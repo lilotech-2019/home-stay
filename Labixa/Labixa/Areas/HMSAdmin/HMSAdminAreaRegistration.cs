@@ -17,7 +17,7 @@ namespace Labixa.Areas.HMSAdmin
             context.MapRoute(
                 "HMSAdmin_default",
                 "HMSAdmin/{controller}/{action}/{id}",
-                new {controller="Hotel", action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }

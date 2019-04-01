@@ -1,10 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Labixa.Models;
 using Outsourcing.Data.Models;
+using System.Web.Security;
 
 namespace Labixa.Controllers
 {
@@ -12,9 +18,10 @@ namespace Labixa.Controllers
     {
 
         private UserManager<User> _userManager;
+        private IUserRoleStore<User> _userRoleManager;
 
 
-        public AccountController(UserManager<User> userManager, IUserRoleStore<User> userRoleManager)
+        public AccountController(UserManager<User> userManager)
         {
             _userManager = userManager;
         }
@@ -45,7 +52,7 @@ namespace Labixa.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", @"Invalid username or password.");
+                    ModelState.AddModelError("", "Invalid username or password.");
                 }
             }
 
@@ -94,9 +101,16 @@ namespace Labixa.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
-            ManageMessageId? message;
+            ManageMessageId? message = null;
             IdentityResult result = await _userManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
-            message = result.Succeeded ? ManageMessageId.RemoveLoginSuccess : ManageMessageId.Error;
+            if (result.Succeeded)
+            {
+                message = ManageMessageId.RemoveLoginSuccess;
+            }
+            else
+            {
+                message = ManageMessageId.Error;
+            }
             return RedirectToAction("Manage", new { Message = message });
         }
 
@@ -143,7 +157,10 @@ namespace Labixa.Controllers
             {
                 // User does not have a password so remove any validation errors caused by a missing OldPassword field
                 ModelState state = ModelState["OldPassword"];
-                state?.Errors.Clear();
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
 
                 if (ModelState.IsValid)
                 {
@@ -311,7 +328,13 @@ namespace Labixa.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
 
         private async Task SignInAsync(User user, bool isPersistent)
         {

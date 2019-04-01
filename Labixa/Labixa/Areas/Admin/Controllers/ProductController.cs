@@ -1,58 +1,65 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
+using Outsourcing.Service;
+using Outsourcing.Data.Models;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
+using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Outsourcing.Data.Models;
-using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+
+    public partial class ProductController : Controller
     {
         #region Field
 
         readonly IProductService _productService;
         readonly IProductCategoryService _productCategoryService;
 
+        readonly IProductAttributeService _productAttributeService;
+        readonly IProductAttributeMappingService _productAttributeMappingService;
+
         readonly IPictureService _pictureService;
-        readonly IVendorService _vendorService;
-        readonly ILocationService _locationService;
-        readonly IPromotionService _promotionService;
-        readonly IColorService _colorService;
+        readonly IVendorService _VendorService;
+        readonly ILocationService _LocationService;
+        readonly IPromotionService _PromotionService;
+        readonly IColorService _ColorService;
 
         readonly IProductPictureMappingService _productPictureMappingService;
-        readonly IProductCategoryMappingService _productCategoryMappingService;
+        readonly IProductCategoryMappingService _ProductCategoryMappingService;
+
+
 
         #endregion
 
         #region Ctor
-
         public ProductController(IProductService productService, IProductCategoryService productCategoryService,
-            IProductAttributeService productAttributeService,
-            IProductAttributeMappingService productAttributeMappingService,
-            IPictureService pictureService, IProductPictureMappingService productPictureMappingService,
-            IVendorService vendorService,
-            ILocationService locationService,
-            IPromotionService promotionService,
-            IProductCategoryMappingService productCategoryMappingService,
-            IColorService colorService
-        )
+            IProductAttributeService productAttributeService, IProductAttributeMappingService productAttributeMappingService,
+            IPictureService pictureService, IProductPictureMappingService productPictureMappingService, IVendorService _VendorService,
+         ILocationService _LocationService,
+         IPromotionService _PromotionService, IProductCategoryMappingService _ProductCategoryMappingService,
+            IColorService _ColorService
+           )
         {
-            _productService = productService;
-            _productCategoryService = productCategoryService;
-            _pictureService = pictureService;
-            _productPictureMappingService = productPictureMappingService;
-            _vendorService = vendorService;
-            _promotionService = promotionService;
-            _locationService = locationService;
-            _productCategoryMappingService = productCategoryMappingService;
-            _colorService = colorService;
+            this._productService = productService;
+            this._productCategoryService = productCategoryService;
+            this._productAttributeService = productAttributeService;
+            this._productAttributeMappingService = productAttributeMappingService;
+            this._pictureService = pictureService;
+            this._productPictureMappingService = productPictureMappingService;
+            this._VendorService = _VendorService;
+            this._PromotionService = _PromotionService;
+            this._LocationService = _LocationService;
+            this._ProductCategoryMappingService = _ProductCategoryMappingService;
+            this._ColorService = _ColorService;
         }
-
         #endregion
 
         public ActionResult Index()
@@ -77,21 +84,19 @@ namespace Labixa.Areas.Admin.Controllers
         {
             //Get the list category
             var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
-            var listVendor = _vendorService.GetVendors().ToSelectListItems(-1);
-            var listPromotion = _promotionService.GetPromotions().ToSelectListItems(-1);
-            var listLocation = _locationService.GetLocations().ToSelectListItems(-1);
-            var listColor = _colorService.GetColors().ToSelectListItems(-1);
+            var listVendor = _VendorService.GetVendors().ToSelectListItems(-1);
+            var ListPromotion = _PromotionService.GetPromotions().ToSelectListItems(-1);
+            var ListLocation = _LocationService.GetLocations().ToSelectListItems(-1);
+            var ListColor = _ColorService.GetColors().ToSelectListItems(-1);
             Product product = new Product();
-            ProductFormModel model = new ProductFormModel
-            {
-                ListColors = listColor,
-                ListProductCategory = listProductCategory,
-                Location = listLocation,
-                Promotion = listPromotion,
-                Vendor = listVendor,
-                product = product
-            };
+            ProductFormModel model = new ProductFormModel();
 
+            model.ListColors = ListColor;
+            model.ListProductCategory = listProductCategory;
+            model.Location = ListLocation;
+            model.Promotion = ListPromotion;
+            model.Vendor = listVendor;
+            model.product = product;
             return View(model);
         }
 
@@ -116,14 +121,14 @@ namespace Labixa.Areas.Admin.Controllers
                     ProductCategoryMapping obj = new ProductCategoryMapping();
                     obj.ProductId = product.Id;
                     obj.ProductCategoryId = newProduct.CategoryId;
-                    _productCategoryMappingService.CreateProductCategoryMapping(obj);
+                    _ProductCategoryMappingService.CreateProductCategoryMapping(obj);
                 }
                 if (newProduct.CategoryId2 != 0)
                 {
                     ProductCategoryMapping obj = new ProductCategoryMapping();
                     obj.ProductId = product.Id;
                     obj.ProductCategoryId = newProduct.CategoryId2;
-                    _productCategoryMappingService.CreateProductCategoryMapping(obj);
+                    _ProductCategoryMappingService.CreateProductCategoryMapping(obj);
                 }
                 //Add ProductAttribute after product created
                 //product.ProductAttributeMappings = new Collection<ProductAttributeMapping>();
@@ -142,12 +147,12 @@ namespace Labixa.Areas.Admin.Controllers
                     bool ismain = i == 0;
                     _pictureService.CreatePicture(newPic);
                     product.ProductPictureMappings.Add(
-                        new ProductPictureMapping
+                        new ProductPictureMapping()
                         {
                             PictureId = newPic.Id,
                             ProductId = product.Id,
                             IsMainPicture = ismain,
-                            DisplayOrder = 0
+                            DisplayOrder = 0,
                         });
                 }
                 _productService.EditProduct(product);
@@ -161,10 +166,10 @@ namespace Labixa.Areas.Admin.Controllers
             else
             {
                 var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
-                var listVendor = _vendorService.GetVendors().ToSelectListItems(-1);
-                var ListPromotion = _promotionService.GetPromotions().ToSelectListItems(-1);
-                var ListLocation = _locationService.GetLocations().ToSelectListItems(-1);
-                var ListColor = _colorService.GetColors().ToSelectListItems(-1);
+                var listVendor = _VendorService.GetVendors().ToSelectListItems(-1);
+                var ListPromotion = _PromotionService.GetPromotions().ToSelectListItems(-1);
+                var ListLocation = _LocationService.GetLocations().ToSelectListItems(-1);
+                var ListColor = _ColorService.GetColors().ToSelectListItems(-1);
                 Product product = new Product();
                 ProductFormModel model = new ProductFormModel();
 
@@ -181,6 +186,7 @@ namespace Labixa.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int productId)
         {
+
             Product product = _productService.GetProductById(productId);
             var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
             //var vendorid = product.VendorId != null ? -1 : product.VendorId;
@@ -189,7 +195,7 @@ namespace Labixa.Areas.Admin.Controllers
             //var ListPromotion = _PromotionService.GetPromotions().ToSelectListItems(product.PromotionId);
             //var locationid = product.LocationId != null ? -1 : product.VendorId;
             //var ListLocation = _LocationService.GetLocations().ToSelectListItems(product.LocationId);
-            // var ListColor = _ColorService.GetColors().ToSelectListItems(product.ColorId);
+           // var ListColor = _ColorService.GetColors().ToSelectListItems(product.ColorId);
 
             ProductFormModel model = new ProductFormModel();
             model.CategoryId = product.ProductCategoryMappings.FirstOrDefault().ProductCategoryId;
@@ -213,17 +219,15 @@ namespace Labixa.Areas.Admin.Controllers
                 Product product = productToEdit.product;
                 if (productToEdit.CategoryId != 0)
                 {
-                    var obj = _productCategoryMappingService.GetProductCategoryMappings()
-                        .Where(p => p.ProductId == productToEdit.product.Id);
+                    var obj = _ProductCategoryMappingService.GetProductCategoryMappings().Where(p => p.ProductId == productToEdit.product.Id);
                     obj.FirstOrDefault().ProductCategoryId = productToEdit.CategoryId;
-                    _productCategoryMappingService.EditProductCategoryMapping(obj.FirstOrDefault());
+                    _ProductCategoryMappingService.EditProductCategoryMapping(obj.FirstOrDefault());
                 }
                 if (productToEdit.CategoryId2 != 0)
                 {
-                    var obj = _productCategoryMappingService.GetProductCategoryMappings()
-                        .Where(p => p.ProductId == productToEdit.product.Id);
+                    var obj = _ProductCategoryMappingService.GetProductCategoryMappings().Where(p => p.ProductId == productToEdit.product.Id);
                     obj.LastOrDefault().ProductCategoryId = productToEdit.CategoryId;
-                    _productCategoryMappingService.EditProductCategoryMapping(obj.LastOrDefault());
+                    _ProductCategoryMappingService.EditProductCategoryMapping(obj.LastOrDefault());
                 }
                 //Product product = Mapper.Map<ProductFormModel, Product>(productToEdit.product);
                 if (String.IsNullOrEmpty(product.Slug))
@@ -244,13 +248,15 @@ namespace Labixa.Areas.Admin.Controllers
                     _pictureService.EditPicture(picture.Picture);
                 }
                 //add tour relation
-                return continueEditing
-                    ? RedirectToAction("Edit", "Product", new {productId = product.Id})
-                    : RedirectToAction("Index", "Product");
+                return continueEditing ? RedirectToAction("Edit", "Product", new { productId = product.Id })
+                      : RedirectToAction("Index", "Product");
             }
-            var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
-            productToEdit.ListProductCategory = listProductCategory;
-            return RedirectToAction("Edit", new {productId = productToEdit.product.Id});
+            else
+            {
+                var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
+                productToEdit.ListProductCategory = listProductCategory;
+                return RedirectToAction("Edit", new { productId = productToEdit.product.Id });
+            }
         }
 
 

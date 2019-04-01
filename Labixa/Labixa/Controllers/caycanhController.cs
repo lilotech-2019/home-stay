@@ -4,6 +4,7 @@ using Outsourcing.Data.Models;
 using Outsourcing.Service;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace Labixa.Controllers
 {
@@ -28,15 +28,16 @@ namespace Labixa.Controllers
         private readonly IProductCategoryMappingService _productCategoryMappingService;
         private readonly IPictureService _pictureService;
         private readonly IProductPictureMappingService _productPictureMappingService;
+        
 
 
         public caycanhController(IProductService productService, IBlogService blogService,
             IWebsiteAttributeService websiteAttributeService, IBlogCategoryService blogCategoryService,
             IStaffService staffService, IProductAttributeMappingService productAttributeMappingService,
-            INotificationService _notificationService, ITypeNotifyService _typeNotifyService,
+            INotificationService _notificationService, ITypeNotifyService _typeNotifyService, 
             IProductCategoryMappingService _productCategoryMappingService, IPictureService _pictureService,
             IProductPictureMappingService _productPictureMappingService
-        )
+           )
         {
             this._productService = productService;
             this._blogService = blogService;
@@ -50,13 +51,12 @@ namespace Labixa.Controllers
             this._productPictureMappingService = _productPictureMappingService;
             this._pictureService = _pictureService;
         }
-
         public ActionResult demo(string url = "1")
         {
             ViewBag.url = Session["url"];
             return View();
+            
         }
-
         [HttpPost]
         public ActionResult demo(HttpPostedFileBase file)
         {
@@ -74,11 +74,11 @@ namespace Labixa.Controllers
             Session["url"] = "/images/uploaded/" + fileName_;
             return RedirectToAction("demo", "tinhte");
         }
-
         //
         // GET: /tinhte/
         public ActionResult Index()
         {
+
             var url = "https://tinhte.vn/page-";
             List<string> ListProductUrl = new List<string>();
             List<string> PageUrl = new List<string>();
@@ -96,8 +96,7 @@ namespace Labixa.Controllers
                     web = new HtmlWeb();
                     doc = web.Load(page);
                     Thread.Sleep(1000);
-                    foreach (var productUrl in doc.DocumentNode.SelectNodes(
-                        "//div[contains(@class,'thread-title') and contains(@class,'width-narrow')]//a"))
+                    foreach (var productUrl in doc.DocumentNode.SelectNodes("//div[contains(@class,'thread-title') and contains(@class,'width-narrow')]//a"))
                     {
                         if (productUrl.Attributes["href"].Value != null)
                         {
@@ -108,6 +107,7 @@ namespace Labixa.Controllers
 
                 catch (Exception)
                 {
+
                     continue;
                 }
             }
@@ -131,8 +131,7 @@ namespace Labixa.Controllers
                     {
                         continue;
                     }
-                    item.Title = doc.DocumentNode.SelectSingleNode("//div[@class='bg']//p[@class='title']").InnerText
-                        .Trim();
+                    item.Title = doc.DocumentNode.SelectSingleNode("//div[@class='bg']//p[@class='title']").InnerText.Trim();
                     item.Slug = StringConvert.ConvertShortName(item.Title);
                     item.BlogCategoryId = 3;
                     item.IsAvailable = false;
@@ -153,8 +152,7 @@ namespace Labixa.Controllers
                         {
                             if (img != null)
                             {
-                                url = Regex.Match(img.GetAttributeValue("style", ""), @"(?<=url\()(.*)(?=\))").Groups[1]
-                                    .Value;
+                                url = Regex.Match(img.GetAttributeValue("style", ""), @"(?<=url\()(.*)(?=\))").Groups[1].Value;
                                 if (url == "")
                                 {
                                     continue;
@@ -168,15 +166,11 @@ namespace Labixa.Controllers
                         }
                     }
                     //content = doc.DocumentNode.SelectSingleNode("//div[@class='uix_message ']//div[contains(@class, 'messageInfo') and contains(class, 'primaryContent')]//blockquote").InnerHtml;
-                    content = doc.DocumentNode.SelectSingleNode("//div[@class='uix_message ']//article//blockquote")
-                        .InnerHtml.Trim();
+                    content = doc.DocumentNode.SelectSingleNode("//div[@class='uix_message ']//article//blockquote").InnerHtml.Trim();
                     content = changeLinkaHref(content, item.Title.Trim());
                     content = removePStrongB(content, item.Title.Trim());
-                    item.Content = content.Replace("<!-- .share-post -->", null).Replace("<p>", "<div>")
-                        .Replace("</p>", "</div>").Replace("<strong>",
-                            "<a href='/tin-tuc/" + StringConvert.ConvertShortName(item.Slug) + "' alt='" + item.Title +
-                            "'>")
-                        .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null).Trim();
+                    item.Content = content.Replace("<!-- .share-post -->", null).Replace("<p>", "<div>").Replace("</p>", "</div>").Replace("<strong>", "<a href='/tin-tuc/" + StringConvert.ConvertShortName(item.Slug) + "' alt='" + item.Title + "'>")
+                    .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null).Trim();
                     _blogService.CreateBlog(item);
                     ListBlog.Add(item);
                 }
@@ -185,10 +179,10 @@ namespace Labixa.Controllers
                 {
                     continue;
                 }
+
             }
             return View(ListBlog);
         }
-
         public ActionResult cayvahoa()
         {
             var url = "http://cayvahoa.net/cay-canh-trong-nha/page/";
@@ -208,9 +202,7 @@ namespace Labixa.Controllers
                     web = new HtmlWeb();
                     doc = web.Load("https://google.com");
                     Thread.Sleep(2000);
-                    foreach (var productUrl in doc.DocumentNode.SelectNodes(
-                        "//div[contains(@class,'sp-show') and contains(@class,'box-item-inner')]//a//div[@class='thumbnail']")
-                    )
+                    foreach (var productUrl in doc.DocumentNode.SelectNodes("//div[contains(@class,'sp-show') and contains(@class,'box-item-inner')]//a//div[@class='thumbnail']"))
                     {
                         if (productUrl.ParentNode.Attributes["href"].Value != null)
                         {
@@ -219,13 +211,13 @@ namespace Labixa.Controllers
                     }
                 }
 
-                catch (Exception)
+                catch(Exception)
                 {
                     throw;
                     //continue;
                 }
             }
-
+           
             foreach (var item in ListProductUrl)
             {
                 try
@@ -234,9 +226,7 @@ namespace Labixa.Controllers
                     doc = web.Load(item);
                     Thread.Sleep(1000);
                     var product = new Product();
-                    product.Name = doc.DocumentNode
-                        .SelectSingleNode("//h1[contains(@class,'product_title') and contains(@class,'entry-title')]")
-                        .InnerText;
+                    product.Name = doc.DocumentNode.SelectSingleNode("//h1[contains(@class,'product_title') and contains(@class,'entry-title')]").InnerText;
                     product.Description = doc.DocumentNode.SelectSingleNode("//div[@class='description']").InnerHtml;
                     product.Description = doc.DocumentNode.SelectSingleNode("//div[@class='description']").InnerHtml;
                     product.Content = doc.DocumentNode.SelectSingleNode("//div[@id='tab-description']").InnerHtml;
@@ -247,19 +237,12 @@ namespace Labixa.Controllers
                     _productService.CreateProduct(product);
                     product.Slug = StringConvert.ConvertShortName(product.Name + " " + product.Id);
                     _productService.EditProduct(product);
-                    var cate = new ProductCategoryMapping
-                    {
-                        ProductCategoryId = 36,
-                        ProductId = product.Id
-                    };
+                    var cate = new ProductCategoryMapping();
+                    cate.ProductCategoryId = 36;
+                    cate.ProductId = product.Id;
                     _productCategoryMappingService.CreateProductCategoryMapping(cate);
-
                     #region Add image
-
-                    var imageUrl = doc.DocumentNode
-                        .SelectSingleNode(
-                            "//a[contains(@class,'woocommerce-main-image') and contains(@class,'zoom')]//img")
-                        .Attributes["src"].Value;
+                    var imageUrl = doc.DocumentNode.SelectSingleNode("//a[contains(@class,'woocommerce-main-image') and contains(@class,'zoom')]//img").Attributes["src"].Value;
                     var urlimage = SaveImage(imageUrl);
                     for (int i = 0; i < 5; i++)
                     {
@@ -272,17 +255,18 @@ namespace Labixa.Controllers
                         picMap.PictureId = img.Id;
                         _productPictureMappingService.CreateProductPictureMapping(picMap);
                     }
-
                     #endregion
+
                 }
                 catch (Exception)
                 {
+
                     continue;
                 }
             }
             return View();
-        }
 
+        }
         public ActionResult sieuthicayxanh()
         {
             var url = "http://sieuthicayxanh.vn/cay-an-qua";
@@ -306,7 +290,7 @@ namespace Labixa.Controllers
                     {
                         if (productUrl.Attributes["href"].Value != null)
                         {
-                            ListProductUrl.Add("http://sieuthicayxanh.vn" + productUrl.Attributes["href"].Value);
+                            ListProductUrl.Add("http://sieuthicayxanh.vn"+productUrl.Attributes["href"].Value);
                         }
                     }
                 }
@@ -340,11 +324,8 @@ namespace Labixa.Controllers
                     cate.ProductCategoryId = 42;
                     cate.ProductId = product.Id;
                     _productCategoryMappingService.CreateProductCategoryMapping(cate);
-
                     #region Add image
-
-                    var imageUrl = "http://sieuthicayxanh.vn" + doc.DocumentNode
-                                       .SelectSingleNode("//ul[@id='thumb_img']//li/img").Attributes["src"].Value;
+                    var imageUrl = "http://sieuthicayxanh.vn" + doc.DocumentNode.SelectSingleNode("//ul[@id='thumb_img']//li/img").Attributes["src"].Value;
                     var urlimage = SaveImage(imageUrl);
                     for (int i = 0; i < 5; i++)
                     {
@@ -357,18 +338,18 @@ namespace Labixa.Controllers
                         picMap.PictureId = img.Id;
                         _productPictureMappingService.CreateProductPictureMapping(picMap);
                     }
-
                     #endregion
+
                 }
                 catch (Exception)
                 {
                     //throw;
-                    continue;
+                   continue;
                 }
             }
             return View();
-        }
 
+        }
         public string SaveImage(string url)
         {
             if (url == "")
@@ -378,24 +359,23 @@ namespace Labixa.Controllers
             try
             {
                 Stream imageStream = new WebClient().OpenRead(url);
-               //Image img = Image.FromStream(imageStream);
+                Image img = Image.FromStream(imageStream);
                 var path = Path.Combine(Server.MapPath("~/images/uploaded/caycanh/"), url.Split('/').LastOrDefault());
-               // img.Save(path);
+                img.Save(path);
                 return "/images/uploaded/caycanh/" + url.Split('/').LastOrDefault();
             }
             catch (Exception)
             {
                 return url;
+                
             }
-        }
 
+        }
         public string removePStrongB(string content, string name)
         {
-            return content.Replace("<p>", "<div>").Replace("</p>", "</div>").Replace("<strong>",
-                    "<a href='/tin-tuc/" + StringConvert.ConvertShortName(name) + "' alt='" + name + "'>")
-                .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null);
+            return content.Replace("<p>", "<div>").Replace("</p>", "</div>").Replace("<strong>", "<a href='/tin-tuc/" + StringConvert.ConvertShortName(name) + "' alt='" + name + "'>")
+                  .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null);
         }
-
         public string changeLinkaHref(string content, string name)
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();

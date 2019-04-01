@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Labixa;
 using System.Resources;
+using System.Windows.Forms;
 using System.Collections;
 using System.Globalization;
 using Labixa.App_Data;
@@ -22,18 +25,17 @@ namespace Labixa.Areas.Admin.Controllers
         }
         public ActionResult ViewVietNam()
         {
+            List<ResourcesFormModel> listResource; ;
             XmlDocument loResource = new XmlDocument();
             loResource.Load(Server.MapPath("~/Resources.vi.resx"));
 
-            XmlNodeList loRoot = loResource.SelectNodes("root/data");
-            if (loRoot == null) return View();
+            XmlNodeList loRoot = loResource.SelectNodes(
+                                        string.Format("root/data"));
             foreach (XmlNode item in loRoot)
             {
-                var obj = new ResourcesFormModel
-                {
-                    Name = item.InnerText,
-                    Value = item.SelectSingleNode("data/value")?.Value
-                };
+                ResourcesFormModel obj = new ResourcesFormModel();
+                obj.Name = item.InnerText.ToString();
+                obj.Value= item.SelectSingleNode(string.Format("data/value")).Value;
                 obj.Value = item.InnerXml;
             }
             return View();
@@ -85,7 +87,7 @@ namespace Labixa.Areas.Admin.Controllers
            //// listr.AddResource("abc", "Truong Long");
            // listr.Generate();
            // listr.Close();
-            ClearCookie();
+            clearCookie();
             return View();
         }
 
@@ -108,11 +110,11 @@ namespace Labixa.Areas.Admin.Controllers
                 loResource.Save(Server.MapPath("~/Resources.vi.resx"));
                 
             }
-            ClearCookie();
+            clearCookie();
             return RedirectToAction("Index");
         }
-
-        private void ClearCookie()
+        
+        void clearCookie()
         {
             #region [Get Language and set Cookies]
             HttpCookie cookie; 

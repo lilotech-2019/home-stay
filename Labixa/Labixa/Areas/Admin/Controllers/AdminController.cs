@@ -1,19 +1,21 @@
 ﻿using Microsoft.AspNet.Identity;
 using Outsourcing.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Admin.Controllers
 {
     //[Authorize]
-    public class AdminController : Controller
+    public  class AdminController : Controller
     {
-        private readonly UserManager<User> _userManager;
-
-        public AdminController(UserManager<User> userManager)
+        UserManager<User> userManager;
+        public AdminController()
         {
-            _userManager = userManager;
+            
         }
-
         //
         // GET: /Admin/
         public ActionResult Index()
@@ -21,13 +23,13 @@ namespace Labixa.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult ChangePassword(string Id, string oldPass, string newPass)
+        public ActionResult ChangePassword(string Id,string oldPass, string newPass)
         {
-            Id = "c21a1169-1e5d-4aa7-9604-1595514608bc";
+            Id= "c21a1169-1e5d-4aa7-9604-1595514608bc";
             oldPass = "123456";
             newPass = "labixa123";
-            _userManager.ChangePassword(Id, oldPass, newPass);
+                        userManager.ChangePassword(Id, oldPass, newPass);
             return View("Index");
         }
-    }
+	}
 }

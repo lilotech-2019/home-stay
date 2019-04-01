@@ -1,13 +1,14 @@
 ﻿@using Outsourcing.Data.Models.HMS
 @model IEnumerable<Room>
+    @* thấy a chỉ lấy dât từ room phải ko, da   *@
 @{
     ViewBag.Title = "Quản lý Phòng";
 
 }
 
 @section scripts{
-    <script src="/Content/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="/Content/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="/Content/HMSAdmin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/Content/HMSAdmin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
 }
 @section breadcrumb
 {
@@ -51,48 +52,44 @@
                     {
                         int count = 0;
                         foreach (var item in Model)
-                        {
+                        { //lấy item từ lít
                             count++;
-                            <tr class="odd">
+                    <tr class="odd">
 
-                                <td class="">@item.Name</td>
-                                <td class="">@item.string1</td>
-                                <td class="">@item.Hotel.Name</td>
-                                <td class="">@item.Price.ToString("#,##0")</td>
-                                @{
+                        <td class="">@item.Name</td>
+                        <td class="">@item.string1</td>
+                        <td class="">@item.Hotel.Name</td>
+                       
+                        <td class="hidden-480 ">
+                            @if (item.Status)
+        {
 
-                                }
-                                @*<td class="hidden-480 ">@item.Promotion.Name</td>*@
-                                <td class="hidden-480 ">
-                                    @if (item.Status)
-                                    {
+                    <span class="label label-sm label-warning">Đang ẩn</span>
+}
+else
+{
 
-                                        <span class="label label-sm label-warning">Đang ẩn</span>
-                                    }
-                                    else
-                                    {
+                    <span class="label label-sm label-success">Hiển thị</span>
+}
+                        </td>
+                        <td class="">
+                            <a href="/HMSAdmin/RoomOrder/CreateRoomOrder?RoomId=@item.Id" class="btn btn-xs btn-info">
+                                Tạo đơn hàng
+                            </a>
+                        </td>
+                        <td class=" ">
+                            <div class="visible-md visible-lg  btn-group">
 
-                                        <span class="label label-sm label-success">Hiển thị</span>
-                                    }
-                                </td>
-                                <td class="">
-                                    <a href="/HMSAdmin/RoomOrder/CreateRoomOrder?RoomId=@item.Id" class="btn btn-xs btn-info">
-                                        Tạo đơn hàng
-                                    </a>
-                                </td>
-                                <td class=" ">
-                                    <div class="visible-md visible-lg  btn-group">
+                                <a href="/HMSAdmin/Room/Edit?RoomId=@item.Id" class="btn btn-xs btn-info">
+                                    <i class="icon-edit bigger-160"></i>
+                                </a>
+                                <a href="/HMSAdmin/Room/Delete?RoomId=@item.Id" class="btn btn-xs btn-danger">
+                                    <i class="icon-trash bigger-160"></i>
+                                </a>
 
-                                        <a href="/HMSAdmin/Room/Edit?RoomId=@item.Id" class="btn btn-xs btn-info">
-                                            <i class="icon-edit bigger-160"></i>
-                                        </a>
-                                        <a href="/HMSAdmin/Room/Delete?RoomId=@item.Id" class="btn btn-xs btn-danger">
-                                            <i class="icon-trash bigger-160"></i>
-                                        </a>
-
-                                    </div>
-                                </td>
-                            </tr>
+                            </div>
+                        </td>
+                    </tr>
                         }
                     }
                 </tbody>

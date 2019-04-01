@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 using ElFinder;
 
@@ -55,7 +58,7 @@ namespace Labixa.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult LoadFile()
         {
-            return Connector.Process(HttpContext.Request);
+            return Connector.Process(this.HttpContext.Request);
         }
         public ActionResult SelectFile(List<String> values)
         {

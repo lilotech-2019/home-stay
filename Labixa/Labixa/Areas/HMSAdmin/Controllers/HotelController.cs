@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
+using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
+using Labixa.Helpers;
 using Labixa.Areas.HMSAdmin.ViewModels;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
@@ -25,15 +32,18 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         #endregion
 
-        public ActionResult Index()
+        public ActionResult Index(int? page = 1)
         {
             var Hotels = _HotelService.GetHotels();
-            return View(model: Hotels);
+            
+          
+                             
+            return View(model:Hotels);
         }
         public ActionResult ManageStaticPage()
         {
             var Hotels = _HotelService.GetStaticPage();
-            return View(Hotels);
+            return View(model: Hotels);
         }
 
         public ActionResult Create()

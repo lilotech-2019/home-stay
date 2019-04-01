@@ -1,8 +1,12 @@
 ﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Labixa.Models;
 using Outsourcing.Service;
+using Outsourcing.Data.Models;
 using PagedList;
 using Labixa.ViewModels;
 using Labixa.Helpers;
@@ -12,10 +16,11 @@ namespace Labixa.Controllers
     public class NewsController : BaseHomeController
     {
         private readonly IBlogService _blogService;
-
+        private readonly IBlogCategoryService _blogCategoryService;
         public NewsController(IBlogService blogService, IBlogCategoryService blogCategoryService)
         {
-            _blogService = blogService;
+            this._blogCategoryService = blogCategoryService;
+            this._blogService = blogService;
         }
         //
         // GET: /Blog/
@@ -36,21 +41,17 @@ namespace Labixa.Controllers
             int pageSize = 4;//day la so bai viet tren 1 page
                              //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
                              // khởi tạo BlogView vừa mới tạo
-            BlogViewModel viewModel = new BlogViewModel
-            {
-                RelatedBlogs = _blogService.Get3BlogNewsNewest(),
-                ListBlogs = model.ToPagedList(pageNumber, pageSize)
-            };
+            BlogViewModel viewModel = new BlogViewModel();
+            viewModel.RelatedBlogs = _blogService.Get3BlogNewsNewest();
+            viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
 
             return View(viewModel);//no truyen kieu du lieu la IPagedList<Blog>
         }
         public ActionResult Detail(string slug)
         {
-            BlogViewModel viewModel = new BlogViewModel
-            {
-                RelatedBlogs = _blogService.Get3BlogNewsNewest(),
-                listBlogNew = _blogService.GetBlogByUrlName(slug)
-            };
+            BlogViewModel viewModel = new BlogViewModel();
+            viewModel.RelatedBlogs = _blogService.Get3BlogNewsNewest();
+            viewModel.listBlogNew = _blogService.GetBlogByUrlName(slug);
             return View(viewModel);
         }
 
@@ -75,11 +76,9 @@ namespace Labixa.Controllers
                 cookie.Value = slug;   // update cookie value
             else
             {
-                cookie = new HttpCookie("_culture")
-                {
-                    Value = slug,
-                    Expires = DateTime.Now.AddYears(1)
-                };
+                cookie = new HttpCookie("_culture");
+                cookie.Value = slug;
+                cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
             return RedirectToAction("Index","Home");
