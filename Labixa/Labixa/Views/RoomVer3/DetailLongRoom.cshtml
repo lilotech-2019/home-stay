@@ -1,0 +1,447 @@
+﻿@*@model Outsourcing.Data.Models.HMS.Room*@
+
+@model Labixa.ViewModels.RoomVer3ViewModel
+@{
+    HttpCookie cookie = Request.Cookies["_culture"];
+}
+
+<section class="row final-inner-header">
+    <div class="container">
+        <h2 class="this-title">@Html.Raw(Resources.HMS_RoomDetail)</h2>
+    </div>
+</section>
+<section class="row final-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
+            <li><a href="/danh-sach-phong-ngan-han" class="active">@Html.Raw(Resources.HMS_RoomDetail)</a></li>
+        </ol>
+    </div>
+</section>
+<!-- Header  Slider style-->
+<!-- News style-->
+<section class="container clearfix common-pad-inner">
+    <div class="row">
+        <div class="col-md-4 col-md-push-8">
+            <div class="single-sidebar-widget sroom-sidebar">
+                <!-- Booking Form style-->
+                <div class="book-r-form">
+                    <div class="room-price">
+                        <h6>@Html.Raw(Resources.HMS_StartForm)</h6>
+                         @if (cookie.Value.Equals("vi"))
+                        {
+                    <p>@Model.listRoom.Price.ToString("#,##0") <span>/ Ngày</span></p>
+}
+else
+{
+                    <p>@{var value = (Model.listRoom.Price / 23000).ToString("#,##0");} @value$<span>/ Day</span></p>
+
+}
+                    </div>
+                    <div class="book-form">
+                        <div class="col-md-12">
+                            <b>@Html.Raw(Resources.HMS_StartDate)</b>
+                            <input placeholder="@Html.Raw(Resources.HMS_StartDate)" type="text" class="form-control datepicker-example8">
+                        </div>
+                        <div class="col-md-12">
+                            <b>@Html.Raw(Resources.HMS_StartDate)</b>
+                            <input type="text" placeholder="@Html.Raw(Resources.HMS_StartDate)" class="form-control datepicker-example8">
+                        </div>
+                        <div class="col-md-12">
+                            <b>@Html.Raw(Resources.HMS_PeopleNumber)</b>
+                            <div class="select-box">
+                                <select name="selectMenu" class="select-menu">
+                                    <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="chk-button">
+                                <button type="submit" class="res-btn" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                    @Html.Raw(Resources.HMS_Booking)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                @*<section class="clearfix common-pad-inner booknow">*@
+                                <div class="sec-header">
+                                    <h2>@Html.Raw(Resources.HMS_Booking)</h2>
+                                    @*<h3>@Html.Raw(Resources.HMS_Rooms)</h3>*@
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-12">
+                                        <div class="book-left-content input_form">
+                                            <form id="contactBooking"
+                                                  action="/RoomVer3/BookingLongRoom" method="post">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="name" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="email" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                @*<div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input type="date" name="CheckIn" id="startDate" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input type="date" name="Deadline" id="endDate" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" placeholder="@Html.Raw(Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
+                                                    </div>
+                                                </div>*@
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <div class="select-box">
+                                                            <select name="Type" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
+                                                                <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="phone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.HMS_Phone)" required
+                                                               class="form-control" onkeypress="return isNumberKey(event)">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <textarea id="message" rows="6" name="Description" placeholder="@Html.Raw(Resources.HMS_Message)" required
+                                                                  class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <button type="submit" class="res-btn"
+                                                                onclick="SendMess()">
+                                                            @Html.Raw(Resources.HMS_SendMessage)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="single-sidebar-widget">
+                                            <!-- Categories style-->
+                                            <div class="single-sidebar-widget-outer">
+                                                <div class="sec-title-cat sec-title">
+                                                    <h2>@Html.Raw(Resources.HMS_Benefit)</h2>
+                                                </div>
+                                                <div class="categories">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                                <label class="form-check-label" for="defaultCheck1">
+                                                                    @Html.Raw(Resources.HMS_RentVerhical)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                                                <label class="form-check-label" for="defaultCheck2">
+                                                                    Tour
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                                                <label class="form-check-label" for="defaultCheck3">
+                                                                    @Html.Raw(Resources.HMS_Cars)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                                                <label class="form-check-label" for="defaultCheck4">
+                                                                    @Html.Raw(Resources.HMS_BBQ)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                                                <label class="form-check-label" for="defaultCheck5">
+                                                                    @Html.Raw(Resources.HMS_Souvenir)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                                                <label class="form-check-label" for="defaultCheck6">
+                                                                    @Html.Raw(Resources.HMS_Laundry)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                                                                <label class="form-check-label" for="defaultCheck7">
+                                                                    @Html.Raw(Resources.HMS_AirTicket)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                                                                <label class="form-check-label" for="defaultCheck8">
+                                                                    Visa
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
+                                                                <label class="form-check-label" for="defaultCheck9">
+                                                                    @Html.Raw(Resources.HMS_AirportTaxi)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                                <label class="form-check-label" for="defaultCheck10">
+                                                                    @Html.Raw(Resources.HMS_Location)
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @*</section>*@
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.HMS_Close)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Booking Form style-->
+                <!-- Budget Rooms style-->
+                <div class="single-sidebar-widget-outer">
+                    <div class="sec-title">
+                        <h2>@Html.Raw(Resources.HMS_BudgetRooms)</h2>
+                    </div>
+                    <div class="popular-post">
+                        <ul>
+                            @foreach (var iterm in Model.RelatedRoomLong)
+                            {
+                                if (cookie.Value.Equals("vi"))
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box">
+                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                                <h4>@iterm.Name</h4>
+                                            </a>
+                                            <p>@Model.listRoom.Price.ToString("#,##0")/Ngày</p>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box">
+                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                                <h4>@iterm.NameENG</h4>
+                                            </a>
+                                            <p>@{var value = (Model.listRoom.Price / 23000).ToString("#,##0");} @value$/ Day</p>
+                                        </div>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- Budget Rooms style-->
+            </div>
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+            <div class="single-room-wrapper">
+                <!-- Rooms Slider style-->
+                <div class="room-slider-wrapper">
+                    <div class="single-r-wrapper">
+                        <div class="single-sl-room">
+                            <div data-hash="zero" class="owl-itemm"> <img src="@Model.listRoom.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></div>
+                            <div data-hash="one" class="owl-itemm">  <img src="@Model.listRoom.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></div>
+                            <div data-hash="two" class="owl-itemm">   <img src="@Model.listRoom.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></div>
+                            <div data-hash="three" class="owl-itemm">  <img src="@Model.listRoom.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></div>
+                            <div data-hash="four" class="owl-itemm">  <img src="@Model.listRoom.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></div>
+                        </div>
+
+
+                        <a href="#zero" class="button secondary url"> <img src="@Model.listRoom.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></a>
+                        <a href="#one" class="button secondary url"> <img src="@Model.listRoom.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></a>
+                        <a href="#two" class="button secondary url"> <img src="@Model.listRoom.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></a>
+                        <a href="#three" class="button secondary url"> <img src="@Model.listRoom.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></a>
+                        <a href="#four" class="button secondary url"> <img src="@Model.listRoom.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></a>
+
+                    </div>
+                </div>
+                <!-- Rooms Slider style-->
+                <!-- Description of Room style-->
+                <div class="room-dec-wrapper">
+                    @if (cookie.Value.Equals("vi"))
+                    {
+                        <div class="room-dec-wrapper">
+                            <h2>@Model.listRoom.Name</h2>
+                            <p>@Html.Raw(Model.listRoom.MetaDescription)</p>
+                            <p>@Html.Raw(Model.listRoom.Description)</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="room-dec-wrapper">
+                            <h2>@Model.listRoom.NameENG</h2>
+                            <p>@Html.Raw(Model.listRoom.Temp_1)</p>
+                            <p>@Html.Raw(Model.listRoom.DescriptionENG)</p>
+                        </div>
+                    }
+                </div>
+                <!-- Description of Room style-->
+                <!-- Room Facilities style-->
+                <div class="room-fac-wrapper">
+                    <h2>Room Facilities</h2>
+                    <div class="row">
+                        <div class="ro-facilitie">
+                  <ul class="clearfix">
+                                @if (Model.listRoom.Utility_Tivi)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+
+                                                <h3>@Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    @if (Model.listRoom.Utility_TuDo)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                       @if (Model.listRoom.Utility_DryHair)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                             @if (Model.listRoom.Utility_HotWater)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                                   @if (Model.listRoom.Utility_Iron)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                         @if (Model.listRoom.Utility_Kitchen)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                           @if (Model.listRoom.Utility_Snack)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                             @if (Model.listRoom.Utility_TeaCoffee)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                                               @if (Model.listRoom.Utility_WashMachine)
+                                    {
+                                        <li>
+                                            <div class="facilitie-i-box">
+                                                <h3>@Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            </div>
+                                        </li>
+                                    }
+                           
+                           
+                           
+                           
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Room Facilities style-->
+                <!-- Room Overview style-->
+        
+                <!-- Room Overview style-->
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function SendMess() {
+        var name, email, startdate, endDate, people, phone, message;
+        name = document.getElementById("name").value;
+        email = document.getElementById("email").value;
+        people = document.getElementById("people").value;
+        phone = document.getElementById("phone").value;
+        message = document.getElementById("message").value;
+        if (name != "" && email != "" && people != "" && phone != "" && message != "") {
+            alert("Đặt Phòng Thành Công");
+        }
+    }
+
+</script>
+<!-- News style-->

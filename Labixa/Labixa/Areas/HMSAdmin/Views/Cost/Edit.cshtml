@@ -1,0 +1,96 @@
+﻿@using Outsourcing.Core
+@model Labixa.Areas.HMSAdmin.ViewModels.CostModel
+@{
+}
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/HMSAdmin/Cost">Quản lý Chi Phí</a>
+            </li>
+            <li class="active">Chỉnh sửa Chi Phí</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Thêm mới Chi Phí
+            </div>
+            @using (Html.BeginForm("Edit", "Cost", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Cost.Id)
+                @Html.HiddenFor(model => model.Cost.IsDelete)
+                @Html.HiddenFor(model => model.Cost.isImport)
+                @Html.HiddenFor(model => model.Cost.DateCreated)
+                @Html.HiddenFor(model => model.Cost.OrginalPrice)
+                @Html.HiddenFor(model => model.Cost.Price)
+                @Html.HiddenFor(model => model.Cost.Quantity)
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab1">
+                            <i class="green icon icon-home bigger-120"></i>
+                            Nội dung
+                        </a>
+                    </li>
+
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane fade active in">
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Loại Chi Phí</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(model => model.Cost.CostCategoryId, Model.ListCostCategory)
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên Chi Phí</label>
+
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Cost.Name)
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Mô tả Chi Phí</label>
+
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Cost.Description, "CkEditor")
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+                @*
+            partial for group button
+                *@
+                @Html.Partial("_PartialButtonGroup", "/HMSAdmin/Cost")
+            }
+        </div>
+    </div>
+</div>

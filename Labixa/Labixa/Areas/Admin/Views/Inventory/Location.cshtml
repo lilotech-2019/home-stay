@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Location";
+}
+@model Outsourcing.Data.Models.Product
+@section scripts{
+    <script src="/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Quản lý Vị trí sản phẩm</li>
+        </ul>
+    </div>
+}
+@if (Model!=null)
+{
+    
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            @*<a class="btn btn-success" href="/Admin/Product/Create" style="margin-bottom:10px">Thêm mới sản phẩm</a>*@
+
+            <div class="table-header">Danh sách vị trí của sản phẩm: @Model.Name</div>
+
+            <table id="productTable" class="table table-bordered table-striped table-fixed-header">
+                <thead>
+                    <tr role="row">
+                        <th>Vị Trí</th>
+                        <th>Tồn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    @if (Model.InventoryLogs != null && Model.InventoryLogs.Any())
+                    {
+                        int count = 0;
+                        foreach (var item in Model.InventoryLogs.GroupBy(p=>p.Location.Name).ToList())
+                        {
+                            count++;
+                            <tr class="odd">
+                                <td class="">@item.Key</td>
+                                @{
+                            int imports = 0;
+                            int exports = 0;
+                            foreach (var import in Model.InventoryLogs.Where(p => p.IsImport && p.Location.Name.ToLower().Equals(item.Key.ToLower())))
+                            {
+                                imports += import.Quantity;
+                            }
+                            foreach (var export in Model.InventoryLogs.Where(p => !p.IsImport && p.Location.Name.ToLower().Equals(item.Key.ToLower())))
+                            {
+                                exports += export.Quantity;
+                            }
+                            int result = imports - exports;
+                            <td class="">@result</td>
+
+                                }
+                                <td class=" ">
+                                    <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+                                        <a href="/Admin/Product/Edit?productId=@Model.Id" class="btn btn-xs btn-info">
+                                            <i class="icon-edit bigger-160"></i>
+                                        </a>
+                                        <a href="/Admin/Product/Delete?productId=@Model.Id" class="btn btn-xs btn-danger">
+                                            <i class="icon-trash bigger-160"></i>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <h1>Hi Hi Không có sản phẩm nào như vậy cả, vui lòng chọn đúng sản phẩm :)</h1>
+}
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        var table = $("#productTable").DataTable();
+        //var arrayfilter = [2, 4];
+
+        createDropFilter(table, [2]);
+        bindDropFilter(table, [5]);
+
+    });
+
+    function createDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change', function () {
+                table.column(i)
+                    .search($(this).val())
+                    .draw();
+            });
+
+            table.column(i).data().unique().sort().each(function (d, j) {
+                filter1.append('<option value="' + d + '">' + d + '</option>');
+            });
+
+        });
+    }
+    function bindDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change', function () {
+                table.column(i)
+                    .search($(this).val())
+                    .draw();
+            });
+        });
+    }
+</script>      
+

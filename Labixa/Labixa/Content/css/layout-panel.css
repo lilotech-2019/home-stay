@@ -1,0 +1,110 @@
+#layout-panel {
+	background: #3a3a3a;
+	color: #fff;
+	position: fixed;
+	width: 320px;
+	height: 100%;
+	right: -320px;
+	top: 0;
+	z-index: 100000;
+}
+#layout-panel .demo-outer {
+	width: 320px;
+	overflow:hidden;
+	height: 100%;
+}
+#layout-panel .demos {
+	width: 340px;
+	overflow-y:scroll;
+}
+#layout-panel .btn-toggle {
+	display: block;
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	top: 50%;
+	margin-top: -35px;
+	left: -70px;
+	background: rgba(0,0,0,.5);
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	border-radius: 5px 0 0 5px;
+	text-decoration: none;
+	padding-top: 48px;
+}
+#layout-panel .btn-toggle .icon {
+	color: #fff;
+	position: absolute;
+	top: 18px;
+	left: 20px;
+}
+#layout-panel .btn-toggle .icon:before {
+	font-size: 35px;
+}
+#layout-panel ul {
+	margin: 2px 0 0 2px;
+	padding: 0;
+}
+#layout-panel ul li {
+	display: block;
+	vertical-align: middle;
+	width: 157px;
+	height: 157px;
+	float: left;
+	position: relative;
+	margin: 0 2px 2px 0;
+}
+#layout-panel ul li img {
+	width: 100%;
+}
+#layout-panel ul li .hover {
+	display: block;
+	width: 157px;
+	height: 157px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,.5);
+	opacity: 0;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	font-size: 15px;
+	color: #fff;
+}
+#layout-panel ul li:hover .hover {
+	opacity: 1;
+}
+#layout-panel ul li .hover h3 {
+	font-size: 18px;
+	color: #fff;
+	padding-top: 30%;
+}
+ @keyframes blink {
+ 0% {
+opacity: 1.0;
+}
+ 50% {
+opacity: 0.0;
+}
+ 100% {
+opacity: 1.0;
+}
+}
+ @-webkit-keyframes blink {
+ 0% {
+opacity: 1.0;
+}
+ 50% {
+opacity: 0.0;
+}
+ 100% {
+opacity: 1.0;
+}
+}
+.blink {
+	animation: blink 1s linear infinite;
+	-webkit-animation: blink 1s linear infinite;
+}

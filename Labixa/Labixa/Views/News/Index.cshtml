@@ -1,0 +1,114 @@
+﻿
+@using PagedList.Mvc;
+@*khai bao thu vien pagelist*@
+@*@model PagedList.IPagedList<Outsourcing.Data.Models.Blog>*@
+@model Labixa.ViewModels.BlogViewModel
+@*don nhan du lieu dang IPagedList<Blog>*@
+@using Outsourcing.Service
+@using Outsourcing.Data.Repository
+
+@{
+
+    ViewBag.Title = "Index";
+    // lấy cookie để chọn ngôn ngữ cho data
+    HttpCookie cookie = Request.Cookies["_culture"];
+}
+
+
+<!-- Home Slider-->
+<section class="row final-inner-header">
+    <div class="container">
+        <h2 class="this-title">News</h2>
+    </div>
+</section>
+<section class="row final-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">News</li>
+        </ol>
+    </div>
+</section>
+<section class="container clearfix common-pad-inner">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 pull-left">
+            <div class="single-sidebar-widget">
+
+           <!-- Categories style--><!-- Popular Posts style--><div class="single-sidebar-widget-outer">
+                    <div class="sec-title">
+                        <h2>@Html.Raw(Resources.HMS_BlogNew)</h2>
+                    </div>
+                    <div class="popular-post">
+                        <ul>
+                            @foreach (var item in Model.RelatedBlogs)
+                            {
+                                if (cookie.Value.Equals("vi"))
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.Title</h4>
+                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.TitleENG</h4>
+                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 pull-right">
+            <div class="single-post-wrapper">
+                <!-- News 1-->
+                @foreach (var item in Model.ListBlogs)
+                {
+                    @*foreach nhu 1 list*@
+                    if (cookie.Value.Equals("vi"))
+                    {
+                        <article class="single-blog-post img-cap-effect">
+                            <div class="img-box">
+                                <a href="/tintuc/@item.Slug">
+                                    <img src="@item.BlogImage" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
+                            <p>@item.Description</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
+                        </article>
+                    }
+                    else
+                    {
+                        <article class="single-blog-post img-cap-effect">
+                            <div class="img-box">
+                                <a href="/tintuc/@item.Slug">
+                                    <img src="@item.BlogImage" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <h3><a href="/tintuc/@item.Slug">@item.TitleENG</a></h3>
+                            <p>@item.DescriptionENG</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
+                        </article>
+                    }
+
+                }
+
+                <div>
+                    @Html.PagedListPager(Model.ListBlogs, page => Url.Action("Index", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script></script>

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.Product>
+@using Outsourcing.Data.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts{
+    <script src="/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <i class="icon-ok green"></i>
+                    Quản lý tin tức
+                </div>*@
+            @*<a class="btn btn-success" href="/Admin/Inventory/Create" style="margin-bottom:10px">Nhập Hàng</a>*@
+
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-6">
+                    <div class="widget-box transparent">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="table-header">Kho</div>
+
+            <table id="InventoryTable" class="table table-bordered table-striped table-fixed-header">
+                <thead>
+                    <tr role="row">
+                        <th>STT</th>
+                        <th>Sản Phẩm</th>
+                        <th>Tồn</th>
+                        <th>Đơn Giá</th>
+                        <th>Nhà Cung Cấp</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    @if (Model != null && Model.Any())
+                    {
+                        int count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            <tr class="odd">
+                                <td class=" sorting_1">@count</td>
+                                <td class="hidden-480 ">@item.Name</td>
+                                @{
+                            //var listimport = item.Inventorys.Where(p => p.isImport == true);
+                            //Double sumImport = 0;
+                            //if (listimport != null)
+                            //{
+                            //    foreach (var import in listimport)
+                            //    {
+                            //        sumImport += import.Quantity;
+                            //    }
+                            //}
+                            //var listExport = item.Inventorys.Where(p => p.isImport == false);
+                            //Double sumExport = 0;
+                            //if (listExport != null)
+                            //{
+                            //    foreach (var export in listExport)
+                            //    {
+                            //        sumExport += export.Quantity;
+                            //    }
+                            //}
+                            //var result = sumImport - sumExport;
+                            if (item.InventoryLogs.Any())
+	{
+                                @:<td class="hidden-480 ">@item.InventoryLogs.FirstOrDefault().Inventory.Quantity</td>
+    @:<td class="hidden-480 ">@item.InventoryLogs.FirstOrDefault().Inventory.Price</td>
+
+    }
+                            else
+                            {
+
+                                @:<td class="hidden-480 ">0</td>
+                            @:<td class="hidden-480 ">0</td>
+	}
+                                }
+
+                                        <td class=" ">@item.Vendor.Name</td>
+                                        <td class=" ">
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+                                                <a href="/Admin/Inventory/Create?ProductId=@item.Id" class="btn btn-xs btn-info">
+                                                    <i class="icon-edit bigger-120">Nhập</i>
+                                                </a>
+                                                <a href="/Admin/Inventory/Location?ProductId=@item.Id" class="btn btn-xs btn-info">
+                                                    <i class="icon-edit bigger-120">Vị Trí</i>
+                                                </a>
+                                                @*<a href="/Admin/Inventory/Delete?InventoryId=@item.Id" class="btn btn-xs btn-danger">
+                                                        <i class="icon-trash bigger-160"></i>
+                                                    </a>*@
+                                            </div>
+                                        </td>
+                                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        var table = $("#InventoryTable").DataTable();
+        //var arrayfilter = [2, 4];
+
+        createDropFilter(table, [2]);
+        bindDropFilter(table, [6]);
+
+    });
+
+    function createDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change', function () {
+                table.column(i)
+                    .search($(this).val())
+                    .draw();
+            });
+
+            table.column(i).data().unique().sort().each(function (d, j) {
+                filter1.append('<option value="' + d + '">' + d + '</option>');
+            });
+
+        });
+    }
+    function bindDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change', function () {
+                table.column(i)
+                    .search($(this).val())
+                    .draw();
+            });
+        });
+    }
+</script>

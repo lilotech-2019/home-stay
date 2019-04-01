@@ -1,0 +1,116 @@
+﻿@model Outsourcing.Data.Models.Color
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
+}
+<script>
+    function sendContact() {
+        var Name, Email, PhoneNumber, message;
+        Name = document.getElementById("CustomerName").value;
+        Email = document.getElementById("Email").value;
+        PhoneNumber = document.getElementById("PhoneNumber").value;
+        message = document.getElementById("content").value;
+        if (Name != "" && Email != "" && PhoneNumber != "" && message != "") {
+            alert("Gửi Tin Nhắn Thành Công");
+        }
+    }
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>
+<section class="row final-inner-header">
+    <div class="container">
+        <h2 class="this-title">@Html.Raw(Resources.HMS_Contact)</h2>
+    </div>
+</section>
+<section class="row final-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
+            <li><a href="/lien-he" class="active">@Html.Raw(Resources.HMS_Contact)</a></li>
+        </ol>
+    </div>
+</section>
+<!-- Booking style-->
+<section class="container clearfix common-pad booknow">
+    <div class="sec-header">
+        <h2>@Html.Raw(Resources.HMS_SendMessage)</h2>
+        <h3>Pick a room that best suits your taste and budget</h3>
+    </div>
+    <div class="row nasir-contact">
+        <div class="col-md-8">
+            <div class="book-left-content input_form">
+                @* form để submit data *@
+                <form id="contactForm" action="/Home/Contact" method="post">
+                    @*@Html.HiddenFor(model => model.IsDelete)
+                    @Html.HiddenFor(model => model.Note)*@
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                            <span>@Html.Raw(Resources.HMS_Name)</span>
+                            <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                            <span>@Html.Raw(Resources.HMS_Email) </span>
+                            <input id="Email" type="email" name="Email" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <span>@Html.Raw(Resources.HMS_Phone)</span>
+                            <input id="PhoneNumber" type="text" name="Description" placeholder="@Html.Raw(Resources.HMS_Phone)" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <span>@Html.Raw(Resources.HMS_Message)</span>
+                            <textarea id="content" rows="6" name="Content" placeholder="@Html.Raw(Resources.HMS_Message)" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="res-btn" onclick="sendContact()">@Html.Raw(Resources.HMS_SendMessage)</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="success">
+                    <p>Tin nhắn thành công</p>
+                </div>
+                <div id="error">
+                    <p>Thất bại!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="contact-info">
+                <h2>@Html.Raw(Resources.HMS_Contact)</h2>
+                <div class="media-contact clearfix">
+                    <div class="media-contact-icon"><i aria-hidden="true" class="fa fa-map-marker"></i></div>
+                    <div class="media-contact-info">
+                        <p>Lake Resort, Lorance 542B, Tailstoi Town 5248 MT, Wordwide Country</p>
+                    </div>
+                </div>
+                <div class="media-contact clearfix">
+                    <div class="media-contact-icon"><i aria-hidden="true" class="fa fa-envelope-o"></i></div>
+                    <div class="media-contact-info">
+                        <p><a href="mailto:Info@Resorthotel.Com">Info@Resorthotel.Com</a><br><a href="mailto:support@Resorthotel.Com">support@Resorthotel.Com</a></p>
+                    </div>
+                </div>
+                <div class="media-contact clearfix">
+                    <div class="media-contact-icon"><i aria-hidden="true" class="fa fa-phone"></i></div>
+                    <div class="media-contact-info">
+                        <p>Monday to Friday : 8.00am to 5.00 pm<br>                                  Saturday : 8.00am to 3.00 pm<br>                                  Sunday : <span>closed</span></p>
+                    </div>
+                </div>
+                <div class="media-contact clearfix">
+                    <div class="media-contact-icon"><i aria-hidden="true" class="icon icon-Timer"></i></div>
+                    <div class="media-contact-info">
+                        <p><a href="tel:18005622487"><i>+ 1800 562 2487</i></a><br><a href="tel:32155468975"><i>+ 3215 546 8975</i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Booking style-->
+<!-- TT-CONTACT-MAP-->
+<div id="map-canvas" data-lat="51.477254" data-lng="-0.026888" data-zoom="14" class="tt-contact-map map-block"></div>
+<div class="addresses-block"><a data-lat="51.477254" data-marker="" data-lng="-0.026888" data-string="1. Here is some address or email or phone or something else..."></a></div>
+

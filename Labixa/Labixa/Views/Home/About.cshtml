@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
+}
+
+    <!-- Header  Inner style-->
+    <section class="row final-inner-header">
+        <div class="container">
+            <h2 class="this-title">@Html.Raw(Resources.HMS_AboutUs)</h2>
+        </div>
+    </section>
+    <section class="row final-breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
+                <li class="active"> <a href="/gioi-thieu"></a>@Html.Raw(Resources.HMS_AboutUs)</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Header  Slider style-->
+    <!-- About Resort style-->
+    <section class="container clearfix common-pad about-info-box">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="sec-header3">
+                    <h2>@Html.Raw(Resources.HMS_AboutUs)</h2>
+                    <h3>Pick a room that best suits your taste and budget</h3>
+                </div>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam.</p>
+                <h6>eque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incid dolor sit amet, consectetur, adipisci velit,</h6>
+                <ul>
+                    <li><span>Awesome Nature</span></li>
+                    <li><span>Awaded Resort</span></li>
+                    <li><span>Online Booking</span></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 hidden-xs">
+                <div class="img-cap-effect">
+                    <div class="img-box">
+                        <img src="~/Content/HMS/images/about/1.jpg" alt="">
+                        <div class="img-caption"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Resort style-->
+    <!-- Our Resort Values style-->
+    <section class="clearfix news-wrapper">
+        <div class="container clearfix common-pad">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 our-resort-value hidden-xs">
+                    <div class="img-l-box"><img src="~/Content/HMS/images/our-resort-values/1.jpg" alt=""></div>
+                    <div class="img-r-box">
+                        <div class="img-box1"><img src="~/Content/HMS/images/our-resort-values/2.jpg" alt=""></div>
+                        <div class="img-box2"><img src="~/Content/HMS/images/our-resort-values/3.jpg" alt=""></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="resort-r-value">
+                        <div class="sec-header sec-header-pad">
+                            <h2>@Html.Raw(Resources.HMS_OurServiceValues)</h2>
+                            <h3>Pick a room that best suits your taste and budget</h3>
+                        </div>
+                        <div class="accordian-area">
+                            <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
+                                <div class="panel panel-default">
+                                    <div id="headingOne" role="tab" class="panel-heading">
+                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed"><span>WE offer luxury service to our customer</span><i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                    </div>
+                                    <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse">
+                                        <div class="panel-body faq-content">
+                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div id="headingTwo" role="tab" class="panel-heading">
+                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                    </div>
+                                    <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse in">
+                                        <div class="panel-body faq-content">
+                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div id="headingThree" role="tab" class="panel-heading">
+                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                    </div>
+                                    <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse">
+                                        <div class="panel-body faq-content">
+                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Resort Values style-->
+    <!-- Take a Tour video-->
+    <section class="take-a-tour-video-box">
+        <div class="check-video-box">
+            <div class="img-holder">
+                <img src="~/Content/HMS/images/about/video-overlay.jpg" alt="">
+                <div class="content">
+                    <div class="content-inner">
+                        <div class="box">
+                            <h3>Take a Tour</h3><a href="~/Content/HMS/images/about/video1.jpg" class="fancybox"><i class="icon icon-Play"></i></a>
+                            <h4>0f our wounderfull resort</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Take a Tour video-->
+   

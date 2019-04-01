@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Blog>
+    @using PagedList.Mvc;
+@{
+    ViewBag.Title = "BlogsCategories";
+    ViewBag.description = "Web's slogan";
+    ViewBag.url = "";
+    ViewBag.image = "~/Content/hotel/room/download.jpg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="sca_content" class="sca_content">
+    <section class="sca_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div id="block-scalac-content">
+                        <div>
+                            @foreach (var item in Model)
+    {
+                        <div class="sca_post_item">
+                            <div class="sca_post_img">
+                                <a href="/tintuc/@item.Slug/"><img src="@item.BlogImage" alt="@item.Title"></a>
+                            </div>
+                            <div class="sca_post_title">
+                                <h3><a href="/tintuc/@item.Slug/">@item.Title</a></h3>
+                            </div>
+                            @item.Description
+                            <div class="sca_post_more clearfix">
+                                <div class="pull-left">
+                                    <a href="/tintuc/@item.Slug/" class="btn">READ MORE</a>
+                                </div>
+
+                            </div>
+                        </div>
+}
+                            <div>
+                                @Html.PagedListPager(Model, page => Url.Action("BlogsCategories",
+                                                new { page, id = ViewBag.id, sortby = ViewBag.sortby, orderStatus = ViewBag.orderStatus }), new PagedListRenderOptions()
+                                                {
+                                                    DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                                                    DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                                                    MaximumPageNumbersToDisplay = 3, // number of pages in line
+                                                       DisplayEllipsesWhenNotShowingAllPageNumbers = true
+                                                })
+                            </div>
+
+
+
+                            @*<nav class="sca_blog_pag">
+            <ul class="pagination">
+                <li class="pager__item is-active page active">
+                    <a class="page-numbers current" title="Current page">1</a>
+                </li>
+                <li class="pager__item">
+                    <a href="blog37e7.html?sidebar=none&amp;page=1" title="Go to page 2">
+                        <span class="visually-hidden">
+                            Page
+                        </span>2
+                    </a>
+                </li>
+                <li class="pager__item pager__item--next">
+                    <a href="blog37e7.html?sidebar=none&amp;page=1" title="Go to next page" rel="next">
+                        <i class="ti ti-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+

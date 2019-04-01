@@ -1,0 +1,113 @@
+﻿@*@model Outsourcing.Data.Models.Blog*@
+@model Labixa.ViewModels.BlogViewModel
+@{ 
+                HttpCookie cookie = Request.Cookies["_culture"];
+}
+
+<section class="row final-inner-header">
+    <div class="container">
+        <h2 class="this-title">@Html.Raw(Resources.HMS_BlogDetail)</h2>
+    </div>
+</section>
+<section class="row final-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
+            <li class="active">@Html.Raw(Resources.HMS_BlogDetail)</li>
+        </ol>
+    </div>
+</section>
+<!-- Header  Slider style-->
+<!-- News style-->
+<section class="container clearfix common-pad-inner">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 pull-left">
+            <div class="single-sidebar-widget">
+
+                <!-- Categories style-->
+                <div class="single-sidebar-widget-outer" style="display:none">
+
+                </div>
+                <!-- Categories style-->
+                <!-- Popular Posts style-->
+                <div class="single-sidebar-widget-outer">
+                    <div class="sec-title">
+                        <h2>@Html.Raw(Resources.HMS_BlogNew)</h2>
+                    </div>
+                    <div class="popular-post">
+                        <ul>
+                            @foreach (var item in Model.RelatedBlogs)
+                            {
+                                if (cookie.Value.Equals("vi"))
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.Title</h4>
+                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.TitleENG</h4>
+                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 pull-right">
+            <div class="single-post-wrapper">
+          
+            @if (cookie.Value.Equals("vi"))
+            {
+            <article class="single-blog-post img-cap-effect">
+                <div class="img-box">
+                    <a href="@Model.listBlogNew.Slug">
+                        <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+
+                    </a>
+                </div>
+
+                <h3>@Model.listBlogNew.Title</h3>
+                <p> @Html.Raw(Model.listBlogNew.Description)</p>
+
+                <p>@Html.Raw(Model.listBlogNew.Content) </p>
+            </article>
+            }
+            else
+            {
+            <article class="single-blog-post img-cap-effect">
+                <div class="img-box">
+                    <a href="@Model.listBlogNew.Slug">
+                        <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+
+                    </a>
+                </div>
+
+                <h3>@Model.listBlogNew.TitleENG</h3>
+                @*<p> @Html.Raw(Model.listBlogNew.DescriptionENG)</p>*@
+
+                <p>@Html.Raw(Model.listBlogNew.ContentENG) </p>
+            </article>
+            }
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- News style-->
+<!-- Welcome banner  style-->
+<!-- Welcome banner  style-->

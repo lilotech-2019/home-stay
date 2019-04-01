@@ -1,0 +1,105 @@
+﻿@using Outsourcing.Core
+@model Labixa.Areas.HMSAdmin.ViewModels.CostOrderCreateModel
+@{
+}
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/HMSAdmin/CostOrder">Quản lý đơn chi phí</a>
+            </li>
+            <li class="active">Thêm mới Đơn chi phí</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Thêm mới Đơn chi phí
+            </div>
+            @using (Html.BeginForm("Create", "CostOrder", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                Nội dung chính
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a data-toggle="tab" href="#tab2">
+                                <i class="red  icon-rocket bigger-120"></i>
+                                Danh sách chi
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên Chi phí</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.CostOrderModel.CustomerName)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Khách sạn</label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.CostOrderModel.HotelId, Model.ListHotels)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Nội dung</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.CostOrderModel.Description, "CkEditor")
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ngày chi</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.CostOrderModel.Deadline)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab2" class="tab-pane fade">
+                            <div class="form-group ">
+                                Bạn cần tạo đơn trước khi thêm danh sách chi
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                @*
+                    partial for group button
+                *@
+                @Html.Partial("_PartialButtonGroup", "/HMSAdmin/CostOrder")
+            }
+        </div>
+    </div>
+</div>

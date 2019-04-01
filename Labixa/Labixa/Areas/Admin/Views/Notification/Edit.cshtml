@@ -1,0 +1,132 @@
+﻿@using Outsourcing.Core
+@model Outsourcing.Data.Models.Notification
+@{
+}
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Chỉnh sửa nội dung
+            </div>
+            @if (Model != null)
+            {
+                using (Html.BeginForm("Edit", "Notification", null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.IsDelete)
+    @Html.HiddenFor(model => model.isUrgent)
+    @Html.HiddenFor(model => model.TypeNotifyId)
+                    @Html.HiddenFor(model => model.DateCreated)
+
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab1">
+                                    <i class="green ace-icon fa fa-home bigger-120"></i>
+                                    Nội dung
+                                </a>
+                            </li>
+
+                            @*<li class="">
+                                    <a data-toggle="tab" href="#tab2">
+                                        Chỉnh sửa SEO
+                                    </a>
+                                </li>*@
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane fade active in">
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Name)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Mô tả</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Description)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Loại Cảnh Báo</label>
+
+                                    <div class="col-sm-9">
+                                        <label class="col-xs-12 col-md-8" for="BlogCategoryId">@Model.TypeNotify.Name</label>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Đã Đọc</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.isRead)
+                                    </div>
+                                </div>
+                                @*<div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Quan Trọng</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.isUrgent)
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            @*<div id="tab2" class="tab-pane fade">
+
+                <div class="form-group ">
+                    @Html.MyLabelFor(model => model.MetaKeywords)
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.MetaKeywords)
+                        @Html.ValidationMessageFor(model => model.MetaKeywords)
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    @Html.MyLabelFor(model => model.MetaTitle)
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.MetaTitle)
+                        @Html.ValidationMessageFor(model => model.MetaTitle)
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    @Html.MyLabelFor(model => model.MetaDescription)
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.MetaDescription)
+                        @Html.ValidationMessageFor(model => model.MetaDescription)
+                    </div>
+                </div>
+                <div class="form-group ">
+                    @Html.MyLabelFor(model => model.Slug)
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Slug)
+                        @Html.ValidationMessageFor(model => model.Slug)
+                    </div>
+                </div>
+            </div>*@
+
+                        </div>
+                    </div>
+
+
+                    @*
+                        partial for group button
+                    *@
+                    @Html.Partial("_PartialButtonGroup", "/Admin/Notification")
+                }
+            }
+            else
+            {
+                <h1>Không tìm thấy tin tức!</h1>
+            }
+        </div>
+    </div>
+</div>

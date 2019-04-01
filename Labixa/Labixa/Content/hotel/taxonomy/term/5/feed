@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="http://scala2.drupalet.com/tags/web-design">
+  <channel>
+    <title>Web Design</title>
+    <link>http://scala2.drupalet.com/tags/web-design</link>
+    <description/>
+    <language>en</language>
+    
+    <item>
+  <title>Post with Image</title>
+  <link>http://scala2.drupalet.com/post-image</link>
+  <description>&lt;span&gt;Post with Image&lt;/span&gt;
+&lt;p&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+&lt;blockquote&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. 
+&lt;/blockquote&gt;
+&lt;small&gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/small&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;
+    &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+    &lt;li&gt;Integer molestie lorem at massa&lt;/li&gt;
+    &lt;li&gt;Facilisis in pretium nisl aliquet&lt;/li&gt;
+    &lt;li&gt;
+        Nulla volutpat aliquam velit
+        &lt;ul&gt;&lt;li&gt;Phasellus iaculis neque&lt;/li&gt;
+            &lt;li&gt;Purus sodales ultricies&lt;/li&gt;
+            &lt;li&gt;Vestibulum laoreet porttitor sem&lt;/li&gt;
+            &lt;li&gt;Ac tristique libero volutpat at&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+    &lt;li&gt;Faucibus porta lacus fringilla vel&lt;/li&gt;
+    &lt;li&gt;Aenean sit amet erat nunc&lt;/li&gt;
+    &lt;li&gt;Eget porttitor lorem&lt;/li&gt;
+&lt;/ul&gt;&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Thu, 10/19/2017 - 04:20&lt;/span&gt;
+&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Comments&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Comments&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;    &lt;a href="http://scala2.drupalet.com/tags/marketing" hreflang="en"&gt;Marketing&lt;/a&gt;,     &lt;a href="http://scala2.drupalet.com/tags/web-design" hreflang="en"&gt;Web Design&lt;/a&gt;NoneImage</description>
+  <pubDate>Thu, 19 Oct 2017 08:20:46 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">11 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>Post with Video</title>
+  <link>http://scala2.drupalet.com/post-video</link>
+  <description>&lt;span&gt;Post with Video&lt;/span&gt;
+&lt;p&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+&lt;blockquote&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. 
+&lt;/blockquote&gt;
+&lt;small&gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/small&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;
+    &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+    &lt;li&gt;Integer molestie lorem at massa&lt;/li&gt;
+    &lt;li&gt;Facilisis in pretium nisl aliquet&lt;/li&gt;
+    &lt;li&gt;
+        Nulla volutpat aliquam velit
+        &lt;ul&gt;&lt;li&gt;Phasellus iaculis neque&lt;/li&gt;
+            &lt;li&gt;Purus sodales ultricies&lt;/li&gt;
+            &lt;li&gt;Vestibulum laoreet porttitor sem&lt;/li&gt;
+            &lt;li&gt;Ac tristique libero volutpat at&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+    &lt;li&gt;Faucibus porta lacus fringilla vel&lt;/li&gt;
+    &lt;li&gt;Aenean sit amet erat nunc&lt;/li&gt;
+    &lt;li&gt;Eget porttitor lorem&lt;/li&gt;
+&lt;/ul&gt;&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Thu, 10/19/2017 - 04:20&lt;/span&gt;
+&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Comments&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Comments&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;    &lt;a href="http://scala2.drupalet.com/tags/marketing" hreflang="en"&gt;Marketing&lt;/a&gt;,     &lt;a href="http://scala2.drupalet.com/tags/web-design" hreflang="en"&gt;Web Design&lt;/a&gt;	&lt;div class="video-embed-field-responsive-video"&gt;
+	&lt;iframe width="854" height="480" frameborder="0" allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/uVju5--RqtY?autoplay=0&amp;start=0&amp;rel=0"&gt;&lt;/iframe&gt;
+
+	&lt;/div&gt;
+NoneVideo</description>
+  <pubDate>Thu, 19 Oct 2017 08:20:46 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">10 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>Post with Soundcloud</title>
+  <link>http://scala2.drupalet.com/post-soundcloud</link>
+  <description>&lt;span&gt;Post with Soundcloud&lt;/span&gt;
+&lt;p&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+&lt;blockquote&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. 
+&lt;/blockquote&gt;
+&lt;small&gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/small&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;
+    &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+    &lt;li&gt;Integer molestie lorem at massa&lt;/li&gt;
+    &lt;li&gt;Facilisis in pretium nisl aliquet&lt;/li&gt;
+    &lt;li&gt;
+        Nulla volutpat aliquam velit
+        &lt;ul&gt;&lt;li&gt;Phasellus iaculis neque&lt;/li&gt;
+            &lt;li&gt;Purus sodales ultricies&lt;/li&gt;
+            &lt;li&gt;Vestibulum laoreet porttitor sem&lt;/li&gt;
+            &lt;li&gt;Ac tristique libero volutpat at&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+    &lt;li&gt;Faucibus porta lacus fringilla vel&lt;/li&gt;
+    &lt;li&gt;Aenean sit amet erat nunc&lt;/li&gt;
+    &lt;li&gt;Eget porttitor lorem&lt;/li&gt;
+&lt;/ul&gt;&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Thu, 10/19/2017 - 04:20&lt;/span&gt;
+&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Comments&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Comments&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;    &lt;a href="http://scala2.drupalet.com/tags/marketing" hreflang="en"&gt;Marketing&lt;/a&gt;,     &lt;a href="http://scala2.drupalet.com/tags/web-design" hreflang="en"&gt;Web Design&lt;/a&gt;&lt;iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=http%3A%2F%2Fapi.soundcloud.com%2Fusers%2F40174345&amp;show_artwork=false&amp;auto_play=false&amp;show_comments=true&amp;show_playcount=false&amp;color=ff7700"&gt;&lt;/iframe&gt;NoneMusic</description>
+  <pubDate>Thu, 19 Oct 2017 08:20:46 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">9 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>Post with Slider Gallery</title>
+  <link>http://scala2.drupalet.com/post-slider-gallery</link>
+  <description>&lt;span&gt;Post with Slider Gallery&lt;/span&gt;
+&lt;p&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+&lt;blockquote&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. 
+&lt;/blockquote&gt;
+&lt;small&gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/small&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;
+    &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+    &lt;li&gt;Integer molestie lorem at massa&lt;/li&gt;
+    &lt;li&gt;Facilisis in pretium nisl aliquet&lt;/li&gt;
+    &lt;li&gt;
+        Nulla volutpat aliquam velit
+        &lt;ul&gt;&lt;li&gt;Phasellus iaculis neque&lt;/li&gt;
+            &lt;li&gt;Purus sodales ultricies&lt;/li&gt;
+            &lt;li&gt;Vestibulum laoreet porttitor sem&lt;/li&gt;
+            &lt;li&gt;Ac tristique libero volutpat at&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+    &lt;li&gt;Faucibus porta lacus fringilla vel&lt;/li&gt;
+    &lt;li&gt;Aenean sit amet erat nunc&lt;/li&gt;
+    &lt;li&gt;Eget porttitor lorem&lt;/li&gt;
+&lt;/ul&gt;&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Thu, 10/19/2017 - 04:20&lt;/span&gt;
+&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Comments&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Comments&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;    &lt;a href="http://scala2.drupalet.com/tags/marketing" hreflang="en"&gt;Marketing&lt;/a&gt;,     &lt;a href="http://scala2.drupalet.com/tags/web-design" hreflang="en"&gt;Web Design&lt;/a&gt;NoneGallery</description>
+  <pubDate>Thu, 19 Oct 2017 08:20:46 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">8 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>We Love to design</title>
+  <link>http://scala2.drupalet.com/we-love-design</link>
+  <description>&lt;span&gt;We Love to design&lt;/span&gt;
+&lt;p&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+&lt;blockquote&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. 
+&lt;/blockquote&gt;
+&lt;small&gt;
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/small&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Lorem ipsum dolor sit amet&lt;/li&gt;
+    &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+    &lt;li&gt;Integer molestie lorem at massa&lt;/li&gt;
+    &lt;li&gt;Facilisis in pretium nisl aliquet&lt;/li&gt;
+    &lt;li&gt;
+        Nulla volutpat aliquam velit
+        &lt;ul&gt;&lt;li&gt;Phasellus iaculis neque&lt;/li&gt;
+            &lt;li&gt;Purus sodales ultricies&lt;/li&gt;
+            &lt;li&gt;Vestibulum laoreet porttitor sem&lt;/li&gt;
+            &lt;li&gt;Ac tristique libero volutpat at&lt;/li&gt;
+        &lt;/ul&gt;&lt;/li&gt;
+    &lt;li&gt;Faucibus porta lacus fringilla vel&lt;/li&gt;
+    &lt;li&gt;Aenean sit amet erat nunc&lt;/li&gt;
+    &lt;li&gt;Eget porttitor lorem&lt;/li&gt;
+&lt;/ul&gt;&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Thu, 10/19/2017 - 04:20&lt;/span&gt;
+&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Comments&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Comments&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;    &lt;a href="http://scala2.drupalet.com/tags/marketing" hreflang="en"&gt;Marketing&lt;/a&gt;,     &lt;a href="http://scala2.drupalet.com/tags/web-design" hreflang="en"&gt;Web Design&lt;/a&gt;RightImage</description>
+  <pubDate>Thu, 19 Oct 2017 08:20:46 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">7 at http://scala2.drupalet.com</guid>
+    </item>
+
+  </channel>
+</rss>

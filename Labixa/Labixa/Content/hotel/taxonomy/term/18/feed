@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="http://scala2.drupalet.com/product-tags/work">
+  <channel>
+    <title>Work</title>
+    <link>http://scala2.drupalet.com/product-tags/work</link>
+    <description/>
+    <language>en</language>
+    
+    <item>
+  <title>Full Midi #1</title>
+  <link>http://scala2.drupalet.com/full-midi-1</link>
+  <description>&lt;span&gt;Full Midi #1&lt;/span&gt;
+&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Tue, 10/24/2017 - 22:08&lt;/span&gt;
+&lt;div class="display-price uc-product-36 product-info"&gt;&lt;span class="uc-price"&gt;$8.26&lt;/span&gt;&lt;/div&gt;$8.26&lt;form class="inline-form" data-drupal-selector="uc-product-add-to-cart-form-36" action="http://scala2.drupalet.com/taxonomy/term/18/feed" method="post" id="uc-product-add-to-cart-form-36" accept-charset="UTF-8"&gt;
+  &lt;div class="js-form-item form-item js-form-type-uc-quantity form-item-qty js-form-item-qty form-no-label"&gt;
+        &lt;input class="form-control form-uc-quantity" data-drupal-selector="edit-qty" type="number" min="0" step="1" id="edit-qty" name="qty" value="1" size="5" maxlength="6" /&gt;&lt;/div&gt;
+&lt;input data-drupal-selector="form-ymkplg5gyczvflbpjyn9-yat-6oo3kcr7czedsgeixw" type="hidden" name="form_build_id" value="form-ymKPLG5gYCzVfLbpjyN9-Yat-6Oo3kCr7CzeDSGEIxw" /&gt;&lt;input data-drupal-selector="edit-uc-product-add-to-cart-form-36" type="hidden" name="form_id" value="uc_product_add_to_cart_form_36" /&gt;&lt;div data-drupal-selector="edit-actions" class="form-actions" id="edit-actions"&gt;
+	&lt;input class="button btn btn-default js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Add to cart" /&gt;&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;a href="http://scala2.drupalet.com/portfolio-categories/mens-wear" hreflang="en"&gt;Mens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/shoes" hreflang="en"&gt;Shoes&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/womens-wear" hreflang="en"&gt;Womens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/urban" hreflang="en"&gt;Urban&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/vintage" hreflang="en"&gt;Vintage&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/work" hreflang="en"&gt;Work&lt;/a&gt;&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Reviews&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Reviews&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;</description>
+  <pubDate>Wed, 25 Oct 2017 02:08:45 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">36 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>New Look #1</title>
+  <link>http://scala2.drupalet.com/new-look-1</link>
+  <description>&lt;span&gt;New Look #1&lt;/span&gt;
+&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Tue, 10/24/2017 - 22:08&lt;/span&gt;
+&lt;div class="display-price uc-product-35 product-info"&gt;&lt;span class="uc-price"&gt;$12.96&lt;/span&gt;&lt;/div&gt;$12.96&lt;form class="inline-form" data-drupal-selector="uc-product-add-to-cart-form-35" action="http://scala2.drupalet.com/taxonomy/term/18/feed" method="post" id="uc-product-add-to-cart-form-35" accept-charset="UTF-8"&gt;
+  &lt;div class="js-form-item form-item js-form-type-uc-quantity form-item-qty js-form-item-qty form-no-label"&gt;
+        &lt;input class="form-control form-uc-quantity" data-drupal-selector="edit-qty" type="number" min="0" step="1" id="edit-qty--2" name="qty" value="1" size="5" maxlength="6" /&gt;&lt;/div&gt;
+&lt;input data-drupal-selector="form-ttri9by0veykqipt49joywu9q2sj0eh2-7a0axdzr94" type="hidden" name="form_build_id" value="form-TtrI9BY0vEYkQiPT49jOyWu9q2SJ0EH2_7A0AXDzr94" /&gt;&lt;input data-drupal-selector="edit-uc-product-add-to-cart-form-35" type="hidden" name="form_id" value="uc_product_add_to_cart_form_35" /&gt;&lt;div data-drupal-selector="edit-actions" class="form-actions" id="edit-actions--2"&gt;
+	&lt;input class="button btn btn-default js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" name="op" value="Add to cart" /&gt;&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;a href="http://scala2.drupalet.com/portfolio-categories/mens-wear" hreflang="en"&gt;Mens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/shoes" hreflang="en"&gt;Shoes&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/womens-wear" hreflang="en"&gt;Womens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/urban" hreflang="en"&gt;Urban&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/vintage" hreflang="en"&gt;Vintage&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/work" hreflang="en"&gt;Work&lt;/a&gt;&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Reviews&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Reviews&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;</description>
+  <pubDate>Wed, 25 Oct 2017 02:08:45 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">35 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>Lost Ink #1</title>
+  <link>http://scala2.drupalet.com/lost-ink-1</link>
+  <description>&lt;span&gt;Lost Ink #1&lt;/span&gt;
+&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Tue, 10/24/2017 - 22:08&lt;/span&gt;
+&lt;div class="display-price uc-product-34 product-info"&gt;&lt;span class="uc-price"&gt;$12.96&lt;/span&gt;&lt;/div&gt;$12.96&lt;form class="inline-form" data-drupal-selector="uc-product-add-to-cart-form-34" action="http://scala2.drupalet.com/taxonomy/term/18/feed" method="post" id="uc-product-add-to-cart-form-34" accept-charset="UTF-8"&gt;
+  &lt;div class="js-form-item form-item js-form-type-uc-quantity form-item-qty js-form-item-qty form-no-label"&gt;
+        &lt;input class="form-control form-uc-quantity" data-drupal-selector="edit-qty" type="number" min="0" step="1" id="edit-qty--3" name="qty" value="1" size="5" maxlength="6" /&gt;&lt;/div&gt;
+&lt;input data-drupal-selector="form-qwl0dv2bmr0m-4om9lgyyjij7nwnebyibjparje-om" type="hidden" name="form_build_id" value="form-qwL0Dv2bmR0M-_4oM9lGYYJiJ7NWNEbyibjparJE-OM" /&gt;&lt;input data-drupal-selector="edit-uc-product-add-to-cart-form-34" type="hidden" name="form_id" value="uc_product_add_to_cart_form_34" /&gt;&lt;div data-drupal-selector="edit-actions" class="form-actions" id="edit-actions--3"&gt;
+	&lt;input class="button btn btn-default js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--3" name="op" value="Add to cart" /&gt;&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;a href="http://scala2.drupalet.com/portfolio-categories/mens-wear" hreflang="en"&gt;Mens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/shoes" hreflang="en"&gt;Shoes&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/womens-wear" hreflang="en"&gt;Womens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/urban" hreflang="en"&gt;Urban&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/vintage" hreflang="en"&gt;Vintage&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/work" hreflang="en"&gt;Work&lt;/a&gt;&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Reviews&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Reviews&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;</description>
+  <pubDate>Wed, 25 Oct 2017 02:08:45 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">34 at http://scala2.drupalet.com</guid>
+    </item>
+<item>
+  <title>Vintage Floral #1</title>
+  <link>http://scala2.drupalet.com/vintage-floral-1</link>
+  <description>&lt;span&gt;Vintage Floral #1&lt;/span&gt;
+&lt;span&gt;&lt;span lang="" about="http://scala2.drupalet.com/user/1" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;admin&lt;/span&gt;&lt;/span&gt;
+&lt;span&gt;Tue, 10/24/2017 - 22:08&lt;/span&gt;
+&lt;div class="display-price uc-product-33 product-info"&gt;&lt;span class="uc-price"&gt;$12.96&lt;/span&gt;&lt;/div&gt;$12.96&lt;form class="inline-form" data-drupal-selector="uc-product-add-to-cart-form-33" action="http://scala2.drupalet.com/taxonomy/term/18/feed" method="post" id="uc-product-add-to-cart-form-33" accept-charset="UTF-8"&gt;
+  &lt;div class="js-form-item form-item js-form-type-uc-quantity form-item-qty js-form-item-qty form-no-label"&gt;
+        &lt;input class="form-control form-uc-quantity" data-drupal-selector="edit-qty" type="number" min="0" step="1" id="edit-qty--4" name="qty" value="1" size="5" maxlength="6" /&gt;&lt;/div&gt;
+&lt;input data-drupal-selector="form-2z75mx-kevpoxqnzib0fhsvhbuuoy31dnidps2zhik" type="hidden" name="form_build_id" value="form-2Z75Mx_-keVpoxQnZIb0fhSVhBUuOY31dNIdPs2ZHik" /&gt;&lt;input data-drupal-selector="edit-uc-product-add-to-cart-form-33" type="hidden" name="form_id" value="uc_product_add_to_cart_form_33" /&gt;&lt;div data-drupal-selector="edit-actions" class="form-actions" id="edit-actions--4"&gt;
+	&lt;input class="button btn btn-default js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--4" name="op" value="Add to cart" /&gt;&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;a href="http://scala2.drupalet.com/portfolio-categories/mens-wear" hreflang="en"&gt;Mens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/shoes" hreflang="en"&gt;Shoes&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/portfolio-categories/womens-wear" hreflang="en"&gt;Womens Wear&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/urban" hreflang="en"&gt;Urban&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/vintage" hreflang="en"&gt;Vintage&lt;/a&gt;&lt;a href="http://scala2.drupalet.com/product-tags/work" hreflang="en"&gt;Work&lt;/a&gt;&lt;div class="comments-title"&gt;
+    &lt;h3 class="title"&gt;Reviews&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="comments-content"&gt;
+    
+    &lt;section class="form-comment"&gt;&lt;div class="form-comment-title"&gt;
+            &lt;h3 class="title"&gt;Leave a Reviews&lt;/h3&gt;
+        &lt;/div&gt;
+            &lt;/section&gt;&lt;/div&gt;$120.36</description>
+  <pubDate>Wed, 25 Oct 2017 02:08:45 +0000</pubDate>
+    <dc:creator>admin</dc:creator>
+    <guid isPermaLink="false">33 at http://scala2.drupalet.com</guid>
+    </item>
+
+  </channel>
+</rss>

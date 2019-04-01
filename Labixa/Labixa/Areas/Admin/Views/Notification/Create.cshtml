@@ -1,0 +1,117 @@
+﻿@using Outsourcing.Core
+@model Labixa.Areas.Admin.ViewModel.NotificationModels
+@{
+}
+Resources.
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="alert alert-block alert-info">
+                @Resources.Admin_Create
+            </div>
+            @using (Html.BeginForm("Create", "Notification", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green ace-icon fa fa-home bigger-120"></i>
+                                @Resources.Content
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên</label>
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.notification.Name)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Kiểu Notify</label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.notification.TypeNotifyId,Model.ListType)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Mô tả</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.notification.Description)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Đã Đọc</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.notification.isRead)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Quan Trọng</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.notification.isUrgent)
+                                </div>
+                            </div>
+                          
+                        </div>
+
+                        @*<div id="tab2" class="tab-pane fade">
+
+                                <div class="form-group ">
+                                    @Html.MyLabelFor(model => model.notification.MetaKeywords)
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.notification.MetaKeywords)
+                                        @Html.ValidationMessageFor(model => model.notification.MetaKeywords)
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    @Html.MyLabelFor(model => model.notification.MetaTitle)
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.notification.MetaTitle)
+                                        @Html.ValidationMessageFor(model => model.notification.MetaTitle)
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    @Html.MyLabelFor(model => model.notification.MetaDescription)
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.notification.MetaDescription)
+                                        @Html.ValidationMessageFor(model => model.notification.MetaDescription)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    @Html.MyLabelFor(model => model.notification.Slug)
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.notification.Slug)
+                                        @Html.ValidationMessageFor(model => model.notification.Slug)
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </div>
+                </div>
+
+
+
+                @*
+                    partial for group button
+                *@
+                @Html.Partial("_PartialButtonGroup", "/Admin/Notification")
+            }
+        </div>
+    </div>
+</div>

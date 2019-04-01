@@ -1,0 +1,40 @@
+﻿@model Outsourcing.Data.Models.Blog
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.description = Model.Description;
+    ViewBag.Keyword = Model.Description;
+    ViewBag.url = "";
+    ViewBag.image = Model.BlogImage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="sca_content" class="sca_content">
+    <section class="sca_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div id="block-scalac-content">
+                        <div class="sca_post_img">
+                            <img src="@Model.BlogImage" alt="We Love to design">
+
+                        </div>
+                        <h3>@Model.Title</h3>
+
+                        <div class="body">
+                            <blockquote>
+                                @Model.Description
+                            </blockquote>
+                            @Html.Raw(Model.Content)
+
+                            <br /><br />
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+

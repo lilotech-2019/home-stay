@@ -1,0 +1,1 @@
+jQuery(document).ready(function($){if($('#scalac-instagram-carousel').length>0){$('#scalac-instagram-carousel').owlCarousel({items:3,responsive:{0:{items:1,},768:{items:2,},980:{items:3,}},navigation:true,responsiveRefreshRate:200,pagination:true,autoPlay:4000,margin:40,loop:true,navigationText:['<i class="ti ti-angle-left"></i>','<i class="ti ti-angle-right"></i>']});}});

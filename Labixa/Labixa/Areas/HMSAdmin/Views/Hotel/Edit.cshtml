@@ -1,0 +1,307 @@
+﻿@using Outsourcing.Core
+@model Labixa.Areas.HMSAdmin.ViewModels.HotelModel
+@{
+}
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="/HMSAdmin/Hotel">Quản lý Khách sạn</a>
+            </li>
+            <li class="active">Chỉnh sửa Khách sạn</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Thêm mới Khách sạn
+            </div>
+            @using (Html.BeginForm("Edit", "Hotel", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Slug)
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                Nội dung
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a data-toggle="tab" href="#tab2">
+                                <i class="red  icon-rocket bigger-120"></i>
+                                Chỉnh sửa SEO
+                            </a>
+                        </li>
+                        @*<li class="">
+                        <a data-toggle="tab" href="#tab3">
+                            <i class="blue  icon-picture bigger-120"></i>
+                            Thuộc tính sản phẩm
+                        </a>
+                    </li>*@
+                        @*<li class="">
+                        <a data-toggle="tab" href="#tab4">
+                            <i class="blue  icon-picture bigger-120"></i>
+                            Hình ảnh
+                        </a>
+                    </li>*@
+                        @*<li class="">
+                        <a data-toggle="tab" href="#tab5">
+                            <i class="blue  icon-picture bigger-120"></i>
+                            Tour Liên Quan
+                        </a>
+                    </li>*@
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Loại Khách sạn</label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownListFor(model => model.CategoryHotelId, Model.ListCategoryHotel)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên Khách sạn</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Name)
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Mô tả khách sạn</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Description, "CkEditor")
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Phần trăm chiết khấu</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.SharePercent)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ẩn Khách sạn</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Status)
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Địa chỉ</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Address)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên Host</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.HostName)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Phone Host</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.HostPhone)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Email Host</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.HostEmail)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Địa chỉ Host</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.HostPhone)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Mã hợp đông</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.ContractNumber)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ngày Ký</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.ContractDate)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ngày hết hạn</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.ContractExpire)
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ảnh đại diện 1</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage1, "GetImageFromElfinder")
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ảnh đại diện 2</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage2, "GetImageFromElfinder")
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Ảnh đại diện 3</label>
+
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage3, "GetImageFromElfinder")
+                                </div>
+                            </div>
+
+                            @*<div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.Position)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.Position)
+                                @Html.ValidationMessageFor(model => model.product.Position)
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.IsHomePage)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.IsHomePage)
+                                @Html.ValidationMessageFor(model => model.product.IsHomePage)
+                            </div>
+                        </div>*@
+                            @*<div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.ProductImage)
+                                <a href="javascrip:void(0)" id="GetElImage" class="btn btn-success"><i class="icon-upload"></i>Chọn ảnh</a>
+                                @Html.ValidationMessageFor(model => model.product.ProductImage)
+                            </div>
+                        </div>*@
+                            @*<div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.Description)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.Description)
+                                @Html.ValidationMessageFor(model => model.product.Description)
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.Price)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.Price)
+                                @Html.ValidationMessageFor(model => model.product.Price)
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.OldPrice)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.OldPrice)
+                                @Html.ValidationMessageFor(model => model.product.OldPrice)
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            @Html.MyLabelFor(model => model.product.Content)
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.product.Content, "CkEditor")
+                                @Html.ValidationMessageFor(model => model.product.Content)
+                            </div>
+                        </div>*@
+
+                        </div>
+
+                        <div id="tab2" class="tab-pane fade">
+
+                            <div class="form-group ">
+                                @Html.MyLabelFor(model => model.MetaKeywords)
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.MetaKeywords)
+                                    @Html.ValidationMessageFor(model => model.MetaKeywords)
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                @Html.MyLabelFor(model => model.MetaTitle)
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.MetaTitle)
+                                    @Html.ValidationMessageFor(model => model.MetaTitle)
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                @Html.MyLabelFor(model => model.MetaDescription)
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.MetaDescription)
+                                    @Html.ValidationMessageFor(model => model.MetaDescription)
+                                </div>
+                            </div>
+
+                            @*<div class="form-group ">
+                                @Html.MyLabelFor(model => model.Slug)
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Slug)
+                                    @Html.ValidationMessageFor(model => model.Slug)
+                                </div>
+                            </div>*@
+                        </div>
+
+                        <div id="tab3" class="tab-pane fade">
+                            <div class="form-group ">
+                                Bạn cần tạo sản phẩm trước khi chỉnh sửa thuộc tính
+                            </div>
+                        </div>
+                        <div id="tab4" class="tab-pane fade">
+                            <div class="form-group ">
+                                Bạn cần tạo sản phẩm trước khi chỉnh sửa hình ảnh
+                            </div>
+                        </div>
+                        <div id="tab5" class="tab-pane fade">
+                            <div class="form-group ">
+                                Bạn cần tạo sản phẩm trước khi chỉnh sửa Tour liên quan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*
+            partial for group button
+                *@
+                @Html.Partial("_PartialButtonGroup", "/HMSAdmin/Hotel")
+            }
+        </div>
+    </div>
+</div>

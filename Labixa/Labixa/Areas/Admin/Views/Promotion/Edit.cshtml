@@ -1,0 +1,117 @@
+﻿@using Outsourcing.Core
+@model Outsourcing.Data.Models.Promotion
+@{
+}
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Chỉnh sửa nội dung
+            </div>
+            @if (Model != null)
+            {
+                using (Html.BeginForm("Edit", "Promotion", null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.isDelete)
+
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab1">
+                                    <i class="green ace-icon fa fa-home bigger-120"></i>
+                                    Nội dung
+                                </a>
+                            </li>
+
+                            @*<li class="">
+                                    <a data-toggle="tab" href="#tab2">
+                                        Chỉnh sửa SEO
+                                    </a>
+                                </li>*@
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane fade active in">
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Tên Khuyến mãi</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Name)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Mô tả</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Description)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId">Phần trăm</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Percent)
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label no-padding-right" for="BlogCategoryId"> Nội dung</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Content, "CkEditor")
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @*<div id="tab2" class="tab-pane fade">
+
+                                    <div class="form-group ">
+                                        @Html.MyLabelFor(model => model.MetaKeywords)
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => model.MetaKeywords)
+                                            @Html.ValidationMessageFor(model => model.MetaKeywords)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        @Html.MyLabelFor(model => model.MetaTitle)
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => model.MetaTitle)
+                                            @Html.ValidationMessageFor(model => model.MetaTitle)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        @Html.MyLabelFor(model => model.Slug)
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => model.Slug)
+                                            @Html.ValidationMessageFor(model => model.Slug)
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                        </div>
+                    </div>
+
+
+                    @*
+                        partial for group button
+                    *@
+                    @Html.Partial("_PartialButtonGroup", "/Admin/Promotion")
+                }
+            }
+            else
+            {
+                <h1>Không tìm thấy tin tức!</h1>
+            }
+        </div>
+    </div>
+</div>
