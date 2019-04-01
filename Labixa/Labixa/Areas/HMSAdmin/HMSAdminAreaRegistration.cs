@@ -2,15 +2,9 @@
 
 namespace Labixa.Areas.HMSAdmin
 {
-    public class HMSAdminAreaRegistration : AreaRegistration 
+    public class HmsAdminAreaRegistration : AreaRegistration 
     {
-        public override string AreaName 
-        {
-            get 
-            {
-                return "HMSAdmin";
-            }
-        }
+        public override string AreaName => "HMSAdmin";
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {

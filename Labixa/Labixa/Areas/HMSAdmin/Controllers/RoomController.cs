@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
 using Labixa.Areas.HMSAdmin.ViewModels;
 using System.Collections.ObjectModel;
 
@@ -20,37 +14,37 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         #region Field
 
-        readonly IRoomService _RoomService;
-        readonly IRoomImageService _RoomImageService;
-        readonly IHotelService _HotelService;
-        readonly IRoomImageMappingService _RoomImageMappingService;
+        readonly IRoomService _roomService;
+        readonly IRoomImageService _roomImageService;
+        readonly IHotelService _hotelService;
+        readonly IRoomImageMappingService _roomImageMappingService;
 
 
         #endregion
 
         #region Ctor
-        public RoomController(IRoomService RoomService, IRoomImageService RoomImageService
-        , IHotelService HotelService
-        , IRoomImageMappingService RoomImageMappingService)
+        public RoomController(IRoomService roomService, IRoomImageService roomImageService
+        , IHotelService hotelService
+        , IRoomImageMappingService roomImageMappingService)
         {
-            _RoomService = RoomService;
-            _RoomImageService = RoomImageService;
-            _HotelService = HotelService;
-            _RoomImageMappingService = RoomImageMappingService;
+            _roomService = roomService;
+            _roomImageService = roomImageService;
+            _hotelService = hotelService;
+            _roomImageMappingService = roomImageMappingService;
         }
         #endregion
         //
         // GET: /HMSAdmin/Room/
         public ActionResult Index()
         {
-            var model = _RoomService.GetRooms();
-            return View(model: model);
+            var model = _roomService.GetRooms();
+            return View(model);
         }
         public ActionResult Create()
         {
             RoomModel model = new RoomModel();
-            model.ListHotels = _HotelService.GetHotels().ToSelectListItems(-1);
-            return View(model: model);
+            model.ListHotels = _hotelService.GetHotels().ToSelectListItems(-1);
+            return View(model);
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
@@ -58,7 +52,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Room = new Room
+                var room = new Room
                 {
                     //Mapping to domain
                     //Room = (Room)Mapper.Map<RoomModel, Room>(newRoom);
@@ -86,134 +80,134 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                     Utility_TuDo = newRoom.Utility_TuDo,
                     Utility_WashMachine = newRoom.Utility_WashMachine
                 };
-                if (String.IsNullOrEmpty(Room.Slug))
+                if (String.IsNullOrEmpty(room.Slug))
                 {
-                    Room.Slug = StringConvert.ConvertShortName(Room.Name);
+                    room.Slug = StringConvert.ConvertShortName(room.Name);
                 }
                 //Create Room
-                _RoomService.CreateRoom(Room);
-                if (Room.RoomImageMappings==null)
+                _roomService.CreateRoom(room);
+                if (room.RoomImageMappings==null)
                 {
-                    Room.RoomImageMappings = new Collection<RoomImageMapping>();
+                    room.RoomImageMappings = new Collection<RoomImageMapping>();
                     for (int i = 0; i < 8; i++)
                     {
                         var newPic = new RoomImage();
                         bool ismain = i == 0;
-                        _RoomImageService.CreateRoomImage(newPic);
-                        Room.RoomImageMappings.Add(
+                        _roomImageService.CreateRoomImage(newPic);
+                        room.RoomImageMappings.Add(
                             new RoomImageMapping()
                             {
                                 RoomImageId = newPic.Id,
-                                RoomId = Room.Id,
+                                RoomId = room.Id,
                                 IsMainPicture = ismain,
                                 DisplayOrder = 0,
                             });
                     }
-                    _RoomService.EditRoom(Room);
+                    _roomService.EditRoom(room);
                 }
-                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = Room.Id })
+                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = room.Id })
                                   : RedirectToAction("Index", "Room");
             }
             else
             {
-                newRoom.ListHotels = _HotelService.GetHotels().ToSelectListItems(newRoom.HotelId);
+                newRoom.ListHotels = _hotelService.GetHotels().ToSelectListItems(newRoom.HotelId);
                 return View("Create", newRoom);
             }
         }
 
         [HttpGet]
-        public ActionResult Edit(int RoomId)
+        public ActionResult Edit(int roomId)
         {
 
-            var Room = _RoomService.GetRoomById(RoomId);
+            var room = _roomService.GetRoomById(roomId);
             //RoomModel RoomFormModel = Mapper.Map<Room, RoomModel>(Room);
-            RoomModel RoomFormModel = new RoomModel();
+            RoomModel roomFormModel = new RoomModel();
             // RoomFormModel = Mapper.Map<Room, RoomModel>(Room);
-            RoomFormModel.Description = Room.Description;
-            RoomFormModel.DiscountPercent = Room.DiscountPercent;
-            RoomFormModel.DisplayOrder = Room.DisplayOrder;
-            RoomFormModel.HotelId = Room.HotelId;
-            RoomFormModel.Id = Room.Id;
-            RoomFormModel.IsStaticPage = Room.IsStaticPage;
-            RoomFormModel.Layout = Room.Layout;
-            RoomFormModel.MetaDescription = Room.MetaDescription;
-            RoomFormModel.MetaKeywords = Room.MetaKeywords;
-            RoomFormModel.MetaTitle = Room.MetaTitle;
-            RoomFormModel.Name = Room.Name;
-            RoomFormModel.Noted = Room.Noted;
-            RoomFormModel.Price = Room.Price;
-            RoomFormModel.RoomImageMappings = Room.RoomImageMappings;
-            RoomFormModel.SharePercent = Room.SharePercent;
-            RoomFormModel.Slug = Room.Slug;
-            RoomFormModel.Status = Room.Status;
-            RoomFormModel.string1 = Room.string1;
-            RoomFormModel.Utility_DryHair = Room.Utility_DryHair;
-            RoomFormModel.Utility_HotWater = Room.Utility_HotWater;
-            RoomFormModel.Utility_Iron = Room.Utility_Iron;
-            RoomFormModel.Utility_Kitchen = Room.Utility_Kitchen;
-            RoomFormModel.Utility_Snack = Room.Utility_Snack;
-            RoomFormModel.Utility_Snack = Room.Utility_Snack;
-            RoomFormModel.Utility_DryHair = Room.Utility_DryHair;
-            RoomFormModel.Utility_TeaCoffee = Room.Utility_TeaCoffee;
-            RoomFormModel.Utility_Tivi = Room.Utility_Tivi;
-            RoomFormModel.Utility_TuDo = Room.Utility_TuDo;
-            RoomFormModel.Utility_WashMachine = Room.Utility_WashMachine;
-            RoomFormModel.ListHotels = _HotelService.GetHotels().ToSelectListItems(RoomFormModel.HotelId);
-            return View(model: RoomFormModel);
+            roomFormModel.Description = room.Description;
+            roomFormModel.DiscountPercent = room.DiscountPercent;
+            roomFormModel.DisplayOrder = room.DisplayOrder;
+            roomFormModel.HotelId = room.HotelId;
+            roomFormModel.Id = room.Id;
+            roomFormModel.IsStaticPage = room.IsStaticPage;
+            roomFormModel.Layout = room.Layout;
+            roomFormModel.MetaDescription = room.MetaDescription;
+            roomFormModel.MetaKeywords = room.MetaKeywords;
+            roomFormModel.MetaTitle = room.MetaTitle;
+            roomFormModel.Name = room.Name;
+            roomFormModel.Noted = room.Noted;
+            roomFormModel.Price = room.Price;
+            roomFormModel.RoomImageMappings = room.RoomImageMappings;
+            roomFormModel.SharePercent = room.SharePercent;
+            roomFormModel.Slug = room.Slug;
+            roomFormModel.Status = room.Status;
+            roomFormModel.string1 = room.string1;
+            roomFormModel.Utility_DryHair = room.Utility_DryHair;
+            roomFormModel.Utility_HotWater = room.Utility_HotWater;
+            roomFormModel.Utility_Iron = room.Utility_Iron;
+            roomFormModel.Utility_Kitchen = room.Utility_Kitchen;
+            roomFormModel.Utility_Snack = room.Utility_Snack;
+            roomFormModel.Utility_Snack = room.Utility_Snack;
+            roomFormModel.Utility_DryHair = room.Utility_DryHair;
+            roomFormModel.Utility_TeaCoffee = room.Utility_TeaCoffee;
+            roomFormModel.Utility_Tivi = room.Utility_Tivi;
+            roomFormModel.Utility_TuDo = room.Utility_TuDo;
+            roomFormModel.Utility_WashMachine = room.Utility_WashMachine;
+            roomFormModel.ListHotels = _hotelService.GetHotels().ToSelectListItems(roomFormModel.HotelId);
+            return View(roomFormModel);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(RoomModel RoomToEdit, bool continueEditing)
+        public ActionResult Edit(RoomModel roomToEdit, bool continueEditing)
         {
             if (ModelState.IsValid)
             {
-                var Room = _RoomService.GetRoomById(RoomToEdit.Id);
+                var room = _roomService.GetRoomById(roomToEdit.Id);
                 //Mapping to domain
                 //Mapping to domain
-                Room.Description = RoomToEdit.Description;
-                Room.DiscountPercent = RoomToEdit.DiscountPercent;
-                Room.DisplayOrder = RoomToEdit.DisplayOrder;
-                Room.HotelId = RoomToEdit.HotelId;
-                Room.Id = RoomToEdit.Id;
-                Room.IsStaticPage = RoomToEdit.IsStaticPage;
-                Room.Layout = RoomToEdit.Layout;
-                Room.MetaDescription = RoomToEdit.MetaDescription;
-                Room.MetaKeywords = RoomToEdit.MetaKeywords;
-                Room.MetaTitle = RoomToEdit.MetaTitle;
-                Room.Name = RoomToEdit.Name;
-                Room.Noted = RoomToEdit.Noted;
-                Room.Price = RoomToEdit.Price;
-                foreach (var item in RoomToEdit.RoomImageMappings)
+                room.Description = roomToEdit.Description;
+                room.DiscountPercent = roomToEdit.DiscountPercent;
+                room.DisplayOrder = roomToEdit.DisplayOrder;
+                room.HotelId = roomToEdit.HotelId;
+                room.Id = roomToEdit.Id;
+                room.IsStaticPage = roomToEdit.IsStaticPage;
+                room.Layout = roomToEdit.Layout;
+                room.MetaDescription = roomToEdit.MetaDescription;
+                room.MetaKeywords = roomToEdit.MetaKeywords;
+                room.MetaTitle = roomToEdit.MetaTitle;
+                room.Name = roomToEdit.Name;
+                room.Noted = roomToEdit.Noted;
+                room.Price = roomToEdit.Price;
+                foreach (var item in roomToEdit.RoomImageMappings)
                 {
-                    _RoomImageMappingService.EditRoomImageMapping(item);
-                    _RoomImageService.EditRoomImage(item.RoomImage);
+                    _roomImageMappingService.EditRoomImageMapping(item);
+                    _roomImageService.EditRoomImage(item.RoomImage);
                 }
-                Room.SharePercent = RoomToEdit.SharePercent;
-                Room.Slug = RoomToEdit.Slug;
-                Room.Status = RoomToEdit.Status;
-                Room.string1 = RoomToEdit.string1;
-                Room.Utility_DryHair = RoomToEdit.Utility_DryHair;
-                Room.Utility_HotWater = RoomToEdit.Utility_HotWater;
-                Room.Utility_Iron = RoomToEdit.Utility_Iron;
-                Room.Utility_Kitchen = RoomToEdit.Utility_Kitchen;
-                Room.Utility_Snack = RoomToEdit.Utility_Snack;
-                Room.Utility_Snack = RoomToEdit.Utility_Snack;
-                Room.Utility_DryHair = RoomToEdit.Utility_DryHair;
-                Room.Utility_TeaCoffee = RoomToEdit.Utility_TeaCoffee;
-                Room.Utility_Tivi = RoomToEdit.Utility_Tivi;
-                Room.Utility_TuDo = RoomToEdit.Utility_TuDo;
-                Room.Utility_WashMachine = RoomToEdit.Utility_WashMachine;
+                room.SharePercent = roomToEdit.SharePercent;
+                room.Slug = roomToEdit.Slug;
+                room.Status = roomToEdit.Status;
+                room.string1 = roomToEdit.string1;
+                room.Utility_DryHair = roomToEdit.Utility_DryHair;
+                room.Utility_HotWater = roomToEdit.Utility_HotWater;
+                room.Utility_Iron = roomToEdit.Utility_Iron;
+                room.Utility_Kitchen = roomToEdit.Utility_Kitchen;
+                room.Utility_Snack = roomToEdit.Utility_Snack;
+                room.Utility_Snack = roomToEdit.Utility_Snack;
+                room.Utility_DryHair = roomToEdit.Utility_DryHair;
+                room.Utility_TeaCoffee = roomToEdit.Utility_TeaCoffee;
+                room.Utility_Tivi = roomToEdit.Utility_Tivi;
+                room.Utility_TuDo = roomToEdit.Utility_TuDo;
+                room.Utility_WashMachine = roomToEdit.Utility_WashMachine;
 
-                Room.Slug = StringConvert.ConvertShortName(Room.Name);
-                _RoomService.EditRoom(Room);
-                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = Room.Id })
+                room.Slug = StringConvert.ConvertShortName(room.Name);
+                _roomService.EditRoom(room);
+                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = room.Id })
                                  : RedirectToAction("Index", "Room");
             }
             else
             {
-                RoomToEdit.ListHotels = _HotelService.GetHotels().ToSelectListItems(RoomToEdit.HotelId);
-                return View("Edit", RoomToEdit);
+                roomToEdit.ListHotels = _hotelService.GetHotels().ToSelectListItems(roomToEdit.HotelId);
+                return View("Edit", roomToEdit);
             }
         }
 
@@ -221,9 +215,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
 
 
-        public ActionResult Delete(int RoomId)
+        public ActionResult Delete(int roomId)
         {
-            _RoomService.DeleteRoom(RoomId);
+            _roomService.DeleteRoom(roomId);
             return RedirectToAction("Index");
         }
     }

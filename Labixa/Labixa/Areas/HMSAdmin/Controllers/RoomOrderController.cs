@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
-using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
-using Labixa.Areas.HMSAdmin.ViewModels;
-using System.Collections.ObjectModel;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
@@ -20,47 +11,47 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         #region Field
 
-        readonly IRoomService _RoomService;
-        readonly IRoomOrderService _RoomOrderService;
-        readonly IHotelService _HotelService;
-        readonly IRoomOrderItemService _RoomOrderItemService;
+        readonly IRoomService _roomService;
+        readonly IRoomOrderService _roomOrderService;
+        readonly IHotelService _hotelService;
+        readonly IRoomOrderItemService _roomOrderItemService;
 
 
         #endregion
-        public RoomOrderController(IRoomService RoomService,
-         IHotelService HotelService, IRoomOrderItemService RoomOrderItemService, IRoomOrderService RoomOrderService)
+        public RoomOrderController(IRoomService roomService,
+         IHotelService hotelService, IRoomOrderItemService roomOrderItemService, IRoomOrderService roomOrderService)
         {
-            this._HotelService = HotelService;
-            this._RoomOrderItemService = RoomOrderItemService;
-            this._RoomService = RoomService;
-            this._RoomOrderService = RoomOrderService;
+            this._hotelService = hotelService;
+            this._roomOrderItemService = roomOrderItemService;
+            this._roomService = roomService;
+            this._roomOrderService = roomOrderService;
         }
         //
         // GET: /HMSAdmin/RoomOrder/
         public ActionResult Index()
         {
-            var model = _RoomOrderService.GetRoomOrders();
-            return View(model: model);
+            var model = _roomOrderService.GetRoomOrders();
+            return View(model);
         }
-        public ActionResult CreateRoomOrder(int? RoomId)
+        public ActionResult CreateRoomOrder(int? roomId)
         {
-            var _RoomOrder = new RoomOrder();
-            if (!(RoomId == null))
+            var roomOrder = new RoomOrder();
+            if (!(roomId == null))
             {
 
-                var room = _RoomService.GetRoomById(int.Parse(RoomId.ToString()));
-                _RoomOrder.CheckIn = DateTime.Now.Date;
-                _RoomOrder.DateCreated = DateTime.Now.Date;
-                _RoomOrder.Deadline = DateTime.Now.Date;
-                _RoomOrder.Deleted = false;
-                _RoomOrder.RoomId = room.Id;
-                _RoomOrder.Status = 0;
-                var total = Calculator.CalcNumOfDay(DateTime.Parse(_RoomOrder.CheckIn.ToString()), DateTime.Parse(_RoomOrder.Deadline.ToString()));
-                _RoomOrder.TotalBookPrice = total * room.Price;
-                _RoomOrderService.CreateRoomOrder(_RoomOrder);
-                return View("CreateRoomOrder", _RoomOrder);
+                var room = _roomService.GetRoomById(int.Parse(roomId.ToString()));
+                roomOrder.CheckIn = DateTime.Now.Date;
+                roomOrder.DateCreated = DateTime.Now.Date;
+                roomOrder.Deadline = DateTime.Now.Date;
+                roomOrder.Deleted = false;
+                roomOrder.RoomId = room.Id;
+                roomOrder.Status = 0;
+                var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrder.CheckIn.ToString()), DateTime.Parse(roomOrder.Deadline.ToString()));
+                roomOrder.TotalBookPrice = total * room.Price;
+                _roomOrderService.CreateRoomOrder(roomOrder);
+                return View("CreateRoomOrder", roomOrder);
             }
-            return View("CreateRoomOrder", _RoomOrder);
+            return View("CreateRoomOrder", roomOrder);
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
@@ -68,52 +59,52 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (!(roomOrder == null))
             {
-                var room = _RoomService.GetRoomById(int.Parse(roomOrder.RoomId.ToString()));
+                var room = _roomService.GetRoomById(int.Parse(roomOrder.RoomId.ToString()));
 
                 var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrder.CheckIn.ToString()), DateTime.Parse(roomOrder.Deadline.ToString()));
                 roomOrder.TotalBookPrice = double.Parse(roomOrder.TotalPaymentRoom_DraftCheckIn.ToString()) + (total * room.Price);
-                _RoomOrderService.EditRoomOrder(roomOrder);
+                _roomOrderService.EditRoomOrder(roomOrder);
                 return continueEditing ? RedirectToAction("Edit", "RoomOrder", new { RoomOrderId = roomOrder.Id })
                                  : RedirectToAction("Index", "RoomOrder");
             }
             return View("Edit", roomOrder);
         }
-        public ActionResult Edit(int RoomOrderId)
+        public ActionResult Edit(int roomOrderId)
         {
-            var model = _RoomOrderService.GetRoomOrderById(RoomOrderId);
+            var model = _roomOrderService.GetRoomOrderById(roomOrderId);
             return View(model);
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(RoomOrder RoomOrderEdit, bool continueEditing)
+        public ActionResult Edit(RoomOrder roomOrderEdit, bool continueEditing)
         {
-            if (!(RoomOrderEdit == null))
+            if (!(roomOrderEdit == null))
             {
-                var room = _RoomService.GetRoomById(int.Parse(RoomOrderEdit.RoomId.ToString()));
+                var room = _roomService.GetRoomById(int.Parse(roomOrderEdit.RoomId.ToString()));
 
-                var total = Calculator.CalcNumOfDay(DateTime.Parse(RoomOrderEdit.CheckIn.ToString()), DateTime.Parse(RoomOrderEdit.Deadline.ToString()));
+                var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrderEdit.CheckIn.ToString()), DateTime.Parse(roomOrderEdit.Deadline.ToString()));
                 Room room1 = room;
-                RoomOrderEdit.TotalBookPrice = double.Parse(RoomOrderEdit.TotalPaymentRoom_DraftCheckIn.ToString()) + (total * room1.Price);
-                _RoomOrderService.EditRoomOrder(RoomOrderEdit);
-                return continueEditing ? RedirectToAction("Edit", "RoomOrder", new { RoomOrderId = RoomOrderEdit.Id })
+                roomOrderEdit.TotalBookPrice = double.Parse(roomOrderEdit.TotalPaymentRoom_DraftCheckIn.ToString()) + (total * room1.Price);
+                _roomOrderService.EditRoomOrder(roomOrderEdit);
+                return continueEditing ? RedirectToAction("Edit", "RoomOrder", new { RoomOrderId = roomOrderEdit.Id })
                                  : RedirectToAction("Index", "RoomOrder");
             }
-            return View("Edit", RoomOrderEdit);
+            return View("Edit", roomOrderEdit);
         }
-        public ActionResult Status(int RoomOrderId, int status = -1)
+        public ActionResult Status(int roomOrderId, int status = -1)
         {
-            var roomOrder = _RoomOrderService.GetRoomOrderById(RoomOrderId);
+            var roomOrder = _roomOrderService.GetRoomOrderById(roomOrderId);
             if (status>-1)
             {
                 if (status==0)
                 {
                     roomOrder.Status = 1;
-                    _RoomOrderService.EditRoomOrder(roomOrder);
+                    _roomOrderService.EditRoomOrder(roomOrder);
                 }
                 else if(status==1)
                 {
                     roomOrder.Status = 2;
-                    _RoomOrderService.EditRoomOrder(roomOrder);
+                    _roomOrderService.EditRoomOrder(roomOrder);
                 }
             }
             return RedirectToAction("Index","RoomOrder");

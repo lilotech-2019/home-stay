@@ -1,37 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
-using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
 
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    #region Field
-    public partial class CategoryHotelController : BaseController
+    public class CategoryHotelController : BaseController
     {
-        readonly ICategoryHotelService _CategoryHotelService;
+        #region Field
+
+        readonly ICategoryHotelService _categoryHotelService;
+
         #endregion
 
         #region Ctor
-        public CategoryHotelController(ICategoryHotelService CategoryHotelService)
+
+        public CategoryHotelController(ICategoryHotelService categoryHotelService)
         {
-            _CategoryHotelService = CategoryHotelService;
+            _categoryHotelService = categoryHotelService;
         }
+
         #endregion
 
         public ActionResult Index()
         {
-            var CategoryHotels = _CategoryHotelService.GetProductCategories();
-            return View(model: CategoryHotels);
+            var categoryHotels = _categoryHotelService.GetProductCategories();
+            return View(categoryHotels);
         }
         //public ActionResult ManageStaticPage()
         //{
@@ -59,9 +56,10 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                     newCategoryHotel.Slug = StringConvert.ConvertShortName(newCategoryHotel.Name);
                 }
                 //Create CategoryHotel
-                _CategoryHotelService.CreateCategoryHotel(newCategoryHotel);
-                return continueEditing ? RedirectToAction("Edit", "CategoryHotel", new { CategoryHotelId = newCategoryHotel.Id })
-                                  : RedirectToAction("Index", "CategoryHotel");
+                _categoryHotelService.CreateCategoryHotel(newCategoryHotel);
+                return continueEditing
+                    ? RedirectToAction("Edit", "CategoryHotel", new {CategoryHotelId = newCategoryHotel.Id})
+                    : RedirectToAction("Index", "CategoryHotel");
             }
             else
             {
@@ -70,14 +68,13 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int CategoryHotelId)
+        public ActionResult Edit(int categoryHotelId)
         {
-
-            var CategoryHotel = _CategoryHotelService.GetCategoryHotelById(CategoryHotelId);
+            var categoryHotel = _categoryHotelService.GetCategoryHotelById(categoryHotelId);
             //CategoryHotelFormModel CategoryHotelFormModel = Mapper.Map<CategoryHotel, CategoryHotelFormModel>(CategoryHotel);
             //CategoryHotelFormModel.ListCategory = _CategoryHotelCategoryService.GetCategoryHotelCategories().ToSelectListItems(-1);
 
-            return View(model: CategoryHotel);
+            return View(categoryHotel);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
@@ -92,9 +89,10 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 {
                     editCategoryHotel.Slug = StringConvert.ConvertShortName(editCategoryHotel.Name);
                 }
-                _CategoryHotelService.EditCategoryHotel(editCategoryHotel);
-                return continueEditing ? RedirectToAction("Edit", "CategoryHotel", new { CategoryHotelId = editCategoryHotel.Id })
-                                 : RedirectToAction("Index", "CategoryHotel");
+                _categoryHotelService.EditCategoryHotel(editCategoryHotel);
+                return continueEditing
+                    ? RedirectToAction("Edit", "CategoryHotel", new {CategoryHotelId = editCategoryHotel.Id})
+                    : RedirectToAction("Index", "CategoryHotel");
             }
             else
             {
@@ -104,12 +102,10 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
 
         [HttpPost]
-        public ActionResult Delete(int CategoryHotelId)
+        public ActionResult Delete(int categoryHotelId)
         {
-            _CategoryHotelService.DeleteProductCategories(CategoryHotelId);
+            _categoryHotelService.DeleteProductCategories(categoryHotelId);
             return RedirectToAction("Index");
         }
-
-
     }
 }

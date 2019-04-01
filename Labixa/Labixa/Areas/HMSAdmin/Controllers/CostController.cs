@@ -1,43 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
 using Labixa.Areas.HMSAdmin.ViewModels;
 
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    public partial class CostController : BaseController
+    public class CostController : BaseController
     {
-        readonly ICostService _CostService;
-        readonly ICostCategoryService _CostCategoryService;
-        public CostController(ICostService CostService, ICostCategoryService CostCategoryService)
+        readonly ICostService _costService;
+        readonly ICostCategoryService _costCategoryService;
+        public CostController(ICostService costService, ICostCategoryService costCategoryService)
         {
-            _CostCategoryService = CostCategoryService;
-            _CostService = CostService;
+            _costCategoryService = costCategoryService;
+            _costService = costService;
         }
         //
         // GET: /HMSAdmin/Cost/
         public ActionResult Index()
         {
-            var model = _CostService.GetCosts();
+            var model = _costService.GetCosts();
             return View(model);
         }
         public ActionResult Create()
         {
-            CostModel model = new CostModel();
-           
-            model.ListCostCategory = _CostCategoryService.GetProductCategories().ToSelectListItems(-1);
-            return View(model: model);
+            CostModel model = new CostModel
+            {
+                ListCostCategory = _costCategoryService.GetProductCategories().ToSelectListItems(-1)
+            };
+
+            return View(model);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
@@ -46,59 +41,59 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Cost = new Cost();
-                Cost = newCost.Cost;
-                Cost.IsDelete = false;
-                Cost.isImport = false;
-                Cost.OrginalPrice = 0;
-                Cost.Price = 0;
-                Cost.Quantity = 0;
-                Cost.DateCreated = DateTime.Now.Date;
+                var cost = new Cost();
+                cost = newCost.Cost;
+                cost.IsDelete = false;
+                cost.isImport = false;
+                cost.OrginalPrice = 0;
+                cost.Price = 0;
+                cost.Quantity = 0;
+                cost.DateCreated = DateTime.Now.Date;
                 //Create Hotel
-                _CostService.CreateCost(Cost);
-                return continueEditing ? RedirectToAction("Edit", "Cost", new { HotelId = Cost.Id })
+                _costService.CreateCost(cost);
+                return continueEditing ? RedirectToAction("Edit", "Cost", new { HotelId = cost.Id })
                                   : RedirectToAction("Index", "Cost");
             }
             else
             {
-                newCost.ListCostCategory = _CostCategoryService.GetProductCategories().ToSelectListItems(newCost.Cost.CostCategoryId);
+                newCost.ListCostCategory = _costCategoryService.GetProductCategories().ToSelectListItems(newCost.Cost.CostCategoryId);
                 return View("Create", newCost);
             }
         }
 
         [HttpGet]
-        public ActionResult Edit(int CostId)
+        public ActionResult Edit(int costId)
         {
 
-            var Cost = _CostService.GetCostById(CostId);
+            var cost = _costService.GetCostById(costId);
             //CostModel HotelFormModel = Mapper.Map<Hotel, CostModel>(Hotel);
             CostModel model = new CostModel();
-            model.Cost = Cost;
+            model.Cost = cost;
 
-            model.ListCostCategory = _CostCategoryService.GetProductCategories().ToSelectListItems(Cost.CostCategoryId);
+            model.ListCostCategory = _costCategoryService.GetProductCategories().ToSelectListItems(cost.CostCategoryId);
 
-            return View(model: model);
+            return View(model);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(CostModel CostToEdit, bool continueEditing)
+        public ActionResult Edit(CostModel costToEdit, bool continueEditing)
         {
             if (ModelState.IsValid)
             {
-                var Cost = _CostService.GetCostById(CostToEdit.Cost.Id);
-                Cost.CostCategoryId = CostToEdit.Cost.CostCategoryId;
-                Cost.Name = CostToEdit.Cost.Name;
-                Cost.Description= CostToEdit.Cost.Description;
+                var cost = _costService.GetCostById(costToEdit.Cost.Id);
+                cost.CostCategoryId = costToEdit.Cost.CostCategoryId;
+                cost.Name = costToEdit.Cost.Name;
+                cost.Description= costToEdit.Cost.Description;
 
-                _CostService.EditCost(Cost);
-                return continueEditing ? RedirectToAction("Edit", "Cost", new { HotelId = Cost.Id })
+                _costService.EditCost(cost);
+                return continueEditing ? RedirectToAction("Edit", "Cost", new { HotelId = cost.Id })
                                  : RedirectToAction("Index", "Cost");
             }
             else
             {
-                CostToEdit.ListCostCategory = _CostCategoryService.GetProductCategories().ToSelectListItems(CostToEdit.Cost.CostCategoryId);
-                return View("Edit", CostToEdit);
+                costToEdit.ListCostCategory = _costCategoryService.GetProductCategories().ToSelectListItems(costToEdit.Cost.CostCategoryId);
+                return View("Edit", costToEdit);
             }
         }
 
@@ -106,9 +101,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
 
 
-        public ActionResult Delete(int CostId)
+        public ActionResult Delete(int costId)
         {
-            _CostService.DeleteCost(CostId);
+            _costService.DeleteCost(costId);
             return RedirectToAction("Index");
         }
     }

@@ -1,94 +1,93 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
 using Labixa.Areas.HMSAdmin.ViewModels;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class CostOrderController : BaseController
     {
-        readonly ICostService _CostService;
-        readonly ICostOrderItemService _CostOrderItemService;
-        readonly ICostOrderService _CostOrderService;
-        readonly IHotelService _HotelService;
-        public CostOrderController(ICostService CostService,
-         ICostOrderItemService CostOrderItemService,
-         ICostOrderService CostOrderService,
-         IHotelService HotelService)
+        readonly ICostService _costService;
+        readonly ICostOrderItemService _costOrderItemService;
+        readonly ICostOrderService _costOrderService;
+        readonly IHotelService _hotelService;
+
+        public CostOrderController(ICostService costService,
+            ICostOrderItemService costOrderItemService,
+            ICostOrderService costOrderService,
+            IHotelService hotelService)
         {
-            _CostService = CostService;
-            _CostOrderItemService = CostOrderItemService;
-            _CostOrderService = CostOrderService;
-            _HotelService = HotelService;
+            _costService = costService;
+            _costOrderItemService = costOrderItemService;
+            _costOrderService = costOrderService;
+            _hotelService = hotelService;
         }
+
         //
         // GET: /HMSAdmin/CostOrder/
         public ActionResult Index()
         {
-            var model = _CostOrderService.GetCostOrders();
-            return View(model: model);
+            var model = _costOrderService.GetCostOrders();
+            return View(model);
         }
 
         public ActionResult Create()
         {
-            CostOrderCreateModel model = new CostOrderCreateModel();
-            model.ListHotels = _HotelService.GetHotels().ToSelectListItems(-1);
-            return View(model: model);
+            CostOrderCreateModel model =
+                new CostOrderCreateModel {ListHotels = _hotelService.GetHotels().ToSelectListItems(-1)};
+            return View(model);
         }
+
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
         public ActionResult Create(CostOrderCreateModel newCost, bool continueEditing)
         {
             if (ModelState.IsValid)
             {
-                var listCost = _CostService.GetCosts();
-                var CostOrder = new CostOrder();
-                CostOrder = newCost.CostOrderModel;
-                CostOrder.Deleted = false;
-                CostOrder.TotalPaymentRoom_DraftCheckIn = 0;
-                CostOrder.TotalPayment_CheckOut = 0;
-                CostOrder.Status = 0;
-                CostOrder.ShipmentId = 0;
-                CostOrder.ShipmentFee = 0;
-                CostOrder.DateCreated = DateTime.Now.Date;
+                var listCost = _costService.GetCosts();
+                var costOrder = newCost.CostOrderModel;
+                costOrder.Deleted = false;
+                costOrder.TotalPaymentRoom_DraftCheckIn = 0;
+                costOrder.TotalPayment_CheckOut = 0;
+                costOrder.Status = 0;
+                costOrder.ShipmentId = 0;
+                costOrder.ShipmentFee = 0;
+                costOrder.DateCreated = DateTime.Now.Date;
                 //Create Hotel
-                _CostOrderService.CreateCostOrder(CostOrder);
+                _costOrderService.CreateCostOrder(costOrder);
                 foreach (var item in listCost)
                 {
-                    CostOrderItem costItem = new CostOrderItem();
-                    costItem.CostId = item.Id;
-                    costItem.CostOrderId = CostOrder.Id;
-                    costItem.Price = 0;
-                    costItem.Quantity = 0;
-                    costItem.Discount = 0;
-                    _CostOrderItemService.CreateCostOrderItem(costItem);
+                    CostOrderItem costItem = new CostOrderItem
+                    {
+                        CostId = item.Id,
+                        CostOrderId = costOrder.Id,
+                        Price = 0,
+                        Quantity = 0,
+                        Discount = 0
+                    };
+                    _costOrderItemService.CreateCostOrderItem(costItem);
                 }
-                return continueEditing ? RedirectToAction("Edit", "CostOrder", new { HotelId = CostOrder.Id })
-                                  : RedirectToAction("Index", "CostOrder");
+                return continueEditing
+                    ? RedirectToAction("Edit", "CostOrder", new {HotelId = costOrder.Id})
+                    : RedirectToAction("Index", "CostOrder");
             }
             else
             {
-                newCost.ListHotels = _HotelService.GetHotels().ToSelectListItems(newCost.CostOrderModel.HotelId);
+                newCost.ListHotels = _hotelService.GetHotels().ToSelectListItems(newCost.CostOrderModel.HotelId);
                 return View("Create", newCost);
             }
         }
 
-        public ActionResult Edit(int CostOrderId)
+        public ActionResult Edit(int costOrderId)
         {
             CostOrderEditModel model = new CostOrderEditModel();
-            var listHotels = _HotelService.GetHotels();
-            var listCost = _CostService.GetCosts();
-            var costOrder = _CostOrderService.GetCostOrderById(CostOrderId);
+            var listHotels = _hotelService.GetHotels();
+            _costService.GetCosts();
+            var costOrder = _costOrderService.GetCostOrderById(costOrderId);
             model.CostOrderModel = costOrder;
             model.ListHotels = listHotels.ToSelectListItems(costOrder.HotelId);
 
@@ -102,35 +101,37 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             //        model.ListCostOrderItemEditModels.Add(costItem);
             //    }
             //}
-            return View(model: model);
+            return View(model);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(CostOrderEditModel EditCostOrder, bool continueEditing)
+        public ActionResult Edit(CostOrderEditModel editCostOrder, bool continueEditing)
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in EditCostOrder.CostOrderModel.CostOrderItems)
+                foreach (var item in editCostOrder.CostOrderModel.CostOrderItems)
                 {
                     //item.CostOrderId = EditCostOrder.CostOrderModel.Id;
-                    _CostOrderItemService.EditCostOrderItem(CostOrderItemToEdit: item);
+                    _costOrderItemService.EditCostOrderItem(item);
                 }
-                var TotalCost = Calculator.SumOfCostOrder(EditCostOrder.CostOrderModel);
-                var CostOrder = _CostOrderService.GetCostOrderById(EditCostOrder.CostOrderModel.Id);
-                CostOrder.TotalPayment_CheckOut = TotalCost;
-                CostOrder.CustomerName = EditCostOrder.CostOrderModel.CustomerName;
-                CostOrder.Deadline= EditCostOrder.CostOrderModel.Deadline;
-                CostOrder.HotelId= EditCostOrder.CostOrderModel.HotelId;
-                CostOrder.CostOrderItems = EditCostOrder.CostOrderModel.CostOrderItems;
-                _CostOrderService.EditCostOrder(CostOrder);
-                return continueEditing ? RedirectToAction("Edit", "CostOrder", new { CostOrderId = CostOrder.Id })
-                                 : RedirectToAction("Index", "CostOrder");
+                var totalCost = Calculator.SumOfCostOrder(editCostOrder.CostOrderModel);
+                var costOrder = _costOrderService.GetCostOrderById(editCostOrder.CostOrderModel.Id);
+                costOrder.TotalPayment_CheckOut = totalCost;
+                costOrder.CustomerName = editCostOrder.CostOrderModel.CustomerName;
+                costOrder.Deadline = editCostOrder.CostOrderModel.Deadline;
+                costOrder.HotelId = editCostOrder.CostOrderModel.HotelId;
+                costOrder.CostOrderItems = editCostOrder.CostOrderModel.CostOrderItems;
+                _costOrderService.EditCostOrder(costOrder);
+                return continueEditing
+                    ? RedirectToAction("Edit", "CostOrder", new {CostOrderId = costOrder.Id})
+                    : RedirectToAction("Index", "CostOrder");
             }
             else
             {
-                EditCostOrder.ListHotels = _HotelService.GetHotels().ToSelectListItems(EditCostOrder.CostOrderModel.HotelId);
-                return View("Edit", EditCostOrder);
+                editCostOrder.ListHotels =
+                    _hotelService.GetHotels().ToSelectListItems(editCostOrder.CostOrderModel.HotelId);
+                return View("Edit", editCostOrder);
             }
         }
     }
