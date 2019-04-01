@@ -1,10 +1,9 @@
-﻿using Labixa.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Labixa.Helpers;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -29,7 +28,7 @@ namespace Labixa.Areas.Admin.Controllers
 
             cultureName = "vi";
             // Modify current thread's cultures            
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("vi");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi");
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
             return base.BeginExecuteCore(callback, state);

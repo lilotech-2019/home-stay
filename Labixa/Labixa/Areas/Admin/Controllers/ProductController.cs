@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
-using Outsourcing.Service;
-using Outsourcing.Data.Models;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
-using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
 
-    public partial class ProductController : Controller
+    public class ProductController : Controller
     {
         #region Field
 
@@ -48,12 +44,12 @@ namespace Labixa.Areas.Admin.Controllers
             IColorService _ColorService
            )
         {
-            this._productService = productService;
-            this._productCategoryService = productCategoryService;
-            this._productAttributeService = productAttributeService;
-            this._productAttributeMappingService = productAttributeMappingService;
-            this._pictureService = pictureService;
-            this._productPictureMappingService = productPictureMappingService;
+            _productService = productService;
+            _productCategoryService = productCategoryService;
+            _productAttributeService = productAttributeService;
+            _productAttributeMappingService = productAttributeMappingService;
+            _pictureService = pictureService;
+            _productPictureMappingService = productPictureMappingService;
             this._VendorService = _VendorService;
             this._PromotionService = _PromotionService;
             this._LocationService = _LocationService;
@@ -147,12 +143,12 @@ namespace Labixa.Areas.Admin.Controllers
                     bool ismain = i == 0;
                     _pictureService.CreatePicture(newPic);
                     product.ProductPictureMappings.Add(
-                        new ProductPictureMapping()
+                        new ProductPictureMapping
                         {
                             PictureId = newPic.Id,
                             ProductId = product.Id,
                             IsMainPicture = ismain,
-                            DisplayOrder = 0,
+                            DisplayOrder = 0
                         });
                 }
                 _productService.EditProduct(product);
@@ -251,12 +247,9 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Product", new { productId = product.Id })
                       : RedirectToAction("Index", "Product");
             }
-            else
-            {
-                var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
-                productToEdit.ListProductCategory = listProductCategory;
-                return RedirectToAction("Edit", new { productId = productToEdit.product.Id });
-            }
+            var listProductCategory = _productCategoryService.GetProductCategories().ToSelectListItems(-1);
+            productToEdit.ListProductCategory = listProductCategory;
+            return RedirectToAction("Edit", new { productId = productToEdit.product.Id });
         }
 
 

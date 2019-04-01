@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
-using Outsourcing.Service;
 using Outsourcing.Data.Models;
-using Outsourcing.Core.Common;
-using Outsourcing.Core.Extensions;
-using WebGrease.Css.Extensions;
-using Outsourcing.Core.Framework.Controllers;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -37,12 +28,12 @@ namespace Labixa.Areas.Admin.Controllers
             IProductAttributeService productAttributeService, IProductAttributeMappingService productAttributeMappingService,
             IPictureService pictureService, IProductPictureMappingService productPictureMappingService        )
         {
-            this._productService = productService;
-            this._productCategoryService = productCategoryService;
-            this._productAttributeService = productAttributeService;
-            this._productAttributeMappingService = productAttributeMappingService;
-            this._pictureService = pictureService;
-            this._productPictureMappingService = productPictureMappingService;
+            _productService = productService;
+            _productCategoryService = productCategoryService;
+            _productAttributeService = productAttributeService;
+            _productAttributeMappingService = productAttributeMappingService;
+            _pictureService = pictureService;
+            _productPictureMappingService = productPictureMappingService;
         }
         #endregion
 

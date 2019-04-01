@@ -13,99 +13,82 @@ using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Controllers
 {
-
     public class HomeController : BaseHomeController
     {
         private readonly IProductService _productService;
         private readonly IBlogService _blogService;
-        private readonly IBlogCategoryService _blogCategoryService;
         private readonly IWebsiteAttributeService _websiteAttributeService;
-        private readonly IStaffService _staffService;
-        private readonly ITypeNotifyService _typeNotifyService;
-        private readonly IProductAttributeMappingService _productAttributeMappingService;
-     
+
         //khởi tạo service Vendor
-        private readonly IVendorService _VendorService;
+        private readonly IVendorService _vendorService;
 
-        private readonly IRoomService _RoomService;
-
-        private readonly IWebsiteAttributeService _IWebsiteAttributeService;
+        private readonly IRoomService _roomService;
 
 
+        private readonly IColorService _colorService;
 
-        private readonly IColorService _ColorService;
+        private readonly ICostService _costService;
 
-        private readonly ICostService _CostService;
-        public HomeController(IProductService productService, IBlogService blogService,
-            IWebsiteAttributeService websiteAttributeService, IBlogCategoryService blogCategoryService,
-            IStaffService staffService, IProductAttributeMappingService productAttributeMappingService,
-            ITypeNotifyService _typeNotifyService, IVendorService VendorService, IRoomService roomService, IWebsiteAttributeService IWebsiteAttributeService,
-            IColorService ColorService, ICostService CostService
-           )
+        public HomeController(IVendorService vendorService, IProductService productService, IBlogService blogService,
+            IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IColorService colorService,
+            ICostService costService)
         {
-            this._productService = productService;
-            this._blogService = blogService;
-            this._websiteAttributeService = websiteAttributeService;
-            this._blogCategoryService = blogCategoryService;
-            this._staffService = staffService;
-            this._productAttributeMappingService = productAttributeMappingService;
-            this._typeNotifyService = _typeNotifyService;
-            this._VendorService = VendorService;
-            this._RoomService = roomService;
-            this._ColorService = ColorService;
-            this._CostService = CostService;
+            _vendorService = vendorService;
+            _productService = productService;
+            _blogService = blogService;
+            _websiteAttributeService = websiteAttributeService;
+            _roomService = roomService;
+            _colorService = colorService;
+            _costService = costService;
         }
 
 
         public ActionResult Index()
         {
-  
-            IndexViewModel model = new IndexViewModel();        
-            model.roomHome = _RoomService.Get3RoomShortNews();
+            IndexViewModel model = new IndexViewModel();
+            model.roomHome = _roomService.Get3RoomShortNews();
             model.blogHome = _blogService.Get3BlogNewsNewest();
             model.imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1"));
             model.imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2"));
             model.imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"));
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Deposit(Vendor model)
         {
-            _VendorService.CreateVendor(model); 
+            _vendorService.CreateVendor(model);
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Index2()
         {
-
             return View();
         }
+
         public ActionResult Index3()
         {
-
             return View();
         }
 
         public ActionResult About()
-        {                   
+        {
             return View();
         }
-      
+
         public ActionResult Booking()
         {
             //Vendor model = new Vendor();
             return View();
-       
         }
-  
-     
+
+
         public ActionResult BookingRoom(Cost modelBooking)
         {
             CostCategory categoryId = new CostCategory();
             modelBooking.CostCategoryId = 1;
-            _CostService.CreateCost(modelBooking);
+            _costService.CreateCost(modelBooking);
             return RedirectToAction("Booking", "Home");
-  
         }
 
 
@@ -114,74 +97,90 @@ namespace Labixa.Controllers
             return View();
         }
 
-      
+
         //nếu ko có gì nó sẽ là action có method là Get
         public ActionResult Contact()
         {
             // nó sẽ mặc định lấy cái view tên trùng với tên action luôn
-           
+
             //muốn gom model, thì phải khởi tạo model trước ở method get
             Color model = new Color();
             return View(model);
         }
+
         //nếu để anotation như vậy thì action này có method là Post
         //khi gom model thì kiểu trả về không còn là mở string xàm nữa, mà là model
         [HttpPost]
-       public ActionResult Contact(Color modelContact) 
+        public ActionResult Contact(Color modelContact)
         {
-
             //khởi tạo obj Vendor, đổ data
             //create obj vendor
-            _ColorService.CreateColor(modelContact); //xong lưu database
+            _colorService.CreateColor(modelContact); //xong lưu database
             return RedirectToAction("Contact", "Home");
         }
-       public ActionResult Detail(string slug)
+
+        public ActionResult Detail(string slug)
         {
-            var obj  = _productService.GetProducts().Where(p => p.Slug.Equals(slug)).FirstOrDefault();
+            var obj = _productService.GetProducts().FirstOrDefault(p => p.Slug.Equals(slug));
             return View(obj);
-            
         }
+
         public ActionResult ImageLogo()
         {
-            var url = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("LoadPageImage")).FirstOrDefault();
+            var url = _websiteAttributeService.GetWebsiteAttributes()
+                .FirstOrDefault(p => p.Name.Equals("LoadPageImage"));
             return PartialView("_logoPartial", url);
         }
+
         public ActionResult BannerAttribute()
         {
             BannerViewModel bannerViewModel = new BannerViewModel();
-            bannerViewModel.bannerLogo = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("BannerLogo")).FirstOrDefault();
-            bannerViewModel.bannerTitle = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("BannerTitle")).FirstOrDefault();
-            bannerViewModel.bannerImage = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("BannerImage")).FirstOrDefault();
+            bannerViewModel.bannerLogo = _websiteAttributeService
+                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerLogo"));
+            bannerViewModel.bannerTitle = _websiteAttributeService
+                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerTitle"));
+            bannerViewModel.bannerImage = _websiteAttributeService
+                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerImage"));
 
             return PartialView("_bannerPartial", bannerViewModel);
         }
-        public ActionResult contactValue()
+
+        public ActionResult ContactValue()
         {
-            var model = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Contact")).FirstOrDefault();
+            var model = _websiteAttributeService.GetWebsiteAttributes()
+                .FirstOrDefault(p => p.Name.Equals("Contact"));
             return PartialView("_contactPartial", model);
         }
-        
-        public ActionResult menu()
+
+        public ActionResult Menu()
         {
-            MenuViewModel menuViewModel = new MenuViewModel();
-            menuViewModel.pageLogo = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("PageLogo")).FirstOrDefault();
-            menuViewModel.pageSlogan = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("PageSlogan")).FirstOrDefault();
-            menuViewModel.pageTitle = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("PageTitle")).FirstOrDefault();
+            MenuViewModel menuViewModel = new MenuViewModel
+            {
+                pageLogo = _websiteAttributeService
+                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageLogo")),
+                pageSlogan = _websiteAttributeService
+                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageSlogan")),
+                pageTitle = _websiteAttributeService
+                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageTitle"))
+            };
             return PartialView("_menuPartial", menuViewModel);
         }
+
         public ActionResult DetailService(string slug)
         {
             var model = _blogService.GetStaticPage().Where(p => p.Slug.Equals(slug)).FirstOrDefault();
-            
+
             return View(model);
         }
+
         public ActionResult DetailBlog(string slug)
         {
-            var model = _blogService.GetBlogsByCategory(3).Where(p => p.Slug.Equals(slug)).FirstOrDefault();
+            var model = _blogService.GetBlogsByCategory(3).FirstOrDefault(p => p.Slug.Equals(slug));
             return View(model);
         }
-        public ActionResult BlogsCategories(int? page=1)
-        {   
+
+        public ActionResult BlogsCategories(int? page = 1)
+        {
             var model = _blogService.GetBlogsByCategory(3).ToList();
             int pageNumber = (page ?? 1);
 

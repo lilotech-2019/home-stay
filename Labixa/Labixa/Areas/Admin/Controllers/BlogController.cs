@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
-using Outsourcing.Service;
-using Outsourcing.Data.Models;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
-using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-using Labixa.Helpers;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
     //[Authorize]
-    public partial class BlogController : BaseController
+    public class BlogController : BaseController
     {
         #region Field
 
@@ -68,11 +63,8 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Blog", new { blogId = blog.Id })
                                   : RedirectToAction("Index", "Blog");
             }
-            else
-            {
-                newBlog.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
-                return View("Create", newBlog);
-            }
+            newBlog.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
+            return View("Create", newBlog);
         }
 
         [HttpGet]
@@ -102,11 +94,8 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Blog", new { blogId = blog.Id })
                                  : RedirectToAction("Index", "Blog");
             }
-            else
-            {
-                blogToEdit.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
-                return View("Edit", blogToEdit);
-            }
+            blogToEdit.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
+            return View("Edit", blogToEdit);
         }
 
         [HttpGet]
@@ -131,11 +120,8 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("EditStaticPage", "Blog", new { id = blog.Id })
                                : RedirectToAction("ManageStaticPage", "Blog");
             }
-            else
-            {
-                blogToEdit.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
-                return View("EditStaticPage", blogToEdit);
-            }
+            blogToEdit.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
+            return View("EditStaticPage", blogToEdit);
         }
 
         [HttpPost]

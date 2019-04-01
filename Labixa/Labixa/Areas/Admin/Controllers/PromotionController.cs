@@ -1,10 +1,6 @@
-﻿using Outsourcing.Data.Models;
+﻿using System.Web.Mvc;
+using Outsourcing.Data.Models;
 using Outsourcing.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -32,12 +28,12 @@ namespace Labixa.Areas.Admin.Controllers
             IPictureService pictureService, IProductPictureMappingService productPictureMappingService, IPromotionService _promotionService
            )
         {
-            this._productService = productService;
-            this._productCategoryService = productCategoryService;
-            this._productAttributeService = productAttributeService;
-            this._productAttributeMappingService = productAttributeMappingService;
-            this._pictureService = pictureService;
-            this._productPictureMappingService = productPictureMappingService;
+            _productService = productService;
+            _productCategoryService = productCategoryService;
+            _productAttributeService = productAttributeService;
+            _productAttributeMappingService = productAttributeMappingService;
+            _pictureService = pictureService;
+            _productPictureMappingService = productPictureMappingService;
             this._promotionService = _promotionService;
         }
         #endregion
@@ -67,10 +63,7 @@ namespace Labixa.Areas.Admin.Controllers
                 _promotionService.CreatePromotion(newPromotion);
                 return RedirectToAction("Index", "Promotion");
             }
-            else
-            {
-                return View("Create", newPromotion);
-            }
+            return View("Create", newPromotion);
         }
 
         [HttpGet]
@@ -91,10 +84,7 @@ namespace Labixa.Areas.Admin.Controllers
                 _promotionService.EditPromotion(promotiontoedit);
                 return RedirectToAction("Index", "Promotion");
             }
-            else
-            {
-                return View("Edit", promotiontoedit);
-            }
+            return View("Edit", promotiontoedit);
         }
         [HttpPost]
         public ActionResult Delete(int id)

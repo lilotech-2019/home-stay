@@ -18,10 +18,9 @@ namespace Labixa.Controllers
     {
 
         private UserManager<User> _userManager;
-        private IUserRoleStore<User> _userRoleManager;
 
 
-        public AccountController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, IUserRoleStore<User> userRoleManager)
         {
             _userManager = userManager;
         }

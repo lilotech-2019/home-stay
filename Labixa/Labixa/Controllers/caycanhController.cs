@@ -359,9 +359,10 @@ namespace Labixa.Controllers
             try
             {
                 Stream imageStream = new WebClient().OpenRead(url);
-                Image img = Image.FromStream(imageStream);
-                var path = Path.Combine(Server.MapPath("~/images/uploaded/caycanh/"), url.Split('/').LastOrDefault());
-                img.Save(path);
+               // Image img = Image.FromStream(imageStream);
+                var path = Path.Combine(Server.MapPath("~/images/uploaded/caycanh/"), url.Split('/').LastOrDefault() ?? throw new
+                                                                                          InvalidOperationException());
+               // img.Save(path);
                 return "/images/uploaded/caycanh/" + url.Split('/').LastOrDefault();
             }
             catch (Exception)

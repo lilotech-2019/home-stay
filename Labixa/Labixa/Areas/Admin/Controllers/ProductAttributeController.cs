@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Outsourcing.Data.Models;
-using Outsourcing.Data;
-using Outsourcing.Service;
-using Labixa.Areas.Admin.ViewModel;
+﻿using System.Web.Mvc;
 using AutoMapper;
+using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Core.Framework.Controllers;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -51,10 +43,7 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "ProductAttribute", new { productAttriId = productAttribute.Id })
                                    : RedirectToAction("Index", "ProductAttribute");
             }
-            else
-            {
-                return View("Create", newProductAttri);
-            }
+            return View("Create", newProductAttri);
         }
 
 
@@ -69,19 +58,16 @@ namespace Labixa.Areas.Admin.Controllers
                 [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
         public ActionResult Edit(ProductAttributeFormModel productAttriToEdit, bool continueEditing)
-        {
-            if (ModelState.IsValid)
+                {
+                    if (ModelState.IsValid)
             {
                 ProductAttribute productAttribute = Mapper.Map<ProductAttributeFormModel, ProductAttribute>(productAttriToEdit);
                 _productAttributeService.EditProductAttribute(productAttribute);
                 return continueEditing ? RedirectToAction("Edit", "ProductAttribute", new { productAttriId = productAttribute.Id })
                                    : RedirectToAction("Index", "ProductAttribute");
             }
-            else
-            {
-                return View("Edit", productAttriToEdit);
-            }
-        }
+                    return View("Edit", productAttriToEdit);
+                }
 
         public ActionResult Delete(int productAttriId)
         {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Outsourcing.Data;
+﻿using System.Web.Mvc;
 using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
@@ -17,7 +12,7 @@ namespace Labixa.Areas.Admin.Controllers
 
         public DashboardController(IBlogService blogService)
         {
-            this._blogService = blogService;
+            _blogService = blogService;
         }
         //
         // GET: /Admin/Dashboard/

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
-using Outsourcing.Service;
-using Outsourcing.Data.Models;
 using Outsourcing.Core.Common;
-using Outsourcing.Core.Extensions;
-using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -56,7 +49,7 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Staff", new { id = item.Id })
                                  : RedirectToAction("Index", "Staff");
             }
-            else return View("Create", obj); 
+            return View("Create", obj);
         }
         public ActionResult Edit(int id)
         {
@@ -83,7 +76,6 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Staff", new { id = item.Id })
                     : RedirectToAction("Index", "Staff");
             }
-            else
             return View("Edit", obj);
         }
         public ActionResult Delete(int id)

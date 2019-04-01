@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 using ElFinder;
 
 namespace Labixa.Areas.Admin.Controllers
 {
-    public partial class FileController : Controller
+    public class FileController : Controller
     {
         private Connector _connector;
 
@@ -44,7 +41,7 @@ namespace Labixa.Areas.Admin.Controllers
                         StartPath = directory,
                         ThumbnailsStorage = thumbsStorage,
                         MaxUploadSizeInMb = 2.2,
-                        ThumbnailsUrl = "/Admin/File/Thumbnails/",
+                        ThumbnailsUrl = "/Admin/File/Thumbnails/"
 
                     });
                     _connector = new Connector(driver);
@@ -58,7 +55,7 @@ namespace Labixa.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult LoadFile()
         {
-            return Connector.Process(this.HttpContext.Request);
+            return Connector.Process(HttpContext.Request);
         }
         public ActionResult SelectFile(List<String> values)
         {
@@ -68,7 +65,7 @@ namespace Labixa.Areas.Admin.Controllers
             foreach (var file in values)
             {
                 //@"\Images\" 
-                var sliceString = Connector.GetFileByHash(file).FullName.Split(new string[] { rootUrl }, StringSplitOptions.None);
+                var sliceString = Connector.GetFileByHash(file).FullName.Split(new[] { rootUrl }, StringSplitOptions.None);
                 //string[] sliceString = Regex.Split(Connector.GetFileByHash(file).FullName, @"\VC\");
                 var url = sliceString[1].Replace(@"\", "/").Replace(@"\\", "/");
                 returnlist += rootUrl + url + ";";

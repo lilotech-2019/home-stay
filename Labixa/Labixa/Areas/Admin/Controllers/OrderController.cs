@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Outsourcing.Data.Models;
-using Outsourcing.Data;
-using Outsourcing.Service;
-using Labixa.Areas.Admin.ViewModel;
+﻿using System.Web.Mvc;
 using AutoMapper;
+using Labixa.Areas.Admin.ViewModel;
 using Outsourcing.Core.Framework.Controllers;
+using Outsourcing.Data;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -28,8 +21,8 @@ namespace Labixa.Areas.Admin.Controllers
         #region Ctor
         public OrderController(IOrderService orderService, IOrderItemService orderItemService)
         {
-            this._orderService = orderService;
-            this._orderItemService = orderItemService;
+            _orderService = orderService;
+            _orderItemService = orderItemService;
         }
         #endregion
 
@@ -56,10 +49,7 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Order", new { id = order.Id })
                                 : RedirectToAction("Index", "Order");
             }
-            else
-            {
-                return View("Create", newOrder);
-            }
+            return View("Create", newOrder);
         }
 
         public ActionResult Edit(int orderId)
@@ -80,10 +70,7 @@ namespace Labixa.Areas.Admin.Controllers
                 return continueEditing ? RedirectToAction("Edit", "Order", new { id = order.Id })
                  : RedirectToAction("Index", "Order");
             }
-            else
-            {
-                return View("Edit", newOrder);
-            }
+            return View("Edit", newOrder);
         }
 
         public ActionResult Delete(int orderId)

@@ -6,6 +6,7 @@ using Outsourcing.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Outsourcing.Data.Models.HMS;
 
 
@@ -85,7 +86,7 @@ namespace Outsourcing.Data
         {
 
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
         }
 

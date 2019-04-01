@@ -1,12 +1,9 @@
-﻿using Labixa.Areas.Admin.ViewModel;
+﻿using System;
+using System.Web.Mvc;
+using Labixa.Areas.Admin.ViewModel;
+using Outsourcing.Core.Extensions;
 using Outsourcing.Data.Models;
 using Outsourcing.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Outsourcing.Core.Extensions;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -36,12 +33,12 @@ namespace Labixa.Areas.Admin.Controllers
             IPictureService pictureService, IProductPictureMappingService productPictureMappingService, INotificationService _NotificationService
            , ITypeNotifyService _TypeNotifyService)
         {
-            this._productService = productService;
-            this._productCategoryService = productCategoryService;
-            this._productAttributeService = productAttributeService;
-            this._productAttributeMappingService = productAttributeMappingService;
-            this._pictureService = pictureService;
-            this._productPictureMappingService = productPictureMappingService;
+            _productService = productService;
+            _productCategoryService = productCategoryService;
+            _productAttributeService = productAttributeService;
+            _productAttributeMappingService = productAttributeMappingService;
+            _pictureService = pictureService;
+            _productPictureMappingService = productPictureMappingService;
             this._NotificationService = _NotificationService;
             this._TypeNotifyService = _TypeNotifyService;
         }
@@ -77,10 +74,7 @@ namespace Labixa.Areas.Admin.Controllers
                 _NotificationService.CreateNotification(newNotification.notification);
                 return RedirectToAction("Index", "Notification");
             }
-            else
-            {
-                return View("Create", newNotification);
-            }
+            return View("Create", newNotification);
         }
 
         [HttpGet]
@@ -101,10 +95,7 @@ namespace Labixa.Areas.Admin.Controllers
                 _NotificationService.EditNotification(Notificationtoedit);
                 return RedirectToAction("Index", "Notification");
             }
-            else
-            {
-                return View("Edit", Notificationtoedit);
-            }
+            return View("Edit", Notificationtoedit);
         }
         [HttpPost]
         public ActionResult Delete(int id)

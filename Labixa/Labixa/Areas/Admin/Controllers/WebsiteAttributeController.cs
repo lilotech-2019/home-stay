@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
-using Labixa.Areas.Admin.ViewModel;
 using Labixa.Areas.Admin.ViewModel.WebsiteAtribute;
 using Outsourcing.Core.Framework.Controllers;
 using Outsourcing.Data.Models;
@@ -54,10 +51,7 @@ namespace Labixa.Areas.Admin.Controllers
                 _websiteAttributeService.CreateWebsiteAttribute(websiteAttribute);
                 return RedirectToAction("Index", "WebsiteAttribute");
             }
-            else
-            {
-                return View("Create", model);
-            }
+            return View("Create", model);
         }
         public ActionResult Edit(int id)
         {

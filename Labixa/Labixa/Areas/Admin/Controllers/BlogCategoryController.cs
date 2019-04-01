@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Labixa.Areas.Admin.ViewModel;
-using Outsourcing.Service;
-using Outsourcing.Data.Models;
 using Outsourcing.Core.Common;
 using Outsourcing.Core.Extensions;
-using WebGrease.Css.Extensions;
 using Outsourcing.Core.Framework.Controllers;
-
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -24,7 +18,7 @@ namespace Labixa.Areas.Admin.Controllers
         #region Ctor
         public BlogCategoryController(IBlogCategoryService blogCategoryService)
         {
-            this._blogCategoryService = blogCategoryService;
+            _blogCategoryService = blogCategoryService;
         }
         #endregion
         // GET: Admin/BlogCategory
@@ -48,15 +42,12 @@ namespace Labixa.Areas.Admin.Controllers
                 var slug = StringConvert.ConvertShortName(blog.Name);
                 blog.Slug = slug;
                 _blogCategoryService.CreateBlogCategory(blog);
-                return continueEditing ? RedirectToAction("Edit", "BlogCategory", new { Id = blog.Id })
+                return continueEditing ? RedirectToAction("Edit", "BlogCategory", new {blog.Id })
                                 : RedirectToAction("Index", "BlogCategory");
             }
-            else
-            {
-                var listCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
-                obj.ListCategory = listCategory;
-                return View("Create", obj);
-            }
+            var listCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
+            obj.ListCategory = listCategory;
+            return View("Create", obj);
         }
 
         public ActionResult Edit(int Id)
@@ -79,15 +70,12 @@ namespace Labixa.Areas.Admin.Controllers
                 BlogCategory item = Mapper.Map<BlogCategoryFormModel, BlogCategory>(obj);
                 item.Slug = StringConvert.ConvertShortName(item.Name);
                 _blogCategoryService.EditBlogCategory(item);
-                return continueEditing ? RedirectToAction("Edit", "BlogCategory", new { Id = item.Id })
+                return continueEditing ? RedirectToAction("Edit", "BlogCategory", new {item.Id })
                     : RedirectToAction("Index", "BlogCategory");
             }
-            else
-            {
-                var listCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
-                obj.ListCategory = listCategory;
-                return View("Edit", obj);
-            }
+            var listCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
+            obj.ListCategory = listCategory;
+            return View("Edit", obj);
         }
         [HttpPost]
         public ActionResult Delete(int id)
