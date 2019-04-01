@@ -297,7 +297,7 @@ namespace Labixa.Helpers
         /// </summary>
         public static bool IsRighToLeft()
         {
-            return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+            return Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
         }
 
         /// <summary>
