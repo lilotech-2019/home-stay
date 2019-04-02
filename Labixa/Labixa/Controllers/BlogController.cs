@@ -9,7 +9,7 @@ namespace Labixa.Controllers
     public class BlogController : Controller
     {
         //
-        // GET: /Blog/ ở đây phải ko
+        // GET: /Blog/ ở đây phải koGDFGFD ok biet, gio commit sao
         public ActionResult Index()
         {
             return View();
