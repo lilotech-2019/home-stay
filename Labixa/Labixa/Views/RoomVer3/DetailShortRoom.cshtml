@@ -39,18 +39,20 @@ else
 }
                     </div>
                     <div class="book-form">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.HMS_StartDate)</b>
-                            <input placeholder="@Html.Raw(Resources.HMS_StartDate)" type="text" class="form-control datepicker-example8">
+                           <input type="date" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
                         </div>
-                        <div class="col-md-12">
-                            <b>@Html.Raw(Resources.HMS_StartDate)</b>
-                            <input type="text" placeholder="@Html.Raw(Resources.HMS_StartDate)" class="form-control datepicker-example8">
+                        <div class="col-md-12" style="padding-bottom:10px">
+                            <b>@Html.Raw(Resources.HMS_EndDate)</b>
+                            <input type="date" name="CheckIn" id="endDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                                   data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.HMS_PeopleNumber)</b>
                             <div class="select-box">
-                                <select name="selectMenu" class="select-menu">
+                                <select name="selectMenu" class="select-menu" id="selectMenu">
                                     <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -59,10 +61,11 @@ else
                                 </select>
                             </div>
                         </div>
+                      
                         <div class="col-md-12">
                             <div class="chk-button">
                                 <button type="submit" class="res-btn" data-toggle="modal"
-                                        data-target="#exampleModalCenter">
+                                        data-target="#exampleModalCenter" onclick="bookingShortRoom()">
                                     @Html.Raw(Resources.HMS_Booking)
                                 </button>
                             </div>
@@ -82,34 +85,35 @@ else
                                     <h2>@Html.Raw(Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-8 col-sm-12">
-                                        <div class="book-left-content input_form">
-                                            <form id="contactBooking"
-                                                  action="/RoomVer3/BookingRoom" method="post">
-                                                <div class="row">
+                                <form id="contactBooking"
+                                      action="/RoomVer3/BookingRoom" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-sm-12">
+                                            <div class="book-left-content input_form">
+
+                                                <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="name" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control" required>
+                                                        <input id="CustomerName" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control" required>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="email" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input type="date" name="CheckIn" id="startDate" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input type="date" name="Deadline" id="endDate" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" placeholder="@Html.Raw(Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
+                                                        <input id="CustomerEmail" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control" required>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input type="date" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input type="date" name="Deadline" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" @*placeholder="@Html.Raw(Resources.HMS_EndDate)"*@ onClick="$(this).removeClass('placeholderclass')">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <div class="select-box">
-                                                            <select name="Type" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
-                                                                <option value="default" name="CustomeNumber">@Html.Raw(Resources.HMS_PeopleNumber)</option>
+                                                            <select name="CustomeNumber" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
+                                                                <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -118,129 +122,132 @@ else
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="phone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.HMS_Phone)" required
+                                                        <input id="CustomerPhone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.HMS_Phone)" required
                                                                class="form-control" onkeypress="return isNumberKey(event)">
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <textarea id="message" rows="6" name="Description" placeholder="@Html.Raw(Resources.HMS_Message)" required
-                                                                  class="form-control"></textarea>
+                                                                  class="form-control" style="height:200px;"></textarea>
                                                     </div>
                                                 </div>
+                                                <input type="text" name="RoomId" value="@Model.listRoom.Id" style="display:none;">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <button type="submit" class="res-btn"
-                                                                onclick="SendMess()">
+                                                                onclick="BookingRooom()">
                                                             @Html.Raw(Resources.HMS_SendMessage)
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12">
-                                        <div class="single-sidebar-widget">
-                                            <!-- Categories style-->
-                                            <div class="single-sidebar-widget-outer">
-                                                <div class="sec-title-cat sec-title">
-                                                    <h2>@Html.Raw(Resources.HMS_Benefit)</h2>
-                                                </div>
-                                                <div class="categories">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="form-check" name="Book_Motobike">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                                <label class="form-check-label" for="defaultCheck1">
-                                                                    @Html.Raw(Resources.HMS_RentVerhical)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" name="Book_Tour">
-                                                                <label class="form-check-label" for="defaultCheck2">
-                                                                    Tour
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" name="BookCar">
-                                                                <label class="form-check-label" for="defaultCheck3">
-                                                                    @Html.Raw(Resources.HMS_Cars)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" name="Book_BBQService">
-                                                                <label class="form-check-label" for="defaultCheck4">
-                                                                    @Html.Raw(Resources.HMS_BBQ)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5" name="Book_Gift">
-                                                                <label class="form-check-label" for="defaultCheck5">
-                                                                    @Html.Raw(Resources.HMS_Souvenir)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck6" name="Book_Laundry">
-                                                                <label class="form-check-label" for="defaultCheck6">
-                                                                    @Html.Raw(Resources.HMS_Laundry)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck7" name="Book_FlightTicket">
-                                                                <label class="form-check-label" for="defaultCheck7">
-                                                                    @Html.Raw(Resources.HMS_AirTicket)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck8" name="Book_Visa">
-                                                                <label class="form-check-label" for="defaultCheck8">
-                                                                    Visa
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck9" name="Book_Taxi">
-                                                                <label class="form-check-label" for="defaultCheck9">
-                                                                    @Html.Raw(Resources.HMS_AirportTaxi)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck10" name="Book_SuggestionTour">
-                                                                <label class="form-check-label" for="defaultCheck10">
-                                                                    @Html.Raw(Resources.HMS_Location)
-                                                                </label>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+
                                             </div>
-
                                         </div>
-                                    </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="single-sidebar-widget">
+                                                <!-- Categories style-->
+                                                <div class="single-sidebar-widget-outer">
+                                                    <div class="sec-title-cat sec-title">
+                                                        <h2>@Html.Raw(Resources.HMS_Benefit)</h2>
+                                                    </div>
+                                                    <div class="categories">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="action" value="true" name="Book_Motobike">
+                                                                    <label class="form-check-label" for="defaultCheck1">
+                                                                        @Html.Raw(Resources.HMS_RentVerhical)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck2" name="Book_Tour">
+                                                                    <label class="form-check-label" for="defaultCheck2">
+                                                                        Tour
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck3" name="BookCar">
+                                                                    <label class="form-check-label" for="defaultCheck3">
+                                                                        @Html.Raw(Resources.HMS_Cars)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck4" name="Book_BBQService">
+                                                                    <label class="form-check-label" for="defaultCheck4">
+                                                                        @Html.Raw(Resources.HMS_BBQ)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck5" name="Book_Gift">
+                                                                    <label class="form-check-label" for="defaultCheck5">
+                                                                        @Html.Raw(Resources.HMS_Souvenir)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck6" name="Book_Laundry">
+                                                                    <label class="form-check-label" for="defaultCheck6">
+                                                                        @Html.Raw(Resources.HMS_Laundry)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck7" name="Book_FlightTicket">
+                                                                    <label class="form-check-label" for="defaultCheck7">
+                                                                        @Html.Raw(Resources.HMS_AirTicket)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck8" name="Book_Visa">
+                                                                    <label class="form-check-label" for="defaultCheck8">
+                                                                        Visa
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck9" name="Book_Taxi">
+                                                                    <label class="form-check-label" for="defaultCheck9">
+                                                                        @Html.Raw(Resources.HMS_AirportTaxi)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck10" name="Book_SuggestionTour">
+                                                                    <label class="form-check-label" for="defaultCheck10">
+                                                                        @Html.Raw(Resources.HMS_Location)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @*</section>*@
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.HMS_Close)</button>
                                 </div>
-                                @*</section>*@
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.HMS_Close)</button>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -266,7 +273,8 @@ else
                                             <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
                                                 <h4>@iterm.Name</h4>
                                             </a>
-                                            <p>@Model.listRoom.Price.ToString("#,##0")/Ngày</p>
+                                            <p>@iterm.Price.ToString("#,##0")/Ngày</p>
+                                            
                                         </div>
                                     </li>
                                 }
@@ -282,7 +290,7 @@ else
                                             <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
                                                 <h4>@iterm.NameENG</h4>
                                             </a>
-                                            <p>@{var value = (Model.listRoom.Price / 23000).ToString("#,##0");} @value$ / Day</p>
+                                            <p>@{var value = (iterm.Price/ 23000).ToString("#,##0");} @value$ / Day</p>
                                         </div>
                                     </li>
                                 }
@@ -333,6 +341,7 @@ else
                             <h2>@Model.listRoom.NameENG</h2>
                             <p>@Html.Raw(Model.listRoom.Temp_1)</p>
                             <p>@Html.Raw(Model.listRoom.DescriptionENG)</p>
+                            <input type="text" name="@Model.listRoom.Id" value="@Model.listRoom.Id" style="display:none;" >
                         </div>
                     }
                 </div>
@@ -433,16 +442,43 @@ else
     </div>
 </section>
 <script>
-    function SendMess() {
-        var name, email, startdate, endDate, people, phone, message;
-        name = document.getElementById("name").value;
-        email = document.getElementById("email").value;
-        people = document.getElementById("people").value;
-        phone = document.getElementById("phone").value;
-        message = document.getElementById("message").value;
-        if (name != "" && email != "" && people != "" && phone != "" && message != "") {
-            alert("Đặt Phòng Thành Công");
+    function BookingRooom() {
+        var CustomerName, CustomerEmail, CustomerPhone;
+       
+        CustomerEmail = document.getElementById("CustomerEmail").value;
+        CustomerPhone = document.getElementById("CustomerPhone").value;
+        CustomerName = document.getElementById("CustomerName").value;
+
+        var checkBox = document.getElementById("action");
+        var checkboxValue = true;
+
+     
+        if (checkBox.checked == true) {
+            document.getElementById("action").value = checkboxValue;
+           
+
+        } else {
+            document.getElementById("action").value = 0;
         }
+        if (CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
+            alert("Đặt Phòng Thành Công");
+        } else {
+            alert("Đặt Phòng Không Thành Công");
+        }
+
+
+    }
+    function bookingShortRoom() {
+        var startDay, endDay, selectMenu;
+         startDay = document.getElementById("startDay").value;
+         endDay = document.getElementById("endDay").value;
+         selectMenu = document.getElementById("selectMenu").value;
+        document.getElementById("startDayRoom").value = startDay;
+        document.getElementById("endDayRoom").value = endDay;
+        document.getElementById("CustomeNumber").value = selectMenu;
+    }
+    function checkBenefit() {
+       
     }
 
 </script>

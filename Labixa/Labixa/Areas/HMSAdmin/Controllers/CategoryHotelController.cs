@@ -38,14 +38,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
         public ActionResult Create()
         {
-            CategoryHotel model = new CategoryHotel();
+            CategoryHotels model = new CategoryHotels();
             //Get the list category
             return View(model);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Create(CategoryHotel newCategoryHotel, bool continueEditing)
+        public ActionResult Create(CategoryHotels newCategoryHotel, bool continueEditing)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(CategoryHotel editCategoryHotel, bool continueEditing)
+        public ActionResult Edit(CategoryHotels editCategoryHotel, bool continueEditing)
         {
             if (ModelState.IsValid)
             {

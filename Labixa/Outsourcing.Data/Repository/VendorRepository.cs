@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace Outsourcing.Data.Repository
 {
  
-    public class VendorRepository : RepositoryBase<Vendor>, IVendorRepository
+    public class VendorRepository : RepositoryBase<Vendors>, IVendorRepository
     {
         public VendorRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IVendorRepository : IRepository<Vendor>
+    public interface IVendorRepository : IRepository<Vendors>
     {
 
     }

@@ -38,7 +38,7 @@ namespace Labixa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                BlogCategory blog = Mapper.Map<BlogCategoryFormModel, BlogCategory>(obj);
+                BlogCategories blog = Mapper.Map<BlogCategoryFormModel, BlogCategories>(obj);
                 var slug = StringConvert.ConvertShortName(blog.Name);
                 blog.Slug = slug;
                 _blogCategoryService.CreateBlogCategory(blog);
@@ -57,7 +57,7 @@ namespace Labixa.Areas.Admin.Controllers
             var list = _blogCategoryService.GetBlogCategories().ToSelectListItems(int.Parse(item.CategoryParentId.ToString() == "" ? "0" : item.CategoryParentId.ToString()));
 
             //BlogCategoryFormModel model1 = Mapper.Map<BlogCategory,BlogCategoryFormModel>(item);
-            var blogCategory = Mapper.Map<BlogCategory, BlogCategoryFormModel>(item);
+            var blogCategory = Mapper.Map<BlogCategories, BlogCategoryFormModel>(item);
             blogCategory.ListCategory = list;
 
             return View(blogCategory);
@@ -67,7 +67,7 @@ namespace Labixa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                BlogCategory item = Mapper.Map<BlogCategoryFormModel, BlogCategory>(obj);
+                BlogCategories item = Mapper.Map<BlogCategoryFormModel, BlogCategories>(obj);
                 item.Slug = StringConvert.ConvertShortName(item.Name);
                 _blogCategoryService.EditBlogCategory(item);
                 return continueEditing ? RedirectToAction("Edit", "BlogCategory", new {item.Id })

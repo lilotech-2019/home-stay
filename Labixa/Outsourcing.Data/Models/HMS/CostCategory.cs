@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
@@ -16,7 +20,7 @@ namespace Outsourcing.Data.Models.HMS
         public string Slug { get; set; }
         public bool Deleted { get; set; }
 
-        public virtual ICollection<Cost> Costs { get; set; }
+        public virtual ICollection<Costs> Costs { get; set; }
 
         //public string Test { get; set; }
     }

@@ -14,13 +14,13 @@ namespace Outsourcing.Service.HMS
     public interface IRoomImageMappingService
     {
 
-        IEnumerable<RoomImageMapping> GetRoomImageMappings();
-        RoomImageMapping GetRoomImageMappingById(int RoomImageMappingId);
-        void CreateRoomImageMapping(RoomImageMapping RoomImageMapping);
-        void EditRoomImageMapping(RoomImageMapping RoomImageMappingToEdit);
+        IEnumerable<RoomImageMappings> GetRoomImageMappings();
+        RoomImageMappings GetRoomImageMappingById(int RoomImageMappingId);
+        void CreateRoomImageMapping(RoomImageMappings RoomImageMapping);
+        void EditRoomImageMapping(RoomImageMappings RoomImageMappingToEdit);
         void DeleteRoomImageMapping(int RoomImageMappingId);
         void SaveRoomImageMapping();
-        IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMapping RoomImageMapping);
+        IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings RoomImageMapping);
 
     }
     public class RoomImageMappingService : IRoomImageMappingService
@@ -40,25 +40,25 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<RoomImageMapping> GetRoomImageMappings()
+        public IEnumerable<RoomImageMappings> GetRoomImageMappings()
         {
             var RoomImageMappings = RoomImageMappingRepository.GetAll();
             return RoomImageMappings;
         }
 
-        public RoomImageMapping GetRoomImageMappingById(int RoomImageMappingId)
+        public RoomImageMappings GetRoomImageMappingById(int RoomImageMappingId)
         {
             var RoomImageMapping = RoomImageMappingRepository.GetById(RoomImageMappingId);
             return RoomImageMapping;
         }
 
-        public void CreateRoomImageMapping(RoomImageMapping RoomImageMapping)
+        public void CreateRoomImageMapping(RoomImageMappings RoomImageMapping)
         {
             RoomImageMappingRepository.Add(RoomImageMapping);
             SaveRoomImageMapping();
         }
 
-        public void EditRoomImageMapping(RoomImageMapping RoomImageMappingToEdit)
+        public void EditRoomImageMapping(RoomImageMappings RoomImageMappingToEdit)
         {
             RoomImageMappingRepository.Update(RoomImageMappingToEdit);
             SaveRoomImageMapping();
@@ -80,7 +80,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMapping RoomImageMapping)
+        public IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings RoomImageMapping)
         {
 
             //    yield return new ValidationResult("RoomImageMapping", "ErrorString");

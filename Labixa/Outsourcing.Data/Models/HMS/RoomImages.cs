@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
    
-    public class RoomImage : BaseEntity
+    public class RoomImages : BaseEntity
     {
         public string Binary { get; set; }
         public string MimeType { get; set; }
@@ -13,6 +17,6 @@ namespace Outsourcing.Data.Models.HMS
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<RoomImageMapping> RoomImageMappings { get; set; }
+        public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
     }
 }

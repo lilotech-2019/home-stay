@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
  
-    public class RoomUtility : BaseEntity
+    public class RoomUtilities : BaseEntity
     {
         public string Name { get; set; }
 
@@ -13,7 +17,7 @@ namespace Outsourcing.Data.Models.HMS
 
         public string ControlType { get; set; }
 
-        public virtual ICollection<RoomUtilityRoomMapping> RoomUtilityRoomMappings { get; set; }
+        public virtual ICollection<RoomUtilityRoomMappings> RoomUtilityRoomMappings { get; set; }
 
         public bool Deleted { get; set; }
 

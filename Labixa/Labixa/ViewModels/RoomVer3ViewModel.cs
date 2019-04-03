@@ -11,15 +11,15 @@ namespace Labixa.ViewModels
     {
         public RoomVer3ViewModel()
         {
-            RelatedRoom = new List<Room>();
-            RelatedRoomLong = new List<Room>();
+            RelatedRoom = new List<Rooms>();
+            RelatedRoomLong = new List<Rooms>();
         }
 
-        public IEnumerable<Room> RelatedRoom { get; set; }
+        public IEnumerable<Rooms> RelatedRoom { get; set; }
 
-        public IEnumerable<Room> RelatedRoomLong { get; set; }
+        public IEnumerable<Rooms> RelatedRoomLong { get; set; }
 
-        public Room listRoom { get; set; }
+        public Rooms listRoom { get; set; }
 
 
 

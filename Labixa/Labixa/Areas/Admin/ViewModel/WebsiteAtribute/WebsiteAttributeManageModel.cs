@@ -9,6 +9,6 @@ namespace Labixa.Areas.Admin.ViewModel.WebsiteAtribute
     {
 
         public string Type { get; set; }
-        public List<WebsiteAttribute> WebsiteAttributes { get; set; }
+        public List<WebsiteAttributes> WebsiteAttributes { get; set; }
     }
 }

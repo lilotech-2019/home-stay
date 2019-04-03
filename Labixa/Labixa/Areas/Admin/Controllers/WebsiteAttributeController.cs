@@ -47,7 +47,7 @@ namespace Labixa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                WebsiteAttribute websiteAttribute = Mapper.Map<WebsiteAttributeFormModel, WebsiteAttribute>(model);
+                WebsiteAttributes websiteAttribute = Mapper.Map<WebsiteAttributeFormModel, WebsiteAttributes>(model);
                 _websiteAttributeService.CreateWebsiteAttribute(websiteAttribute);
                 return RedirectToAction("Index", "WebsiteAttribute");
             }
@@ -56,7 +56,7 @@ namespace Labixa.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var websiteAttribute = _websiteAttributeService.GetWebsiteAttributeById(id);
-            WebsiteAttributeFormModel model = Mapper.Map<WebsiteAttribute, WebsiteAttributeFormModel>(websiteAttribute);
+            WebsiteAttributeFormModel model = Mapper.Map<WebsiteAttributes, WebsiteAttributeFormModel>(websiteAttribute);
             if (model != null)
             {
                 return View(model);
@@ -69,7 +69,7 @@ namespace Labixa.Areas.Admin.Controllers
         public ActionResult Edit(WebsiteAttributeFormModel model, bool continueEditing)
         {
 
-            WebsiteAttribute websiteAttribute = Mapper.Map<WebsiteAttributeFormModel, WebsiteAttribute>(model);
+            WebsiteAttributes websiteAttribute = Mapper.Map<WebsiteAttributeFormModel, WebsiteAttributes>(model);
 
             _websiteAttributeService.EditWebsiteAttribute(websiteAttribute);
 

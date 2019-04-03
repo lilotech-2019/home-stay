@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Repository
 {
-    public class ColorRepository : RepositoryBase<Color>, IColorRepository
+    public class ColorRepository : RepositoryBase<Colors>, IColorRepository
     {
         public ColorRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IColorRepository : IRepository<Color>
+    public interface IColorRepository : IRepository<Colors>
     {
 
     }

@@ -14,27 +14,27 @@ namespace Outsourcing.Service.HMS
     public interface IHotelService
     {
 
-        IEnumerable<Hotel> GetHotels();
-        Hotel GetHotelContact();
-        IEnumerable<Hotel> GetHomePageHotels();
-        IEnumerable<Hotel> GetHotelByCategorySlug(string slug);
-        IEnumerable<Hotel> GetHotelByCategoryId(int id);
-        IEnumerable<Hotel> Get6HotelService();
-        IEnumerable<Hotel> Get2HotelNews();
-        IEnumerable<Hotel> Get3HotelNewsNewest();
-        Hotel GetHotelById(int HotelId);
-        void CreateHotel(Hotel Hotel);
-        void EditHotel(Hotel HotelToEdit);
+        IEnumerable<Hotels> GetHotels();
+        Hotels GetHotelContact();
+        IEnumerable<Hotels> GetHomePageHotels();
+        IEnumerable<Hotels> GetHotelByCategorySlug(string slug);
+        IEnumerable<Hotels> GetHotelByCategoryId(int id);
+        IEnumerable<Hotels> Get6HotelService();
+        IEnumerable<Hotels> Get2HotelNews();
+        IEnumerable<Hotels> Get3HotelNewsNewest();
+        Hotels GetHotelById(int HotelId);
+        void CreateHotel(Hotels Hotel);
+        void EditHotel(Hotels HotelToEdit);
         void DeleteHotel(int HotelId);
         void SaveHotel();
         IEnumerable<ValidationResult> CanAddHotel(string HotelUrl);
 
-        Hotel GetHotelByUrlName(string urlName);
+        Hotels GetHotelByUrlName(string urlName);
 
-        IEnumerable<Hotel> GetHotelsByCategory(int HotelTypeId);
+        IEnumerable<Hotels> GetHotelsByCategory(int HotelTypeId);
 
-        IEnumerable<Hotel> GetStaticPage();
-        IEnumerable<Hotel> GetNewPost();
+        IEnumerable<Hotels> GetStaticPage();
+        IEnumerable<Hotels> GetNewPost();
     }
     public class HotelService : IHotelService
     {
@@ -52,17 +52,17 @@ namespace Outsourcing.Service.HMS
         #endregion
 
         #region Implementation for IHotelService
-        public IEnumerable<Hotel> GetHotels()
+        public IEnumerable<Hotels> GetHotels()
         {
             var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderBy(b => b.Position);
             return Hotels;
         }
-        public IEnumerable<Hotel> Get3HotelsPosition()
+        public IEnumerable<Hotels> Get3HotelsPosition()
         {
             var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderBy(b => b.Position).Take(3);
             return Hotels;
         }
-        public IEnumerable<Hotel> GetHomePageHotels()
+        public IEnumerable<Hotels> GetHomePageHotels()
         {
             //var Hotels = HotelRepository.
             //    GetMany(b => !b.HotelCategory.IsStaticPage && !b.Deleted && b.IsHomePage).
@@ -70,7 +70,7 @@ namespace Outsourcing.Service.HMS
             //return Hotels;
             return null;
         }
-        public IEnumerable<Hotel> GetHotelByCategoryId(int id)
+        public IEnumerable<Hotels> GetHotelByCategoryId(int id)
         {
             //var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
             //    && b.HotelCategory.Id.Equals(id)
@@ -80,7 +80,7 @@ namespace Outsourcing.Service.HMS
             return null;
 
         }
-        public IEnumerable<Hotel> GetHotelByCategorySlug(string slug)
+        public IEnumerable<Hotels> GetHotelByCategorySlug(string slug)
         {
             //    var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
             //        && b.HotelCategory.Slug.Equals(slug)
@@ -90,25 +90,25 @@ namespace Outsourcing.Service.HMS
             return null;
 
         }
-        public IEnumerable<Hotel> GetStaticPage()
+        public IEnumerable<Hotels> GetStaticPage()
         {
             var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderByDescending(b => b.DateCreated);
             return Hotels;
         }
 
-        public Hotel GetHotelById(int HotelId)
+        public Hotels GetHotelById(int HotelId)
         {
             var Hotel = HotelRepository.GetById(HotelId);
             return Hotel;
         }
 
-        public void CreateHotel(Hotel Hotel)
+        public void CreateHotel(Hotels Hotel)
         {
             HotelRepository.Add(Hotel);
             SaveHotel();
         }
 
-        public void EditHotel(Hotel HotelToEdit)
+        public void EditHotel(Hotels HotelToEdit)
         {
             HotelToEdit.LastEditedTime = DateTime.Now;
             HotelRepository.Update(HotelToEdit);
@@ -144,29 +144,29 @@ namespace Outsourcing.Service.HMS
             return null;
         }
 
-        public Hotel GetHotelByUrlName(string urlName)
+        public Hotels GetHotelByUrlName(string urlName)
         {
             var Hotel = HotelRepository.Get(b => b.Slug == urlName);
             return Hotel;
         }
 
-        public IEnumerable<Hotel> GetHotelsByCategory(int HotelTypeId)
+        public IEnumerable<Hotels> GetHotelsByCategory(int HotelTypeId)
         {
             var Hotels = this.GetHotels().Where(b => b.CategoryHotelId == HotelTypeId);
             return Hotels;
         }
 
-        public IEnumerable<Hotel> Get6HotelService()
+        public IEnumerable<Hotels> Get6HotelService()
         {
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 6).Take(6);
             return Hotels;
         }
-        public IEnumerable<Hotel> Get2HotelNews()
+        public IEnumerable<Hotels> Get2HotelNews()
         {
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(2);
             return Hotels;
         }
-        public IEnumerable<Hotel> Get3HotelNewsNewest()
+        public IEnumerable<Hotels> Get3HotelNewsNewest()
         {
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(3);
             return Hotels;
@@ -174,14 +174,14 @@ namespace Outsourcing.Service.HMS
         #endregion
 
 
-        public Hotel GetHotelContact()
+        public Hotels GetHotelContact()
         {
             var item = HotelRepository.Get(p => p.Slug.Equals("lien-he"));
             return item;
         }
 
 
-        public IEnumerable<Hotel> GetNewPost()
+        public IEnumerable<Hotels> GetNewPost()
         {
             return HotelRepository.GetAll().Where(p => p.CategoryHotelId == 3).OrderByDescending(p => p.DateCreated).Take(5);
         }

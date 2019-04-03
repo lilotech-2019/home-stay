@@ -20,8 +20,8 @@ namespace Outsourcing.Data
         {
         }
 
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<BlogCategory> BlogCategories { get; set; }
+        public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<BlogCategories> BlogCategories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Picture> Pictures { get; set; }
@@ -31,8 +31,8 @@ namespace Outsourcing.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductPictureMapping> ProductPictureMappings { get; set; }
         public DbSet<Staff> Staffs { get; set; }
-        public DbSet<WebsiteAttribute> WebsiteAttributes { get; set; }
-        public DbSet<Color> Colors { get; set; }
+        public DbSet<WebsiteAttributes> WebsiteAttributes { get; set; }
+        public DbSet<Colors> Colors { get; set; }
         public DbSet<Inventory> Inventorys { get; set; }
         public DbSet<InventoryLog> InventoryLogs { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -41,21 +41,21 @@ namespace Outsourcing.Data
         public DbSet<ProductCategoryMapping> ProductCategoryMappings { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
-        public DbSet<Vendor> Vendors { get; set; }
-        public DbSet<CategoryHotel> CategoryHotels { get; set; }
-        public DbSet<CategoryProduct> CategoryProducts { get; set; }
+        public DbSet<Vendors> Vendors { get; set; }
+        public DbSet<CategoryHotels> CategoryHotels { get; set; }
+        public DbSet<CategoryProducts> CategoryProducts { get; set; }
         public DbSet<CostCategory> CostCategorys { get; set; }
         public DbSet<CostOrderItem> CostOrderItems { get; set; }
         public DbSet<CostOrder> CostOrders { get; set; }
-        public DbSet<Cost> Costs { get; set; }
-        public DbSet<Hotel> Hotels { get; set; }
-        public DbSet<Room> Room { get; set; }
-        public DbSet<RoomImageMapping> RoomImageMappings { get; set; }
-        public DbSet<RoomOrder> RoomOrders { get; set; }
-        public DbSet<RoomOrderItem> RoomOrderItems { get; set; }
-        public DbSet<RoomUtility> RoomUtilitys { get; set; }
-        public DbSet<RoomUtilityRoomMapping> RoomUtilityRoomMappings { get; set; }
-        public DbSet<RoomImage> RoomImages { get; set; }
+        public DbSet<Costs> Costs { get; set; }
+        public DbSet<Hotels> Hotels { get; set; }
+        public DbSet<Rooms> Room { get; set; }
+        public DbSet<RoomImageMappings> RoomImageMappings { get; set; }
+        public DbSet<RoomOrders> RoomOrders { get; set; }
+        public DbSet<RoomOrderItems> RoomOrderItems { get; set; }
+        public DbSet<RoomUtilities> RoomUtilitys { get; set; }
+        public DbSet<RoomUtilityRoomMappings> RoomUtilityRoomMappings { get; set; }
+        public DbSet<RoomImages> RoomImages { get; set; }
         public DbSet<HMSProduct> HMSProduct { get; set; }//a
 
 

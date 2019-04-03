@@ -43,10 +43,10 @@ namespace Outsourcing.Data
                 }
             }
 
-            context.BlogCategories.Add(new BlogCategory() { Name = "None", Slug = "none", Status = true, IsStaticPage = false,DisplayOrder=9999,Description="Danh Mục Con Của None Sẽ Là Danh Mục Cấp 1" });
-            context.BlogCategories.Add(new BlogCategory() { Name = "Trang Tĩnh", Slug = "trang-tinh", Status = true, IsStaticPage = true });
-            context.BlogCategories.Add(new BlogCategory() { Name = "Tin tức", Slug = "tin-tuc", Status = true, IsStaticPage = false});
-            context.BlogCategories.Add(new BlogCategory() { Name = "Sự kiện", Slug = "su-kien", Status = true, IsStaticPage = false });
+            context.BlogCategories.Add(new BlogCategories() { Name = "None", Slug = "none", Status = true, IsStaticPage = false,DisplayOrder=9999,Description="Danh Mục Con Của None Sẽ Là Danh Mục Cấp 1" });
+            context.BlogCategories.Add(new BlogCategories() { Name = "Trang Tĩnh", Slug = "trang-tinh", Status = true, IsStaticPage = true });
+            context.BlogCategories.Add(new BlogCategories() { Name = "Tin tức", Slug = "tin-tuc", Status = true, IsStaticPage = false});
+            context.BlogCategories.Add(new BlogCategories() { Name = "Sự kiện", Slug = "su-kien", Status = true, IsStaticPage = false });
 
             context.ProductCategories.Add(new ProductCategory() { Name = "DanhMuc1", Slug = "danh-muc-1", Deleted = false });
             context.ProductCategories.Add(new ProductCategory() { Name = "DanhMuc2", Slug = "danh-muc-2", Deleted = false });
@@ -55,7 +55,7 @@ namespace Outsourcing.Data
             context.Staffs.Add(new Staff() { Name = "Truong Long", Phone = "0922007855", Type = 3, skype = "longt711", Yahoo = "longt711", Deleted = false });
             context.Staffs.Add(new Staff() { Name = "Truong Long", Phone = "0922007855", Type = 4, skype = "longt711", Yahoo = "longt711", Deleted = false });
             
-            context.WebsiteAttributes.Add(new WebsiteAttribute() { Name = "Labixa.PopupWebsite", IsPublic = true, Deleted = false });
+            context.WebsiteAttributes.Add(new WebsiteAttributes() { Name = "Labixa.PopupWebsite", IsPublic = true, Deleted = false });
             context.SaveChanges();
         }
 

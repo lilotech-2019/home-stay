@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
 
-    public class RoomOrder : BaseEntity
+    public class RoomOrders : BaseEntity
     {
-        public RoomOrder()
+        public RoomOrders()
         {
             DateCreated = DateTime.Now;
         }
@@ -48,11 +51,11 @@ namespace Outsourcing.Data.Models.HMS
         public string Note { get; set; }
         public string Description { get; set; }
         public string DescriptionEN { get; set; }
-        public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
+        public virtual ICollection<RoomOrderItems> RoomOrderItems { get; set; }
 
         public int RoomId { get; set; }
 
         [ForeignKey("RoomId")]
-        virtual public Room Room { get; set; }
+        virtual public Rooms Room { get; set; }
     }
 }

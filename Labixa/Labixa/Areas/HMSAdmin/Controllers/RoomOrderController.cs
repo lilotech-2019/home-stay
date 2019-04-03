@@ -35,7 +35,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         public ActionResult CreateRoomOrder(int? roomId)
         {
-            var roomOrder = new RoomOrder();
+            var roomOrder = new RoomOrders();
             if (!(roomId == null))
             {
 
@@ -55,7 +55,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult CreateRoomOrder(RoomOrder roomOrder, bool continueEditing)
+        public ActionResult CreateRoomOrder(RoomOrders roomOrder, bool continueEditing)
         {
             if (!(roomOrder == null))
             {
@@ -76,14 +76,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(RoomOrder roomOrderEdit, bool continueEditing)
+        public ActionResult Edit(RoomOrders roomOrderEdit, bool continueEditing)
         {
             if (!(roomOrderEdit == null))
             {
                 var room = _roomService.GetRoomById(int.Parse(roomOrderEdit.RoomId.ToString()));
 
                 var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrderEdit.CheckIn.ToString()), DateTime.Parse(roomOrderEdit.Deadline.ToString()));
-                Room room1 = room;
+                Rooms room1 = room;
                 roomOrderEdit.TotalBookPrice = double.Parse(roomOrderEdit.TotalPaymentRoom_DraftCheckIn.ToString()) + (total * room1.Price);
                 _roomOrderService.EditRoomOrder(roomOrderEdit);
                 return continueEditing ? RedirectToAction("Edit", "RoomOrder", new { RoomOrderId = roomOrderEdit.Id })

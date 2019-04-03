@@ -13,11 +13,11 @@ namespace Outsourcing.Service
 {
     public interface IBlogCategoryService
     {
-        IEnumerable<BlogCategory> GetBlogCategories();
-        BlogCategory GetBlogCategoryById(int blogId);
-        BlogCategory GetBlogCategoryByUrl(string url);
-        void CreateBlogCategory(BlogCategory obj);
-        void EditBlogCategory(BlogCategory obj);
+        IEnumerable<BlogCategories> GetBlogCategories();
+        BlogCategories GetBlogCategoryById(int blogId);
+        BlogCategories GetBlogCategoryByUrl(string url);
+        void CreateBlogCategory(BlogCategories obj);
+        void EditBlogCategory(BlogCategories obj);
         void DeleteBlogCategory(string urlName);
         void DeleteBlogCategory(int id);
 
@@ -39,13 +39,13 @@ namespace Outsourcing.Service
         #endregion
 
         #region [base Method]
-        public IEnumerable<BlogCategory> GetBlogCategories()
+        public IEnumerable<BlogCategories> GetBlogCategories()
         {
             var list = blogCategoryRepository.GetAll().Where(p => p.Status && !p.IsStaticPage).OrderByDescending(p => p.CategoryParentId).ToList();
             return list;
         }
 
-        public BlogCategory GetBlogCategoryByUrl(string slug)
+        public BlogCategories GetBlogCategoryByUrl(string slug)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Outsourcing.Service
             }
         }
 
-        public BlogCategory GetBlogCategoryById(int blogId)
+        public BlogCategories GetBlogCategoryById(int blogId)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Outsourcing.Service
             }
         }
 
-        public void CreateBlogCategory(BlogCategory obj)
+        public void CreateBlogCategory(BlogCategories obj)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Outsourcing.Service
             }
         }
 
-        public void EditBlogCategory(BlogCategory obj)
+        public void EditBlogCategory(BlogCategories obj)
         {
             try
             {

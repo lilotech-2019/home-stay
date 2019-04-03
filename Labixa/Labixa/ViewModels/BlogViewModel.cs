@@ -10,12 +10,12 @@ namespace Labixa.ViewModels
     {
         public BlogViewModel()
         {
-            RelatedBlogs = new List<Blog>();
+            RelatedBlogs = new List<Blogs>();
         }
-        public PagedList.IPagedList<Outsourcing.Data.Models.Blog> ListBlogs { get; set; } //danh sách tin tuc
-        public IEnumerable<Blog> RelatedBlogs { get; set; } //relateBlog
+        public PagedList.IPagedList<Outsourcing.Data.Models.Blogs> ListBlogs { get; set; } //danh sách tin tuc
+        public IEnumerable<Blogs> RelatedBlogs { get; set; } //relateBlog
 
-        public Blog listBlogNew { get; set; }
+        public Blogs listBlogNew { get; set; }
 
     }
 }

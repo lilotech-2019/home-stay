@@ -15,13 +15,13 @@ namespace Outsourcing.Service.HMS
     public interface IRoomImageService
     {
 
-        IEnumerable<RoomImage> GetRoomImages();
-        RoomImage GetRoomImageById(int RoomImageId);
-        void CreateRoomImage(RoomImage RoomImage);
-        void EditRoomImage(RoomImage RoomImageToEdit);
+        IEnumerable<RoomImages> GetRoomImages();
+        RoomImages GetRoomImageById(int RoomImageId);
+        void CreateRoomImage(RoomImages RoomImage);
+        void EditRoomImage(RoomImages RoomImageToEdit);
         void DeleteRoomImage(int RoomImageId);
         void SaveRoomImage();
-        IEnumerable<ValidationResult> CanAddRoomImage(RoomImage RoomImage);
+        IEnumerable<ValidationResult> CanAddRoomImage(RoomImages RoomImage);
 
     }
     public class RoomImageService : IRoomImageService
@@ -41,25 +41,25 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<RoomImage> GetRoomImages()
+        public IEnumerable<RoomImages> GetRoomImages()
         {
             var RoomImages = RoomImageRepository.GetAll();
             return RoomImages;
         }
 
-        public RoomImage GetRoomImageById(int RoomImageId)
+        public RoomImages GetRoomImageById(int RoomImageId)
         {
             var RoomImage = RoomImageRepository.GetById(RoomImageId);
             return RoomImage;
         }
 
-        public void CreateRoomImage(RoomImage RoomImage)
+        public void CreateRoomImage(RoomImages RoomImage)
         {
             RoomImageRepository.Add(RoomImage);
             SaveRoomImage();
         }
 
-        public void EditRoomImage(RoomImage RoomImageToEdit)
+        public void EditRoomImage(RoomImages RoomImageToEdit)
         {
             RoomImageRepository.Update(RoomImageToEdit);
             SaveRoomImage();
@@ -81,7 +81,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomImage(RoomImage RoomImage)
+        public IEnumerable<ValidationResult> CanAddRoomImage(RoomImages RoomImage)
         {
 
             //    yield return new ValidationResult("RoomImage", "ErrorString");

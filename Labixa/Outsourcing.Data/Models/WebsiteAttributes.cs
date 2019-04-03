@@ -1,6 +1,12 @@
-﻿namespace Outsourcing.Data.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Outsourcing.Data.Models
 {
-    public class WebsiteAttribute : BaseEntity
+    public class WebsiteAttributes : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }

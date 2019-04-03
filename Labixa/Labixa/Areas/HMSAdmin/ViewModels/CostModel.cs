@@ -8,9 +8,9 @@ namespace Labixa.Areas.HMSAdmin.ViewModels
     {
         public CostModel()
         {
-            Cost = new Cost();
+            Cost = new Costs();
         }
-        public Cost Cost { get; set; }
+        public Costs Cost { get; set; }
         public IEnumerable<SelectListItem> ListCostCategory { get; set; }
     }
 }

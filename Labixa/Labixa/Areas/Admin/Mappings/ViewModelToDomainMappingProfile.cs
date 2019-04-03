@@ -20,14 +20,14 @@ namespace Labixa.Areas.Admin.Mappings
             //Mapper.CreateMap<UserFormViewModel, User>().ForMember(x => x.Id, opt => opt.MapFrom(source => source.UserId));
             //Mapper.CreateMap<XViewModel, X()
             //    .ForMember(x => x.PropertyXYZ, opt => opt.MapFrom(source => source.Property1));     
-            CreateMap<BlogFormModel, Blog>();
+            CreateMap<BlogFormModel, Blogs>();
             CreateMap<ProductFormModel, Product>();
             CreateMap<ProductAttributeFormModel, ProductAttribute>();
             CreateMap<OrderFormModel, Order>();
-            CreateMap<WebsiteAttributeFormModel, WebsiteAttribute>();
+            CreateMap<WebsiteAttributeFormModel, WebsiteAttributes>();
 
             //LongT
-            CreateMap<BlogCategoryFormModel, BlogCategory>();
+            CreateMap<BlogCategoryFormModel, BlogCategories>();
             CreateMap<StaffFormModel, Staff>();
             CreateMap<ProductCategoryFormModel, ProductCategory>();
             CreateMap<AlbumPhotoFormModel, Product>();

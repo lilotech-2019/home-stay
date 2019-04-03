@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public class Blog : BaseEntity
+    public class Blogs : BaseEntity
     {
-        public Blog()
+        public Blogs()
         {
             this.DateCreated = DateTime.Now;
             this.LastEditedTime = DateTime.Now;
@@ -50,7 +56,7 @@ namespace Outsourcing.Data.Models
         public int Position { get; set; }
 
         [ForeignKey("BlogCategoryId")]
-        virtual public BlogCategory BlogCategory { get; set; }
+        virtual public BlogCategories BlogCategory { get; set; }
 
     }
 

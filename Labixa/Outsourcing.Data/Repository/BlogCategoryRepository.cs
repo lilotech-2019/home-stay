@@ -4,14 +4,14 @@ using System;
 using System.Linq.Expressions;
 namespace Outsourcing.Data.Repository
 {
-    public class BlogCategoryRepository : RepositoryBase<BlogCategory>, IBlogTypeRepository
+    public class BlogCategoryRepository : RepositoryBase<BlogCategories>, IBlogTypeRepository
         {
         public BlogCategoryRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
             {
             }        
         }
-    public interface IBlogTypeRepository : IRepository<BlogCategory>
+    public interface IBlogTypeRepository : IRepository<BlogCategories>
     {
         
     }

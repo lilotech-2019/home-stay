@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
 
-    public class Room : BaseEntity
+    public class Rooms : BaseEntity
     {
 
         public string Name { get; set; }
@@ -59,11 +63,11 @@ namespace Outsourcing.Data.Models.HMS
         [ForeignKey("Hotel")]
         public int HotelId { get; set; }
 
-        virtual public Hotel Hotel { get; set; }
+        virtual public Hotels Hotel { get; set; }
 
 
-    public virtual ICollection<RoomImageMapping> RoomImageMappings { get; set; }
-    public virtual ICollection<RoomOrder> RoomOrders { get; set; }
+    public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
+    public virtual ICollection<RoomOrders> RoomOrders { get; set; }
 
     }
 }

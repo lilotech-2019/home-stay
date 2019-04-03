@@ -5,14 +5,14 @@ using System.Linq.Expressions;
 
 namespace Outsourcing.Data.Repository
 {
-    public class WebsiteAttributeRepository : RepositoryBase<WebsiteAttribute>, IWebsiteAttributeRepository
+    public class WebsiteAttributeRepository : RepositoryBase<WebsiteAttributes>, IWebsiteAttributeRepository
     {
         public WebsiteAttributeRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IWebsiteAttributeRepository : IRepository<WebsiteAttribute>
+    public interface IWebsiteAttributeRepository : IRepository<WebsiteAttributes>
     {
 
     }

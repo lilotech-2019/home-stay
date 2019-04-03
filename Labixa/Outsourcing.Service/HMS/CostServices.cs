@@ -14,27 +14,27 @@ namespace Outsourcing.Service.HMS
     public interface ICostService
     {
 
-        IEnumerable<Cost> GetCosts();
-        Cost GetCostContact();
-        IEnumerable<Cost> GetHomePageCosts();
-        IEnumerable<Cost> GetCostByCategorySlug(string slug);
-        IEnumerable<Cost> GetCostByCategoryId(int id);
-        IEnumerable<Cost> Get6CostService();
-        IEnumerable<Cost> Get2CostNews();
-        IEnumerable<Cost> Get3CostNewsNewest();
-        Cost GetCostById(int CostId);
-        void CreateCost(Cost Cost);
-        void EditCost(Cost CostToEdit);
+        IEnumerable<Costs> GetCosts();
+        Costs GetCostContact();
+        IEnumerable<Costs> GetHomePageCosts();
+        IEnumerable<Costs> GetCostByCategorySlug(string slug);
+        IEnumerable<Costs> GetCostByCategoryId(int id);
+        IEnumerable<Costs> Get6CostService();
+        IEnumerable<Costs> Get2CostNews();
+        IEnumerable<Costs> Get3CostNewsNewest();
+        Costs GetCostById(int CostId);
+        void CreateCost(Costs Cost);
+        void EditCost(Costs CostToEdit);
         void DeleteCost(int CostId);
         void SaveCost();
         IEnumerable<ValidationResult> CanAddCost(string CostUrl);
 
-        Cost GetCostByUrlName(string urlName);
+        Costs GetCostByUrlName(string urlName);
 
-        IEnumerable<Cost> GetCostsByCategory(int CostTypeId);
+        IEnumerable<Costs> GetCostsByCategory(int CostTypeId);
 
-        IEnumerable<Cost> GetStaticPage();
-        IEnumerable<Cost> GetNewPost();
+        IEnumerable<Costs> GetStaticPage();
+        IEnumerable<Costs> GetNewPost();
     }
     public class CostService : ICostService
     {
@@ -52,54 +52,54 @@ namespace Outsourcing.Service.HMS
         #endregion
 
         #region Implementation for ICostService
-        public IEnumerable<Cost> GetCosts()
+        public IEnumerable<Costs> GetCosts()
         {
             var Costs = CostRepository.GetAll().Where(p=>!p.IsDelete);
             return Costs;
         }
-        public IEnumerable<Cost> Get3CostsPosition()
+        public IEnumerable<Costs> Get3CostsPosition()
         {
             var Costs = CostRepository.GetAll();
 
             return Costs;
         }
-        public IEnumerable<Cost> GetHomePageCosts()
+        public IEnumerable<Costs> GetHomePageCosts()
         {
             var Costs = CostRepository.GetAll();
 
             return Costs;
         }
-        public IEnumerable<Cost> GetCostByCategoryId(int id)
+        public IEnumerable<Costs> GetCostByCategoryId(int id)
         {
             var Costs = CostRepository.GetAll();
 
             return Costs;
         }
-        public IEnumerable<Cost> GetCostByCategorySlug(string slug)
+        public IEnumerable<Costs> GetCostByCategorySlug(string slug)
         {
             var Costs = CostRepository.GetAll();
 
             return Costs;
         }
-        public IEnumerable<Cost> GetStaticPage()
+        public IEnumerable<Costs> GetStaticPage()
         {
             var Costs = CostRepository.GetAll();
             return Costs;
         }
 
-        public Cost GetCostById(int CostId)
+        public Costs GetCostById(int CostId)
         {
             var Cost = CostRepository.GetById(CostId);
             return Cost;
         }
 
-        public void CreateCost(Cost Cost)
+        public void CreateCost(Costs Cost)
         {
             CostRepository.Add(Cost);
             SaveCost();
         }
 
-        public void EditCost(Cost CostToEdit)
+        public void EditCost(Costs CostToEdit)
         {
             //CostToEdit.LastEditedTime = DateTime.Now;
             CostRepository.Update(CostToEdit);
@@ -130,30 +130,30 @@ namespace Outsourcing.Service.HMS
             return null;
         }
 
-        public Cost GetCostByUrlName(string urlName)
+        public Costs GetCostByUrlName(string urlName)
         {
             var Costs = CostRepository.GetAll();
 
             return null;
         }
 
-        public IEnumerable<Cost> GetCostsByCategory(int CostTypeId)
+        public IEnumerable<Costs> GetCostsByCategory(int CostTypeId)
         {
             var Costs = this.GetCosts().Where(b => b.CostCategoryId == CostTypeId);
             return Costs;
         }
 
-        public IEnumerable<Cost> Get6CostService()
+        public IEnumerable<Costs> Get6CostService()
         {
             var Costs = this.GetCosts().Where(p => p.CostCategoryId == 6).Take(6);
             return Costs;
         }
-        public IEnumerable<Cost> Get2CostNews()
+        public IEnumerable<Costs> Get2CostNews()
         {
             var Costs = CostRepository.GetAll();
             return Costs;
         }
-        public IEnumerable<Cost> Get3CostNewsNewest()
+        public IEnumerable<Costs> Get3CostNewsNewest()
         {
             var Costs = CostRepository.GetAll();
             return Costs;
@@ -161,14 +161,14 @@ namespace Outsourcing.Service.HMS
         #endregion
 
 
-        public Cost GetCostContact()
+        public Costs GetCostContact()
         {
             var Costs = CostRepository.GetAll();
             return Costs.FirstOrDefault();
         }
 
 
-        public IEnumerable<Cost> GetNewPost()
+        public IEnumerable<Costs> GetNewPost()
         {
             return CostRepository.GetAll().Where(p => p.CostCategoryId == 3).OrderByDescending(p => p.DateCreated).Take(5);
         }

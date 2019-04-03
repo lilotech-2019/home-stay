@@ -91,16 +91,16 @@ namespace Labixa.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking)
+        public ActionResult BookingRoom(RoomOrders modelBooking)
         {
             _RoomOrderService.CreateRoomOrder(modelBooking);
             return RedirectToAction("ShortRoom", "RoomVer3");
           
         }
         [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrderItem modelBooking)
+        public ActionResult BookingLongRoom(RoomOrders modelBookingLongRoom)
         {
-            _RoomOrderItemService.CreateRoomOrderItem(modelBooking);
+            _RoomOrderService.CreateRoomOrder(modelBookingLongRoom);
             return RedirectToAction("LongRoom", "RoomVer3");
 
         }

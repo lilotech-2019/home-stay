@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -48,7 +51,6 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -59,25 +61,25 @@
   <ItemGroup>
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\BlogCategory.cs" />
-    <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\BlogCategories.cs" />
+    <Compile Include="Models\Blogs.cs" />
     <Compile Include="Models\CategoryProductMapping.cs" />
-    <Compile Include="Models\Color.cs" />
-    <Compile Include="Models\HMS\CategoryHotel.cs" />
-    <Compile Include="Models\HMS\CategoryProduct.cs" />
-    <Compile Include="Models\HMS\Cost.cs" />
+    <Compile Include="Models\Colors.cs" />
+    <Compile Include="Models\HMS\CategoryHotels.cs" />
+    <Compile Include="Models\HMS\CategoryProducts.cs" />
+    <Compile Include="Models\HMS\Costs.cs" />
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />
-    <Compile Include="Models\HMS\Hotel.cs" />
-    <Compile Include="Models\HMS\Product.cs" />
-    <Compile Include="Models\HMS\Room.cs" />
-    <Compile Include="Models\HMS\RoomImage.cs" />
-    <Compile Include="Models\HMS\RoomImageMapping.cs" />
-    <Compile Include="Models\HMS\RoomOrder.cs" />
-    <Compile Include="Models\HMS\RoomOrderItem.cs" />
-    <Compile Include="Models\HMS\RoomUtility.cs" />
-    <Compile Include="Models\HMS\RoomUtilityRoomMapping.cs" />
+    <Compile Include="Models\HMS\Hotels.cs" />
+    <Compile Include="Models\HMS\Products.cs" />
+    <Compile Include="Models\HMS\Rooms.cs" />
+    <Compile Include="Models\HMS\RoomImages.cs" />
+    <Compile Include="Models\HMS\RoomImageMappings.cs" />
+    <Compile Include="Models\HMS\RoomOrders.cs" />
+    <Compile Include="Models\HMS\RoomOrderItems.cs" />
+    <Compile Include="Models\HMS\RoomUtilities.cs" />
+    <Compile Include="Models\HMS\RoomUtilityRoomMappings.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\InventoryLog.cs" />
     <Compile Include="Models\Location.cs" />
@@ -95,8 +97,8 @@
     <Compile Include="Models\Shipment.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TypeNotify.cs" />
-    <Compile Include="Models\Vendor.cs" />
-    <Compile Include="Models\WebsiteAttribute.cs" />
+    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\WebsiteAttributes.cs" />
     <Compile Include="OutsourcingSampleData.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
