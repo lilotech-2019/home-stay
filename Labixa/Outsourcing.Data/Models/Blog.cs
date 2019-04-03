@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models
@@ -7,11 +8,17 @@ namespace Outsourcing.Data.Models
     {
         public Blog()
         {
-            this.DateCreated = DateTime.Now;
-            this.LastEditedTime = DateTime.Now;
+            DateCreated = DateTime.Now;
+            LastEditedTime = DateTime.Now;
         }
+
+        [Display(Name = "Title", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.ErrorMessage.ErrorMessageResource),
+            ErrorMessageResourceName = "TitleRequired")]
+
         public string Title { get; set; }
-        public string TitleENG{ get; set; }
+
+        public string TitleENG { get; set; }
 
         /// <summary>
         /// URL  SEO friendly
@@ -46,12 +53,11 @@ namespace Outsourcing.Data.Models
 
         //Get or set the picture of blog
         public int PictureId { get; set; }
+
         public int BlogCategoryId { get; set; }
         public int Position { get; set; }
 
         [ForeignKey("BlogCategoryId")]
-        virtual public BlogCategory BlogCategory { get; set; }
-
+        public virtual BlogCategory BlogCategory { get; set; }
     }
-
 }

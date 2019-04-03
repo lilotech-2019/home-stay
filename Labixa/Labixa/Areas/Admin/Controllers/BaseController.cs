@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Globalization;
-using System.Threading;
-using System.Web;
 using System.Web.Mvc;
-using Labixa.Helpers;
+using Resources;
 
 namespace Labixa.Areas.Admin.Controllers
 {
@@ -11,27 +8,20 @@ namespace Labixa.Areas.Admin.Controllers
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            string cultureName = null;
-            cultureName = "vi";
-            // Validate culture name
-            HttpCookie cultureCookie = Request.Cookies["_culture"];
-            if (cultureCookie != null)
-            {                //cultureName = cultureCookie.Value;
-                cultureName = "vi";
+            string lang;
+            var langCookie = Request.Cookies["culture"];
+            if (langCookie != null)
+            {
+                lang = langCookie.Value;
             }
-            //else
-            //    cultureName = Request.UserLanguages != null && Request.UserLanguages.Length > 0 ?
-            //            Request.UserLanguages[0] :  // obtain it from HTTP header AcceptLanguages
-            //            null;
-            // Validate culture name
-            cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
-
-            cultureName = "vi";
-            // Modify current thread's cultures            
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi");
-            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
-
+            else
+            {
+                var userLanguage = Request.UserLanguages;
+                var userLang = userLanguage != null ? userLanguage[0] : "";
+                lang = userLang != "" ? userLang : LanguageMang.GetDefaultLanguage();
+            }
+            new LanguageMang().SetLanguage(lang);
             return base.BeginExecuteCore(callback, state);
         }
-	}
+    }
 }

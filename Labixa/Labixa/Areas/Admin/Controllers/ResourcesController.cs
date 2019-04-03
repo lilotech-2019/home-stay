@@ -62,17 +62,17 @@ namespace Labixa.Areas.Admin.Controllers
 
             #endregion
 
-            ResourceSet resourceSet =
-                Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            //ResourceSet resourceSet =
+              //  Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             //ResXResourceReader read = new ResXResourceReader(AppDomain.CurrentDomain.BaseDirectory + "Resources.en.resx");
             List<ResourcesFormModel> listResource = new List<ResourcesFormModel>();
-            foreach (DictionaryEntry entry in resourceSet)
-            {
-                ResourcesFormModel item = new ResourcesFormModel();
-                item.Name = entry.Key.ToString();
-                item.Value = entry.Value.ToString();
-                listResource.Add(item);
-            }
+            //foreach (DictionaryEntry entry in resourceSet)
+            //{
+            //    ResourcesFormModel item = new ResourcesFormModel();
+            //    item.Name = entry.Key.ToString();
+            //    item.Value = entry.Value.ToString();
+            //    listResource.Add(item);
+            //}
             //resourceSet.Dispose();
             return listResource;
         }

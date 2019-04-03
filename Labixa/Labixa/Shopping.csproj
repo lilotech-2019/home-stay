@@ -76,6 +76,7 @@
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromotionController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResourcesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaffController.cs" />
     <Compile Include="Areas\Admin\Controllers\TypeNotifyController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
@@ -1528,6 +1529,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1980,6 +1982,10 @@
     <ProjectReference Include="..\Outsourcing.Service\Outsourcing.Service.csproj">
       <Project>{9C27520D-D8B8-486A-A353-EBD5A81E4DF2}</Project>
       <Name>Outsourcing.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{F1C27911-CE4D-429E-9483-14E73AC120C8}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
