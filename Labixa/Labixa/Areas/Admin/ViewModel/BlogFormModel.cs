@@ -18,6 +18,9 @@ namespace Labixa.Areas.Admin.ViewModel
 
         // [DisplayName(@"Tiêu đề")]
         [Display(Name = "Title", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(Resources.ErrorMessage.ErrorMessageResource),
+            ErrorMessageResourceName = "TitleRequired")]
+
         public string Title { get; set; }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models
@@ -11,10 +10,6 @@ namespace Outsourcing.Data.Models
             DateCreated = DateTime.Now;
             LastEditedTime = DateTime.Now;
         }
-
-        [Display(Name = "Title", ResourceType = typeof(Resources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(Resources.ErrorMessage.ErrorMessageResource),
-            ErrorMessageResourceName = "TitleRequired")]
 
         public string Title { get; set; }
 
