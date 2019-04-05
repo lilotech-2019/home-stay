@@ -16,13 +16,13 @@ namespace Outsourcing.Service.HMS
    public interface ICategoryHotelService
     {
 
-        IEnumerable<CategoryHotel> GetProductCategories();
-        CategoryHotel GetCategoryHotelById(int CategoryHotelId);
-        void CreateCategoryHotel(CategoryHotel CategoryHotel);
-        void EditCategoryHotel(CategoryHotel CategoryHotelToEdit);
+        IEnumerable<CategoryHotels> GetProductCategories();
+        CategoryHotels GetCategoryHotelById(int CategoryHotelId);
+        void CreateCategoryHotel(CategoryHotels CategoryHotel);
+        void EditCategoryHotel(CategoryHotels CategoryHotelToEdit);
         void DeleteProductCategories(int CategoryHotelId);
         void SaveCategoryHotel();
-        IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotel CategoryHotel);
+        IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotels CategoryHotel);
 
     }
     public class CategoryHotelService : ICategoryHotelService
@@ -42,25 +42,25 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<CategoryHotel> GetProductCategories()
+        public IEnumerable<CategoryHotels> GetProductCategories()
         {
             var CategoryHotels = CategoryHotelRepository.GetAll().Where(p => p.Status == true);
             return CategoryHotels;
         }
 
-        public CategoryHotel GetCategoryHotelById(int CategoryHotelId)
+        public CategoryHotels GetCategoryHotelById(int CategoryHotelId)
         {
             var CategoryHotel = CategoryHotelRepository.GetById(CategoryHotelId);
             return CategoryHotel;
         }
 
-        public void CreateCategoryHotel(CategoryHotel CategoryHotel)
+        public void CreateCategoryHotel(CategoryHotels CategoryHotel)
         {
             CategoryHotelRepository.Add(CategoryHotel);
             SaveCategoryHotel();
         }
 
-        public void EditCategoryHotel(CategoryHotel CategoryHotelToEdit)
+        public void EditCategoryHotel(CategoryHotels CategoryHotelToEdit)
         {
             CategoryHotelRepository.Update(CategoryHotelToEdit);
             SaveCategoryHotel();
@@ -82,7 +82,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotel CategoryHotel)
+        public IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotels CategoryHotel)
         {
 
             //    yield return new ValidationResult("CategoryHotel", "ErrorString");

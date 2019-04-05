@@ -12,13 +12,13 @@ namespace Outsourcing.Service
     public interface IVendorService
     {
 
-        IEnumerable<Vendor> GetVendors();
-        Vendor GetVendorById(int VendorId);
-        void CreateVendor(Vendor Vendor);
-        void EditVendor(Vendor VendorToEdit);
+        IEnumerable<Vendors> GetVendors();
+        Vendors GetVendorById(int VendorId);
+        void CreateVendor(Vendors Vendor);
+        void EditVendor(Vendors VendorToEdit);
         void DeleteVendor(int VendorId);
         void SaveVendor();
-        IEnumerable<ValidationResult> CanAddVendor(Vendor Vendor);
+        IEnumerable<ValidationResult> CanAddVendor(Vendors Vendor);
 
     }
     public class VendorService : IVendorService
@@ -38,25 +38,25 @@ namespace Outsourcing.Service
 
         #region BaseMethod
 
-        public IEnumerable<Vendor> GetVendors()
+        public IEnumerable<Vendors> GetVendors()
         {
             var Vendors = VendorRepository.GetAll();
             return Vendors;
         }
 
-        public Vendor GetVendorById(int VendorId)
+        public Vendors GetVendorById(int VendorId)
         {
             var Vendor = VendorRepository.GetById(VendorId);
             return Vendor;
         }
 
-        public void CreateVendor(Vendor Vendor)
+        public void CreateVendor(Vendors Vendor)
         {
             VendorRepository.Add(Vendor);
             SaveVendor();
         }
 
-        public void EditVendor(Vendor VendorToEdit)
+        public void EditVendor(Vendors VendorToEdit)
         {
             VendorRepository.Update(VendorToEdit);
             SaveVendor();
@@ -78,7 +78,7 @@ namespace Outsourcing.Service
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddVendor(Vendor Vendor)
+        public IEnumerable<ValidationResult> CanAddVendor(Vendors Vendor)
         {
 
             //    yield return new ValidationResult("Vendor", "ErrorString");

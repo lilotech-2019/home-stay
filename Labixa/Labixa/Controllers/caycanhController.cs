@@ -111,7 +111,7 @@ namespace Labixa.Controllers
                     continue;
                 }
             }
-            List<Blog> ListBlog = new List<Blog>();
+            List<Blogs> ListBlog = new List<Blogs>();
             IEnumerable<string> list = ListProductUrl;
             foreach (var urlProduct in list.Reverse())
             {
@@ -124,7 +124,7 @@ namespace Labixa.Controllers
                     web = new HtmlWeb();
                     doc = web.Load(urlProduct);
                     Thread.Sleep(500);
-                    Blog item = new Blog();
+                    Blogs item = new Blogs();
                     var id = urlProduct.Split('.').LastOrDefault().ToString().Replace("/", null).Trim();
                     var blog = _blogService.GetBlogs().Where(p => p.Id.Equals(id)).FirstOrDefault();
                     if (blog != null)

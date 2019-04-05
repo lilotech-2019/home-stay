@@ -47,13 +47,13 @@ namespace Labixa.Areas.Admin.Controllers
         public ActionResult Create()
         {
             //Get the list category
-            var Vendor = new Vendor();
+            var Vendor = new Vendors();
             return View(Vendor);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Vendor newVendor)
+        public ActionResult Create(Vendors newVendor)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace Labixa.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Vendor Vendortoedit)
+        public ActionResult Edit(Vendors Vendortoedit)
         {
             if (ModelState.IsValid)
             {

@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
    
-    public class CategoryProduct : BaseEntity
+    public class CategoryProducts : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }

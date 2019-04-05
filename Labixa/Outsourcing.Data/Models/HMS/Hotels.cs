@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
    
-    public class Hotel : BaseEntity
+    public class Hotels : BaseEntity
     {
-        public Hotel()
+        public Hotels()
         {
             DateCreated = DateTime.Now.Date;
             LastEditedTime = DateTime.Now.Date;
@@ -77,7 +80,7 @@ namespace Outsourcing.Data.Models.HMS
         public string string1 { get; set; }
         public int CategoryHotelId { get; set; }
         [ForeignKey("CategoryHotelId")]
-        virtual public CategoryHotel CategoryHotel { get; set; }
+        virtual public CategoryHotels CategoryHotel { get; set; }
         public virtual ICollection<CostOrder> CostOrders { get; set; }
 
     }

@@ -53,7 +53,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hotel = new Hotel
+                var hotel = new Hotels
                 {
                     //Mapping to domain
                     //Hotel = (Hotel)Mapper.Map<HotelModel, Hotel>(newHotel);

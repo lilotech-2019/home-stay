@@ -47,13 +47,13 @@ namespace Labixa.Areas.Admin.Controllers
         public ActionResult Create()
         {
             //Get the list category
-            var Color = new Color();
+            var Color = new Colors();
             return View(Color);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Color newColor)
+        public ActionResult Create(Colors newColor)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace Labixa.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Color Colortoedit)
+        public ActionResult Edit(Colors Colortoedit)
         {
             if (ModelState.IsValid)
             {

@@ -26,8 +26,8 @@ namespace Labixa.Areas.HMSAdmin.Mappings
             //Mapper.CreateMap<Group, GroupsItemViewModel>().ForMember(x => x.CreatedDate, opt => opt.MapFrom(source => source.CreatedDate.ToString("dd MMM yyyy")));
 
             //Mapper.CreateMap<IPagedList<Group>, IPagedList<GroupsItemViewModel>>().ConvertUsing<PagedListConverter<Group, GroupsItemViewModel>>();
-            CreateMap<HotelModel, Hotel>();
-            CreateMap<Room, RoomModel>();
+            CreateMap<HotelModel, Hotels>();
+            CreateMap<Rooms, RoomModel>();
 
             //Mapper.CreateMap<Hotel, HotelModel>().ForMember(x => x.Address, opt => opt.MapFrom(source => source.Address))
             //                                          .ForMember(x => x.CategoryHotelId, opt => opt.MapFrom(source => source.CategoryHotelId))

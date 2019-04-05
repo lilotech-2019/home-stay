@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Outsourcing.Data.Repository.HMS
 {
    
-    public class RoomOrderItemRepository : RepositoryBase<RoomOrderItem>, IRoomOrderItemRepository
+    public class RoomOrderItemRepository : RepositoryBase<RoomOrderItems>, IRoomOrderItemRepository
     {
         public RoomOrderItemRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IRoomOrderItemRepository : IRepository<RoomOrderItem>
+    public interface IRoomOrderItemRepository : IRepository<RoomOrderItems>
     {
 
     }

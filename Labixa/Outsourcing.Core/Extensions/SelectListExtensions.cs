@@ -27,7 +27,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-              this IEnumerable<CategoryHotel> CategoryHotel, int selectedId)
+              this IEnumerable<CategoryHotels> CategoryHotel, int selectedId)
         {
             return
 
@@ -41,7 +41,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-             this IEnumerable<Hotel> Hotels, int selectedId)
+             this IEnumerable<Hotels> Hotels, int selectedId)
         {
             return
 
@@ -55,7 +55,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-             this IEnumerable<Cost> Cost, int selectedId)
+             this IEnumerable<Costs> Cost, int selectedId)
         {
             return
 
@@ -83,7 +83,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-              this IEnumerable<BlogCategory> blogCategory, int selectedId)
+              this IEnumerable<BlogCategories> blogCategory, int selectedId)
         {
             return
 
@@ -97,7 +97,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-            this IEnumerable<Vendor> blogCategory, int selectedId)
+            this IEnumerable<Vendors> blogCategory, int selectedId)
         {
             return
 
@@ -125,7 +125,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-           this IEnumerable<Color> blogCategory, int selectedId)
+           this IEnumerable<Colors> blogCategory, int selectedId)
         {
             return
 

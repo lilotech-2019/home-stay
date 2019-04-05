@@ -13,13 +13,13 @@ namespace Outsourcing.Service
 {
     public interface IWebsiteAttributeService
     {
-        IEnumerable<WebsiteAttribute> GetWebsiteAttributeByType(string type);
-        IEnumerable<WebsiteAttribute> GetWebsiteAttributes();
-        WebsiteAttribute GetWebsiteAttributeById(int websiteAttributeId);
-        WebsiteAttribute GetWebsiteAttributeByName(string Name);
+        IEnumerable<WebsiteAttributes> GetWebsiteAttributeByType(string type);
+        IEnumerable<WebsiteAttributes> GetWebsiteAttributes();
+        WebsiteAttributes GetWebsiteAttributeById(int websiteAttributeId);
+        WebsiteAttributes GetWebsiteAttributeByName(string Name);
 
-        void CreateWebsiteAttribute(WebsiteAttribute websiteAttribute);
-        void EditWebsiteAttribute(WebsiteAttribute websiteAttributeToEdit);
+        void CreateWebsiteAttribute(WebsiteAttributes websiteAttribute);
+        void EditWebsiteAttribute(WebsiteAttributes websiteAttributeToEdit);
         void DeleteWebsiteAttribute(int websiteAttributeId);
         void SaveWebsiteAttribute();
 
@@ -41,30 +41,30 @@ namespace Outsourcing.Service
         }
         #endregion
 
-        public IEnumerable<WebsiteAttribute> GetAvailableCategorys()
+        public IEnumerable<WebsiteAttributes> GetAvailableCategorys()
         {
             var list = _websiteAttributeRepository.GetAll().Where(p=>p.Deleted==true);
             return list;
         }
 
-        public IEnumerable<WebsiteAttribute> GetWebsiteAttributes()
+        public IEnumerable<WebsiteAttributes> GetWebsiteAttributes()
         {
             var list = _websiteAttributeRepository.GetAll().Where(p => p.Deleted == false);
             return list;
         }
 
-        public WebsiteAttribute GetWebsiteAttributeById(int websiteAttributeId)
+        public WebsiteAttributes GetWebsiteAttributeById(int websiteAttributeId)
         {
             var item = _websiteAttributeRepository.Get(p => p.Id == websiteAttributeId);
             return item;
         }
-        public WebsiteAttribute GetWebsiteAttributeByName(string  name)
+        public WebsiteAttributes GetWebsiteAttributeByName(string  name)
         {
             var item = _websiteAttributeRepository.Get(p => p.Name == name);
             return item;
         }
 
-        public void CreateWebsiteAttribute(WebsiteAttribute websiteAttribute)
+        public void CreateWebsiteAttribute(WebsiteAttributes websiteAttribute)
         {
             if (websiteAttribute != null)
             {
@@ -73,7 +73,7 @@ namespace Outsourcing.Service
             }
         }
 
-        public void EditWebsiteAttribute(WebsiteAttribute websiteAttributeToEdit)
+        public void EditWebsiteAttribute(WebsiteAttributes websiteAttributeToEdit)
         {
             if (websiteAttributeToEdit != null)
             {
@@ -96,7 +96,7 @@ namespace Outsourcing.Service
             _unitOfWork.Commit();
         }
 
-        public IEnumerable<WebsiteAttribute> GetWebsiteAttributeByType(string type)
+        public IEnumerable<WebsiteAttributes> GetWebsiteAttributeByType(string type)
         {
             return _websiteAttributeRepository.GetAll().Where(p => p.Type.ToLower().Equals(type.ToLower()));
         }

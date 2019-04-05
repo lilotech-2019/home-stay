@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace Outsourcing.Data.Repository.HMS
 {
   
-    public class CostRepository : RepositoryBase<Cost>, ICostRepository
+    public class CostRepository : RepositoryBase<Costs>, ICostRepository
     {
         public CostRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface ICostRepository : IRepository<Cost>
+    public interface ICostRepository : IRepository<Costs>
     {
 
     }

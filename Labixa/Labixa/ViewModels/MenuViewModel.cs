@@ -8,8 +8,8 @@ namespace Labixa.ViewModels
 {
     public class MenuViewModel
     {
-        public WebsiteAttribute pageLogo { get; set; }
-        public WebsiteAttribute pageTitle { get; set; }
-        public WebsiteAttribute pageSlogan { get; set; }
+        public WebsiteAttributes pageLogo { get; set; }
+        public WebsiteAttributes pageTitle { get; set; }
+        public WebsiteAttributes pageSlogan { get; set; }
     }
 }

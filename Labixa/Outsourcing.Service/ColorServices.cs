@@ -14,13 +14,13 @@ namespace Outsourcing.Service
     public interface IColorService
     {
 
-        IEnumerable<Color> GetColors();
-        Color GetColorById(int ColorId);
-        void CreateColor(Color Color);
-        void EditColor(Color ColorToEdit);
+        IEnumerable<Colors> GetColors();
+        Colors GetColorById(int ColorId);
+        void CreateColor(Colors Color);
+        void EditColor(Colors ColorToEdit);
         void DeleteColor(int ColorId);
         void SaveColor();
-        IEnumerable<ValidationResult> CanAddColor(Color Color);
+        IEnumerable<ValidationResult> CanAddColor(Colors Color);
 
     }
     public class ColorService : IColorService
@@ -40,25 +40,25 @@ namespace Outsourcing.Service
 
         #region BaseMethod
 
-        public IEnumerable<Color> GetColors()
+        public IEnumerable<Colors> GetColors()
         {
             var Colors = ColorRepository.GetAll();
             return Colors;
         }
 
-        public Color GetColorById(int ColorId)
+        public Colors GetColorById(int ColorId)
         {
             var Color = ColorRepository.GetById(ColorId);
             return Color;
         }
 
-        public void CreateColor(Color Color)
+        public void CreateColor(Colors Color)
         {
             ColorRepository.Add(Color);
             SaveColor();
         }
 
-        public void EditColor(Color ColorToEdit)
+        public void EditColor(Colors ColorToEdit)
         {
             ColorRepository.Update(ColorToEdit);
             SaveColor();
@@ -80,7 +80,7 @@ namespace Outsourcing.Service
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddColor(Color Color)
+        public IEnumerable<ValidationResult> CanAddColor(Colors Color)
         {
 
             //    yield return new ValidationResult("Color", "ErrorString");

@@ -55,7 +55,7 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Deposit(Vendor model)
+        public ActionResult Deposit(Vendors model)
         {
             _vendorService.CreateVendor(model);
             return RedirectToAction("Index", "Home");
@@ -83,7 +83,7 @@ namespace Labixa.Controllers
         }
 
 
-        public ActionResult BookingRoom(Cost modelBooking)
+        public ActionResult BookingRoom(Costs modelBooking)
         {
             CostCategory categoryId = new CostCategory();
             modelBooking.CostCategoryId = 1;
@@ -104,14 +104,14 @@ namespace Labixa.Controllers
             // nó sẽ mặc định lấy cái view tên trùng với tên action luôn
 
             //muốn gom model, thì phải khởi tạo model trước ở method get
-            Color model = new Color();
+            Colors model = new Colors();
             return View(model);
         }
 
         //nếu để anotation như vậy thì action này có method là Post
         //khi gom model thì kiểu trả về không còn là mở string xàm nữa, mà là model
         [HttpPost]
-        public ActionResult Contact(Color modelContact)
+        public ActionResult Contact(Colors modelContact)
         {
             //khởi tạo obj Vendor, đổ data
             //create obj vendor

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace Outsourcing.Data.Repository.HMS
 {
   
-    public class CategoryHotelRepository : RepositoryBase<CategoryHotel>, ICategoryHotelRepository
+    public class CategoryHotelRepository : RepositoryBase<CategoryHotels>, ICategoryHotelRepository
     {
         public CategoryHotelRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface ICategoryHotelRepository : IRepository<CategoryHotel>
+    public interface ICategoryHotelRepository : IRepository<CategoryHotels>
     {
 
     }

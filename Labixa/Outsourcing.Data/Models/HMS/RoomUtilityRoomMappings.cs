@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Outsourcing.Data.Models
+namespace Outsourcing.Data.Models.HMS
 {
-    public class ProductAttributeMapping : BaseEntity
+  
+    public class RoomUtilityRoomMappings : BaseEntity
     {
-        public ProductAttributeMapping()
+        public RoomUtilityRoomMappings()
         {
             Value = "Default";
             IsRequired = false;
@@ -20,8 +21,8 @@ namespace Outsourcing.Data.Models
         public int DisplayOrder { get; set; }
         public int ProductId { get; set; }
         public int ProductAttributeId { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual ProductAttribute ProductAttribute { get; set; }
+        public virtual Rooms Room { get; set; }
+        public virtual RoomUtilities RoomUtility { get; set; }
 
     }
 }

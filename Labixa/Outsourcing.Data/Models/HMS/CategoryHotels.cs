@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
-    public class CategoryHotel : BaseEntity
+    public class CategoryHotels : BaseEntity
     {
 
         public string Name { get; set; }
@@ -31,7 +35,7 @@ namespace Outsourcing.Data.Models.HMS
         public bool IsStaticPage { get; set; }
         public string Noted { get; set; }
         public string string1 { get; set; }
-        virtual public ICollection<Hotel> Hotels { get; set; }
+        virtual public ICollection<Hotels> Hotels { get; set; }
 
     }
 }

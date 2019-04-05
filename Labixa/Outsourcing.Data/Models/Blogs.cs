@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public class Blog : BaseEntity
+    public class Blogs : BaseEntity
     {
-        public Blog()
+        public Blogs()
         {
-            DateCreated = DateTime.Now;
-            LastEditedTime = DateTime.Now;
+            this.DateCreated = DateTime.Now;
+            this.LastEditedTime = DateTime.Now;
         }
-
         public string Title { get; set; }
-
-        public string TitleENG { get; set; }
+        public string TitleENG{ get; set; }
 
         /// <summary>
         /// URL  SEO friendly
@@ -48,11 +52,12 @@ namespace Outsourcing.Data.Models
 
         //Get or set the picture of blog
         public int PictureId { get; set; }
-
         public int BlogCategoryId { get; set; }
         public int Position { get; set; }
 
         [ForeignKey("BlogCategoryId")]
-        public virtual BlogCategory BlogCategory { get; set; }
+        virtual public BlogCategories BlogCategory { get; set; }
+
     }
+
 }

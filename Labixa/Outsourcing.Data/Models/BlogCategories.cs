@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public class BlogCategory : BaseEntity
+    public class BlogCategories : BaseEntity
     {
 
         public string Name { get; set; }
@@ -35,10 +41,10 @@ namespace Outsourcing.Data.Models
         /// Is this blog is static Page
         /// </summary>
         public bool IsStaticPage { get; set; }
-        virtual public ICollection<Blog> Blogs { get; set; }
+        virtual public ICollection<Blogs> Blogs { get; set; }
         
         [ForeignKey("CategoryParentId")]
-        virtual public BlogCategory CategoryParent { get; set; }
+        virtual public BlogCategories CategoryParent { get; set; }
     }
 
 }

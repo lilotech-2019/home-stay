@@ -1,6 +1,12 @@
-﻿namespace Outsourcing.Data.Models.HMS
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Outsourcing.Data.Models.HMS
 {
-    public class RoomOrderItem : BaseEntity
+    public class RoomOrderItems : BaseEntity
     {
         public int RoomOrderId { get; set; }
         public int HMSProductId { get; set; }
@@ -14,8 +20,9 @@
         public string Description { get; set; }
 
 
+
         public virtual HMSProduct HMSProduct { get; set; }
-        public virtual RoomOrder RoomOrder { get; set; }
+        public virtual RoomOrders RoomOrder { get; set; }
 
     }
 }

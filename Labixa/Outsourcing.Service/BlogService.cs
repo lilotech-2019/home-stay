@@ -14,28 +14,28 @@ namespace Outsourcing.Service
     public interface IBlogService
     {
 
-        IEnumerable<Blog> GetBlogs();
-        Blog GetBlogContact();
-        IEnumerable<Blog> GetHomePageBlogs();
-        IEnumerable<Blog> GetBlogByCategorySlug(string slug);
-        IEnumerable<Blog> GetBlogByCategoryId(int id);
-        IEnumerable<Blog> Get6BlogService();
-        IEnumerable<Blog> Get2BlogNews();
-        IEnumerable<Blog> Get3BlogNewsNewest();
-        Blog GetBlogById(int blogId);
-        void CreateBlog(Blog blog);
-        void EditBlog(Blog blogToEdit);
+        IEnumerable<Blogs> GetBlogs();
+        Blogs GetBlogContact();
+        IEnumerable<Blogs> GetHomePageBlogs();
+        IEnumerable<Blogs> GetBlogByCategorySlug(string slug);
+        IEnumerable<Blogs> GetBlogByCategoryId(int id);
+        IEnumerable<Blogs> Get6BlogService();
+        IEnumerable<Blogs> Get2BlogNews();
+        IEnumerable<Blogs> Get3BlogNewsNewest();
+        Blogs GetBlogById(int blogId);
+        void CreateBlog(Blogs blog);
+        void EditBlog(Blogs blogToEdit);
         void DeleteBlog(int blogId);
         void SaveBlog();
         IEnumerable<ValidationResult> CanAddBlog(string BlogUrl);
 
-        Blog GetBlogByUrlName(string urlName);
+        Blogs GetBlogByUrlName(string urlName);
 
-        IEnumerable<Blog> GetBlogsByCategory(int blogTypeId);
+        IEnumerable<Blogs> GetBlogsByCategory(int blogTypeId);
 
-        IEnumerable<Blog> GetStaticPage();
-        IEnumerable<Blog> GetNewPost();
-        IEnumerable<Blog> Get3BlogsPosition();
+        IEnumerable<Blogs> GetStaticPage();
+        IEnumerable<Blogs> GetNewPost();
+        IEnumerable<Blogs> Get3BlogsPosition();
     }
     public class BlogService : IBlogService
     {
@@ -53,24 +53,24 @@ namespace Outsourcing.Service
         #endregion
 
         #region Implementation for IBlogService
-        public IEnumerable<Blog> GetBlogs()
+        public IEnumerable<Blogs> GetBlogs()
         {
             var blogs = blogRepository.GetMany(b => !b.BlogCategory.IsStaticPage && !b.Deleted).OrderBy(b => b.Position);
             return blogs;
         }
-        public IEnumerable<Blog> Get3BlogsPosition()
+        public IEnumerable<Blogs> Get3BlogsPosition()
         {
             var blogs = blogRepository.GetMany(b => !b.BlogCategory.IsStaticPage && !b.Deleted).OrderBy(b => b.Position).Take(3);
             return blogs;
         }
-          public IEnumerable<Blog> GetHomePageBlogs()
+          public IEnumerable<Blogs> GetHomePageBlogs()
         {
             var blogs = blogRepository.
                 GetMany(b => !b.BlogCategory.IsStaticPage && !b.Deleted && b.IsHomePage).
                 OrderByDescending(b => b.DateCreated);
             return blogs;
         }
-          public IEnumerable<Blog> GetBlogByCategoryId(int id)
+          public IEnumerable<Blogs> GetBlogByCategoryId(int id)
           {
               var blogs = blogRepository.GetMany(b => !b.BlogCategory.IsStaticPage
                   && b.BlogCategory.Id.Equals(id)
@@ -78,7 +78,7 @@ namespace Outsourcing.Service
                   OrderByDescending(b => b.DateCreated);
               return blogs;
           }
-        public IEnumerable<Blog> GetBlogByCategorySlug(string slug)
+        public IEnumerable<Blogs> GetBlogByCategorySlug(string slug)
         {
             var blogs = blogRepository.GetMany(b => !b.BlogCategory.IsStaticPage 
                 && b.BlogCategory.Slug.Equals(slug)
@@ -86,25 +86,25 @@ namespace Outsourcing.Service
                 OrderByDescending(b => b.DateCreated);
             return blogs;
         }
-        public IEnumerable<Blog> GetStaticPage()
+        public IEnumerable<Blogs> GetStaticPage()
         {
             var blogs = blogRepository.GetMany(b => b.BlogCategory.IsStaticPage && !b.Deleted).OrderByDescending(b => b.DateCreated);
             return blogs;
         }
 
-        public Blog GetBlogById(int blogId)
+        public Blogs GetBlogById(int blogId)
         {
             var blog = blogRepository.GetById(blogId);
             return blog;
         }
 
-        public void CreateBlog(Blog blog)
+        public void CreateBlog(Blogs blog)
         {
             blogRepository.Add(blog);
             SaveBlog();
         }
 
-        public void EditBlog(Blog blogToEdit)
+        public void EditBlog(Blogs blogToEdit)
         {
             blogToEdit.LastEditedTime = DateTime.Now;
             blogRepository.Update(blogToEdit);
@@ -139,29 +139,29 @@ namespace Outsourcing.Service
             }
         }
 
-        public Blog GetBlogByUrlName(string urlName)
+        public Blogs GetBlogByUrlName(string urlName)
         {
             var blog = blogRepository.Get(b => b.Slug == urlName);
             return blog;
         }
 
-        public IEnumerable<Blog> GetBlogsByCategory(int blogTypeId)
+        public IEnumerable<Blogs> GetBlogsByCategory(int blogTypeId)
         {
             var blogs = this.GetBlogs().Where(b => b.BlogCategoryId == blogTypeId);
             return blogs;
         }
 
-        public IEnumerable<Blog> Get6BlogService()
+        public IEnumerable<Blogs> Get6BlogService()
         {
             var blogs = this.GetBlogs().Where(p => p.BlogCategoryId == 6).Take(6);
             return blogs;
         }
-        public IEnumerable<Blog> Get2BlogNews()
+        public IEnumerable<Blogs> Get2BlogNews()
         {
             var blogs = this.GetBlogs().Where(p => p.BlogCategoryId == 3).OrderBy(p => p.Position).Take(2);
             return blogs;
         }
-        public IEnumerable<Blog> Get3BlogNewsNewest()
+        public IEnumerable<Blogs> Get3BlogNewsNewest()
         {
             var blogs = this.GetBlogs().Where(p => p.BlogCategoryId == 3).OrderBy(p=>p.Position).Take(3);
             return blogs;
@@ -169,14 +169,14 @@ namespace Outsourcing.Service
         #endregion
 
 
-        public Blog GetBlogContact()
+        public Blogs GetBlogContact()
         {
             var item = blogRepository.Get(p => p.Slug.Equals("lien-he"));
             return item;
         }
 
 
-        public IEnumerable<Blog> GetNewPost()
+        public IEnumerable<Blogs> GetNewPost()
         {
             return blogRepository.GetAll().Where(p => p.BlogCategoryId == 3).OrderByDescending(p => p.DateCreated).Take(5);
         }

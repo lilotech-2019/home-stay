@@ -52,7 +52,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var room = new Room
+                var room = new Rooms
                 {
                     //Mapping to domain
                     //Room = (Room)Mapper.Map<RoomModel, Room>(newRoom);
@@ -88,14 +88,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _roomService.CreateRoom(room);
                 if (room.RoomImageMappings==null)
                 {
-                    room.RoomImageMappings = new Collection<RoomImageMapping>();
+                    room.RoomImageMappings = new Collection<RoomImageMappings>();
                     for (int i = 0; i < 8; i++)
                     {
-                        var newPic = new RoomImage();
+                        var newPic = new RoomImages();
                         bool ismain = i == 0;
                         _roomImageService.CreateRoomImage(newPic);
                         room.RoomImageMappings.Add(
-                            new RoomImageMapping()
+                            new RoomImageMappings()
                             {
                                 RoomImageId = newPic.Id,
                                 RoomId = room.Id,

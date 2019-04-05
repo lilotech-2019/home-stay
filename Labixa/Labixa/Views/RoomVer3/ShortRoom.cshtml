@@ -1,8 +1,7 @@
-﻿
-@using PagedList.Mvc;
+﻿@using PagedList.Mvc;
 @*khai bao thu vien pagelist*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Room>
-     
+@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Rooms>
+
 @*don nhan du lieu dang IPagedList<Blog>*@
 
 
@@ -10,8 +9,8 @@
 @{
 
     ViewBag.Title = "ShortRoom";
-    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
-    HttpCookie cookie = Request.Cookies["_culture"];
+Layout = "~/Views/Shared/_LayoutHMS.cshtml";
+HttpCookie cookie = Request.Cookies["_culture"];
 }
 
 <section class="row final-inner-header">
@@ -49,41 +48,41 @@
             {
                 if (cookie.Value.Equals("vi"))
                 {
-                     <div class="col-sm-4 nroom-grid">
-                 
+                    <div class="col-sm-4 nroom-grid">
 
-                    <a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="room-img">
 
-                        <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                        <a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="room-img">
 
-                    </a>
-                    <div class="row this-conts">
-                        <div class="media">
-                            <div class="media-body this-title">@iterm.Name</div>
-                            <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
+                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+
+                        </a>
+                        <div class="row this-conts">
+                            <div class="media">
+                                <div class="media-body this-title">@iterm.Name</div>
+                                <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
+                            </div>
+                            <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
                         </div>
-                        <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
                     </div>
-                </div>
                 }
                 else
                 {
-                     <div class="col-sm-4 nroom-grid">
-                    @*<img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">*@
+                    <div class="col-sm-4 nroom-grid">
+                        @*<img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">*@
 
-                    <a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="room-img">
+                        <a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="room-img">
 
-                        <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
 
-                    </a>
-                    <div class="row this-conts">
-                        <div class="media">
-                            <div class="media-body this-title">@iterm.NameENG</div>
-                            <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
+                        </a>
+                        <div class="row this-conts">
+                            <div class="media">
+                                <div class="media-body this-title">@iterm.NameENG</div>
+                                <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
+                            </div>
+                            <p>@Html.Raw(iterm.Temp_1)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                         </div>
-                        <p>@Html.Raw(iterm.Temp_1)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                     </div>
-                </div>
                 }
 
 

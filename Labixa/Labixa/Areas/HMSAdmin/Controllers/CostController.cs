@@ -41,7 +41,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var cost = new Cost();
+                var cost = new Costs();
                 cost = newCost.Cost;
                 cost.IsDelete = false;
                 cost.isImport = false;

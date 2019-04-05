@@ -15,13 +15,13 @@ namespace Outsourcing.Service.HMS
     public interface ICategoryProductService
     {
 
-        IEnumerable<CategoryProduct> GetProductCategories();
-        CategoryProduct GetCategoryProductById(int CategoryProductId);
-        void CreateCategoryProduct(CategoryProduct CategoryProduct);
-        void EditCategoryProduct(CategoryProduct CategoryProductToEdit);
+        IEnumerable<CategoryProducts> GetProductCategories();
+        CategoryProducts GetCategoryProductById(int CategoryProductId);
+        void CreateCategoryProduct(CategoryProducts CategoryProduct);
+        void EditCategoryProduct(CategoryProducts CategoryProductToEdit);
         void DeleteProductCategories(int CategoryProductId);
         void SaveCategoryProduct();
-        IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProduct CategoryProduct);
+        IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts CategoryProduct);
 
     }
     public class CategoryProductService : ICategoryProductService
@@ -41,25 +41,25 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<CategoryProduct> GetProductCategories()
+        public IEnumerable<CategoryProducts> GetProductCategories()
         {
             var CategoryProducts = CategoryProductRepository.GetAll().Where(p => p.Deleted == false);
             return CategoryProducts;
         }
 
-        public CategoryProduct GetCategoryProductById(int CategoryProductId)
+        public CategoryProducts GetCategoryProductById(int CategoryProductId)
         {
             var CategoryProduct = CategoryProductRepository.GetById(CategoryProductId);
             return CategoryProduct;
         }
 
-        public void CreateCategoryProduct(CategoryProduct CategoryProduct)
+        public void CreateCategoryProduct(CategoryProducts CategoryProduct)
         {
             CategoryProductRepository.Add(CategoryProduct);
             SaveCategoryProduct();
         }
 
-        public void EditCategoryProduct(CategoryProduct CategoryProductToEdit)
+        public void EditCategoryProduct(CategoryProducts CategoryProductToEdit)
         {
             CategoryProductRepository.Update(CategoryProductToEdit);
             SaveCategoryProduct();
@@ -81,7 +81,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProduct CategoryProduct)
+        public IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts CategoryProduct)
         {
 
             //    yield return new ValidationResult("CategoryProduct", "ErrorString");
