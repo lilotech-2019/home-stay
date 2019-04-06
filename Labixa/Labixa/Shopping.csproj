@@ -100,6 +100,7 @@
     <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\RoomController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\RoomOrderController.cs" />
     <Compile Include="Areas\HMSAdmin\HMSAdminAreaRegistration.cs" />
@@ -1532,6 +1533,11 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\HMSAdmin\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\Orders\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
