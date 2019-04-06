@@ -33,7 +33,7 @@ Resources.
         <div class="col-xs-12">
             
             <div class="alert alert-block alert-info">
-            @Resources.Admin_Create
+            @Resources.Resources.Admin_Create
             </div>
             @using (Html.BeginForm("Create", "Blog", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -44,13 +44,13 @@ Resources.
                         <li class="active">
                             <a data-toggle="tab" href="#tab1">
                                 <i class="green ace-icon fa fa-home bigger-120"></i>
-                                @Resources.Content
+                                @Resources.Resources.Content
                             </a>
                         </li>
 
                         <li class="">
                             <a data-toggle="tab" href="#tab2">
-                                @Resources.EditSeo
+                                @Resources.Resources.EditSeo
                             </a>
                         </li>
                     </ul>

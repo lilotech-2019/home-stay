@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Resources;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
-using Labixa.App_Data;
 using Labixa.Areas.Admin.ViewModel;
 using Labixa.Helpers;
 
@@ -28,13 +24,14 @@ namespace Labixa.Areas.Admin.Controllers
 
             XmlNodeList loRoot = loResource.SelectNodes(
                 "root/data");
-            foreach (XmlNode item in loRoot)
-            {
-                ResourcesFormModel obj = new ResourcesFormModel();
-                obj.Name = item.InnerText;
-                obj.Value = item.SelectSingleNode("data/value").Value;
-                obj.Value = item.InnerXml;
-            }
+            if (loRoot != null)
+                foreach (XmlNode item in loRoot)
+                {
+                    ResourcesFormModel obj = new ResourcesFormModel();
+                    obj.Name = item.InnerText;
+                    obj.Value = item.SelectSingleNode("data/value")?.Value;
+                    obj.Value = item.InnerXml;
+                }
             return View();
         }
 
@@ -63,7 +60,7 @@ namespace Labixa.Areas.Admin.Controllers
             #endregion
 
             //ResourceSet resourceSet =
-              //  Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            //  Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             //ResXResourceReader read = new ResXResourceReader(AppDomain.CurrentDomain.BaseDirectory + "Resources.en.resx");
             List<ResourcesFormModel> listResource = new List<ResourcesFormModel>();
             //foreach (DictionaryEntry entry in resourceSet)
@@ -89,7 +86,7 @@ namespace Labixa.Areas.Admin.Controllers
             //// listr.AddResource("abc", "Truong Long");
             // listr.Generate();
             // listr.Close();
-            clearCookie();
+            ClearCookie();
             return View();
         }
 
@@ -103,18 +100,18 @@ namespace Labixa.Areas.Admin.Controllers
             loResource.Load(Server.MapPath("~/Resources.vi.resx"));
 
             XmlNode loRoot = loResource.SelectSingleNode(
-                string.Format("root/data[@name='{0}']/value", key));
+                $"root/data[@name='{key}']/value");
 
             if (loRoot != null)
             {
                 loRoot.InnerText = value;
                 loResource.Save(Server.MapPath("~/Resources.vi.resx"));
             }
-            clearCookie();
+            ClearCookie();
             return RedirectToAction("Index");
         }
 
-        void clearCookie()
+        private void ClearCookie()
         {
             #region [Get Language and set Cookies]
 

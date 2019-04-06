@@ -120,4 +120,7 @@
   <data name="TitleRequired" xml:space="preserve">
     <value>Vui lòng nhập tiêu đề</value>
   </data>
+  <data name="ApplicationDbContext_Commit___Property____0____Error____1__" xml:space="preserve">
+    <value>- Property: "{0}", Error: "{1}"</value>
+  </data>
 </root>

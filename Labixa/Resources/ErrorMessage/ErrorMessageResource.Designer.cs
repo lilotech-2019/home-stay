@@ -61,6 +61,15 @@ namespace Resources.ErrorMessage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - Property: &quot;{0}&quot;, Error: &quot;{1}&quot;.
+        /// </summary>
+        public static string ApplicationDbContext_Commit___Property____0____Error____1__ {
+            get {
+                return ResourceManager.GetString("ApplicationDbContext_Commit___Property____0____Error____1__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tiêu đề.
         /// </summary>
         public static string TitleRequired {
