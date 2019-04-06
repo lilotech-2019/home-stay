@@ -2,15 +2,14 @@
 {
 public class DatabaseFactory : Disposable, IDatabaseFactory
 {
-    private ApplicationDbContext dataContext;
+    private ApplicationDbContext _dataContext;
     public ApplicationDbContext Get()
     {
-        return dataContext ?? (dataContext = new ApplicationDbContext());
+        return _dataContext ?? (_dataContext = new ApplicationDbContext());
     }
     protected override void DisposeCore()
     {
-        if (dataContext != null)
-            dataContext.Dispose();
+        _dataContext?.Dispose();
     }
 }
 }

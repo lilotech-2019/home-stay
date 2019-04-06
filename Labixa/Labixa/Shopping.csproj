@@ -103,6 +103,7 @@
     <Compile Include="Areas\HMSAdmin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\RoomController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\RoomOrderController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\RoomOrdersController.cs" />
     <Compile Include="Areas\HMSAdmin\HMSAdminAreaRegistration.cs" />
     <Compile Include="Areas\HMSAdmin\Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Areas\HMSAdmin\Mappings\DomainToViewModelMappingProfile.cs" />
@@ -1538,6 +1539,11 @@
     <Content Include="Areas\HMSAdmin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Create.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Delete.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Details.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

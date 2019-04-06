@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
-
     public class RoomOrders : BaseEntity
     {
         public RoomOrders()
         {
             DateCreated = DateTime.Now;
+            ShipmentId = 0;
         }
+
         public string CustomerName { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerPhone { get; set; }
         public string CustomerEmail { get; set; }
         public int CustomeNumber { get; set; }
+
         /// <summary>
         /// the final payment to customer pay 
         /// </summary>
         public double? TotalPayment_CheckOut { get; set; }
+
         /// <summary>
         /// just count total of booking room, not include sum of service and other
         /// </summary>
         public double? TotalPaymentRoom_DraftCheckIn { get; set; }
-        public int? Status { get; set; }
+
+        public int Status { get; set; }
         public int? ShipmentId { get; set; }
-        public Double? ShipmentFee { get; set; }
+        public double? ShipmentFee { get; set; }
         public bool Deleted { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? Deadline { get; set; }
@@ -50,12 +51,12 @@ namespace Outsourcing.Data.Models.HMS
         public double TotalBookPrice { get; set; }
         public string Note { get; set; }
         public string Description { get; set; }
-        public string DescriptionEN { get; set; }
+
         public virtual ICollection<RoomOrderItems> RoomOrderItems { get; set; }
 
-        public int RoomId { get; set; }
+        public int? RoomId { get; set; }
 
         [ForeignKey("RoomId")]
-        virtual public Rooms Room { get; set; }
+        public virtual Rooms Room { get; set; }
     }
 }

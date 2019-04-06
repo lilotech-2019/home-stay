@@ -8,6 +8,8 @@ namespace Outsourcing.Data.Models
         public Order()
         {
             DateCreated = DateTime.Now;
+            Deadline = DateTime.Now;
+    
         }
 
         public string CustomerName { get; set; }

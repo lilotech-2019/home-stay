@@ -1,0 +1,274 @@
+﻿@model Outsourcing.Data.Models.HMS.RoomOrders
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RoomOrders</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPayment_CheckOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPayment_CheckOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPaymentRoom_DraftCheckIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPaymentRoom_DraftCheckIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Motobike)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Motobike)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookCar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookCar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Tour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Tour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_BBQService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_BBQService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Gift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Gift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Laundry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Laundry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_FlightTicket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_FlightTicket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Visa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Visa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_Taxi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_Taxi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_SuggestionTour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_SuggestionTour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book_RegisterResidence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book_RegisterResidence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherBookService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherBookService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_DescriptionBook_Noted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_DescriptionBook_Noted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBookPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBookPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

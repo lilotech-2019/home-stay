@@ -43,7 +43,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.ShipmentId = new SelectList(_shipmentService.GetShipments(), "Id", "Note");
-            return View();
+            return View(new Order());
         }
 
         [HttpPost]
