@@ -1,6 +1,4 @@
-﻿
-
-@model IEnumerable<Outsourcing.Data.Models.HMS.RoomOrders>
+﻿@model IEnumerable<Outsourcing.Data.Models.HMS.RoomOrders>
 @Scripts.Render("~/Content/dataTable")
 
 @{
@@ -24,20 +22,24 @@
                         @Html.DisplayNameFor(model => model.Room.Name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CustomerName)
+                        @Html.DisplayNameFor(model => model.CheckIn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Deadline)
                     </th>
 
                     <th>
-                        @Html.DisplayNameFor(model => model.CustomerPhone)
+                        @Html.DisplayNameFor(model => model.CustomerName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CustomerEmail)
+                        @Html.DisplayNameFor(model => model.CustomerPhone)
                     </th>
+
                     <th>
                         @Html.DisplayNameFor(model => model.TotalPayment_CheckOut)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalPaymentRoom_DraftCheckIn)
+                        Total Draff
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
@@ -47,45 +49,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ShipmentFee)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Deadline)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CheckIn)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Motobike)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BookCar)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Tour)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_BBQService)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Gift)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Laundry)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_FlightTicket)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Visa)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_Taxi)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_SuggestionTour)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Book_RegisterResidence)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.OtherBookService)
@@ -102,6 +65,7 @@
 
                     <th></th>
                 </tr>
+
             </thead>
 
             <tbody>
@@ -111,22 +75,24 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td rowspan="4">
                             @Html.DisplayFor(modelItem => item.Room.Name)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Deadline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckIn)
+                        </td>
+
+                        <td>
                             @Html.DisplayFor(modelItem => item.CustomerName)
                         </td>
-                    
+
                         <td>
                             @Html.DisplayFor(modelItem => item.CustomerPhone)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CustomerEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CustomeNumber)
-                        </td>
+
                         <td>
                             @Html.DisplayFor(modelItem => item.TotalPayment_CheckOut)
                         </td>
@@ -142,51 +108,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ShipmentFee)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Deleted)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Deadline)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CheckIn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Motobike)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BookCar)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Tour)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_BBQService)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Gift)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Laundry)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_FlightTicket)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Visa)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_Taxi)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_SuggestionTour)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Book_RegisterResidence)
-                        </td>
+
                         <td>
                             @Html.DisplayFor(modelItem => item.OtherBookService)
                         </td>
@@ -202,11 +124,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
-                   
-                        <td>
+
+                        <td rowspan="4">
                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 
-                                <a href="Edit/@item.Id" class="btn btn-xs btn-info">
+                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
                                     <i class="icon-edit bigger-120"></i>
                                 </a>
                                 <a href="#" class="btn btn-xs btn-danger">
@@ -215,12 +137,209 @@
                             </div>
                         </td>
                     </tr>
+                 
+                    <tr>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-motorcycle" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-car" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                        Book Tour
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-fire" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-ticket" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                         book visa
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-taxi" aria-hidden="true"></i>
+
+                        </th>
+                        <th class="center" style="background: cyan">
+Suggest Tour
+
+                        </th>
+                        <th class="center" style="background: cyan">
+
+                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+
+                        </th>
+                    </tr>
+                    <tr style="text-align: center">
+
+                        @{
+                            if (item.Book_Motobike)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+
+                            if (item.BookCar)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+
+                            if (item.Book_Tour)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_BBQService)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Gift)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Laundry)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_FlightTicket)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Visa)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Taxi)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_SuggestionTour)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_RegisterResidence)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+
+                        }
+
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-
 
 
 <script>

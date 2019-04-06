@@ -41,7 +41,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(new RoomOrders());
         }
 
-     [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RoomOrders roomOrders)
         {
@@ -72,12 +72,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(roomOrders);
         }
 
-        // POST: /HMSAdmin/RoomOrders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,CustomerName,CustomerAddress,CustomerPhone,CustomerEmail,CustomeNumber,TotalPayment_CheckOut,TotalPaymentRoom_DraftCheckIn,Status,ShipmentId,ShipmentFee,Deleted,DateCreated,Deadline,CheckIn,Book_Motobike,BookCar,Book_Tour,Book_BBQService,Book_Gift,Book_Laundry,Book_FlightTicket,Book_Visa,Book_Taxi,Book_SuggestionTour,Book_RegisterResidence,OtherBookService,Total_DescriptionBook_Noted,TotalBookPrice,Note,Description,DescriptionEN,RoomId")] RoomOrders roomOrders)
+        public async Task<ActionResult> Edit(RoomOrders roomOrders)
         {
             if (ModelState.IsValid)
             {
