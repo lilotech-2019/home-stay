@@ -1032,5 +1032,12 @@ namespace Labixa.App_Data
                 return ResourceManager.GetString("HMS_Close", resourceCulture);
             }
         }
+        public static string HMS_footerExpartService
+        {
+            get
+            {
+                return ResourceManager.GetString("HMS_footerExpartService", resourceCulture);
+            }
+        }
     }
 }

@@ -220,12 +220,12 @@
                     <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
                         <div class="ro-img"><img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive"></div>
                         <div class="ro-txt">
-                            <div class="left-h pull-left">
+                            <div class="left-h pull-left"  style="padding-bottom:15px">
                                 <p>@iterm.Name</p>
                             </div>
-                            <div class="right-p pull-right">
-                                <p>$@iterm.Price.ToString("#,##0")<span>Ngày</span></p>
-                            </div>
+                            @*<div class="right-p pull-right">
+                                <p></p>
+                            </div>*@
                         </div>
                     </a>
                 </div>
@@ -238,12 +238,12 @@ else
                 <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
                     <div class="ro-img"><img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive"></div>
                     <div class="ro-txt">
-                        <div class="left-h pull-left">
+                        <div class="left-h pull-left" style="padding-bottom:15px">
                             <p>@iterm.NameENG</p>
                         </div>
-                        <div class="right-p pull-right">
-                            <p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<span>Day</span></p>
-                        </div>
+                        @*<div class="right-p pull-right" >
+                            <p></p>
+                        </div>*@
                     </div>
                 </a>
             </div>
@@ -298,136 +298,7 @@ else
 </div>
 <!-- Know About Us style-->
 <!-- Our Resort Values style-->
-<section class="container clearfix common-pad our-res">
-    <div class="row">
-        <div class="col-md-4 col-sm-4 pull-left spa-offer">
-            <div class="img_holder">
-                <img src="~/Content/HMS/images/our-resort/1.jpg" alt="" class="img-responsive">
-                <div class="overlay" style="display:none;">
-                    <div class="room-ad-cont">
-                        <!-- <h2>25% <span>off</span></h2> -->
-                        <h3>
-                            <span>Weeken Spa Offer</span></h3>
-                            <p>Enjoy a luxurious SPA weekend dedicated to helping you unwind.</p><a href="booking.html">
-                                Read
-                                more
-                            </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8 col-sm-8">
-            <div class="left-pad">
-                <div class="sec-header">
-                    <h2>@Html.Raw(Resources.HMS_OurServiceValues)</h2>
-                    <h3>Pick a room that best suits your taste and budget</h3>
-                </div>
-                <div class="tab-title-box">
-                    <ul role="tablist" class="clearfix">
-                        <li data-tab-name="quality" class="active">
-                            <a href="#quality" aria-controls="quality" role="tab"
-                               data-toggle="tab">Quality</a>
-                        </li>
-                        <li data-tab-name="ourvision">
-                            <a href="#ourvision" aria-controls="ourvision" role="tab"
-                               data-toggle="tab">Our vision</a>
-                        </li>
-                        <li data-tab-name="success">
-                            <a href="#success" aria-controls="success" role="tab"
-                               data-toggle="tab">Success</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tab-content-box tab-content">
-                    <div id="quality" class="single-tab-content tab-pane fade in active row">
-                        <div class="col-md-12">
-                            <div class="content-box">
-                                <h2>@Html.Raw(Resources.HMS_HomestayQuality)</h2>
-                                <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
-                                </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="ourvision" class="single-tab-content tab-pane fade row">
-                        <div class="col-md-12">
-                            <div class="content-box">
-                                <h2>@Html.Raw(Resources.HMS_ResortQuality)</h2>
-                                <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
-                                </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="success" class="single-tab-content tab-pane fade row">
-                        <div class="col-md-12">
-                            <div class="content-box">
-                                <h2>@Html.Raw(Resources.HMS_ResortQuality)</h2>
-                                <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
-                                </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- Our Resort Values style-->
 <section class="clearfix news-wrapper">
     <section class="container clearfix common-pad">

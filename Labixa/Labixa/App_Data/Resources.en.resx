@@ -310,7 +310,7 @@
     <value>Home</value>
   </data>
   <data name="HMS_LongRoom" xml:space="preserve">
-    <value>EXPART SERVICES</value>
+    <value>Expart Service</value>
   </data>
   <data name="HMS_News" xml:space="preserve">
     <value>News</value>
@@ -464,5 +464,8 @@
   </data>
   <data name="HMS_TypeForRent" xml:space="preserve">
     <value>Type for rent</value>
+  </data>
+  <data name="HMS_footerExpartService" xml:space="preserve">
+    <value>Expart Services</value>
   </data>
 </root>

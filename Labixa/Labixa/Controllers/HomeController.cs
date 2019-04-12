@@ -104,14 +104,14 @@ namespace Labixa.Controllers
             // nó sẽ mặc định lấy cái view tên trùng với tên action luôn
 
             //muốn gom model, thì phải khởi tạo model trước ở method get
-            Colors model = new Colors();
-            return View(model);
+            //Colors model = new Colors();
+            return View();
         }
 
         //nếu để anotation như vậy thì action này có method là Post
         //khi gom model thì kiểu trả về không còn là mở string xàm nữa, mà là model
         [HttpPost]
-        public ActionResult Contact(Colors modelContact)
+        public ActionResult ContactBookingRooom(Colors modelContact)
         {
             //khởi tạo obj Vendor, đổ data
             //create obj vendor
