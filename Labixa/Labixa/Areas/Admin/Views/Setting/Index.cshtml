@@ -1,0 +1,22 @@
+﻿@using Resources
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="padding: 5px">
+
+                @{
+                    foreach (var i in LanguageMang.AvailableLanguages)
+                    {
+                        @Html.ActionLink(i.LanguageFullName, "ChangeLanguage", "Setting", new {lang = i.LanguageCultureName}, null)
+                        <text> </text>
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
