@@ -10,7 +10,7 @@ using Outsourcing.Data.Models;
 //using FluentValidation.Mvc;
 //using FluentValidation.Validators;
 //using FluentValidation;
-using Labixa.App_Data;
+
 
 namespace Labixa.Areas.Admin.ViewModel
 {

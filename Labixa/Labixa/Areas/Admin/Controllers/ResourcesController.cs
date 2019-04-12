@@ -6,7 +6,7 @@ using System.Resources;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
-using Labixa.App_Data;
+
 using Labixa.Areas.Admin.ViewModel;
 using Labixa.Helpers;
 
