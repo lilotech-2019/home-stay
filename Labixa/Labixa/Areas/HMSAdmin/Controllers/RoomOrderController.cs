@@ -21,10 +21,10 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public RoomOrderController(IRoomService roomService,
          IHotelService hotelService, IRoomOrderItemService roomOrderItemService, IRoomOrderService roomOrderService)
         {
-            this._hotelService = hotelService;
-            this._roomOrderItemService = roomOrderItemService;
-            this._roomService = roomService;
-            this._roomOrderService = roomOrderService;
+            _hotelService = hotelService;
+            _roomOrderItemService = roomOrderItemService;
+            _roomService = roomService;
+            _roomOrderService = roomOrderService;
         }
         //
         // GET: /HMSAdmin/RoomOrder/

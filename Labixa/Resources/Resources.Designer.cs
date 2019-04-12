@@ -296,6 +296,510 @@ namespace Labixa.App_Data
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giới Thiệu.
+        /// </summary>
+        public static string HMS_AboutUs {
+            get {
+                return ResourceManager.GetString("HMS_AboutUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to địa chỉ cho thuê.
+        /// </summary>
+        public static string HMS_AddressforRent {
+            get {
+                return ResourceManager.GetString("HMS_AddressforRent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Người Lớn.
+        /// </summary>
+        public static string HMS_Adult {
+            get {
+                return ResourceManager.GetString("HMS_Adult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Airport Taxi.
+        /// </summary>
+        public static string HMS_AirportTaxi {
+            get {
+                return ResourceManager.GetString("HMS_AirportTaxi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Air Ticket.
+        /// </summary>
+        public static string HMS_AirTicket {
+            get {
+                return ResourceManager.GetString("HMS_AirTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dịch vụ BBQ.
+        /// </summary>
+        public static string HMS_BBQ {
+            get {
+                return ResourceManager.GetString("HMS_BBQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiện ích.
+        /// </summary>
+        public static string HMS_Benefit {
+            get {
+                return ResourceManager.GetString("HMS_Benefit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to chi tiết tin tức.
+        /// </summary>
+        public static string HMS_BlogDetail {
+            get {
+                return ResourceManager.GetString("HMS_BlogDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tin Nổi Bật.
+        /// </summary>
+        public static string HMS_BlogNew {
+            get {
+                return ResourceManager.GetString("HMS_BlogNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Booking.
+        /// </summary>
+        public static string HMS_Booking {
+            get {
+                return ResourceManager.GetString("HMS_Booking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xe Hơi 4,7,16 chỗ.
+        /// </summary>
+        public static string HMS_Cars {
+            get {
+                return ResourceManager.GetString("HMS_Cars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string HMS_Category {
+            get {
+                return ResourceManager.GetString("HMS_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trẻ Em.
+        /// </summary>
+        public static string HMS_Children {
+            get {
+                return ResourceManager.GetString("HMS_Children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đóng.
+        /// </summary>
+        public static string HMS_Close {
+            get {
+                return ResourceManager.GetString("HMS_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liên Hệ.
+        /// </summary>
+        public static string HMS_Contact {
+            get {
+                return ResourceManager.GetString("HMS_Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ký Gởi.
+        /// </summary>
+        public static string HMS_Deposit {
+            get {
+                return ResourceManager.GetString("HMS_Deposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string HMS_Email {
+            get {
+                return ResourceManager.GetString("HMS_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ngày về.
+        /// </summary>
+        public static string HMS_EndDate {
+            get {
+                return ResourceManager.GetString("HMS_EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expart Services.
+        /// </summary>
+        public static string HMS_footerExpartService {
+            get {
+                return ResourceManager.GetString("HMS_footerExpartService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to địa chỉ.
+        /// </summary>
+        public static string HMS_GETINTOUCH {
+            get {
+                return ResourceManager.GetString("HMS_GETINTOUCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trang chủ.
+        /// </summary>
+        public static string HMS_Home {
+            get {
+                return ResourceManager.GetString("HMS_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home About Us.
+        /// </summary>
+        public static string HMS_HomeAbouUs {
+            get {
+                return ResourceManager.GetString("HMS_HomeAbouUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homestay Quality.
+        /// </summary>
+        public static string HMS_HomestayQuality {
+            get {
+                return ResourceManager.GetString("HMS_HomestayQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giặt Ủi.
+        /// </summary>
+        public static string HMS_Laundry {
+            get {
+                return ResourceManager.GetString("HMS_Laundry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to location.
+        /// </summary>
+        public static string HMS_Location {
+            get {
+                return ResourceManager.GetString("HMS_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EXPART SERVICES.
+        /// </summary>
+        public static string HMS_LongRoom {
+            get {
+                return ResourceManager.GetString("HMS_LongRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tin Nhắn.
+        /// </summary>
+        public static string HMS_Message {
+            get {
+                return ResourceManager.GetString("HMS_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Họ Và Tên.
+        /// </summary>
+        public static string HMS_Name {
+            get {
+                return ResourceManager.GetString("HMS_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tin Tức và Sự Kiện.
+        /// </summary>
+        public static string HMS_NewAndEvent {
+            get {
+                return ResourceManager.GetString("HMS_NewAndEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cẩm Nang Du Lịch.
+        /// </summary>
+        public static string HMS_News {
+            get {
+                return ResourceManager.GetString("HMS_News", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our Service Values.
+        /// </summary>
+        public static string HMS_OurServiceValues {
+            get {
+                return ResourceManager.GetString("HMS_OurServiceValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to số người.
+        /// </summary>
+        public static string HMS_PeopleNumber {
+            get {
+                return ResourceManager.GetString("HMS_PeopleNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số Điện Thoại.
+        /// </summary>
+        public static string HMS_Phone {
+            get {
+                return ResourceManager.GetString("HMS_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to giá cho thuê.
+        /// </summary>
+        public static string HMS_PriceForRent {
+            get {
+                return ResourceManager.GetString("HMS_PriceForRent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to link nhanh.
+        /// </summary>
+        public static string HMS_QUICKLINKS {
+            get {
+                return ResourceManager.GetString("HMS_QUICKLINKS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to thuê xe.
+        /// </summary>
+        public static string HMS_RentVerhical {
+            get {
+                return ResourceManager.GetString("HMS_RentVerhical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Homestay Quality.
+        /// </summary>
+        public static string HMS_ResortQuality {
+            get {
+                return ResourceManager.GetString("HMS_ResortQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room Detail.
+        /// </summary>
+        public static string HMS_RoomDetail {
+            get {
+                return ResourceManager.GetString("HMS_RoomDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rooms And Suits.
+        /// </summary>
+        public static string HMS_Rooms {
+            get {
+                return ResourceManager.GetString("HMS_Rooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gửi.
+        /// </summary>
+        public static string HMS_Send {
+            get {
+                return ResourceManager.GetString("HMS_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send a message.
+        /// </summary>
+        public static string HMS_SendMessage {
+            get {
+                return ResourceManager.GetString("HMS_SendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đặt Phòng/Nguyên Căn.
+        /// </summary>
+        public static string HMS_ShortRoom {
+            get {
+                return ResourceManager.GetString("HMS_ShortRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quà lưu niệm.
+        /// </summary>
+        public static string HMS_Souvenir {
+            get {
+                return ResourceManager.GetString("HMS_Souvenir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ngày đến.
+        /// </summary>
+        public static string HMS_StartDate {
+            get {
+                return ResourceManager.GetString("HMS_StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to bắt đầu.
+        /// </summary>
+        public static string HMS_StartForm {
+            get {
+                return ResourceManager.GetString("HMS_StartForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to loại hình cho thuê.
+        /// </summary>
+        public static string HMS_TypeForRent {
+            get {
+                return ResourceManager.GetString("HMS_TypeForRent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bàn Là.
+        /// </summary>
+        public static string HMS_Utility_Iron {
+            get {
+                return ResourceManager.GetString("HMS_Utility_Iron", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bếp.
+        /// </summary>
+        public static string HMS_Utility_Kitchen {
+            get {
+                return ResourceManager.GetString("HMS_Utility_Kitchen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bánh.
+        /// </summary>
+        public static string HMS_Utility_Snack {
+            get {
+                return ResourceManager.GetString("HMS_Utility_Snack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tee / Cooffe.
+        /// </summary>
+        public static string HMS_Utility_TeaCoffee {
+            get {
+                return ResourceManager.GetString("HMS_Utility_TeaCoffee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Máy Giặt.
+        /// </summary>
+        public static string HMS_Utility_WashMachine {
+            get {
+                return ResourceManager.GetString("HMS_Utility_WashMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Máy Sấy tóc.
+        /// </summary>
+        public static string HMS_UtilityDryHair {
+            get {
+                return ResourceManager.GetString("HMS_UtilityDryHair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nước nóng.
+        /// </summary>
+        public static string HMS_UtilityHotWater {
+            get {
+                return ResourceManager.GetString("HMS_UtilityHotWater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ti vi.
+        /// </summary>
+        public static string HMS_UtilityTivi {
+            get {
+                return ResourceManager.GetString("HMS_UtilityTivi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tủ đồ.
+        /// </summary>
+        public static string HMS_UtilityTuDo {
+            get {
+                return ResourceManager.GetString("HMS_UtilityTuDo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Da Lat Amazing.
+        /// </summary>
+        public static string HMS_Welcome {
+            get {
+                return ResourceManager.GetString("HMS_Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trang Chủ.
         /// </summary>
         public static string Home {
@@ -346,6 +850,15 @@ namespace Labixa.App_Data
         public static string LabixaBoat {
             get {
                 return ResourceManager.GetString("LabixaBoat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tour Tổ Chức Dài Ngày.
+        /// </summary>
+        public static string LongTour {
+            get {
+                return ResourceManager.GetString("LongTour", resourceCulture);
             }
         }
         
@@ -594,7 +1107,7 @@ namespace Labixa.App_Data
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VIDEO.
+        ///   Looks up a localized string similar to Phóng Sự Về Labixa.
         /// </summary>
         public static string Video {
             get {

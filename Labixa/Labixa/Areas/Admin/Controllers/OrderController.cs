@@ -10,26 +10,25 @@ namespace Labixa.Areas.Admin.Controllers
 {
     public class OrderController : Controller
     {
-        private OutsourcingEntities db = new OutsourcingEntities();
-
         #region Field
+
         readonly IOrderService _orderService;
 
-        readonly IOrderItemService _orderItemService;
         #endregion
 
         #region Ctor
-        public OrderController(IOrderService orderService, IOrderItemService orderItemService)
+
+        public OrderController(IOrderService orderService, IOrderItemService orderItemService, ApplicationDbContext db)
         {
             _orderService = orderService;
-            _orderItemService = orderItemService;
         }
+
         #endregion
 
         public ActionResult Index()
         {
             var orders = _orderService.GetOrders();
-            return View(model: orders);
+            return View(orders);
         }
 
         public ActionResult Create()
@@ -46,8 +45,9 @@ namespace Labixa.Areas.Admin.Controllers
             {
                 Order order = Mapper.Map<OrderFormModel, Order>(newOrder);
                 _orderService.CreateOrder(order);
-                return continueEditing ? RedirectToAction("Edit", "Order", new { id = order.Id })
-                                : RedirectToAction("Index", "Order");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Order", new { id = order.Id })
+                    : RedirectToAction("Index", "Order");
             }
             return View("Create", newOrder);
         }
@@ -56,7 +56,7 @@ namespace Labixa.Areas.Admin.Controllers
         {
             var order = _orderService.GetOrderById(orderId);
             OrderFormModel orderFormModel = Mapper.Map<Order, OrderFormModel>(order);
-            return View(model: orderFormModel);
+            return View(orderFormModel);
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
@@ -67,8 +67,9 @@ namespace Labixa.Areas.Admin.Controllers
             {
                 var order = Mapper.Map<OrderFormModel, Order>(newOrder);
                 _orderService.EditOrder(order);
-                return continueEditing ? RedirectToAction("Edit", "Order", new { id = order.Id })
-                 : RedirectToAction("Index", "Order");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Order", new { id = order.Id })
+                    : RedirectToAction("Index", "Order");
             }
             return View("Edit", newOrder);
         }

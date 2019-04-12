@@ -41,7 +41,7 @@ namespace Labixa
                 .Where(t => t.Name.EndsWith("Authentication"))
                 .AsImplementedInterfaces().InstancePerRequest();
 
-            builder.Register(c => new UserManager<User>(new UserStore<User>(new OutsourcingEntities())))
+            builder.Register(c => new UserManager<User>(new UserStore<User>(new ApplicationDbContext())))
                 .As<UserManager<User>>().InstancePerRequest();
             builder.RegisterFilterProvider();
             var container = builder.Build();

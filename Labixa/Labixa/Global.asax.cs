@@ -4,6 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Outsourcing.Data;
 using Outsourcing.Data.Migrations;
+
 //using FluentValidation.Mvc;
 namespace Labixa
 {
@@ -16,13 +17,14 @@ namespace Labixa
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-           // System.Data.Entity.Database.SetInitializer(new OutsourcingSampleData());//
-            //System.Data.Entity.Database.SetInitializer<OutsourcingEntities>(null);
+            // System.Data.Entity.Database.SetInitializer(new OutsourcingSampleData());//
+            // System.Data.Entity.Database.SetInitializer<OutsourcingEntities>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Bootstrapper.Run();
+
             // Auto update db to latest.
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             using (var context = new ApplicationDbContext())

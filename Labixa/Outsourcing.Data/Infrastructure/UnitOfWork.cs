@@ -2,18 +2,15 @@
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDatabaseFactory databaseFactory;
-        private OutsourcingEntities dataContext;
+        private readonly IDatabaseFactory _databaseFactory;
+        private ApplicationDbContext _dataContext;
 
         public UnitOfWork(IDatabaseFactory databaseFactory)
         {
-            this.databaseFactory = databaseFactory;
+            _databaseFactory = databaseFactory;
         }
 
-        protected OutsourcingEntities DataContext
-        {
-            get { return dataContext ?? (dataContext = databaseFactory.Get()); }
-        }
+        protected ApplicationDbContext DataContext => _dataContext ?? (_dataContext = _databaseFactory.Get());
 
         public void Commit()
         {

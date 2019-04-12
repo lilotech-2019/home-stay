@@ -311,6 +311,7 @@
   </data>
   <data name="HMS_Home" xml:space="preserve">
     <value>Trang chủ</value>
+    <comment>HMS_Home</comment>
   </data>
   <data name="HMS_LongRoom" xml:space="preserve">
     <value>EXPART SERVICES</value>
