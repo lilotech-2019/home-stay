@@ -14,13 +14,13 @@ namespace Outsourcing.Service.HMS
     public interface IRoomOrderItemService
     {
 
-        IEnumerable<RoomOrderItems> GetRoomOrderItems();
-        RoomOrderItems GetRoomOrderItemById(int RoomOrderItemId);
-        void CreateRoomOrderItem(RoomOrderItems RoomOrderItem);
-        void EditRoomOrderItem(RoomOrderItems RoomOrderItemToEdit);
+        IEnumerable<RoomOrderItem> GetRoomOrderItems();
+        RoomOrderItem GetRoomOrderItemById(int RoomOrderItemId);
+        void CreateRoomOrderItem(RoomOrderItem RoomOrderItem);
+        void EditRoomOrderItem(RoomOrderItem roomOrderItemToEdit);
         void DeleteRoomOrderItem(int RoomOrderItemId);
         void SaveRoomOrderItem();
-        IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItems RoomOrderItem);
+        IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem RoomOrderItem);
 
     }
     public class RoomOrderItemService : IRoomOrderItemService
@@ -40,27 +40,27 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<RoomOrderItems> GetRoomOrderItems()
+        public IEnumerable<RoomOrderItem> GetRoomOrderItems()
         {
             var RoomOrderItems = RoomOrderItemRepository.GetAll();
             return RoomOrderItems;
         }
 
-        public RoomOrderItems GetRoomOrderItemById(int RoomOrderItemId)
+        public RoomOrderItem GetRoomOrderItemById(int RoomOrderItemId)
         {
             var RoomOrderItem = RoomOrderItemRepository.GetById(RoomOrderItemId);
             return RoomOrderItem;
         }
 
-        public void CreateRoomOrderItem(RoomOrderItems RoomOrderItem)
+        public void CreateRoomOrderItem(RoomOrderItem RoomOrderItem)
         {
             RoomOrderItemRepository.Add(RoomOrderItem);
             SaveRoomOrderItem();
         }
 
-        public void EditRoomOrderItem(RoomOrderItems RoomOrderItemToEdit)
+        public void EditRoomOrderItem(RoomOrderItem roomOrderItemToEdit)
         {
-            RoomOrderItemRepository.Update(RoomOrderItemToEdit);
+            RoomOrderItemRepository.Update(roomOrderItemToEdit);
             SaveRoomOrderItem();
         }
 
@@ -80,7 +80,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItems RoomOrderItem)
+        public IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem RoomOrderItem)
         {
 
             //    yield return new ValidationResult("RoomOrderItem", "ErrorString");

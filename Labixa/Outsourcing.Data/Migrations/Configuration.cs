@@ -124,7 +124,7 @@ namespace Outsourcing.Data.Migrations
                     Name = "Trương Long",
                     Phone = "0922007855",
                     Type = 1,
-                    skype = "longt711",
+                    Skype = "longt711",
                     Yahoo = "longt711",
                     Deleted = false
                 });
@@ -133,7 +133,7 @@ namespace Outsourcing.Data.Migrations
                     Name = "Ngọc Linh",
                     Phone = "0922007855",
                     Type = 2,
-                    skype = "longt711",
+                    Skype = "longt711",
                     Yahoo = "longt711",
                     Deleted = false
                 });
@@ -142,7 +142,7 @@ namespace Outsourcing.Data.Migrations
                     Name = "Truong Long",
                     Phone = "0922007855",
                     Type = 3,
-                    skype = "longt711",
+                    Skype = "longt711",
                     Yahoo = "longt711",
                     Deleted = false
                 });
@@ -151,7 +151,7 @@ namespace Outsourcing.Data.Migrations
                     Name = "Truong Long",
                     Phone = "0922007855",
                     Type = 4,
-                    skype = "longt711",
+                    Skype = "longt711",
                     Yahoo = "longt711",
                     Deleted = false
                 });

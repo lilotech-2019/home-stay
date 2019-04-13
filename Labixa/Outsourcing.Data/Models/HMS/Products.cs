@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
@@ -53,7 +50,7 @@ namespace Outsourcing.Data.Models.HMS
         //public virtual ProductCategory ProductCategory { get; set; }
         //public virtual ICollection<ProductPictureMapping> ProductPictureMappings { get; set; }
         //public virtual ICollection<ProductAttributeMapping> ProductAttributeMappings { get; set; }
-        public virtual ICollection<RoomOrderItems> RoomOrderItems { get; set; }
+        public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
         //public virtual ICollection<ProductCategoryMapping> ProductCategoryMappings { get; set; }
     }
 }

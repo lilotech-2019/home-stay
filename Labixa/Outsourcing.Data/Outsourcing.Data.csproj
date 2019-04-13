@@ -73,13 +73,14 @@
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />
+    <Compile Include="Models\HMS\Customer.cs" />
     <Compile Include="Models\HMS\Hotels.cs" />
     <Compile Include="Models\HMS\Products.cs" />
     <Compile Include="Models\HMS\Rooms.cs" />
     <Compile Include="Models\HMS\RoomImages.cs" />
     <Compile Include="Models\HMS\RoomImageMappings.cs" />
-    <Compile Include="Models\HMS\RoomOrders.cs" />
-    <Compile Include="Models\HMS\RoomOrderItems.cs" />
+    <Compile Include="Models\HMS\RoomOrder.cs" />
+    <Compile Include="Models\HMS\RoomOrderItem.cs" />
     <Compile Include="Models\HMS\RoomUtilities.cs" />
     <Compile Include="Models\HMS\RoomUtilityRoomMappings.cs" />
     <Compile Include="Models\Inventory.cs" />

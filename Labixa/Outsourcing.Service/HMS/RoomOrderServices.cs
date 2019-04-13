@@ -15,13 +15,13 @@ namespace Outsourcing.Service.HMS
     public interface IRoomOrderService
     {
 
-        IEnumerable<RoomOrders> GetRoomOrders();
-        RoomOrders GetRoomOrderById(int RoomOrderId);
-        void CreateRoomOrder(RoomOrders RoomOrder);
-        void EditRoomOrder(RoomOrders RoomOrderToEdit);
+        IEnumerable<RoomOrder> GetRoomOrders();
+        RoomOrder GetRoomOrderById(int RoomOrderId);
+        void CreateRoomOrder(RoomOrder RoomOrder);
+        void EditRoomOrder(RoomOrder roomOrderToEdit);
         void DeleteRoomOrder(int RoomOrderId);
         void SaveRoomOrder();
-        IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrders RoomOrder);
+        IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrder RoomOrder);
        
     }
     public class RoomOrderService : IRoomOrderService
@@ -41,27 +41,27 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IEnumerable<RoomOrders> GetRoomOrders()
+        public IEnumerable<RoomOrder> GetRoomOrders()
         {
             var RoomOrders = RoomOrderRepository.GetAll();
             return RoomOrders;
         }
 
-        public RoomOrders GetRoomOrderById(int RoomOrderId)
+        public RoomOrder GetRoomOrderById(int RoomOrderId)
         {
             var RoomOrder = RoomOrderRepository.GetById(RoomOrderId);
             return RoomOrder;
         }
 
-        public void CreateRoomOrder(RoomOrders RoomOrder)
+        public void CreateRoomOrder(RoomOrder RoomOrder)
         {
             RoomOrderRepository.Add(RoomOrder);
             SaveRoomOrder();
         }
 
-        public void EditRoomOrder(RoomOrders RoomOrderToEdit)
+        public void EditRoomOrder(RoomOrder roomOrderToEdit)
         {
-            RoomOrderRepository.Update(RoomOrderToEdit);
+            RoomOrderRepository.Update(roomOrderToEdit);
             SaveRoomOrder();
         }
 
@@ -81,7 +81,7 @@ namespace Outsourcing.Service.HMS
             unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrders RoomOrder)
+        public IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrder RoomOrder)
         {
 
             //    yield return new ValidationResult("RoomOrder", "ErrorString");

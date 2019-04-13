@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public abstract partial class BaseEntity
+    public abstract class BaseEntity
     {
         /// <summary>
         /// Gets or sets the entity identifier

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Outsourcing.Data.Models.HMS
 {
@@ -12,7 +8,7 @@ namespace Outsourcing.Data.Models.HMS
         public string Name { get; set; }
 
         public string Description { get; set; }
-        public bool isActived { get; set; }
+        public bool IsActived { get; set; }
         public string Noted { get; set; }
 
         public string ControlType { get; set; }

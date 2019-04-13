@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-    public class RoomOrders : BaseEntity
+    public class RoomOrder : BaseEntity
     {
-        public RoomOrders()
+        public RoomOrder()
         {
             DateCreated = DateTime.Now;
             ShipmentId = 0;
@@ -28,7 +28,7 @@ namespace Outsourcing.Data.Models.HMS
         /// </summary>
         public double? TotalPaymentRoom_DraftCheckIn { get; set; }
 
-        public int Status { get; set; }
+        public RoomOrderStatus Status { get; set; }
         public int? ShipmentId { get; set; }
         public double? ShipmentFee { get; set; }
         public bool Deleted { get; set; }
@@ -52,11 +52,23 @@ namespace Outsourcing.Data.Models.HMS
         public string Note { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<RoomOrderItems> RoomOrderItems { get; set; }
+        public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
 
         public int? RoomId { get; set; }
+        public int? CustomerId { get; set; }
 
         [ForeignKey("RoomId")]
         public virtual Rooms Room { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+    }
+
+    public enum RoomOrderStatus
+    {
+        New = 0,
+        Processed = 1,
+        CheckIn = 3,
+        CheckOut = 4
     }
 }

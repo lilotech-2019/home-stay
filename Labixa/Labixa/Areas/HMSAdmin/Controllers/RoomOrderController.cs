@@ -35,7 +35,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         public ActionResult CreateRoomOrder(int? roomId)
         {
-            var roomOrder = new RoomOrders();
+            var roomOrder = new RoomOrder();
             if (!(roomId == null))
             {
 
@@ -55,7 +55,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult CreateRoomOrder(RoomOrders roomOrder, bool continueEditing)
+        public ActionResult CreateRoomOrder(RoomOrder roomOrder, bool continueEditing)
         {
             if (!(roomOrder == null))
             {
@@ -76,7 +76,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         }
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
-        public ActionResult Edit(RoomOrders roomOrderEdit, bool continueEditing)
+        public ActionResult Edit(RoomOrder roomOrderEdit, bool continueEditing)
         {
             if (!(roomOrderEdit == null))
             {
@@ -98,12 +98,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 if (status==0)
                 {
-                    roomOrder.Status = 1;
+                    roomOrder.Status = RoomOrderStatus.New;
                     _roomOrderService.EditRoomOrder(roomOrder);
                 }
                 else if(status==1)
                 {
-                    roomOrder.Status = 2;
+                    roomOrder.Status = RoomOrderStatus.Processed;
                     _roomOrderService.EditRoomOrder(roomOrder);
                 }
             }

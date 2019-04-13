@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
@@ -8,106 +9,116 @@ using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    public class RoomOrdersController : Controller
+    public class RoomOrdersController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: /HMSAdmin/RoomOrders/
+        // GET: /HMSAdmin/RoomOrder/
         public async Task<ActionResult> Index()
         {
-            var roomorders = _db.RoomOrders.Include(r => r.Room);
-            return View(await roomorders.ToListAsync());
+            var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer).Where(w => w.Deleted == false)
+                .OrderBy(o => o.Status);
+            return View(await roomOrders.ToListAsync());
         }
 
-        // GET: /HMSAdmin/RoomOrders/Details/5
+        public async Task<ActionResult> Index(RoomOrderStatus status)
+        {
+            var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer)
+                .Where(w => w.Deleted == false && w.Status == status)
+                .OrderBy(o => o.Status);
+            return View(await roomOrders.ToListAsync());
+        }
+
+        // GET: /HMSAdmin/RoomOrder/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RoomOrders roomOrders = await _db.RoomOrders.FindAsync(id);
-            if (roomOrders == null)
+            var roomOrder = await _db.RoomOrders.FindAsync(id);
+            if (roomOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(roomOrders);
+            return View(roomOrder);
         }
 
-        // GET: /HMSAdmin/RoomOrders/Create
+        // GET: /HMSAdmin/RoomOrder/Create
         public ActionResult Create()
         {
             ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name");
-            return View(new RoomOrders());
+            return View(new RoomOrder());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RoomOrders roomOrders)
+        public async Task<ActionResult> Create(RoomOrder roomOrder)
         {
             if (ModelState.IsValid)
             {
-                _db.RoomOrders.Add(roomOrders);
+                roomOrder.Status = RoomOrderStatus.New;
+                _db.RoomOrders.Add(roomOrder);
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrders.RoomId);
-            return View(roomOrders);
+            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrder.RoomId);
+            return View(roomOrder);
         }
 
-        // GET: /HMSAdmin/RoomOrders/Edit/5
+        // GET: /HMSAdmin/RoomOrder/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RoomOrders roomOrders = await _db.RoomOrders.FindAsync(id);
-            if (roomOrders == null)
+            var roomOrder = await _db.RoomOrders.FindAsync(id);
+            if (roomOrder == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrders.RoomId);
-            return View(roomOrders);
+            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrder.RoomId);
+            return View(roomOrder);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(RoomOrders roomOrders)
+        public async Task<ActionResult> Edit(RoomOrder roomOrder)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(roomOrders).State = EntityState.Modified;
+                _db.Entry(roomOrder).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrders.RoomId);
-            return View(roomOrders);
+            ViewBag.RoomId = new SelectList(_db.Room, "Id", "Name", roomOrder.RoomId);
+            return View(roomOrder);
         }
 
-        // GET: /HMSAdmin/RoomOrders/Delete/5
+        // GET: /HMSAdmin/RoomOrder/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RoomOrders roomOrders = await _db.RoomOrders.FindAsync(id);
-            if (roomOrders == null)
+            var roomOrder = await _db.RoomOrders.FindAsync(id);
+            if (roomOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(roomOrders);
+            return View(roomOrder);
         }
 
-        // POST: /HMSAdmin/RoomOrders/Delete/5
+        // POST: /HMSAdmin/RoomOrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            RoomOrders roomOrders = await _db.RoomOrders.FindAsync(id);
-            _db.RoomOrders.Remove(roomOrders ?? throw new InvalidOperationException());
+            var roomOrder = await _db.RoomOrders.FindAsync(id);
+            _db.RoomOrders.Remove(roomOrder ?? throw new InvalidOperationException());
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

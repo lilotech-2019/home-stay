@@ -46,8 +46,8 @@ namespace Outsourcing.Data
         public DbSet<Hotels> Hotels { get; set; }
         public DbSet<Rooms> Room { get; set; }
         public DbSet<RoomImageMappings> RoomImageMappings { get; set; }
-        public DbSet<RoomOrders> RoomOrders { get; set; }
-        public DbSet<RoomOrderItems> RoomOrderItems { get; set; }
+        public DbSet<RoomOrder> RoomOrders { get; set; }
+        public DbSet<RoomOrderItem> RoomOrderItems { get; set; }
         public DbSet<RoomUtilities> RoomUtilitys { get; set; }
         public DbSet<RoomUtilityRoomMappings> RoomUtilityRoomMappings { get; set; }
         public DbSet<RoomImages> RoomImages { get; set; }

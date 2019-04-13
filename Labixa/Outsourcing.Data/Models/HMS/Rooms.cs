@@ -67,7 +67,7 @@ namespace Outsourcing.Data.Models.HMS
 
 
     public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
-    public virtual ICollection<RoomOrders> RoomOrders { get; set; }
+    public virtual ICollection<RoomOrder> RoomOrders { get; set; }
 
     }
 }
