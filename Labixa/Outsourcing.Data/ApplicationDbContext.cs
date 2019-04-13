@@ -93,5 +93,7 @@ namespace Outsourcing.Data
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<Outsourcing.Data.Models.HMS.Customer> Customers { get; set; }
     }
 }

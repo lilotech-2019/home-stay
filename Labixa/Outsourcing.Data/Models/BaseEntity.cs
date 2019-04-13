@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
@@ -55,9 +51,7 @@ namespace Outsourcing.Data.Models
 
         public override int GetHashCode()
         {
-            if (Equals(Id, default(int)))
-                return base.GetHashCode();
-            return Id.GetHashCode();
+            return Equals(Id, default(int)) ? base.GetHashCode() : Id.GetHashCode();
         }
 
         public static bool operator ==(BaseEntity x, BaseEntity y)

@@ -9,11 +9,11 @@ using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    public class RoomOrdersController : BaseController
+    public class RoomOrdersController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: /HMSAdmin/RoomOrder/
+        // GET: /HMSAdmin/RoomOrders/
         public async Task<ActionResult> Index()
         {
             var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer).Where(w => w.Deleted == false)
@@ -21,13 +21,13 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(await roomOrders.ToListAsync());
         }
 
-        public async Task<ActionResult> Index(RoomOrderStatus status)
-        {
-            var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer)
-                .Where(w => w.Deleted == false && w.Status == status)
-                .OrderBy(o => o.Status);
-            return View(await roomOrders.ToListAsync());
-        }
+        //public async Task<ActionResult> Index(RoomOrderStatus status)
+        //{
+        //    var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer)
+        //        .Where(w => w.Deleted == false && w.Status == status)
+        //        .OrderBy(o => o.Status);
+        //    return View(await roomOrders.ToListAsync());
+        //}
 
         // GET: /HMSAdmin/RoomOrder/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -58,6 +58,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             if (ModelState.IsValid)
             {
                 roomOrder.Status = RoomOrderStatus.New;
+                roomOrder.Total = roomOrder.Draff;
                 _db.RoomOrders.Add(roomOrder);
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");

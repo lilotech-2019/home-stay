@@ -12,7 +12,7 @@ namespace Labixa.Areas.HMSAdmin.ViewModels
         public int SharePercent { get; set; }
         public bool Status { get; set; }
         public double Price { get; set; }
-        public int? DiscountPercent { get; set; }
+        public int DiscountPercent { get; set; }
         /// <summary>
         /// URL  SEO friendly
         /// </summary>

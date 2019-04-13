@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\ValidateDateRange.cs" />
     <Compile Include="Authentication\DefaultFormsAuthentication.cs" />
     <Compile Include="Authentication\IFormsAuthentication.cs" />
     <Compile Include="Authentication\UserAuthenticationTicketBuilder.cs" />

@@ -8,344 +8,329 @@
 <h2>Tên trang</h2>
 @Styles.Render("~/Content/dataTable")
 <p>
-    @Html.ActionLink("Tạo mới", "Create", null, new {@class = "btn btn-primary"})
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <div class="row">
-<div class="col-xs-12">
-<h3 class="header smaller lighter blue">Tên Trang</h3>
-<div class="table-header">Tên bảng</div>
-<table id="datatable" class="table table-striped table-bordered table-hover">
-<thead>
+    <div class="col-xs-12">
+        <h3 class="header smaller lighter blue">Tên Trang</h3>
+        <div class="table-header">Tên bảng</div>
+        <table id="datatable" class="table table-striped table-bordered table-hover">
+            <thead>
 
-<tr>
-    <th>
-        @Html.DisplayNameFor(model => model.Room.Name)
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Room.Name)
 
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.CheckIn)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Deadline)
-    </th>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CheckIn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CheckOut)
+                    </th>
 
-    <th>
-        @Html.DisplayNameFor(model => model.CustomerName)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.CustomerPhone)
-    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer.Phone)
+                    </th>
 
-    <th>
-        @Html.DisplayNameFor(model => model.TotalPayment_CheckOut)
-    </th>
-    <th>
-        Total Draff
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Status)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.ShipmentId)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.ShipmentFee)
-    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Draff)
+                    </th>
+                    <th>
+                        Total Draff
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
 
-    <th>
-        @Html.DisplayNameFor(model => model.Total_DescriptionBook_Noted)
-    </th>
-  
-    <th>
-        @Html.DisplayNameFor(model => model.Note)
-    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AmountOfPeople)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
 
-    <th></th>
-</tr>
+                    <th></th>
+                </tr>
 
-</thead>
+            </thead>
 
-<tbody>
+            <tbody>
 
 
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td rowspan="2">
-            @Html.DisplayFor(modelItem => item.Room.Name)
-        </td>
-        <td class="">@DateTime.Parse(item.CheckIn.ToString()).ToShortDateString()</td>
-        <td class="">@DateTime.Parse(item.Deadline.ToString()).ToShortDateString()</td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td rowspan="2">
+                            @Html.DisplayFor(modelItem => item.Room.Name)
+                        </td>
+                        <td class=""> @Html.DisplayFor(modelItem => item.CheckIn)</td>
+                        <td class="">    @Html.DisplayFor(modelItem => item.CheckOut)</td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerName)
-        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Name)
+                        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerPhone)
-        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Phone)
+                        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPayment_CheckOut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPaymentRoom_DraftCheckIn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipmentId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipmentFee)
-        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Draff)
+                        </td>
 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Total_DescriptionBook_Noted)
-        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total_DescriptionBook_Noted)
+                        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AmountOfPeople)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Note)
+                        </td>
 
 
-        <td >
-            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                        <td>
+                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 
-                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a href="#" class="btn btn-xs btn-danger">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </div>
-        </td>
-    </tr>
+                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
 
-    <tr>
+                    <tr>
 
-        <th class="center" style="background: cyan">
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-motorcycle" aria-hidden="true"></i>
+                            <i class="fa fa-motorcycle" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-car" aria-hidden="true"></i>
+                            <i class="fa fa-car" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            Book Tour
+                            Book Tour
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-fire" aria-hidden="true"></i>
+                            <i class="fa fa-fire" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-gift" aria-hidden="true"></i>
+                            <i class="fa fa-gift" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-ticket" aria-hidden="true"></i>
+                            <i class="fa fa-ticket" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            book visa
+                            book visa
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-taxi" aria-hidden="true"></i>
+                            <i class="fa fa-taxi" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
-            Suggest Tour
+                        </th>
+                        <th class="center" style="background: cyan">
+                            Suggest Tour
 
-        </th>
-        <th class="center" style="background: cyan">
+                        </th>
+                        <th class="center" style="background: cyan">
 
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
 
-        </th>
-        <th class="center" style="background: cyan">
-            @*@Html.DisplayNameFor(model => model.OtherBookService)*@
-            Other
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalBookPrice)
-        </th>
-    </tr>
-    <tr style="text-align: center">
-        <td>
-            <button class="btn btn-small btn-cool">Check Out</button>
-        </td>
-        @{
-            if (item.Book_Motobike)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
+                        </th>
+                        <th class="center" style="background: cyan">
+                            @*@Html.DisplayNameFor(model => model.OtherBookService)*@
+                            Other
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalBookPrice)
+                        </th>
+                    </tr>
 
-            if (item.BookCar)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
+                    <tr style="text-align: center">
+                        <td>
+                            <button class="btn btn-small btn-cool">Check Out</button>
+                        </td>
+                        @{
+                            if (item.Book_Motobike)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
 
-            if (item.Book_Tour)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_BBQService)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_Gift)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_Laundry)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_FlightTicket)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_Visa)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_Taxi)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_SuggestionTour)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-            if (item.Book_RegisterResidence)
-            {
-                <td style="background: chartreuse;">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </td>
-            }
-        }
-        <td>
-            @Html.DisplayFor(modelItem => item.OtherBookService)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalBookPrice)
-        </td>
+                            if (item.BookCar)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
 
-    </tr>
-}
-</tbody>
-</table>
-</div>
+                            if (item.Book_Tour)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_BBQService)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Gift)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Laundry)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_FlightTicket)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Visa)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_Taxi)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_SuggestionTour)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                            if (item.Book_RegisterResidence)
+                            {
+                                <td style="background: chartreuse;">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </td>
+                            }
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OtherBookService)
+                        </td>
+                      
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         /* Initialise the DataTable */
 
         $('#datatable').dataTable();

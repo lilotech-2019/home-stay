@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
-   
+
     public class Hotels : BaseEntity
     {
         public Hotels()
@@ -17,25 +14,15 @@ namespace Outsourcing.Data.Models.HMS
         }
         public string MetaKeywords { get; set; }
         public string MetaTitle { get; set; }
-        public string MetaTitleEN { get; set; }
-        public string MetaDescription { get; set; }
-        public string MetaDescriptionEN { get; set; }
         public string Name { get; set; }
-        public string NameEN { get; set; }
         public string Description { get; set; }
-        public string DescriptionENG { get; set; }
         public int SharePercent { get; set; }
         public bool Status { get; set; }
-        public string Address { get; set;}
+        public string Address { get; set; }
         public string District { get; set; }
         public string Ward { get; set; }
         public string Street { get; set; }
-        public string AddressENG { get; set; }
-        public string DistrictENG { get; set; }
-        public string WardENG { get; set; }
-        public string StreetENG { get; set; }
         public string ManagerName { get; set; }
-        public string ManagerNameEN { get; set; }
         public string ManagerPhone { get; set; }
         public string ManagerEmail { get; set; }
         public string HostName { get; set; }
@@ -48,11 +35,7 @@ namespace Outsourcing.Data.Models.HMS
         public string UrlImage1 { get; set; }
         public string UrlImage2 { get; set; }
         public string UrlImage3 { get; set; }
-        public string Temp_1 { get; set; }
-        public string Temp_2 { get; set; }
-        public string Temp_3 { get; set; }
-        public string Temp_4 { get; set; }
-        public string Temp_5 { get; set; }
+   
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
@@ -77,11 +60,11 @@ namespace Outsourcing.Data.Models.HMS
         public DateTime DateCreated { get; set; }
         public DateTime LastEditedTime { get; set; }
         public string Noted { get; set; }
-        public string string1 { get; set; }
+
         public int CategoryHotelId { get; set; }
         [ForeignKey("CategoryHotelId")]
-        virtual public CategoryHotels CategoryHotel { get; set; }
+        public virtual CategoryHotels CategoryHotel { get; set; }
         public virtual ICollection<CostOrder> CostOrders { get; set; }
-
+        public string MetaDescription { get; set; }
     }
 }

@@ -118,22 +118,44 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    @Html.LabelFor(model => model.CheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                                    @Html.LabelFor(model => model.CheckInDate, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.CheckIn, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.CheckIn)
+                                        @Html.TextBoxFor(model => model.CheckInDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckInDate)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    @Html.LabelFor(model => model.Deadline, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    @Html.LabelFor(model => model.CheckOutDate, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Deadline, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Deadline)
+                                        @Html.TextBoxFor(model => model.CheckOutDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckOutDate)
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-sm-6">
+                                    @Html.LabelFor(model => model.CheckInTime, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.CheckInTime, null, new { @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckInTime)
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    @Html.LabelFor(model => model.CheckOutTime, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.CheckOutTime, null, new { @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckOutTime)
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-sm-6">
+                                    @Html.LabelFor(model => model.AmountOfPeople, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.AmountOfPeople, null, new { @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.AmountOfPeople)
+                                    </div>
+                                </div>  <div class="form-group col-sm-6">
                                     @Html.LabelFor(model => model.Note, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
                                         @Html.EditorFor(model => model.Note, null, new { @class = "col-xs-10 col-sm-5" })
