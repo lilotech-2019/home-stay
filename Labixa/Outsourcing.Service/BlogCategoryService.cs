@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository;
-using Outsourcing.Service.Properties;
 
 namespace Outsourcing.Service
 {
@@ -23,25 +19,32 @@ namespace Outsourcing.Service
 
         void SaveChange();
     }
+
     public class BlogCategoryService : IBlogCategoryService
     {
         #region Field
-        private readonly IBlogTypeRepository blogCategoryRepository;
-        private readonly IUnitOfWork unitOfWork;
+
+        private readonly IBlogTypeRepository _blogCategoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         #endregion
 
         #region Ctor
+
         public BlogCategoryService(IBlogTypeRepository blogCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this.blogCategoryRepository = blogCategoryRepository;
-            this.unitOfWork = unitOfWork;
+            _blogCategoryRepository = blogCategoryRepository;
+            _unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region [base Method]
+
         public IEnumerable<BlogCategories> GetBlogCategories()
         {
-            var list = blogCategoryRepository.GetAll().Where(p => p.Status && !p.IsStaticPage).OrderByDescending(p => p.CategoryParentId).ToList();
+            var list = _blogCategoryRepository.FindBy(p => p.Status && !p.IsStaticPage)
+                .OrderByDescending(p => p.CategoryParentId).ToList();
             return list;
         }
 
@@ -49,7 +52,7 @@ namespace Outsourcing.Service
         {
             try
             {
-                var item = blogCategoryRepository.Get(p => p.Slug.Equals(slug));
+                var item = _blogCategoryRepository.FindBy(p => p.Slug.Equals(slug)).SingleOrDefault();
                 return item;
             }
             catch (Exception)
@@ -62,8 +65,8 @@ namespace Outsourcing.Service
         {
             try
             {
-                var item = blogCategoryRepository.GetById(blogId);
-                return item;
+                var item = _blogCategoryRepository.FindBy(w => w.Id == blogId);
+                return item.SingleOrDefault();
             }
             catch (Exception)
             {
@@ -75,13 +78,12 @@ namespace Outsourcing.Service
         {
             try
             {
-                blogCategoryRepository.Add(obj);
+                _blogCategoryRepository.Add(obj);
                 SaveChange();
-
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
 
@@ -89,18 +91,22 @@ namespace Outsourcing.Service
         {
             try
             {
-                var item = blogCategoryRepository.Get(p => p.Id == obj.Id);
-                item.Name = obj.Name;
-                item.Slug = obj.Slug;
-                item.Status = obj.Status;
-                item.DisplayOrder = obj.DisplayOrder;
-                item.CategoryParentId = obj.CategoryParentId;
-                blogCategoryRepository.Update(item);
-                SaveChange();
+                var item = _blogCategoryRepository.FindBy(p => p.Id == obj.Id).SingleOrDefault();
+                if (item != null)
+                {
+                    item.Name = obj.Name;
+                    item.Slug = obj.Slug;
+                    item.Status = obj.Status;
+                    item.DisplayOrder = obj.DisplayOrder;
+                    item.CategoryParentId = obj.CategoryParentId;
+                    _blogCategoryRepository.Update(item);
+
+                    SaveChange();
+                }
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
 
@@ -108,14 +114,18 @@ namespace Outsourcing.Service
         {
             try
             {
-                var item = blogCategoryRepository.Get(p => p.Slug.Equals(slugName));
-                item.Status = false;
-                blogCategoryRepository.Update(item);
-                SaveChange();
+                var item = _blogCategoryRepository.FindBy(p => p.Slug.Equals(slugName)).SingleOrDefault();
+                if (item != null)
+                {
+                    item.Status = false;
+                    _blogCategoryRepository.Update(item);
+
+                    SaveChange();
+                }
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
 
@@ -124,22 +134,27 @@ namespace Outsourcing.Service
         {
             try
             {
-                unitOfWork.Commit();
+                _unitOfWork.Commit();
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
+
         #endregion
 
 
         public void DeleteBlogCategory(int id)
         {
-            var item = blogCategoryRepository.Get(p => p.Id == id);
-            item.Status = false;
-            blogCategoryRepository.Update(item);
-            SaveChange();
+            var item = _blogCategoryRepository.FindBy(p => p.Id == id).SingleOrDefault();
+            if (item != null)
+            {
+                item.Status = false;
+                _blogCategoryRepository.Update(item);
+
+                SaveChange();
+            }
         }
     }
 }
