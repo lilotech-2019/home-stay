@@ -17,7 +17,7 @@ namespace Labixa.Areas.Admin.ViewModel
         public int Id { get; set; }
 
         // [DisplayName(@"Tiêu đề")]
-        [Display(Name = "Title", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Title", ResourceType = typeof(Resources.Languages))]
         [Required(ErrorMessageResourceType = typeof(Resources.ErrorMessage.ErrorMessageResource),
             ErrorMessageResourceName = "TitleRequired")]
 
@@ -27,35 +27,35 @@ namespace Labixa.Areas.Admin.ViewModel
         /// URL  SEO friendly
         /// </summary>
         //[DisplayName(@"Đường dẫn")]
-        [Display(Name = "Slug", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Slug", ResourceType = typeof(Resources.Languages))]
         public string Slug { get; set; }
 
         // [DisplayName(@"Thẻ meta từ khóa")]
-        [Display(Name = "MetaKeyWords", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "MetaKeyWords", ResourceType = typeof(Resources.Languages))]
         public string MetaKeywords { get; set; }
 
         //[DisplayName(@"Thẻ meta Trang")]
-        [Display(Name = "MetaTitle", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "MetaTitle", ResourceType = typeof(Resources.Languages))]
         public string MetaTitle { get; set; }
 
         //[DisplayName(@"Thẻ meta Mô tả")]
-        [Display(Name = "MetaDescription", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "MetaDescription", ResourceType = typeof(Resources.Languages))]
         public string MetaDescription { get; set; }
 
         // [DisplayName(@"Hình ảnh")]
-        [Display(Name = "BlogImage", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "BlogImage", ResourceType = typeof(Resources.Languages))]
         public string BlogImage { get; set; }
 
         // [DisplayName(@"Mô tả ")]
-        [Display(Name = "Description", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Description", ResourceType = typeof(Resources.Languages))]
         public string Description { get; set; }
 
         //[DisplayName(@"Nội dung")]
-        [Display(Name = "Content", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Content", ResourceType = typeof(Resources.Languages))]
         public string Content { get; set; }
 
         [DisplayName(@"Hiển thị")]
-        [Display(Name = "IsAvailable", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "IsAvailable", ResourceType = typeof(Resources.Languages))]
         public bool IsAvailable { get; set; }
 
         //Get or set the picture of blog
@@ -68,7 +68,7 @@ namespace Labixa.Areas.Admin.ViewModel
         public int Position { get; set; }
 
         [DisplayName(@"Danh mục")]
-        [Display(Name = "BlogCategoryId", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "BlogCategoryId", ResourceType = typeof(Resources.Languages))]
         public int BlogCategoryId { get; set; }
 
         [DisplayName(@"Danh mục")]

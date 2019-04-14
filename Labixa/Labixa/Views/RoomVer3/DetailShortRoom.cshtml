@@ -26,7 +26,7 @@
             <div class="single-sidebar-widget sroom-sidebar">
                 <!-- Booking Form style-->
                 <div class="book-r-form">
-                    <div class="room-price">
+                    @*<div class="room-price">
                         <h6>@Html.Raw(Resources.HMS_StartForm)</h6>
                         @if (cookie.Value.Equals("vi"))
                         {
@@ -37,7 +37,7 @@ else
                     <p>@{var value = (Model.listRoom.Price / 23000).ToString("#,##0");} @value$<span>/ Day</span></p>
 
 }
-                    </div>
+                    </div>*@
                     <div class="book-form">
                         <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.HMS_StartDate)</b>
@@ -137,7 +137,7 @@ else
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <button type="submit" class="res-btn"
                                                                 onclick="BookingRooom()">
-                                                            @Html.Raw(Resources.HMS_SendMessage)
+                                                            @Html.Raw(Resources.HMS_Booking)
                                                         </button>
                                                     </div>
                                                 </div>
@@ -453,18 +453,10 @@ else
         var checkboxValue = true;
 
      
-        if (checkBox.checked == true) {
-            document.getElementById("action").value = checkboxValue;
-           
-
-        } else {
-            document.getElementById("action").value = 0;
-        }
+      
         if (CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
             alert("Đặt Phòng Thành Công");
-        } else {
-            alert("Đặt Phòng Không Thành Công");
-        }
+        } 
 
 
     }

@@ -39,29 +39,29 @@
         <div class="col-md-8">
             <div class="book-left-content input_form">
                 @* form để submit data *@
-                <form id="contactForm" action="/Home/Contact" method="post">
+                <form id="contactForm" action="/Home/ContactBookingRooom" method="post">
                     @*@Html.HiddenFor(model => model.IsDelete)
                     @Html.HiddenFor(model => model.Note)*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.HMS_Name)</span>
-                            <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control">
+                            <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control" required>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.HMS_Email) </span>
-                            <input id="Email" type="email" name="Email" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control">
+                            <input id="Email" type="email" name="Email" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <span>@Html.Raw(Resources.HMS_Phone)</span>
-                            <input id="PhoneNumber" type="text" name="Description" placeholder="@Html.Raw(Resources.HMS_Phone)" class="form-control">
+                            <input id="PhoneNumber" type="text" name="Description" placeholder="@Html.Raw(Resources.HMS_Phone)" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <span>@Html.Raw(Resources.HMS_Message)</span>
-                            <textarea id="content" rows="6" name="Content" placeholder="@Html.Raw(Resources.HMS_Message)" class="form-control"></textarea>
+                            <textarea id="content" rows="6" name="Content" placeholder="@Html.Raw(Resources.HMS_Message)" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="row">
