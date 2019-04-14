@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Labixa.Models;
 using Outsourcing.Data.Models;
 using PagedList;
 using Labixa.ViewModels;
@@ -45,12 +41,14 @@ namespace Labixa.Controllers
 
         public ActionResult Index()
         {
-            IndexViewModel model = new IndexViewModel();
-            model.roomHome = _roomService.Get3RoomShortNews();
-            model.blogHome = _blogService.Get3BlogNewsNewest();
-            model.imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1"));
-            model.imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2"));
-            model.imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"));
+            IndexViewModel model = new IndexViewModel
+            {
+                roomHome = _roomService.Get3RoomShortNews(),
+                blogHome = _blogService.Get3BlogNewsNewest(),
+                imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1")),
+                imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2")),
+                imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"))
+            };
             return View(model);
         }
 
@@ -59,16 +57,6 @@ namespace Labixa.Controllers
         {
             _vendorService.CreateVendor(model);
             return RedirectToAction("Index", "Home");
-        }
-
-        public ActionResult Index2()
-        {
-            return View();
-        }
-
-        public ActionResult Index3()
-        {
-            return View();
         }
 
         public ActionResult About()
@@ -168,7 +156,7 @@ namespace Labixa.Controllers
 
         public ActionResult DetailService(string slug)
         {
-            var model = _blogService.GetStaticPage().Where(p => p.Slug.Equals(slug)).FirstOrDefault();
+            var model = _blogService.GetStaticPage().FirstOrDefault(p => p.Slug.Equals(slug));
 
             return View(model);
         }

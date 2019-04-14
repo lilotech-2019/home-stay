@@ -58,7 +58,7 @@
         }
         @foreach (var iterm in Model.imageHome3)
         {
-            <div style="background-image: url(@iterm.Value); backgroudn-position: center right;" class="item slide-3">
+            <div style="background-image: url(@iterm.Value); -ms-background-position: center right; background-position: center right;" class="item slide-3">
                 <div class="carousel-caption nhs-caption nhs-caption3">
                     <div class="thm-container">
                         <div class="box valign-middle">
@@ -254,7 +254,7 @@
                                 </div>
                                 <div class="ro-txt">
                                     <div class="left-h pull-left">
-                                        <p>@iterm.NameENG</p>
+                                        <p>@iterm.Name</p>
                                     </div>
                                     <div class="right-p pull-right">
                                         <p>

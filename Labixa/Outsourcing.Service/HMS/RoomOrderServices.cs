@@ -1,91 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
 {
-
     public interface IRoomOrderService
     {
-
-        IEnumerable<RoomOrder> GetRoomOrders();
-        RoomOrder GetRoomOrderById(int RoomOrderId);
-        void CreateRoomOrder(RoomOrder RoomOrder);
-        void EditRoomOrder(RoomOrder roomOrderToEdit);
-        void DeleteRoomOrder(int RoomOrderId);
-        void SaveRoomOrder();
-        IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrder RoomOrder);
-       
+        IQueryable<RoomOrder> FindAll();
+        RoomOrder FindById(int id);
+        void Create(RoomOrder entity);
+        void Edit(RoomOrder entity);
+        void Delete(int id);
+        void Delete(RoomOrder entity);
     }
+
     public class RoomOrderService : IRoomOrderService
     {
         #region Field
-        private readonly IRoomOrderRepository RoomOrderRepository;
-        private readonly IUnitOfWork unitOfWork;
+
+        private readonly IRoomOrderRepository _roomOrderRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         #endregion
 
         #region Ctor
-        public RoomOrderService(IRoomOrderRepository RoomOrderRepository, IUnitOfWork unitOfWork)
+
+        public RoomOrderService(IRoomOrderRepository roomOrderRepository, IUnitOfWork unitOfWork)
         {
-            this.RoomOrderRepository = RoomOrderRepository;
-            this.unitOfWork = unitOfWork;
+            _roomOrderRepository = roomOrderRepository;
+            _unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region BaseMethod
 
-        public IEnumerable<RoomOrder> GetRoomOrders()
+        public IQueryable<RoomOrder> FindAll()
         {
-            var RoomOrders = RoomOrderRepository.GetAll();
-            return RoomOrders;
+            return _roomOrderRepository.FindBy(w => w.Deleted == false);
         }
 
-        public RoomOrder GetRoomOrderById(int RoomOrderId)
+        public RoomOrder FindById(int id)
         {
-            var RoomOrder = RoomOrderRepository.GetById(RoomOrderId);
-            return RoomOrder;
+            return _roomOrderRepository.FindBy(w => w.Id == id && w.Deleted == false).SingleOrDefault();
         }
 
-        public void CreateRoomOrder(RoomOrder RoomOrder)
+        public void Create(RoomOrder entity)
         {
-            RoomOrderRepository.Add(RoomOrder);
-            SaveRoomOrder();
+            _roomOrderRepository.Add(entity);
+            _unitOfWork.Commit();
         }
 
-        public void EditRoomOrder(RoomOrder roomOrderToEdit)
+        public void Edit(RoomOrder entity)
         {
-            RoomOrderRepository.Update(roomOrderToEdit);
-            SaveRoomOrder();
+            _roomOrderRepository.Update(entity);
+            _unitOfWork.Commit();
         }
 
-        public void DeleteRoomOrder(int RoomOrderId)
+        public void Delete(int id)
         {
-            //Get RoomOrder by id.
-            var RoomOrder = RoomOrderRepository.GetById(RoomOrderId);
-            if (RoomOrder != null)
-            {
-                RoomOrderRepository.Delete(RoomOrder);
-                SaveRoomOrder();
-            }
+            _roomOrderRepository.Delete(w => w.Id == id);
+            _unitOfWork.Commit();
         }
 
-        public void SaveRoomOrder()
+        public void Delete(RoomOrder entity)
         {
-            unitOfWork.Commit();
-        }
-
-        public IEnumerable<ValidationResult> CanAddRoomOrder(RoomOrder RoomOrder)
-        {
-
-            //    yield return new ValidationResult("RoomOrder", "ErrorString");
-            return null;
+            _roomOrderRepository.Delete(entity);
+            _unitOfWork.Commit();
         }
 
         #endregion

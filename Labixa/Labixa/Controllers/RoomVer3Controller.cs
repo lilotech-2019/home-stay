@@ -1,13 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Labixa.Models;
 using Outsourcing.Service;
 using Outsourcing.Service.HMS;
-using Outsourcing.Data.Models;
 using PagedList;
 using Labixa.ViewModels;
 using Outsourcing.Data.Models.HMS;
@@ -16,21 +10,15 @@ namespace Labixa.Controllers
 {
     public class RoomVer3Controller : BaseHomeController
     {
-        private readonly IRoomService _RoomService;
+        private readonly IRoomService _roomService;
+        
 
-        //khởi tạo service Vendor
-        private readonly IVendorService _VendorService;
+        private readonly IRoomOrderService _roomOrderService;
 
-        private readonly IRoomOrderService _RoomOrderService;
-
-        private readonly IRoomOrderItemService _RoomOrderItemService;
-        public RoomVer3Controller(IRoomService RoomService, IVendorService VendorService, IRoomOrderService RoomOrderService, IRoomOrderItemService RoomOrderItem)
+        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService, IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem)
         {
-            this._RoomService = RoomService;
-            this._VendorService = VendorService;
-            this._RoomOrderService = RoomOrderService;
-            this._RoomOrderItemService = RoomOrderItem;
-
+            _roomService = roomService;
+            _roomOrderService = roomOrderService;
         }
         //do mặc định khi gọi, /room/ -> nó sẽ nhảy vô index cho nên mặc định khi vô đây
         // mình sẽ auto chuyển sang action Shortroom
@@ -50,20 +38,22 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _RoomService.GetRooms().Where(p=>p.Hotel.Layout==0);
+            var listShortRoom = _roomService.GetRooms().Where(p=>p.Hotel.Layout==0);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
         /// chi tiết phòng ngắn hạn
         /// </summary>
-        /// <param name="Slug"></param>
+        /// <param name="slug"></param>
         /// <returns></returns>
-        public ActionResult DetailShortRoom(string Slug)
+        public ActionResult DetailShortRoom(string slug)
         {
             //var model = _RoomService.GetRoomByUrlName(Slug);
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel();
-            viewModel.RelatedRoom = _RoomService.Get3RoomShortNews();
-            viewModel.listRoom = _RoomService.GetRoomByUrlName(Slug);
+            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
+            {
+                RelatedRoom = _roomService.Get3RoomShortNews(),
+                listRoom = _roomService.GetRoomByUrlName(slug)
+            };
             return View(viewModel);
         }
         /// <summary>
@@ -75,32 +65,34 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _RoomService.GetRooms().Where(p => p.Hotel.Layout == 2);
+            var listLongRoom = _roomService.GetRooms().Where(p => p.Hotel.Layout == 2);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
         /// chi tiết phòng dài hạn
         /// </summary>
-        /// <param name="Slug"></param>
+        /// <param name="slug"></param>
         /// <returns></returns>
-        public ActionResult DetailLongRoom(string Slug)
+        public ActionResult DetailLongRoom(string slug)
         {
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel();
-            viewModel.RelatedRoomLong = _RoomService.Get3RoomLongNews();
-            viewModel.listRoom = _RoomService.GetRoomByUrlName(Slug);
+            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
+            {
+                RelatedRoomLong = _roomService.Get3RoomLongNews(),
+                listRoom = _roomService.GetRoomByUrlName(slug)
+            };
             return View(viewModel);
         }
         [HttpPost]
         public ActionResult BookingRoom(RoomOrder modelBooking)
         {
-            _RoomOrderService.CreateRoomOrder(modelBooking);
+            _roomOrderService.Create(modelBooking);
             return RedirectToAction("ShortRoom", "RoomVer3");
           
         }
         [HttpPost]
         public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom)
         {
-            _RoomOrderService.CreateRoomOrder(modelBookingLongRoom);
+            _roomOrderService.Create(modelBookingLongRoom);
             return RedirectToAction("LongRoom", "RoomVer3");
 
         }
