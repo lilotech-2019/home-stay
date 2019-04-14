@@ -44,6 +44,14 @@ namespace Outsourcing.Data.Infrastructure
             foreach (T obj in objects)
                 _dbset.Remove(obj);
         }
+        public virtual IQueryable<T> FindBy()
+        {
+            return _dbset;
+        }
+        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> where)
+        {
+            return _dbset.Where(where);
+        }
 
         public virtual T GetById(long id)
         {
@@ -60,10 +68,13 @@ namespace Outsourcing.Data.Infrastructure
             return _dbset.ToList();
         }
 
+     
+
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
             return _dbset.Where(where).ToList();
         }
+
 
         /// <summary>
         /// Return a paged list of entities

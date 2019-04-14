@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
+using Outsourcing.Service.HMS;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
@@ -13,21 +14,21 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        private readonly IRoomOrderService _roomOrderService;
+
+        public RoomOrdersController(IRoomOrderService roomOrderService)
+        {
+            _roomOrderService = roomOrderService;
+        }
+
         // GET: /HMSAdmin/RoomOrders/
         public async Task<ActionResult> Index()
         {
-            var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer).Where(w => w.Deleted == false)
-                .OrderBy(o => o.Status);
+            //var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer).Where(w => w.Deleted == false)
+            //    .OrderBy(o => o.Status);
+            var roomOrders = _roomOrderService.FindAll().AsNoTracking();
             return View(await roomOrders.ToListAsync());
         }
-
-        //public async Task<ActionResult> Index(RoomOrderStatus status)
-        //{
-        //    var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer)
-        //        .Where(w => w.Deleted == false && w.Status == status)
-        //        .OrderBy(o => o.Status);
-        //    return View(await roomOrders.ToListAsync());
-        //}
 
         // GET: /HMSAdmin/RoomOrder/Details/5
         public async Task<ActionResult> Details(int? id)
