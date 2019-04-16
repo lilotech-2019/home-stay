@@ -1549,6 +1549,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit_bak.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Checkout.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

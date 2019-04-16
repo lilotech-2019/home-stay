@@ -1,327 +1,191 @@
-﻿@model IEnumerable<Outsourcing.Data.Models.HMS.RoomOrder>
-@Scripts.Render("~/Content/dataTable")
-
+﻿@using System.Globalization
+@using Outsourcing.Data.Models.HMS
+@model IEnumerable<RoomOrder>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý Phòng";
 }
 
-<h2>Tên trang</h2>
-@Styles.Render("~/Content/dataTable")
-<p>
-    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary" })
-</p>
-<div class="row">
-    <div class="col-xs-12">
-        <h3 class="header smaller lighter blue">Tên Trang</h3>
-        <div class="table-header">Tên bảng</div>
-        <table id="datatable" class="table table-striped table-bordered table-hover">
-            <thead>
+@section scripts{
+    <script src="~/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed');
+            } catch (e) {
+            }
+        </script>
 
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Room.Name)
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Quản lý Đơn hàng</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
 
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CheckIn)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CheckOut)
-                    </th>
+            <a class="btn btn-success" href="@Url.Action("Create")" style="margin-bottom: 10px">Thêm mới Đơn hàng</a>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.Customer.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Customer.Phone)
-                    </th>
+            <div class="table-header">Danh sách Đơn hàng</div>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.Draff)
-                    </th>
-                
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.AmountOfPeople)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Note)
-                    </th>
-
-                    <th></th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Room.Name)
-                        </td>
-                        <td class=""> @Html.DisplayFor(modelItem => item.CheckIn)</td>
-                        <td class="">    @Html.DisplayFor(modelItem => item.CheckOut)</td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Name)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Customer.Phone)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Draff)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-
-                    
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AmountOfPeople)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Note)
-                        </td>
-
-
-                        <td>
-                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-
-                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-xs btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
+            <table id="productTable" class="table table-bordered table-striped table-fixed-header">
+                <thead>
+                    <tr role="row">
+                        <th>#</th>
+                        <th>Tên Khách sạn</th>
+                        <th>Tên phòng</th>
+                        <th>Tên khách hàng</th>
+                        <th>Điện Thoại</th>
+                        <th>Ngày Checkin</th>
+                        <th>Ngày Checkout</th>
+                        <th>Tạm Tính</th>
+                        <th>Trạng Thái</th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    @if (Model != null && Model.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
 
-                    <tr>
-
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-motorcycle" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-car" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            Book Tour
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-fire" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-gift" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-suitcase" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-ticket" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            book visa
-
-                        </th>
-                        <th class="center" style="background: cyan">
-
-                            <i class="fa fa-taxi" aria-hidden="true"></i>
-
-                        </th>
-                        <th class="center" style="background: cyan">
-                            Suggest Tour
-
-                        </th>
-                        <th class="center" style="background: cyan">
-                           RegisterResidence
-                        </th>
-                        <th class="center" style="background: cyan">
-                            @Html.DisplayNameFor(model => model.OtherBookService)
-                     
-                        </th>
-                    </tr>
-
-                    <tr style="text-align: center">
-                     
-                        @{
-                            if (item.Book_Motobike)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            <tr class="">
+                                <td>@count</td>
+                                <td class="">
+                                    <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
                                 </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                <td class="">
+                                    <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
                                 </td>
-                            }
+                                <td class="">@item.Customer.Name</td>
+                                <td class="">@item.Customer.Phone</td>
+                                <td class="">@item.CheckIn</td>
+                                <td class="">@item.CheckOut</td>
+                                <td class="">@item.Draff.ToString("#,##0")</td>
 
-                            if (item.BookCar)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
+                                <td class="hidden-480 ">
+                                    @{
+                                        var status = item.Status;
+                                        switch (status)
+                                        {
+                                            case RoomOrderStatus.New:
+                                                <span class="label label-sm label-warning">Đợi xác nhận</span>
+                                                var selectList = Enum.GetValues(typeof(RoomOrderStatus))
+                                                    .Cast<RoomOrderStatus>()
+                                                    .Where(e => e != RoomOrderStatus.New && e != RoomOrderStatus.Processed)
+                                                    .Select(e => new SelectListItem
+                                                    {
+                                                        Value = ((int)e).ToString(),
+                                                        Text = e.ToString()
+                                                    });
+                                                @Html.DropDownList(string.Format("item.Status.{0}", item.Id), selectList)
+                                                <button id="updateStatus" data-id="@item.Id">Xử lý</button>
+                                                break;
+                                            case RoomOrderStatus.Processed:
+                                                <span class="label label-sm label-success">Đã xử lý</span>
+                                                break;
+                                            case RoomOrderStatus.CheckIn:
+                                                <a href="@Url.Action("Checkout", new{id=item.Id})" class="btn btn-primary btn-small">Check out</a>
+                                                break;
+                                        }
 
-                            if (item.Book_Tour)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    }
                                 </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+
+
+                                <td class=" ">
+                                    <div class="visible-md visible-lg  btn-group">
+
+                                        <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+
+                                    </div>
                                 </td>
-                            }
-                            if (item.Book_BBQService)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_Gift)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_Laundry)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_FlightTicket)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_Visa)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_Taxi)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_SuggestionTour)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
-                            if (item.Book_RegisterResidence)
-                            {
-                                <td style="background: chartreuse;">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </td>
-                            }
+                            </tr>
                         }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OtherBookService)
-                        </td>
-                      
-                    </tr>
-                }
-            </tbody>
-        </table>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+    // var dataId = $("#updateStatus").attr("data-id");
+    // var status = $("#item_Status_" + dataId + " option:selected").val();
+    //$("#item_Status_" + dataId).on('change', function(e) {
+    //    $("option:selected", this);
+    //   status = this.value;
+    //});
 
-
-<script>
     $(document).ready(function () {
-        /* Initialise the DataTable */
+        $("#updateStatus").on("click",
+            function () {
+                var dataId = $(this).attr("data-id");
+                var status = $("#item_Status_" + dataId + " option:selected").val();
+                var url = "/HMSAdmin/RoomOrders/UpdateStatus?id=" + dataId + "&status=" + status;
+                $.ajax({
+                    // edit to add steve's suggestion.
+                    //url: "/ControllerName/ActionName",
+                    url: url,
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            });
+    });
+    // $("updateStatus").getJSON();
 
-        $('#datatable').dataTable();
+    $(document).ready(function () {
+        var table = $("#productTable").DataTable();
+        //var arrayfilter = [2, 4];
+
+        createDropFilter(table, [2]);
+        bindDropFilter(table, [5]);
 
     });
+
+    function createDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change',
+                function () {
+                    table.column(i)
+                        .search($(this).val())
+                        .draw();
+                });
+
+            table.column(i).data().unique().sort().each(function (d, j) {
+                filter1.append('<option value="' + d + '">' + d + '</option>');
+            });
+
+        });
+    }
+
+    function bindDropFilter(table, array) {
+        array.forEach(function (i) {
+            var selector = ".filter_" + i;
+            var filter1 = $(selector);
+            filter1.on('change',
+                function () {
+                    table.column(i)
+                        .search($(this).val())
+                        .draw();
+                });
+        });
+    }
 </script>

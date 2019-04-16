@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Outsourcing.Core.Common;
+﻿using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
@@ -11,6 +9,7 @@ namespace Outsourcing.Service.HMS
     {
         IQueryable<RoomOrder> FindAll();
         RoomOrder FindById(int id);
+        void UpdateStatus(int id, RoomOrderStatus status);
         void Create(RoomOrder entity);
         void Edit(RoomOrder entity);
         void Delete(int id);
@@ -46,6 +45,13 @@ namespace Outsourcing.Service.HMS
         public RoomOrder FindById(int id)
         {
             return _roomOrderRepository.FindBy(w => w.Id == id && w.Deleted == false).SingleOrDefault();
+        }
+
+        public void UpdateStatus(int id, RoomOrderStatus status)
+        {
+            var entity = FindById(id);
+            entity.Status = status;
+            Edit(entity);
         }
 
         public void Create(RoomOrder entity)

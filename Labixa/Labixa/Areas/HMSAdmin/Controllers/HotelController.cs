@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
@@ -9,30 +12,35 @@ using Labixa.Areas.HMSAdmin.ViewModels;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-
     #region Field
+
     public partial class HotelController : BaseController
     {
         readonly IHotelService _hotelService;
         readonly ICategoryHotelService _hotelCategoryService;
+
         #endregion
 
         #region Ctor
+
         public HotelController(IHotelService hotelService, ICategoryHotelService hotelCategoryService)
         {
             _hotelService = hotelService;
             _hotelCategoryService = hotelCategoryService;
         }
+
         #endregion
 
-        public ActionResult Index(int? page = 1)
+        public async Task<ActionResult> Index(int? id, int? page = 1)
         {
             var hotels = _hotelService.GetHotels();
-            
-          
-                             
-            return View(hotels);
+            if (id != null)
+            {
+                hotels = hotels.Where(w => w.Id == id);
+            }
+            return View(await hotels.ToListAsync());
         }
+
         public ActionResult ManageStaticPage()
         {
             var hotels = _hotelService.GetStaticPage();
@@ -43,7 +51,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             //Get the list category
             var listCategory = _hotelCategoryService.GetProductCategories().ToSelectListItems(-1);
-            var hotel = new HotelModel { ListCategoryHotel = listCategory };
+            var hotel = new HotelModel {ListCategoryHotel = listCategory};
             return View(hotel);
         }
 
@@ -85,12 +93,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 }
                 //Create Hotel
                 _hotelService.CreateHotel(hotel);
-                return continueEditing ? RedirectToAction("Edit", "Hotel", new { HotelId = hotel.Id })
-                                  : RedirectToAction("Index", "Hotel");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Hotel", new {HotelId = hotel.Id})
+                    : RedirectToAction("Index", "Hotel");
             }
             else
             {
-                newHotel.ListCategoryHotel = _hotelCategoryService.GetProductCategories().ToSelectListItems(newHotel.CategoryHotelId);
+                newHotel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+                    .ToSelectListItems(newHotel.CategoryHotelId);
                 return View("Create", newHotel);
             }
         }
@@ -98,7 +108,6 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         [HttpGet]
         public ActionResult Edit(int hotelId)
         {
-
             var hotel = _hotelService.GetHotelById(hotelId);
             //HotelModel HotelFormModel = Mapper.Map<Hotel, HotelModel>(Hotel);
             HotelModel hotelFormModel = new HotelModel
@@ -128,7 +137,8 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 UrlImage2 = hotel.UrlImage2,
                 UrlImage3 = hotel.UrlImage3
             };
-            hotelFormModel.ListCategoryHotel = _hotelCategoryService.GetProductCategories().ToSelectListItems(hotelFormModel.CategoryHotelId);
+            hotelFormModel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+                .ToSelectListItems(hotelFormModel.CategoryHotelId);
 
             return View(hotelFormModel);
         }
@@ -165,26 +175,23 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 hotel.UrlImage3 = hotelToEdit.UrlImage3;
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.EditHotel(hotel);
-                return continueEditing ? RedirectToAction("Edit", "Hotel", new { HotelId = hotel.Id })
-                                 : RedirectToAction("Index", "Hotel");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Hotel", new {HotelId = hotel.Id})
+                    : RedirectToAction("Index", "Hotel");
             }
             else
             {
-                hotelToEdit.ListCategoryHotel = _hotelCategoryService.GetProductCategories().ToSelectListItems(hotelToEdit.CategoryHotelId);
+                hotelToEdit.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+                    .ToSelectListItems(hotelToEdit.CategoryHotelId);
                 return View("Edit", hotelToEdit);
             }
         }
 
 
-
-
-     
         public ActionResult Delete(int hotelId)
         {
             _hotelService.DeleteHotel(hotelId);
             return RedirectToAction("Index");
         }
-
-
     }
 }

@@ -1,0 +1,202 @@
+﻿@model Outsourcing.Data.Models.HMS.RoomOrder
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Checkout</h2>
+   
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Name)
+        </dd>
+  
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>RoomOrder</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CheckOutDate, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.CheckOutDate)
+                @Html.ValidationMessageFor(model => model.CheckOutDate)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CheckInDate, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.CheckInDate)
+                @Html.ValidationMessageFor(model => model.CheckInDate)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CheckOutTime, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.CheckOutTime)
+                @Html.ValidationMessageFor(model => model.CheckOutTime)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CheckInTime, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.CheckInTime)
+                @Html.ValidationMessageFor(model => model.CheckInTime)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Motobike, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Motobike)
+                @Html.ValidationMessageFor(model => model.Book_Motobike)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.BookCar, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.BookCar)
+                @Html.ValidationMessageFor(model => model.BookCar)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Tour, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Tour)
+                @Html.ValidationMessageFor(model => model.Book_Tour)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_BBQService, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_BBQService)
+                @Html.ValidationMessageFor(model => model.Book_BBQService)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Gift, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Gift)
+                @Html.ValidationMessageFor(model => model.Book_Gift)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Laundry, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Laundry)
+                @Html.ValidationMessageFor(model => model.Book_Laundry)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_FlightTicket, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_FlightTicket)
+                @Html.ValidationMessageFor(model => model.Book_FlightTicket)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Visa, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Visa)
+                @Html.ValidationMessageFor(model => model.Book_Visa)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_Taxi, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_Taxi)
+                @Html.ValidationMessageFor(model => model.Book_Taxi)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_SuggestionTour, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_SuggestionTour)
+                @Html.ValidationMessageFor(model => model.Book_SuggestionTour)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Book_RegisterResidence, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Book_RegisterResidence)
+                @Html.ValidationMessageFor(model => model.Book_RegisterResidence)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.OtherBookService, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.OtherBookService)
+                @Html.ValidationMessageFor(model => model.OtherBookService)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Total_DescriptionBook_Noted, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Total_DescriptionBook_Noted)
+                @Html.ValidationMessageFor(model => model.Total_DescriptionBook_Noted)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.TotalBookPrice, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.TotalBookPrice)
+                @Html.ValidationMessageFor(model => model.TotalBookPrice)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Note, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Note)
+                @Html.ValidationMessageFor(model => model.Note)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.AmountOfPeople, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.AmountOfPeople)
+                @Html.ValidationMessageFor(model => model.AmountOfPeople)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
