@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
 {
     public interface IHotelService
     {
-
-        IEnumerable<Hotels> GetHotels();
+        IQueryable<Hotels> GetHotels();
         Hotels GetHotelContact();
         IEnumerable<Hotels> GetHomePageHotels();
         IEnumerable<Hotels> GetHotelByCategorySlug(string slug);
@@ -36,32 +32,39 @@ namespace Outsourcing.Service.HMS
         IEnumerable<Hotels> GetStaticPage();
         IEnumerable<Hotels> GetNewPost();
     }
+
     public class HotelService : IHotelService
     {
         #region Field
+
         private readonly IHotelRepository HotelRepository;
         private readonly IUnitOfWork unitOfWork;
+
         #endregion
 
         #region Ctor
+
         public HotelService(IHotelRepository HotelRepository, IUnitOfWork unitOfWork)
         {
             this.HotelRepository = HotelRepository;
             this.unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region Implementation for IHotelService
-        public IEnumerable<Hotels> GetHotels()
+
+        public IQueryable<Hotels> GetHotels()
         {
-            var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderBy(b => b.Position);
-            return Hotels;
+            return HotelRepository.FindBy().OrderBy(b => b.Position);
         }
+
         public IEnumerable<Hotels> Get3HotelsPosition()
         {
-            var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderBy(b => b.Position).Take(3);
+            var Hotels = HotelRepository.GetMany(b => !b.Deleted).OrderBy(b => b.Position).Take(3);
             return Hotels;
         }
+
         public IEnumerable<Hotels> GetHomePageHotels()
         {
             //var Hotels = HotelRepository.
@@ -70,6 +73,7 @@ namespace Outsourcing.Service.HMS
             //return Hotels;
             return null;
         }
+
         public IEnumerable<Hotels> GetHotelByCategoryId(int id)
         {
             //var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
@@ -78,8 +82,8 @@ namespace Outsourcing.Service.HMS
             //    OrderByDescending(b => b.DateCreated);
             //return Hotels;
             return null;
-
         }
+
         public IEnumerable<Hotels> GetHotelByCategorySlug(string slug)
         {
             //    var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
@@ -88,11 +92,11 @@ namespace Outsourcing.Service.HMS
             //        OrderByDescending(b => b.DateCreated);
             //    return Hotels;
             return null;
-
         }
+
         public IEnumerable<Hotels> GetStaticPage()
         {
-            var Hotels = HotelRepository.GetMany(b =>!b.Deleted).OrderByDescending(b => b.DateCreated);
+            var Hotels = HotelRepository.GetMany(b => !b.Deleted).OrderByDescending(b => b.DateCreated);
             return Hotels;
         }
 
@@ -161,16 +165,19 @@ namespace Outsourcing.Service.HMS
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 6).Take(6);
             return Hotels;
         }
+
         public IEnumerable<Hotels> Get2HotelNews()
         {
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(2);
             return Hotels;
         }
+
         public IEnumerable<Hotels> Get3HotelNewsNewest()
         {
             var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(3);
             return Hotels;
         }
+
         #endregion
 
 
@@ -183,7 +190,8 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<Hotels> GetNewPost()
         {
-            return HotelRepository.GetAll().Where(p => p.CategoryHotelId == 3).OrderByDescending(p => p.DateCreated).Take(5);
+            return HotelRepository.GetAll().Where(p => p.CategoryHotelId == 3).OrderByDescending(p => p.DateCreated)
+                .Take(5);
         }
     }
 }

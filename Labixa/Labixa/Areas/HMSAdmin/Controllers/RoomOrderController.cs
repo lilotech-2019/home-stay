@@ -39,7 +39,7 @@
 //            if (!(roomId == null))
 //            {
 
-//                var room = _roomService.GetRoomById(int.Parse(roomId.ToString()));
+//                var room = _roomService.FindById(int.Parse(roomId.ToString()));
 //                roomOrder.CheckIn = DateTime.Now.Date;
 //                roomOrder.DateCreated = DateTime.Now.Date;
 //                roomOrder.Deadline = DateTime.Now.Date;
@@ -59,7 +59,7 @@
 //        {
 //            if (!(roomOrder == null))
 //            {
-//                var room = _roomService.GetRoomById(int.Parse(roomOrder.RoomId.ToString()));
+//                var room = _roomService.FindById(int.Parse(roomOrder.RoomId.ToString()));
 
 //                //var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrder.CheckIn.ToString()), DateTime.Parse(roomOrder.Deadline.ToString()));
 //                //roomOrder.TotalBookPrice = double.Parse(roomOrder.TotalPaymentRoom_DraftCheckIn.ToString()) + (total * room.Price);
@@ -80,7 +80,7 @@
 //        {
 //            if (!(roomOrderEdit == null))
 //            {
-//                var room = _roomService.GetRoomById(int.Parse(roomOrderEdit.RoomId.ToString()));
+//                var room = _roomService.FindById(int.Parse(roomOrderEdit.RoomId.ToString()));
 
 //                var total = Calculator.CalcNumOfDay(DateTime.Parse(roomOrderEdit.CheckIn.ToString()), DateTime.Parse(roomOrderEdit.Deadline.ToString()));
 //                Rooms room1 = room;

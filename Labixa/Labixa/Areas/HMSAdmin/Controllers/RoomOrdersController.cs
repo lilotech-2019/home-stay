@@ -21,11 +21,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             _roomOrderService = roomOrderService;
         }
 
-        // GET: /HMSAdmin/RoomOrders/
+        public ActionResult UpdateStatus(int id, RoomOrderStatus status)
+        {
+            _roomOrderService.UpdateStatus(id, status);
+            return Json(HttpStatusCode.OK, JsonRequestBehavior.AllowGet);
+        }
+
         public async Task<ActionResult> Index()
         {
-            //var roomOrders = _db.RoomOrders.Include(r => r.Room).Include(c => c.Customer).Where(w => w.Deleted == false)
-            //    .OrderBy(o => o.Status);
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
             return View(await roomOrders.ToListAsync());
         }
@@ -132,6 +135,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Checkout(int id)
+        {
+            var entity =_roomOrderService.FindById(id);
+            return View(entity);
         }
     }
 }

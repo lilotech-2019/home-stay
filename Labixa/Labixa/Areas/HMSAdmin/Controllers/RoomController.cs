@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Common;
@@ -7,6 +6,7 @@ using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
 using Labixa.Areas.HMSAdmin.ViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
@@ -19,33 +19,41 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         readonly IHotelService _hotelService;
         readonly IRoomImageMappingService _roomImageMappingService;
 
-
         #endregion
 
         #region Ctor
+
         public RoomController(IRoomService roomService, IRoomImageService roomImageService
-        , IHotelService hotelService
-        , IRoomImageMappingService roomImageMappingService)
+            , IHotelService hotelService
+            , IRoomImageMappingService roomImageMappingService)
         {
             _roomService = roomService;
             _roomImageService = roomImageService;
             _hotelService = hotelService;
             _roomImageMappingService = roomImageMappingService;
         }
+
         #endregion
+
         //
         // GET: /HMSAdmin/Room/
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var model = _roomService.GetRooms();
-            return View(model);
+            var rooms = _roomService.GetRooms();
+            if (id != null)
+            {
+                rooms = rooms.Where(w => w.Id == id);
+            }
+
+            return View(rooms);
         }
+
         public ActionResult Create()
         {
-            RoomModel model = new RoomModel();
-            model.ListHotels = _hotelService.GetHotels().ToSelectListItems(-1);
+            var model = new RoomModel {ListHotels = _hotelService.GetHotels().AsEnumerable().ToSelectListItems(-1)};
             return View(model);
         }
+
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
         public ActionResult Create(RoomModel newRoom, bool continueEditing)
@@ -80,13 +88,13 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                     Utility_TuDo = newRoom.Utility_TuDo,
                     Utility_WashMachine = newRoom.Utility_WashMachine
                 };
-                if (String.IsNullOrEmpty(room.Slug))
+                if (string.IsNullOrEmpty(room.Slug))
                 {
                     room.Slug = StringConvert.ConvertShortName(room.Name);
                 }
                 //Create Room
                 _roomService.CreateRoom(room);
-                if (room.RoomImageMappings==null)
+                if (room.RoomImageMappings == null)
                 {
                     room.RoomImageMappings = new Collection<RoomImageMappings>();
                     for (int i = 0; i < 8; i++)
@@ -105,8 +113,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                     }
                     _roomService.EditRoom(room);
                 }
-                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = room.Id })
-                                  : RedirectToAction("Index", "Room");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Room", new {RoomId = room.Id})
+                    : RedirectToAction("Index", "Room");
             }
             else
             {
@@ -118,34 +127,35 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         [HttpGet]
         public ActionResult Edit(int roomId)
         {
-
-            var room = _roomService.GetRoomById(roomId);
+            var room = _roomService.FindById(roomId);
             //RoomModel RoomFormModel = Mapper.Map<Room, RoomModel>(Room);
-            RoomModel roomFormModel = new RoomModel();
+            RoomModel roomFormModel = new RoomModel
+            {
+                Description = room.Description,
+                DiscountPercent = room.DiscountPercent,
+                DisplayOrder = room.DisplayOrder,
+                HotelId = room.HotelId,
+                Id = room.Id,
+                IsStaticPage = room.IsStaticPage,
+                Layout = room.Layout,
+                MetaDescription = room.MetaDescription,
+                MetaKeywords = room.MetaKeywords,
+                MetaTitle = room.MetaTitle,
+                Name = room.Name,
+                Noted = room.Noted,
+                Price = room.Price,
+                RoomImageMappings = room.RoomImageMappings,
+                SharePercent = room.SharePercent,
+                Slug = room.Slug,
+                Status = room.Status,
+                string1 = room.string1,
+                Utility_DryHair = room.Utility_DryHair,
+                Utility_HotWater = room.Utility_HotWater,
+                Utility_Iron = room.Utility_Iron,
+                Utility_Kitchen = room.Utility_Kitchen,
+                Utility_Snack = room.Utility_Snack
+            };
             // RoomFormModel = Mapper.Map<Room, RoomModel>(Room);
-            roomFormModel.Description = room.Description;
-            roomFormModel.DiscountPercent = room.DiscountPercent;
-            roomFormModel.DisplayOrder = room.DisplayOrder;
-            roomFormModel.HotelId = room.HotelId;
-            roomFormModel.Id = room.Id;
-            roomFormModel.IsStaticPage = room.IsStaticPage;
-            roomFormModel.Layout = room.Layout;
-            roomFormModel.MetaDescription = room.MetaDescription;
-            roomFormModel.MetaKeywords = room.MetaKeywords;
-            roomFormModel.MetaTitle = room.MetaTitle;
-            roomFormModel.Name = room.Name;
-            roomFormModel.Noted = room.Noted;
-            roomFormModel.Price = room.Price;
-            roomFormModel.RoomImageMappings = room.RoomImageMappings;
-            roomFormModel.SharePercent = room.SharePercent;
-            roomFormModel.Slug = room.Slug;
-            roomFormModel.Status = room.Status;
-            roomFormModel.string1 = room.string1;
-            roomFormModel.Utility_DryHair = room.Utility_DryHair;
-            roomFormModel.Utility_HotWater = room.Utility_HotWater;
-            roomFormModel.Utility_Iron = room.Utility_Iron;
-            roomFormModel.Utility_Kitchen = room.Utility_Kitchen;
-            roomFormModel.Utility_Snack = room.Utility_Snack;
             roomFormModel.Utility_Snack = room.Utility_Snack;
             roomFormModel.Utility_DryHair = room.Utility_DryHair;
             roomFormModel.Utility_TeaCoffee = room.Utility_TeaCoffee;
@@ -162,7 +172,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var room = _roomService.GetRoomById(roomToEdit.Id);
+                var room = _roomService.FindById(roomToEdit.Id);
                 //Mapping to domain
                 //Mapping to domain
                 room.Description = roomToEdit.Description;
@@ -201,8 +211,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
                 room.Slug = StringConvert.ConvertShortName(room.Name);
                 _roomService.EditRoom(room);
-                return continueEditing ? RedirectToAction("Edit", "Room", new { RoomId = room.Id })
-                                 : RedirectToAction("Index", "Room");
+                return continueEditing
+                    ? RedirectToAction("Edit", "Room", new {RoomId = room.Id})
+                    : RedirectToAction("Index", "Room");
             }
             else
             {
@@ -210,9 +221,6 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 return View("Edit", roomToEdit);
             }
         }
-
-
-
 
 
         public ActionResult Delete(int roomId)
