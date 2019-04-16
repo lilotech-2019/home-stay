@@ -39,9 +39,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Draff)
                     </th>
-                    <th>
-                        Total Draff
-                    </th>
+                
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
@@ -65,7 +63,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td rowspan="2">
+                        <td>
                             @Html.DisplayFor(modelItem => item.Room.Name)
                         </td>
                         <td class=""> @Html.DisplayFor(modelItem => item.CheckIn)</td>
@@ -87,10 +85,7 @@
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Total_DescriptionBook_Noted)
-                        </td>
-
+                    
                         <td>
                             @Html.DisplayFor(modelItem => item.AmountOfPeople)
                         </td>
@@ -164,23 +159,16 @@
 
                         </th>
                         <th class="center" style="background: cyan">
-
-                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-
+                           RegisterResidence
                         </th>
                         <th class="center" style="background: cyan">
-                            @*@Html.DisplayNameFor(model => model.OtherBookService)*@
-                            Other
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TotalBookPrice)
+                            @Html.DisplayNameFor(model => model.OtherBookService)
+                     
                         </th>
                     </tr>
 
                     <tr style="text-align: center">
-                        <td>
-                            <button class="btn btn-small btn-cool">Check Out</button>
-                        </td>
+                     
                         @{
                             if (item.Book_Motobike)
                             {

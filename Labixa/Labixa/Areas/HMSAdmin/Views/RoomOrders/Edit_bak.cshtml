@@ -12,16 +12,64 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RoomOrder</h4>
+        <h4>RoomOrders</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
          <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Total, new { @class = "col-sm-3 control-label no-padding-right" })
+            @Html.LabelFor(model => model.CustomerName, new { @class = "col-sm-3 control-label no-padding-right" })
            <div class="col-sm-9">
-                @Html.EditorFor(model => model.Total)
-                @Html.ValidationMessageFor(model => model.Total)
+                @Html.EditorFor(model => model.CustomerName)
+                @Html.ValidationMessageFor(model => model.CustomerName)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CustomerAddress, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.CustomerAddress)
+                @Html.ValidationMessageFor(model => model.CustomerAddress)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CustomerPhone, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.CustomerPhone)
+                @Html.ValidationMessageFor(model => model.CustomerPhone)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CustomerEmail, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.CustomerEmail)
+                @Html.ValidationMessageFor(model => model.CustomerEmail)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.CustomeNumber, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.CustomeNumber)
+                @Html.ValidationMessageFor(model => model.CustomeNumber)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.TotalPayment_CheckOut, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.TotalPayment_CheckOut)
+                @Html.ValidationMessageFor(model => model.TotalPayment_CheckOut)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.TotalPaymentRoom_DraftCheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.TotalPaymentRoom_DraftCheckIn)
+                @Html.ValidationMessageFor(model => model.TotalPaymentRoom_DraftCheckIn)
             </div>
         </div>
 
@@ -66,34 +114,18 @@
         </div>
 
          <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CheckOutDate, new { @class = "col-sm-3 control-label no-padding-right" })
+            @Html.LabelFor(model => model.Deadline, new { @class = "col-sm-3 control-label no-padding-right" })
            <div class="col-sm-9">
-                @Html.EditorFor(model => model.CheckOutDate)
-                @Html.ValidationMessageFor(model => model.CheckOutDate)
+                @Html.EditorFor(model => model.Deadline)
+                @Html.ValidationMessageFor(model => model.Deadline)
             </div>
         </div>
 
          <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CheckInDate, new { @class = "col-sm-3 control-label no-padding-right" })
+            @Html.LabelFor(model => model.CheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
            <div class="col-sm-9">
-                @Html.EditorFor(model => model.CheckInDate)
-                @Html.ValidationMessageFor(model => model.CheckInDate)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CheckOutTime, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.CheckOutTime)
-                @Html.ValidationMessageFor(model => model.CheckOutTime)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CheckInTime, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.CheckInTime)
-                @Html.ValidationMessageFor(model => model.CheckInTime)
+                @Html.EditorFor(model => model.CheckIn)
+                @Html.ValidationMessageFor(model => model.CheckIn)
             </div>
         </div>
 
@@ -193,6 +225,13 @@
             </div>
         </div>
 
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Total_DescriptionBook_Noted, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.Total_DescriptionBook_Noted)
+                @Html.ValidationMessageFor(model => model.Total_DescriptionBook_Noted)
+            </div>
+        </div>
 
          <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.TotalBookPrice, new { @class = "col-sm-3 control-label no-padding-right" })
@@ -211,18 +250,18 @@
         </div>
 
          <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.AmountOfPeople, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.AmountOfPeople)
-                @Html.ValidationMessageFor(model => model.AmountOfPeople)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
            <div class="col-sm-9">
                 @Html.EditorFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+         <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.DescriptionEN, new { @class = "col-sm-3 control-label no-padding-right" })
+           <div class="col-sm-9">
+                @Html.EditorFor(model => model.DescriptionEN)
+                @Html.ValidationMessageFor(model => model.DescriptionEN)
             </div>
         </div>
 
@@ -233,14 +272,6 @@
                 @Html.ValidationMessageFor(model => model.RoomId)
             </div>
         </div>
-
-         @*<div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CustomerId, "CustomerId", new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.DropDownList("CustomerId", String.Empty)
-                @Html.ValidationMessageFor(model => model.CustomerId)
-            </div>
-        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

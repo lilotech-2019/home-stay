@@ -1541,13 +1541,14 @@
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Create.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Delete.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Details.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Index.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit_bak.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
