@@ -20,9 +20,11 @@ namespace Outsourcing.Data.Models.HMS
         /// </summary>
         public double Total { get; set; }
 
-        public double Draff => TotalDraff() - Discount();
+        public double Draff => TotalDraff();
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH-mm}")]
         public DateTime CheckIn => CheckInDate + CheckInTime;
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH-mm}")]
         public DateTime CheckOut => CheckOutDate + CheckOutTime;
 
@@ -30,9 +32,11 @@ namespace Outsourcing.Data.Models.HMS
         {
             if (Room == null)
             {
-                return 0;
+                return 0.1;
             }
-            return Room.Price * (CheckOut - CheckIn).TotalDays;
+            var calculateDay = (DateTime.Now - CheckIn).TotalDays;
+
+            return Room.Price * calculateDay;
         }
 
         private double Discount()
@@ -101,8 +105,6 @@ namespace Outsourcing.Data.Models.HMS
             {
                 yield return new ValidationResult("CheckInDate must be greater than CheckOutDate");
             }
-
-          
         }
     }
 

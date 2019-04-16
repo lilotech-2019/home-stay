@@ -1,102 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
 {
-
     public interface IRoomService
     {
-
         IEnumerable<Rooms> GetRooms();
-        Rooms GetRoomById(int RoomId);
-        void CreateRoom(Rooms Room);
-        void EditRoom(Rooms RoomToEdit);
-        void DeleteRoom(int RoomId);
+        Rooms FindById(int id);
+        void CreateRoom(Rooms room);
+        void EditRoom(Rooms roomToEdit);
+        void DeleteRoom(int roomId);
         void SaveRoom();
         Rooms GetRoomByUrlName(string urlName);
         IEnumerable<Rooms> Get3RoomShortNews();
         IEnumerable<Rooms> Get3RoomLongNews();
 
         //IEnumerable<Room> Get4RoomShortHome();
-   
-        IEnumerable<ValidationResult> CanAddRoom(Rooms Room);
 
+        IEnumerable<ValidationResult> CanAddRoom(Rooms room);
     }
+
     public class RoomService : IRoomService
     {
         #region Field
-        private readonly IRoomRepository RoomRepository;
-        private readonly IUnitOfWork unitOfWork;
+
+        private readonly IRoomRepository _roomRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         #endregion
 
         #region Ctor
-        public RoomService(IRoomRepository RoomRepository, IUnitOfWork unitOfWork)
+
+        public RoomService(IRoomRepository roomRepository, IUnitOfWork unitOfWork)
         {
-            this.RoomRepository = RoomRepository;
-            this.unitOfWork = unitOfWork;
+            this._roomRepository = roomRepository;
+            this._unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region BaseMethod
 
         public IEnumerable<Rooms> GetRooms()
         {
-            var Rooms = RoomRepository.GetAll();
-            return Rooms;
+            return _roomRepository.FindBy();
         }
 
-        public Rooms GetRoomById(int RoomId)
+        public Rooms FindById(int id)
         {
-            var Room = RoomRepository.GetById(RoomId);
-            return Room;
+            return _roomRepository.FindBy(w => w.Id == id).SingleOrDefault();
         }
 
-        public Rooms GetRoomByUrlName( string urlName)
+        public Rooms GetRoomByUrlName(string urlName)
         {
-            var Room = RoomRepository.Get(b => b.Slug == urlName);
-            return Room;
+            var room = _roomRepository.FindBy(b => b.Slug == urlName).SingleOrDefault();
+            return room;
         }
 
 
-        public void CreateRoom(Rooms Room)
+        public void CreateRoom(Rooms room)
         {
-            RoomRepository.Add(Room);
+            _roomRepository.Add(room);
             SaveRoom();
         }
 
-        public void EditRoom(Rooms RoomToEdit)
+        public void EditRoom(Rooms roomToEdit)
         {
-            RoomRepository.Update(RoomToEdit);
+            _roomRepository.Update(roomToEdit);
             SaveRoom();
         }
 
-        public void DeleteRoom(int RoomId)
+        public void DeleteRoom(int roomId)
         {
             //Get Room by id.
-            var Room = RoomRepository.GetById(RoomId);
-            if (Room != null)
+            var room = _roomRepository.FindBy(w => w.Id == roomId).SingleOrDefault();
+            if (room != null)
             {
-                RoomRepository.Delete(Room);
+                _roomRepository.Delete(room);
                 SaveRoom();
             }
         }
 
         public void SaveRoom()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoom(Rooms Room)
+        public IEnumerable<ValidationResult> CanAddRoom(Rooms room)
         {
-
             //    yield return new ValidationResult("Room", "ErrorString");
             return null;
         }
@@ -112,10 +107,6 @@ namespace Outsourcing.Service.HMS
             var blogs = this.GetRooms().Where(p => p.Hotel.Layout == 2).OrderBy(p => p.Layout == 1).Take(3);
             return blogs;
         }
-
-
-
-    
 
         #endregion
     }
