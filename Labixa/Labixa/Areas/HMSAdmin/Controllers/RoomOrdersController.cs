@@ -21,9 +21,9 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             _roomOrderService = roomOrderService;
         }
 
-        public ActionResult UpdateStatus(int id, RoomOrderStatus status)
+        public ActionResult UpdateStatus(int id, int status)
         {
-            _roomOrderService.UpdateStatus(id, status);
+            _roomOrderService.UpdateStatus(id, (RoomOrderStatus) status);
             return Json(HttpStatusCode.OK, JsonRequestBehavior.AllowGet);
         }
 

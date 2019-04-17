@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
@@ -51,6 +52,18 @@ namespace Outsourcing.Service.HMS
         {
             var entity = FindById(id);
             entity.Status = status;
+            //if (status == RoomOrderStatus.CheckIn)
+            //{
+            //    entity.CheckInDate = DateTime.Today;
+            //    entity.CheckInTime = DateTime.Now.TimeOfDay;
+            //}
+            //else if (status == RoomOrderStatus.CheckOut)
+            //{
+            //    entity.CheckOutDate = DateTime.Today;
+            //    entity.CheckOutTime = DateTime.Now.TimeOfDay;
+            //   entity.Total = (entity.CheckOut - entity.CheckIn).TotalDays * entity.Room.Price;
+            //}
+
             Edit(entity);
         }
 

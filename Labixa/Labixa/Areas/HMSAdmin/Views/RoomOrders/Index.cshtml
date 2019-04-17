@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@using Outsourcing.Data.Models.HMS
+﻿@using Outsourcing.Data.Models.HMS
 @model IEnumerable<RoomOrder>
 @{
     ViewBag.Title = "Quản lý Phòng";
@@ -38,86 +37,84 @@
 
             <table id="productTable" class="table table-bordered table-striped table-fixed-header">
                 <thead>
-                    <tr role="row">
-                        <th>#</th>
-                        <th>Tên Khách sạn</th>
-                        <th>Tên phòng</th>
-                        <th>Tên khách hàng</th>
-                        <th>Điện Thoại</th>
-                        <th>Ngày Checkin</th>
-                        <th>Ngày Checkout</th>
-                        <th>Tạm Tính</th>
-                        <th>Trạng Thái</th>
-                        <th></th>
-                    </tr>
+                <tr role="row">
+                    <th>#</th>
+                    <th>Tên Khách sạn</th>
+                    <th>Tên phòng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Điện Thoại</th>
+                    <th>Ngày Checkin</th>
+                    <th>Ngày Checkout</th>
+                    <th>Tạm Tính</th>
+                    <th>Trạng Thái</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                    @if (Model != null && Model.Any())
+                @if (Model != null && Model.Any())
+                {
+                    var count = 0;
+                    foreach (var item in Model)
                     {
-                        var count = 0;
-                        foreach (var item in Model)
-                        {
-                            count++;
+                        count++;
 
-                            <tr class="">
-                                <td>@count</td>
-                                <td class="">
-                                    <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
-                                </td>
-                                <td class="">
-                                    <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
-                                </td>
-                                <td class="">@item.Customer.Name</td>
-                                <td class="">@item.Customer.Phone</td>
-                                <td class="">@item.CheckIn</td>
-                                <td class="">@item.CheckOut</td>
-                                <td class="">@item.Draff.ToString("#,##0")</td>
+                        <tr class="">
+                            <td>@count</td>
+                            <td class="">
+                                <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
+                            </td>
+                            <td class="">
+                                <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
+                            </td>
+                            <td class="">@item.Customer.Name</td>
+                            <td class="">@item.Customer.Phone</td>
+                            <td class="">@item.CheckIn</td>
+                            <td class="">@item.CheckOut</td>
+                            <td class="">@item.Draff.ToString("#,##0")</td>
 
-                                <td class="hidden-480 ">
-                                    @{
-                                        var status = item.Status;
-                                        switch (status)
-                                        {
-                                            case RoomOrderStatus.New:
-                                                <span class="label label-sm label-warning">Đợi xác nhận</span>
-                                                var selectList = Enum.GetValues(typeof(RoomOrderStatus))
-                                                    .Cast<RoomOrderStatus>()
-                                                    .Where(e => e != RoomOrderStatus.New && e != RoomOrderStatus.Processed)
-                                                    .Select(e => new SelectListItem
-                                                    {
-                                                        Value = ((int)e).ToString(),
-                                                        Text = e.ToString()
-                                                    });
-                                                @Html.DropDownList(string.Format("item.Status.{0}", item.Id), selectList)
-                                                <button id="updateStatus" data-id="@item.Id">Xử lý</button>
-                                                break;
-                                            case RoomOrderStatus.Processed:
-                                                <span class="label label-sm label-success">Đã xử lý</span>
-                                                break;
-                                            case RoomOrderStatus.CheckIn:
-                                                <a href="@Url.Action("Checkout", new{id=item.Id})" class="btn btn-primary btn-small">Check out</a>
-                                                break;
-                                        }
+                            <td class="hidden-480 ">
+                                @{
+                                    var status = item.Status;
+                                    switch (status)
+                                    {
+                                        case RoomOrderStatus.New:
+                                            <span class="label label-sm label-warning">Đợi xác nhận</span>
 
+                                            <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
+                                            break;
+                                        case RoomOrderStatus.Processed:
+                                            <span class="label label-sm label-success">Đã xử lý</span>
+                                            break;
+                                        case RoomOrderStatus.CheckIn:
+                                            <span class="label label-sm label-success">Đã check in</span>
+                                            <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
+                                            break;
+                                        case RoomOrderStatus.CheckOut:
+                                            <span class="label label-sm label-success">Đã check out</span>
+                                            <button id="processed" data-href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</button>
+                                            break;
+                                        default:
+                                            throw new ArgumentOutOfRangeException();
                                     }
-                                </td>
+                                }
+                            </td>
 
 
-                                <td class=" ">
-                                    <div class="visible-md visible-lg  btn-group">
+                            <td class=" ">
+                                <div class="visible-md visible-lg  btn-group">
 
-                                        <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                    <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
 
-                                    </div>
-                                </td>
-                            </tr>
-                        }
+                                </div>
+                            </td>
+                        </tr>
                     }
+                }
                 </tbody>
             </table>
         </div>
@@ -131,25 +128,26 @@
     //   status = this.value;
     //});
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#updateStatus").on("click",
-            function () {
-                var dataId = $(this).attr("data-id");
-                var status = $("#item_Status_" + dataId + " option:selected").val();
-                var url = "/HMSAdmin/RoomOrders/UpdateStatus?id=" + dataId + "&status=" + status;
+            function() {
+                var url = $(this).attr("data-url");
                 $.ajax({
-                    // edit to add steve's suggestion.
-                    //url: "/ControllerName/ActionName",
                     url: url,
-                    success: function () {
-                        location.reload();
+                    success: function() {
+                        window.location.reload();
                     }
                 });
+            });
+        $("#processed").on("click",
+            function() {
+                var url = $(this).attr("data-href");
+                window.location.href = url;
             });
     });
     // $("updateStatus").getJSON();
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         var table = $("#productTable").DataTable();
         //var arrayfilter = [2, 4];
 
@@ -159,17 +157,17 @@
     });
 
     function createDropFilter(table, array) {
-        array.forEach(function (i) {
+        array.forEach(function(i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function () {
+                function() {
                     table.column(i)
                         .search($(this).val())
                         .draw();
                 });
 
-            table.column(i).data().unique().sort().each(function (d, j) {
+            table.column(i).data().unique().sort().each(function(d, j) {
                 filter1.append('<option value="' + d + '">' + d + '</option>');
             });
 
@@ -177,11 +175,11 @@
     }
 
     function bindDropFilter(table, array) {
-        array.forEach(function (i) {
+        array.forEach(function(i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function () {
+                function() {
                     table.column(i)
                         .search($(this).val())
                         .draw();
