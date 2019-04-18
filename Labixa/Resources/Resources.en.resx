@@ -468,4 +468,7 @@
   <data name="HMS_footerExpartService" xml:space="preserve">
     <value>Expart Services</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value>Phòng nổi bật</value>
+  </data>
 </root>

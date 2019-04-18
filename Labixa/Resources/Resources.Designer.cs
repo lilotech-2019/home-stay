@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phòng nổi bật.
+        /// </summary>
+        public static string HMS_BudgetRooms {
+            get {
+                return ResourceManager.GetString("HMS_BudgetRooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xe Hơi 4,7,16 chỗ.
         /// </summary>
         public static string HMS_Cars {

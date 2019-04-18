@@ -9,7 +9,7 @@ namespace Outsourcing.Data.Models.HMS
     {
 
         public string Name { get; set; }
-        public string NameENG { get; set; }
+        public string NameEN { get; set; }
         public string Description { get; set; }
         public string DescriptionENG { get; set; }
         public int SharePercent { get; set; }

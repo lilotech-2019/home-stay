@@ -24,13 +24,19 @@
                     <div class="thm-container">
                         <div class="box valign-middle">
                             <div class="content text-left">
-                                <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ</h2>
+                                <p data-animation="animated fadeInDown">
+                                    Rời bỏ nội đô ồn ào và chật chội để kiếm tìm một không gian sống riêng tư mà thoáng đãng, an nhiên giữa sông nước, cây cỏ và nắng gió 
+                                </p>
+                                }else{
+                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
                                 <p data-animation="animated fadeInDown">
                                     Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
                                     aut fugit, sed quia consequuntur magni dolores eos quit.
                                 </p>
-                                @*<a data-animation="animated fadeInRight"
-                            href="#" class="nhs-btn">know more</a>*@
+                                }
                             </div>
                         </div>
                     </div>
@@ -44,12 +50,19 @@
                     <div class="thm-container">
                         <div class="box valign-middle">
                             <div class="content text-center">
-                                <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
+                               @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ </h2>
+                                <p data-animation="animated fadeInDown">
+                                    công trình kiến trúc nhà vườn được thiết kế để phục vụ cho những trải nghiệm cảm xúc vợ chồng đỉnh cao, văn minh hiện
+                                </p>
+                                }else{
+                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
                                 <p data-animation="animated fadeInDown">
                                     Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
                                     aut fugit, sed quia consequuntur magni dolores eos quit.
-                                </p>@*<a data-animation="animated fadeInRight"
-                            href="#" class="nhs-btn">know more</a>*@
+                                </p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -63,14 +76,19 @@
                     <div class="thm-container">
                         <div class="box valign-middle">
                             <div class="content text-left">
-                                <h2 data-animation="animated fadeInUp" class="this-title">
-                                    Make Your Memorable Holidays in a LakeResort
-                                </h2>
+                                 @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ </h2>
+                                <p data-animation="animated fadeInDown">
+                                   Căn hộ dịch vụ cao cấp được xây dựng với các tiện nghi, sang trọng cùng với cách bố trí hài hòa theo phong cách hiện đại. 
+                                </p>
+                                }else{
+                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
                                 <p data-animation="animated fadeInDown">
                                     Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
                                     aut fugit, sed quia consequuntur magni dolores eos quit.
-                                </p>@*<a data-animation="animated fadeInRight"
-                            href="#" class="nhs-btn">know more</a>*@
+                                </p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -88,45 +106,7 @@
 </div>
 <!-- Search style-->
 <div class="search-wrapper">
-    <section class="container clearfix">
-        <div class="search-sec" style="display: none;">
-            <div class="overlay">
-                <div class="border">
-                    <div class="ser-in-box">
-                        <input placeholder="Arival Date" type="text" class="form-control datepicker-example8">
-                    </div>
-                    <div class="ser-in-box">
-                        <input type="text" placeholder="Departure Date" class="form-control datepicker-example8">
-                    </div>
-                    <div class="ser-in-box">
-                        <div class="select-box">
-                            <select name="selectMenu" class="select-menu">
-                                <option value="default">Adults</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="ser-in-box">
-                        <div class="select-box">
-                            <select name="selectMenu" class="select-menu">
-                                <option value="default">Children</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="ser-in-box chk-button">
-                        <button type="submit" class="res-btn" onclick="location.href = '/booking'">Check Availability</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 </div>
 <!-- Search style-->
 <!-- Welcome to Lake Resort style-->
@@ -134,12 +114,24 @@
     <section class="container clearfix wel-pad">
         <div class="wel-content">
             <h1>@Html.Raw(Resources.Resources.HMS_Welcome)</h1>
-            <h2>Pick a room that best suits your taste and budget</h2>
+            @if (cookie != null && cookie.Value.Equals("vi"))
+            {
+            <h2>Hãy đến với Đà Lạt Amazing để trải nghiệm!</h2>
+            <p>
+                Nếu bạn cần một không gian để làm mới tâm hồn, tìm kiếm cảm hứng cho cuộc sống của bản thân thì hãy đến Đà Lạt Amazing.
+                Bạn muốn hít thở không khí trong lành, tránh xa sự ồn ào của phố thị, tận hưởng những giây phút thư giãn bên người thân
+                trong một không gian đầm ấm, gắn kết với nhau hơn bên. Đây là là công trình kiến trúc  được thiết kế để phục vụ cho những trải nghiệm cảm xúc vợ chồng đỉnh cao, văn minh hiện đại và chỉ để dành riêng phục vụ cho các bạn
+            </p>
+            }
+            else
+            {
+                 <h2>Pick a room that best suits your taste and budget</h2>
             <p>
                 Neque porro quisquam est, qui dolorem ipsum quia dqAolor sit amet, consectetur, adipisci velit, sed quia non
                 numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
                 veniam, quis nostrum exercitationem ullam corporis suscipit.
             </p>
+            }
         </div>
         <div class="row">
             <div class="single_wel_cont home4v col-md-3 col-sm-6">
@@ -147,12 +139,28 @@
                     <div class="icon-box">
                         <img src="~/Content/HMS/images/welcome/icon-3.png" alt="">
                     </div>
-                    <h4>Lexuary Spa</h4>
-                    <div class="overlay transition3s">
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                <h4>Dịch Vụ Spa</h4>
+                    }
+                    else
+                    {
+                <h4>Lexuary Spa</h4>
+                    }
+                        <div class="overlay transition3s">
                         <div class="icon_position_table">
                             <div class="icon_container border_round">
-                                <h2>Lexuary Spa</h2>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                 <h2>Dịch Vụ Spa</h2>
+                 <p>Dịch vụ spa- nơi chăm sóc sắc đẹp cho các bạn. </p>
+                    }
+                    else
+                    {
+                <h2>Lexuary Spa</h2>
+                 <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                    }
+                               
                             </div>
                         </div>
                     </div>
@@ -163,12 +171,25 @@
                     <div class="icon-box">
                         <img src="~/Content/HMS/images/welcome/icon-1.png" alt="">
                     </div>
-                    <h4>Inhouse Restaurant</h4>
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                    <h4>Nhà Hàng</h4>
+                    }else{
+                   <h4>Inhouse Restaurant</h4>
+                   }
                     <div class="overlay transition3s">
                         <div class="icon_position_table">
                             <div class="icon_container border_round">
-                                <h2>Inhouse Restaurant</h2>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                                  @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                    <h2>Nhà Hàng</h2>
+                    <p>Nơi phụ các món ăn , thức uống ngon và chất lượng</p>
+
+                    }else{
+                   <h2>Inhouse Restaurant</h2>
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                   }
+                               
                             </div>
                         </div>
                     </div>
@@ -179,12 +200,19 @@
                     <div class="icon-box">
                         <img src="~/Content/HMS/images/welcome/icon-2.png" alt="">
                     </div>
-                    <h4>Fitness Gym</h4>
+                    <h4>Gym</h4>
                     <div class="overlay transition3s">
                         <div class="icon_position_table">
                             <div class="icon_container border_round">
-                                <h2>Fitness Gym</h2>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                                 @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                    <h2>Gym</h2>
+                    <p>Đi du lịch nhưng vẫn tập được gym, chỉ có tại Đà Lạt Amazing </p>
+                    }else{
+                    <h2>Fitness Gym</h2>
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                   }
+                                
                             </div>
                         </div>
                     </div>
@@ -195,12 +223,24 @@
                     <div class="icon-box">
                         <img src="~/Content/HMS/images/welcome/icon-3.png" alt="">
                     </div>
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                    <h4>Món ăn ngon</h4>
+                    }else{
                     <h4>Delicious Food</h4>
+                   }
                     <div class="overlay transition3s">
                         <div class="icon_position_table">
                             <div class="icon_container border_round">
-                                <h2>Delicious Food</h2>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                    <h2>Món ăn ngon</h2>
+                    <p>Chúng tôi đem đến cho các bạn những món ăn ngon , thức uống bổ dưỡng</p>
+                    }else{
+                   <h2>Delicious Food</h2>
+                   <p>Neque porro quisquam est, qui dolorem ipsum quia orro quisquam estdqAolor </p>
+                   }
+                                
                             </div>
                         </div>
                     </div>
@@ -214,7 +254,13 @@
 <section class="container clearfix common-pad">
     <div class="sec-header">
         <h2>@Html.Raw(Resources.Resources.HMS_Rooms)</h2>
-        <h3>Pick a room that best suits your taste and budget</h3>
+        @if (cookie != null && cookie.Value.Equals("vi"))
+         {
+        <h3>Chất lượng dịch vụ tốt nhất với mức giá phải chăng</h3>
+         }else{
+         <h3>Pick a room that best suits your taste and budget</h3>
+         }
+       
     </div>
     <div class="room-slider">
         <div class="roomsuite-slider">
@@ -254,7 +300,7 @@
                                 </div>
                                 <div class="ro-txt">
                                     <div class="left-h pull-left">
-                                        <p>@iterm.Name</p>
+                                        <p>@iterm.NameEN</p>
                                     </div>
                                     <div class="right-p pull-right">
                                         <p>
@@ -281,13 +327,26 @@
         <div class="promo-content">
             <div class="know-top">
                 <h2>@Html.Raw(Resources.Resources.HMS_HomeAbouUs)</h2>
-                <h3>Discover what makes us a five star hotel</h3>
+                 @if (cookie != null && cookie.Value.Equals("vi"))
+         {
+        <h3>Thông Tin về chúng tôi</h3>
+        <p>
+            Bạn có muốn tận hưởng cảm giác thư thái như đang nằm ngay trên bờ biển mà không cần lái xe vài chục cây số? Giữa trung tâm của phố cổ ồn ào tồn tại một nơi tuyệt đẹp
+            để bạn có thể trải nghiệm tất cả các dịch vụ tốt, chất lượng bên chúng tôi,chúng tôi rất vui nếu được phục vụ cho bạn.
+            Chúng tôi Cung cấp căn hộ với tiện nghi có sẵn,các tiện ích xung quanh. Có thể thuê căn hộ trong thời gian ngắn hạn theo ngày hoặc dài hạn theo tháng.
+            Bạn đã hình dung về một căn hộ thoáng mát, đầy đủ tiện nghi hiện đại mà có cả một khu vườn xanh mướt trước mặt?
+
+        </p>
+         }else{
+          <h3>Discover what makes us a five star hotel</h3>
                 <p>
                     Neque porro quisquam est, qui dolorem ipsum quia dqAolor sit amet, consectetur, adipisci velit, sed quia
                     non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro
                     quisquam est, qui dolorem ipsum quia dqAolor sit amet, consectetur, adipisci velit, sed quia non numquam
                     eius modi yu enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit.
                 </p>
+         }
+               
             </div>
             <div class="know-bot">
                 <ul>
@@ -296,9 +355,18 @@
                             <img src="~/Content/HMS/images/know-about-us/icon1.png" alt="" class="img-responsive">
                         </div>
                         <div class="about-cont">
-                            <p>
-                                Dedicated<br>Team
-                            </p>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                        <p>
+                           Dịch Vụ <br/>Tốt
+                        </p>
+                            }
+                            else
+                            {
+                                 <p>
+                            Dedicated<br>Team}
+                        </p>
+                            }
                         </div>
                     </li>
                     <li>
@@ -306,9 +374,19 @@
                             <img src="~/Content/HMS/images/know-about-us/icon2.png" alt="" class="img-responsive">
                         </div>
                         <div class="about-cont">
-                            <p>
-                                Best<br>Advisors
-                            </p>
+                             @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                        <p>
+                           Chất lượng <br/>
+                            Tốt
+                        </p>
+                            }
+                            else
+                            {
+                                 <p>
+                            Best<br>Team}
+                        </p>
+                            }
                         </div>
                     </li>
                     <li>
@@ -316,9 +394,19 @@
                             <img src="~/Content/HMS/images/know-about-us/icon3.png" alt="" class="img-responsive">
                         </div>
                         <div class="about-cont">
-                            <p>
-                                24/7<br>Supports
-                            </p>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                        <p>
+                           Hỗ Trợ <br/>
+                            Tốt
+                        </p>
+                            }
+                            else
+                            {
+                                 <p>
+                            Support}
+                        </p>
+                            }
                         </div>
                     </li>
                 </ul>
@@ -334,16 +422,7 @@
             <div class="img_holder">
                 <img src="~/Content/HMS/images/our-resort/1.jpg" alt="" class="img-responsive">
                 <div class="overlay" style="display: none;">
-                    <div class="room-ad-cont">
-                        <!-- <h2>25% <span>off</span></h2> -->
-                        <h3>
-                            <span>Weeken Spa Offer</span>
-                        </h3>
-                        <p>Enjoy a luxurious SPA weekend dedicated to helping you unwind.</p><a href="booking.html">
-                            Read
-                            more
-                        </a>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -351,27 +430,65 @@
             <div class="left-pad">
                 <div class="sec-header">
                     <h2>@Html.Raw(Resources.Resources.HMS_OurServiceValues)</h2>
-                    <h3>Pick a room that best suits your taste and budget</h3>
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                <h3>Hãy Trải nghiệm dịch vụ tại Đà Lạt Amazing</h3>
+                    }
+                    else
+                    {
+                <h3>Pick a room that best suits your taste and budget</h3>
+                    }
                 </div>
                 <div class="tab-title-box">
                     <ul role="tablist" class="clearfix">
                         <li data-tab-name="quality" class="active">
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
                             <a href="#quality" aria-controls="quality" role="tab"
-                               data-toggle="tab">
-                                Quality
-                            </a>
+                           data-toggle="tab">
+                           Chất Lượng
+                             </a>
+                            }
+                            else
+                            {
+                          <a href="#quality" aria-controls="quality" role="tab"
+                           data-toggle="tab">
+                            Quality
+                         </a>
+                            }
                         </li>
                         <li data-tab-name="ourvision">
-                            <a href="#ourvision" aria-controls="ourvision" role="tab"
+                             @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                            <a href="#ourvision" aria-controls="quality" role="tab"
+                           data-toggle="tab">
+                         Tầm Nhìn
+                             </a>
+                            }
+                            else
+                            {
+                            <a href="#ourvision" aria-controls="quality" role="tab"
                                data-toggle="tab">
                                 Our vision
                             </a>
+                            }
+                            
                         </li>
                         <li data-tab-name="success">
-                            <a href="#success" aria-controls="success" role="tab"
+                               @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                            <a href="#success" aria-controls="quality" role="tab"
+                           data-toggle="tab">
+                        Sự Thành Công
+                             </a>
+                            }
+                            else
+                            {
+                            <a href="#success" aria-controls="quality" role="tab"
                                data-toggle="tab">
-                                Success
+                               Succeed
                             </a>
+                            }
                         </li>
                     </ul>
                 </div>
@@ -380,27 +497,60 @@
                         <div class="col-md-12">
                             <div class="content-box">
                                 <h2>@Html.Raw(Resources.Resources.HMS_HomestayQuality)</h2>
-                                <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
-                                </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+    {
+                            <p>
+                                Có 2 cái yếu tố cần giữ khi kinh doanh homestay đó là phong cách riêng và thái độ phục vụ chu đáo với khách. Thái độ ở đây là sự nhiệt tình, hỗ trợ kịp thời, hợp lý để khách luôn cảm thấy quen thuộc và gần gũi khi nghỉ lại. Cái đó mới là cái giúp mình có thể duy trì kinh doanh lâu dài được
+                            </p>
+
+}
+else
+{
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
+                                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
+                                eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                            </p>
+}
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Công Ty Phát Triên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Nhân Viên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Quan hệ Tốt Khách hàng</li>
+                                    </ul>
                                 </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Chất lượng </li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Dịch Vụ</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Hỗ trợ Khách hàng</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
+                                else
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -408,27 +558,59 @@
                         <div class="col-md-12">
                             <div class="content-box">
                                 <h2>@Html.Raw(Resources.Resources.HMS_ResortQuality)</h2>
+                                 @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
                                 <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                                   Bản thân mình là người yêu cái đẹp, rất thích ở nhà đẹp. Mình thích tự tay thiết kế và trang trí cho căn hộ mình ở. Và tình cờ lướt Facebook, mình có biết đến hệ thống kinh doanh của Luxstay nên đã quyết định thử sức với mô hình này. Vừa có lợi nhuận, vừa được thực hiện sở thích mình, lại có sự hỗ trợ từ Đà Lạt Amazing, ngại gì chứ!
                                 </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
+
+                                }
+                                else
+                                {
+                                    <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
+                                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
+                                eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                            </p>
+                                }
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Công Ty Phát Triên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Nhân Viên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Quan hệ Tốt Khách hàng</li>
+                                    </ul>
                                 </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Chất lượng </li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Dịch Vụ</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Hỗ trợ Khách hàng</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
+                                else
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -436,27 +618,59 @@
                         <div class="col-md-12">
                             <div class="content-box">
                                 <h2>@Html.Raw(Resources.Resources.HMS_ResortQuality)</h2>
+                                 @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
                                 <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
-                                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
-                                    eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                                    Trong quá trình chuẩn bị cho công việc này, mối lo lắng nhất của mình là làm thế nào để các căn hộ mình thuê luôn được đông khách. Mình đã tìm hiểu và làm quen được với nhiều các bạn host địa bàn mà mình phát triển. Các bạn là những người giúp mình trong việc tìm nhà để đáp ứng đúng tiêu chí mà một đơn vị mình đã kết hợp đưa các căn hộ của mình lên quảng cáo trực tuyến, đó là Đà Lạt Amazing.
                                 </p>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
-                                            <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
-                                        </ul>
-                                    </div>
+
+                                }
+                                else
+                                {
+                                    <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium,
+                                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dict
+                                eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                            </p>
+                                }
+                              @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Công Ty Phát Triên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Nhân Viên</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Quan hệ Tốt Khách hàng</li>
+                                    </ul>
                                 </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Chất lượng </li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Dịch Vụ</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Hỗ trợ Khách hàng</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
+                                else
+                                {
+                                          <div class="row">
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Our Company Growth</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> 1000 Employed</li>
+                                        <li><i class="fa fa-arrow-circle-right"></i> Customer Relationship</li>
+                                    </ul>
+                                </div>
+                            </div>
+                                }
                             </div>
                         </div>
                     </div>

@@ -2,19 +2,20 @@
 @{
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
+    HttpCookie cookie = Request.Cookies["_culture"];
 }
 
     <!-- Header  Inner style-->
     <section class="row final-inner-header">
         <div class="container">
-            <h2 class="this-title">@Html.Raw(Resources.HMS_AboutUs)</h2>
+            <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_AboutUs)</h2>
         </div>
     </section>
     <section class="row final-breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
-                <li class="active"> <a href="/gioi-thieu"></a>@Html.Raw(Resources.HMS_AboutUs)</li>
+                <li><a href="/">@Html.Raw(Resources.Resources.HMS_Home)</a></li>
+                <li class="active"> <a href="/gioi-thieu"></a>@Html.Raw(Resources.Resources.HMS_AboutUs)</li>
             </ol>
         </div>
     </section>
@@ -24,16 +25,46 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="sec-header3">
-                    <h2>@Html.Raw(Resources.HMS_AboutUs)</h2>
-                    <h3>Pick a room that best suits your taste and budget</h3>
+                    <h2>@Html.Raw(Resources.Resources.HMS_AboutUs)</h2>
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                        <h3>Thông tin đôi nét về chúng tôi</h3>
+                    }
+                    else
+                    {
+                        <h3>Pick a room that best suits your taste and budget</h3>
+                    }
+
+              
                 </div>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam.</p>
+                 @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                <p>
+                    Đặt phòng  rất nhanh chóng,Bạn sẽ tìm được ngay căn ưng ý mà không tốn nhiều thời gian.
+                    Dịch vụ chăm sóc khách hàng tận tình, chuyên nghiệp.Căn hộ đẹp, sạch sẽ, chủ nhà thân thiện,
+                    thuận tiện đi lại. Nhân viên cũng hỗ trợ khách hàng rất nhiệt tình trong quá trình tìm phòng, 
+                    tiến hành đặt phòng và liên lạc.
+                </p>
+                <h6>Căn hộ bạn  ở sẽ rất xinh xắn, trang trí vô cùng sinh động và bắt mắt.
+                 Bạn sẽ Siêu thích căn hộ này ấy. Đảm bảo rằng khách hàng se luôn hài lòng với dịch vụ của chúng tôi</h6>
+                <ul>
+                    <li><span>Thiên nhiên tuyệt vời</span></li>
+                    <li><span>Căn hộ cao cấp</span></li>
+                    <li><span>Đặt Phòng đơn giản</span></li>
+                </ul>
+                    }
+                    else
+                    {
+                 <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam.</p>
                 <h6>eque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incid dolor sit amet, consectetur, adipisci velit,</h6>
                 <ul>
                     <li><span>Awesome Nature</span></li>
                     <li><span>Awaded Resort</span></li>
                     <li><span>Online Booking</span></li>
                 </ul>
+                    }
+
+               
             </div>
             <div class="col-sm-4 hidden-xs">
                 <div class="img-cap-effect">
@@ -60,38 +91,125 @@
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="resort-r-value">
                         <div class="sec-header sec-header-pad">
-                            <h2>@Html.Raw(Resources.HMS_OurServiceValues)</h2>
-                            <h3>Pick a room that best suits your taste and budget</h3>
+                            <h2>@Html.Raw(Resources.Resources.HMS_OurServiceValues)</h2>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                        <h3>Chúng tôi luôn phục vụ các dịch vụ tốt nhất cho khách hàng</h3>
+                    }
+                    else
+                    {
+                        <h3>Pick a room that best suits your taste and budget</h3>
+                    }
                         </div>
                         <div class="accordian-area">
                             <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
                                 <div class="panel panel-default">
                                     <div id="headingOne" role="tab" class="panel-heading">
-                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed"><span>WE offer luxury service to our customer</span><i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                        @if (cookie != null && cookie.Value.Equals("vi"))
+                                        {
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                <span>
+
+                                                 Dịch Vụ Ẩm thực
+                                                </span><i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                            </a>
+                                        </h4>
+                                        }
+                                        else
+                                        {
+                                            <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                            <span>
+
+                                                WE offer luxury service to our customer
+                                            </span><i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                        </a>
+                                    </h4>
+                                        }
+
                                     </div>
                                     <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse">
                                         <div class="panel-body faq-content">
-                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+    {
+                                        <p> Dịch vụ ăn uống chất lượng, an toàn. Đây là Khu ẩm thực được trang trí đẹp mắt, hơn nữa bạn có thể tìm thấy các món ăn quốc tế ở đây.</p>
+}
+else
+{
+                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+}
+
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel panel-default">
                                     <div id="headingTwo" role="tab" class="panel-heading">
-                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                        @if (cookie != null && cookie.Value.Equals("vi"))
+                                        {
+                                                  <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            Dịch Vụ Spa
+                                            <i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                        </a>
+                                    </h4>
+                                        }
+                                        else
+                                        {
+                                                <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            WE offer luxury service to our customer
+                                            <i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                        </a>
+                                    </h4>
+                                        }
                                     </div>
                                     <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse in">
                                         <div class="panel-body faq-content">
-                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                            <p>Tại Đây chúng tôi tin rằng sức khỏe là nền tảng vững chắc nhất, hiệu quả nhất và tiên tiến nhất để có được vẻ đẹp thực sự, dễ nhận thấy và lâu dà</p>
+                                            }
+                                            else
+                                            {
+                                                 <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel panel-default">
                                     <div id="headingThree" role="tab" class="panel-heading">
-                                        <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i></a></h4>
+                                        @if (cookie != null && cookie.Value.Equals("vi"))
+                                        {
+                                                   <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">
+                                           Dịch vụ chăm sóc khách hàng
+                                            <i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                        </a>
+                                    </h4>
+                                        }
+                                        else
+                                        {
+                                                   <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">
+                                            WE offer luxury service to our customer
+                                            <i class="fa fa-minus"></i><i class="fa fa-plus"></i>
+                                        </a>
+                                    </h4>
+                                        }
+                                 
                                     </div>
                                     <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse">
                                         <div class="panel-body faq-content">
-                                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                            <p>dịch vụ chăm sóc khách hàng tốt, luôn sẵn sàng giải đáp những thắc mắc, khó khăn của khách hàng. Tạo cảm giác thoải mái nhất cho khách hàng</p>
+                                            }
+                                            else
+                                            {
+                                                 <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -111,8 +229,16 @@
                 <div class="content">
                     <div class="content-inner">
                         <div class="box">
-                            <h3>Take a Tour</h3><a href="~/Content/HMS/images/about/video1.jpg" class="fancybox"><i class="icon icon-Play"></i></a>
-                            <h4>0f our wounderfull resort</h4>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                         <h3>Căn phòng</h3><a href="~/Content/HMS/images/about/video1.jpg" class="fancybox"><i class="icon icon-Play"></i></a>
+                        <h4>Tuyệt vời của chúng tôi</h4>
+                            }
+                            else
+                            {
+                                <h3>Take a Tour</h3><a href="~/Content/HMS/images/about/video1.jpg" class="fancybox"><i class="icon icon-Play"></i></a>
+                        <h4>0f our wounderfull resort</h4>
+                            }
                         </div>
                     </div>
                 </div>

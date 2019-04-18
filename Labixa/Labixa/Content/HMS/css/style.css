@@ -117,7 +117,7 @@ html, body{
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   height: 100%;
   letter-spacing: 0.2px;
   color: #aaa;
@@ -135,7 +135,7 @@ html {
   line-height: 28px;
   color: #fff;
   text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   font-weight: 600;
   display: inline-block;
   border-radius: 3px;
@@ -1115,7 +1115,7 @@ header {
 .wel-box .overlay .icon_position_table .icon_container p {
   text-align: center;
   color: #fffefe;
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
   margin: 0;
   padding: 0;
 }
@@ -1144,19 +1144,19 @@ header {
 
 .wel-content h1 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0;
   padding: 0;
 }
 
-.wel-content h2 {
-  color: #aaaaaa;
-  font: 400 1.15em/1.8em "Open Sans", sans-serif;
-  margin: 0 0 1em;
-  padding: 0;
-  font-style: italic;
-  position: relative;
-}
+    .wel-content h2 {
+        color: #aaaaaa;
+        font: 400 1.15em/1.8em sans-serif;
+        margin: 0 0 1em;
+        padding: 0;
+        font-style: italic;
+        position: relative;
+    }
 
 .wel-content h2:after {
   content: '';
@@ -1173,7 +1173,7 @@ header {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .wel-box .icon-box {
@@ -1183,7 +1183,7 @@ header {
 .wel-box h4 {
   color: #0e1322;
   text-align: center;
-  font: 400 1.57em/1.4em 'PT Serif', serif;
+  font: 400 1.57em/1.4em normal;
   font-style: italic;
   margin: 0.5em 0 0;
   padding: 0;
@@ -1209,19 +1209,19 @@ header {
 
 .sec-header h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0;
   padding: 0;
 }
 
-.sec-header h3 {
-  color: #aaaaaa;
-  font: 400 1.15em/1.8em "Open Sans", sans-serif;
-  margin: 0 0 2.7em;
-  padding: 0;
-  font-style: italic;
-  position: relative;
-}
+    .sec-header h3 {
+        color: #aaaaaa;
+        font: 400 1.15em/1.8em sans-serif;
+        margin: 0 0 2.7em;
+        padding: 0;
+        font-style: italic;
+        position: relative;
+    }
 
 .sec-header h3:after {
   content: '';
@@ -1240,14 +1240,14 @@ header {
 
 .sec-header3 h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0;
   padding: 0;
 }
 
 .sec-header3 h3 {
   color: #aaaaaa;
-  font: 400 1.15em/1.8em "Open Sans", sans-serif;
+  font: 400 1.15em/1.8em normal;
   margin: 0 0 2.1em;
   padding: 0;
   font-style: italic;
@@ -1331,7 +1331,7 @@ header {
 
 .room-suite .item .left-h p {
   color: #242424;
-  font: 1.86em/1em "Playball", sans-serif;
+  font: 1.86em/1em normal;
   padding: 0.7em 0 0;
   margin: 0;
 }
@@ -1342,7 +1342,7 @@ header {
 
 .room-suite .item .right-p p {
   color: #242424;
-  font: 1.72em/1.25em "Playball", sans-serif;
+  font: 1.72em/1.25em normal;
   padding: 0.3em 0 0.6em;
   margin: 0;
 }
@@ -1353,7 +1353,7 @@ header {
 
 .room-suite .item .right-p p span {
   display: block;
-  font: 400 0.6em/1em "Open Sans", sans-serif;
+  font: 400 0.6em/1em normal;
   font-style: italic;
   color: #888;
 }
@@ -1422,14 +1422,14 @@ header {
 
 .fluid-know-area .service-promo .know-top h2 {
   color: #fff;
-  font: 2.3em/1em "Playball", sans-serif;
+  font: 2.3em/1em normal;
   margin: 0;
   padding: 0;
 }
 
 .fluid-know-area .service-promo .know-top h3 {
   color: #5bb3fd;
-  font: 400 1.15em/1.8em "Open Sans", sans-serif;
+  font: 400 1.15em/1.8em normal;
   margin: 0 0 1.5em;
   padding: 0;
   font-style: italic;
@@ -1451,7 +1451,7 @@ header {
   color: #b5c9db;
   margin: 0 0 2.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .fluid-know-area .service-promo .know-bot {
@@ -1493,7 +1493,7 @@ header {
   color: #fff;
   margin: 0;
   padding: 0;
-  font: 400 1.33em/1.3em "Open Sans", sans-serif;
+  font: 400 1.33em/1.3em normal;
 }
 
 .fluid-know-area .work-image-ser img {
@@ -1572,27 +1572,27 @@ header {
 
 .spa-offer .img_holder .room-ad-cont h2 {
   color: #fff;
-  font: 4em/1em "Playball", sans-serif;
+  font: 4em/1em normal;
   margin: 0 0 0.6em;
   padding: 0;
 }
 
 .spa-offer .img_holder .room-ad-cont h2 span {
   color: #fff;
-  font: 0.59em/1em "Playball", sans-serif;
+  font: 0.59em/1em normal;
   display: block;
 }
 
 .spa-offer .img_holder .room-ad-cont h3 {
   color: #fff;
-  font: 600 1.66em/1em 'Open Sans Condensed', sans-serif;
+  font: 600 1.66em/1em normal;
   margin: 0 0 0.5em;
   padding: 0;
 }
 
 .spa-offer .img_holder .room-ad-cont a {
   color: #000;
-  font: 600 1.0715em/1.6em "Open Sans", sans-serif;
+  font: 600 1.0715em/1.6em normal;
 }
 
 .spa-offer .img_holder .room-ad-cont a:hover {
@@ -1600,7 +1600,7 @@ header {
 }
 
 .spa-offer .img_holder .room-ad-cont p {
-  font: 400 1.0715em/1.6em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.6em normal;
   color: #fff;
   padding: 0;
   margin: 0 0 1.8em;
@@ -1685,7 +1685,7 @@ header {
 
 .our-res .tab-title-box ul li a {
   text-align: center;
-  font: 700 1.1em/1em "Open Sans", sans-serif;
+  font: 700 1.1em/1em normal;
   display: block;
   color: #242424;
   padding: 1em 0;
@@ -1697,19 +1697,19 @@ header {
   color: #898989;
   margin: 0 0 2em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .our-res .single-tab-content h2 {
   color: #242424;
-  font: 700 1.3em/1.8em "Open Sans", sans-serif;
+  font: 700 1.3em/1.8em normal;
   margin: 0;
   padding: 0;
 }
 
 .our-res .single-tab-content ul li {
   color: #6c6c6c;
-  font: 400 1.0715em/2em "Open Sans", sans-serif;
+  font: 400 1.0715em/2em normal;
 }
 
 .our-res .single-tab-content ul li .fa {
@@ -1771,14 +1771,14 @@ header {
 }
 
 .promo-wrapper .promo-imgslider .promo-content h2 {
-  font: 2.86em/1em "Playball", sans-serif;
+  font: 2.86em/1em normal;
   color: #fff;
   margin: 0 0 0.5em;
   padding: 0;
 }
 
 .promo-wrapper .promo-imgslider .promo-content p {
-  font: 400 1.22em/1.5em "Open Sans", sans-serif;
+  font: 400 1.22em/1.5em normal;
   margin: 0 0 1.8em;
   padding: 0;
   color: #fff;
@@ -1790,7 +1790,7 @@ header {
   padding: 0.2em 2em 0.3em;
   border: 1px solid #fff;
   color: #fff;
-  font: 400 1.22em/1.8em "Open Sans", sans-serif;
+  font: 400 1.22em/1.8em normal;
   font-style: italic;
 }
 
@@ -1840,7 +1840,7 @@ header {
 
 .testimonials-wrapper .item .test-cont p {
   color: #a0a0a0;
-  font: 400 1.0175em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0175em/1.8em normal;
 }
 
 .testimonials-wrapper .item .test-bot {
@@ -1861,12 +1861,12 @@ header {
   color: #1f4d84;
   padding: 0 0 0.5em;
   margin: 0;
-  font: 1.43em/1em "Playball", sans-serif;
+  font: 1.43em/1em normal;
 }
 
 .testimonials-wrapper .item .test-bot .client_name h5 span {
   color: #3d3d3d;
-  font: 400 0.7em/1em "Open Sans", sans-serif;
+  font: 400 0.7em/1em normal;
 }
 
 .testimonials-wrapper .item .test-bot .client_name h5 a {
@@ -1894,7 +1894,7 @@ header {
 }
 
 .testimonial-p .media-body h3 {
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   letter-spacing: 0.3px;
   color: #242424;
   margin: 0 0 0.5em;
@@ -1902,14 +1902,14 @@ header {
 }
 
 .testimonial-p .media-body p {
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
   letter-spacing: 0.3px;
   color: #898989;
   margin-bottom: 1em;
 }
 
 .testimonial-p .media-body a {
-  font: 600 1.0715em/1em "Open Sans", sans-serif;
+  font: 600 1.0715em/1em normal;
   letter-spacing: 0.3px;
   color: #1f4d84;
   font-style: italic;
@@ -1919,7 +1919,7 @@ header {
 
 .testimonial-p .media-body a span {
   color: #3d3d3d;
-  font: 400 0.9em/1em "Open Sans", sans-serif;
+  font: 400 0.9em/1em normal;
 }
 
 .testimonial-p .media-body h6 {
@@ -2008,7 +2008,7 @@ header {
 }
 
 .news-evn-img .event-date h3 {
-  font: 600 1.8em/1.2em "Open Sans", sans-serif;
+  font: 600 1.8em/1.2em normal;
   color: #fff;
   margin: 0;
   padding: 0.4em 0 0;
@@ -2035,7 +2035,7 @@ header {
 }
 
 .news-evn-cont p {
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
   color: #8e8d8d;
   margin: 0;
   padding: 0;
@@ -2099,7 +2099,7 @@ header {
 
 .wel-ad-inner .wel-text h3 {
   color: #fff;
-  font: 400 1.15em/1.5em "Open Sans", sans-serif;
+  font: 400 1.15em/1.5em normal;
   padding: 0 0 1.4em;
   margin: 0;
 }
@@ -2171,13 +2171,13 @@ footer {
 .footer-top {
   position: relative;
   overflow: hidden;
-  font: 400 0.94m/1.5em "Open Sans", sans-serif;
+  font: 400 0.94m/1.5em normal;
 }
 
 .widget.about-us-widget p {
   color: #797979;
   margin-top: 2em;
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
   padding: 0;
   margin-bottom: 1.5em;
 }
@@ -2218,7 +2218,7 @@ footer {
 }
 
 .widget-contact h4, .get-in-touch h4, .widget-links h4 {
-  font: 600 18px/17px "Open Sans", sans-serif;
+  font: 600 18px/17px normal;
   color: #fff;
   margin-top: 0px;
   text-transform: uppercase;
@@ -2244,7 +2244,7 @@ footer {
 .widget-contact-list ul li a {
   color: #797979;
   text-transform: capitalize;
-  font: 400 1.0715em/2.3em "Open Sans", sans-serif;
+  font: 400 1.0715em/2.3em normal;
 }
 
 .widget-contact-list ul li a:hover {
@@ -2277,7 +2277,7 @@ footer {
   color: #7b7b7b;
   width: -webkit-calc(100% - 34px);
   width: calc(100% - 34px);
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
   padding: 0.5em 0;
 }
 
@@ -2307,7 +2307,7 @@ footer {
 }
 
 .footer-copy p {
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
   color: #545454;
   padding: 0;
   margin: 0;
@@ -2606,7 +2606,7 @@ footer {
 }
 
 .header-breadcrumb h1 {
-  font: 3.72em/1em "Playball", sans-serif;
+  font: 3.72em/1em normal;
   margin: 0 0 0.23em;
   padding: 0;
   color: #fff;
@@ -2628,13 +2628,13 @@ footer {
 }
 
 .breadcrumb li a {
-  font: 600 1em/2.6em "Open Sans", sans-serif;
+  font: 600 1em/2.6em normal;
   letter-spacing: 0.3px;
   color: #5bb3fd;
 }
 
 .breadcrumb > .active {
-  font: 600 1em/2.5em "Open Sans", sans-serif;
+  font: 600 1em/2.5em normal;
   color: #fff;
 }
 
@@ -2721,7 +2721,7 @@ footer {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .about-info-box h6 {
@@ -2736,7 +2736,7 @@ footer {
 
 .about-info-box ul li {
   display: inline-block;
-  font: 400 1.43em/1em 'PT Serif', serif;
+  font: 400 1.35em/1em 'PT Serif', serif;
   color: #000;
   font-style: italic;
 }
@@ -2842,7 +2842,7 @@ footer {
 }
 
 .accordian-area .panel-title {
-  font: 400 1.3em/1em "Open Sans", sans-serif;
+  font: 400 1.3em/1em normal;
 }
 
 /* ==============================
@@ -2903,14 +2903,14 @@ footer {
 }
 
 .check-video-box .img-holder .content .content-inner .box h3 {
-  font: 3.65em/1em "Playball", sans-serif;
+  font: 3.65em/1em normal;
   margin: 0 0 0.8em;
   padding: 0;
   color: #fff;
 }
 
 .check-video-box .img-holder .content .content-inner .box h4 {
-  font: 400 2.35em/1.8em "Open Sans", sans-serif;
+  font: 400 2.35em/1.8em normal;
   margin: 1.2em 0 0;
   padding: 0;
   color: #fff;
@@ -2958,7 +2958,7 @@ footer {
 
 .room-wrapper .media-body h2 {
   color: #0e1322;
-  font: 2.15em/1em "Playball", sans-serif;
+  font: 2.15em/1em normal;
   margin: 0 0 0.3em;
   padding: 0;
   position: relative;
@@ -2979,14 +2979,14 @@ footer {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .room-wrapper .media-body h3 {
   color: #000;
   margin: 0 0 0.5em;
   padding: 0;
-  font: 600 1.23em/1em "Open Sans", sans-serif;
+  font: 600 1.23em/1em normal;
   font-style: italic;
 }
 
@@ -2994,7 +2994,7 @@ footer {
   color: #3894c3;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
   font-style: italic;
 }
 
@@ -3008,14 +3008,14 @@ footer {
 
 .room-wrapper .media-right p {
   color: #242424;
-  font: 2.86em/1.25em "Playball", sans-serif;
+  font: 2.86em/1.25em normal;
   padding: 0;
   margin: 0 0 0.5em;
 }
 
 .room-wrapper .media-right p span {
   display: block;
-  font: 400 0.4em/1em "Open Sans", sans-serif;
+  font: 400 0.4em/1em normal;
   font-style: italic;
   color: #888;
   margin: 0 0 2em;
@@ -3029,7 +3029,7 @@ footer {
   color: #fff;
   border-radius: 3px;
   text-transform: uppercase;
-  font: 400 0.88em/1em "Open Sans", sans-serif;
+  font: 400 0.88em/1em normal;
 }
 
 .room-wrapper .media-right a:hover {
@@ -3070,7 +3070,7 @@ footer {
 
 .room-t-wrapper .content h2 {
   color: #0e1322;
-  font: 2.15em/1em "Playball", sans-serif;
+  font: 2.15em/1em normal;
   margin: 0 0 0.3em;
   padding: 0;
   position: relative;
@@ -3091,7 +3091,7 @@ footer {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .room-t-wrapper .content .bottom-content {
@@ -3100,14 +3100,14 @@ footer {
 
 .room-t-wrapper .content .bottom-content p {
   color: #242424;
-  font: 2.7em/1.25em "Playball", sans-serif;
+  font: 2.7em/1.25em normal;
   padding: 0;
   margin: 0 0 0.5em;
 }
 
 .room-t-wrapper .content .bottom-content p span {
   display: block;
-  font: 400 0.4em/1em "Open Sans", sans-serif;
+  font: 400 0.4em/1em normal;
   font-style: italic;
   color: #888;
   margin: 0 0 2em;
@@ -3121,7 +3121,7 @@ footer {
   color: #fff;
   border-radius: 3px;
   text-transform: uppercase;
-  font: 400 0.88em/1em "Open Sans", sans-serif;
+  font: 400 0.88em/1em normal;
 }
 
 .room-t-wrapper .content .bottom-content a:hover {
@@ -3228,7 +3228,7 @@ footer {
   height: 45px;
   border-radius: 0;
   border: none;
-  font: 400 1em/1em "Open Sans", sans-serif;
+  font: 400 1em/1em normal;
   padding: 0 30px;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -3294,7 +3294,7 @@ footer {
 }
 
 .single-sidebar-widget .popular-post .content a h4 {
-  font: 600 1em/1em "Open Sans", sans-serif;
+  font: 600 1em/1em normal;
   color: #242424;
   text-transform: uppercase;
   -webkit-transition: all .3s ease;
@@ -3312,21 +3312,21 @@ footer {
 
 .single-sidebar-widget .popular-post .content span {
   color: #999999;
-  font: 400 0.93em/1em "Open Sans", sans-serif;
+  font: 400 0.93em/1em normal;
   display: block;
   margin-top: 1.2em;
 }
 
 .single-sidebar-widget .popular-post .content h6 {
   color: #242424;
-  font: 1.6em/1em "Playball", sans-serif;
+  font: 1.6em/1em normal;
   margin: 0.6em 0 0;
   padding: 0;
 }
 
 .single-sidebar-widget .popular-post .content h6 span {
   display: inline-block;
-  font: 600 0.63em/1em "Open Sans", sans-serif;
+  font: 600 0.63em/1em normal;
   font-style: italic;
 }
 
@@ -3396,14 +3396,14 @@ footer {
 
 .single-blog-post .date-box .date-inner .date-c-inner p {
   color: #fff;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 0;
   padding: 0;
 }
 
 .single-blog-post .date-box .date-inner .date-c-inner p span {
   color: #fff;
-  font: 0.7em/1em "Playball", sans-serif;
+  font: 0.7em/1em normal;
   margin: 0;
   padding: 0;
   display: block;
@@ -3482,19 +3482,19 @@ footer {
   text-transform: none;
   margin: 0.6em 0 0;
   padding: 0 0 0.8em;
-  font: 600 1.33em/1em "Open Sans", sans-serif;
+  font: 600 1.33em/1em normal;
 }
 
 .single-blog-post p {
   color: #898989;
   margin: 0 0 2em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .single-blog-post h6 {
   color: #1cbac8;
-  font: 400 1.0715em/1em "Open Sans", sans-serif;
+  font: 400 1.0715em/1em normal;
   margin: 2em 0 0;
   padding: 0;
 }
@@ -3516,7 +3516,7 @@ footer {
 .post-list li {
   float: left;
   width: 270px;
-  font: 400 14px/30px "Open Sans", sans-serif;
+  font: 400 14px/30px normal;
   color: #91b41a;
   letter-spacing: 0.3px;
 }
@@ -3555,7 +3555,7 @@ blockquote:before {
 
 blockquote p {
   float: left;
-  font: 400 1.2em/1em "Open Sans", sans-serif;
+  font: 400 1.2em/1em normal;
   letter-spacing: 0.3px;
   color: #898989;
   width: -webkit-calc(100% - 70px);
@@ -3567,14 +3567,14 @@ blockquote p {
 blockquote footer {
   text-align: right;
   color: #e8a20c;
-  font: 400 1.2em/1em "Open Sans", sans-serif;
+  font: 400 1.2em/1em normal;
   font-style: italic;
   background: transparent;
 }
 
 blockquote footer a {
   color: #e8a20c;
-  font: 400 0.8em/1em "Open Sans", sans-serif;
+  font: 400 0.8em/1em normal;
   font-style: italic;
 }
 
@@ -3583,7 +3583,7 @@ blockquote footer a {
 ============================== */
 .news-comments .comments_count, .leave-comments .leave-comment-title {
   margin: 30px 0px 30px 0;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   color: #242424;
   font-weight: bold;
 }
@@ -3645,13 +3645,13 @@ blockquote footer a {
   }
 }
 .comments .comment .media-body h5 {
-  font: 500 1em/2em "Open Sans", sans-serif;
+  font: 500 1em/2em normal;
   margin: 0;
   color: #242424;
 }
 
 .comments .comment .media-body p {
-  font: 400 14px/30px "Open Sans", sans-serif;
+  font: 400 14px/30px normal;
   color: #898989;
 }
 
@@ -3672,7 +3672,7 @@ blockquote footer a {
 }
 .comments .comment .media-body .date-reply li a {
   padding: 0;
-  font: 13px/1 "Open Sans", sans-serif;
+  font: 13px/1 normal;
   text-transform: capitalize;
   color: #47bcca;
 }
@@ -3744,7 +3744,7 @@ blockquote footer a {
 .comment_form .form-control {
   border-radius: 0;
   padding: 9px 20px;
-  font: 14px/25px "Open Sans", sans-serif;
+  font: 14px/25px normal;
   color: #000;
   margin-bottom: 20px;
   background: #fff;
@@ -3822,7 +3822,7 @@ blockquote footer a {
   border: 1px solid #f6ba18;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font: 600 1.2em/2.1em "Open Sans", sans-serif;
+  font: 600 1.2em/2.1em normal;
   padding: 7px 22px 7px 22px;
   color: #19242a;
   margin-top: 10px;
@@ -3874,7 +3874,7 @@ blockquote footer a {
 
 .gallery-filter li span {
   display: inline-block;
-  font: 700 0.94em/3em "Open Sans", sans-serif;
+  font: 700 0.94em/3em normal;
   color: #666666;
   text-transform: uppercase;
   cursor: pointer;
@@ -4017,7 +4017,7 @@ blockquote footer a {
 
 .single-gallery .img-holder .content .link-gallery a {
   color: #fff;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   display: table-cell;
   vertical-align: middle;
 }
@@ -4105,7 +4105,7 @@ blockquote footer a {
 
 .book-right h2 {
   color: #0e1322;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 1.5em 0 0.5em;
   padding: 0;
   position: relative;
@@ -4126,7 +4126,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .book-left-content {
@@ -4209,7 +4209,7 @@ blockquote footer a {
 }
 
 .input_form form .form-control.error + .error {
-  font: 400 0.8em/1em "Open Sans", sans-serif;
+  font: 400 0.8em/1em normal;
   margin-bottom: 20px;
   margin-top: 5px;
   color: red;
@@ -4263,10 +4263,10 @@ blockquote footer a {
 }
 
 .book-left-content span {
-  color: #404040;
-  display: block;
-  font: 600 1em/1.5em "Open Sans", sans-serif;
-  margin: 0 0 0.7em;
+    color: #404040;
+    display: block;
+    font: 600 1em/1.5em "Open Sans", sans-serif;
+    margin: 0 0 0.7em;
 }
 
 .contact-info {
@@ -4276,7 +4276,7 @@ blockquote footer a {
 
 .contact-info h2 {
   color: #0e1322;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 0 0 1.5em;
   padding: 0;
   position: relative;
@@ -4318,7 +4318,7 @@ blockquote footer a {
 
 .contact-info .media-contact-info p a i {
   color: #545353;
-  font: 1.4em/1em "Playball", sans-serif;
+  font: 1.4em/1em normal;
 }
 
 .contact-info .media-contact-info {
@@ -4329,7 +4329,7 @@ blockquote footer a {
   color: #898989;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .contact-info .media-contact-info p a {
@@ -4372,20 +4372,20 @@ blockquote footer a {
 .book-r-form .room-price h6 {
   margin: 0 0 0.8em;
   padding: 0;
-  font: 700 0.88em/1em "Open Sans", sans-serif;
+  font: 700 0.88em/1em normal;
   text-transform: uppercase;
   color: #848484;
 }
 
 .book-r-form .room-price p {
-  font: 2.66em/1em "Playball", sans-serif;
+  font: 2.66em/1em normal;
   margin: 0;
   padding: 0;
   color: #000;
 }
 
 .book-r-form .room-price p span {
-  font: 600 0.4em/1em "Open Sans", sans-serif;
+  font: 600 0.4em/1em normal;
   color: #848484;
   text-transform: uppercase;
 }
@@ -4401,7 +4401,7 @@ blockquote footer a {
   display: block;
   color: #000;
   text-transform: uppercase;
-  font: 600 0.95em/1em "Open Sans", sans-serif;
+  font: 600 0.95em/1em normal;
   margin: 0 0 0.8em;
 }
 
@@ -4536,7 +4536,7 @@ blockquote footer a {
 
 .single-room-wrapper .room-dec-wrapper h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 1em;
   padding: 0;
   position: relative;
@@ -4557,7 +4557,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 2em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .single-room-wrapper .room-fac-wrapper {
@@ -4566,7 +4566,7 @@ blockquote footer a {
 
 .single-room-wrapper .room-fac-wrapper h2, .single-room-wrapper .room-overview h2, .single-room-wrapper .question-wrapper h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 1em;
   padding: 0;
   position: relative;
@@ -4631,7 +4631,7 @@ blockquote footer a {
   color: #000;
   text-transform: uppercase;
   background: transparent;
-  font: 700 1em/1em "Open Sans", sans-serif;
+  font: 700 1em/1em normal;
 }
 
 .single-room-wrapper .room-overview .table > tbody > tr > th {
@@ -4643,12 +4643,12 @@ blockquote footer a {
 .single-room-wrapper .room-overview .table > tbody > tr > td {
   border-top: 1px solid transparent;
   color: #898989;
-  font: 400 1.0715em/1em "Open Sans", sans-serif;
+  font: 400 1.0715em/1em normal;
   padding: 13px 30px;
 }
 
 .single-room-wrapper .room-overview h5 {
-  font: 400 1.3em/1.5em "Open Sans", sans-serif;
+  font: 400 1.3em/1.5em normal;
   font-style: italic;
   padding: 0;
   margin-bottom: 3em;
@@ -4667,7 +4667,7 @@ blockquote footer a {
 .single-room-wrapper .question-wrapper .form-control {
   margin-bottom: 20px;
   border-radius: 0;
-  font: 1em/1.5em "Open Sans", sans-serif;
+  font: 1em/1.5em normal;
   color: #959595;
   padding: 11px 20px;
   border: 1px solid #e1e1e1;
@@ -4677,7 +4677,7 @@ blockquote footer a {
 }
 
 .room-overview a {
-  font: 600 1.3em/1.5em "Open Sans", sans-serif;
+  font: 600 1.3em/1.5em normal;
   padding: 0.8em 2em;
 }
 
@@ -4709,7 +4709,7 @@ blockquote footer a {
 .wel-band .top-left .t-txt {
   float: left;
   text-transform: uppercase;
-  font: 600 0.93em/1em "Open Sans", sans-serif;
+  font: 600 0.93em/1em normal;
   color: #7f7f7f;
   margin-top: 0.5em;
 }
@@ -4725,7 +4725,7 @@ blockquote footer a {
 .wel-band .top-right {
   display: inline-block;
   text-transform: uppercase;
-  font: 600 0.87em/1.5em "Open Sans", sans-serif;
+  font: 600 0.87em/1.5em normal;
   color: #7f8997;
   margin-top: 0.28em;
 }
@@ -4860,13 +4860,13 @@ blockquote footer a {
 
 .home-slider2 .carousel-caption h2 {
   color: #fff;
-  font: 3.93em/1em "Playball", sans-serif;
+  font: 3.93em/1em normal;
   margin: 0 0 0.55em;
   padding: 0;
 }
 
 .home-slider2 .carousel-caption p {
-  font: 400 1.22em/1.5em "Open Sans", sans-serif;
+  font: 400 1.22em/1.5em normal;
   margin: 0 0 1.7em;
   padding: 0;
   font-style: italic;
@@ -4874,7 +4874,7 @@ blockquote footer a {
 
 .home-slider2 .carousel-caption a {
   display: inline-block;
-  font: 600 1em/1em "Open Sans", sans-serif;
+  font: 600 1em/1em normal;
   border: 1px solid #fff;
   border-radius: 5px;
   color: #fff;
@@ -4943,7 +4943,7 @@ blockquote footer a {
 
 .rest-fact-counter .text-box2 p {
   color: #85ab00;
-  font: 400 1.0715em/1.4em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.4em normal;
   margin: 0;
   padding: 0;
   text-transform: uppercase;
@@ -4968,7 +4968,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .activities-cont a {
@@ -5010,7 +5010,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .offer-right .offer-img-box1 {
@@ -5048,7 +5048,7 @@ blockquote footer a {
 .offer-right .offer-img-box2 .box1 .img_holder .overlay .text1 {
   position: relative;
   color: #fff;
-  font: 400 0.7em/1.8em "Open Sans", sans-serif;
+  font: 400 0.7em/1.8em normal;
   text-align: right;
 }
 
@@ -5058,20 +5058,20 @@ blockquote footer a {
 
 .offer-right .offer-img-box2 .box1 .img_holder .overlay .offertext1 p {
   color: #dc6c04;
-  font: 3.5em/1em "Playball", sans-serif;
+  font: 3.5em/1em normal;
   margin: 0;
   padding: 0.2em 0.6em;
 }
 
 .offer-right .offer-img-box2 .box1 .img_holder .overlay .offertext1 .off-txt {
   color: #dc6c04;
-  font: 0.58em/1em "Playball", sans-serif;
+  font: 0.58em/1em normal;
   display: inline-block;
 }
 
 .offer-right .offer-img-box2 .box1 .img_holder .overlay .offertext1 .winter-txt {
   color: #000;
-  font: 700 0.5em/1em 'Open Sans Condensed', sans-serif;
+  font: 700 0.5em/1em normal;
   display: inline-block;
   padding-left: 0.4em;
 }
@@ -5095,7 +5095,7 @@ blockquote footer a {
 
 .offer-right .offer-img-box2 .box2 .img_holder .overlay p {
   color: #000;
-  font: 600 1.7em/1em 'Open Sans Condensed', sans-serif;
+  font: 600 1.7em/1em normal;
   padding: 0;
   margin: 0;
 }
@@ -5104,18 +5104,18 @@ blockquote footer a {
   color: #729400;
   padding: 0;
   margin: 0;
-  font: 2.67em/1em "Playball", sans-serif;
+  font: 2.67em/1em normal;
 }
 
 .offer-right .offer-img-box2 .box2 .img_holder .overlay h2 span {
   color: #729400;
-  font: 0.76em/1em "Playball", sans-serif;
+  font: 0.76em/1em normal;
 }
 
 .offer-right .offer-img-box2 .box2 .img_holder .overlay h6 {
   border-top: 1px solid #a5a4a4;
   color: #929292;
-  font: 400 0.7em/1.8em "Open Sans", sans-serif;
+  font: 400 0.7em/1.8em normal;
   padding: 0;
   margin: 0;
   text-align: center;
@@ -5131,7 +5131,7 @@ blockquote footer a {
 
 .sec-w-header h2 {
   color: #fff;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0;
   padding: 0;
 }
@@ -5183,7 +5183,7 @@ blockquote footer a {
 
 .sec-header-two h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 1.3em;
   padding: 0;
 }
@@ -5224,13 +5224,13 @@ blockquote footer a {
   color: #1c1c1c;
   margin: 0 0 0.3em;
   padding: 0;
-  font: 700 1.0715em/1em "Open Sans", sans-serif;
+  font: 700 1.0715em/1em normal;
   text-transform: uppercase;
 }
 
 .our-event-t-wrapper .media-body p {
   color: #a0a0a0;
-  font: 400 1.0715em/1.6em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.6em normal;
   margin: 0;
   padding: 0;
 }
@@ -5258,14 +5258,14 @@ blockquote footer a {
 
 .our-event-t-wrapper .date-box .date-inner .date-c-inner p {
   color: #fff;
-  font: 2.15em/1em "Playball", sans-serif;
+  font: 2.15em/1em normal;
   margin: 0;
   padding: 0;
 }
 
 .our-event-t-wrapper .date-box .date-inner .date-c-inner p span {
   color: #fff;
-  font: 0.7em/1em "Playball", sans-serif;
+  font: 0.7em/1em normal;
   margin: 0;
   padding: 0;
   display: block;
@@ -5304,7 +5304,7 @@ blockquote footer a {
 
 .get-touch-wrapper .touch-txt h3 {
   color: #323232;
-  font: 1.72em/1em "Playball", sans-serif;
+  font: 1.72em/1em normal;
   margin: 0 0 1em;
   padding: 0;
 }
@@ -5312,14 +5312,14 @@ blockquote footer a {
 .get-touch-wrapper .touch-txt h3 span {
   color: #7e7e7e;
   display: block;
-  font: 400 0.62em/1.6em "Open Sans", sans-serif;
+  font: 400 0.62em/1.6em normal;
 }
 
 .get-touch-wrapper .touch-txt p {
   color: #7e7e7e;
   margin: 0 0 1em;
   padding: 0;
-  font: 400 1.0715em/1.6em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.6em normal;
 }
 
 .get-touch-wrapper .touch-txt p a {
@@ -5332,7 +5332,7 @@ blockquote footer a {
 
 .sec-header-touch h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 0.7em;
   padding: 0;
 }
@@ -5380,7 +5380,7 @@ blockquote footer a {
 
 .room-suite-htwo .item .ro-txt h2 {
   color: #242424;
-  font: 1.86em/1em "Playball", sans-serif;
+  font: 1.86em/1em normal;
   padding: 0;
   margin: 1em 0 0.7em;
   position: relative;
@@ -5400,7 +5400,7 @@ blockquote footer a {
 .room-suite-htwo .item .ro-txt p {
   color: #898989;
   margin: 0 0 1.8em;
-  font: 400 1.0715em/1.5em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.5em normal;
 }
 
 .room-suite-htwo .item .ro-img {
@@ -5434,14 +5434,14 @@ blockquote footer a {
 
 .room-suite-htwo .ro-text-two .right-p-two p {
   color: #242424;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   padding: 0 0 0;
   margin: 0;
 }
 
 .room-suite-htwo .ro-text-two .right-p-two p span {
   display: block;
-  font: 400 0.5em/1.3em "Open Sans", sans-serif;
+  font: 400 0.5em/1.3em normal;
   font-style: italic;
   color: #888;
 }
@@ -5486,7 +5486,7 @@ blockquote footer a {
 
 .sec-header-small h2 {
   color: #0e1322;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 0 0 0.8em;
   padding: 0;
 }
@@ -5516,7 +5516,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .aminities-outer ul {
@@ -5621,7 +5621,7 @@ blockquote footer a {
   -o-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  font: 400 1.0715em/1.7em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.7em normal;
   padding: 0 1.5em 1.7em;
   color: #898989;
   margin: 0;
@@ -5699,7 +5699,7 @@ blockquote footer a {
 
 .activities-content h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 1.4em 0 0.6em;
   padding: 0;
   position: relative;
@@ -5720,7 +5720,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .activities-content .res-btn {
@@ -5736,7 +5736,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 /* ==============================
@@ -5751,7 +5751,7 @@ blockquote footer a {
   color: #898989;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .offer-deal-dark {
@@ -5762,7 +5762,7 @@ blockquote footer a {
 
 .offer-content h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 0.6em;
   padding: 0;
   position: relative;
@@ -5783,7 +5783,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .offer-content {
@@ -5817,14 +5817,14 @@ blockquote footer a {
 
 .offer-b-price p {
   color: #242424;
-  font: 2em/0.9em "Playball", sans-serif;
+  font: 2em/0.9em normal;
   padding: 0 0 0;
   margin: 0;
 }
 
 .offer-b-price p span {
   display: block;
-  font: 400 0.53em/1.3em "Open Sans", sans-serif;
+  font: 400 0.53em/1.3em normal;
   font-style: italic;
   color: #888;
 }
@@ -5853,13 +5853,13 @@ blockquote footer a {
   color: #fff;
   padding: 0.4em;
   margin: 0;
-  font: 3.15em/1em "Playball", sans-serif;
+  font: 3.15em/1em normal;
   text-align: center;
 }
 
 .offer-deal .img-holder .overlay p span {
   color: #fff;
-  font: 0.64em/1em "Playball", sans-serif;
+  font: 0.64em/1em normal;
   display: block;
 }
 
@@ -5891,7 +5891,7 @@ blockquote footer a {
 
 .family-content h2 {
   color: #0e1322;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 0 0 1.3em;
   padding: 0;
   position: relative;
@@ -5912,7 +5912,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .family-img {
@@ -6071,7 +6071,7 @@ blockquote footer a {
 ============================== */
 .hidden-bar .logo-side h2 {
   color: #fff;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0.8em 0 0.4em;
   padding: 0;
 }
@@ -6080,12 +6080,12 @@ blockquote footer a {
   color: #fff;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .hidden-bar .side-gallery h3 {
   color: #fff;
-  font: 600 1.26em/1em "Open Sans", sans-serif;
+  font: 600 1.26em/1em normal;
   position: relative;
   margin: 0 0 1.7em;
   padding: 0;
@@ -6113,7 +6113,7 @@ blockquote footer a {
 
 .hidden-bar .side-email a {
   color: #fff;
-  font: 400 1.1em/1.7em "Open Sans", sans-serif;
+  font: 400 1.1em/1.7em normal;
   margin: 0;
   padding: 0;
 }
@@ -6145,7 +6145,7 @@ blockquote footer a {
 
 .hidden-bar-two .logo-side h2 {
   color: #2a2a2a;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0.8em 0 0.4em;
   padding: 0;
 }
@@ -6154,7 +6154,7 @@ blockquote footer a {
   color: #898989;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .hidden-bar-two .logo {
@@ -6210,7 +6210,7 @@ blockquote footer a {
 
 .hidden-bar-two .side-gallery h3 {
   color: #898989;
-  font: 600 1.26em/1em "Open Sans", sans-serif;
+  font: 600 1.26em/1em normal;
   position: relative;
   margin: 0 0 1.7em;
   padding: 0;
@@ -6249,7 +6249,7 @@ blockquote footer a {
 
 .hidden-bar-two .side-email a {
   color: #898989;
-  font: 400 1.1em/1.7em "Open Sans", sans-serif;
+  font: 400 1.1em/1.7em normal;
   margin: 0;
   padding: 0;
 }
@@ -6273,7 +6273,7 @@ blockquote footer a {
 
 .m-traking .maount-content h2 {
   color: #0e1322;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 1.3em;
   padding: 0;
   position: relative;
@@ -6292,7 +6292,7 @@ blockquote footer a {
 
 .m-traking .maount-content h3 {
   color: #0e1322;
-  font: 2em/1em "Playball", sans-serif;
+  font: 2em/1em normal;
   margin: 0 0 1.3em;
   padding: 0;
   position: relative;
@@ -6313,14 +6313,14 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 3em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .m-traking .maount-content h5 {
   color: #898989;
   margin: 0 0 0.3em;
   padding: 1em 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
   font-style: italic;
   border-top: 1px solid #dcdcdc;
   border-bottom: 1px solid #dcdcdc;
@@ -6402,7 +6402,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .rest-content ul {
@@ -6414,7 +6414,7 @@ blockquote footer a {
   padding: 0 0 0 1em;
   margin: 0;
   color: #898989;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
   font-style: italic;
 }
 
@@ -6439,7 +6439,7 @@ blockquote footer a {
   color: #898989;
   margin: 0 0 1.5em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .our-spec-outer {
@@ -6450,7 +6450,7 @@ blockquote footer a {
 
 .our-spec-outer .item h2 {
   color: #242424;
-  font: 1.86em/1em "Playball", sans-serif;
+  font: 1.86em/1em normal;
   margin: 1em 0 0.4em;
   padding: 0;
   position: relative;
@@ -6480,7 +6480,7 @@ blockquote footer a {
   color: #000;
   margin: 0;
   padding: 1em 0;
-  font: 600 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 600 1.0715em/1.8em normal;
 }
 
 .tab-inner-cont .media {
@@ -6506,7 +6506,7 @@ blockquote footer a {
 
 .tab-inner-cont .media .media-left h2 {
   color: #242424;
-  font: 800 1.43em/1.4em "Open Sans", sans-serif;
+  font: 800 1.43em/1.4em normal;
   margin: 0;
   padding: 0;
 }
@@ -6515,7 +6515,7 @@ blockquote footer a {
   color: #898989;
   margin: 0;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .tab-inner-cont .media .media-right {
@@ -6525,7 +6525,7 @@ blockquote footer a {
 
 .tab-inner-cont .media .media-right p {
   color: #94bc09;
-  font: 2.72em/1em "Playball", sans-serif;
+  font: 2.72em/1em normal;
   margin: 0.2em 0;
   padding: 0;
 }
@@ -6543,7 +6543,7 @@ blockquote footer a {
 
 .our-table-cont h2 {
   color: #fff;
-  font: 2.43em/1em "Playball", sans-serif;
+  font: 2.43em/1em normal;
   margin: 0 0 0.6em;
   padding: 0;
   position: relative;
@@ -6564,7 +6564,7 @@ blockquote footer a {
   color: #fff;
   margin: 0 0 2em;
   padding: 0;
-  font: 400 1.0715em/1.8em "Open Sans", sans-serif;
+  font: 400 1.0715em/1.8em normal;
 }
 
 .table-form {
@@ -6593,7 +6593,7 @@ blockquote footer a {
 .our-menu-tab .nav-tabs > li > a {
   text-transform: uppercase;
   color: #242424;
-  font: 600 1.15em/1em 'Open Sans Condensed', sans-serif;
+  font: 600 1.15em/1em normal;
   border-radius: 0;
   padding: 0.9em 3.3em;
   background: #f5f5f5;
@@ -6680,18 +6680,18 @@ body {
 .nhs-caption .this-title {
   margin-top: 0;
   margin-bottom: 20px;
-  font: 48px/52px "Playball", cursive;
+  font: 48px/52px normal;
   color: #fff;
 }
 .nhs-caption .this-stitle {
-  font: italic 30px/1.2 "Open Sans", sans-serif;
+  font: italic 30px/1.2 normal;
   margin-top: 0;
   margin-bottom: 35px;
   color: #fff;
   animation-delay: 200ms !important;
 }
 .nhs-caption p {
-  font: 17px/26px "Open Sans", sans-serif;
+  font: 17px/26px normal;
   color: #fff;
   letter-spacing: 0.3px;
   margin-bottom: 40px;
@@ -6708,7 +6708,7 @@ body {
   padding: 0 25px;
   display: inline-block;
   font-weight: bold;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   text-transform: uppercase;
   color: #fff;
 }
@@ -6725,7 +6725,7 @@ body {
   padding: 0 25px;
   display: inline-block;
   font-weight: bold;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   text-transform: uppercase;
   background: #1bb0e7;
   color: #fff;
@@ -6743,7 +6743,7 @@ body {
   padding: 0 25px;
   display: inline-block;
   font-weight: bold;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   text-transform: uppercase;
   background: #b8da3e;
   color: #6d7d32;
@@ -6798,7 +6798,7 @@ body {
   font-style: italic;
   font-size: 20px;
   line-height: 1.4;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   margin-bottom: 30px;
 }
 .nhs-caption6 a + a, .nhs-caption7 a + a {
@@ -6999,16 +6999,16 @@ body {
   line-height: 24px;
   color: #242424;
   font-weight: bold;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
 }
 .bee-accordion p {
-  font: 14px/24px "Open Sans", sans-serif;
+  font: 14px/24px normal;
   color: #898989;
   margin-bottom: 20px;
   letter-spacing: 0.3px;
 }
 .bee-accordion .nav li {
-  font: 14px/26px "Open Sans", sans-serif;
+  font: 14px/26px normal;
   letter-spacing: 0.3px;
   color: #757575;
 }
@@ -7054,10 +7054,10 @@ body {
   margin-top: 0;
   margin-bottom: 24px;
   color: #fff;
-  font-family: "Playball", cursive;
+  font-family: normal;
 }
 .nasir-activity p {
-  font: 16px/26px "Open Sans", sans-serif;
+  font: 16px/26px normal;
   letter-spacing: 0.3px;
   color: #fff;
   margin: 0;
@@ -7146,7 +7146,7 @@ body {
   color: #606060;
   text-transform: uppercase;
   font-size: 35px;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
 }
 .nasir-welcome-style .this-title {
   font-size: 50px;
@@ -7155,11 +7155,11 @@ body {
   margin-top: 10px;
   margin-bottom: 30px;
   font-weight: 800;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   color: #000;
 }
 .nasir-welcome-style p {
-  font: 15px/26px "Open Sans", sans-serif;
+  font: 15px/26px normal;
   letter-spacing: 0.3px;
   color: #8c8c8c;
   margin: 0;
@@ -7250,7 +7250,7 @@ body {
   font-size: 15px;
   line-height: 26px;
   letter-spacing: 0.3px;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
 }
 .nasir-activities2 .nav li {
   position: relative;
@@ -7317,12 +7317,12 @@ body {
 }
 .nasir-activities2 .this-ftitle {
   font-size: 22px;
-  font-family: "Playball", cursive;
+  font-family: normal;
   margin: 0;
 }
 .nasir-activities2 .this-stitle {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   font-weight: bold;
 }
 
@@ -7366,7 +7366,7 @@ body {
   font-size: 15px;
   line-height: 22px;
   color: #c1c1c1;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
 }
 .nasir-contact-box .media .media-body a:hover, .nasir-contact-box .media .media-body a:focus {
   color: #a2d002;
@@ -7412,7 +7412,7 @@ body {
   text-align: center;
   margin-bottom: 30px;
   font-size: 34px;
-  font-family: "Playball", cursive;
+  font-family: normal;
   line-height: 1;
   letter-spacing: 0.30px;
   color: #0e1322;
@@ -7496,14 +7496,14 @@ body {
   z-index: 2;
 }
 .explore-video .this-title {
-  font-family: "Playball", cursive;
+  font-family: normal;
   font-size: 50px;
   margin: 0 0 15px;
   letter-spacing: 0.3px;
 }
 .explore-video .this-stitle {
   letter-spacing: 0.3px;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   margin-top: 0;
 }
 .explore-video a {
@@ -7522,7 +7522,7 @@ body {
 }
 .download-theme .media-body {
   font-size: 40px;
-  font-family: "Playball", cursive;
+  font-family: normal;
   letter-spacing: 0.3px;
   color: #fff;
 }
@@ -7596,14 +7596,14 @@ body {
   transform: scale(1.1);
 }
 .fpackage .this-title {
-  font: bold 18px/26px "Open Sans", sans-serif;
+  font: bold 18px/26px normal;
   color: #000;
   letter-spacing: 0.3px;
   margin-bottom: 20px;
   display: block;
 }
 .fpackage p {
-  font: 15px/26px "Open Sans", sans-serif;
+  font: 15px/26px normal;
   color: #898989;
   margin: 0;
 }
@@ -7928,7 +7928,7 @@ body {
 }
 .nasir-subscribe-form-row h3 {
   color: #fff;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   font-weight: 400;
   font-size: 16px;
   margin: 0;
@@ -8745,32 +8745,32 @@ body {
 .nroom-grid .media {
   text-align: left;
 }
-.nroom-grid .this-title {
-  vertical-align: middle;
-  font-family: "Playball", cursive;
-  font-size: 26px;
-  color: #242424;
-  letter-spacing: 0.3px;
-}
+    .nroom-grid .this-title {
+        vertical-align: middle;
+        font-family: "Playball", cursive;
+        font-size: 26px;
+        color: #242424;
+        letter-spacing: 0.3px;
+    }
 .nroom-grid .media-right {
   font-size: 24px;
-  font-family: "Playball", cursive;
+  font-family: normal;
   white-space: nowrap;
   color: #242424;
 }
 .nroom-grid .media-right small {
   display: block;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: normal;
   color: #888;
 }
-.nroom-grid p {
-  margin: 20px 0 25px;
-  font-weight: 600;
-  color: #8e8e8e;
-  font-family: "Open Sans", sans-serif;
-  line-height: 26px;
-}
+    .nroom-grid p {
+        margin: 20px 0 25px;
+        font-weight: 600;
+        color: #8e8e8e;
+        font-family: sans-serif;
+        line-height: 26px;
+    }
 .nroom-grid .read-more {
   background: #85ab00;
   padding: 0 20px;
@@ -8780,7 +8780,7 @@ body {
   border-radius: 3px;
   text-transform: uppercase;
   display: inline-block;
-  font: 400 0.88em/38px "Open Sans", sans-serif;
+  font: 400 0.88em/38px normal;
 }
 .nroom-grid .read-more i {
   margin-left: 10px;
@@ -8816,7 +8816,7 @@ body {
   }
   #main-navigation-wrapper .nav > li.open > .dropdown-menu li a {
     font-weight: 600;
-    font-family: "Open Sans", sans-serif;
+    font-family: normal;
   }
   #main-navigation-wrapper .nav > li.open > .dropdown-menu li a:before {
     content: '-';
@@ -9061,7 +9061,7 @@ body {
 #main-navigation-wrapper .nav > li > a {
   padding: 25px 0;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: sans-serif;
   font-weight: bold;
   color: #666666;
   text-transform: uppercase;
@@ -9194,7 +9194,7 @@ body {
         color: #666666;
         border-bottom: 1px solid #F0F0F0;
         font-size: 14px;
-        font-family: "Open Sans", sans-serif;
+        font-family: normal;
         font-weight: 700;
         text-align: left;
         transition: background .4s ease;
@@ -9729,7 +9729,7 @@ body {
     .final-inner-header .this-title {
         margin: 0;
         letter-spacing: 0.3px;
-        font-family: "Playball", cursive;
+        font-family: normal;
         text-transform: capitalize;
         font-size: 55px;
         color: #fff;
@@ -9758,7 +9758,7 @@ body {
         }
 
             .final-breadcrumb .breadcrumb li {
-                font-family: "Open Sans", sans-serif;
+                font-family: normal;
                 font-weight: bold;
                 text-transform: uppercase;
                 color: #bfbfbf;
@@ -10022,7 +10022,7 @@ body {
     .fullwidth-slider .this-title {
         font-size: 15px;
         font-weight: bold;
-        font-family: "Open Sans", sans-serif;
+        font-family: normal;
         color: #fff;
         margin: 0;
         position: relative;

@@ -7,14 +7,14 @@
 
 <section class="row final-inner-header">
     <div class="container">
-        <h2 class="this-title">@Html.Raw(Resources.HMS_RoomDetail)</h2>
+        <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_RoomDetail)</h2>
     </div>
 </section>
 <section class="row final-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
-            <li><a href="/danh-sach-phong-ngan-han" class="active">@Html.Raw(Resources.HMS_RoomDetail)</a></li>
+            <li><a href="/">@Html.Raw(Resources.Resources.HMS_Home)</a></li>
+            <li><a href="/danh-sach-phong-ngan-han" class="active">@Html.Raw(Resources.Resources.HMS_RoomDetail)</a></li>
         </ol>
     </div>
 </section>
@@ -27,7 +27,7 @@
                 <!-- Booking Form style-->
                 <div class="book-r-form">
                     @*<div class="room-price">
-                        <h6>@Html.Raw(Resources.HMS_StartForm)</h6>
+                        <h6>@Html.Raw(Resources.Resources.HMS_StartForm)</h6>
                         @if (cookie.Value.Equals("vi"))
                         {
                             <p>@Model.listRoom.Price.ToString("#,##0") <span>/ Ngày</span></p>
@@ -40,20 +40,20 @@
                     </div>*@
                     <div class="book-form">
                         @*<div class="col-md-12" style="padding-bottom:10px">
-                            <b>@Html.Raw(Resources.HMS_StartDate)</b>
+                            <b>@Html.Raw(Resources.Resources.HMS_StartDate)</b>
                             <input type="date" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" 
-                                   data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
+                                   data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
                         </div>
                         <div class="col-md-12" style="padding-bottom:10px">
-                            <b>@Html.Raw(Resources.HMS_EndDate)</b>
+                            <b>@Html.Raw(Resources.Resources.HMS_EndDate)</b>
                             <input type="date" name="CheckIn" id="endDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" 
-                                   data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
+                                   data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
                         </div>*@
                         @*<div class="col-md-12" style="padding-bottom:10px">
-                            <b>@Html.Raw(Resources.HMS_PeopleNumber)</b>
+                            <b>@Html.Raw(Resources.Resources.HMS_PeopleNumber)</b>
                             <div class="select-box">
                                 <select name="selectMenu" class="select-menu" id="selectMenu" >
-                                    <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
+                                    <option value="default">@Html.Raw(Resources.Resources.HMS_PeopleNumber)</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -66,7 +66,7 @@
                             <div class="chk-button">
                                 <button type="submit" class="res-btn" data-toggle="modal"
                                         data-target="#exampleModalCenter" onclick="bookingShortRoom()">
-                                    @Html.Raw(Resources.HMS_Booking)
+                                    @Html.Raw(Resources.Resources.HMS_Booking)
                                 </button>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 @*<section class="clearfix common-pad-inner booknow">*@
                                 <div class="sec-header">
-                                    <h2>@Html.Raw(Resources.HMS_Booking)</h2>
-                                    @*<h3>@Html.Raw(Resources.HMS_Rooms)</h3>*@
+                                    <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
+                                    @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
                                 <form id="contactBooking"
                                       action="/RoomVer3/BookingLongRoom" method="post">
@@ -93,27 +93,27 @@
 
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerName" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.HMS_Name)" class="form-control" required>
+                                                        <input id="CustomerName" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerEmail" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.HMS_Email)" class="form-control" required>
+                                                        <input id="CustomerEmail" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
                                                     </div>
                                                 </div>
                                                 @*<div class="row form-group" style="display:none;">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input type="date" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input type="date" name="Deadline" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" placeholder="@Html.Raw(Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
+                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                 </div>*@
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <div class="select-box">
                                                             <select name="CustomeNumber" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
-                                                                <option value="default">@Html.Raw(Resources.HMS_PeopleNumber)</option>
+                                                                <option value="default">@Html.Raw(Resources.Resources.HMS_PeopleNumber)</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -122,13 +122,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerPhone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.HMS_Phone)" required
+                                                        <input id="CustomerPhone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                class="form-control" onkeypress="return isNumberKey(event)">
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <textarea id="message" rows="6" name="Description" placeholder="@Html.Raw(Resources.HMS_Message)" required
+                                                        <textarea id="message" rows="6" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                   class="form-control" style="height:200px;"></textarea>
                                                     </div>
                                                 </div>
@@ -137,7 +137,7 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <button type="submit" class="res-btn"
                                                                 onclick="BookingRooom()">
-                                                            @Html.Raw(Resources.HMS_Booking)
+                                                            @Html.Raw(Resources.Resources.HMS_Booking)
                                                         </button>
                                                     </div>
                                                 </div>
@@ -149,7 +149,7 @@
                                                 <!-- Categories style-->
                                                 <div class="single-sidebar-widget-outer">
                                                     <div class="sec-title-cat sec-title">
-                                                        <h2>@Html.Raw(Resources.HMS_Benefit)</h2>
+                                                        <h2>@Html.Raw(Resources.Resources.HMS_Benefit)</h2>
                                                     </div>
                                                     <div class="categories">
                                                         <ul>
@@ -157,7 +157,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" id="action" value="true" name="Book_Motobike">
                                                                     <label class="form-check-label" for="defaultCheck1">
-                                                                        @Html.Raw(Resources.HMS_RentVerhical)
+                                                                        @Html.Raw(Resources.Resources.HMS_RentVerhical)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -173,7 +173,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck3" name="BookCar">
                                                                     <label class="form-check-label" for="defaultCheck3">
-                                                                        @Html.Raw(Resources.HMS_Cars)
+                                                                        @Html.Raw(Resources.Resources.HMS_Cars)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -181,7 +181,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck4" name="Book_BBQService">
                                                                     <label class="form-check-label" for="defaultCheck4">
-                                                                        @Html.Raw(Resources.HMS_BBQ)
+                                                                        @Html.Raw(Resources.Resources.HMS_BBQ)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -189,7 +189,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck5" name="Book_Gift">
                                                                     <label class="form-check-label" for="defaultCheck5">
-                                                                        @Html.Raw(Resources.HMS_Souvenir)
+                                                                        @Html.Raw(Resources.Resources.HMS_Souvenir)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -197,7 +197,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck6" name="Book_Laundry">
                                                                     <label class="form-check-label" for="defaultCheck6">
-                                                                        @Html.Raw(Resources.HMS_Laundry)
+                                                                        @Html.Raw(Resources.Resources.HMS_Laundry)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -205,7 +205,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck7" name="Book_FlightTicket">
                                                                     <label class="form-check-label" for="defaultCheck7">
-                                                                        @Html.Raw(Resources.HMS_AirTicket)
+                                                                        @Html.Raw(Resources.Resources.HMS_AirTicket)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -221,7 +221,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck9" name="Book_Taxi">
                                                                     <label class="form-check-label" for="defaultCheck9">
-                                                                        @Html.Raw(Resources.HMS_AirportTaxi)
+                                                                        @Html.Raw(Resources.Resources.HMS_AirportTaxi)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -229,7 +229,7 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" value="true" id="defaultCheck10" name="Book_SuggestionTour">
                                                                     <label class="form-check-label" for="defaultCheck10">
-                                                                        @Html.Raw(Resources.HMS_Location)
+                                                                        @Html.Raw(Resources.Resources.HMS_Location)
                                                                     </label>
                                                                 </div>
                                                             </li>
@@ -244,7 +244,7 @@
                                     @*</section>*@
                                 </form>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.HMS_Close)</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
                                 </div>
                             </div>
 
@@ -255,7 +255,7 @@
                 <!-- Budget Rooms style-->
                 <div class="single-sidebar-widget-outer">
                     <div class="sec-title">
-                        <h2>@Html.Raw(Resources.HMS_BudgetRooms)</h2>
+                        <h2>@Html.Raw(Resources.Resources.HMS_BudgetRooms)</h2>
                     </div>
                     <div class="popular-post">
                         <ul>
@@ -288,7 +288,7 @@
                                         </div>
                                         <div class="content">
                                             <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
-                                                <h4>@iterm.NameENG</h4>
+                                                <h4>@iterm.NameEN</h4>
                                             </a>
                                             @*<p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$ / Day</p>*@
                                         </div>
@@ -338,8 +338,8 @@
                     else
                     {
                         <div class="room-dec-wrapper">
-                            <h2>@Model.listRoom.NameENG</h2>
-                            <p>@Html.Raw(Model.listRoom.Temp_1)</p>
+                            <h2>@Model.listRoom.NameEN</h2>
+                            <p>@Html.Raw(Model.listRoom.string1)</p>
                             <p>@Html.Raw(Model.listRoom.DescriptionENG)</p>
                             <input type="text" name="@Model.listRoom.Id" value="@Model.listRoom.Id" style="display:none;">
                         </div>
@@ -357,7 +357,7 @@
                                     <li>
                                         <div class="facilitie-i-box">
 
-                                            <h3>@Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -365,7 +365,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -373,7 +373,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -381,7 +381,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -389,7 +389,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -397,7 +397,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -405,7 +405,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -413,7 +413,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
@@ -421,7 +421,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
                                         </div>
                                     </li>
                                 }
