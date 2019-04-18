@@ -1,8 +1,8 @@
 ﻿using Outsourcing.Core.Common;
 using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
+using Outsourcing.Service.HMS;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -11,61 +11,93 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class CategoryHotelsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        #region Fields
+        private readonly ICategoryHotelService _categoryHotelService;
+        #endregion
 
-        // GET: /HMSAdmin/CategoryHotels/
+        #region Ctor
+        public CategoryHotelsController(ICategoryHotelService categoryHotelService)
+        {
+            _categoryHotelService = categoryHotelService;
+        }
+        #endregion
+
+        #region Index
+        /// <summary>
+        /// Index - GET
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            return View(await db.CategoryHotels.Where(w=>w.IsDelete == false).AsNoTracking().ToListAsync());
+            var categories = await _categoryHotelService.FindAll().AsNoTracking().ToListAsync();
+            return View(categories);
         }
+        #endregion
 
-        // GET: /HMSAdmin/CategoryHotels/Details/5
-        public async Task<ActionResult> Details(int? id)
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = await db.CategoryHotels.Where(w => w.IsDelete == false & w.Id == id).AsNoTracking().SingleOrDefaultAsync();
+            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
             }
             return View(categoryHotels);
         }
+        #endregion
 
-        // GET: /HMSAdmin/CategoryHotels/Create
+        #region Create
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View(new CategoryHotels { SharePercent = 0 });
         }
 
-        // POST: /HMSAdmin/CategoryHotels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Create - POST
+        /// </summary>
+        /// <param name="categoryHotels"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CategoryHotels categoryHotels)
+        public ActionResult Create(CategoryHotels categoryHotels)
         {
             if (ModelState.IsValid)
             {
                 categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                db.CategoryHotels.Add(categoryHotels);
-                await db.SaveChangesAsync();
+                _categoryHotelService.Create(categoryHotels);
                 return RedirectToAction("Index");
             }
 
             return View(categoryHotels);
         }
+        #endregion
 
-        // GET: /HMSAdmin/CategoryHotels/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+        /// <summary>
+        /// Edit - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = await db.CategoryHotels.FindAsync(id);
+            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
@@ -73,31 +105,38 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(categoryHotels);
         }
 
-        // POST: /HMSAdmin/CategoryHotels/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit - POST
+        /// </summary>
+        /// <param name="categoryHotels"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(CategoryHotels categoryHotels)
+        public ActionResult Edit(CategoryHotels categoryHotels)
         {
             if (ModelState.IsValid)
             {
                 categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                db.Entry(categoryHotels).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _categoryHotelService.Edit(categoryHotels);
                 return RedirectToAction("Index");
             }
             return View(categoryHotels);
         }
+        #endregion
 
-        // GET: /HMSAdmin/CategoryHotels/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region Delete
+        /// <summary>
+        /// Delete - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = await db.CategoryHotels.FindAsync(id);
+            var categoryHotels = _categoryHotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
@@ -105,29 +144,18 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(categoryHotels);
         }
 
-        // POST: /HMSAdmin/CategoryHotels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            CategoryHotels categoryHotels = await db.CategoryHotels.FindAsync(id);
+            var categoryHotels = _categoryHotelService.FindById(id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
             }
-            categoryHotels.IsDelete = true;
-            db.Entry(categoryHotels).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+            _categoryHotelService.Delete(categoryHotels);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }

@@ -1,94 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Outsourcing.Core.Common;
+﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Repository;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
+using System.Linq;
 
 namespace Outsourcing.Service.HMS
 {
- 
-   public interface ICategoryHotelService
+
+    public interface ICategoryHotelService
     {
 
-        IEnumerable<CategoryHotels> GetProductCategories();
-        CategoryHotels GetCategoryHotelById(int CategoryHotelId);
-        void CreateCategoryHotel(CategoryHotels CategoryHotel);
-        void EditCategoryHotel(CategoryHotels CategoryHotelToEdit);
-        void DeleteProductCategories(int CategoryHotelId);
-        void SaveCategoryHotel();
-        IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotels CategoryHotel);
+        IQueryable<CategoryHotels> FindAll();
+        CategoryHotels FindById(int id);
+        void Create(CategoryHotels entity);
+        void Edit(CategoryHotels entity);
+        void Delete(int id);
+        void Delete(CategoryHotels entity);
 
     }
     public class CategoryHotelService : ICategoryHotelService
     {
         #region Field
-        private readonly ICategoryHotelRepository CategoryHotelRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICategoryHotelRepository _categoryHotelRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CategoryHotelService(ICategoryHotelRepository CategoryHotelRepository, IUnitOfWork unitOfWork)
+        public CategoryHotelService(ICategoryHotelRepository categoryHotelRepository, IUnitOfWork unitOfWork)
         {
-            this.CategoryHotelRepository = CategoryHotelRepository;
-            this.unitOfWork = unitOfWork;
+            _categoryHotelRepository = categoryHotelRepository;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
         #region BaseMethod
 
-        public IEnumerable<CategoryHotels> GetProductCategories()
+        public IQueryable<CategoryHotels> FindAll()
         {
-            var CategoryHotels = CategoryHotelRepository.GetAll().Where(p => p.Status == true);
-            return CategoryHotels;
+            var listEntities = _categoryHotelRepository.FindBy(w => w.IsDelete == false);
+            return listEntities;
         }
 
-        public CategoryHotels GetCategoryHotelById(int CategoryHotelId)
+        public CategoryHotels FindById(int id)
         {
-            var CategoryHotel = CategoryHotelRepository.GetById(CategoryHotelId);
-            return CategoryHotel;
+            var entity = _categoryHotelRepository.FindBy(w => w.IsDelete == false & w.Id == id).SingleOrDefault();
+            return entity;
         }
 
-        public void CreateCategoryHotel(CategoryHotels CategoryHotel)
+        public void Create(CategoryHotels entity)
         {
-            CategoryHotelRepository.Add(CategoryHotel);
-            SaveCategoryHotel();
+            _categoryHotelRepository.Add(entity);
+            commit();
         }
 
-        public void EditCategoryHotel(CategoryHotels CategoryHotelToEdit)
+        public void Edit(CategoryHotels entity)
         {
-            CategoryHotelRepository.Update(CategoryHotelToEdit);
-            SaveCategoryHotel();
+            _categoryHotelRepository.Update(entity);
+            commit();
         }
 
-        public void DeleteProductCategories(int CategoryHotelId)
+        public void Delete(int id)
         {
-            //Get CategoryHotel by id.
-            var CategoryHotel = CategoryHotelRepository.GetById(CategoryHotelId);
-            if (CategoryHotel != null)
+            var entity = FindById(id);
+            Delete(entity);
+        }
+
+        private void commit()
+        {
+            _unitOfWork.Commit();
+        }
+
+        public void Delete(CategoryHotels entity)
+        {
+            if (entity != null)
             {
-                CategoryHotelRepository.Delete(CategoryHotel);
-                SaveCategoryHotel();
+                entity.IsDelete = true;
+                Edit(entity);
             }
         }
-
-        public void SaveCategoryHotel()
-        {
-            unitOfWork.Commit();
-        }
-
-        public IEnumerable<ValidationResult> CanAddCategoryHotel(CategoryHotels CategoryHotel)
-        {
-
-            //    yield return new ValidationResult("CategoryHotel", "ErrorString");
-            return null;
-        }
-
         #endregion
     }
 }
