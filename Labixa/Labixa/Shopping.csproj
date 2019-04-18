@@ -97,6 +97,7 @@
     <Compile Include="Areas\Admin\ViewModel\StaffFormModel.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BaseController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CategoryHotelController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\CategoryHotelsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelController.cs" />
@@ -1550,6 +1551,11 @@
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit_bak.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Checkout.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Create.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Delete.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Details.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Edit.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1905,7 +1911,6 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\Shared\Partial\" />
     <Folder Include="Areas\HMSAdmin\Models\" />
-    <Folder Include="Areas\HMSAdmin\Views\CategoryHotel\" />
     <Folder Include="Areas\HMSAdmin\Views\Shared\Partial\" />
     <Folder Include="Content\admin\fonts\" />
     <Folder Include="images\uploaded\caycanh\" />

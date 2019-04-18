@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Outsourcing.Data.Models.HMS
 {
     public class CategoryHotels : BaseEntity
     {
 
+        [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
+
+        [AllowHtml]
         public string Description { get; set; }
+
+        [Range(0, 100)]
         public int SharePercent { get; set; }
         public bool Status { get; set; }
 
@@ -35,7 +39,8 @@ namespace Outsourcing.Data.Models.HMS
         public bool IsStaticPage { get; set; }
         public string Noted { get; set; }
         public string string1 { get; set; }
-        virtual public ICollection<Hotels> Hotels { get; set; }
+        public virtual ICollection<Hotels> Hotels { get; set; }
 
+        public bool IsDelete { get; set; }
     }
 }

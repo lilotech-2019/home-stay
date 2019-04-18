@@ -5,6 +5,7 @@ using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
 using Outsourcing.Data.Models.HMS;
+using System;
 
 namespace Labixa.Controllers
 {
@@ -83,9 +84,11 @@ namespace Labixa.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking)
+        public ActionResult BookingRoom(RoomOrder modelBooking, String CustomerName, String CustomerEmail)
         {
+            
             _roomOrderService.Create(modelBooking);
+
             return RedirectToAction("ShortRoom", "RoomVer3");
           
         }
