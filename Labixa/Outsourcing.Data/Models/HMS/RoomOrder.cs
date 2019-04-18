@@ -47,7 +47,7 @@ namespace Outsourcing.Data.Models.HMS
             }
             return Room.Price * Room.DiscountPercent * (CheckOut - CheckIn).TotalDays;
         }
-        private double Price { get; set; }
+        public double Price { get; set; }
         public RoomOrderStatus Status { get; set; }
         public int? ShipmentId { get; set; }
         public double? ShipmentFee { get; set; }
