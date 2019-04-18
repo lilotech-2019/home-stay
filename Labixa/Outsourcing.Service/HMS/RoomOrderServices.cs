@@ -44,7 +44,7 @@ namespace Outsourcing.Service.HMS
         }
 
         public RoomOrder FindById(int id)
-        {
+        {          
             return _roomOrderRepository.FindBy(w => w.Id == id && w.Deleted == false).SingleOrDefault();
         }
 
