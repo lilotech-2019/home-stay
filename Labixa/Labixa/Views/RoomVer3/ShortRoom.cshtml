@@ -1,4 +1,5 @@
-﻿@using PagedList.Mvc;
+﻿
+@using PagedList.Mvc;
 @*khai bao thu vien pagelist*@
 @model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Rooms>
 
@@ -9,20 +10,20 @@
 @{
 
     ViewBag.Title = "ShortRoom";
-Layout = "~/Views/Shared/_LayoutHMS.cshtml";
-HttpCookie cookie = Request.Cookies["_culture"];
+    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
+    HttpCookie cookie = Request.Cookies["_culture"];
 }
 
 <section class="row final-inner-header">
     <div class="container">
-        <h2 class="this-title">@Html.Raw(Resources.HMS_Rooms)</h2>
+        <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_Rooms)</h2>
     </div>
 </section>
 <section class="row final-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="/">@Html.Raw(Resources.HMS_Home)</a></li>
-            <li><a href="/danh-sach-phong-ngan-han" class="active">@Html.Raw(Resources.HMS_Rooms)</a></li>
+            <li><a href="/">@Html.Raw(Resources.Resources.HMS_Home)</a></li>
+            <li><a href="/danh-sach-phong-ngan-han" class="active">@Html.Raw(Resources.Resources.HMS_Rooms)</a></li>
         </ol>
     </div>
 </section>
@@ -33,7 +34,7 @@ HttpCookie cookie = Request.Cookies["_culture"];
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
             <div class="sec-header3">
-                <h2>@Html.Raw(Resources.HMS_Rooms)</h2>
+                <h2>@Html.Raw(Resources.Resources.HMS_Rooms)</h2>
                 <h3></h3>
             </div>
         </div>
@@ -77,10 +78,10 @@ HttpCookie cookie = Request.Cookies["_culture"];
                         </a>
                         <div class="row this-conts">
                             <div class="media">
-                                <div class="media-body this-title">@iterm.NameENG</div>
+                                <div class="media-body this-title">@iterm.NameEN</div>
                                 <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
                             </div>
-                            <p>@Html.Raw(iterm.Temp_1)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
+                            <p>@Html.Raw(iterm.string1)</p><a href="/chi-tiet-phong-ngan-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 }
