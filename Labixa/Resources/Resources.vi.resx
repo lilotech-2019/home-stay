@@ -474,4 +474,7 @@
   <data name="String1" xml:space="preserve">
     <value>Phòng nổi bật</value>
   </data>
+  <data name="Action" xml:space="preserve">
+    <value>Thao Tác</value>
+  </data>
 </root>
