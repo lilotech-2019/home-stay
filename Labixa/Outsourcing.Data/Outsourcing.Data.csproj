@@ -83,7 +83,7 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BlogCategories.cs" />
     <Compile Include="Models\Blogs.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />
-    <Compile Include="Models\HMS\Customer.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HMS\Hotels.cs" />
     <Compile Include="Models\HMS\Products.cs" />
     <Compile Include="Models\HMS\Rooms.cs" />
@@ -176,9 +176,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{f1c27911-ce4d-429e-9483-14e73ac120c8}</Project>

@@ -98,7 +98,6 @@
     <Compile Include="Areas\HMSAdmin\Controllers\BaseController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BlogsController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\CategoryHotelController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CategoryHotelsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\ContactUsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
@@ -115,11 +114,11 @@
     <Compile Include="Areas\HMSAdmin\Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Areas\HMSAdmin\Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Areas\HMSAdmin\Mappings\ViewModelToDomainMappingProfile.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\CostModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\CostOrderCreateModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\CostOrderEditModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\HotelModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\RoomModel.cs" />
+    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostModel.cs" />
+    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderCreateModel.cs" />
+    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
+    <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
+    <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -1946,7 +1945,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\Shared\Partial\" />
-    <Folder Include="Areas\HMSAdmin\Models\" />
     <Folder Include="Areas\HMSAdmin\Views\Shared\Partial\" />
     <Folder Include="Content\admin\fonts\" />
     <Folder Include="images\uploaded\caycanh\" />

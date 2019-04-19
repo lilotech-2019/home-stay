@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Outsourcing.Data.Models.HMS;
 
-namespace Outsourcing.Data.Models.HMS
+namespace Outsourcing.Data.Models
 {
     public class Customer : BaseEntity
     {

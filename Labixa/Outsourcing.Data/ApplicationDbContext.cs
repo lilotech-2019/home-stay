@@ -54,6 +54,8 @@ namespace Outsourcing.Data
         public DbSet<HMSProduct> HmsProducts { get; set; } //a
 
 
+        public DbSet<Customer> Customers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -93,7 +95,5 @@ namespace Outsourcing.Data
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public System.Data.Entity.DbSet<Outsourcing.Data.Models.HMS.Customer> Customers { get; set; }
     }
 }
