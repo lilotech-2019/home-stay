@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Service.Properties;
-using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
 {
@@ -17,27 +13,27 @@ namespace Outsourcing.Service.HMS
     public interface IHmsProductService
     {
 
-        IEnumerable<HMSProduct> GetHmsProducts();
-        HMSProduct GetHmsProductContact();
-        IEnumerable<HMSProduct> GetHomePageHmsProducts();
-        IEnumerable<HMSProduct> GetHmsProductByCategorySlug(string slug);
-        IEnumerable<HMSProduct> GetHmsProductByCategoryId(int id);
-        IEnumerable<HMSProduct> Get6HmsProductService();
-        IEnumerable<HMSProduct> Get2HmsProductNews();
-        IEnumerable<HMSProduct> Get3HmsProductNewsNewest();
-        HMSProduct GetHmsProductById(int hmsProductId);
-        void CreateHmsProduct(HMSProduct hmsProduct);
-        void EditHmsProduct(HMSProduct hmsProductToEdit);
+        IEnumerable<HmsProduct> GetHmsProducts();
+        HmsProduct GetHmsProductContact();
+        IEnumerable<HmsProduct> GetHomePageHmsProducts();
+        IEnumerable<HmsProduct> GetHmsProductByCategorySlug(string slug);
+        IEnumerable<HmsProduct> GetHmsProductByCategoryId(int id);
+        IEnumerable<HmsProduct> Get6HmsProductService();
+        IEnumerable<HmsProduct> Get2HmsProductNews();
+        IEnumerable<HmsProduct> Get3HmsProductNewsNewest();
+        HmsProduct GetHmsProductById(int hmsProductId);
+        void CreateHmsProduct(HmsProduct hmsProduct);
+        void EditHmsProduct(HmsProduct hmsProductToEdit);
         void DeleteHmsProduct(int hmsProductId);
         void SaveHmsProduct();
         IEnumerable<ValidationResult> CanAddHmsProduct(string hmsProductUrl);
 
-        HMSProduct GetHmsProductByUrlName(string urlName);
+        HmsProduct GetHmsProductByUrlName(string urlName);
 
-        IEnumerable<HMSProduct> GetHmsProductsByCategory(int hmsProductTypeId);
+        IEnumerable<HmsProduct> GetHmsProductsByCategory(int hmsProductTypeId);
 
-        IEnumerable<HMSProduct> GetStaticPage();
-        IEnumerable<HMSProduct> GetNewPost();
+        IEnumerable<HmsProduct> GetStaticPage();
+        IEnumerable<HmsProduct> GetNewPost();
     }
     public class HmsProductService : IHmsProductService
     {
@@ -55,56 +51,56 @@ namespace Outsourcing.Service.HMS
         #endregion
 
         #region Implementation for IHMSProductService
-        public IEnumerable<HMSProduct> GetHmsProducts()
+        public IEnumerable<HmsProduct> GetHmsProducts()
         {
             var hmsProducts = _hmsProductRepository.GetMany(b => !b.Deleted).OrderBy(b => b.Position);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> Get3HmsProductsPosition()
+        public IEnumerable<HmsProduct> Get3HmsProductsPosition()
         {
             var hmsProducts = _hmsProductRepository.GetMany(b => !b.Deleted).OrderBy(b => b.Position).Take(3);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> GetHomePageHmsProducts()
+        public IEnumerable<HmsProduct> GetHomePageHmsProducts()
         {
             var hmsProducts = _hmsProductRepository.
                 GetMany(b => !b.Deleted && b.IsHomePage).
                 OrderByDescending(b => b.DateCreated);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> GetHmsProductByCategoryId(int id)
+        public IEnumerable<HmsProduct> GetHmsProductByCategoryId(int id)
         {
             var hmsProducts = _hmsProductRepository.GetMany(b => b.CategoryProductId.Equals(id)
                 && !b.Deleted).
                 OrderByDescending(b => b.DateCreated);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> GetHmsProductByCategorySlug(string slug)
+        public IEnumerable<HmsProduct> GetHmsProductByCategorySlug(string slug)
         {
             var hmsProducts = _hmsProductRepository.GetMany(b =>b.Slug.Equals(slug)
                 && !b.Deleted).
                 OrderByDescending(b => b.DateCreated);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> GetStaticPage()
+        public IEnumerable<HmsProduct> GetStaticPage()
         {
             var hmsProducts = _hmsProductRepository.GetMany(b =>!b.Deleted).OrderByDescending(b => b.DateCreated);
             return hmsProducts;
         }
 
-        public HMSProduct GetHmsProductById(int hmsProductId)
+        public HmsProduct GetHmsProductById(int hmsProductId)
         {
             var hmsProduct = _hmsProductRepository.GetById(hmsProductId);
             return hmsProduct;
         }
 
-        public void CreateHmsProduct(HMSProduct hmsProduct)
+        public void CreateHmsProduct(HmsProduct hmsProduct)
         {
             _hmsProductRepository.Add(hmsProduct);
             SaveHmsProduct();
         }
 
-        public void EditHmsProduct(HMSProduct hmsProductToEdit)
+        public void EditHmsProduct(HmsProduct hmsProductToEdit)
         {
             hmsProductToEdit.LastEditedTime = DateTime.Now;
             _hmsProductRepository.Update(hmsProductToEdit);
@@ -140,29 +136,29 @@ namespace Outsourcing.Service.HMS
             return null;
         }
 
-        public HMSProduct GetHmsProductByUrlName(string urlName)
+        public HmsProduct GetHmsProductByUrlName(string urlName)
         {
             var hmsProduct = _hmsProductRepository.Get(b => b.Slug == urlName);
             return hmsProduct;
         }
 
-        public IEnumerable<HMSProduct> GetHmsProductsByCategory(int hmsProductTypeId)
+        public IEnumerable<HmsProduct> GetHmsProductsByCategory(int hmsProductTypeId)
         {
             var hmsProducts = this.GetHmsProducts();
             return hmsProducts;
         }
 
-        public IEnumerable<HMSProduct> Get6HmsProductService()
+        public IEnumerable<HmsProduct> Get6HmsProductService()
         {
             var hmsProducts = this.GetHmsProducts().Take(6);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> Get2HmsProductNews()
+        public IEnumerable<HmsProduct> Get2HmsProductNews()
         {
             var hmsProducts = this.GetHmsProducts().OrderBy(p => p.Position).Take(2);
             return hmsProducts;
         }
-        public IEnumerable<HMSProduct> Get3HmsProductNewsNewest()
+        public IEnumerable<HmsProduct> Get3HmsProductNewsNewest()
         {
             var hmsProducts = this.GetHmsProducts().OrderBy(p => p.Position).Take(3);
             return hmsProducts;
@@ -170,14 +166,14 @@ namespace Outsourcing.Service.HMS
         #endregion
 
 
-        public HMSProduct GetHmsProductContact()
+        public HmsProduct GetHmsProductContact()
         {
             var item = _hmsProductRepository.Get(p => p.Slug.Equals("lien-he"));
             return item;
         }
 
 
-        public IEnumerable<HMSProduct> GetNewPost()
+        public IEnumerable<HmsProduct> GetNewPost()
         {
             return _hmsProductRepository.GetAll().OrderByDescending(p => p.DateCreated).Take(5);
         }

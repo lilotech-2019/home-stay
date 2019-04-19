@@ -57,7 +57,7 @@
 //        {
 //            if (ModelState.IsValid)
 //            {
-//                newColor.isDelete = false;
+//                newColor.Deleted = false;
 //                //Mapping to domain
 //                //Create Blog
 //                _ColorService.Create(newColor);

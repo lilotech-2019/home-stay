@@ -44,12 +44,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Colors colors = _colorService.FindById((int)id);
-            if (colors == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(colors);
+            return View(deposit);
         }
         #endregion
 
@@ -66,19 +66,19 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="colors"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Colors colors)
+        public ActionResult Create(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                _colorService.Create(colors);
+                _colorService.Create(deposit);
                 return RedirectToAction("Index");
             }
 
-            return View(colors);
+            return View(deposit);
         }
         #endregion
 
@@ -94,29 +94,29 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Colors colors = _colorService.FindById((int)id);
-            if (colors == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(colors);
+            return View(deposit);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="colors"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Colors colors)
+        public ActionResult Edit(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                _colorService.Edit(colors);
+                _colorService.Edit(deposit);
                 return RedirectToAction("Index");
             }
-            return View(colors);
+            return View(deposit);
         }
         #endregion
 

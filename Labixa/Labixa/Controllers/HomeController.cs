@@ -98,7 +98,7 @@ namespace Labixa.Controllers
         //nếu để anotation như vậy thì action này có method là Post
         //khi gom model thì kiểu trả về không còn là mở string xàm nữa, mà là model
         [HttpPost]
-        public ActionResult ContactBookingRooom(Colors modelContact)
+        public ActionResult ContactBookingRooom(Deposit modelContact)
         {
             //khởi tạo obj Vendor, đổ data
             //create obj vendor

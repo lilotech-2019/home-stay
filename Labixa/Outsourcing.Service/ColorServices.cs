@@ -10,13 +10,13 @@ namespace Outsourcing.Service
     public interface IColorService
     {
 
-        IQueryable<Colors> FindAll();
-        Colors FindById(int id);
-        void Create(Colors entity);
-        void Edit(Colors entity);
+        IQueryable<Deposit> FindAll();
+        Deposit FindById(int id);
+        void Create(Deposit entity);
+        void Edit(Deposit entity);
         void Delete(int id);
-        void Delete(Colors entity);
-        IQueryable<Colors> FindSelectList(int? id);
+        void Delete(Deposit entity);
+        IQueryable<Deposit> FindSelectList(int? id);
     }
     public class ColorService : IColorService
     {
@@ -34,25 +34,25 @@ namespace Outsourcing.Service
         #endregion
 
         #region BaseMethod
-        public IQueryable<Colors> FindAll()
+        public IQueryable<Deposit> FindAll()
         {
-            var listEntities = _colorRepository.FindBy(w => w.isDelete == false);
+            var listEntities = _colorRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
-        public Colors FindById(int id)
+        public Deposit FindById(int id)
         {
-            var entity = _colorRepository.FindBy(w => w.isDelete == false & w.Id == id).SingleOrDefault();
+            var entity = _colorRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 
-        public void Create(Colors entity)
+        public void Create(Deposit entity)
         {
             _colorRepository.Add(entity);
             Commit();
         }
 
-        public void Edit(Colors entity)
+        public void Edit(Deposit entity)
         {
             _colorRepository.Update(entity);
             Commit();
@@ -64,9 +64,9 @@ namespace Outsourcing.Service
             Delete(entity);
         }
 
-        public IQueryable<Colors> FindSelectList(int? id)
+        public IQueryable<Deposit> FindSelectList(int? id)
         {
-            var list = _colorRepository.FindBy(r => r.isDelete == false);
+            var list = _colorRepository.FindBy(r => r.Deleted == false);
             if (id != null)
             {
                 list = list.Where(w => w.Id == id);
@@ -79,11 +79,11 @@ namespace Outsourcing.Service
             _unitOfWork.Commit();
         }
 
-        public void Delete(Colors entity)
+        public void Delete(Deposit entity)
         {
             if (entity != null)
             {
-                entity.isDelete = true;
+                entity.Deleted = true;
                 Edit(entity);
             }
         }

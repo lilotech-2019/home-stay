@@ -88,7 +88,7 @@
     <Compile Include="Models\BlogCategories.cs" />
     <Compile Include="Models\Blogs.cs" />
     <Compile Include="Models\CategoryProductMapping.cs" />
-    <Compile Include="Models\Colors.cs" />
+    <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\HMS\CategoryHotels.cs" />
     <Compile Include="Models\HMS\CategoryProducts.cs" />
     <Compile Include="Models\HMS\Costs.cs" />
