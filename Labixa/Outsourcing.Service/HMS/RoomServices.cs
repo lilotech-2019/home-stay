@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Outsourcing.Core.Common;
+﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
+using System.Linq;
 
 namespace Outsourcing.Service.HMS
 {
