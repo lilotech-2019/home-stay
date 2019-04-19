@@ -1,5 +1,4 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.HMS;
 using System.Data.Entity;
