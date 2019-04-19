@@ -1,73 +1,100 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Outsourcing.Data.Models;
+using Outsourcing.Service;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Data;
-using Outsourcing.Data.Models;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class ContactUsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        #region Fields
+        private readonly IVendorService _vendorService;
+        #endregion
 
-        // GET: /HMSAdmin/ContactUs/
+        #region Ctor
+        public ContactUsController(IVendorService vendorService)
+        {
+            _vendorService = vendorService;
+        }
+        #endregion
+
+        #region Index
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            return View(await db.Vendors.ToListAsync());
+            var vendors = await _vendorService.FindAll().AsNoTracking().ToListAsync();
+            return View(vendors);
         }
+        #endregion
 
-        // GET: /HMSAdmin/ContactUs/Details/5
-        public async Task<ActionResult> Details(int? id)
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = await db.Vendors.FindAsync(id);
+            Vendors vendors = _vendorService.FindById((int)id);
             if (vendors == null)
             {
                 return HttpNotFound();
             }
             return View(vendors);
         }
+        #endregion
 
-        // GET: /HMSAdmin/ContactUs/Create
+        #region Create
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            return View(new Vendors { Percent = 0 });
         }
 
-        // POST: /HMSAdmin/ContactUs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Create - POST
+        /// </summary>
+        /// <param name="vendors"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,Address,Phone,Description,Content,Type,Note,Percent,IsDelete,Price")] Vendors vendors)
+        public ActionResult Create(Vendors vendors)
         {
             if (ModelState.IsValid)
             {
-                db.Vendors.Add(vendors);
-                await db.SaveChangesAsync();
+                _vendorService.Create(vendors);
                 return RedirectToAction("Index");
             }
 
             return View(vendors);
         }
+        #endregion
 
-        // GET: /HMSAdmin/ContactUs/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+        /// <summary>
+        /// Edit - GET 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = await db.Vendors.FindAsync(id);
+            Vendors vendors = _vendorService.FindById((int)id);
             if (vendors == null)
             {
                 return HttpNotFound();
@@ -75,30 +102,32 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(vendors);
         }
 
-        // POST: /HMSAdmin/ContactUs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,Address,Phone,Description,Content,Type,Note,Percent,IsDelete,Price")] Vendors vendors)
+        public ActionResult Edit(Vendors vendors)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vendors).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _vendorService.Edit(vendors);
                 return RedirectToAction("Index");
             }
             return View(vendors);
         }
+        #endregion
 
-        // GET: /HMSAdmin/ContactUs/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region Delete
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = await db.Vendors.FindAsync(id);
+            var vendors = _vendorService.FindById((int)id);
             if (vendors == null)
             {
                 return HttpNotFound();
@@ -106,24 +135,19 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(vendors);
         }
 
-        // POST: /HMSAdmin/ContactUs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Vendors vendors = await db.Vendors.FindAsync(id);
-            db.Vendors.Remove(vendors);
-            await db.SaveChangesAsync();
+            var vendors = _vendorService.FindById(id);
+            if (vendors == null)
+            {
+                return HttpNotFound();
+            }
+            _vendorService.Delete(vendors);
             return RedirectToAction("Index");
         }
+        #endregion
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
