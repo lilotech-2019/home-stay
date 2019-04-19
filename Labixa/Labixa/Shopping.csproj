@@ -98,10 +98,11 @@
     <Compile Include="Areas\HMSAdmin\Controllers\BaseController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BlogsController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\CategoryHotelsController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\HotelCategoryController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\ContactUsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\DepositController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelsController.cs" />
@@ -1556,11 +1557,11 @@
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Edit_bak.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\RoomOrders\Checkout.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Delete.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Details.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CategoryHotels\Index.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\Create.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\Delete.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\Details.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\Edit.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\Index.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Hotels\Create.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Hotels\Delete.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Hotels\Details.cshtml" />
@@ -1591,6 +1592,7 @@
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Details.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Index.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

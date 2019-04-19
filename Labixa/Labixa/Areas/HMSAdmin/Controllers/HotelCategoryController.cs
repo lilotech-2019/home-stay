@@ -1,5 +1,4 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.HMS;
 using System.Data.Entity;
@@ -9,14 +8,14 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    public class CategoryHotelsController : Controller
+    public class HotelCategoryController : Controller
     {
         #region Fields
         private readonly ICategoryHotelService _categoryHotelService;
         #endregion
 
         #region Ctor
-        public CategoryHotelsController(ICategoryHotelService categoryHotelService)
+        public HotelCategoryController(ICategoryHotelService categoryHotelService)
         {
             _categoryHotelService = categoryHotelService;
         }
@@ -46,12 +45,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
-            if (categoryHotels == null)
+            HotelCategory hotelCategory = _categoryHotelService.FindById((int)id);
+            if (hotelCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(hotelCategory);
         }
         #endregion
 
@@ -62,26 +61,26 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View(new CategoryHotels { SharePercent = 0 });
+            return View(new HotelCategory { SharePercent = 0 });
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="categoryHotels"></param>
+        /// <param name="hotelCategory"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CategoryHotels categoryHotels)
+        public ActionResult Create(HotelCategory hotelCategory)
         {
             if (ModelState.IsValid)
             {
-                categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                _categoryHotelService.Create(categoryHotels);
+                hotelCategory.Slug = StringConvert.ConvertShortName(hotelCategory.Name);
+                _categoryHotelService.Create(hotelCategory);
                 return RedirectToAction("Index");
             }
 
-            return View(categoryHotels);
+            return View(hotelCategory);
         }
         #endregion
 
@@ -97,30 +96,30 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
-            if (categoryHotels == null)
+            HotelCategory hotelCategory = _categoryHotelService.FindById((int)id);
+            if (hotelCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(hotelCategory);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="categoryHotels"></param>
+        /// <param name="hotelCategory"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CategoryHotels categoryHotels)
+        public ActionResult Edit(HotelCategory hotelCategory)
         {
             if (ModelState.IsValid)
             {
-                categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                _categoryHotelService.Edit(categoryHotels);
+                hotelCategory.Slug = StringConvert.ConvertShortName(hotelCategory.Name);
+                _categoryHotelService.Edit(hotelCategory);
                 return RedirectToAction("Index");
             }
-            return View(categoryHotels);
+            return View(hotelCategory);
         }
         #endregion
 

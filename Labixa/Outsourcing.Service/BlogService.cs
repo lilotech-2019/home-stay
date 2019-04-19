@@ -9,20 +9,20 @@ namespace Outsourcing.Service
 {
     public interface IBlogService
     {
-        IQueryable<Blogs> FindAll();
+        IQueryable<Blog> FindAll();
 
         [Obsolete]
-        IEnumerable<Blogs> GetBlogs();
+        IEnumerable<Blog> GetBlogs();
 
-        Blogs FindById(int id);
-        Blogs FindBySlug(string slug);
-        Blogs GetBlogById(int id);
-        Blogs GetStaticPage();
-        void Create(Blogs entity);
-        void Edit(Blogs entity);
-        void EditBlog(Blogs entity);
+        Blog FindById(int id);
+        Blog FindBySlug(string slug);
+        Blog GetBlogById(int id);
+        Blog GetStaticPage();
+        void Create(Blog entity);
+        void Edit(Blog entity);
+        void EditBlog(Blog entity);
         void Delete(int id);
-        void Delete(Blogs entity);
+        void Delete(Blog entity);
     }
 
     public class BlogService : IBlogService
@@ -46,55 +46,55 @@ namespace Outsourcing.Service
 
         #region Implementation for IHotelService
 
-        public IQueryable<Blogs> FindAll()
+        public IQueryable<Blog> FindAll()
         {
             var listEntities = _blogsRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
-        public IEnumerable<Blogs> GetBlogs()
+        public IEnumerable<Blog> GetBlogs()
         {
             return FindAll();
         }
 
-        public IQueryable<Blogs> GetBlogCategories()
+        public IQueryable<Blog> GetBlogCategories()
         {
             throw new NotImplementedException();
         }
 
-        public Blogs FindById(int id)
+        public Blog FindById(int id)
         {
             return _blogsRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
         }
 
-        public Blogs FindBySlug(string slug)
+        public Blog FindBySlug(string slug)
         {
             return _blogsRepository.FindBy(w => w.Deleted == false & w.Slug == slug).SingleOrDefault();
         }
 
-        public Blogs GetBlogById(int id)
+        public Blog GetBlogById(int id)
         {
             return FindById(id);
         }
 
-        public Blogs GetStaticPage()
+        public Blog GetStaticPage()
         {
             throw new NotImplementedException();
         }
 
-        public void Create(Blogs entity)
+        public void Create(Blog entity)
         {
             _blogsRepository.Add(entity);
             Commit();
         }
 
-        public void Edit(Blogs entity)
+        public void Edit(Blog entity)
         {
             _blogsRepository.Update(entity);
             Commit();
         }
 
-        public void EditBlog(Blogs entity)
+        public void EditBlog(Blog entity)
         {
             throw new NotImplementedException();
         }
@@ -110,7 +110,7 @@ namespace Outsourcing.Service
             _unitOfWork.Commit();
         }
 
-        public void Delete(Blogs entity)
+        public void Delete(Blog entity)
         {
             if (entity != null)
             {

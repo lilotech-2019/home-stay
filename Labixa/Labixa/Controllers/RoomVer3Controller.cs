@@ -38,7 +38,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.FindAll().Where(p=>p.Hotel.Layout==0);
+            var listShortRoom = _roomService.FindAll();
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _roomService.FindAll().Where(p => p.Hotel.Layout == 2);
+            var listLongRoom = _roomService.FindAll();
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>

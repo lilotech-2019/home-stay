@@ -7,13 +7,13 @@ namespace Outsourcing.Service.HMS
 {
     public interface IHotelService
     {
-        IQueryable<Hotels> FindAll();
-        Hotels FindById(int id);
-        void Create(Hotels entity);
-        void Edit(Hotels entity);
+        IQueryable<Hotel> FindAll();
+        Hotel FindById(int id);
+        void Create(Hotel entity);
+        void Edit(Hotel entity);
         void Delete(int id);
-        void Delete(Hotels entity);
-        IQueryable<Hotels> FindSelectList(int? id);
+        void Delete(Hotel entity);
+        IQueryable<Hotel> FindSelectList(int? id);
     }
 
     public class HotelService : IHotelService
@@ -36,7 +36,7 @@ namespace Outsourcing.Service.HMS
         #endregion
 
         #region Implementation for IHotelService
-        public IQueryable<Hotels> FindSelectList(int? id)
+        public IQueryable<Hotel> FindSelectList(int? id)
         {
             var list = _hotelRepository.FindBy(r => r.Deleted == false);
             if (id != null)
@@ -46,25 +46,25 @@ namespace Outsourcing.Service.HMS
             return list;
         }
 
-        public IQueryable<Hotels> FindAll()
+        public IQueryable<Hotel> FindAll()
         {
             var listEntities = _hotelRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
-        public Hotels FindById(int id)
+        public Hotel FindById(int id)
         {
             var entity = _hotelRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 
-        public void Create(Hotels entity)
+        public void Create(Hotel entity)
         {
             _hotelRepository.Add(entity);
             Commit();
         }
 
-        public void Edit(Hotels entity)
+        public void Edit(Hotel entity)
         {
             _hotelRepository.Update(entity);
             Commit();
@@ -81,7 +81,7 @@ namespace Outsourcing.Service.HMS
             _unitOfWork.Commit();
         }
 
-        public void Delete(Hotels entity)
+        public void Delete(Hotel entity)
         {
             if (entity != null)
             {

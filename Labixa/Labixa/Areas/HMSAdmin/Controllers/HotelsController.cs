@@ -1,5 +1,4 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.HMS;
 using System.Data.Entity;
@@ -13,13 +12,14 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         #region Fields
         private readonly IHotelService _hotelService;
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ICategoryHotelService _categoryHotelService;
         #endregion
 
         #region Ctor
-        public HotelsController(IHotelService hotelService)
+        public HotelsController(IHotelService hotelService, ICategoryHotelService categoryHotelService)
         {
             _hotelService = hotelService;
+            _categoryHotelService = categoryHotelService;
         }
         #endregion
 
@@ -47,12 +47,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotels hotels = _hotelService.FindById((int)id);
-            if (hotels == null)
+            Hotel hotel = _hotelService.FindById((int)id);
+            if (hotel == null)
             {
                 return HttpNotFound();
             }
-            return View(hotels);
+            return View(hotel);
         }
         #endregion
 
@@ -63,27 +63,27 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryHotelId = new SelectList(_db.CategoryHotels, "Id", "Name");
-            return View(new Hotels { SharePercent = 0 });
+            ViewBag.CategoryHotelId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
+            return View(new Hotel { SharePercent = 0 });
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="hotels"></param>
+        /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Hotels hotels)
+        public ActionResult Create(Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                hotels.Slug = StringConvert.ConvertShortName(hotels.Name);
-                _hotelService.Create(hotels);
+                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+                _hotelService.Create(hotel);
                 return RedirectToAction("Index");
             }
 
-            return View(hotels);
+            return View(hotel);
         }
         #endregion
 
@@ -99,32 +99,32 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotels hotels = _hotelService.FindById((int)id);
-            if (hotels == null)
+            Hotel hotel = _hotelService.FindById((int)id);
+            if (hotel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryHotelId = new SelectList(_db.CategoryHotels, "Id", "Name");
-            return View(hotels);
+            ViewBag.CategoryHotelId = _categoryHotelService.FindSelectList();
+            return View(hotel);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="hotels"></param>
+        /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Hotels hotels)
+        public ActionResult Edit(Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                hotels.Slug = StringConvert.ConvertShortName(hotels.Name);
-                _hotelService.Edit(hotels);
+                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+                _hotelService.Edit(hotel);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryHotelId = new SelectList(_db.CategoryHotels, "Id", "Name");
-            return View(hotels);
+            ViewBag.CategoryHotelId = _categoryHotelService.FindSelectList();
+            return View(hotel);
         }
         #endregion
 

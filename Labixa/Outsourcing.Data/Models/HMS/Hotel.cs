@@ -5,24 +5,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-
-    public class Hotels : BaseEntity
+    public class Hotel : BaseEntity
     {
-        public Hotels()
+        public Hotel()
         {
-            DateCreated = DateTime.Now.Date;
-            LastEditedTime = DateTime.Now.Date;
+            DateCreated = DateTime.Now;
+            LastModify = DateTime.Now;
         }
+
         public string MetaKeywords { get; set; }
         public string MetaTitle { get; set; }
 
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         [Range(0, 100)]
         public int SharePercent { get; set; }
-        public bool Status { get; set; }
+
         public string Address { get; set; }
         public string District { get; set; }
         public string Ward { get; set; }
@@ -40,35 +42,18 @@ namespace Outsourcing.Data.Models.HMS
         public string UrlImage1 { get; set; }
         public string UrlImage2 { get; set; }
         public string UrlImage3 { get; set; }
-   
+
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }
 
-        /// <summary>
-        /// Type of Layout
-        /// </summary>
-        public int? Layout { get; set; }
-
-        /// <summary>
-        /// Position Display
-        /// </summary>
-        public int? DisplayOrder { get; set; }
-
-        /// <summary>
-        /// Is this blog is static Page
-        /// </summary>
-        public bool IsStaticPage { get; set; }
-        public bool Deleted { get; set; }
-        public int Position { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime LastEditedTime { get; set; }
         public string Noted { get; set; }
 
-        public int CategoryHotelId { get; set; }
-        [ForeignKey("CategoryHotelId")]
-        public virtual CategoryHotels CategoryHotel { get; set; }
+        [ForeignKey(nameof(HotelCategory))]
+        public int HotelCategoryId { get; set; }
+
+        public virtual HotelCategory HotelCategory { get; set; }
         public virtual ICollection<CostOrder> CostOrders { get; set; }
         public string MetaDescription { get; set; }
     }

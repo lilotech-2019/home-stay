@@ -40,6 +40,6 @@ namespace Outsourcing.Data.Models.HMS
 
         public int HotelId { get; set; }
         [ForeignKey("HotelId")]
-        public virtual Hotels Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
     }
 }

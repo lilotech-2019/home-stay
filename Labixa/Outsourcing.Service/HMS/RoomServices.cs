@@ -39,7 +39,7 @@ namespace Outsourcing.Service.HMS
 
         public IQueryable<Rooms> FindSelectList(int? id)
         {
-            var list = _roomRepository.FindBy(r => r.IsDelete == false);
+            var list = _roomRepository.FindBy(r => r.Deleted == false);
             if (id != null)
             {
                 list = list.Where(w => w.Id == id);
@@ -49,7 +49,7 @@ namespace Outsourcing.Service.HMS
 
         public IQueryable<Rooms> FindAll()
         {
-            var listEntities = _roomRepository.FindBy(w => w.IsDelete == false);
+            var listEntities = _roomRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
@@ -75,7 +75,7 @@ namespace Outsourcing.Service.HMS
         {
             if (entity != null)
             {
-                entity.IsDelete = true;
+                entity.Deleted = true;
                 Edit(entity);
             }
         }
@@ -87,7 +87,7 @@ namespace Outsourcing.Service.HMS
 
         public Rooms FindById(int id)
         {
-            var entity = _roomRepository.FindBy(w => w.IsDelete == false & w.Id == id).SingleOrDefault();
+            var entity = _roomRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 

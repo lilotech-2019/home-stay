@@ -49,12 +49,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blogs blogs = _blogsService.FindById((int)id);
-            if (blogs == null)
+            Blog blog = _blogsService.FindById((int)id);
+            if (blog == null)
             {
                 return HttpNotFound();
             }
-            return View(blogs);
+            return View(blog);
         }
         #endregion
 
@@ -66,26 +66,26 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories,"Name");
-            return View(new Blogs { Position = 0});
+            return View(new Blog { Position = 0});
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="blogs"></param>
+        /// <param name="blog"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Blogs blogs)
+        public ActionResult Create(Blog blog)
         {
             if (ModelState.IsValid)
             {
-                blogs.Slug = StringConvert.ConvertShortName(blogs.Title);
-                _blogsService.Create(blogs);
+                blog.Slug = StringConvert.ConvertShortName(blog.Title);
+                _blogsService.Create(blog);
                 return RedirectToAction("Index");
             }
             ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
-            return View(blogs);
+            return View(blog);
         }
         #endregion
 
@@ -101,32 +101,32 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blogs blogs = _blogsService.FindById((int)id);
-            if (blogs == null)
+            Blog blog = _blogsService.FindById((int)id);
+            if (blog == null)
             {
                 return HttpNotFound();
             }
             ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
-            return View(blogs);
+            return View(blog);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="blogs"></param>
+        /// <param name="blog"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Blogs blogs)
+        public ActionResult Edit(Blog blog)
         {
             if (ModelState.IsValid)
             {
-                blogs.Slug = StringConvert.ConvertShortName(blogs.Title);
-                _blogsService.Edit(blogs);
+                blog.Slug = StringConvert.ConvertShortName(blog.Title);
+                _blogsService.Edit(blog);
                 return RedirectToAction("Index");
             }
             ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
-            return View(blogs);
+            return View(blog);
         }
         #endregion
 

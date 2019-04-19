@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models
@@ -13,5 +14,9 @@ namespace Outsourcing.Data.Models
         public int Id { get; set; }
 
         public bool Deleted { get; set; }
+        public bool Status { get; set; }
+
+        public DateTime? DateCreated { get; set; }
+        public DateTime? LastModify { get; set; }
     }
 }

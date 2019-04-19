@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public class Blogs : BaseEntity
+    public class Blog : BaseEntity
     {
-        public Blogs()
+        public Blog()
         {
             this.DateCreated = DateTime.Now;
             this.LastEditedTime = DateTime.Now;
