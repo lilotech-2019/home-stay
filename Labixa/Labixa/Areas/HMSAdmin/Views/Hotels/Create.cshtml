@@ -1,0 +1,198 @@
+﻿@model Outsourcing.Data.Models.HMS.Hotels
+
+@{
+    ViewBag.Title = "Custom Create";
+}
+
+
+<div class="page-header">
+    <h1>
+        Create
+
+    </h1>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Hotels</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.SharePercent, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.SharePercent)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Address, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Address, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.District, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.District, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.District)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Ward, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Ward, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Ward)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Street, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Street, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Street)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.ManagerName, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.ManagerName, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.ManagerName)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.ManagerPhone, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.ManagerPhone, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.ManagerPhone)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.ManagerEmail, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.ManagerEmail, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.ManagerEmail)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.HostName, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.HostName, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.HostName)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.HostPhone, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.HostPhone, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.HostPhone)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.HostEmail, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.HostEmail, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.HostEmail)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.HostAddress, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.HostAddress, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.HostAddress)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.ContractNumber, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.ContractNumber, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.ContractNumber)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Position, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Position, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Position)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Noted, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Noted, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Noted)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Status)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.CategoryHotelId, "CategoryHotelId", new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("CategoryHotelId", String.Empty)
+                        @Html.ValidationMessageFor(model => model.CategoryHotelId)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Description, "CkEditor")
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        <input type="reset" value="Reset" class="btn" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}

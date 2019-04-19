@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
@@ -14,8 +15,12 @@ namespace Outsourcing.Data.Models.HMS
         }
         public string MetaKeywords { get; set; }
         public string MetaTitle { get; set; }
+
+        [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Range(0, 100)]
         public int SharePercent { get; set; }
         public bool Status { get; set; }
         public string Address { get; set; }
