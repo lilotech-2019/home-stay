@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<Shipment> GetShipments();
-        Shipment GetShipmentById(int ShipmentId);
-        void CreateShipment(Shipment Shipment);
-        void EditShipment(Shipment ShipmentToEdit);
-        void DeleteShipment(int ShipmentId);
+        Shipment GetShipmentById(int shipmentId);
+        void CreateShipment(Shipment shipment);
+        void EditShipment(Shipment shipmentToEdit);
+        void DeleteShipment(int shipmentId);
         void SaveShipment();
-        IEnumerable<ValidationResult> CanAddShipment(Shipment Shipment);
+        IEnumerable<ValidationResult> CanAddShipment(Shipment shipment);
 
     }
     public class ShipmentService : IShipmentService
     {
         #region Field
-        private readonly IShipmentRepository ShipmentRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IShipmentRepository _shipmentRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ShipmentService(IShipmentRepository ShipmentRepository, IUnitOfWork unitOfWork)
+        public ShipmentService(IShipmentRepository shipmentRepository, IUnitOfWork unitOfWork)
         {
-            this.ShipmentRepository = ShipmentRepository;
-            this.unitOfWork = unitOfWork;
+            this._shipmentRepository = shipmentRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<Shipment> GetShipments()
         {
-            var Shipments = ShipmentRepository.GetAll();
-            return Shipments;
+            var shipments = _shipmentRepository.GetAll();
+            return shipments;
         }
 
-        public Shipment GetShipmentById(int ShipmentId)
+        public Shipment GetShipmentById(int shipmentId)
         {
-            var Shipment = ShipmentRepository.GetById(ShipmentId);
-            return Shipment;
+            var shipment = _shipmentRepository.GetById(shipmentId);
+            return shipment;
         }
 
-        public void CreateShipment(Shipment Shipment)
+        public void CreateShipment(Shipment shipment)
         {
-            ShipmentRepository.Add(Shipment);
+            _shipmentRepository.Add(shipment);
             SaveShipment();
         }
 
-        public void EditShipment(Shipment ShipmentToEdit)
+        public void EditShipment(Shipment shipmentToEdit)
         {
-            ShipmentRepository.Update(ShipmentToEdit);
+            _shipmentRepository.Update(shipmentToEdit);
             SaveShipment();
         }
 
-        public void DeleteShipment(int ShipmentId)
+        public void DeleteShipment(int shipmentId)
         {
             //Get Shipment by id.
-            var Shipment = ShipmentRepository.GetById(ShipmentId);
-            if (Shipment != null)
+            var shipment = _shipmentRepository.GetById(shipmentId);
+            if (shipment != null)
             {
-                ShipmentRepository.Delete(Shipment);
+                _shipmentRepository.Delete(shipment);
                 SaveShipment();
             }
         }
 
         public void SaveShipment()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddShipment(Shipment Shipment)
+        public IEnumerable<ValidationResult> CanAddShipment(Shipment shipment)
         {
 
             //    yield return new ValidationResult("Shipment", "ErrorString");

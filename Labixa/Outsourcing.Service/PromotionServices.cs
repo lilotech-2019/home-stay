@@ -13,26 +13,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<Promotion> GetPromotions();
-        Promotion GetPromotionById(int PromotionId);
-        void CreatePromotion(Promotion Promotion);
-        void EditPromotion(Promotion PromotionToEdit);
-        void DeletePromotion(int PromotionId);
+        Promotion GetPromotionById(int promotionId);
+        void CreatePromotion(Promotion promotion);
+        void EditPromotion(Promotion promotionToEdit);
+        void DeletePromotion(int promotionId);
         void SavePromotion();
-        IEnumerable<ValidationResult> CanAddPromotion(Promotion Promotion);
+        IEnumerable<ValidationResult> CanAddPromotion(Promotion promotion);
 
     }
     public class PromotionService : IPromotionService
     {
         #region Field
-        private readonly IPromotionRepository PromotionRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IPromotionRepository _promotionRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public PromotionService(IPromotionRepository PromotionRepository, IUnitOfWork unitOfWork)
+        public PromotionService(IPromotionRepository promotionRepository, IUnitOfWork unitOfWork)
         {
-            this.PromotionRepository = PromotionRepository;
-            this.unitOfWork = unitOfWork;
+            this._promotionRepository = promotionRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -40,45 +40,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<Promotion> GetPromotions()
         {
-            var Promotions = PromotionRepository.GetAll();
-            return Promotions;
+            var promotions = _promotionRepository.GetAll();
+            return promotions;
         }
 
-        public Promotion GetPromotionById(int PromotionId)
+        public Promotion GetPromotionById(int promotionId)
         {
-            var Promotion = PromotionRepository.GetById(PromotionId);
-            return Promotion;
+            var promotion = _promotionRepository.GetById(promotionId);
+            return promotion;
         }
 
-        public void CreatePromotion(Promotion Promotion)
+        public void CreatePromotion(Promotion promotion)
         {
-            PromotionRepository.Add(Promotion);
+            _promotionRepository.Add(promotion);
             SavePromotion();
         }
 
-        public void EditPromotion(Promotion PromotionToEdit)
+        public void EditPromotion(Promotion promotionToEdit)
         {
-            PromotionRepository.Update(PromotionToEdit);
+            _promotionRepository.Update(promotionToEdit);
             SavePromotion();
         }
 
-        public void DeletePromotion(int PromotionId)
+        public void DeletePromotion(int promotionId)
         {
             //Get Promotion by id.
-            var Promotion = PromotionRepository.GetById(PromotionId);
-            if (Promotion != null)
+            var promotion = _promotionRepository.GetById(promotionId);
+            if (promotion != null)
             {
-                PromotionRepository.Delete(Promotion);
+                _promotionRepository.Delete(promotion);
                 SavePromotion();
             }
         }
 
         public void SavePromotion()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddPromotion(Promotion Promotion)
+        public IEnumerable<ValidationResult> CanAddPromotion(Promotion promotion)
         {
 
             //    yield return new ValidationResult("Promotion", "ErrorString");

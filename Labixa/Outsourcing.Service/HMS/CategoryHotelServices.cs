@@ -49,13 +49,13 @@ namespace Outsourcing.Service.HMS
         public void Create(CategoryHotels entity)
         {
             _categoryHotelRepository.Add(entity);
-            commit();
+            Commit();
         }
 
         public void Edit(CategoryHotels entity)
         {
             _categoryHotelRepository.Update(entity);
-            commit();
+            Commit();
         }
 
         public void Delete(int id)
@@ -64,7 +64,7 @@ namespace Outsourcing.Service.HMS
             Delete(entity);
         }
 
-        private void commit()
+        private void Commit()
         {
             _unitOfWork.Commit();
         }

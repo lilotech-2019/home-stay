@@ -16,10 +16,10 @@ namespace Outsourcing.Service
         IEnumerable<Staff> GetAvailableCategorys();
 
         IEnumerable<Staff> GetStaffs();
-        Staff GetStaffById(int StaffId);
-        void CreateStaff(Staff Staff);
-        void EditStaff(Staff StaffToEdit);
-        void DeleteStaff(int StaffId);
+        Staff GetStaffById(int staffId);
+        void CreateStaff(Staff staff);
+        void EditStaff(Staff staffToEdit);
+        void DeleteStaff(int staffId);
         void SaveStaff();
 
         //Staff GetCategoryByUrlName(string );
@@ -28,21 +28,21 @@ namespace Outsourcing.Service
     class StaffService : IStaffService
     {
         #region Field
-        private readonly IStaffRepository staffRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IStaffRepository _staffRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public StaffService(IStaffRepository staffRepository, IUnitOfWork unitOfWork)
         {
-            this.staffRepository = staffRepository;
-            this.unitOfWork = unitOfWork;
+            this._staffRepository = staffRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
         public IEnumerable<Staff> GetAvailableCategorys()
         {
-            var list = staffRepository.GetAll().Where(p=>p.Deleted==true);
+            var list = _staffRepository.GetAll().Where(p=>p.Deleted==true);
             return list;
         }
 
@@ -50,7 +50,7 @@ namespace Outsourcing.Service
         {
             try
             {
-                var list = staffRepository.GetAll().Where(p => p.Deleted == false);
+                var list = _staffRepository.GetAll().Where(p => p.Deleted == false);
                 return list;
             }
             catch (Exception)
@@ -63,7 +63,7 @@ namespace Outsourcing.Service
 
         public Staff GetStaffById(int staffId)
         {
-            var item = staffRepository.Get(p => p.Id == staffId);
+            var item = _staffRepository.Get(p => p.Id == staffId);
             return item;
         }
 
@@ -71,7 +71,7 @@ namespace Outsourcing.Service
         {
             if (staff != null)
             {
-                staffRepository.Add(staff);
+                _staffRepository.Add(staff);
                 SaveStaff();
             }
         }
@@ -80,23 +80,23 @@ namespace Outsourcing.Service
         {
             if (staffToEdit != null)
             {
-                staffRepository.Update(staffToEdit);
+                _staffRepository.Update(staffToEdit);
                 SaveStaff();
             }
         }
 
         public void DeleteStaff(int staffId)
         {
-            var item = staffRepository.Get(p => p.Id == staffId);
+            var item = _staffRepository.Get(p => p.Id == staffId);
            // staffRepository.Delete(item);
             item.Deleted = true;
-            staffRepository.Update(item);
+            _staffRepository.Update(item);
             SaveStaff();
         }
 
         public void SaveStaff()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
     }
 }

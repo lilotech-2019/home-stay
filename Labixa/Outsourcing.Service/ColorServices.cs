@@ -49,13 +49,13 @@ namespace Outsourcing.Service
         public void Create(Colors entity)
         {
             _colorRepository.Add(entity);
-            commit();
+            Commit();
         }
 
         public void Edit(Colors entity)
         {
             _colorRepository.Update(entity);
-            commit();
+            Commit();
         }
 
         public void Delete(int id)
@@ -74,7 +74,7 @@ namespace Outsourcing.Service
             return list;
         }
 
-        private void commit()
+        private void Commit()
         {
             _unitOfWork.Commit();
         }

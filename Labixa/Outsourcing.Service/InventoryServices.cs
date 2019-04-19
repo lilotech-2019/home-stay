@@ -15,26 +15,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<Inventory> GetInventorys();
-        Inventory GetInventoryById(int InventoryId);
-        Inventory CreateInventory(Inventory Inventory);
-        void EditInventory(Inventory InventoryToEdit);
-        void DeleteInventory(int InventoryId);
+        Inventory GetInventoryById(int inventoryId);
+        Inventory CreateInventory(Inventory inventory);
+        void EditInventory(Inventory inventoryToEdit);
+        void DeleteInventory(int inventoryId);
         void SaveInventory();
-        IEnumerable<ValidationResult> CanAddInventory(Inventory Inventory);
+        IEnumerable<ValidationResult> CanAddInventory(Inventory inventory);
 
     }
     public class InventoryService : IInventoryService
     {
         #region Field
-        private readonly IInventoryRepository InventoryRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public InventoryService(IInventoryRepository InventoryRepository, IUnitOfWork unitOfWork)
+        public InventoryService(IInventoryRepository inventoryRepository, IUnitOfWork unitOfWork)
         {
-            this.InventoryRepository = InventoryRepository;
-            this.unitOfWork = unitOfWork;
+            this._inventoryRepository = inventoryRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,46 +42,46 @@ namespace Outsourcing.Service
 
         public IEnumerable<Inventory> GetInventorys()
         {
-            var Inventorys = InventoryRepository.GetAll();
-            return Inventorys;
+            var inventorys = _inventoryRepository.GetAll();
+            return inventorys;
         }
 
-        public Inventory GetInventoryById(int InventoryId)
+        public Inventory GetInventoryById(int inventoryId)
         {
-            var Inventory = InventoryRepository.GetById(InventoryId);
-            return Inventory;
+            var inventory = _inventoryRepository.GetById(inventoryId);
+            return inventory;
         }
 
-        public Inventory CreateInventory(Inventory Inventory)
+        public Inventory CreateInventory(Inventory inventory)
         {
-            InventoryRepository.Add(Inventory);
+            _inventoryRepository.Add(inventory);
             SaveInventory();
-            return Inventory;
+            return inventory;
         }
 
-        public void EditInventory(Inventory InventoryToEdit)
+        public void EditInventory(Inventory inventoryToEdit)
         {
-            InventoryRepository.Update(InventoryToEdit);
+            _inventoryRepository.Update(inventoryToEdit);
             SaveInventory();
         }
 
-        public void DeleteInventory(int InventoryId)
+        public void DeleteInventory(int inventoryId)
         {
             //Get Inventory by id.
-            var Inventory = InventoryRepository.GetById(InventoryId);
-            if (Inventory != null)
+            var inventory = _inventoryRepository.GetById(inventoryId);
+            if (inventory != null)
             {
-                InventoryRepository.Delete(Inventory);
+                _inventoryRepository.Delete(inventory);
                 SaveInventory();
             }
         }
 
         public void SaveInventory()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddInventory(Inventory Inventory)
+        public IEnumerable<ValidationResult> CanAddInventory(Inventory inventory)
         {
 
             //    yield return new ValidationResult("Inventory", "ErrorString");

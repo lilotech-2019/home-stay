@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class ProductCategoryService : IProductCategoryService
     {
         #region Field
-        private readonly IProductCategoryRepository productCategoryRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public ProductCategoryService(IProductCategoryRepository productCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this.productCategoryRepository = productCategoryRepository;
-            this.unitOfWork = unitOfWork;
+            this._productCategoryRepository = productCategoryRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<ProductCategory> GetProductCategories()
         {
-            var productCategorys = productCategoryRepository.GetAll().Where(p=>p.Deleted==false);
+            var productCategorys = _productCategoryRepository.GetAll().Where(p=>p.Deleted==false);
             return productCategorys;
         }
 
         public ProductCategory GetProductCategoryById(int productCategoryId)
         {
-            var productCategory = productCategoryRepository.GetById(productCategoryId);
+            var productCategory = _productCategoryRepository.GetById(productCategoryId);
             return productCategory;
         }
 
         public void CreateProductCategory(ProductCategory productCategory)
         {
-            productCategoryRepository.Add(productCategory);
+            _productCategoryRepository.Add(productCategory);
             SaveProductCategory();
         }
 
         public void EditProductCategory(ProductCategory productCategoryToEdit)
         {
-            productCategoryRepository.Update(productCategoryToEdit);
+            _productCategoryRepository.Update(productCategoryToEdit);
             SaveProductCategory();
         }
 
         public void DeleteProductCategories(int productCategoryId)
         {
             //Get productCategory by id.
-            var productCategory = productCategoryRepository.GetById(productCategoryId);
+            var productCategory = _productCategoryRepository.GetById(productCategoryId);
             if (productCategory != null)
             {
-                productCategoryRepository.Delete(productCategory);
+                _productCategoryRepository.Delete(productCategory);
                 SaveProductCategory();
             }
         }
 
         public void SaveProductCategory()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddProductCategory(ProductCategory productCategory)

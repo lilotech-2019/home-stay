@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Outsourcing.Service;
@@ -31,17 +30,18 @@ namespace Labixa.Controllers
 //noi chung ky moi nhanh dc, 
         public ActionResult Index(int? page = 1)
         {
-            var model = _blogService.FindAll();//em chi can get het data
-            int pageNumber = (page ?? 1);// day la so thu tu page
-            int pageSize = 4;//day la so bai viet tren 1 page
-                             //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
-                             // khởi tạo BlogView vừa mới tạo
+            var model = _blogService.FindAll(); //em chi can get het data
+            int pageNumber = (page ?? 1); // day la so thu tu page
+            int pageSize = 4; //day la so bai viet tren 1 page
+            //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
+            // khởi tạo BlogView vừa mới tạo
             BlogViewModel viewModel = new BlogViewModel();
             viewModel.RelatedBlogs = _blogService.FindAll();
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
 
-            return View(viewModel);//no truyen kieu du lieu la IPagedList<Blog>
+            return View(viewModel); //no truyen kieu du lieu la IPagedList<Blog>
         }
+
         public ActionResult Detail(string slug)
         {
             BlogViewModel viewModel = new BlogViewModel
@@ -55,14 +55,15 @@ namespace Labixa.Controllers
         public ActionResult Event()
         {
             return View();
-
         }
+
         public ActionResult ActitityNews()
         {
             return View();
-
         }
+
         #region[Multi Language]
+
         public ActionResult SetCulture(string slug)
         {
             // Validate input
@@ -70,7 +71,7 @@ namespace Labixa.Controllers
             // Save culture in a cookie
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
-                cookie.Value = slug;   // update cookie value
+                cookie.Value = slug; // update cookie value
             else
             {
                 cookie = new HttpCookie("_culture");
@@ -78,8 +79,9 @@ namespace Labixa.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
         #endregion
     }
 }

@@ -17,26 +17,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<CostOrder> GetCostOrders();
-        CostOrder GetCostOrderById(int CostOrderId);
-        void CreateCostOrder(CostOrder CostOrder);
-        void EditCostOrder(CostOrder CostOrderToEdit);
-        void DeleteCostOrder(int CostOrderId);
+        CostOrder GetCostOrderById(int costOrderId);
+        void CreateCostOrder(CostOrder costOrder);
+        void EditCostOrder(CostOrder costOrderToEdit);
+        void DeleteCostOrder(int costOrderId);
         void SaveCostOrder();
-        IEnumerable<ValidationResult> CanAddCostOrder(CostOrder CostOrder);
+        IEnumerable<ValidationResult> CanAddCostOrder(CostOrder costOrder);
 
     }
     public class CostOrderService : ICostOrderService
     {
         #region Field
-        private readonly ICostOrderRepository CostOrderRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICostOrderRepository _costOrderRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CostOrderService(ICostOrderRepository CostOrderRepository, IUnitOfWork unitOfWork)
+        public CostOrderService(ICostOrderRepository costOrderRepository, IUnitOfWork unitOfWork)
         {
-            this.CostOrderRepository = CostOrderRepository;
-            this.unitOfWork = unitOfWork;
+            this._costOrderRepository = costOrderRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -44,45 +44,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CostOrder> GetCostOrders()
         {
-            var CostOrders = CostOrderRepository.GetAll().OrderByDescending(b => b.DateCreated);
-            return CostOrders;
+            var costOrders = _costOrderRepository.GetAll().OrderByDescending(b => b.DateCreated);
+            return costOrders;
         }
 
-        public CostOrder GetCostOrderById(int CostOrderId)
+        public CostOrder GetCostOrderById(int costOrderId)
         {
-            var CostOrder = CostOrderRepository.GetById(CostOrderId);
-            return CostOrder;
+            var costOrder = _costOrderRepository.GetById(costOrderId);
+            return costOrder;
         }
 
-        public void CreateCostOrder(CostOrder CostOrder)
+        public void CreateCostOrder(CostOrder costOrder)
         {
-            CostOrderRepository.Add(CostOrder);
+            _costOrderRepository.Add(costOrder);
             SaveCostOrder();
         }
 
-        public void EditCostOrder(CostOrder CostOrderToEdit)
+        public void EditCostOrder(CostOrder costOrderToEdit)
         {
-            CostOrderRepository.Update(CostOrderToEdit);
+            _costOrderRepository.Update(costOrderToEdit);
             SaveCostOrder();
         }
 
-        public void DeleteCostOrder(int CostOrderId)
+        public void DeleteCostOrder(int costOrderId)
         {
             //Get CostOrder by id.
-            var CostOrder = CostOrderRepository.GetById(CostOrderId);
-            if (CostOrder != null)
+            var costOrder = _costOrderRepository.GetById(costOrderId);
+            if (costOrder != null)
             {
-                CostOrderRepository.Delete(CostOrder);
+                _costOrderRepository.Delete(costOrder);
                 SaveCostOrder();
             }
         }
 
         public void SaveCostOrder()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCostOrder(CostOrder CostOrder)
+        public IEnumerable<ValidationResult> CanAddCostOrder(CostOrder costOrder)
         {
 
             //    yield return new ValidationResult("CostOrder", "ErrorString");

@@ -16,7 +16,7 @@ namespace Outsourcing.Service
         IEnumerable<WebsiteAttributes> GetWebsiteAttributeByType(string type);
         IEnumerable<WebsiteAttributes> GetWebsiteAttributes();
         WebsiteAttributes GetWebsiteAttributeById(int websiteAttributeId);
-        WebsiteAttributes GetWebsiteAttributeByName(string Name);
+        WebsiteAttributes GetWebsiteAttributeByName(string name);
 
         void CreateWebsiteAttribute(WebsiteAttributes websiteAttribute);
         void EditWebsiteAttribute(WebsiteAttributes websiteAttributeToEdit);

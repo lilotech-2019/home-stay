@@ -22,16 +22,16 @@ namespace Outsourcing.Service.HMS
         IEnumerable<Costs> Get6CostService();
         IEnumerable<Costs> Get2CostNews();
         IEnumerable<Costs> Get3CostNewsNewest();
-        Costs GetCostById(int CostId);
-        void CreateCost(Costs Cost);
-        void EditCost(Costs CostToEdit);
-        void DeleteCost(int CostId);
+        Costs GetCostById(int costId);
+        void CreateCost(Costs cost);
+        void EditCost(Costs costToEdit);
+        void DeleteCost(int costId);
         void SaveCost();
-        IEnumerable<ValidationResult> CanAddCost(string CostUrl);
+        IEnumerable<ValidationResult> CanAddCost(string costUrl);
 
         Costs GetCostByUrlName(string urlName);
 
-        IEnumerable<Costs> GetCostsByCategory(int CostTypeId);
+        IEnumerable<Costs> GetCostsByCategory(int costTypeId);
 
         IEnumerable<Costs> GetStaticPage();
         IEnumerable<Costs> GetNewPost();
@@ -39,138 +39,138 @@ namespace Outsourcing.Service.HMS
     public class CostService : ICostService
     {
         #region Field
-        private readonly ICostRepository CostRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICostRepository _costRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CostService(ICostRepository CostRepository, IUnitOfWork unitOfWork)
+        public CostService(ICostRepository costRepository, IUnitOfWork unitOfWork)
         {
-            this.CostRepository = CostRepository;
-            this.unitOfWork = unitOfWork;
+            this._costRepository = costRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
         #region Implementation for ICostService
         public IEnumerable<Costs> GetCosts()
         {
-            var Costs = CostRepository.GetAll().Where(p=>!p.IsDelete);
-            return Costs;
+            var costs = _costRepository.GetAll().Where(p=>!p.IsDelete);
+            return costs;
         }
         public IEnumerable<Costs> Get3CostsPosition()
         {
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
 
-            return Costs;
+            return costs;
         }
         public IEnumerable<Costs> GetHomePageCosts()
         {
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
 
-            return Costs;
+            return costs;
         }
         public IEnumerable<Costs> GetCostByCategoryId(int id)
         {
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
 
-            return Costs;
+            return costs;
         }
         public IEnumerable<Costs> GetCostByCategorySlug(string slug)
         {
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
 
-            return Costs;
+            return costs;
         }
         public IEnumerable<Costs> GetStaticPage()
         {
-            var Costs = CostRepository.GetAll();
-            return Costs;
+            var costs = _costRepository.GetAll();
+            return costs;
         }
 
-        public Costs GetCostById(int CostId)
+        public Costs GetCostById(int costId)
         {
-            var Cost = CostRepository.GetById(CostId);
-            return Cost;
+            var cost = _costRepository.GetById(costId);
+            return cost;
         }
 
-        public void CreateCost(Costs Cost)
+        public void CreateCost(Costs cost)
         {
-            CostRepository.Add(Cost);
+            _costRepository.Add(cost);
             SaveCost();
         }
 
-        public void EditCost(Costs CostToEdit)
+        public void EditCost(Costs costToEdit)
         {
             //CostToEdit.LastEditedTime = DateTime.Now;
-            CostRepository.Update(CostToEdit);
+            _costRepository.Update(costToEdit);
             SaveCost();
         }
 
-        public void DeleteCost(int CostId)
+        public void DeleteCost(int costId)
         {
             //Get Cost by id.
-            var Cost = CostRepository.GetById(CostId);
-            if (Cost != null)
+            var cost = _costRepository.GetById(costId);
+            if (cost != null)
             {
-                Cost.IsDelete = true;
-                CostRepository.Update(Cost);
+                cost.IsDelete = true;
+                _costRepository.Update(cost);
                 SaveCost();
             }
         }
 
         public void SaveCost()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddCost(string slug)
         {
             //Get Cost by url.
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
             return null;
         }
 
         public Costs GetCostByUrlName(string urlName)
         {
-            var Costs = CostRepository.GetAll();
+            var costs = _costRepository.GetAll();
 
             return null;
         }
 
-        public IEnumerable<Costs> GetCostsByCategory(int CostTypeId)
+        public IEnumerable<Costs> GetCostsByCategory(int costTypeId)
         {
-            var Costs = this.GetCosts().Where(b => b.CostCategoryId == CostTypeId);
-            return Costs;
+            var costs = this.GetCosts().Where(b => b.CostCategoryId == costTypeId);
+            return costs;
         }
 
         public IEnumerable<Costs> Get6CostService()
         {
-            var Costs = this.GetCosts().Where(p => p.CostCategoryId == 6).Take(6);
-            return Costs;
+            var costs = this.GetCosts().Where(p => p.CostCategoryId == 6).Take(6);
+            return costs;
         }
         public IEnumerable<Costs> Get2CostNews()
         {
-            var Costs = CostRepository.GetAll();
-            return Costs;
+            var costs = _costRepository.GetAll();
+            return costs;
         }
         public IEnumerable<Costs> Get3CostNewsNewest()
         {
-            var Costs = CostRepository.GetAll();
-            return Costs;
+            var costs = _costRepository.GetAll();
+            return costs;
         }
         #endregion
 
 
         public Costs GetCostContact()
         {
-            var Costs = CostRepository.GetAll();
-            return Costs.FirstOrDefault();
+            var costs = _costRepository.GetAll();
+            return costs.FirstOrDefault();
         }
 
 
         public IEnumerable<Costs> GetNewPost()
         {
-            return CostRepository.GetAll().Where(p => p.CostCategoryId == 3).OrderByDescending(p => p.DateCreated).Take(5);
+            return _costRepository.GetAll().Where(p => p.CostCategoryId == 3).OrderByDescending(p => p.DateCreated).Take(5);
         }
     }
 }

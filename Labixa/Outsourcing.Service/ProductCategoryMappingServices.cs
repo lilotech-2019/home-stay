@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<ProductCategoryMapping> GetProductCategoryMappings();
-        ProductCategoryMapping GetProductCategoryMappingById(int ProductCategoryMappingId);
-        void CreateProductCategoryMapping(ProductCategoryMapping ProductCategoryMapping);
-        void EditProductCategoryMapping(ProductCategoryMapping ProductCategoryMappingToEdit);
-        void DeleteProductCategoryMapping(int ProductCategoryMappingId);
+        ProductCategoryMapping GetProductCategoryMappingById(int productCategoryMappingId);
+        void CreateProductCategoryMapping(ProductCategoryMapping productCategoryMapping);
+        void EditProductCategoryMapping(ProductCategoryMapping productCategoryMappingToEdit);
+        void DeleteProductCategoryMapping(int productCategoryMappingId);
         void SaveProductCategoryMapping();
-        IEnumerable<ValidationResult> CanAddProductCategoryMapping(ProductCategoryMapping ProductCategoryMapping);
+        IEnumerable<ValidationResult> CanAddProductCategoryMapping(ProductCategoryMapping productCategoryMapping);
 
     }
     public class ProductCategoryMappingService : IProductCategoryMappingService
     {
         #region Field
-        private readonly IProductCategoryMappingRepository ProductCategoryMappingRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductCategoryMappingRepository _productCategoryMappingRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ProductCategoryMappingService(IProductCategoryMappingRepository ProductCategoryMappingRepository, IUnitOfWork unitOfWork)
+        public ProductCategoryMappingService(IProductCategoryMappingRepository productCategoryMappingRepository, IUnitOfWork unitOfWork)
         {
-            this.ProductCategoryMappingRepository = ProductCategoryMappingRepository;
-            this.unitOfWork = unitOfWork;
+            this._productCategoryMappingRepository = productCategoryMappingRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<ProductCategoryMapping> GetProductCategoryMappings()
         {
-            var ProductCategoryMappings = ProductCategoryMappingRepository.GetAll();
-            return ProductCategoryMappings;
+            var productCategoryMappings = _productCategoryMappingRepository.GetAll();
+            return productCategoryMappings;
         }
 
-        public ProductCategoryMapping GetProductCategoryMappingById(int ProductCategoryMappingId)
+        public ProductCategoryMapping GetProductCategoryMappingById(int productCategoryMappingId)
         {
-            var ProductCategoryMapping = ProductCategoryMappingRepository.GetById(ProductCategoryMappingId);
-            return ProductCategoryMapping;
+            var productCategoryMapping = _productCategoryMappingRepository.GetById(productCategoryMappingId);
+            return productCategoryMapping;
         }
 
-        public void CreateProductCategoryMapping(ProductCategoryMapping ProductCategoryMapping)
+        public void CreateProductCategoryMapping(ProductCategoryMapping productCategoryMapping)
         {
-            ProductCategoryMappingRepository.Add(ProductCategoryMapping);
+            _productCategoryMappingRepository.Add(productCategoryMapping);
             SaveProductCategoryMapping();
         }
 
-        public void EditProductCategoryMapping(ProductCategoryMapping ProductCategoryMappingToEdit)
+        public void EditProductCategoryMapping(ProductCategoryMapping productCategoryMappingToEdit)
         {
-            ProductCategoryMappingRepository.Update(ProductCategoryMappingToEdit);
+            _productCategoryMappingRepository.Update(productCategoryMappingToEdit);
             SaveProductCategoryMapping();
         }
 
-        public void DeleteProductCategoryMapping(int ProductCategoryMappingId)
+        public void DeleteProductCategoryMapping(int productCategoryMappingId)
         {
             //Get ProductCategoryMapping by id.
-            var ProductCategoryMapping = ProductCategoryMappingRepository.GetById(ProductCategoryMappingId);
-            if (ProductCategoryMapping != null)
+            var productCategoryMapping = _productCategoryMappingRepository.GetById(productCategoryMappingId);
+            if (productCategoryMapping != null)
             {
-                ProductCategoryMappingRepository.Delete(ProductCategoryMapping);
+                _productCategoryMappingRepository.Delete(productCategoryMapping);
                 SaveProductCategoryMapping();
             }
         }
 
         public void SaveProductCategoryMapping()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddProductCategoryMapping(ProductCategoryMapping ProductCategoryMapping)
+        public IEnumerable<ValidationResult> CanAddProductCategoryMapping(ProductCategoryMapping productCategoryMapping)
         {
 
             //    yield return new ValidationResult("ProductCategoryMapping", "ErrorString");

@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<Notification> GetNotifications();
-        Notification GetNotificationById(int NotificationId);
-        void CreateNotification(Notification Notification);
-        void EditNotification(Notification NotificationToEdit);
-        void DeleteNotification(int NotificationId);
+        Notification GetNotificationById(int notificationId);
+        void CreateNotification(Notification notification);
+        void EditNotification(Notification notificationToEdit);
+        void DeleteNotification(int notificationId);
         void SaveNotification();
-        IEnumerable<ValidationResult> CanAddNotification(Notification Notification);
+        IEnumerable<ValidationResult> CanAddNotification(Notification notification);
 
     }
     public class NotificationService : INotificationService
     {
         #region Field
-        private readonly INotificationRepository NotificationRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly INotificationRepository _notificationRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public NotificationService(INotificationRepository NotificationRepository, IUnitOfWork unitOfWork)
+        public NotificationService(INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
         {
-            this.NotificationRepository = NotificationRepository;
-            this.unitOfWork = unitOfWork;
+            this._notificationRepository = notificationRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<Notification> GetNotifications()
         {
-            var Notifications = NotificationRepository.GetAll();
-            return Notifications;
+            var notifications = _notificationRepository.GetAll();
+            return notifications;
         }
 
-        public Notification GetNotificationById(int NotificationId)
+        public Notification GetNotificationById(int notificationId)
         {
-            var Notification = NotificationRepository.GetById(NotificationId);
-            return Notification;
+            var notification = _notificationRepository.GetById(notificationId);
+            return notification;
         }
 
-        public void CreateNotification(Notification Notification)
+        public void CreateNotification(Notification notification)
         {
-            NotificationRepository.Add(Notification);
+            _notificationRepository.Add(notification);
             SaveNotification();
         }
 
-        public void EditNotification(Notification NotificationToEdit)
+        public void EditNotification(Notification notificationToEdit)
         {
-            NotificationRepository.Update(NotificationToEdit);
+            _notificationRepository.Update(notificationToEdit);
             SaveNotification();
         }
 
-        public void DeleteNotification(int NotificationId)
+        public void DeleteNotification(int notificationId)
         {
             //Get Notification by id.
-            var Notification = NotificationRepository.GetById(NotificationId);
-            if (Notification != null)
+            var notification = _notificationRepository.GetById(notificationId);
+            if (notification != null)
             {
-                NotificationRepository.Delete(Notification);
+                _notificationRepository.Delete(notification);
                 SaveNotification();
             }
         }
 
         public void SaveNotification()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddNotification(Notification Notification)
+        public IEnumerable<ValidationResult> CanAddNotification(Notification notification)
         {
 
             //    yield return new ValidationResult("Notification", "ErrorString");

@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<Location> GetLocations();
-        Location GetLocationById(int LocationId);
-        void CreateLocation(Location Location);
-        void EditLocation(Location LocationToEdit);
-        void DeleteLocation(int LocationId);
+        Location GetLocationById(int locationId);
+        void CreateLocation(Location location);
+        void EditLocation(Location locationToEdit);
+        void DeleteLocation(int locationId);
         void SaveLocation();
-        IEnumerable<ValidationResult> CanAddLocation(Location Location);
+        IEnumerable<ValidationResult> CanAddLocation(Location location);
 
     }
     public class LocationService : ILocationService
     {
         #region Field
-        private readonly ILocationRepository LocationRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public LocationService(ILocationRepository LocationRepository, IUnitOfWork unitOfWork)
+        public LocationService(ILocationRepository locationRepository, IUnitOfWork unitOfWork)
         {
-            this.LocationRepository = LocationRepository;
-            this.unitOfWork = unitOfWork;
+            this._locationRepository = locationRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<Location> GetLocations()
         {
-            var Locations = LocationRepository.GetAll();
-            return Locations;
+            var locations = _locationRepository.GetAll();
+            return locations;
         }
 
-        public Location GetLocationById(int LocationId)
+        public Location GetLocationById(int locationId)
         {
-            var Location = LocationRepository.GetById(LocationId);
-            return Location;
+            var location = _locationRepository.GetById(locationId);
+            return location;
         }
 
-        public void CreateLocation(Location Location)
+        public void CreateLocation(Location location)
         {
-            LocationRepository.Add(Location);
+            _locationRepository.Add(location);
             SaveLocation();
         }
 
-        public void EditLocation(Location LocationToEdit)
+        public void EditLocation(Location locationToEdit)
         {
-            LocationRepository.Update(LocationToEdit);
+            _locationRepository.Update(locationToEdit);
             SaveLocation();
         }
 
-        public void DeleteLocation(int LocationId)
+        public void DeleteLocation(int locationId)
         {
             //Get Location by id.
-            var Location = LocationRepository.GetById(LocationId);
-            if (Location != null)
+            var location = _locationRepository.GetById(locationId);
+            if (location != null)
             {
-                LocationRepository.Delete(Location);
+                _locationRepository.Delete(location);
                 SaveLocation();
             }
         }
 
         public void SaveLocation()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddLocation(Location Location)
+        public IEnumerable<ValidationResult> CanAddLocation(Location location)
         {
 
             //    yield return new ValidationResult("Location", "ErrorString");

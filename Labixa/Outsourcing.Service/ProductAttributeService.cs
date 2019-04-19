@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class ProductAttributeService : IProductAttributeService
     {
         #region Field
-        private readonly IProductAttributeRepository productAttributeRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductAttributeRepository _productAttributeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public ProductAttributeService(IProductAttributeRepository productAttributeRepository, IUnitOfWork unitOfWork)
         {
-            this.productAttributeRepository = productAttributeRepository;
-            this.unitOfWork = unitOfWork;
+            this._productAttributeRepository = productAttributeRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<ProductAttribute> GetProductAttributes()
         {
-            var productAttributes = productAttributeRepository.GetAll();
+            var productAttributes = _productAttributeRepository.GetAll();
             return productAttributes;
         }
 
         public ProductAttribute GetProductAttributeById(int productAttributeId)
         {
-            var productAttribute = productAttributeRepository.GetById(productAttributeId);
+            var productAttribute = _productAttributeRepository.GetById(productAttributeId);
             return productAttribute;
         }
 
         public void CreateProductAttribute(ProductAttribute productAttribute)
         {
-            productAttributeRepository.Add(productAttribute);
+            _productAttributeRepository.Add(productAttribute);
             SaveProductAttribute();
         }
 
         public void EditProductAttribute(ProductAttribute productAttributeToEdit)
         {
-            productAttributeRepository.Update(productAttributeToEdit);
+            _productAttributeRepository.Update(productAttributeToEdit);
             SaveProductAttribute();
         }
 
         public void DeleteProductAttribute(int productAttributeId)
         {
             //Get productAttribute by id.
-            var productAttribute = productAttributeRepository.GetById(productAttributeId);
+            var productAttribute = _productAttributeRepository.GetById(productAttributeId);
             if (productAttribute != null)
             {
-                productAttributeRepository.Delete(productAttribute);
+                _productAttributeRepository.Delete(productAttribute);
                 SaveProductAttribute();
             }
         }
 
         public void SaveProductAttribute()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddProductAttribute(ProductAttribute productAttribute)

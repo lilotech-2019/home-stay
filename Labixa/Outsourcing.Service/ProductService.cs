@@ -32,25 +32,25 @@ namespace Outsourcing.Service
 
         #region [Manage PhotoAlbum]
         Product GetPhoto();
-        void EditPhoto(Product Photo);
-        void DeletePhoto(int PhotoId); 
+        void EditPhoto(Product photo);
+        void DeletePhoto(int photoId); 
         #endregion
 
     }
     public class ProductService : IProductService
     {
         #region Field
-        private readonly IProductRepository productRepository;
-        private readonly IProductAttributeMappingRepository productAttributeRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductRepository _productRepository;
+        private readonly IProductAttributeMappingRepository _productAttributeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public ProductService(IProductRepository productRepository,IProductAttributeMappingRepository productAttributeRepository, IUnitOfWork unitOfWork)
         {
-            this.productRepository = productRepository;
-            this.productAttributeRepository = productAttributeRepository;
-            this.unitOfWork = unitOfWork;
+            this._productRepository = productRepository;
+            this._productAttributeRepository = productAttributeRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -58,13 +58,13 @@ namespace Outsourcing.Service
         
         public IEnumerable<Product> GetProducts()
         {
-            var products = productRepository.GetMany(p => !p.Deleted).OrderBy(p => p.Position) ;
+            var products = _productRepository.GetMany(p => !p.Deleted).OrderBy(p => p.Position) ;
             return products;
         }
 
         public IEnumerable<Product> GetHomePageProducts(bool showOnHomePage)
         {
-            var products = productRepository.GetMany(p => !p.Deleted && p.IsPublic );
+            var products = _productRepository.GetMany(p => !p.Deleted && p.IsPublic );
             if (showOnHomePage)
             {
                 products = products.Where(p => p.IsHomePage).OrderBy(p=>p.Position);
@@ -74,43 +74,43 @@ namespace Outsourcing.Service
         
         public Product GetProductById(int productId)
         {
-            var product = productRepository.GetById(productId);
+            var product = _productRepository.GetById(productId);
             return product;
         }
         public Product GetProductBySlug(string slug)
         {
-            var product = productRepository.Get(p => !p.Deleted && p.Slug.Equals(slug));
+            var product = _productRepository.Get(p => !p.Deleted && p.Slug.Equals(slug));
             return product;
         }
 
         public void CreateProduct(Product product)
         {
-            productRepository.Add(product);
+            _productRepository.Add(product);
             SaveProduct();
         }
 
         public void EditProduct(Product productToEdit)
         {
-            productRepository.Update(productToEdit);
+            _productRepository.Update(productToEdit);
             SaveProduct();
         }
 
         public void DeleteProduct(int productId)
         {
             //Get product by id.
-            var product = productRepository.GetById(productId);
+            var product = _productRepository.GetById(productId);
             if (product != null)
             {
                 product.Deleted = true;
                 //productRepository.Delete(product);
-                productRepository.Update(product);
+                _productRepository.Update(product);
                 SaveProduct();
             }
         }
 
         public void SaveProduct()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddProduct(Product product)
@@ -125,7 +125,7 @@ namespace Outsourcing.Service
 
         public IEnumerable<Product> GetAllProducts()
         {
-            var list = productRepository.GetAll().Where(p => p.IsPublic == true && p.Deleted==false);
+            var list = _productRepository.GetAll().Where(p => p.IsPublic == true && p.Deleted==false);
             return list;
         }
 
@@ -133,10 +133,10 @@ namespace Outsourcing.Service
         public IEnumerable<Product> GetDailyTour()
         {
             var listDailyTour = new List<Product>();
-            var listProduct = productRepository.GetMany(p=>p.Deleted==false);
+            var listProduct = _productRepository.GetMany(p=>p.Deleted==false);
             foreach (var product in listProduct)
             {
-                if (productAttributeRepository.GetAll().Where(p => p.ProductId == product.Id && p.ProductAttributeId == 13 && p.Value.Equals("true")).Count() >0)
+                if (_productAttributeRepository.GetAll().Where(p => p.ProductId == product.Id && p.ProductAttributeId == 13 && p.Value.Equals("true")).Count() >0)
                 {
                     listDailyTour.Add(product);
                 } 
@@ -154,10 +154,10 @@ namespace Outsourcing.Service
         public IEnumerable<Product> GetLongTour()
         {
             var listLongTour = new List<Product>();
-            var listProduct = productRepository.GetMany(p => p.Deleted == false);
+            var listProduct = _productRepository.GetMany(p => p.Deleted == false);
             foreach (var product in listProduct)
             {
-                if (productAttributeRepository.GetAll().Where(p => p.ProductId == product.Id && p.ProductAttributeId == 13 && p.Value.Equals("false")).Count()>0)
+                if (_productAttributeRepository.GetAll().Where(p => p.ProductId == product.Id && p.ProductAttributeId == 13 && p.Value.Equals("false")).Count()>0)
                  {
                     listLongTour.Add(product);
                 }
@@ -170,20 +170,20 @@ namespace Outsourcing.Service
 
         public Product GetPhoto()
         {
-            return productRepository.Get(p => p.Id == 50);
+            return _productRepository.Get(p => p.Id == 50);
         }
 
        
-        public void EditPhoto(Product Photo)
+        public void EditPhoto(Product photo)
         {
-            Photo.LastEditedTime = DateTime.Now;
-            productRepository.Update(Photo);
+            photo.LastEditedTime = DateTime.Now;
+            _productRepository.Update(photo);
             SaveProduct();
         }
 
-        public void DeletePhoto(int PhotoId)
+        public void DeletePhoto(int photoId)
         {
-            var photo = productRepository.GetById(PhotoId);
+            var photo = _productRepository.GetById(photoId);
             photo.Deleted = true;
             EditPhoto(photo);
         }
