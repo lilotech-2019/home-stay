@@ -13,6 +13,7 @@ namespace Outsourcing.Service.HMS
         void Edit(Hotels entity);
         void Delete(int id);
         void Delete(Hotels entity);
+        IQueryable<Hotels> FindSelectList(int? id);
     }
 
     public class HotelService : IHotelService
@@ -35,7 +36,16 @@ namespace Outsourcing.Service.HMS
         #endregion
 
         #region Implementation for IHotelService
-        
+        public IQueryable<Hotels> FindSelectList(int? id)
+        {
+            var list = _hotelRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
+            {
+                list = list.Where(w => w.Id == id);
+            }
+            return list;
+        }
+
         public IQueryable<Hotels> FindAll()
         {
             var listEntities = _hotelRepository.FindBy(w => w.Deleted == false);

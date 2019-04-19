@@ -7,17 +7,18 @@ namespace Outsourcing.Data.Models.HMS
 
     public class Rooms : BaseEntity
     {
-
+        [Required][MaxLength(255)]
         public string Name { get; set; }
         public string NameEN { get; set; }
         public string Description { get; set; }
         public string DescriptionENG { get; set; }
+        [Range(0, 100)]
         public int SharePercent { get; set; }
         public bool Status { get; set; }
         public double Price { get; set; }
         [Range(0,100)]
         public int DiscountPercent { get; set; }
-      
+        public bool IsDelete { get; set; }
         /// <summary>
         /// URL  SEO friendly
         /// </summary>

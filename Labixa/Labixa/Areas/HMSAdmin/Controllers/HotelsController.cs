@@ -89,7 +89,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
         #region Edit
         /// <summary>
-        /// Edit
+        /// Edit - GET
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -104,12 +104,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.CategoryHotelId = new SelectList(_db.CategoryHotels, "Id", "Name");
             return View(hotels);
         }
 
         /// <summary>
-        /// Edit
+        /// Edit - POST
         /// </summary>
         /// <param name="hotels"></param>
         /// <returns></returns>

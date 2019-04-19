@@ -1,109 +1,143 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using Outsourcing.Core.Common;
 using Outsourcing.Data;
 using Outsourcing.Data.Models.HMS;
+using Outsourcing.Service.HMS;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class RoomsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        #region Fields
+        private readonly IRoomService _roomService;
+        private readonly IHotelService _hotelService;
+        #endregion
 
-        // GET: /HMSAdmin/Rooms/
+        #region Ctor
+        public RoomsController(IRoomService roomService, IHotelService hotelService)
+        {
+            _roomService = roomService;
+            _hotelService = hotelService;
+        }
+        #endregion
+
+        #region Index
+        /// <summary>
+        /// Index - GET
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var room = db.Room.Include(r => r.Hotel);
-            return View(await room.ToListAsync());
+            var rooms = await _roomService.FindAll().AsNoTracking().ToListAsync();
+            return View(rooms);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Rooms/Details/5
-        public async Task<ActionResult> Details(int? id)
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rooms rooms = await db.Room.FindAsync(id);
+            Rooms rooms = _roomService.FindById((int)id);
             if (rooms == null)
             {
                 return HttpNotFound();
             }
             return View(rooms);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Rooms/Create
+        #region Create
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "MetaKeywords");
-            return View();
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
+            return View(new Rooms { SharePercent = 0 });
         }
 
-        // POST: /HMSAdmin/Rooms/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Create - POST
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,NameEN,Description,DescriptionENG,SharePercent,Status,Price,DiscountPercent,Slug,Layout,DisplayOrder,IsStaticPage,Noted,string1,Utility_Tivi,Utility_TuDo,Utility_HotWater,Utility_DryHair,Utility_Iron,Utility_Kitchen,Utility_TeaCoffee,Utility_Snack,Utility_WashMachine,MetaKeywords,MetaTitle,MetaDescription,HotelId")] Rooms rooms)
+        public ActionResult Create(Rooms rooms)
         {
             if (ModelState.IsValid)
             {
-                db.Room.Add(rooms);
-                await db.SaveChangesAsync();
+                rooms.Slug = StringConvert.ConvertShortName(rooms.Name);
+                _roomService.Create(rooms);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "MetaKeywords", rooms.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
             return View(rooms);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Rooms/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+        /// <summary>
+        /// Edit - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rooms rooms = await db.Room.FindAsync(id);
+            Rooms rooms = _roomService.FindById((int)id);
             if (rooms == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "MetaKeywords", rooms.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", rooms.HotelId);
             return View(rooms);
         }
 
-        // POST: /HMSAdmin/Rooms/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit - POST
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,NameEN,Description,DescriptionENG,SharePercent,Status,Price,DiscountPercent,Slug,Layout,DisplayOrder,IsStaticPage,Noted,string1,Utility_Tivi,Utility_TuDo,Utility_HotWater,Utility_DryHair,Utility_Iron,Utility_Kitchen,Utility_TeaCoffee,Utility_Snack,Utility_WashMachine,MetaKeywords,MetaTitle,MetaDescription,HotelId")] Rooms rooms)
+        public ActionResult Edit(Rooms rooms)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rooms).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                rooms.Slug = StringConvert.ConvertShortName(rooms.Name);
+                _roomService.Edit(rooms);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(db.Hotels, "Id", "MetaKeywords", rooms.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", rooms.HotelId);
             return View(rooms);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Rooms/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region Delete
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rooms rooms = await db.Room.FindAsync(id);
+            var rooms = _roomService.FindById((int)id);
             if (rooms == null)
             {
                 return HttpNotFound();
@@ -111,24 +145,19 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(rooms);
         }
 
-        // POST: /HMSAdmin/Rooms/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Rooms rooms = await db.Room.FindAsync(id);
-            db.Room.Remove(rooms);
-            await db.SaveChangesAsync();
+            var rooms = _roomService.FindById(id);
+            if (rooms == null)
+            {
+                return HttpNotFound();
+            }
+            _roomService.Delete(rooms);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }
