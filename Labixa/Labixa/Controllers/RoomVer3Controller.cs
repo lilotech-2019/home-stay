@@ -5,7 +5,6 @@ using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
 using Outsourcing.Data.Models.HMS;
-using System;
 
 namespace Labixa.Controllers
 {
@@ -39,7 +38,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.GetRooms().Where(p=>p.Hotel.Layout==0);
+            var listShortRoom = _roomService.FindAll().Where(p=>p.Hotel.Layout==0);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
@@ -51,10 +50,10 @@ namespace Labixa.Controllers
         {
             //var model = _RoomService.GetRoomByUrlName(Slug);
             RoomVer3ViewModel viewModel = new RoomVer3ViewModel
-            {
-                RelatedRoom = _roomService.Get3RoomShortNews(),
-                listRoom = _roomService.GetRoomByUrlName(slug)
-            };
+                ();
+            viewModel.RelatedRoom = _roomService.FindAll();
+            viewModel.listRoom = _roomService.FindAll().SingleOrDefault(w => w.Slug == slug);
+            
             return View(viewModel);
         }
         /// <summary>
@@ -66,7 +65,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _roomService.GetRooms().Where(p => p.Hotel.Layout == 2);
+            var listLongRoom = _roomService.FindAll().Where(p => p.Hotel.Layout == 2);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
@@ -78,13 +77,13 @@ namespace Labixa.Controllers
         {
             RoomVer3ViewModel viewModel = new RoomVer3ViewModel
             {
-                RelatedRoomLong = _roomService.Get3RoomLongNews(),
-                listRoom = _roomService.GetRoomByUrlName(slug)
+                RelatedRoomLong = _roomService.FindAll(),
+                listRoom = _roomService.FindAll().SingleOrDefault(w=>w.Slug==slug)
             };
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking, String CustomerName, String CustomerEmail)
+        public ActionResult BookingRoom(RoomOrder modelBooking, string customerName, string customerEmail)
         {
             
             _roomOrderService.Create(modelBooking);

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Outsourcing.Core.Common;
+﻿using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
@@ -31,15 +29,16 @@ namespace Outsourcing.Service.HMS
 
         public RoomService(IRoomRepository roomRepository, IUnitOfWork unitOfWork)
         {
-            this._roomRepository = roomRepository;
-            this._unitOfWork = unitOfWork;
+            _roomRepository = roomRepository;
+            _unitOfWork = unitOfWork;
         }
 
         #endregion
 
         #region BaseMethod
 
-        public IQueryable<Rooms> FindSelectList(int? id) {
+        public IQueryable<Rooms> FindSelectList(int? id)
+        {
             var list = _roomRepository.FindBy(r => r.IsDelete == false);
             if (id != null)
             {
@@ -57,13 +56,13 @@ namespace Outsourcing.Service.HMS
         public void Create(Rooms entity)
         {
             _roomRepository.Add(entity);
-            commit();
+            Commit();
         }
 
         public void Edit(Rooms entity)
         {
             _roomRepository.Update(entity);
-            commit();
+            Commit();
         }
 
         public void Delete(int id)
@@ -81,7 +80,8 @@ namespace Outsourcing.Service.HMS
             }
         }
 
-        private void commit() {
+        private void Commit()
+        {
             _unitOfWork.Commit();
         }
 
@@ -90,6 +90,7 @@ namespace Outsourcing.Service.HMS
             var entity = _roomRepository.FindBy(w => w.IsDelete == false & w.Id == id).SingleOrDefault();
             return entity;
         }
+
         #endregion
     }
 }

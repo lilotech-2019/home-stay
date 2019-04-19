@@ -15,6 +15,9 @@ namespace Outsourcing.Service
         void Edit(BlogCategories entity);
         void Delete(BlogCategories entity);
         void Delete(int id);
+
+        [Obsolete]
+        IEnumerable<BlogCategories> GetBlogCategories();
     }
 
     public class BlogCategoryService : IBlogCategoryService
@@ -30,8 +33,8 @@ namespace Outsourcing.Service
 
         public BlogCategoryService(IBlogTypeRepository blogCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this._blogCategoryRepository = blogCategoryRepository;
-            this._unitOfWork = unitOfWork;
+            _blogCategoryRepository = blogCategoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         #endregion
@@ -53,18 +56,19 @@ namespace Outsourcing.Service
         public void Create(BlogCategories entity)
         {
             _blogCategoryRepository.Add(entity);
-            commit();
+            Commit();
         }
 
         public void Edit(BlogCategories entity)
         {
             _blogCategoryRepository.Update(entity);
-            commit();
+            Commit();
         }
 
         #endregion
 
-        private void commit(){
+        private void Commit()
+        {
             _unitOfWork.Commit();
         }
 
@@ -72,6 +76,11 @@ namespace Outsourcing.Service
         {
             var entity = FindById(id);
             Delete(entity);
+        }
+
+        public IEnumerable<BlogCategories> GetBlogCategories()
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(BlogCategories entity)

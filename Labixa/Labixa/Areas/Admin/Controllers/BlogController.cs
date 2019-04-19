@@ -54,12 +54,12 @@ namespace Labixa.Areas.Admin.Controllers
             {
                 //Mapping to domain
                 Blogs blog = Mapper.Map<BlogFormModel, Blogs>(newBlog);
-                if (String.IsNullOrEmpty(blog.Slug))
+                if (string.IsNullOrEmpty(blog.Slug))
                 {
                     blog.Slug = StringConvert.ConvertShortName(blog.Title);
                 }
                 //Create Blog
-                _blogService.CreateBlog(blog);
+                _blogService.Create(blog);
                 return continueEditing ? RedirectToAction("Edit", "Blog", new { blogId = blog.Id })
                                   : RedirectToAction("Index", "Blog");
             }
@@ -127,7 +127,7 @@ namespace Labixa.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int blogId)
         {
-            _blogService.DeleteBlog(blogId);
+            _blogService.Delete(blogId);
             return RedirectToAction("Index");
         }
 

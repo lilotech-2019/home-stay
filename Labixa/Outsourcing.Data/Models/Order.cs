@@ -19,7 +19,7 @@ namespace Outsourcing.Data.Models
         public int OrderTotal { get; set; }
         public int Status { get; set; }
         public int? ShipmentId { get; set; }
-        public Double ShipmentFee { get; set; }
+        public double ShipmentFee { get; set; }
         public bool Deleted { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime Deadline { get; set; }

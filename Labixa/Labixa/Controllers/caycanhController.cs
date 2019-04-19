@@ -162,7 +162,7 @@ namespace Labixa.Controllers
                             "<a href='/tin-tuc/" + StringConvert.ConvertShortName(item.Slug) + "' alt='" + item.Title +
                             "'>")
                         .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null).Trim();
-                    _blogService.CreateBlog(item);
+                    _blogService.Create(item);
                     listBlog.Add(item);
                 }
 
