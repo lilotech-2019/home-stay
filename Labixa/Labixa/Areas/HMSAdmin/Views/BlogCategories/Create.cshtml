@@ -29,39 +29,23 @@
         <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.Name,null, new {@class="col-xs-10 col-sm-5"})
+                @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
                 @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-        <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
-            <div class="col-sm-9">
-                @Html.EditorFor(model => model.Description,null, new {@class="col-xs-10 col-sm-5"})
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-        </div>
-
-        <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
-            <div class="col-sm-9">
-                @Html.EditorFor(model => model.Status,null, new {@class="col-xs-10 col-sm-5"})
-                @Html.ValidationMessageFor(model => model.Status)
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Slug, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.Slug,null, new {@class="col-xs-10 col-sm-5"})
+                @Html.EditorFor(model => model.Slug, null, new { @class = "col-xs-10 col-sm-5" })
                 @Html.ValidationMessageFor(model => model.Slug)
             </div>
         </div>
 
         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CategoryParentId, "CategoryParentId", new { @class = "col-sm-3 control-label no-padding-right" })
+            @Html.LabelFor(model => model.CategoryParentId, "BlogCategoriesId", new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
-                @Html.DropDownList("CategoryParentId", String.Empty)
+                @Html.DropDownList("BlogCategoriesId", String.Empty)
                 @Html.ValidationMessageFor(model => model.CategoryParentId)
             </div>
         </div>
@@ -69,31 +53,47 @@
         <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Layout, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.Layout,null, new {@class="col-xs-10 col-sm-5"})
+                @Html.EditorFor(model => model.Layout, "CkEditor")
                 @Html.ValidationMessageFor(model => model.Layout)
-            </div>
-        </div>
-
-        <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.DisplayOrder, new { @class = "col-sm-3 control-label no-padding-right" })
-            <div class="col-sm-9">
-                @Html.EditorFor(model => model.DisplayOrder,null, new {@class="col-xs-10 col-sm-5"})
-                @Html.ValidationMessageFor(model => model.DisplayOrder)
             </div>
         </div>
 
         <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.IsStaticPage, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.IsStaticPage,null, new {@class="col-xs-10 col-sm-5"})
+                @Html.EditorFor(model => model.IsStaticPage, null, new { @class = "col-xs-10 col-sm-5" })
                 @Html.ValidationMessageFor(model => model.IsStaticPage)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.DisplayOrder, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.DisplayOrder, "CkEditor")
+                @Html.ValidationMessageFor(model => model.DisplayOrder)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Description, "CkEditor")
+                @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
 
         <div class="form-group ">
             <div class="col-md-offset-4 col-md-8">
                 <input type="submit" value="Tạo mới" class="btn btn-primary" />
-				<input type="reset" value="Reset" class="btn" />
+                <input type="reset" value="Reset" class="btn" />
             </div>
         </div>
     </div>

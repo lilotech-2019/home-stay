@@ -1,134 +1,170 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using Outsourcing.Core.Common;
 using Outsourcing.Data;
 using Outsourcing.Data.Models;
+using Outsourcing.Service;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class BlogCategoriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        #region Fields
+        private readonly IBlogCategoryService _blogCategoriesService;
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        #endregion
 
-        // GET: /HMSAdmin/BlogCategories/
+        #region Ctor
+        public BlogCategoriesController(IBlogCategoryService blogCategoriesService)
+        {
+            _blogCategoriesService = blogCategoriesService;
+        }
+        #endregion
+
+        #region Index
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var blogcategories = db.BlogCategories.Include(b => b.CategoryParent);
-            return View(await blogcategories.ToListAsync());
+            var blogCategories = await _blogCategoriesService.FindAll().AsNoTracking().ToListAsync();
+            return View(blogCategories);
         }
+        #endregion
 
-        // GET: /HMSAdmin/BlogCategories/Details/5
-        public async Task<ActionResult> Details(int? id)
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogCategories blogCategories = await db.BlogCategories.FindAsync(id);
-            if (blogCategories == null)
+            BlogCategories details = _blogCategoriesService.FindById((int)id);
+            if (details == null)
             {
                 return HttpNotFound();
             }
-            return View(blogCategories);
+            return View(details);
         }
+        #endregion
 
-        // GET: /HMSAdmin/BlogCategories/Create
+        #region Create
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryParentId = new SelectList(db.BlogCategories, "Id", "Name");
+            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
             return View();
         }
 
-        // POST: /HMSAdmin/BlogCategories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Create - POST
+        /// </summary>
+        /// <param name="blogCategories"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,Description,Status,Slug,CategoryParentId,Layout,DisplayOrder,IsStaticPage")] BlogCategories blogCategories)
+        public ActionResult Create(BlogCategories blogCategories)
         {
             if (ModelState.IsValid)
             {
-                db.BlogCategories.Add(blogCategories);
-                await db.SaveChangesAsync();
+                blogCategories.Slug = StringConvert.ConvertShortName(blogCategories.Name);
+                _blogCategoriesService.Create(blogCategories);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryParentId = new SelectList(db.BlogCategories, "Id", "Name", blogCategories.CategoryParentId);
+            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name", blogCategories.CategoryParentId);
             return View(blogCategories);
         }
+        #endregion
 
-        // GET: /HMSAdmin/BlogCategories/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+        /// <summary>
+        /// Edit - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogCategories blogCategories = await db.BlogCategories.FindAsync(id);
-            if (blogCategories == null)
+            BlogCategories hotels = _blogCategoriesService.FindById((int)id);
+            if (hotels == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryParentId = new SelectList(db.BlogCategories, "Id", "Name", blogCategories.CategoryParentId);
-            return View(blogCategories);
+            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
+            return View(hotels);
         }
-
-        // POST: /HMSAdmin/BlogCategories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit - POST
+        /// </summary>
+        /// <param name="blogCategories"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,Description,Status,Slug,CategoryParentId,Layout,DisplayOrder,IsStaticPage")] BlogCategories blogCategories)
+        public ActionResult Edit(BlogCategories blogCategories)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(blogCategories).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                blogCategories.Slug = StringConvert.ConvertShortName(blogCategories.Name);
+                _blogCategoriesService.Edit(blogCategories);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryParentId = new SelectList(db.BlogCategories, "Id", "Name", blogCategories.CategoryParentId);
+            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
             return View(blogCategories);
         }
+        #endregion
 
-        // GET: /HMSAdmin/BlogCategories/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogCategories blogCategories = await db.BlogCategories.FindAsync(id);
-            if (blogCategories == null)
+            var categoryHotels = _blogCategoriesService.FindById((int)id);
+            if (categoryHotels == null)
             {
                 return HttpNotFound();
             }
-            return View(blogCategories);
+            return View(categoryHotels);
         }
 
-        // POST: /HMSAdmin/BlogCategories/Delete/5
+        /// <summary>
+        /// DeleteConfirmed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            BlogCategories blogCategories = await db.BlogCategories.FindAsync(id);
-            db.BlogCategories.Remove(blogCategories);
-            await db.SaveChangesAsync();
+            var blogCategories = _blogCategoriesService.FindById(id);
+            if (blogCategories == null)
+            {
+                return HttpNotFound();
+            }
+            _blogCategoriesService.Delete(blogCategories);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }

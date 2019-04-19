@@ -42,7 +42,8 @@ namespace Outsourcing.Data.Models
         /// </summary>
         public bool IsStaticPage { get; set; }
         virtual public ICollection<Blogs> Blogs { get; set; }
-        
+        public bool IsDelete { get; set; }
+
         [ForeignKey("CategoryParentId")]
         virtual public BlogCategories CategoryParent { get; set; }
     }

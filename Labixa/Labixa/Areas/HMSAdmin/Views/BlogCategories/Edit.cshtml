@@ -4,95 +4,96 @@
     ViewBag.Title = "Edit";
 }
 
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+
 <h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>BlogCategories</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
 
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+<div class="form-horizontal">
+    <h4>BlogCategories</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
 
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.Status)
-                @Html.ValidationMessageFor(model => model.Status)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Slug, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.Slug)
-                @Html.ValidationMessageFor(model => model.Slug)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.CategoryParentId, "CategoryParentId", new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.DropDownList("CategoryParentId", String.Empty)
-                @Html.ValidationMessageFor(model => model.CategoryParentId)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.Layout, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.Layout)
-                @Html.ValidationMessageFor(model => model.Layout)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.DisplayOrder, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.DisplayOrder)
-                @Html.ValidationMessageFor(model => model.DisplayOrder)
-            </div>
-        </div>
-
-         <div class="form-group col-sm-6">
-            @Html.LabelFor(model => model.IsStaticPage, new { @class = "col-sm-3 control-label no-padding-right" })
-           <div class="col-sm-9">
-                @Html.EditorFor(model => model.IsStaticPage)
-                @Html.ValidationMessageFor(model => model.IsStaticPage)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.Slug, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.Slug)
+            @Html.ValidationMessageFor(model => model.Slug)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.CategoryParentId, "CategoryParentId", new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.DropDownList("CategoryParentId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryParentId)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.Layout, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.Layout)
+            @Html.ValidationMessageFor(model => model.Layout)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.IsStaticPage, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.IsStaticPage)
+            @Html.ValidationMessageFor(model => model.IsStaticPage)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.DisplayOrder, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.DisplayOrder)
+            @Html.ValidationMessageFor(model => model.DisplayOrder)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+    </div>
+
+    <div class="form-group col-sm-6">
+        @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+        <div class="col-sm-9">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

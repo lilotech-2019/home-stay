@@ -1,109 +1,148 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using Outsourcing.Core.Common;
 using Outsourcing.Data;
 using Outsourcing.Data.Models;
+using Outsourcing.Service;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
     public class BlogsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        #region Fields
+        private readonly IBlogService _blogsService;
+        private ApplicationDbContext _db = new ApplicationDbContext();
+        #endregion
 
-        // GET: /HMSAdmin/Blogs/
+
+        #region Ctor
+        public BlogsController(IBlogService blogsService)
+        {
+            _blogsService = blogsService;
+        }
+        #endregion
+
+        #region Index
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var blogs = db.Blogs.Include(b => b.BlogCategory);
-            return View(await blogs.ToListAsync());
+            var blogs = await _blogsService.FindAll().AsNoTracking().ToListAsync();
+            return View(blogs);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Blogs/Details/5
-        public async Task<ActionResult> Details(int? id)
+
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blogs blogs = await db.Blogs.FindAsync(id);
+            Blogs blogs = _blogsService.FindById((int)id);
             if (blogs == null)
             {
                 return HttpNotFound();
             }
             return View(blogs);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Blogs/Create
+        #region Create
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.BlogCategoryId = new SelectList(db.BlogCategories, "Id", "Name");
-            return View();
+            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories,"Name");
+            return View(new Blogs { Position = 0});
         }
 
-        // POST: /HMSAdmin/Blogs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Create - POST
+        /// </summary>
+        /// <param name="blogs"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Title,TitleENG,Slug,BlogImage,Description,DescriptionENG,Temp_1,Temp_2,Temp_3,Temp_4,Temp_5,Content,ContentENG,MetaKeywords,MetaTitle,MetaTitleEN,MetaDescription,MetaDescriptionEN,IsAvailable,IsHomePage,Deleted,DateCreated,LastEditedTime,PictureId,BlogCategoryId,Position")] Blogs blogs)
+        public ActionResult Create(Blogs blogs)
         {
             if (ModelState.IsValid)
             {
-                db.Blogs.Add(blogs);
-                await db.SaveChangesAsync();
+                blogs.Slug = StringConvert.ConvertShortName(blogs.Title);
+                _blogsService.Create(blogs);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.BlogCategoryId = new SelectList(db.BlogCategories, "Id", "Name", blogs.BlogCategoryId);
+            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
             return View(blogs);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Blogs/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+        /// <summary>
+        /// Edit - GET 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blogs blogs = await db.Blogs.FindAsync(id);
+            Blogs blogs = _blogsService.FindById((int)id);
             if (blogs == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(db.BlogCategories, "Id", "Name", blogs.BlogCategoryId);
+            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
             return View(blogs);
         }
 
-        // POST: /HMSAdmin/Blogs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edit - POST
+        /// </summary>
+        /// <param name="blogs"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Title,TitleENG,Slug,BlogImage,Description,DescriptionENG,Temp_1,Temp_2,Temp_3,Temp_4,Temp_5,Content,ContentENG,MetaKeywords,MetaTitle,MetaTitleEN,MetaDescription,MetaDescriptionEN,IsAvailable,IsHomePage,Deleted,DateCreated,LastEditedTime,PictureId,BlogCategoryId,Position")] Blogs blogs)
+        public ActionResult Edit(Blogs blogs)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(blogs).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                blogs.Slug = StringConvert.ConvertShortName(blogs.Title);
+                _blogsService.Edit(blogs);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(db.BlogCategories, "Id", "Name", blogs.BlogCategoryId);
+            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
             return View(blogs);
         }
+        #endregion
 
-        // GET: /HMSAdmin/Blogs/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region Delete
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blogs blogs = await db.Blogs.FindAsync(id);
+            var blogs = _blogsService.FindById((int)id);
             if (blogs == null)
             {
                 return HttpNotFound();
@@ -111,24 +150,23 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return View(blogs);
         }
 
-        // POST: /HMSAdmin/Blogs/Delete/5
+        /// <summary>
+        /// DeleteConfirmed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Blogs blogs = await db.Blogs.FindAsync(id);
-            db.Blogs.Remove(blogs);
-            await db.SaveChangesAsync();
+            var blogs = _blogsService.FindById(id);
+            if (blogs == null)
+            {
+                return HttpNotFound();
+            }
+            _blogsService.Delete(blogs);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }
