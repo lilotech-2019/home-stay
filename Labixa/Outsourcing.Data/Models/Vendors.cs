@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Outsourcing.Data.Models
 {
     public class Vendors :BaseEntity
     {
+        [Required][MaxLength(255)]
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -15,6 +14,7 @@ namespace Outsourcing.Data.Models
         public string Content { get; set; }
         public string Type { get; set; }
         public string Note { get; set; }
+        [Range(0, 100)]
         public int Percent { get; set; }
         public bool IsDelete { get; set; }
        
