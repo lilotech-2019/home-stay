@@ -1,0 +1,222 @@
+﻿
+
+@model IEnumerable<Outsourcing.Data.Models.HMS.Rooms>
+@Scripts.Render("~/Content/dataTable")
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tên trang</h2>
+@Styles.Render("~/Content/dataTable")
+<p>
+    @Html.ActionLink("Tạo mới", "Create",null, new {@class="btn btn-primary"})
+</p>
+<div class="row">
+    <div class="col-xs-12">
+    <h3 class="header smaller lighter blue">Tên Trang</h3>
+    <div class="table-header">Tên bảng</div>
+<table id="datatable" class="table table-striped table-bordered table-hover">
+ <thead>
+ 
+       <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hotel.MetaKeywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionENG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SharePercent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountPercent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Layout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsStaticPage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Noted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.string1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_Tivi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_TuDo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_HotWater)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_DryHair)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_Iron)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_Kitchen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_TeaCoffee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_Snack)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utility_WashMachine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaKeywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaDescription)
+        </th>
+        <th></th>
+    </tr>
+ </thead>
+
+ <tbody>
+
+
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hotel.MetaKeywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescriptionENG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SharePercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountPercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Layout)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsStaticPage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Noted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.string1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_Tivi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_TuDo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_HotWater)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_DryHair)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_Iron)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_Kitchen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_TeaCoffee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_Snack)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utility_WashMachine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaKeywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaDescription)
+        </td>
+<td>
+                <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+                    <a href="Edit/@item.Id" class="btn btn-xs btn-info">
+                        <i class="icon-edit bigger-120"></i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-danger">
+                        <i class="icon-trash bigger-120"></i>
+                    </a>
+                </div>
+            </td>
+    </tr>
+}
+ </tbody>
+</table>
+</div>
+</div>
+
+
+
+<script>
+    $(document).ready(function() {
+        /* Initialise the DataTable */
+
+      $('#datatable').dataTable();
+       
+    });
+</script>
