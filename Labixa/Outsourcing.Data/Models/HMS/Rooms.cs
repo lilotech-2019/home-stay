@@ -55,6 +55,7 @@ namespace Outsourcing.Data.Models.HMS
 
     public enum RoomType
     {
+        ShortTempDeposit = 0,
         ShortTemp = 1,
         LongTemp = 2
     }

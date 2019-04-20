@@ -9,7 +9,6 @@ using System.Net.Mail;
 using System.Net;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
-using System.Collections.Generic;
 
 namespace Labixa.Controllers
 {
@@ -43,13 +42,12 @@ namespace Labixa.Controllers
             var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).ToList();
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
+
         /// <summary>
         /// chi tiết phòng ngắn hạn
         /// </summary>
-        /// <param name="slug"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
-      
-       
         public ActionResult LongRoom(int? page)
         {
             int pageNumber = (page ?? 1);
@@ -60,12 +58,11 @@ namespace Labixa.Controllers
        
         public ActionResult Details(int id, string slug)
         {
-            RoomDetailViewModel viewModel;
             var room = _roomService.FindByIdAndSlug(id, slug);
             if (room != null)
             {
                 var relatedRooms = _roomService.FindByType(room.Type);
-                viewModel = new RoomDetailViewModel()
+                var viewModel = new RoomDetailViewModel
                 {
                     RelatedRooms = relatedRooms,
                     Room = room
@@ -76,14 +73,14 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking, String CustomerName, String CustomerEmail, String CustomerPhone, String Name)
+        public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail, String customerPhone, String name)
         { 
             Rooms room = new Rooms();
-            room.Name = Name;
-            string AdminGmail = "minhtrungmessi@gmail.com";
-            string Password = "abc65432abc65432";
-            string Subject = "Đặt phòng thành công";
-            string Content = "<table border=" + 1 + "><thead>" +
+            room.Name = name;
+            string adminGmail = "minhtrungmessi@gmail.com";
+            string password = "abc65432abc65432";
+            string subject = "Đặt phòng thành công";
+            string content = "<table border=" + 1 + "><thead>" +
                 "<th> Họ Tên Khách Hàng </th>" +
                 "<th> Ngày Check In</th>" +
                 "<th> Ngày Check Out</th>" +
@@ -94,25 +91,25 @@ namespace Labixa.Controllers
                 "<th> Số Tiền</th>" +
                 "</thead>" +
                 "<tbody>" +
-                "<td>" + CustomerName + "</td>" +
+                "<td>" + customerName + "</td>" +
                 "<td>" + modelBooking.CheckIn + "</td>" +
                 "<td>" + modelBooking.CheckOut + "</td>" +
-                "<td>" + CustomerEmail + "</td>" +
-                "<td>" + CustomerPhone + "</td>" +
-                "<td>" + Name + "</td>" +
+                "<td>" + customerEmail + "</td>" +
+                "<td>" + customerPhone + "</td>" +
+                "<td>" + name + "</td>" +
                 "<td>" + modelBooking.AmountOfPeople + "</td>" +
                 "<td>" + modelBooking.Price + "</td>" +
                 "</tbody></table>";
             Customer cus = new Customer();
-            cus.Name = CustomerName;
-            cus.Email = CustomerEmail;
-            cus.Phone = CustomerPhone;
-            var customerId = _customerservice.FindIdByPhone(CustomerPhone);
+            cus.Name = customerName;
+            cus.Email = customerEmail;
+            cus.Phone = customerPhone;
+            var customerId = _customerservice.FindIdByPhone(customerPhone);
             modelBooking.CheckInDate = DateTime.Now;
             modelBooking.CheckOutDate = DateTime.Now;
             if (customerId == 0)
             {
-                customerId = _customerservice.CreateNewCustomerByPhone(CustomerName, CustomerEmail, CustomerPhone);
+                customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
             }
             if (customerId != 0)
             {
@@ -123,29 +120,29 @@ namespace Labixa.Controllers
             _roomOrderService.Create(modelBooking);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
-                Credentials = new NetworkCredential(AdminGmail, Password),
+                Credentials = new NetworkCredential(adminGmail, password),
                 EnableSsl = true
             };
             var mess = new MailMessage();
-            mess.From = new MailAddress(AdminGmail);
-            mess.ReplyToList.Add(AdminGmail);
-            mess.To.Add(new MailAddress(CustomerEmail));
-            mess.Subject = Subject;
-            mess.Body = Content;
+            mess.From = new MailAddress(adminGmail);
+            mess.ReplyToList.Add(adminGmail);
+            mess.To.Add(new MailAddress(customerEmail));
+            mess.Subject = subject;
+            mess.Body = content;
             mess.IsBodyHtml = true;
             mail.Send(mess);
             return RedirectToAction("ShortRoom", "RoomVer3");
           
         }
         [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String CustomerName, String CustomerEmail, String CustomerPhone, String Name)
+        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail, String customerPhone, String name)
         {
             Rooms room = new Rooms();
-            room.Name = Name;
-            string AdminGmail = "minhtrungmessi@gmail.com";
-            string Password = "abc65432abc65432";
-            string Subject = "Đặt phòng thành công";
-            string Content = "<table border=" + 1 + "><thead>" +
+            room.Name = name;
+            string adminGmail = "minhtrungmessi@gmail.com";
+            string password = "abc65432abc65432";
+            string subject = "Đặt phòng thành công";
+            string content = "<table border=" + 1 + "><thead>" +
                 "<th> Họ Tên Khách Hàng </th>" +
                 "<th> Email Khách Hàng</th>" +
                 "<th> Số Điện Thoại</th>" +
@@ -154,23 +151,23 @@ namespace Labixa.Controllers
                 "<th> Số Tiền</th>" +
                 "</thead>" +
                 "<tbody>" +
-                "<td>" + CustomerName + "</td>" +
-                "<td>" + CustomerEmail + "</td>" +
-                "<td>" + CustomerPhone + "</td>" +
-                "<td>" + Name + "</td>" +
+                "<td>" + customerName + "</td>" +
+                "<td>" + customerEmail + "</td>" +
+                "<td>" + customerPhone + "</td>" +
+                "<td>" + name + "</td>" +
                 "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                 "<td>" + modelBookingLongRoom + "</td>" +
                 "</tbody></table>";
             Customer cus = new Customer();
-            cus.Name = CustomerName;
-            cus.Email = CustomerEmail;
-            cus.Phone = CustomerPhone;
-            var customerId = _customerservice.FindIdByPhone(CustomerPhone);
+            cus.Name = customerName;
+            cus.Email = customerEmail;
+            cus.Phone = customerPhone;
+            var customerId = _customerservice.FindIdByPhone(customerPhone);
             modelBookingLongRoom.CheckInDate = DateTime.Now;
             modelBookingLongRoom.CheckOutDate = DateTime.Now;
             if (customerId == 0)
             {
-                customerId = _customerservice.CreateNewCustomerByPhone(CustomerName, CustomerEmail, CustomerPhone);
+                customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
             }
             if (customerId != 0)
             {
@@ -181,15 +178,15 @@ namespace Labixa.Controllers
             _roomOrderService.Create(modelBookingLongRoom);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
-                Credentials = new NetworkCredential(AdminGmail, Password),
+                Credentials = new NetworkCredential(adminGmail, password),
                 EnableSsl = true
             };
             var mess = new MailMessage();
-            mess.From = new MailAddress(AdminGmail);
-            mess.ReplyToList.Add(AdminGmail);
-            mess.To.Add(new MailAddress(CustomerEmail));
-            mess.Subject = Subject;
-            mess.Body = Content;
+            mess.From = new MailAddress(adminGmail);
+            mess.ReplyToList.Add(adminGmail);
+            mess.To.Add(new MailAddress(customerEmail));
+            mess.Subject = subject;
+            mess.Body = content;
             mess.IsBodyHtml = true;
             mail.Send(mess);
             return RedirectToAction("LongRoom", "RoomVer3");

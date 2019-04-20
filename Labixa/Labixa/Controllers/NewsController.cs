@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Outsourcing.Service;
@@ -30,7 +31,7 @@ namespace Labixa.Controllers
 //noi chung ky moi nhanh dc, 
         public ActionResult Index(int? page = 1)
         {
-            var model = _blogService.FindAll(); //em chi can get het data
+            var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated); //em chi can get het data
             int pageNumber = (page ?? 1); // day la so thu tu page
             int pageSize = 4; //day la so bai viet tren 1 page
             //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
@@ -44,7 +45,7 @@ namespace Labixa.Controllers
 
         public ActionResult Detail(string slug)
         {
-            BlogViewModel viewModel = new BlogViewModel
+            var viewModel = new BlogViewModel
             {
                 RelatedBlogs = _blogService.FindAll(),
                 listBlogNew = _blogService.FindBySlug(slug)
