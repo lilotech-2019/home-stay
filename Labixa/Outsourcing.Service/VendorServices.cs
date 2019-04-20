@@ -7,12 +7,12 @@ namespace Outsourcing.Service
 {
     public interface IVendorService
     {
-        IQueryable<Vendors> FindAll();
-        Vendors FindById(int id);
-        void Create(Vendors entity);
-        void Edit(Vendors entity);
+        IQueryable<ContactUs> FindAll();
+        ContactUs FindById(int id);
+        void Create(ContactUs entity);
+        void Edit(ContactUs entity);
         void Delete(int id);
-        void Delete(Vendors entity);
+        void Delete(ContactUs entity);
     }
 
     public class VendorService : IVendorService
@@ -36,25 +36,25 @@ namespace Outsourcing.Service
 
         #region BaseMethod
 
-        public IQueryable<Vendors> FindAll()
+        public IQueryable<ContactUs> FindAll()
         {
             var listEntities = _vendorRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
-        public Vendors FindById(int id)
+        public ContactUs FindById(int id)
         {
             var entity = _vendorRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 
-        public void Create(Vendors entity)
+        public void Create(ContactUs entity)
         {
             _vendorRepository.Add(entity);
             Commit();
         }
 
-        public void Edit(Vendors entity)
+        public void Edit(ContactUs entity)
         {
             _vendorRepository.Update(entity);
             Commit();
@@ -66,7 +66,7 @@ namespace Outsourcing.Service
             Delete(entity);
         }
 
-        public void Delete(Vendors entity)
+        public void Delete(ContactUs entity)
         {
             if (entity == null) return;
             entity.Deleted = true;

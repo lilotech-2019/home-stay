@@ -53,7 +53,7 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Deposit(Vendors model)
+        public ActionResult Deposit(ContactUs model)
         {
             _vendorService.Create(model);
             return RedirectToAction("Index", "Home");

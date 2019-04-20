@@ -97,7 +97,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-            this IEnumerable<Vendors> blogCategory, int selectedId)
+            this IEnumerable<ContactUs> blogCategory, int selectedId)
         {
             return
 

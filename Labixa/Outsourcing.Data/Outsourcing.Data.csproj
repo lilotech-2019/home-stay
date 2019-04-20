@@ -121,7 +121,7 @@
     <Compile Include="Models\Shipment.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TypeNotify.cs" />
-    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\ContactUs.cs" />
     <Compile Include="Models\WebsiteAttributes.cs" />
     <Compile Include="OutsourcingSampleData.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />

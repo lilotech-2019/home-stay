@@ -36,7 +36,7 @@ namespace Outsourcing.Data
         public DbSet<ProductCategoryMapping> ProductCategoryMappings { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
-        public DbSet<Vendors> Vendors { get; set; }
+        public DbSet<ContactUs> Vendors { get; set; }
         public DbSet<HotelCategory> HotelCategories { get; set; }
         public DbSet<CategoryProducts> CategoryProducts { get; set; }
         public DbSet<CostCategory> CostCategorys { get; set; }

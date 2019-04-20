@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;

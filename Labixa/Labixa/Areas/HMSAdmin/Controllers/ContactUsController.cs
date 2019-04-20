@@ -44,12 +44,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = _vendorService.FindById((int)id);
-            if (vendors == null)
+            ContactUs contactUs = _vendorService.FindById((int)id);
+            if (contactUs == null)
             {
                 return HttpNotFound();
             }
-            return View(vendors);
+            return View(contactUs);
         }
         #endregion
 
@@ -60,25 +60,25 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View(new Vendors { Percent = 0 });
+            return View(new ContactUs { Percent = 0 });
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="vendors"></param>
+        /// <param name="contactUs"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Vendors vendors)
+        public ActionResult Create(ContactUs contactUs)
         {
             if (ModelState.IsValid)
             {
-                _vendorService.Create(vendors);
+                _vendorService.Create(contactUs);
                 return RedirectToAction("Index");
             }
 
-            return View(vendors);
+            return View(contactUs);
         }
         #endregion
 
@@ -94,24 +94,24 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = _vendorService.FindById((int)id);
-            if (vendors == null)
+            ContactUs contactUs = _vendorService.FindById((int)id);
+            if (contactUs == null)
             {
                 return HttpNotFound();
             }
-            return View(vendors);
+            return View(contactUs);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Vendors vendors)
+        public ActionResult Edit(ContactUs contactUs)
         {
             if (ModelState.IsValid)
             {
-                _vendorService.Edit(vendors);
+                _vendorService.Edit(contactUs);
                 return RedirectToAction("Index");
             }
-            return View(vendors);
+            return View(contactUs);
         }
         #endregion
 

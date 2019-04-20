@@ -3,7 +3,7 @@ using Outsourcing.Data.Models;
 
 namespace Outsourcing.Data.Repository
 {
-    public class VendorRepository : RepositoryBase<Vendors>, IVendorRepository
+    public class VendorRepository : RepositoryBase<ContactUs>, IVendorRepository
     {
         public VendorRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
@@ -11,7 +11,7 @@ namespace Outsourcing.Data.Repository
         }
     }
 
-    public interface IVendorRepository : IRepository<Vendors>
+    public interface IVendorRepository : IRepository<ContactUs>
     {
     }
 }
