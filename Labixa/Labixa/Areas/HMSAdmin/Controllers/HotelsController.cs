@@ -63,7 +63,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryHotelId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
             return View(new Hotel { SharePercent = 0 });
         }
 
@@ -82,7 +82,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _hotelService.Create(hotel);
                 return RedirectToAction("Index");
             }
-
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
             return View(hotel);
         }
         #endregion
@@ -104,7 +104,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryHotelId = _categoryHotelService.FindSelectList();
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name",hotel.Id);
             return View(hotel);
         }
 
@@ -123,7 +123,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _hotelService.Edit(hotel);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryHotelId = _categoryHotelService.FindSelectList();
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
             return View(hotel);
         }
         #endregion
