@@ -83,7 +83,7 @@
                 <h3>@Model.listBlogNew.Title</h3>
                 <p> @Html.Raw(Model.listBlogNew.Description)</p>
 
-                <p>@Html.Raw(Model.listBlogNew.Content) </p>
+                @*<p>@Html.Raw(Model.listBlogNew.Content) </p>*@
             </article>
             }
             else
@@ -97,9 +97,9 @@
                 </div>
 
                 <h3>@Model.listBlogNew.TitleENG</h3>
-                @*<p> @Html.Raw(Model.listBlogNew.DescriptionENG)</p>*@
+     
 
-                <p>@Html.Raw(Model.listBlogNew.ContentENG) </p>
+                <p>@Html.Raw(Model.listBlogNew.DescriptionENG) </p>
             </article>
             }
                 
