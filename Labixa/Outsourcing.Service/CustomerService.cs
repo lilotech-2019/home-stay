@@ -7,7 +7,6 @@ namespace Outsourcing.Service
 {
     public interface ICustomerService
     {
-        void Create(string customerName, string customerEmail, string customerPhone);
         void Create(Customer entity);
         Customer FindByPhone(string phone);
     }
@@ -23,18 +22,6 @@ namespace Outsourcing.Service
             _unitOfWork = unitOfWork;
         }
 
-        public void Create(string customerName, string customerEmail, string customerPhone)
-        {
-            var customer = FindByPhone(customerPhone);
-            if (customer != null) return;
-            customer = new Customer
-            {
-                Name = customerName,
-                Email = customerEmail,
-                Phone = customerPhone
-            };
-            Create(customer);
-        }
 
         public void Create(Customer entity)
         {
@@ -45,7 +32,6 @@ namespace Outsourcing.Service
         public Customer FindByPhone(string phone)
         {
             return _customerRepository.FindBy(c => c.Phone == phone).FirstOrDefault();
-
         }
     }
 }
