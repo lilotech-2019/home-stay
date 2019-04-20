@@ -141,6 +141,7 @@
     <Compile Include="Repository\HMS\CostOrderItemRepository.cs" />
     <Compile Include="Repository\HMS\CostOrderRepository.cs" />
     <Compile Include="Repository\HMS\CostRepository.cs" />
+    <Compile Include="Repository\HMS\CustomerRepository.cs" />
     <Compile Include="Repository\HMS\HotelRepository.cs" />
     <Compile Include="Repository\HMS\ProductRepository.cs" />
     <Compile Include="Repository\HMS\RoomImageMappingRepository.cs" />

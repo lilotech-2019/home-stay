@@ -14,6 +14,7 @@ namespace Outsourcing.Service.HMS
         void Create(HotelCategory entity);
         void Edit(HotelCategory entity);
         void Delete(int id);
+
         void Delete(HotelCategory entity);
     }
 
