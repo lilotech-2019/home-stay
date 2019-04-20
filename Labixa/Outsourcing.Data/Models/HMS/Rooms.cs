@@ -47,7 +47,7 @@ namespace Outsourcing.Data.Models.HMS
         public int HotelId { get; set; }
 
         public virtual Hotel Hotel { get; set; }
-
+        public RoomType Type { get; set; }
 
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
         public virtual ICollection<RoomOrder> RoomOrders { get; set; }
@@ -55,7 +55,6 @@ namespace Outsourcing.Data.Models.HMS
 
     public enum RoomType
     {
-        None = 0,
         ShortTemp = 1,
         LongTemp = 2
     }

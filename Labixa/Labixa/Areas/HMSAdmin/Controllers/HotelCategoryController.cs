@@ -157,5 +157,11 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region MyRegion
+
+        
+
+        #endregion
     }
 }
