@@ -50,7 +50,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             //Get the list category
-            var listCategory = _hotelCategoryService.GetProductCategories().ToSelectListItems(-1);
+            var listCategory = _hotelCategoryService.FindAll().ToSelectListItems(-1);
             var hotel = new HotelModel {ListCategoryHotel = listCategory};
             return View(hotel);
         }
@@ -99,10 +99,11 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             }
             else
             {
-                newHotel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
-                    .ToSelectListItems(newHotel.CategoryHotelId);
-                return View("Create", newHotel);
+                //newHotel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+                //    .ToSelectListItems(newHotel.CategoryHotelId);
+                //return View("Create", newHotel);
             }
+            return null;
         }
 
         [HttpGet]
@@ -137,7 +138,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 UrlImage2 = hotel.UrlImage2,
                 UrlImage3 = hotel.UrlImage3
             };
-            hotelFormModel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+            hotelFormModel.ListCategoryHotel = _hotelCategoryService.FindAll()
                 .ToSelectListItems(hotelFormModel.CategoryHotelId);
 
             return View(hotelFormModel);
@@ -181,7 +182,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             }
             else
             {
-                hotelToEdit.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+                hotelToEdit.ListCategoryHotel = _hotelCategoryService.FindAll()
                     .ToSelectListItems(hotelToEdit.CategoryHotelId);
                 return View("Edit", hotelToEdit);
             }

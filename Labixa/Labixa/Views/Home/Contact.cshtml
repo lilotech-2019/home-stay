@@ -5,15 +5,29 @@
     HttpCookie cookie = Request.Cookies["_culture"];
 }
 <script>
+    function validateForm() {
+        PhoneNumber = document.getElementById("PhoneNumber").value;
+        if (PhoneNumber != PhoneNumber.match(/^([0-9]{10,12})$/)) {
+            alert("Số điện thoại không không hợp lệ");
+           
+        } 
+    }
     function sendContact() {
         var Name, Email, PhoneNumber, message;
+       
         Name = document.getElementById("CustomerName").value;
         Email = document.getElementById("Email").value;
         PhoneNumber = document.getElementById("PhoneNumber").value;
         message = document.getElementById("content").value;
-        if (Name != "" && Email != "" && PhoneNumber != "" && message != "") {
+        //var x = document.forms["contactForm"]["Description"].value;
+        validateForm();
+        if (Name != "" && Email != "" && PhoneNumber == PhoneNumber.match(/^([0-9]{10,12})$/) && message != "") {
             alert("Gửi Tin Nhắn Thành Công");
+        
         }
+       
+        
+       
 
     }
 </script>
@@ -48,7 +62,7 @@
         <div class="col-md-8">
             <div class="book-left-content input_form">
                 @* form để submit data *@
-                <form id="contactForm" action="/Home/ContactBookingRooom" method="post">
+                <form id="contactForm" action="/Home/ContactBookingRooom" method="post" name="contactForm" onsubmit="return validateForm()">
                     @*@Html.HiddenFor(model => model.IsDelete)
                     @Html.HiddenFor(model => model.Note)*@
                     <div class="row">

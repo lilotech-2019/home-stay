@@ -103,6 +103,8 @@ namespace Labixa.Controllers
         {
             //khởi tạo obj Vendor, đổ data
             //create obj vendor
+
+            
             _colorService.CreateColor(modelContact); //xong lưu database
             return RedirectToAction("Contact", "Home");
         }

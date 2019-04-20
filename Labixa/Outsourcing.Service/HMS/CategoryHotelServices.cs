@@ -15,7 +15,7 @@ namespace Outsourcing.Service.HMS
         void Edit(CategoryHotels entity);
         void Delete(int id);
         void Delete(CategoryHotels entity);
-
+        //object GetProductCategories();
     }
     public class CategoryHotelService : ICategoryHotelService
     {
