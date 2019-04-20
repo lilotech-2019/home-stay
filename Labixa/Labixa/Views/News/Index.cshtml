@@ -84,7 +84,7 @@
                                 </a>
                             </div>
                             <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
-                            <p>@item.Description</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
+                            <p>@Html.Raw(item.Description)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
                         </article>
                     }
                     else
@@ -96,7 +96,7 @@
                                 </a>
                             </div>
                             <h3><a href="/tintuc/@item.Slug">@item.TitleENG</a></h3>
-                            <p>@item.DescriptionENG</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
+                            <p>@Html.Raw(item.DescriptionENG)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
                         </article>
                     }
 

@@ -7,6 +7,7 @@ using PagedList;
 using Labixa.ViewModels;
 using Labixa.Helpers;
 
+
 namespace Labixa.Controllers
 {
     public class NewsController : BaseHomeController
@@ -17,30 +18,15 @@ namespace Labixa.Controllers
         {
             _blogService = blogService;
         }
-        //
-        // GET: /Blog/
-        //public ActionResult Index()
-        //{
-        //    var news = _blogService.GetBlogs();
-        //    return View(model: news);
-        //}
-        //int? page = 1:
-
-
-        //Index(int? page = 1): mac dinh page la trang dau tien, neu user bam page o ngoai view thi no tu gan page =xxx
-//noi chung ky moi nhanh dc, 
         public ActionResult Index(int? page = 1)
         {
-            var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated); //em chi can get het data
-            int pageNumber = (page ?? 1); // day la so thu tu page
-            int pageSize = 4; //day la so bai viet tren 1 page
-            //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
-            // khởi tạo BlogView vừa mới tạo
+            int pageNumber = (page ?? 1); 
+            int pageSize = 4; 
             BlogViewModel viewModel = new BlogViewModel();
-            viewModel.RelatedBlogs = _blogService.FindAll();
+            viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w =>w.Id);
+            var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated);
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
-
-            return View(viewModel); //no truyen kieu du lieu la IPagedList<Blog>
+            return View(viewModel); 
         }
 
         public ActionResult Detail(string slug)

@@ -43,8 +43,8 @@ namespace Labixa.Controllers
         {
             IndexViewModel model = new IndexViewModel
             {
-                roomHome = _roomService.FindAll().ToList(),
-                blogHome = _blogService.FindAll(),
+                roomHome = _roomService.FindAll(),
+                blogHome = _blogService.FindAll().Take(3),
                 imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1")),
                 imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2")),
                 imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"))

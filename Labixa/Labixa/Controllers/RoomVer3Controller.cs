@@ -41,7 +41,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).ToList();
+            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(_ => _.Name);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
 

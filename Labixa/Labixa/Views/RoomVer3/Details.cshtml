@@ -3,6 +3,9 @@
 @model Labixa.ViewModels.RoomDetailViewModel
 @{
     HttpCookie cookie = Request.Cookies["_culture"];
+   
+    var longRooom = Outsourcing.Data.Models.HMS.RoomType.LongTemp;
+    var shortRoom = Outsourcing.Data.Models.HMS.RoomType.ShortTemp;
 }
 
 <section class="row final-inner-header">
@@ -25,9 +28,11 @@
         <div class="col-md-4 col-md-push-8">
             <div class="single-sidebar-widget sroom-sidebar">
                 <!-- Booking Form style-->
+           
                 <div class="book-r-form">
-
-                    <div class="book-form">
+                    @if (Model.Room.Type == shortRoom)
+                    {
+                        <div class="book-form">
                         <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.Resources.HMS_StartDate)</b>
                             <input type="date" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
@@ -60,9 +65,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+                      <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -243,6 +246,199 @@
                         </div>
                     </div>
                 </div>
+                        } else {
+
+                 <div class="book-form">
+
+
+                        <div class="col-md-12">
+                            <div class="chk-button">
+                                <button type="submit" class="res-btn" data-toggle="modal"
+                                        data-target="#exampleModalCenter" onclick="bookingShortRoom()">
+                                    @Html.Raw(Resources.Resources.HMS_Booking)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+               
+            
+                <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                @*<section class="clearfix common-pad-inner booknow">*@
+                                <div class="sec-header">
+                                    <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
+                                    @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
+                                </div>
+                                <form id="contactBooking"
+                                      action="/RoomVer3/BookingLongRoom" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-sm-12">
+                                            <div class="book-left-content input_form">
+
+                                                <div class="row form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="CustomerName" type="text" name="CustomerName" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="CustomerEmail" type="email" name="CustomerEmail" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <div class="select-box">
+                                                            <select name="AmountOfPeople" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
+                                                                <option value="default">@Html.Raw(Resources.Resources.HMS_PeopleNumber)</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                        <input id="CustomerPhone" type="text" name="CustomerPhone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
+                                                               class="form-control" onkeypress="return isNumberKey(event)">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
+                                                                  class="form-control" style="height:200px;"></textarea>
+                                                    </div>
+                                                </div>
+                                                <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
+                                                <input type="text" name="Price" value="@Model.Room.Price" style="display:none;">
+                                                <input type="text" name="Name" value="@Model.Room.Name" style="display:none;">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <button type="submit" class="res-btn"
+                                                                onclick="BookingRooom()">
+                                                            @Html.Raw(Resources.Resources.HMS_Booking)
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="single-sidebar-widget">
+                                                <!-- Categories style-->
+                                                <div class="single-sidebar-widget-outer">
+                                                    <div class="sec-title-cat sec-title">
+                                                        <h2>@Html.Raw(Resources.Resources.HMS_Benefit)</h2>
+                                                    </div>
+                                                    <div class="categories">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" id="action" value="true" name="Book_Motobike">
+                                                                    <label class="form-check-label" for="defaultCheck1">
+                                                                        @Html.Raw(Resources.Resources.HMS_RentVerhical)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck2" name="Book_Tour">
+                                                                    <label class="form-check-label" for="defaultCheck2">
+                                                                        Tour
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck3" name="BookCar">
+                                                                    <label class="form-check-label" for="defaultCheck3">
+                                                                        @Html.Raw(Resources.Resources.HMS_Cars)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck4" name="Book_BBQService">
+                                                                    <label class="form-check-label" for="defaultCheck4">
+                                                                        @Html.Raw(Resources.Resources.HMS_BBQ)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck5" name="Book_Gift">
+                                                                    <label class="form-check-label" for="defaultCheck5">
+                                                                        @Html.Raw(Resources.Resources.HMS_Souvenir)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck6" name="Book_Laundry">
+                                                                    <label class="form-check-label" for="defaultCheck6">
+                                                                        @Html.Raw(Resources.Resources.HMS_Laundry)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck7" name="Book_FlightTicket">
+                                                                    <label class="form-check-label" for="defaultCheck7">
+                                                                        @Html.Raw(Resources.Resources.HMS_AirTicket)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck8" name="Book_Visa">
+                                                                    <label class="form-check-label" for="defaultCheck8">
+                                                                        Visa
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck9" name="Book_Taxi">
+                                                                    <label class="form-check-label" for="defaultCheck9">
+                                                                        @Html.Raw(Resources.Resources.HMS_AirportTaxi)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="true" id="defaultCheck10" name="Book_SuggestionTour">
+                                                                    <label class="form-check-label" for="defaultCheck10">
+                                                                        @Html.Raw(Resources.Resources.HMS_Location)
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @*</section>*@
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                        }
+                </div>
+
+
+                <!-- Modal -->
+              
                 <!-- Booking Form style-->
                 <!-- Budget Rooms style-->
                 <div class="single-sidebar-widget-outer">
@@ -257,12 +453,12 @@
                                 {
                                     <li class="img-cap-effect">
                                         <div class="img-box">
-                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
                                             </a>
                                         </div>
                                         <div class="content">
-                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.Name</h4>
                                             </a>
                                             <p>@iterm.Price.ToString("#,##0")/Ngày</p>
@@ -274,13 +470,13 @@
                                 {
                                     <li class="img-cap-effect">
                                         <div class="img-box">
-                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
                                             </a>
                                         </div>
                                         <div class="content">
-                                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
-                                                <h4>@iterm.EnglishName</h4>
+                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                                <h4>@iterm.NameEN</h4>
                                             </a>
                                             <p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$ / Day</p>
                                         </div>
@@ -330,7 +526,7 @@
                     else
                     {
                         <div class="room-dec-wrapper">
-                            <h2>@Model.Room.EnglishName</h2>
+                            <h2>@Model.Room.NameEN</h2>
                             <p>@Html.Raw(Model.Room.MetaTitle)</p>
                             <p>@Html.Raw(Model.Room.DescriptionENG)</p>
                             <input type="text" name="@Model.Room.Id" value="@Model.Room.Id" style="display:none;">
