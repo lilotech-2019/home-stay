@@ -13,14 +13,15 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         #region Fields
         private readonly IBlogService _blogsService;
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly IBlogCategoryService _blogCategoryService;
         #endregion
 
 
         #region Ctor
-        public BlogsController(IBlogService blogsService)
+        public BlogsController(IBlogService blogsService, IBlogCategoryService blogCategoryService)
         {
             _blogsService = blogsService;
+            _blogCategoryService = blogCategoryService;
         }
         #endregion
 
@@ -65,7 +66,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories,"Name");
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
             return View(new Blog { Position = 0});
         }
 
@@ -84,7 +85,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _blogsService.Create(blog);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
             return View(blog);
         }
         #endregion
@@ -106,7 +107,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name",blog.Id);
             return View(blog);
         }
 
@@ -125,7 +126,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _blogsService.Edit(blog);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(_db.BlogCategories, "Id", "Name");
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name", blog.Id);
             return View(blog);
         }
         #endregion

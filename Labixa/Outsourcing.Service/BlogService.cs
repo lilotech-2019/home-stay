@@ -85,13 +85,13 @@ namespace Outsourcing.Service
         public void Create(Blog entity)
         {
             _blogsRepository.Add(entity);
-            Commit();
+            commit();
         }
 
         public void Edit(Blog entity)
         {
             _blogsRepository.Update(entity);
-            Commit();
+            commit();
         }
 
         public void EditBlog(Blog entity)
@@ -105,7 +105,7 @@ namespace Outsourcing.Service
             Delete(entity);
         }
 
-        private void Commit()
+        private void commit()
         {
             _unitOfWork.Commit();
         }
