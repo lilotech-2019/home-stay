@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Outsourcing.Service;
 using PagedList;
 using Labixa.ViewModels;
 using Labixa.Helpers;
-using System.Linq;
+
 
 namespace Labixa.Controllers
 {
@@ -30,7 +31,7 @@ namespace Labixa.Controllers
 
         public ActionResult Detail(string slug)
         {
-            BlogViewModel viewModel = new BlogViewModel
+            var viewModel = new BlogViewModel
             {
                 RelatedBlogs = _blogService.FindAll(),
                 listBlogNew = _blogService.FindBySlug(slug)

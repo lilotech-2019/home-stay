@@ -1593,6 +1593,7 @@
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Edit.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Index.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\HotelCategory\_LeftMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

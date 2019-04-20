@@ -2,6 +2,7 @@
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.HMS;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -25,14 +26,22 @@ namespace Labixa.Areas.HMSAdmin.Controllers
 
         #region Index
         /// <summary>
-        /// Index
+        /// Index - Get
         /// </summary>
+        /// <param name="id">HotelCategoryId</param>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? id)
         {
-            var hotels = await _hotelService.FindAll().AsNoTracking().ToListAsync();
+            var hotels = _hotelService.FindAll();
+            if (id != null)
+            {
+                hotels = hotels.Where(w => w.HotelCategoryId == id);
+            }
+            hotels = hotels.AsNoTracking();
             return View(hotels);
         }
+
+
         #endregion
 
         #region Details
@@ -162,5 +171,6 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
     }
 }
