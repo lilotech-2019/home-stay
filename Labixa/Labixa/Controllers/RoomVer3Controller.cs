@@ -25,11 +25,7 @@ namespace Labixa.Controllers
             _roomOrderService = roomOrderService;
             _customerservice = customerService;
         }
-        //do mặc định khi gọi, /room/ -> nó sẽ nhảy vô index cho nên mặc định khi vô đây
-        // mình sẽ auto chuyển sang action Shortroom
-        //vay la phia view minh se sua thanh , phong ngan hang va phong dai han thoi pk a
-        // cái menu mà Minh kêu e sửa , em sửa chưa, cho a xem đi
-        // GET: /Room/
+
         public ActionResult Index()
         {
             return RedirectToAction("ShortRoom");
@@ -92,8 +88,8 @@ namespace Labixa.Controllers
         { 
             Rooms room = new Rooms();
             room.Name = Name;
-            string AdminGmail = "Mobiado255@gmail.com";
-            string Password = "Trung123";
+            string AdminGmail = "minhtrungmessi@gmail.com";
+            string Password = "abc65432abc65432";
             string Subject = "Đặt phòng thành công";
             string Content = "<table border=" + 1 + "><thead>" +
                 "<th> Họ Tên Khách Hàng </th>" +
