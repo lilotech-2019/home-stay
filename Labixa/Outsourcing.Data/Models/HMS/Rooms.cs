@@ -43,7 +43,7 @@ namespace Outsourcing.Data.Models.HMS
         public string MetaTitle { get; set; }
         public string MetaDescription { get; set; }
 
-        [ForeignKey(nameof(Hotel))]
+        [ForeignKey("Hotel")]
         public int HotelId { get; set; }
 
         public virtual Hotel Hotel { get; set; }
