@@ -1,4 +1,5 @@
 ﻿using Outsourcing.Data.Infrastructure;
+using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using System;
 using System.Collections.Generic;

@@ -4,13 +4,11 @@ using Outsourcing.Service;
 using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
-using Outsourcing.Data.Models.HMS;
-<<<<<<< HEAD
 using System;
 using System.Net.Mail;
 using System.Net;
-=======
->>>>>>> 8713ac6b396c292f4772054d696193ff9056614f
+using Outsourcing.Data.Models;
+using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Controllers
 {
@@ -90,13 +88,8 @@ namespace Labixa.Controllers
             return View(viewModel);
         }
         [HttpPost]
-<<<<<<< HEAD
         public ActionResult BookingRoom(RoomOrder modelBooking, String CustomerName, String CustomerEmail, String CustomerPhone, String Name)
-=======
-        public ActionResult BookingRoom(RoomOrder modelBooking, string customerName, string customerEmail)
->>>>>>> 8713ac6b396c292f4772054d696193ff9056614f
-        {
-
+        { 
             Rooms room = new Rooms();
             room.Name = Name;
             string AdminGmail = "Mobiado255@gmail.com";
