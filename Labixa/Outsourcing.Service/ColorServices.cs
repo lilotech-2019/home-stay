@@ -1,12 +1,8 @@
-﻿using Outsourcing.Core.Common;
-using Outsourcing.Data.Infrastructure;
+﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Service
 {
@@ -14,77 +10,82 @@ namespace Outsourcing.Service
     public interface IColorService
     {
 
-        IEnumerable<Colors> GetColors();
-        Colors GetColorById(int ColorId);
-        void CreateColor(Colors Color);
-        void EditColor(Colors ColorToEdit);
-        void DeleteColor(int ColorId);
-        void SaveColor();
-        IEnumerable<ValidationResult> CanAddColor(Colors Color);
-
+        IQueryable<Deposit> FindAll();
+        Deposit FindById(int id);
+        void Create(Deposit entity);
+        void Edit(Deposit entity);
+        void Delete(int id);
+        void Delete(Deposit entity);
+        IQueryable<Deposit> FindSelectList(int? id);
     }
     public class ColorService : IColorService
     {
         #region Field
-        private readonly IColorRepository ColorRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IColorRepository _colorRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ColorService(IColorRepository ColorRepository, IUnitOfWork unitOfWork)
+        public ColorService(IColorRepository colorRepository, IUnitOfWork unitOfWork)
         {
-            this.ColorRepository = ColorRepository;
-            this.unitOfWork = unitOfWork;
+            _colorRepository = colorRepository;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
         #region BaseMethod
-
-        public IEnumerable<Colors> GetColors()
+        public IQueryable<Deposit> FindAll()
         {
-            var Colors = ColorRepository.GetAll();
-            return Colors;
+            var listEntities = _colorRepository.FindBy(w => w.Deleted == false);
+            return listEntities;
         }
 
-        public Colors GetColorById(int ColorId)
+        public Deposit FindById(int id)
         {
-            var Color = ColorRepository.GetById(ColorId);
-            return Color;
+            var entity = _colorRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+            return entity;
         }
 
-        public void CreateColor(Colors Color)
+        public void Create(Deposit entity)
         {
-            ColorRepository.Add(Color);
-            SaveColor();
+            _colorRepository.Add(entity);
+            Commit();
         }
 
-        public void EditColor(Colors ColorToEdit)
+        public void Edit(Deposit entity)
         {
-            ColorRepository.Update(ColorToEdit);
-            SaveColor();
+            _colorRepository.Update(entity);
+            Commit();
         }
 
-        public void DeleteColor(int ColorId)
+        public void Delete(int id)
         {
-            //Get Color by id.
-            var Color = ColorRepository.GetById(ColorId);
-            if (Color != null)
+            var entity = FindById(id);
+            Delete(entity);
+        }
+
+        public IQueryable<Deposit> FindSelectList(int? id)
+        {
+            var list = _colorRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
             {
-                ColorRepository.Delete(Color);
-                SaveColor();
+                list = list.Where(w => w.Id == id);
             }
+            return list;
         }
 
-        public void SaveColor()
+        private void Commit()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddColor(Colors Color)
+        public void Delete(Deposit entity)
         {
-
-            //    yield return new ValidationResult("Color", "ErrorString");
-            return null;
+            if (entity != null)
+            {
+                entity.Deleted = true;
+                Edit(entity);
+            }
         }
 
         #endregion

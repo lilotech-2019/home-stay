@@ -15,26 +15,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<RoomImageMappings> GetRoomImageMappings();
-        RoomImageMappings GetRoomImageMappingById(int RoomImageMappingId);
-        void CreateRoomImageMapping(RoomImageMappings RoomImageMapping);
-        void EditRoomImageMapping(RoomImageMappings RoomImageMappingToEdit);
-        void DeleteRoomImageMapping(int RoomImageMappingId);
+        RoomImageMappings GetRoomImageMappingById(int roomImageMappingId);
+        void CreateRoomImageMapping(RoomImageMappings roomImageMapping);
+        void EditRoomImageMapping(RoomImageMappings roomImageMappingToEdit);
+        void DeleteRoomImageMapping(int roomImageMappingId);
         void SaveRoomImageMapping();
-        IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings RoomImageMapping);
+        IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings roomImageMapping);
 
     }
     public class RoomImageMappingService : IRoomImageMappingService
     {
         #region Field
-        private readonly IRoomImageMappingRepository RoomImageMappingRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IRoomImageMappingRepository _roomImageMappingRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public RoomImageMappingService(IRoomImageMappingRepository RoomImageMappingRepository, IUnitOfWork unitOfWork)
+        public RoomImageMappingService(IRoomImageMappingRepository roomImageMappingRepository, IUnitOfWork unitOfWork)
         {
-            this.RoomImageMappingRepository = RoomImageMappingRepository;
-            this.unitOfWork = unitOfWork;
+            this._roomImageMappingRepository = roomImageMappingRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,45 +42,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<RoomImageMappings> GetRoomImageMappings()
         {
-            var RoomImageMappings = RoomImageMappingRepository.GetAll();
-            return RoomImageMappings;
+            var roomImageMappings = _roomImageMappingRepository.GetAll();
+            return roomImageMappings;
         }
 
-        public RoomImageMappings GetRoomImageMappingById(int RoomImageMappingId)
+        public RoomImageMappings GetRoomImageMappingById(int roomImageMappingId)
         {
-            var RoomImageMapping = RoomImageMappingRepository.GetById(RoomImageMappingId);
-            return RoomImageMapping;
+            var roomImageMapping = _roomImageMappingRepository.GetById(roomImageMappingId);
+            return roomImageMapping;
         }
 
-        public void CreateRoomImageMapping(RoomImageMappings RoomImageMapping)
+        public void CreateRoomImageMapping(RoomImageMappings roomImageMapping)
         {
-            RoomImageMappingRepository.Add(RoomImageMapping);
+            _roomImageMappingRepository.Add(roomImageMapping);
             SaveRoomImageMapping();
         }
 
-        public void EditRoomImageMapping(RoomImageMappings RoomImageMappingToEdit)
+        public void EditRoomImageMapping(RoomImageMappings roomImageMappingToEdit)
         {
-            RoomImageMappingRepository.Update(RoomImageMappingToEdit);
+            _roomImageMappingRepository.Update(roomImageMappingToEdit);
             SaveRoomImageMapping();
         }
 
-        public void DeleteRoomImageMapping(int RoomImageMappingId)
+        public void DeleteRoomImageMapping(int roomImageMappingId)
         {
             //Get RoomImageMapping by id.
-            var RoomImageMapping = RoomImageMappingRepository.GetById(RoomImageMappingId);
-            if (RoomImageMapping != null)
+            var roomImageMapping = _roomImageMappingRepository.GetById(roomImageMappingId);
+            if (roomImageMapping != null)
             {
-                RoomImageMappingRepository.Delete(RoomImageMapping);
+                _roomImageMappingRepository.Delete(roomImageMapping);
                 SaveRoomImageMapping();
             }
         }
 
         public void SaveRoomImageMapping()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings RoomImageMapping)
+        public IEnumerable<ValidationResult> CanAddRoomImageMapping(RoomImageMappings roomImageMapping)
         {
 
             //    yield return new ValidationResult("RoomImageMapping", "ErrorString");

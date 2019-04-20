@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<TypeNotify> GetTypeNotifys();
-        TypeNotify GetTypeNotifyById(int TypeNotifyId);
-        void CreateTypeNotify(TypeNotify TypeNotify);
-        void EditTypeNotify(TypeNotify TypeNotifyToEdit);
-        void DeleteTypeNotify(int TypeNotifyId);
+        TypeNotify GetTypeNotifyById(int typeNotifyId);
+        void CreateTypeNotify(TypeNotify typeNotify);
+        void EditTypeNotify(TypeNotify typeNotifyToEdit);
+        void DeleteTypeNotify(int typeNotifyId);
         void SaveTypeNotify();
-        IEnumerable<ValidationResult> CanAddTypeNotify(TypeNotify TypeNotify);
+        IEnumerable<ValidationResult> CanAddTypeNotify(TypeNotify typeNotify);
 
     }
     public class TypeNotifyService : ITypeNotifyService
     {
         #region Field
-        private readonly ITypeNotifyRepository TypeNotifyRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ITypeNotifyRepository _typeNotifyRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public TypeNotifyService(ITypeNotifyRepository TypeNotifyRepository, IUnitOfWork unitOfWork)
+        public TypeNotifyService(ITypeNotifyRepository typeNotifyRepository, IUnitOfWork unitOfWork)
         {
-            this.TypeNotifyRepository = TypeNotifyRepository;
-            this.unitOfWork = unitOfWork;
+            this._typeNotifyRepository = typeNotifyRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<TypeNotify> GetTypeNotifys()
         {
-            var TypeNotifys = TypeNotifyRepository.GetAll();
-            return TypeNotifys;
+            var typeNotifys = _typeNotifyRepository.GetAll();
+            return typeNotifys;
         }
 
-        public TypeNotify GetTypeNotifyById(int TypeNotifyId)
+        public TypeNotify GetTypeNotifyById(int typeNotifyId)
         {
-            var TypeNotify = TypeNotifyRepository.GetById(TypeNotifyId);
-            return TypeNotify;
+            var typeNotify = _typeNotifyRepository.GetById(typeNotifyId);
+            return typeNotify;
         }
 
-        public void CreateTypeNotify(TypeNotify TypeNotify)
+        public void CreateTypeNotify(TypeNotify typeNotify)
         {
-            TypeNotifyRepository.Add(TypeNotify);
+            _typeNotifyRepository.Add(typeNotify);
             SaveTypeNotify();
         }
 
-        public void EditTypeNotify(TypeNotify TypeNotifyToEdit)
+        public void EditTypeNotify(TypeNotify typeNotifyToEdit)
         {
-            TypeNotifyRepository.Update(TypeNotifyToEdit);
+            _typeNotifyRepository.Update(typeNotifyToEdit);
             SaveTypeNotify();
         }
 
-        public void DeleteTypeNotify(int TypeNotifyId)
+        public void DeleteTypeNotify(int typeNotifyId)
         {
             //Get TypeNotify by id.
-            var TypeNotify = TypeNotifyRepository.GetById(TypeNotifyId);
-            if (TypeNotify != null)
+            var typeNotify = _typeNotifyRepository.GetById(typeNotifyId);
+            if (typeNotify != null)
             {
-                TypeNotifyRepository.Delete(TypeNotify);
+                _typeNotifyRepository.Delete(typeNotify);
                 SaveTypeNotify();
             }
         }
 
         public void SaveTypeNotify()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddTypeNotify(TypeNotify TypeNotify)
+        public IEnumerable<ValidationResult> CanAddTypeNotify(TypeNotify typeNotify)
         {
 
             //    yield return new ValidationResult("TypeNotify", "ErrorString");

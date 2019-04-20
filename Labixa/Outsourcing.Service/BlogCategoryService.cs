@@ -9,15 +9,16 @@ namespace Outsourcing.Service
 {
     public interface IBlogCategoryService
     {
-        IEnumerable<BlogCategories> GetBlogCategories();
-        BlogCategories GetBlogCategoryById(int blogId);
-        BlogCategories GetBlogCategoryByUrl(string url);
-        void CreateBlogCategory(BlogCategories obj);
-        void EditBlogCategory(BlogCategories obj);
-        void DeleteBlogCategory(string urlName);
-        void DeleteBlogCategory(int id);
+        IQueryable<BlogCategories> FindAll();
+        BlogCategories FindById(int id);
+        void Create(BlogCategories entity);
+        void Edit(BlogCategories entity);
+        void Delete(BlogCategories entity);
+        void Delete(int id);
+        IQueryable<BlogCategories> FindSelectList(int? id);
 
-        void SaveChange();
+        [Obsolete]
+        IEnumerable<BlogCategories> GetBlogCategories();
     }
 
     public class BlogCategoryService : IBlogCategoryService
@@ -39,122 +40,67 @@ namespace Outsourcing.Service
 
         #endregion
 
-        #region [base Method]
+        #region Implementation for IHotelService
 
-        public IEnumerable<BlogCategories> GetBlogCategories()
+        public IQueryable<BlogCategories> FindAll()
         {
-            var list = _blogCategoryRepository.FindBy(p => p.Status && !p.IsStaticPage)
-                .OrderByDescending(p => p.CategoryParentId).ToList();
-            return list;
+            var listEntities = _blogCategoryRepository.FindBy(w => w.IsDelete == false);
+            return listEntities;
         }
 
-        public BlogCategories GetBlogCategoryByUrl(string slug)
+        public BlogCategories FindById(int id)
         {
-            try
-            {
-                var item = _blogCategoryRepository.FindBy(p => p.Slug.Equals(slug)).SingleOrDefault();
-                return item;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            var entity = _blogCategoryRepository.FindBy(w => w.IsDelete == false & w.Id == id).SingleOrDefault();
+            return entity;
         }
 
-        public BlogCategories GetBlogCategoryById(int blogId)
+        public void Create(BlogCategories entity)
         {
-            try
-            {
-                var item = _blogCategoryRepository.FindBy(w => w.Id == blogId);
-                return item.SingleOrDefault();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            _blogCategoryRepository.Add(entity);
+            Commit();
         }
 
-        public void CreateBlogCategory(BlogCategories obj)
+        public void Edit(BlogCategories entity)
         {
-            try
-            {
-                _blogCategoryRepository.Add(obj);
-                SaveChange();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-        public void EditBlogCategory(BlogCategories obj)
-        {
-            try
-            {
-                var item = _blogCategoryRepository.FindBy(p => p.Id == obj.Id).SingleOrDefault();
-                if (item != null)
-                {
-                    item.Name = obj.Name;
-                    item.Slug = obj.Slug;
-                    item.Status = obj.Status;
-                    item.DisplayOrder = obj.DisplayOrder;
-                    item.CategoryParentId = obj.CategoryParentId;
-                    _blogCategoryRepository.Update(item);
-
-                    SaveChange();
-                }
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-        public void DeleteBlogCategory(string slugName)
-        {
-            try
-            {
-                var item = _blogCategoryRepository.FindBy(p => p.Slug.Equals(slugName)).SingleOrDefault();
-                if (item != null)
-                {
-                    item.Status = false;
-                    _blogCategoryRepository.Update(item);
-
-                    SaveChange();
-                }
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-
-        public void SaveChange()
-        {
-            try
-            {
-                _unitOfWork.Commit();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            _blogCategoryRepository.Update(entity);
+            Commit();
         }
 
         #endregion
 
-
-        public void DeleteBlogCategory(int id)
+        private void Commit()
         {
-            var item = _blogCategoryRepository.FindBy(p => p.Id == id).SingleOrDefault();
-            if (item != null)
-            {
-                item.Status = false;
-                _blogCategoryRepository.Update(item);
+            _unitOfWork.Commit();
+        }
 
-                SaveChange();
+        public void Delete(int id)
+        {
+            var entity = FindById(id);
+            Delete(entity);
+        }
+
+        public IEnumerable<BlogCategories> GetBlogCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(BlogCategories entity)
+        {
+            if (entity != null)
+            {
+                entity.IsDelete = true;
+                Edit(entity);
             }
+        }
+
+        public IQueryable<BlogCategories> FindSelectList(int? id)
+        {
+            var list = _blogCategoryRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
+            {
+                list = list.Where(w => w.Id == id);
+            }
+            return list;
         }
     }
 }

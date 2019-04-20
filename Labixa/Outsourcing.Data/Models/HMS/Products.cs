@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-    public class HMSProduct : BaseEntity
+    public class HmsProduct : BaseEntity
     {
-        public HMSProduct()
+        public HmsProduct()
         {
             LastEditedTime = DateCreated = DateTime.Now;
         }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public string Slug { get; set; }
@@ -27,13 +28,18 @@ namespace Outsourcing.Data.Models.HMS
         public bool IsHomePage { get; set; }
         public bool IsPublic { get; set; }
         public bool IsNew { get; set; }
-        public bool Deleted { get; set; }
+
         public int? Position { get; set; }
+
         public int CategoryProductId { get; set; }
+
         //public int InventoryId { get; set; }
         public int DiscountOfVendor { get; set; }
+
         public Double OrginalPrice { get; set; }
+
         public string UrlImage { get; set; }
+
         //public int PictureId { get; set; }
         //[ForeignKey("VendorId")]
         //public virtual Vendor Vendor { get; set; }
@@ -51,6 +57,7 @@ namespace Outsourcing.Data.Models.HMS
         //public virtual ICollection<ProductPictureMapping> ProductPictureMappings { get; set; }
         //public virtual ICollection<ProductAttributeMapping> ProductAttributeMappings { get; set; }
         public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
+
         //public virtual ICollection<ProductCategoryMapping> ProductCategoryMappings { get; set; }
     }
 }

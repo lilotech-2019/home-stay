@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class OrderService : IOrderService
     {
         #region Field
-        private readonly IOrderRepository orderRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public OrderService(IOrderRepository orderRepository, IUnitOfWork unitOfWork)
         {
-            this.orderRepository = orderRepository;
-            this.unitOfWork = unitOfWork;
+            this._orderRepository = orderRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<Order> GetOrders()
         {
-            var orders = orderRepository.GetAll().OrderByDescending(b => b.DateCreated);
+            var orders = _orderRepository.GetAll().OrderByDescending(b => b.DateCreated);
             return orders;
         }
 
         public Order GetOrderById(int orderId)
         {
-            var order = orderRepository.GetById(orderId);
+            var order = _orderRepository.GetById(orderId);
             return order;
         }
 
         public void CreateOrder(Order order)
         {
-            orderRepository.Add(order);
+            _orderRepository.Add(order);
             SaveOrder();
         }
 
         public void EditOrder(Order orderToEdit)
         {
-            orderRepository.Update(orderToEdit);
+            _orderRepository.Update(orderToEdit);
             SaveOrder();
         }
 
         public void DeleteOrder(int orderId)
         {
             //Get order by id.
-            var order = orderRepository.GetById(orderId);
+            var order = _orderRepository.GetById(orderId);
             if (order != null)
             {
-                orderRepository.Delete(order);
+                _orderRepository.Delete(order);
                 SaveOrder();
             }
         }
 
         public void SaveOrder()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddOrder(Order order)

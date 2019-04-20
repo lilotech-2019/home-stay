@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Outsourcing.Data.Models
 {
@@ -15,8 +11,5 @@ namespace Outsourcing.Data.Models
         public string ControlType { get; set; }
 
         public virtual ICollection<ProductAttributeMapping> ProductAttributes { get; set; }
-
-        public bool Deleted { get; set; }
-
     }
 }

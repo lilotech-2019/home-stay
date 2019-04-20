@@ -1,88 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Outsourcing.Core.Common;
-using Outsourcing.Data.Infrastructure;
+﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Repository;
+using System.Linq;
+
 namespace Outsourcing.Service
 {
     public interface IVendorService
     {
-
-        IEnumerable<Vendors> GetVendors();
-        Vendors GetVendorById(int VendorId);
-        void CreateVendor(Vendors Vendor);
-        void EditVendor(Vendors VendorToEdit);
-        void DeleteVendor(int VendorId);
-        void SaveVendor();
-        IEnumerable<ValidationResult> CanAddVendor(Vendors Vendor);
-
+        IQueryable<Vendors> FindAll();
+        Vendors FindById(int id);
+        void Create(Vendors entity);
+        void Edit(Vendors entity);
+        void Delete(int id);
+        void Delete(Vendors entity);
     }
+
     public class VendorService : IVendorService
     {
         #region Field
-        private readonly IVendorRepository VendorRepository;
-        private readonly IUnitOfWork unitOfWork;
+
+        private readonly IVendorRepository _vendorRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         #endregion
 
         #region Ctor
-        public VendorService(IVendorRepository VendorRepository, IUnitOfWork unitOfWork)
+
+        public VendorService(IVendorRepository vendorRepository, IUnitOfWork unitOfWork)
         {
-            this.VendorRepository = VendorRepository;
-            this.unitOfWork = unitOfWork;
+            _vendorRepository = vendorRepository;
+            _unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region BaseMethod
 
-        public IEnumerable<Vendors> GetVendors()
+        public IQueryable<Vendors> FindAll()
         {
-            var Vendors = VendorRepository.GetAll();
-            return Vendors;
+            var listEntities = _vendorRepository.FindBy(w => w.Deleted == false);
+            return listEntities;
         }
 
-        public Vendors GetVendorById(int VendorId)
+        public Vendors FindById(int id)
         {
-            var Vendor = VendorRepository.GetById(VendorId);
-            return Vendor;
+            var entity = _vendorRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+            return entity;
         }
 
-        public void CreateVendor(Vendors Vendor)
+        public void Create(Vendors entity)
         {
-            VendorRepository.Add(Vendor);
-            SaveVendor();
+            _vendorRepository.Add(entity);
+            Commit();
         }
 
-        public void EditVendor(Vendors VendorToEdit)
+        public void Edit(Vendors entity)
         {
-            VendorRepository.Update(VendorToEdit);
-            SaveVendor();
+            _vendorRepository.Update(entity);
+            Commit();
         }
 
-        public void DeleteVendor(int VendorId)
+        public void Delete(int id)
         {
-            //Get Vendor by id.
-            var Vendor = VendorRepository.GetById(VendorId);
-            if (Vendor != null)
-            {
-                VendorRepository.Delete(Vendor);
-                SaveVendor();
-            }
+            var entity = FindById(id);
+            Delete(entity);
         }
 
-        public void SaveVendor()
+        public void Delete(Vendors entity)
         {
-            unitOfWork.Commit();
+            if (entity == null) return;
+            entity.Deleted = true;
+            Edit(entity);
         }
 
-        public IEnumerable<ValidationResult> CanAddVendor(Vendors Vendor)
+        private void Commit()
         {
-
-            //    yield return new ValidationResult("Vendor", "ErrorString");
-            return null;
+            _unitOfWork.Commit();
         }
 
         #endregion

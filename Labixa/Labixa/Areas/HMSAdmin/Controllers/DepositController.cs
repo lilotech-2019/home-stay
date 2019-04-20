@@ -1,7 +1,5 @@
-﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
-using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.HMS;
+﻿using Outsourcing.Data.Models;
+using Outsourcing.Service;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
@@ -9,16 +7,16 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
-    public class CategoryHotelsController : Controller
+    public class DepositController : Controller
     {
         #region Fields
-        private readonly ICategoryHotelService _categoryHotelService;
+        private readonly IColorService _colorService;
         #endregion
 
         #region Ctor
-        public CategoryHotelsController(ICategoryHotelService categoryHotelService)
+        public DepositController(IColorService colorService)
         {
-            _categoryHotelService = categoryHotelService;
+            _colorService = colorService;
         }
         #endregion
 
@@ -29,8 +27,8 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var categories = await _categoryHotelService.FindAll().AsNoTracking().ToListAsync();
-            return View(categories);
+            var colors = await _colorService.FindAll().AsNoTracking().ToListAsync();
+            return View(colors);
         }
         #endregion
 
@@ -46,12 +44,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
-            if (categoryHotels == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(deposit);
         }
         #endregion
 
@@ -62,26 +60,25 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View(new CategoryHotels { SharePercent = 0 });
+            return View();
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="categoryHotels"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CategoryHotels categoryHotels)
+        public ActionResult Create(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                _categoryHotelService.Create(categoryHotels);
+                _colorService.Create(deposit);
                 return RedirectToAction("Index");
             }
 
-            return View(categoryHotels);
+            return View(deposit);
         }
         #endregion
 
@@ -97,30 +94,29 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryHotels categoryHotels = _categoryHotelService.FindById((int)id);
-            if (categoryHotels == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(deposit);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="categoryHotels"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CategoryHotels categoryHotels)
+        public ActionResult Edit(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                categoryHotels.Slug = StringConvert.ConvertShortName(categoryHotels.Name);
-                _categoryHotelService.Edit(categoryHotels);
+                _colorService.Edit(deposit);
                 return RedirectToAction("Index");
             }
-            return View(categoryHotels);
+            return View(deposit);
         }
         #endregion
 
@@ -136,24 +132,24 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _categoryHotelService.FindById((int)id);
-            if (categoryHotels == null)
+            var colors = _colorService.FindById((int)id);
+            if (colors == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(colors);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var categoryHotels = _categoryHotelService.FindById(id);
-            if (categoryHotels == null)
+            var colors = _colorService.FindById(id);
+            if (colors == null)
             {
                 return HttpNotFound();
             }
-            _categoryHotelService.Delete(categoryHotels);
+            _colorService.Delete(colors);
             return RedirectToAction("Index");
         }
         #endregion

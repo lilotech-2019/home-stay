@@ -53,13 +53,13 @@ namespace Labixa.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Mapping to domain
-                Blogs blog = Mapper.Map<BlogFormModel, Blogs>(newBlog);
-                if (String.IsNullOrEmpty(blog.Slug))
+                Blog blog = Mapper.Map<BlogFormModel, Blog>(newBlog);
+                if (string.IsNullOrEmpty(blog.Slug))
                 {
                     blog.Slug = StringConvert.ConvertShortName(blog.Title);
                 }
                 //Create Blog
-                _blogService.CreateBlog(blog);
+                _blogService.Create(blog);
                 return continueEditing ? RedirectToAction("Edit", "Blog", new { blogId = blog.Id })
                                   : RedirectToAction("Index", "Blog");
             }
@@ -72,7 +72,7 @@ namespace Labixa.Areas.Admin.Controllers
         {
 
             var blog = _blogService.GetBlogById(blogId);
-            BlogFormModel blogFormModel = Mapper.Map<Blogs, BlogFormModel>(blog);
+            BlogFormModel blogFormModel = Mapper.Map<Blog, BlogFormModel>(blog);
             blogFormModel.ListCategory = _blogCategoryService.GetBlogCategories().ToSelectListItems(-1);
 
             return View(model: blogFormModel);
@@ -85,7 +85,7 @@ namespace Labixa.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Mapping to domain
-                Blogs blog = Mapper.Map<BlogFormModel, Blogs>(blogToEdit);
+                Blog blog = Mapper.Map<BlogFormModel, Blog>(blogToEdit);
                 if (String.IsNullOrEmpty(blog.Slug))
                 {
                     blog.Slug = StringConvert.ConvertShortName(blog.Title);
@@ -102,7 +102,7 @@ namespace Labixa.Areas.Admin.Controllers
         public ActionResult EditStaticPage(int blogId)
         {
             var blog = _blogService.GetBlogById(blogId);
-            BlogFormModel blogFormModel = Mapper.Map<Blogs, BlogFormModel>(blog);
+            BlogFormModel blogFormModel = Mapper.Map<Blog, BlogFormModel>(blog);
             return View(model: blogFormModel);
         }
 
@@ -113,7 +113,7 @@ namespace Labixa.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Mapping to domain
-                Blogs blog = Mapper.Map<BlogFormModel, Blogs>(blogToEdit);
+                Blog blog = Mapper.Map<BlogFormModel, Blog>(blogToEdit);
               
                 blog.BlogCategoryId = 2;
                 _blogService.EditBlog(blog);
@@ -127,7 +127,7 @@ namespace Labixa.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int blogId)
         {
-            _blogService.DeleteBlog(blogId);
+            _blogService.Delete(blogId);
             return RedirectToAction("Index");
         }
 

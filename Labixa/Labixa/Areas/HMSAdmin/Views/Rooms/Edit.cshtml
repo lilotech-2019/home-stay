@@ -1,14 +1,8 @@
-﻿@model Outsourcing.Data.Models.HMS.CategoryHotels
+﻿@model Outsourcing.Data.Models.HMS.Rooms
 
 @{
     ViewBag.Title = "Edit";
 }
-
-@section scripts{
-    <script src="~/Content/ckeditor/ckeditor.js"></script>
-    <script src="~/Content/ckeditor/config.js"></script>
-}
-
 
 <h2>Edit</h2>
 
@@ -18,12 +12,12 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>CategoryHotels</h4>
+        <h4>Rooms</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group col-sm-6 col-md-12">
+        <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
                 @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
@@ -31,7 +25,7 @@
             </div>
         </div>
 
-        <div class="form-group col-sm-6 col-md-12">
+        <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.SharePercent, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
                 @Html.EditorFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5" })
@@ -39,7 +33,23 @@
             </div>
         </div>
 
-        <div class="form-group col-sm-6 col-md-12">
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.Price, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Price, null, new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.DiscountPercent, new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.DiscountPercent, null, new { @class = "col-xs-10 col-sm-5" })
+                @Html.ValidationMessageFor(model => model.DiscountPercent)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
                 @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
@@ -47,7 +57,15 @@
             </div>
         </div>
 
-        <div class="form-group col-sm-6 col-md-12">
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(model => model.HotelId, "HotelId", new { @class = "col-sm-3 control-label no-padding-right" })
+            <div class="col-sm-9">
+                @Html.DropDownList("HotelId", String.Empty)
+                @Html.ValidationMessageFor(model => model.HotelId)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6">
             @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
             <div class="col-sm-9">
                 @Html.EditorFor(model => model.Description, "CkEditor")
@@ -66,3 +84,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+

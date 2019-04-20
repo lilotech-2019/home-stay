@@ -41,7 +41,7 @@ namespace Labixa.Areas.Admin.Controllers
                 BlogCategories blog = Mapper.Map<BlogCategoryFormModel, BlogCategories>(obj);
                 var slug = StringConvert.ConvertShortName(blog.Name);
                 blog.Slug = slug;
-                _blogCategoryService.CreateBlogCategory(blog);
+                _blogCategoryService.Create(blog);
                 return continueEditing ? RedirectToAction("Edit", "BlogCategory", new {blog.Id })
                                 : RedirectToAction("Index", "BlogCategory");
             }
@@ -52,7 +52,7 @@ namespace Labixa.Areas.Admin.Controllers
 
         public ActionResult Edit(int Id)
         {
-            var item = _blogCategoryService.GetBlogCategoryById(Id);
+            var item = _blogCategoryService.FindById(Id);
 
             var list = _blogCategoryService.GetBlogCategories().ToSelectListItems(int.Parse(item.CategoryParentId.ToString() == "" ? "0" : item.CategoryParentId.ToString()));
 
@@ -69,7 +69,7 @@ namespace Labixa.Areas.Admin.Controllers
             {
                 BlogCategories item = Mapper.Map<BlogCategoryFormModel, BlogCategories>(obj);
                 item.Slug = StringConvert.ConvertShortName(item.Name);
-                _blogCategoryService.EditBlogCategory(item);
+                _blogCategoryService.Edit(item);
                 return continueEditing ? RedirectToAction("Edit", "BlogCategory", new {item.Id })
                     : RedirectToAction("Index", "BlogCategory");
             }
@@ -80,7 +80,7 @@ namespace Labixa.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            _blogCategoryService.DeleteBlogCategory(id);
+            _blogCategoryService.Delete(id);
             return RedirectToAction("Index", "BlogCategory");
         }
     }

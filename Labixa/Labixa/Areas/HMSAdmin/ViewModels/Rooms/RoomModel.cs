@@ -51,7 +51,7 @@ namespace Labixa.Areas.HMSAdmin.ViewModels
         public string MetaTitle { get; set; }
         public string MetaDescription { get; set; }
         public int HotelId { get; set; }
-        public virtual Hotels Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
         public IEnumerable<SelectListItem> ListHotels { get; set; }
 

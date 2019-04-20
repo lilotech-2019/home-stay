@@ -43,8 +43,8 @@ namespace Labixa.Controllers
         {
             IndexViewModel model = new IndexViewModel
             {
-                roomHome = _roomService.Get3RoomShortNews(),
-                blogHome = _blogService.Get3BlogNewsNewest(),
+                roomHome = _roomService.FindAll(),
+                blogHome = _blogService.FindAll(),
                 imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1")),
                 imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2")),
                 imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"))
@@ -55,7 +55,7 @@ namespace Labixa.Controllers
         [HttpPost]
         public ActionResult Deposit(Vendors model)
         {
-            _vendorService.CreateVendor(model);
+            _vendorService.Create(model);
             return RedirectToAction("Index", "Home");
         }
 
@@ -73,7 +73,6 @@ namespace Labixa.Controllers
 
         public ActionResult BookingRoom(Costs modelBooking)
         {
-            CostCategory categoryId = new CostCategory();
             modelBooking.CostCategoryId = 1;
             _costService.CreateCost(modelBooking);
             return RedirectToAction("Booking", "Home");
@@ -99,13 +98,17 @@ namespace Labixa.Controllers
         //nếu để anotation như vậy thì action này có method là Post
         //khi gom model thì kiểu trả về không còn là mở string xàm nữa, mà là model
         [HttpPost]
-        public ActionResult ContactBookingRooom(Colors modelContact)
+        public ActionResult ContactBookingRooom(Deposit modelContact)
         {
             //khởi tạo obj Vendor, đổ data
             //create obj vendor
+<<<<<<< HEAD
 
             
             _colorService.CreateColor(modelContact); //xong lưu database
+=======
+            _colorService.Create(modelContact); //xong lưu database
+>>>>>>> 8713ac6b396c292f4772054d696193ff9056614f
             return RedirectToAction("Contact", "Home");
         }
 
@@ -158,20 +161,21 @@ namespace Labixa.Controllers
 
         public ActionResult DetailService(string slug)
         {
-            var model = _blogService.GetStaticPage().FirstOrDefault(p => p.Slug.Equals(slug));
+            var model = _blogService.FindAll().FirstOrDefault(p => p.Slug.Equals(slug));
 
             return View(model);
         }
 
         public ActionResult DetailBlog(string slug)
         {
-            var model = _blogService.GetBlogsByCategory(3).FirstOrDefault(p => p.Slug.Equals(slug));
+            var model = _blogService.FindAll().Where(w => w.BlogCategory.Id == 3)
+                .FirstOrDefault(p => p.Slug.Equals(slug));
             return View(model);
         }
 
         public ActionResult BlogsCategories(int? page = 1)
         {
-            var model = _blogService.GetBlogsByCategory(3).ToList();
+            var model = _blogService.FindAll().Where(w => w.BlogCategory.Id == 3);
             int pageNumber = (page ?? 1);
 
             return View(model.ToPagedList(pageNumber, 1));

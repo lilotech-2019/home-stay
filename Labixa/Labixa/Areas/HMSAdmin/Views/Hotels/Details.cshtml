@@ -1,0 +1,290 @@
+﻿@model Outsourcing.Data.Models.HMS.Hotel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hotels</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelCategory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaKeywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaKeywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharePercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharePercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ward)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ward)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagerPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractExpire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractExpire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImage1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlImage1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImage2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlImage2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImage3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlImage3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Layout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Layout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsStaticPage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsStaticPage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEditedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastEditedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

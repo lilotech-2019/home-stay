@@ -16,26 +16,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<CostCategory> GetProductCategories();
-        CostCategory GetCostCategoryById(int CostCategoryId);
-        void CreateCostCategory(CostCategory CostCategory);
-        void EditCostCategory(CostCategory CostCategoryToEdit);
-        void DeleteProductCategories(int CostCategoryId);
+        CostCategory GetCostCategoryById(int costCategoryId);
+        void CreateCostCategory(CostCategory costCategory);
+        void EditCostCategory(CostCategory costCategoryToEdit);
+        void DeleteProductCategories(int costCategoryId);
         void SaveCostCategory();
-        IEnumerable<ValidationResult> CanAddCostCategory(CostCategory CostCategory);
+        IEnumerable<ValidationResult> CanAddCostCategory(CostCategory costCategory);
 
     }
     public class CostCategoryService : ICostCategoryService
     {
         #region Field
-        private readonly ICostCategoryRepository CostCategoryRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICostCategoryRepository _costCategoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CostCategoryService(ICostCategoryRepository CostCategoryRepository, IUnitOfWork unitOfWork)
+        public CostCategoryService(ICostCategoryRepository costCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this.CostCategoryRepository = CostCategoryRepository;
-            this.unitOfWork = unitOfWork;
+            this._costCategoryRepository = costCategoryRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -43,45 +43,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CostCategory> GetProductCategories()
         {
-            var CostCategorys = CostCategoryRepository.GetAll().Where(p => p.Deleted == false);
-            return CostCategorys;
+            var costCategorys = _costCategoryRepository.GetAll().Where(p => p.Deleted == false);
+            return costCategorys;
         }
 
-        public CostCategory GetCostCategoryById(int CostCategoryId)
+        public CostCategory GetCostCategoryById(int costCategoryId)
         {
-            var CostCategory = CostCategoryRepository.GetById(CostCategoryId);
-            return CostCategory;
+            var costCategory = _costCategoryRepository.GetById(costCategoryId);
+            return costCategory;
         }
 
-        public void CreateCostCategory(CostCategory CostCategory)
+        public void CreateCostCategory(CostCategory costCategory)
         {
-            CostCategoryRepository.Add(CostCategory);
+            _costCategoryRepository.Add(costCategory);
             SaveCostCategory();
         }
 
-        public void EditCostCategory(CostCategory CostCategoryToEdit)
+        public void EditCostCategory(CostCategory costCategoryToEdit)
         {
-            CostCategoryRepository.Update(CostCategoryToEdit);
+            _costCategoryRepository.Update(costCategoryToEdit);
             SaveCostCategory();
         }
 
-        public void DeleteProductCategories(int CostCategoryId)
+        public void DeleteProductCategories(int costCategoryId)
         {
             //Get CostCategory by id.
-            var CostCategory = CostCategoryRepository.GetById(CostCategoryId);
-            if (CostCategory != null)
+            var costCategory = _costCategoryRepository.GetById(costCategoryId);
+            if (costCategory != null)
             {
-                CostCategoryRepository.Delete(CostCategory);
+                _costCategoryRepository.Delete(costCategory);
                 SaveCostCategory();
             }
         }
 
         public void SaveCostCategory()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCostCategory(CostCategory CostCategory)
+        public IEnumerable<ValidationResult> CanAddCostCategory(CostCategory costCategory)
         {
 
             //    yield return new ValidationResult("CostCategory", "ErrorString");

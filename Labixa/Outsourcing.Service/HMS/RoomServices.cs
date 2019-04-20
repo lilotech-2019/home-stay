@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Outsourcing.Core.Common;
+﻿using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
@@ -9,19 +7,13 @@ namespace Outsourcing.Service.HMS
 {
     public interface IRoomService
     {
-        IEnumerable<Rooms> GetRooms();
+        IQueryable<Rooms> FindAll();
         Rooms FindById(int id);
-        void CreateRoom(Rooms room);
-        void EditRoom(Rooms roomToEdit);
-        void DeleteRoom(int roomId);
-        void SaveRoom();
-        Rooms GetRoomByUrlName(string urlName);
-        IEnumerable<Rooms> Get3RoomShortNews();
-        IEnumerable<Rooms> Get3RoomLongNews();
-
-        //IEnumerable<Room> Get4RoomShortHome();
-
-        IEnumerable<ValidationResult> CanAddRoom(Rooms room);
+        void Create(Rooms entity);
+        void Edit(Rooms entity);
+        void Delete(int id);
+        void Delete(Rooms entity);
+        IQueryable<Rooms> FindSelectList(int? id);
     }
 
     public class RoomService : IRoomService
@@ -37,75 +29,66 @@ namespace Outsourcing.Service.HMS
 
         public RoomService(IRoomRepository roomRepository, IUnitOfWork unitOfWork)
         {
-            this._roomRepository = roomRepository;
-            this._unitOfWork = unitOfWork;
+            _roomRepository = roomRepository;
+            _unitOfWork = unitOfWork;
         }
 
         #endregion
 
         #region BaseMethod
 
-        public IEnumerable<Rooms> GetRooms()
+        public IQueryable<Rooms> FindSelectList(int? id)
         {
-            return _roomRepository.FindBy();
-        }
-
-        public Rooms FindById(int id)
-        {
-            return _roomRepository.FindBy(w => w.Id == id).SingleOrDefault();
-        }
-
-        public Rooms GetRoomByUrlName(string urlName)
-        {
-            var room = _roomRepository.FindBy(b => b.Slug == urlName).SingleOrDefault();
-            return room;
-        }
-
-
-        public void CreateRoom(Rooms room)
-        {
-            _roomRepository.Add(room);
-            SaveRoom();
-        }
-
-        public void EditRoom(Rooms roomToEdit)
-        {
-            _roomRepository.Update(roomToEdit);
-            SaveRoom();
-        }
-
-        public void DeleteRoom(int roomId)
-        {
-            //Get Room by id.
-            var room = _roomRepository.FindBy(w => w.Id == roomId).SingleOrDefault();
-            if (room != null)
+            var list = _roomRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
             {
-                _roomRepository.Delete(room);
-                SaveRoom();
+                list = list.Where(w => w.Id == id);
+            }
+            return list;
+        }
+
+        public IQueryable<Rooms> FindAll()
+        {
+            var listEntities = _roomRepository.FindBy(w => w.Deleted == false);
+            return listEntities;
+        }
+
+        public void Create(Rooms entity)
+        {
+            _roomRepository.Add(entity);
+            Commit();
+        }
+
+        public void Edit(Rooms entity)
+        {
+            _roomRepository.Update(entity);
+            Commit();
+        }
+
+        public void Delete(int id)
+        {
+            var entity = FindById(id);
+            Delete(entity);
+        }
+
+        public void Delete(Rooms entity)
+        {
+            if (entity != null)
+            {
+                entity.Deleted = true;
+                Edit(entity);
             }
         }
 
-        public void SaveRoom()
+        private void Commit()
         {
             _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoom(Rooms room)
+        public Rooms FindById(int id)
         {
-            //    yield return new ValidationResult("Room", "ErrorString");
-            return null;
-        }
-
-        public IEnumerable<Rooms> Get3RoomShortNews()
-        {
-            var blogs = this.GetRooms().Where(p => p.Hotel.Layout == 0).OrderBy(p => p.Layout == 0).Take(3);
-            return blogs;
-        }
-
-        public IEnumerable<Rooms> Get3RoomLongNews()
-        {
-            var blogs = this.GetRooms().Where(p => p.Hotel.Layout == 2).OrderBy(p => p.Layout == 1).Take(3);
-            return blogs;
+            var entity = _roomRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+            return entity;
         }
 
         #endregion

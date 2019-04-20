@@ -6,8 +6,13 @@ namespace Labixa.Areas.HMSAdmin
     {
         public override string AreaName => "HMSAdmin";
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.MapRoute(
+                "HMSAdmin_default_2",
+                "HMSAdmin",
+                new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+            );
             context.MapRoute(
                 "HMSAdmin_default",
                 "HMSAdmin/{controller}/{action}/{id}",

@@ -28,7 +28,7 @@ namespace Labixa.Areas.Admin.Mappings
 
             //Mapper.CreateMap<IPagedList<Group>, IPagedList<GroupsItemViewModel>>().ConvertUsing<PagedListConverter<Group, GroupsItemViewModel>>();
 
-            CreateMap<Blogs, BlogFormModel>();
+            CreateMap<Blog, BlogFormModel>();
             CreateMap<Product, ProductFormModel>();
             CreateMap<ProductAttribute, ProductAttributeFormModel>();
             CreateMap<Order, OrderFormModel>();

@@ -1,52 +1,53 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Outsourcing.Service.HMS;
-using Outsourcing.Data.Models.HMS;
-using Outsourcing.Core.Common;
-using Outsourcing.Core.Extensions;
-using Outsourcing.Core.Framework.Controllers;
-using Labixa.Areas.HMSAdmin.ViewModels;
+﻿//using System;
+//using System.Data.Entity;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using System.Web.Mvc;
+//using Outsourcing.Service.HMS;
+//using Outsourcing.Data.Models.HMS;
+//using Outsourcing.Core.Common;
+//using Outsourcing.Core.Extensions;
+//using Outsourcing.Core.Framework.Controllers;
+//using Labixa.Areas.HMSAdmin.ViewModels;
 
-namespace Labixa.Areas.HMSAdmin.Controllers
-{
-    #region Field
+//namespace Labixa.Areas.HMSAdmin.Controllers
+//{
+//    #region Field
 
-    public partial class HotelController : BaseController
-    {
-        readonly IHotelService _hotelService;
-        readonly ICategoryHotelService _hotelCategoryService;
+//    public partial class HotelController : BaseController
+//    {
+//        readonly IHotelService _hotelService;
+//        readonly ICategoryHotelService _hotelCategoryService;
 
-        #endregion
+//        #endregion
 
-        #region Ctor
+//        #region Ctor
 
-        public HotelController(IHotelService hotelService, ICategoryHotelService hotelCategoryService)
-        {
-            _hotelService = hotelService;
-            _hotelCategoryService = hotelCategoryService;
-        }
+//        public HotelController(IHotelService hotelService, ICategoryHotelService hotelCategoryService)
+//        {
+//            _hotelService = hotelService;
+//            _hotelCategoryService = hotelCategoryService;
+//        }
 
-        #endregion
+//        #endregion
 
-        public async Task<ActionResult> Index(int? id, int? page = 1)
-        {
-            var hotels = _hotelService.GetHotels();
-            if (id != null)
-            {
-                hotels = hotels.Where(w => w.Id == id);
-            }
-            return View(await hotels.ToListAsync());
-        }
+//        public async Task<ActionResult> Index(int? id, int? page = 1)
+//        {
+//            var hotels = _hotelService.FindAll();
+//            if (id != null)
+//            {
+//                hotels = hotels.Where(w => w.Id == id);
+//            }
+//            return View(await hotels.ToListAsync());
+//        }
 
-        public ActionResult ManageStaticPage()
-        {
-            var hotels = _hotelService.GetStaticPage();
-            return View(hotels);
-        }
+//        public ActionResult ManageStaticPage()
+//        {
+//            var hotels = _hotelService.GetStaticPage();
+//            return View(hotels);
+//        }
 
+<<<<<<< HEAD
         public ActionResult Create()
         {
             //Get the list category
@@ -140,10 +141,105 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             };
             hotelFormModel.ListCategoryHotel = _hotelCategoryService.FindAll()
                 .ToSelectListItems(hotelFormModel.CategoryHotelId);
+=======
+//        public ActionResult Create()
+//        {
+//            //Get the list category
+//            var listCategory = _hotelCategoryService.GetProductCategories().ToSelectListItems(-1);
+//            var hotel = new HotelModel {ListCategoryHotel = listCategory};
+//            return View(hotel);
+//        }
 
-            return View(hotelFormModel);
-        }
+//        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+//        [ValidateInput(false)]
+//        public ActionResult Create(HotelModel newHotel, bool continueEditing)
+//        {
+//            if (ModelState.IsValid)
+//            {
+//                var hotel = new Hotels
+//                {
+//                    //Mapping to domain
+//                    //Hotel = (Hotel)Mapper.Map<HotelModel, Hotel>(newHotel);
+//                    Address = newHotel.Address,
+//                    ContractDate = newHotel.ContractDate,
+//                    CategoryHotelId = newHotel.CategoryHotelId,
+//                    ContractExpire = newHotel.ContractExpire,
+//                    ContractNumber = newHotel.ContractNumber,
+//                    DateCreated = newHotel.DateCreated,
+//                    Description = newHotel.Description,
+//                    HostAddress = newHotel.HostAddress,
+//                    HostEmail = newHotel.HostEmail,
+//                    HostName = newHotel.HostName,
+//                    HostPhone = newHotel.HostPhone,
+//                    LastEditedTime = newHotel.LastEditedTime,
+//                    MetaDescription = newHotel.MetaDescription,
+//                    MetaKeywords = newHotel.MetaKeywords,
+//                    MetaTitle = newHotel.MetaTitle,
+//                    Name = newHotel.Name,
+//                    SharePercent = newHotel.SharePercent,
+//                    UrlImage1 = newHotel.UrlImage1,
+//                    UrlImage2 = newHotel.UrlImage2,
+//                    UrlImage3 = newHotel.UrlImage3,
+//                    Deleted = false
+//                };
+//                if (String.IsNullOrEmpty(hotel.Slug))
+//                {
+//                    hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+//                }
+//                //Create Hotel
+//                _hotelService.CreateHotel(hotel);
+//                return continueEditing
+//                    ? RedirectToAction("Edit", "Hotel", new {HotelId = hotel.Id})
+//                    : RedirectToAction("Index", "Hotel");
+//            }
+//            else
+//            {
+//                newHotel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+//                    .ToSelectListItems(newHotel.CategoryHotelId);
+//                return View("Create", newHotel);
+//            }
+//        }
 
+//        [HttpGet]
+//        public ActionResult Edit(int hotelId)
+//        {
+//            var hotel = _hotelService.GetHotelById(hotelId);
+//            //HotelModel HotelFormModel = Mapper.Map<Hotel, HotelModel>(Hotel);
+//            HotelModel hotelFormModel = new HotelModel
+//            {
+//                //Mapping to domain
+//                //Hotel = (Hotel)Mapper.Map<HotelModel, Hotel>(newHotel);
+//                Slug = hotel.Slug,
+//                Id = hotel.Id,
+//                Address = hotel.Address,
+//                ContractDate = hotel.ContractDate,
+//                CategoryHotelId = hotel.CategoryHotelId,
+//                ContractExpire = hotel.ContractExpire,
+//                ContractNumber = hotel.ContractNumber,
+//                DateCreated = hotel.DateCreated,
+//                Description = hotel.Description,
+//                HostAddress = hotel.HostAddress,
+//                HostEmail = hotel.HostEmail,
+//                HostName = hotel.HostName,
+//                HostPhone = hotel.HostPhone,
+//                LastEditedTime = hotel.LastEditedTime,
+//                MetaDescription = hotel.MetaDescription,
+//                MetaKeywords = hotel.MetaKeywords,
+//                MetaTitle = hotel.MetaTitle,
+//                Name = hotel.Name,
+//                SharePercent = hotel.SharePercent,
+//                UrlImage1 = hotel.UrlImage1,
+//                UrlImage2 = hotel.UrlImage2,
+//                UrlImage3 = hotel.UrlImage3
+//            };
+//            hotelFormModel.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+//                .ToSelectListItems(hotelFormModel.CategoryHotelId);
+>>>>>>> 8713ac6b396c292f4772054d696193ff9056614f
+
+//            return View(hotelFormModel);
+//        }
+
+<<<<<<< HEAD
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [ValidateInput(false)]
         public ActionResult Edit(HotelModel hotelToEdit, bool continueEditing)
@@ -187,12 +283,57 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 return View("Edit", hotelToEdit);
             }
         }
+=======
+//        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+//        [ValidateInput(false)]
+//        public ActionResult Edit(HotelModel hotelToEdit, bool continueEditing)
+//        {
+//            if (ModelState.IsValid)
+//            {
+//                var hotel = _hotelService.GetHotelById(hotelToEdit.Id);
+//                //Mapping to domain
+//                //Mapping to domain
+//                //Hotel = (Hotel)Mapper.Map<HotelModel, Hotel>(newHotel);
+//                hotel.Address = hotelToEdit.Address;
+//                hotel.ContractDate = hotelToEdit.ContractDate;
+//                hotel.CategoryHotelId = hotelToEdit.CategoryHotelId;
+//                hotel.ContractExpire = hotelToEdit.ContractExpire;
+//                hotel.ContractNumber = hotelToEdit.ContractNumber;
+//                hotel.DateCreated = hotelToEdit.DateCreated;
+//                hotel.Description = hotelToEdit.Description;
+//                hotel.HostAddress = hotelToEdit.HostAddress;
+//                hotel.HostEmail = hotelToEdit.HostEmail;
+//                hotel.HostName = hotelToEdit.HostName;
+//                hotel.HostPhone = hotelToEdit.HostPhone;
+//                hotel.LastEditedTime = hotelToEdit.LastEditedTime;
+//                hotel.MetaDescription = hotelToEdit.MetaDescription;
+//                hotel.MetaKeywords = hotelToEdit.MetaKeywords;
+//                hotel.MetaTitle = hotelToEdit.MetaTitle;
+//                hotel.Name = hotelToEdit.Name;
+//                hotel.SharePercent = hotelToEdit.SharePercent;
+//                hotel.UrlImage1 = hotelToEdit.UrlImage1;
+//                hotel.UrlImage2 = hotelToEdit.UrlImage2;
+//                hotel.UrlImage3 = hotelToEdit.UrlImage3;
+//                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+//                _hotelService.EditHotel(hotel);
+//                return continueEditing
+//                    ? RedirectToAction("Edit", "Hotel", new {HotelId = hotel.Id})
+//                    : RedirectToAction("Index", "Hotel");
+//            }
+//            else
+//            {
+//                hotelToEdit.ListCategoryHotel = _hotelCategoryService.GetProductCategories()
+//                    .ToSelectListItems(hotelToEdit.CategoryHotelId);
+//                return View("Edit", hotelToEdit);
+//            }
+//        }
+>>>>>>> 8713ac6b396c292f4772054d696193ff9056614f
 
 
-        public ActionResult Delete(int hotelId)
-        {
-            _hotelService.DeleteHotel(hotelId);
-            return RedirectToAction("Index");
-        }
-    }
-}
+//        public ActionResult Delete(int hotelId)
+//        {
+//            _hotelService.DeleteHotel(hotelId);
+//            return RedirectToAction("Index");
+//        }
+//    }
+//}

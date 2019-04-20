@@ -13,7 +13,7 @@ namespace Labixa.Areas.HMSAdmin.Mappings
 
         public override string ProfileName => "ViewModelToDomainMappings";
 
-        protected void Configure()
+        private void Configure()
         {
             //Mapper.CreateMap<UserFormModel, User>();
             //Mapper.CreateMap<UserFormViewModel, User>().ForMember(x => x.Id, opt => opt.MapFrom(source => source.UserId));
