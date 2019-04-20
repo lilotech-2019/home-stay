@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Net;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
+using System.Collections.Generic;
 
 namespace Labixa.Controllers
 {
@@ -39,7 +40,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.FindAll();
+            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).ToList();
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
         /// <summary>
@@ -47,42 +48,36 @@ namespace Labixa.Controllers
         /// </summary>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public ActionResult DetailShortRoom(string slug)
-        {
-            //var model = _RoomService.GetRoomByUrlName(Slug);
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
-                ();
-            viewModel.RelatedRoom = _roomService.FindAll();
-            viewModel.listRoom = _roomService.FindAll().SingleOrDefault(w => w.Slug == slug);
-            
-            return View(viewModel);
-        }
-        /// <summary>
-        /// danh sách phòng dài hạn
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
+      
+       
         public ActionResult LongRoom(int? page)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _roomService.FindAll();
+            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_=>_.Name);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
-        /// <summary>
-        /// chi tiết phòng dài hạn
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <returns></returns>
-        public ActionResult DetailLongRoom(string slug)
+
+        puclic ActionResult 
+   
+       
+        public ActionResult Details(int id, string slug)
         {
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
+            RoomDetailViewModel viewModel;
+            var room = _roomService.FindByIdAndSlug(id, slug);
+            if (room != null)
             {
-                RelatedRoomLong = _roomService.FindAll(),
-                listRoom = _roomService.FindAll().SingleOrDefault(w=>w.Slug==slug)
-            };
-            return View(viewModel);
+                var relatedRooms = _roomService.FindByType(room.Type);
+                viewModel = new RoomDetailViewModel()
+                {
+                    RelatedRooms = relatedRooms,
+                    Room = room
+                };
+                return View(viewModel);
+            }
+            return HttpNotFound();
         }
+
         [HttpPost]
         public ActionResult BookingRoom(RoomOrder modelBooking, String CustomerName, String CustomerEmail, String CustomerPhone, String Name)
         { 

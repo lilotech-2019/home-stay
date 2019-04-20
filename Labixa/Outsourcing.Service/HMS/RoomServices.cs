@@ -14,6 +14,8 @@ namespace Outsourcing.Service.HMS
         void Delete(int id);
         void Delete(Rooms entity);
         IQueryable<Rooms> FindSelectList(int? id);
+        IQueryable<Rooms> FindByType(RoomType type);
+        Rooms FindByIdAndSlug(int id, string slug);
     }
 
     public class RoomService : IRoomService
@@ -89,6 +91,17 @@ namespace Outsourcing.Service.HMS
         {
             var entity = _roomRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
+        }
+
+        public IQueryable<Rooms> FindByType(RoomType type)
+        {
+            var result = _roomRepository.FindBy(w => w.Deleted == false & w.Type == type);
+            return result;
+        }
+
+        public Rooms FindByIdAndSlug(int id, string slug)
+        {
+            return _roomRepository.FindBy(w => w.Deleted == false & w.Id == id & w.Slug == slug).SingleOrDefault();
         }
 
         #endregion

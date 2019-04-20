@@ -1,7 +1,7 @@
 ﻿
 @using PagedList.Mvc;
 @*khai bao thu vien pagelist*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Rooms>
+@model IEnumerable<Outsourcing.Data.Models.HMS.Rooms>
 
 @*don nhan du lieu dang IPagedList<Blog>*@
 
@@ -90,7 +90,7 @@
             }
         </div>
         <div>
-            @Html.PagedListPager(Model, page => Url.Action("ShortRoom", new { page }))
+            @*@Html.PagedListPager(Model, page => Url.Action("ShortRoom", new { page }))*@
         </div>
     </div>
 
