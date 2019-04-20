@@ -120,6 +120,7 @@
     <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
+    <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -1594,6 +1595,7 @@
     <Content Include="Areas\HMSAdmin\Views\ContactUs\Index.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\HMSAdmin\Views\HotelCategory\_LeftMenu.cshtml" />
+    <Content Include="Areas\Portal\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1950,6 +1952,9 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\Shared\Partial\" />
     <Folder Include="Areas\HMSAdmin\Views\Shared\Partial\" />
+    <Folder Include="Areas\Portal\Controllers\" />
+    <Folder Include="Areas\Portal\Models\" />
+    <Folder Include="Areas\Portal\Views\Shared\" />
     <Folder Include="Content\admin\fonts\" />
     <Folder Include="images\uploaded\caycanh\" />
     <Folder Include="Views\caycanh\" />

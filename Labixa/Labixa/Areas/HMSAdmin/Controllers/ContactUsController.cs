@@ -60,7 +60,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View(new ContactUs { Percent = 0 });
+            return View();
         }
 
         /// <summary>

@@ -19,7 +19,8 @@ namespace Labixa.Controllers
 
         private readonly IRoomOrderService _roomOrderService;
 
-        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService, IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem, ICustomerService customerService)
+        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService,
+            IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem, ICustomerService customerService)
         {
             _roomService = roomService;
             _roomOrderService = roomOrderService;
@@ -30,6 +31,7 @@ namespace Labixa.Controllers
         {
             return RedirectToAction("ShortRoom");
         }
+
         /// <summary>
         /// danh sách các phòng ngắn hạn
         /// </summary>
@@ -52,10 +54,10 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_=>_.Name);
+            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_ => _.Name);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
-       
+
         public ActionResult Details(int id, string slug)
         {
             var room = _roomService.FindByIdAndSlug(id, slug);
@@ -73,48 +75,50 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail, String customerPhone, String name)
-        { 
+        public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail,
+            String customerPhone, String name)
+        {
             Room room = new Room();
             room.Name = name;
             string adminGmail = "minhtrungmessi@gmail.com";
             string password = "abc65432abc65432";
             string subject = "Đặt phòng thành công";
             string content = "<table border=" + 1 + "><thead>" +
-                "<th> Họ Tên Khách Hàng </th>" +
-                "<th> Ngày Check In</th>" +
-                "<th> Ngày Check Out</th>" +
-                "<th> Email Khách Hàng</th>" +
-                "<th> Số Điện Thoại</th>" +
-                "<th> Tên Phòng</th>" +
-                "<th> Số Lượng Người</th>" +
-                "<th> Số Tiền</th>" +
-                "</thead>" +
-                "<tbody>" +
-                "<td>" + customerName + "</td>" +
-                "<td>" + modelBooking.CheckIn + "</td>" +
-                "<td>" + modelBooking.CheckOut + "</td>" +
-                "<td>" + customerEmail + "</td>" +
-                "<td>" + customerPhone + "</td>" +
-                "<td>" + name + "</td>" +
-                "<td>" + modelBooking.AmountOfPeople + "</td>" +
-                "<td>" + modelBooking.Price + "</td>" +
-                "</tbody></table>";
-            Customer cus = new Customer();
-            cus.Name = customerName;
-            cus.Email = customerEmail;
-            cus.Phone = customerPhone;
-            var customerId = _customerservice.FindIdByPhone(customerPhone);
-            modelBooking.CheckIn = DateTime.Now;
-            modelBooking.CheckOut = DateTime.Now;
-            if (customerId == 0)
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Ngày Check In</th>" +
+                             "<th> Ngày Check Out</th>" +
+                             "<th> Email Khách Hàng</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Tên Phòng</th>" +
+                             "<th> Số Lượng Người</th>" +
+                             "<th> Số Tiền</th>" +
+                             "</thead>" +
+                             "<tbody>" +
+                             "<td>" + customerName + "</td>" +
+                             "<td>" + modelBooking.CheckIn + "</td>" +
+                             "<td>" + modelBooking.CheckOut + "</td>" +
+                             "<td>" + customerEmail + "</td>" +
+                             "<td>" + customerPhone + "</td>" +
+                             "<td>" + name + "</td>" +
+                             "<td>" + modelBooking.AmountOfPeople + "</td>" +
+                             "<td>" + modelBooking.Price + "</td>" +
+                             "</tbody></table>";
+
+            var customer = _customerservice.FindByPhone(customerPhone);
+            if (customer == null)
             {
-                customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
+                customer = new Customer
+                {
+                    Name = customerName,
+                    Email = customerEmail,
+                    Phone = customerPhone
+                };
+                _customerservice.Create(customer);
             }
-            if (customerId != 0)
-            {
-                modelBooking.CustomerId = customerId;
-            }
+
+            modelBooking.CustomerId = customer.Id;
+
+
             modelBooking.CheckIn = DateTime.Now;
             modelBooking.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBooking);
@@ -132,10 +136,11 @@ namespace Labixa.Controllers
             mess.IsBodyHtml = true;
             mail.Send(mess);
             return RedirectToAction("ShortRoom", "RoomVer3");
-          
         }
+
         [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail, String customerPhone, String name)
+        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail,
+            String customerPhone, String name)
         {
             Room room = new Room();
             room.Name = name;
@@ -143,36 +148,37 @@ namespace Labixa.Controllers
             string password = "abc65432abc65432";
             string subject = "Đặt phòng thành công";
             string content = "<table border=" + 1 + "><thead>" +
-                "<th> Họ Tên Khách Hàng </th>" +
-                "<th> Email Khách Hàng</th>" +
-                "<th> Số Điện Thoại</th>" +
-                "<th> Tên Phòng</th>" +
-                "<th> Số Lượng Người</th>" +
-                "<th> Số Tiền</th>" +
-                "</thead>" +
-                "<tbody>" +
-                "<td>" + customerName + "</td>" +
-                "<td>" + customerEmail + "</td>" +
-                "<td>" + customerPhone + "</td>" +
-                "<td>" + name + "</td>" +
-                "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
-                "<td>" + modelBookingLongRoom + "</td>" +
-                "</tbody></table>";
-            Customer cus = new Customer();
-            cus.Name = customerName;
-            cus.Email = customerEmail;
-            cus.Phone = customerPhone;
-            var customerId = _customerservice.FindIdByPhone(customerPhone);
-            modelBookingLongRoom.CheckIn = DateTime.Now;
-            modelBookingLongRoom.CheckOut = DateTime.Now;
-            if (customerId == 0)
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Email Khách Hàng</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Tên Phòng</th>" +
+                             "<th> Số Lượng Người</th>" +
+                             "<th> Số Tiền</th>" +
+                             "</thead>" +
+                             "<tbody>" +
+                             "<td>" + customerName + "</td>" +
+                             "<td>" + customerEmail + "</td>" +
+                             "<td>" + customerPhone + "</td>" +
+                             "<td>" + name + "</td>" +
+                             "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
+                             "<td>" + modelBookingLongRoom + "</td>" +
+                             "</tbody></table>";
+
+            var customer = _customerservice.FindByPhone(customerPhone);
+
+            if (customer == null)
             {
-                customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
+                customer = new Customer
+                {
+                    Name = customerName,
+                    Email = customerEmail,
+                    Phone = customerPhone
+                };
+                _customerservice.Create(customer);
             }
-            if (customerId != 0)
-            {
-                modelBookingLongRoom.CustomerId = customerId;
-            }
+
+            modelBookingLongRoom.CustomerId = customer.Id;
+
             modelBookingLongRoom.CheckIn = DateTime.Now;
             modelBookingLongRoom.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBookingLongRoom);
@@ -181,8 +187,7 @@ namespace Labixa.Controllers
                 Credentials = new NetworkCredential(adminGmail, password),
                 EnableSsl = true
             };
-            var mess = new MailMessage();
-            mess.From = new MailAddress(adminGmail);
+            var mess = new MailMessage {From = new MailAddress(adminGmail)};
             mess.ReplyToList.Add(adminGmail);
             mess.To.Add(new MailAddress(customerEmail));
             mess.Subject = subject;

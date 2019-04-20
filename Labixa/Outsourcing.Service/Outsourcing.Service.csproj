@@ -72,7 +72,7 @@
     <Compile Include="HMS\CostOrderItemServices.cs" />
     <Compile Include="HMS\CostOrderServices.cs" />
     <Compile Include="HMS\CostServices.cs" />
-    <Compile Include="HMS\CustomerService.cs" />
+    <Compile Include="CustomerService.cs" />
     <Compile Include="HMS\HMSProductServices.cs" />
     <Compile Include="HMS\HotelServices.cs" />
     <Compile Include="HMS\RoomImageMappingServices.cs" />
