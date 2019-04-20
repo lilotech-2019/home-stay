@@ -15,6 +15,7 @@ namespace Outsourcing.Service
         void Edit(BlogCategories entity);
         void Delete(BlogCategories entity);
         void Delete(int id);
+        IQueryable<BlogCategories> FindSelectList(int? id);
 
         [Obsolete]
         IEnumerable<BlogCategories> GetBlogCategories();
@@ -90,6 +91,16 @@ namespace Outsourcing.Service
                 entity.IsDelete = true;
                 Edit(entity);
             }
+        }
+
+        public IQueryable<BlogCategories> FindSelectList(int? id)
+        {
+            var list = _blogCategoryRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
+            {
+                list = list.Where(w => w.Id == id);
+            }
+            return list;
         }
     }
 }

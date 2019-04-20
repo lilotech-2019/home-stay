@@ -1,5 +1,4 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
 using Outsourcing.Data.Models;
 using Outsourcing.Service;
 using System.Data.Entity;
@@ -12,10 +11,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     public class BlogCategoriesController : Controller
     {
         #region Fields
-
         private readonly IBlogCategoryService _blogCategoriesService;
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
         #endregion
 
         #region Ctor
@@ -54,7 +50,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogCategories details = _blogCategoriesService.FindById((int) id);
+            BlogCategories details = _blogCategoriesService.FindById((int)id);
             if (details == null)
             {
                 return HttpNotFound();
@@ -72,7 +68,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name");
             return View();
         }
 
@@ -93,7 +89,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             }
 
             ViewBag.CategoryParentId =
-                new SelectList(_db.BlogCategories, "Id", "Name", blogCategories.CategoryParentId);
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name");
             return View(blogCategories);
         }
 
@@ -112,13 +108,13 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogCategories hotels = _blogCategoriesService.FindById((int) id);
-            if (hotels == null)
+            BlogCategories blogCategories = _blogCategoriesService.FindById((int)id);
+            if (blogCategories == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
-            return View(hotels);
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name", blogCategories.CategoryParentId);
+            return View(blogCategories);
         }
 
         /// <summary>
@@ -136,7 +132,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 _blogCategoriesService.Edit(blogCategories);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryParentId = new SelectList(_db.BlogCategories, "Id", "Name");
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name", blogCategories.CategoryParentId);
             return View(blogCategories);
         }
 
@@ -155,7 +151,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _blogCategoriesService.FindById((int) id);
+            var categoryHotels = _blogCategoriesService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
