@@ -11,11 +11,11 @@ namespace Labixa.ViewModels
     {
         
 
-        public IEnumerable<Rooms> RelatedRooms { get; set; }
+        public IEnumerable<Room> RelatedRooms { get; set; }
 
         //public IEnumerable<Rooms> RelatedRoomLong { get; set; }
 
-        public Rooms Room { get; set; }
+        public Room Room { get; set; }
 
 
 

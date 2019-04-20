@@ -51,7 +51,7 @@ namespace Outsourcing.Service.HMS
         public void UpdateStatus(int id, RoomOrderStatus status)
         {
             var entity = FindById(id);
-            entity.Status = status;
+            entity.OrderStatus = status;
             //if (status == RoomOrderStatus.CheckIn)
             //{
             //    entity.CheckInDate = DateTime.Today;

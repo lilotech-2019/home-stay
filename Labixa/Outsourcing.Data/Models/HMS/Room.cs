@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-    public class Rooms : BaseEntity
+    public class Room : BaseEntity
     {
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
 
-        public string NameEN { get; set; }
+        public string EnglishName { get; set; }
         public string Description { get; set; }
-        public string DescriptionENG { get; set; }
+        public string EnglishDescription { get; set; }
 
         [Range(0, 100)]
         public int SharePercent { get; set; }

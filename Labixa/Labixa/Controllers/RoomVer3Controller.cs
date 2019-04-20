@@ -75,7 +75,7 @@ namespace Labixa.Controllers
         [HttpPost]
         public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail, String customerPhone, String name)
         { 
-            Rooms room = new Rooms();
+            Room room = new Room();
             room.Name = name;
             string adminGmail = "minhtrungmessi@gmail.com";
             string password = "abc65432abc65432";
@@ -105,8 +105,8 @@ namespace Labixa.Controllers
             cus.Email = customerEmail;
             cus.Phone = customerPhone;
             var customerId = _customerservice.FindIdByPhone(customerPhone);
-            modelBooking.CheckInDate = DateTime.Now;
-            modelBooking.CheckOutDate = DateTime.Now;
+            modelBooking.CheckIn = DateTime.Now;
+            modelBooking.CheckOut = DateTime.Now;
             if (customerId == 0)
             {
                 customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
@@ -115,8 +115,8 @@ namespace Labixa.Controllers
             {
                 modelBooking.CustomerId = customerId;
             }
-            modelBooking.CheckInDate = DateTime.Now;
-            modelBooking.CheckOutDate = DateTime.Now;
+            modelBooking.CheckIn = DateTime.Now;
+            modelBooking.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBooking);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
@@ -137,7 +137,7 @@ namespace Labixa.Controllers
         [HttpPost]
         public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail, String customerPhone, String name)
         {
-            Rooms room = new Rooms();
+            Room room = new Room();
             room.Name = name;
             string adminGmail = "minhtrungmessi@gmail.com";
             string password = "abc65432abc65432";
@@ -163,8 +163,8 @@ namespace Labixa.Controllers
             cus.Email = customerEmail;
             cus.Phone = customerPhone;
             var customerId = _customerservice.FindIdByPhone(customerPhone);
-            modelBookingLongRoom.CheckInDate = DateTime.Now;
-            modelBookingLongRoom.CheckOutDate = DateTime.Now;
+            modelBookingLongRoom.CheckIn = DateTime.Now;
+            modelBookingLongRoom.CheckOut = DateTime.Now;
             if (customerId == 0)
             {
                 customerId = _customerservice.CreateNewCustomerByPhone(customerName, customerEmail, customerPhone);
@@ -173,8 +173,8 @@ namespace Labixa.Controllers
             {
                 modelBookingLongRoom.CustomerId = customerId;
             }
-            modelBookingLongRoom.CheckInDate = DateTime.Now;
-            modelBookingLongRoom.CheckOutDate = DateTime.Now;
+            modelBookingLongRoom.CheckIn = DateTime.Now;
+            modelBookingLongRoom.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBookingLongRoom);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {

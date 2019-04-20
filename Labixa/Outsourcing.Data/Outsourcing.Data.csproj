@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BlogCategories.cs" />
@@ -98,13 +99,11 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HMS\Hotel.cs" />
     <Compile Include="Models\HMS\Products.cs" />
-    <Compile Include="Models\HMS\Rooms.cs" />
+    <Compile Include="Models\HMS\Room.cs" />
     <Compile Include="Models\HMS\RoomImages.cs" />
     <Compile Include="Models\HMS\RoomImageMappings.cs" />
     <Compile Include="Models\HMS\RoomOrder.cs" />
     <Compile Include="Models\HMS\RoomOrderItem.cs" />
-    <Compile Include="Models\HMS\RoomUtilities.cs" />
-    <Compile Include="Models\HMS\RoomUtilityRoomMappings.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\InventoryLog.cs" />
     <Compile Include="Models\Location.cs" />

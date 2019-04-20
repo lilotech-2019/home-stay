@@ -119,17 +119,17 @@
                             <div class="row">
                                 <div class="form-group col-sm-6">
 
-                                    @Html.LabelFor(model => model.CheckInDate, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    @Html.LabelFor(model => model.CheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(model => model.CheckInDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.CheckInDate)
+                                        @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckIn)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    @Html.LabelFor(model => model.CheckOutDate, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    @Html.LabelFor(model => model.CheckOut, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(model => model.CheckOutDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.CheckOutDate)
+                                        @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.CheckOut)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6">

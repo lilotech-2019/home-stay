@@ -16,7 +16,7 @@ namespace Labixa.Areas.HMSAdmin.Mappings
         private void Configure()
         {
             CreateMap<HotelModel, Hotel>();
-            CreateMap<Rooms, RoomModel>();
+            CreateMap<Room, RoomModel>();
         }
     }
 }

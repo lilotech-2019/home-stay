@@ -47,12 +47,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rooms rooms = _roomService.FindById((int)id);
-            if (rooms == null)
+            Room room = _roomService.FindById((int)id);
+            if (room == null)
             {
                 return HttpNotFound();
             }
-            return View(rooms);
+            return View(room);
         }
         #endregion
 
@@ -64,27 +64,27 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
-            return View(new Rooms { SharePercent = 0 });
+            return View(new Room { SharePercent = 0 });
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="rooms"></param>
+        /// <param name="room"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Rooms rooms)
+        public ActionResult Create(Room room)
         {
             if (ModelState.IsValid)
             {
-                rooms.Slug = StringConvert.ConvertShortName(rooms.Name);
-                _roomService.Create(rooms);
+                room.Slug = StringConvert.ConvertShortName(room.Name);
+                _roomService.Create(room);
                 return RedirectToAction("Index");
             }
 
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
-            return View(rooms);
+            return View(room);
         }
         #endregion
 
@@ -100,32 +100,32 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rooms rooms = _roomService.FindById((int)id);
-            if (rooms == null)
+            Room room = _roomService.FindById((int)id);
+            if (room == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", rooms.HotelId);
-            return View(rooms);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", room.HotelId);
+            return View(room);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="rooms"></param>
+        /// <param name="room"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Rooms rooms)
+        public ActionResult Edit(Room room)
         {
             if (ModelState.IsValid)
             {
-                rooms.Slug = StringConvert.ConvertShortName(rooms.Name);
-                _roomService.Edit(rooms);
+                room.Slug = StringConvert.ConvertShortName(room.Name);
+                _roomService.Edit(room);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", rooms.HotelId);
-            return View(rooms);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", room.HotelId);
+            return View(room);
         }
         #endregion
 

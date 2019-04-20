@@ -280,7 +280,7 @@
                                         </div>
                                         <div class="content">
                                             <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
-                                                <h4>@iterm.NameEN</h4>
+                                                <h4>@iterm.EnglishName</h4>
                                             </a>
                                             <p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$ / Day</p>
                                         </div>
@@ -330,7 +330,7 @@
                     else
                     {
                         <div class="room-dec-wrapper">
-                            <h2>@Model.Room.NameEN</h2>
+                            <h2>@Model.Room.EnglishName</h2>
                             <p>@Html.Raw(Model.Room.MetaTitle)</p>
                             <p>@Html.Raw(Model.Room.DescriptionENG)</p>
                             <input type="text" name="@Model.Room.Id" value="@Model.Room.Id" style="display:none;">

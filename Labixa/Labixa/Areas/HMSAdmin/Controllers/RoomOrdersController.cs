@@ -91,8 +91,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                roomOrder.Status = RoomOrderStatus.New;
-                roomOrder.Total = roomOrder.Draff;
+                roomOrder.OrderStatus = RoomOrderStatus.New;
                 _roomOrderService.Create(roomOrder);
                 return RedirectToAction("Index");
             }

@@ -7,15 +7,15 @@ namespace Outsourcing.Service.HMS
 {
     public interface IRoomService
     {
-        IQueryable<Rooms> FindAll();
-        Rooms FindById(int id);
-        void Create(Rooms entity);
-        void Edit(Rooms entity);
+        IQueryable<Room> FindAll();
+        Room FindById(int id);
+        void Create(Room entity);
+        void Edit(Room entity);
         void Delete(int id);
-        void Delete(Rooms entity);
-        IQueryable<Rooms> FindSelectList(int? id);
-        IQueryable<Rooms> FindByType(RoomType type);
-        Rooms FindByIdAndSlug(int id, string slug);
+        void Delete(Room entity);
+        IQueryable<Room> FindSelectList(int? id);
+        IQueryable<Room> FindByType(RoomType type);
+        Room FindByIdAndSlug(int id, string slug);
     }
 
     public class RoomService : IRoomService
@@ -39,7 +39,7 @@ namespace Outsourcing.Service.HMS
 
         #region BaseMethod
 
-        public IQueryable<Rooms> FindSelectList(int? id)
+        public IQueryable<Room> FindSelectList(int? id)
         {
             var list = _roomRepository.FindBy(r => r.Deleted == false);
             if (id != null)
@@ -49,19 +49,19 @@ namespace Outsourcing.Service.HMS
             return list;
         }
 
-        public IQueryable<Rooms> FindAll()
+        public IQueryable<Room> FindAll()
         {
             var listEntities = _roomRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
-        public void Create(Rooms entity)
+        public void Create(Room entity)
         {
             _roomRepository.Add(entity);
             Commit();
         }
 
-        public void Edit(Rooms entity)
+        public void Edit(Room entity)
         {
             _roomRepository.Update(entity);
             Commit();
@@ -73,7 +73,7 @@ namespace Outsourcing.Service.HMS
             Delete(entity);
         }
 
-        public void Delete(Rooms entity)
+        public void Delete(Room entity)
         {
             if (entity != null)
             {
@@ -87,19 +87,19 @@ namespace Outsourcing.Service.HMS
             _unitOfWork.Commit();
         }
 
-        public Rooms FindById(int id)
+        public Room FindById(int id)
         {
             var entity = _roomRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 
-        public IQueryable<Rooms> FindByType(RoomType type)
+        public IQueryable<Room> FindByType(RoomType type)
         {
             var result = _roomRepository.FindBy(w => w.Deleted == false & w.Type == type);
             return result;
         }
 
-        public Rooms FindByIdAndSlug(int id, string slug)
+        public Room FindByIdAndSlug(int id, string slug)
         {
             return _roomRepository.FindBy(w => w.Deleted == false & w.Id == id & w.Slug == slug).SingleOrDefault();
         }

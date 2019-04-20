@@ -1,7 +1,7 @@
 ﻿
 @using PagedList.Mvc;
 @*khai bao thu vien pagelist*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Rooms>
+@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Room>
 @*don nhan du lieu dang IPagedList<Blog>*@
 
 
@@ -75,7 +75,7 @@
                         </a>
                         <div class="row this-conts">
                             <div class="media">
-                                <div class="media-body this-title">@iterm.NameEN</div>
+                                <div class="media-body this-title">@iterm.EnglishName</div>
                                 <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
                             </div>
                             <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong-dai-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>

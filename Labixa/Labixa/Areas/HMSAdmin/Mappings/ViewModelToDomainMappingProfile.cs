@@ -19,7 +19,7 @@ namespace Labixa.Areas.HMSAdmin.Mappings
             //Mapper.CreateMap<UserFormViewModel, User>().ForMember(x => x.Id, opt => opt.MapFrom(source => source.UserId));
             //Mapper.CreateMap<XViewModel, X()
             //    .ForMember(x => x.PropertyXYZ, opt => opt.MapFrom(source => source.Property1));     
-            CreateMap<RoomModel, Rooms>();
+            CreateMap<RoomModel, Room>();
 
             //Mapper.CreateMap<HotelModel, Hotel>().ForMember(x => x.Address, opt => opt.MapFrom(source => source.Address))
             //                                           .ForMember(x => x.CategoryHotelId, opt => opt.MapFrom(source => source.CategoryHotelId))
