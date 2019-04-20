@@ -104,7 +104,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name",hotel.Id);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
             return View(hotel);
         }
 

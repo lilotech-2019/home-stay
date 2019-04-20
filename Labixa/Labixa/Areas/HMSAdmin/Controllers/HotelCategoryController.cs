@@ -69,6 +69,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// </summary>
         /// <param name="hotelCategory"></param>
         /// <returns></returns>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(HotelCategory hotelCategory)

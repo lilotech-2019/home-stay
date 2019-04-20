@@ -88,7 +88,6 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryParentId =
             ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name");
             return View(blogCategories);
         }

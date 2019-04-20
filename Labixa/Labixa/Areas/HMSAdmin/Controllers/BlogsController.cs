@@ -1,5 +1,4 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data;
 using Outsourcing.Data.Models;
 using Outsourcing.Service;
 using System.Data.Entity;
@@ -67,7 +66,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
-            return View(new Blog { Position = 0});
+            return View(new Blog { Position = 0 });
         }
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name",blog.Id);
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name", blog.Id);
             return View(blog);
         }
 
