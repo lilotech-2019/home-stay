@@ -57,9 +57,6 @@ namespace Labixa.Controllers
             var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_=>_.Name);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
-
-        puclic ActionResult 
-   
        
         public ActionResult Details(int id, string slug)
         {
