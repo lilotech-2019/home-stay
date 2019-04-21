@@ -4,27 +4,32 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service;
+using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
     public class BlogsController : Controller
     {
         #region Fields
+
         private readonly IBlogService _blogsService;
         private readonly IBlogCategoryService _blogCategoryService;
+
         #endregion
 
 
         #region Ctor
+
         public BlogsController(IBlogService blogsService, IBlogCategoryService blogCategoryService)
         {
             _blogsService = blogsService;
             _blogCategoryService = blogCategoryService;
         }
+
         #endregion
 
         #region Index
+
         /// <summary>
         /// Index
         /// </summary>
@@ -34,10 +39,12 @@ namespace Labixa.Areas.Portal.Controllers
             var blogs = await _blogsService.FindAll().AsNoTracking().ToListAsync();
             return View(blogs);
         }
+
         #endregion
 
 
         #region Details
+
         /// <summary>
         /// Details
         /// </summary>
@@ -49,24 +56,26 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = _blogsService.FindById((int)id);
+            Blog blog = _blogsService.FindById((int) id);
             if (blog == null)
             {
                 return HttpNotFound();
             }
             return View(blog);
         }
+
         #endregion
 
         #region Create
+
         /// <summary>
         /// Create - GET
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
-            return View(new Blog { Position = 0 });
+            ViewBag.BlogCategoryId = _blogCategoryService.FindSelectList(null);
+            return View();
         }
 
         /// <summary>
@@ -84,12 +93,14 @@ namespace Labixa.Areas.Portal.Controllers
                 _blogsService.Create(blog);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
+            ViewBag.BlogCategoryId = _blogCategoryService.FindSelectList(blog.Id);
             return View(blog);
         }
+
         #endregion
 
         #region Edit
+
         /// <summary>
         /// Edit - GET 
         /// </summary>
@@ -101,12 +112,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = _blogsService.FindById((int)id);
+            var blog = _blogsService.FindById((int) id);
             if (blog == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name", blog.Id);
+            ViewBag.BlogCategoryId = _blogCategoryService.FindSelectList(blog.Id);
             return View(blog);
         }
 
@@ -125,12 +136,14 @@ namespace Labixa.Areas.Portal.Controllers
                 _blogsService.Edit(blog);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name", blog.Id);
+            ViewBag.BlogCategoryId = _blogCategoryService.FindSelectList(blog.Id);
             return View(blog);
         }
+
         #endregion
 
         #region Delete
+
         /// <summary>
         /// Delete
         /// </summary>
@@ -142,7 +155,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var blogs = _blogsService.FindById((int)id);
+            var blogs = _blogsService.FindById((int) id);
             if (blogs == null)
             {
                 return HttpNotFound();
@@ -167,6 +180,7 @@ namespace Labixa.Areas.Portal.Controllers
             _blogsService.Delete(blogs);
             return RedirectToAction("Index");
         }
+
         #endregion
     }
 }

@@ -65,7 +65,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
-            return View(new Blog { Position = 0 });
+            return View();
         }
 
         /// <summary>

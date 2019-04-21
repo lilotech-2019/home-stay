@@ -83,6 +83,7 @@
     <Compile Include="Areas\Portal\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogsController.cs" />
     <Compile Include="Areas\Portal\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Portal\Controllers\FileController.cs" />
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
@@ -1595,6 +1596,9 @@
     <Content Include="Areas\Portal\Views\BlogCategories\Details.cshtml" />
     <Content Include="Areas\Portal\Views\BlogCategories\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\BlogCategories\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\File\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\File\_Elfinder.cshtml" />
+    <Content Include="Areas\Portal\Views\File\_ElfinderTextBox.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

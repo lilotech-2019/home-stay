@@ -1,10 +1,14 @@
 ﻿@model Outsourcing.Data.Models.BlogCategories
 
 @{
-    ViewBag.Title = "Custom Create";
+    ViewBag.Title = "Blog Category Create";
 }
 
 
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 <div class="page-header">
     <h1>
         Create
@@ -33,13 +37,6 @@
                     </div>
                 </div>
 
-                <div class="form-group col-sm-6 col-md-12">
-                    @Html.LabelFor(model => model.CategoryParentId, "CategoryParentId", new { @class = "col-sm-3 control-label no-padding-right" })
-                    <div class="col-sm-9">
-                        @Html.DropDownList("CategoryParentId", String.Empty)
-                        @Html.ValidationMessageFor(model => model.CategoryParentId)
-                    </div>
-                </div>
 
                 <div class="form-group col-sm-6 col-md-12">
                     @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
@@ -71,8 +68,4 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section scripts{
-    <script src="~/Content/ckeditor/ckeditor.js"></script>
-    <script src="~/Content/ckeditor/config.js"></script>
-}
 
