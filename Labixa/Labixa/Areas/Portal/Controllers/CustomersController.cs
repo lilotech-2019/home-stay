@@ -14,7 +14,7 @@ namespace Labixa.Areas.Portal.Controllers
             _customerService = customerService;
         }
         /// <summary>
-        /// This Method is test new service is working
+        /// Cái này test service mới viết. cập nhật lại comment khi viết xong hàm này.
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()

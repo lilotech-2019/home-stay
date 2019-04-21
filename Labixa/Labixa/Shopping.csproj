@@ -55,9 +55,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BaseController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\BlogsController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\HotelCategoriesController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\ContactUsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
@@ -87,6 +85,7 @@
     <Compile Include="Areas\Portal\Controllers\FileController.cs" />
     <Compile Include="Areas\Portal\Controllers\HotelCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\HotelsController.cs" />
+    <Compile Include="Areas\Portal\Controllers\RoomsController.cs" />
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
@@ -1611,6 +1610,11 @@
     <Content Include="Areas\Portal\Views\Hotels\Details.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\Delete.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
