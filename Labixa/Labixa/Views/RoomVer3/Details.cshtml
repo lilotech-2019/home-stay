@@ -3,7 +3,7 @@
 @model Labixa.ViewModels.RoomDetailViewModel
 @{
     HttpCookie cookie = Request.Cookies["_culture"];
-   
+
     var longRooom = Outsourcing.Data.Models.HMS.RoomType.LongTemp;
     var shortRoom = Outsourcing.Data.Models.HMS.RoomType.ShortTemp;
 }
@@ -246,7 +246,8 @@
                         </div>
                     </div>
                 </div>
-                        } else {
+                        }
+                    @if(Model.Room.Type == longRooom ){
 
                  <div class="book-form">
 
@@ -476,7 +477,7 @@
                                         </div>
                                         <div class="content">
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                <h4>@iterm.NameEN</h4>
+                                                <h4>@iterm.EnglishName</h4>
                                             </a>
                                             <p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$ / Day</p>
                                         </div>
@@ -526,9 +527,9 @@
                     else
                     {
                         <div class="room-dec-wrapper">
-                            <h2>@Model.Room.NameEN</h2>
+                            <h2>@Model.Room.EnglishName</h2>
                             <p>@Html.Raw(Model.Room.MetaTitle)</p>
-                            <p>@Html.Raw(Model.Room.DescriptionENG)</p>
+                            <p>@Html.Raw(Model.Room.EnglishDescription)</p>
                             <input type="text" name="@Model.Room.Id" value="@Model.Room.Id" style="display:none;">
                         </div>
                     }
