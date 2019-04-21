@@ -65,7 +65,7 @@
 
                         <div class="col-md-12">
                             <div class="chk-button">
-                                <button type="submit" class="res-btn"  onclick="bookingShortRoom()">
+                                <button type="submit" class="res-btn" onclick="bookingShortRoom()">
                                     @Html.Raw(Resources.Resources.HMS_Booking)
                                 </button>
                             </div>
@@ -100,11 +100,11 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input type="date" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
+                                                        <input type="text" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
                                                                data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input type="date" name="CheckOut" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
+                                                        <input type="text" name="CheckOut" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" required
                                                                data-toggle="tooltip" data-placement="top" title="Ngày Đi" @*placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)"*@ onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                 </div>
@@ -639,7 +639,39 @@
 </section>
 <script>
     var check = false;
+    
     $(function () {
+        pickingDate();
+        validateForm();
+        
+    });
+
+    function validateForm() {
+        var checkFrom = $("#startDay");
+        var checkTo = $("#endDay");
+        checkFrom.change(function () {
+            $('.error-check-in').addClass('hidden');
+            var checkDate = isValidDate(checkFrom);
+            if (!checkDate) {
+                check = false;
+                $('.error-check-in').removeClass('hidden');
+            } else {
+                check = true;
+            }
+        });
+
+        checkTo.change(function () {
+            $('.error-check-out').addClass('hidden');
+            var checkDate = isValidDate(checkTo);
+            if (!checkDate) {
+                check = false;
+                $('.error-check-out').removeClass('hidden');
+            } else {
+                check = true;
+            }
+        });   
+    }
+    function pickingDate() {
         var dateFormat = "dd/mm/yy",
             from = $("#startDay")
                 .datepicker({
@@ -670,34 +702,13 @@
                 date = null;
             }
             return date;
-        } 
-        var checkFrom = $("#startDay");
-        var checkTo = $("#endDay");
-        checkFrom.change(function () {
-            $('.error-check-in').addClass('hidden');
-            var checkDate = isValidDate(checkFrom);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-in').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });
-        checkTo.change(function () {
-            $('.error-check-out').addClass('hidden');
-            var checkDate = isValidDate(checkTo);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-out').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });
-    });
+        }
+       
+    }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
         if (!dateString.val().match(regEx)) return false;  // Invalid format
-        dateString.val(dateString.val().slice(0, 10));
+        if (dateString.val().length > 10)  return false; 
         return true;
     }
     function BookingRooom() { 
@@ -732,13 +743,13 @@
     }
     
     function bookingShortRoom() {
-        //var startDay, endDay, selectMenu;
-        //startDay = document.getElementById("startDay").value;
-        //endDay = document.getElementById("endDay").value;
-        //selectMenu = document.getElementById("selectMenu").value;
-        //document.getElementById("startDayRoom").value = startDay;
-        //document.getElementById("endDayRoom").value = endDay;
-        //document.getElementById("CustomeNumber").value = selectMenu;
+        var startDay, endDay, selectMenu;
+        startDay = $('#startDay').val();
+        endDay = $('#endDay').val();
+        selectMenu = $('#selectMenu').val();
+        $('#startDayRoom').val(startDay);
+        $('#endDayRoom').val(endDay);
+        $('#CustomeNumber').val(selectMenu);
         if (check) {
             $("#exampleModalCenter").modal('show');
         }
