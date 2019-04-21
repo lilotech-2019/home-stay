@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.HMS;
+using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -26,12 +25,13 @@ namespace Labixa.Areas.Portal.Controllers
 
         #region Index
         /// <summary>
-        /// Index - GET
+        /// Index
         /// </summary>
+        /// <param name="hotelId">Room Id</param>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int hotelId)
         {
-            var rooms = await _roomService.FindAll().AsNoTracking().ToListAsync();
+            var rooms = await _roomService.FindByHotelId(hotelId).AsNoTracking().ToListAsync();
             return View(rooms);
         }
         #endregion
@@ -64,7 +64,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(new Room { SharePercent = 0 });
         }
 

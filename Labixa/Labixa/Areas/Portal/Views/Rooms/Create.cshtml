@@ -1,7 +1,7 @@
 ﻿@model Outsourcing.Data.Models.Room
 
 @{
-    ViewBag.Title = "Custom Create";
+    ViewBag.Title = "Create Room";
 }
 
 
@@ -51,14 +51,6 @@
                 </div>
 
                 <div class="form-group col-sm-6">
-                    @Html.LabelFor(model => model.DiscountPercent, new { @class = "col-sm-3 control-label no-padding-right" })
-                    <div class="col-sm-9">
-                        @Html.EditorFor(model => model.DiscountPercent, null, new { @class = "col-xs-10 col-sm-5" })
-                        @Html.ValidationMessageFor(model => model.DiscountPercent)
-                    </div>
-                </div>
-
-                <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
                         @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
@@ -69,7 +61,7 @@
                 <div class="form-group col-sm-6">
                     @Html.LabelFor(model => model.HotelId, "HotelId", new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.DropDownList("HotelId", String.Empty)
+                        @Html.DropDownList("HotelId", string.Empty)
                         @Html.ValidationMessageFor(model => model.HotelId)
                     </div>
                 </div>

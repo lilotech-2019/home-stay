@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal.Base;
 
 namespace Outsourcing.Service.Portal
@@ -9,6 +8,7 @@ namespace Outsourcing.Service.Portal
     public interface IRoomService : IServiceBase<Room>
     {
         IQueryable<Room> FindByType(RoomType type);
+        IQueryable<Room> FindByHotelId(int hotelId);
         Room FindByIdAndSlug(int id, string slug);
     }
 
@@ -28,6 +28,11 @@ namespace Outsourcing.Service.Portal
         {
             var result = Repository.FindBy(w => w.Deleted == false & w.Type == type);
             return result;
+        }
+
+        public IQueryable<Room> FindByHotelId(int hotelId)
+        {
+            return Repository.FindBy(w => w.Deleted == false&&w.HotelId==hotelId);
         }
 
         public Room FindByIdAndSlug(int id, string slug)
