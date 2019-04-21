@@ -75,11 +75,11 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail,
-            String customerPhone, String name)
+        public ActionResult BookingRoom(RoomOrder modelBooking, String Name, String Email,
+            String Phone)
         {
             Room room = new Room();
-            room.Name = name;
+            room.Name = Name;
             string adminGmail = "minhtrungmessi@gmail.com";
             string password = "abc65432abc65432";
             string subject = "Đặt phòng thành công";
@@ -89,29 +89,29 @@ namespace Labixa.Controllers
                              "<th> Ngày Check Out</th>" +
                              "<th> Email Khách Hàng</th>" +
                              "<th> Số Điện Thoại</th>" +
-                             "<th> Tên Phòng</th>" +
+                             //"<th> Tên Phòng</th>" +
                              "<th> Số Lượng Người</th>" +
                              "<th> Số Tiền</th>" +
                              "</thead>" +
                              "<tbody>" +
-                             "<td>" + customerName + "</td>" +
+                             "<td>" + Name + "</td>" +
                              "<td>" + modelBooking.CheckIn + "</td>" +
                              "<td>" + modelBooking.CheckOut + "</td>" +
-                             "<td>" + customerEmail + "</td>" +
-                             "<td>" + customerPhone + "</td>" +
-                             "<td>" + name + "</td>" +
+                             "<td>" + Email + "</td>" +
+                             "<td>" + Phone + "</td>" +
+                             //"<td>" + Name + "</td>" +
                              "<td>" + modelBooking.AmountOfPeople + "</td>" +
                              "<td>" + modelBooking.Price + "</td>" +
                              "</tbody></table>";
 
-            var customer = _customerservice.FindByPhone(customerPhone);
+            var customer = _customerservice.FindByPhone(Phone);
             if (customer == null)
             {
                 customer = new Customer
                 {
-                    Name = customerName,
-                    Email = customerEmail,
-                    Phone = customerPhone
+                    Name = Name,
+                    Email = Email,
+                    Phone = Phone
                 };
                 _customerservice.Create(customer);
             }
@@ -130,7 +130,7 @@ namespace Labixa.Controllers
             var mess = new MailMessage();
             mess.From = new MailAddress(adminGmail);
             mess.ReplyToList.Add(adminGmail);
-            mess.To.Add(new MailAddress(customerEmail));
+            mess.To.Add(new MailAddress(Email));
             mess.Subject = subject;
             mess.Body = content;
             mess.IsBodyHtml = true;
@@ -139,8 +139,8 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail,
-            String customerPhone, String name)
+        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String Name, String Email,
+            String Phone, String name)
         {
             Room room = new Room();
             room.Name = name;
@@ -151,36 +151,36 @@ namespace Labixa.Controllers
                              "<th> Họ Tên Khách Hàng </th>" +
                              "<th> Email Khách Hàng</th>" +
                              "<th> Số Điện Thoại</th>" +
-                             "<th> Tên Phòng</th>" +
+                             //"<th> Tên Phòng</th>" +
                              "<th> Số Lượng Người</th>" +
                              "<th> Số Tiền</th>" +
                              "</thead>" +
                              "<tbody>" +
-                             "<td>" + customerName + "</td>" +
-                             "<td>" + customerEmail + "</td>" +
-                             "<td>" + customerPhone + "</td>" +
-                             "<td>" + name + "</td>" +
+                             "<td>" + Name + "</td>" +
+                             "<td>" + Email + "</td>" +
+                             "<td>" + Phone + "</td>" +
+                             //"<td>" + name + "</td>" +
                              "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                              "<td>" + modelBookingLongRoom + "</td>" +
                              "</tbody></table>";
 
-            var customer = _customerservice.FindByPhone(customerPhone);
+            var customer = _customerservice.FindByPhone(Phone);
 
             if (customer == null)
             {
                 customer = new Customer
                 {
-                    Name = customerName,
-                    Email = customerEmail,
-                    Phone = customerPhone
+                    Name = Name,
+                    Email = Email,
+                    Phone = Phone
                 };
                 _customerservice.Create(customer);
             }
 
             modelBookingLongRoom.CustomerId = customer.Id;
 
-            modelBookingLongRoom.CheckIn = DateTime.Now;
-            modelBookingLongRoom.CheckOut = DateTime.Now;
+            //modelBookingLongRoom.CheckIn = DateTime.Now;
+            //modelBookingLongRoom.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBookingLongRoom);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
@@ -189,7 +189,7 @@ namespace Labixa.Controllers
             };
             var mess = new MailMessage {From = new MailAddress(adminGmail)};
             mess.ReplyToList.Add(adminGmail);
-            mess.To.Add(new MailAddress(customerEmail));
+            mess.To.Add(new MailAddress(Email));
             mess.Subject = subject;
             mess.Body = content;
             mess.IsBodyHtml = true;
