@@ -643,7 +643,7 @@
     $(function () {
         pickingDate();
         validateForm();
-        
+        pickingDateModal()    
     });
 
     function validateForm() {
@@ -705,6 +705,38 @@
         }
        
     }
+    function pickingDateModal() {
+        var dateFormat = "dd/mm/yy",
+            from = $("#startDayRoom")
+                .datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2
+                })
+                .on("change", function () {
+                    to.datepicker("option", "minDate", getDateModal(this));
+                }),
+            to = $("#endDayRoom").datepicker({
+                dateFormat: 'dd/mm/yy',
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2
+            })
+                .on("change", function () {
+                    from.datepicker("option", "maxDate", getDateModal(this));
+                });
+
+        function getDateModal(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch (error) {
+                date = null;
+            }
+            return date;
+        }
+    }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
         if (!dateString.val().match(regEx)) return false;  // Invalid format
@@ -712,10 +744,10 @@
         return true;
     }
     function BookingRooom() { 
-        var check = false;
+        var check = true;
         var customerName, customerEmail, customerPhone;
         $('.error-phone').addClass('hidden');
-        $('.error-email').removeClass('hidden');
+        $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
         customerName = $('#CustomerName').val();
@@ -724,22 +756,16 @@
         if (customerPhone.length != 10) {
             $('.error-phone').removeClass('hidden');
             check = false;
-        } else {
-            check = true;
-        }
-        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+ ([a - zA - Z0 - 9]{ 2, 4})+$ /;
-        
+        } 
+
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+ ([a - zA - Z0 - 9]{ 2, 4})+$ /;        
         if (!regex.test(customerEmail)) {
             $('.error-email').removeClass('hidden');
             check = false;
-        } else {
-            check = true;
-        }
+        } 
         if (check && CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
             alert("Đặt Phòng Thành Công");
         }
-
-
     }
     
     function bookingShortRoom() {
