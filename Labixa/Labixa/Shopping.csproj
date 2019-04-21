@@ -1898,7 +1898,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -1908,10 +1907,7 @@
     <Content Include="Views\Shared\_LayoutHMS.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
-    <Content Include="Views\Home\Activities.cshtml" />
     <Content Include="Views\Home\Booking.cshtml" />
-    <Content Include="Views\News\Event.cshtml" />
-    <Content Include="Views\News\ActitityNews.cshtml" />
     <Content Include="Views\RoomVer3\ShortRoom.cshtml" />
     <Content Include="Views\RoomVer3\LongRoom.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
