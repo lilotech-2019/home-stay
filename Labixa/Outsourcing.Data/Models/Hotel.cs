@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
 {
@@ -22,11 +21,10 @@ namespace Outsourcing.Data.Models
 
         public string Description { get; set; }
 
- 
+
         public string Address { get; set; }
         public string District { get; set; }
         public string Ward { get; set; }
-        public string Street { get; set; }
         public string ManagerName { get; set; }
         public string ManagerPhone { get; set; }
         public string ManagerEmail { get; set; }
@@ -52,7 +50,8 @@ namespace Outsourcing.Data.Models
 
         [ForeignKey("HotelCategoryId")]
         public virtual HotelCategory HotelCategory { get; set; }
-        
+
+        [DataType(DataType.MultilineText)]
         public string MetaDescription { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
@@ -8,19 +8,21 @@ using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    public class HotelCategoriesController : Controller
+    public class HotelsController : Controller
     {
         #region Fields
 
-        private readonly IHotelCategoryService _hotelCategoryService;
+        private readonly IHotelService _hotelService;
+        private readonly IHotelCategoryService _categoryHotelService;
 
         #endregion
 
         #region Ctor
 
-        public HotelCategoriesController(IHotelCategoryService hotelCategoryService)
+        public HotelsController(IHotelService hotelService, IHotelCategoryService categoryHotelService)
         {
-            _hotelCategoryService = hotelCategoryService;
+            _hotelService = hotelService;
+            _categoryHotelService = categoryHotelService;
         }
 
         #endregion
@@ -28,13 +30,19 @@ namespace Labixa.Areas.Portal.Controllers
         #region Index
 
         /// <summary>
-        /// Index - GET
+        /// Index - Get
         /// </summary>
+        /// <param name="id">HotelCategoryId</param>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? id)
         {
-            var categories = await _hotelCategoryService.FindAll().AsNoTracking().ToListAsync();
-            return View(categories);
+            var hotels = _hotelService.FindAll();
+            if (id != null)
+            {
+                hotels = hotels.Where(w => w.HotelCategoryId == id);
+            }
+            hotels = hotels.AsNoTracking();
+            return View(hotels);
         }
 
         #endregion
@@ -52,12 +60,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HotelCategory hotelCategory = _hotelCategoryService.FindById((int) id);
-            if (hotelCategory == null)
+            var hotel = _hotelService.FindById((int) id);
+            if (hotel == null)
             {
                 return HttpNotFound();
             }
-            return View(hotelCategory);
+            return View(hotel);
         }
 
         #endregion
@@ -70,27 +78,27 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(), "Id", "Name");
             return View();
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="hotelCategory"></param>
-        /// <returns></returns>
+        /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HotelCategory hotelCategory)
+        public ActionResult Create(Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                hotelCategory.Slug = StringConvert.ConvertShortName(hotelCategory.Name);
-                _hotelCategoryService.Create(hotelCategory);
+                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+                _hotelService.Create(hotel);
                 return RedirectToAction("Index");
             }
-
-            return View(hotelCategory);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
+            return View(hotel);
         }
 
         #endregion
@@ -108,30 +116,32 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HotelCategory hotelCategory = _hotelCategoryService.FindById((int) id);
-            if (hotelCategory == null)
+            Hotel hotel = _hotelService.FindById((int) id);
+            if (hotel == null)
             {
                 return HttpNotFound();
             }
-            return View(hotelCategory);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
+            return View(hotel);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="hotelCategory"></param>
+        /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HotelCategory hotelCategory)
+        public ActionResult Edit(Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                hotelCategory.Slug = StringConvert.ConvertShortName(hotelCategory.Name);
-                _hotelCategoryService.Edit(hotelCategory);
+                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
+                _hotelService.Edit(hotel);
                 return RedirectToAction("Index");
             }
-            return View(hotelCategory);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
+            return View(hotel);
         }
 
         #endregion
@@ -139,7 +149,7 @@ namespace Labixa.Areas.Portal.Controllers
         #region Delete
 
         /// <summary>
-        /// Delete - GET
+        /// Delete
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -149,7 +159,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelCategoryService.FindById((int) id);
+            var categoryHotels = _hotelService.FindById((int) id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
@@ -157,22 +167,19 @@ namespace Labixa.Areas.Portal.Controllers
             return View(categoryHotels);
         }
 
+        // POST: /HMSAdmin/Hotels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var categoryHotels = _hotelCategoryService.FindById(id);
-            if (categoryHotels == null)
+            var hotels = _hotelService.FindById(id);
+            if (hotels == null)
             {
                 return HttpNotFound();
             }
-            _hotelCategoryService.Delete(categoryHotels);
+            _hotelService.Delete(hotels);
             return RedirectToAction("Index");
         }
-
-        #endregion
-
-        #region MyRegion
 
         #endregion
     }
