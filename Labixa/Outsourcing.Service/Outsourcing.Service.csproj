@@ -86,6 +86,10 @@
     <Compile Include="NotificationServices.cs" />
     <Compile Include="OrderItemService.cs" />
     <Compile Include="PictureService.cs" />
+    <Compile Include="Portal\BlogCategoryService.cs" />
+    <Compile Include="Portal\BlogService.cs" />
+    <Compile Include="Portal\CustomerService.cs" />
+    <Compile Include="Portal\base\IServiceBase.cs" />
     <Compile Include="ProductAttributeService.cs" />
     <Compile Include="ProductAttributeMappingervice.cs" />
     <Compile Include="ProductCategoryMappingServices.cs" />

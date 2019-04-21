@@ -1,0 +1,39 @@
+﻿
+@using Outsourcing.Core
+@model Outsourcing.Data.Models.HMS.RoomImageMapping
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RoomId)
+@Html.HiddenFor(model => model.RoomImageId)
+@Html.HiddenFor(model => model.RoomImage.Id)
+@*@if (Model.Product.Id != 50)
+    {
+        if (Model.IsMainPicture)
+        {
+            <label class="col-sm-3 control-label no-padding-right" for="">Ảnh đại diện</label>
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Picture.Url, "GetImageFromElfinder")
+                @Html.ValidationMessageFor(model => model.Picture.Url)
+            </div>
+        }
+        else
+        {
+            @Html.MyLabelFor(model => model.Picture.Url)
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Picture.Url, "GetImageFromElfinder")
+                @Html.ValidationMessageFor(model => model.Picture.Url)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-sm-2" style="float:left; margin-right:35px">
+            @Html.EditorFor(model => model.Picture.Url, "GetImageFromElfinderPhoto")
+            @Html.ValidationMessageFor(model => model.Picture.Url)
+        </div>
+    }*@
+<label class="col-sm-3 control-label no-padding-right" for="">Hình ảnh</label>
+<div class="col-sm-9">
+    @Html.EditorFor(model => model.RoomImage.Url, "GetImageFromElfinder")
+    @Html.ValidationMessageFor(model => model.RoomImage.Url)
+</div>

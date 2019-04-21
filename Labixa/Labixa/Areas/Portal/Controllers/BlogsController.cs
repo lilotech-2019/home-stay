@@ -6,7 +6,7 @@ using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Service;
 
-namespace Labixa.Areas.HMSAdmin.Controllers
+namespace Labixa.Areas.Portal.Controllers
 {
     public class BlogsController : Controller
     {
@@ -14,6 +14,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         private readonly IBlogService _blogsService;
         private readonly IBlogCategoryService _blogCategoryService;
         #endregion
+
 
         #region Ctor
         public BlogsController(IBlogService blogsService, IBlogCategoryService blogCategoryService)
