@@ -1,4 +1,5 @@
-﻿/// <reference path="jquery-3.3.1.js" />
+﻿/// <reference path="jquery-ui-1.12.1.js" />
+/// <reference path="jquery-3.3.1.js" />
 /// <autosync enabled="true" />
 /// <reference path="../content/admin/js/ace.min.js" />
 /// <reference path="../content/admin/js/ace-elements.min.js" />
