@@ -10,16 +10,15 @@ namespace Outsourcing.Data.Models.HMS
         [MaxLength(255)]
         [DisplayName("Category Name")]
         public string Name { get; set; }
-        
-        [Range(0, 100)]
-        public int SharePercent { get; set; }
 
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
         public virtual ICollection<Hotel> Hotels { get; set; }
     }
-
 }

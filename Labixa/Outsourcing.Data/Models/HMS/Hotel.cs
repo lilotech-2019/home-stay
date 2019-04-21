@@ -49,10 +49,12 @@ namespace Outsourcing.Data.Models.HMS
         public string Slug { get; set; }
 
         public string Noted { get; set; }
-        
+
         public int HotelCategoryId { get; set; }
+
         [ForeignKey("HotelCategoryId")]
         public virtual HotelCategory HotelCategory { get; set; }
+
         public virtual ICollection<CostOrder> CostOrders { get; set; }
         public string MetaDescription { get; set; }
     }

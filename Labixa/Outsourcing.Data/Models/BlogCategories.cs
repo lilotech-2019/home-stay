@@ -7,17 +7,19 @@ namespace Outsourcing.Data.Models
 {
     public class BlogCategories : BaseEntity
     {
-        [Required][MaxLength(255)]
+        [Required]
+        [MaxLength(255)]
+        [Display(Name = "Category Name")]
         public string Name { get; set; }
-        public string Description { get; set; }
 
-        public bool Status { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
 
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }
-        
+
         /// <summary>
         /// Parent category
         /// </summary>
@@ -37,11 +39,11 @@ namespace Outsourcing.Data.Models
         /// Is this blog is static Page
         /// </summary>
         public bool IsStaticPage { get; set; }
-        virtual public ICollection<Blog> Blogs { get; set; }
+
+        public virtual ICollection<Blog> Blogs { get; set; }
         public bool IsDelete { get; set; }
 
         [ForeignKey("CategoryParentId")]
-        virtual public BlogCategories CategoryParent { get; set; }
+        public virtual BlogCategories CategoryParent { get; set; }
     }
-
 }
