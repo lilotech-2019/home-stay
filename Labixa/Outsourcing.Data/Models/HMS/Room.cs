@@ -11,7 +11,9 @@ namespace Outsourcing.Data.Models.HMS
         public string Name { get; set; }
 
         public string EnglishName { get; set; }
+        public string NameENG { get; set; }
         public string Description { get; set; }
+        public string DescriptionENG { get; set; }
         public string EnglishDescription { get; set; }
 
         [Range(0, 100)]
