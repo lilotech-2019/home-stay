@@ -9,7 +9,7 @@ namespace Outsourcing.Data.Models.HMS
     {
         public RoomOrder()
         {
-            DateCreated = CheckIn = CheckOut = DateTime.Now;
+            DateCreated =  DateTime.Now;
         }
 
 

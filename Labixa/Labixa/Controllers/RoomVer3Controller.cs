@@ -53,7 +53,7 @@ namespace Labixa.Controllers
         public ActionResult LongRoom(int? page)
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 3;
+            int pageSize = 9;
             var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_ => _.Name);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
@@ -119,8 +119,8 @@ namespace Labixa.Controllers
             modelBooking.CustomerId = customer.Id;
 
 
-            modelBooking.CheckIn = DateTime.Now;
-            modelBooking.CheckOut = DateTime.Now;
+            //modelBooking.CheckIn = DateTime.Now;
+            //modelBooking.CheckOut = DateTime.Now;
             _roomOrderService.Create(modelBooking);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
@@ -161,7 +161,7 @@ namespace Labixa.Controllers
                              "<td>" + Phone + "</td>" +
                              //"<td>" + name + "</td>" +
                              "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
-                             "<td>" + modelBookingLongRoom + "</td>" +
+                             "<td>" + modelBookingLongRoom.Price + "</td>" +
                              "</tbody></table>";
 
             var customer = _customerservice.FindByPhone(Phone);
@@ -176,11 +176,11 @@ namespace Labixa.Controllers
                 };
                 _customerservice.Create(customer);
             }
-
+            modelBookingLongRoom.CheckIn = DateTime.Now;
+            modelBookingLongRoom.CheckOut = DateTime.Now;
             modelBookingLongRoom.CustomerId = customer.Id;
 
-            //modelBookingLongRoom.CheckIn = DateTime.Now;
-            //modelBookingLongRoom.CheckOut = DateTime.Now;
+
             _roomOrderService.Create(modelBookingLongRoom);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {

@@ -14,6 +14,7 @@ namespace Outsourcing.Data.Models
         public string Content { get; set; }
         public ContactUsType Type { get; set; }
         public string Note { get; set; }
+        public double Price { get; set; }
     }
 
     public enum ContactUsType
