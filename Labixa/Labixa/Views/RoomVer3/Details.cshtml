@@ -7,7 +7,12 @@
     var longRooom = Outsourcing.Data.Models.HMS.RoomType.LongTemp;
     var shortRoom = Outsourcing.Data.Models.HMS.RoomType.ShortTemp;
 }
+<style>
+    .text-danger {
+        color: #a94442 !important;
+    }
 
+</style>
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_RoomDetail)</h2>
@@ -35,13 +40,15 @@
                         <div class="book-form">
                         <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.Resources.HMS_StartDate)</b>
-                            <input type="date" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                            <input type="text" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
                                    data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
+                            <small><span class="text-danger error-check-in hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
                         </div>
                         <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.Resources.HMS_EndDate)</b>
-                            <input type="date" name="CheckIn" id="endDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
+                            <input type="text" name="CheckOut" id="endDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" required
                                    data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
+                            <small><span class="text-danger error-check-out hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
                         </div>
                         <div class="col-md-12" style="padding-bottom:10px">
                             <b>@Html.Raw(Resources.Resources.HMS_PeopleNumber)</b>
@@ -58,8 +65,7 @@
 
                         <div class="col-md-12">
                             <div class="chk-button">
-                                <button type="submit" class="res-btn" data-toggle="modal"
-                                        data-target="#exampleModalCenter" onclick="bookingShortRoom()">
+                                <button type="submit" class="res-btn"  onclick="bookingShortRoom()">
                                     @Html.Raw(Resources.Resources.HMS_Booking)
                                 </button>
                             </div>
@@ -89,6 +95,7 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -116,6 +123,7 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                class="form-control" onkeypress="return isNumberKey(event)">
+                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không đúng </span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -630,36 +638,111 @@
     </div>
 </section>
 <script>
-    function BookingRooom() {
-        var CustomerName, CustomerEmail, CustomerPhone;
+    var check = false;
+    $(function () {
+        var dateFormat = "dd/mm/yy",
+            from = $("#startDay")
+                .datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2
+                })
+                .on("change", function () {
+                    to.datepicker("option", "minDate", getDate(this));
 
-        CustomerEmail = document.getElementById("CustomerEmail").value;
-        CustomerPhone = document.getElementById("CustomerPhone").value;
-        CustomerName = document.getElementById("CustomerName").value;
+                }),
+            to = $("#endDay").datepicker({
+                dateFormat: 'dd/mm/yy',
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2
+            })
+                .on("change", function () {
+                    from.datepicker("option", "maxDate", getDate(this));
+                });
 
-        var checkBox = document.getElementById("action");
-        var checkboxValue = true;
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch (error) {
+                date = null;
+            }
+            return date;
+        } 
+        var checkFrom = $("#startDay");
+        var checkTo = $("#endDay");
+        checkFrom.change(function () {
+            $('.error-check-in').addClass('hidden');
+            var checkDate = isValidDate(checkFrom);
+            if (!checkDate) {
+                check = false;
+                $('.error-check-in').removeClass('hidden');
+            } else {
+                check = true;
+            }
+        });
+        checkTo.change(function () {
+            $('.error-check-out').addClass('hidden');
+            var checkDate = isValidDate(checkTo);
+            if (!checkDate) {
+                check = false;
+                $('.error-check-out').removeClass('hidden');
+            } else {
+                check = true;
+            }
+        });
+    });
+    function isValidDate(dateString) {
+        var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
+        if (!dateString.val().match(regEx)) return false;  // Invalid format
+        dateString.val(dateString.val().slice(0, 10));
+        return true;
+    }
+    function BookingRooom() { 
+        var check = false;
+        var customerName, customerEmail, customerPhone;
+        $('.error-phone').addClass('hidden');
+        $('.error-email').removeClass('hidden');
+        customerEmail = $('#CustomerEmail').val();
+        customerPhone = $('#CustomerPhone').val();
+        customerName = $('#CustomerName').val();
 
-
-
-        if (CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
+        customerPhone = customerPhone.replace(/[^0-9]/g, '');
+        if (customerPhone.length != 10) {
+            $('.error-phone').removeClass('hidden');
+            check = false;
+        } else {
+            check = true;
+        }
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+ ([a - zA - Z0 - 9]{ 2, 4})+$ /;
+        
+        if (!regex.test(customerEmail)) {
+            $('.error-email').removeClass('hidden');
+            check = false;
+        } else {
+            check = true;
+        }
+        if (check && CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
             alert("Đặt Phòng Thành Công");
         }
 
 
     }
+    
     function bookingShortRoom() {
-        var startDay, endDay, selectMenu;
-         startDay = document.getElementById("startDay").value;
-         endDay = document.getElementById("endDay").value;
-         selectMenu = document.getElementById("selectMenu").value;
-        document.getElementById("startDayRoom").value = startDay;
-        document.getElementById("endDayRoom").value = endDay;
-        document.getElementById("CustomeNumber").value = selectMenu;
-    }
-    function checkBenefit() {
+        //var startDay, endDay, selectMenu;
+        //startDay = document.getElementById("startDay").value;
+        //endDay = document.getElementById("endDay").value;
+        //selectMenu = document.getElementById("selectMenu").value;
+        //document.getElementById("startDayRoom").value = startDay;
+        //document.getElementById("endDayRoom").value = endDay;
+        //document.getElementById("CustomeNumber").value = selectMenu;
+        if (check) {
+            $("#exampleModalCenter").modal('show');
+        }
 
     }
-
 </script>
 <!-- News style-->
