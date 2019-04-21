@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Outsourcing.Data.Infrastructure;
+using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.Portal.@base;
+using Outsourcing.Service.Portal.Base;
 
 namespace Outsourcing.Service.Portal
 {
@@ -19,5 +16,5 @@ namespace Outsourcing.Service.Portal
             unitOfWork)
         {
         }
-    }
+        }
 }

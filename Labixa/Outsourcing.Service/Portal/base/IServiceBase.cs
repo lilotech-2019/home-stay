@@ -2,7 +2,7 @@
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 
-namespace Outsourcing.Service.Portal.@base
+namespace Outsourcing.Service.Portal.Base
 {
     public interface IServiceBase<T> where T : BaseEntity
     {
@@ -12,6 +12,7 @@ namespace Outsourcing.Service.Portal.@base
         void Edit(T entity);
         void Delete(int id);
         void Delete(T entity);
+        IQueryable<T> FindSelectList(int? id = null);
     }
 
     public abstract class ServiceBase<T> where T : BaseEntity
@@ -72,6 +73,16 @@ namespace Outsourcing.Service.Portal.@base
         public T FindById(int id)
         {
             return Repository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+        }
+
+        public IQueryable<T> FindSelectList(int? id = null)
+        {
+            var data = Repository.FindBy(w => w.Deleted == false);
+            if (id != null)
+            {
+                data = data.Where(w => w.Id == id);
+            }
+            return data;
         }
     }
 }

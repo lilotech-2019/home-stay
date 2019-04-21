@@ -11,8 +11,14 @@ namespace Outsourcing.Data.Models.HMS
         public string Name { get; set; }
 
         public string EnglishName { get; set; }
+        public string NameENG { get; set; }
         public string Description { get; set; }
+        public string DescriptionENG { get; set; }
         public string EnglishDescription { get; set; }
+
+        [Range(0, 100)]
+        public int SharePercent { get; set; }
+
         public double Price { get; set; }
 
         [Range(0, 100)]
@@ -22,8 +28,6 @@ namespace Outsourcing.Data.Models.HMS
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }
-
-        public string EnglishSlug { get; set; }
 
         public string Noted { get; set; }
 
@@ -45,7 +49,10 @@ namespace Outsourcing.Data.Models.HMS
         public int HotelId { get; set; }
 
         public virtual Hotel Hotel { get; set; }
-        public virtual ICollection<Asset> Assets { get; set; }
+        public RoomType Type { get; set; }
+
+        public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
+        public virtual ICollection<RoomOrder> RoomOrders { get; set; }
     }
 
     public enum RoomType

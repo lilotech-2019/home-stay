@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
+using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
 

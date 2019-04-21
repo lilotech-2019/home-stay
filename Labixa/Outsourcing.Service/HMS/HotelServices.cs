@@ -2,6 +2,7 @@
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Repository.HMS;
 using System.Linq;
+using Outsourcing.Data.Models;
 
 namespace Outsourcing.Service.HMS
 {
