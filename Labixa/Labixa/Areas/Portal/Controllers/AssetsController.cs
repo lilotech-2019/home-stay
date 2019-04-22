@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Outsourcing.Data;
-using Outsourcing.Data.Models;
+﻿using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
     public class AssetsController : Controller
     {
         #region Fields
+
         private readonly IAssetService _assertService;
+
+        #endregion
+
+        #region Ctor
+
+        public AssetsController(IAssetService assertService)
+        {
+            _assertService = assertService;
+        }
+
         #endregion
 
         #region Index
@@ -32,52 +37,66 @@ namespace Labixa.Areas.Portal.Controllers
         }
         #endregion
 
-        // GET: /Portal/Assets/Details/5
-        public async Task<ActionResult> Details(int? id)
+        #region Details
+        /// <summary>
+        /// Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = await db.Assets.FindAsync(id);
+            Asset asset = _assertService.FindById((int)id);
             if (asset == null)
             {
                 return HttpNotFound();
             }
             return View(asset);
         }
+        #endregion
 
-        // GET: /Portal/Assets/Create
+        #region Create
+
+        /// <summary>
+        /// Create - GET
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /Portal/Assets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,Price,Quantity,RoomId,Deleted,Status,DateCreated,LastModify")] Asset asset)
+        public ActionResult Create(Asset asset)
         {
             if (ModelState.IsValid)
             {
-                db.Assets.Add(asset);
-                await db.SaveChangesAsync();
+                _assertService.Create(asset);
                 return RedirectToAction("Index");
             }
 
             return View(asset);
         }
+        #endregion
 
-        // GET: /Portal/Assets/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        #region Edit
+
+        /// <summary>
+        /// Edit - GET 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = await db.Assets.FindAsync(id);
+            Asset asset = _assertService.FindById((int)id);
             if (asset == null)
             {
                 return HttpNotFound();
@@ -85,30 +104,33 @@ namespace Labixa.Areas.Portal.Controllers
             return View(asset);
         }
 
-        // POST: /Portal/Assets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,Price,Quantity,RoomId,Deleted,Status,DateCreated,LastModify")] Asset asset)
+        public ActionResult Edit(Asset asset)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(asset).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _assertService.Edit(asset);
                 return RedirectToAction("Index");
             }
             return View(asset);
         }
+        #endregion
 
-        // GET: /Portal/Assets/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        #region Delete
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = await db.Assets.FindAsync(id);
+            Asset asset = _assertService.FindById((int)id);
             if (asset == null)
             {
                 return HttpNotFound();
@@ -116,24 +138,23 @@ namespace Labixa.Areas.Portal.Controllers
             return View(asset);
         }
 
-        // POST: /Portal/Assets/Delete/5
+        /// <summary>
+        /// DeleteConfirmed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Asset asset = await db.Assets.FindAsync(id);
-            db.Assets.Remove(asset);
-            await db.SaveChangesAsync();
+            Asset asset = _assertService.FindById(id);
+            if (asset == null)
+            {
+                return HttpNotFound();
+            }
+            _assertService.Delete(asset);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }
