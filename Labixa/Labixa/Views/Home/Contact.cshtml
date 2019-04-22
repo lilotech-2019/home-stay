@@ -4,26 +4,12 @@
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
     HttpCookie cookie = Request.Cookies["_culture"];
 }
-<script>
-   
-    function sendContact() {
-        var Name, Email, PhoneNumber, message;
-       
-        Name = document.getElementById("CustomerName").value;
-        Email = document.getElementById("Email").value;
-        PhoneNumber = document.getElementById("PhoneNumber").value;
-        message = document.getElementById("content").value;
-        
-        if (Name != "" && Email != "" && PhoneNumber !="" && message != "") {
-            alert("Gửi Tin Nhắn Thành Công");
-        
-        }
-       
-        
-       
-
+<style>
+    .text-danger {
+        color: #a94442 !important;
     }
-</script>
+</style>
+
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>
 <section class="row final-inner-header">
     <div class="container">
@@ -38,7 +24,6 @@
         </ol>
     </div>
 </section>
-<!-- Booking style-->
 <section class="container clearfix common-pad booknow">
     <div class="sec-header">
         <h2>@Html.Raw(Resources.Resources.HMS_SendMessage)</h2>
@@ -54,35 +39,38 @@
     <div class="row nasir-contact">
         <div class="col-md-8">
             <div class="book-left-content input_form">
-                @* form để submit data *@
                 <form id="contactForm" action="/Home/ContactBookingRooom" method="post" name="contactForm">
-                    @*@Html.HiddenFor(model => model.IsDelete)
-                    @Html.HiddenFor(model => model.Note)*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Name)</span>
-                            <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                            <input id="ContactName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                            <small><span class="text-danger error-contactName hidden">Vui lòng nhập Tên  </span></small>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Email) </span>
-                            <input id="Email" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                            <input id="ContactEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                            <small><span class="text-danger error-ContactEmail-none hidden">Vui lòng nhập địa chỉ email </span></small>
+                            <small><span class="text-danger error-ContactEmail hidden">Sai Định Dạng Email</span></small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Phone)</span>
-                            <input id="PhoneNumber" type="text" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
+                            <input id="ContactPhone" type="text" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
+                            <small><span class="text-danger error-ContactPhonel-none hidden">Vui lòng nhập số điện thoại </span></small>
+                            <small><span class="text-danger error-ContactPhone hidden">Sai định dạng số điện thoại</span></small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Message)</span>
-                            <textarea id="content" rows="6" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" class="form-control" required></textarea>
+                            <textarea id="ContactMesss" rows="6" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" class="form-control" required></textarea>
                         </div>
+                        <small><span class="text-danger error-ContactMesss-none hidden">Vui lòng nhập nội dung </span></small>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button type="submit" class="res-btn" onclick="sendContact()">@Html.Raw(Resources.Resources.HMS_SendMessage)</button>
+                            <button type="submit" class="res-btn" id="btn-submit-contact">@Html.Raw(Resources.Resources.HMS_SendMessage)</button>
                         </div>
                     </div>
                 </form>
@@ -120,24 +108,24 @@
                     <div class="media-contact-icon"><i aria-hidden="true" class="fa fa-phone"></i></div>
                     @if (cookie != null && cookie.Value.Equals("vi"))
                     {
-                          <div class="media-contact-info">
-                         <p>
-                        Từ thứ 2 đến thứ 6 : 8.00am to 5.00 pm<br>
-                        Thứ 7 : 8.00am to 3.00 pm<br>
-                        chủ nhật : <span>closed</span>
-                         </p>
-                       </div>
-                          
+                        <div class="media-contact-info">
+                            <p>
+                                Từ thứ 2 đến thứ 6 : 8.00am to 5.00 pm<br>
+                                Thứ 7 : 8.00am to 3.00 pm<br>
+                                chủ nhật : <span>closed</span>
+                            </p>
+                        </div>
+
                     }
                     else
                     {
-                         <div class="media-contact-info">
-                             <p>
-                                 Monday to Friday : 8.00am to 5.00 pm<br>
-                                 Saturday : 8.00am to 3.00 pm<br>
-                                 Sunday : <span>closed</span>
-                             </p>
-                         </div>  
+                        <div class="media-contact-info">
+                            <p>
+                                Monday to Friday : 8.00am to 5.00 pm<br>
+                                Saturday : 8.00am to 3.00 pm<br>
+                                Sunday : <span>closed</span>
+                            </p>
+                        </div>
                     }
 
                 </div>
@@ -151,8 +139,77 @@
         </div>
     </div>
 </section>
-<!-- Booking style-->
-<!-- TT-CONTACT-MAP-->
 <div id="map-canvas" data-lat="10.8851677" data-lng="106.5786695" data-zoom="14" class="tt-contact-map map-block"></div>
 <div class="addresses-block"><a data-lat="10.8851677" data-marker="" data-lng="106.5786695" data-string="1. Here is some address or email or phone or something else..."></a></div>
+<script>
 
+    var check = false;
+    var contactForm = $('#contactForm');//id form
+    var submitBtnContact = $('#btn-submit-contact');//id nut submit
+    $(function () {
+        submitFormContact();
+    });
+    function submitFormContact() {
+        submitBtnContact.click(function (e) {
+            check = validateFormContact();
+            if (check) {
+                alert("Gửi thông tin liên hệ thành công");
+                contactForm.submit();
+            } else {
+                e.preventDefault();
+            }
+        });
+    }
+    function isValidGmail(gmailString) {
+        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+        if (!regex.test(gmailString))
+            return false;
+        return true;
+    }
+    function isValidPhone(phoneString) {
+        if (phoneString.length != 10) {
+            return false;
+        }
+        return true;
+    }
+    function validateFormContact() {
+        var ContactName, ContactEmail, ContactPhone, ContactMesss;
+        ContactName = $('#ContactName').val();
+        ContactEmail = $('#ContactEmail').val();
+        ContactPhone = $('#ContactPhone').val();
+        ContactMesss = $('#ContactMesss').val();
+        if (ContactName == "") {
+            $('.error-contactName').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-contactName').addClass('hidden');
+        }
+        if (ContactEmail == "") {
+            $('.error-ContactEmail-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-ContactEmail-none').addClass('hidden');
+        }
+        if (!isValidGmail(ContactEmail)) {
+            $('.error-ContactEmail').removeClass('hidden');
+            return false;
+        }
+        if (ContactPhone == "") {
+            $('.error-ContactPhonel-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-ContactPhonel-none').addClass('hidden');
+        }
+        if (!isValidPhone(ContactPhone)) {
+            $('.error-ContactPhone').removeClass('hidden');
+            return false;
+        }
+        if (ContactMesss == "") {
+            $('.error-ContactMesss-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-ContactMesss-none').addClass('hidden');
+        }
+        return true;
+    }
+</script>

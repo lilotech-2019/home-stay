@@ -1,19 +1,9 @@
-﻿
-@using PagedList.Mvc;
-@*khai bao thu vien pagelist*@
-@*@model PagedList.IPagedList<Outsourcing.Data.Models.Blog>*@
+﻿@using PagedList.Mvc;
 @model Labixa.ViewModels.BlogViewModel
-@*don nhan du lieu dang IPagedList<Blog>*@
-
 @{
-
     ViewBag.Title = "Index";
-    // lấy cookie để chọn ngôn ngữ cho data
     HttpCookie cookie = Request.Cookies["_culture"];
 }
-
-
-<!-- Home Slider-->
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">News</h2>
@@ -32,7 +22,7 @@
         <div class="col-md-4 col-sm-12 pull-left">
             <div class="single-sidebar-widget">
 
-           <!-- Categories style--><!-- Popular Posts style--><div class="single-sidebar-widget-outer">
+                <!-- Categories style--><!-- Popular Posts style--><div class="single-sidebar-widget-outer">
                     <div class="sec-title">
                         <h2>@Html.Raw(Resources.Resources.HMS_BlogNew)</h2>
                     </div>
@@ -71,10 +61,8 @@
         </div>
         <div class="col-md-8 col-sm-12 pull-right">
             <div class="single-post-wrapper">
-                <!-- News 1-->
                 @foreach (var item in Model.ListBlogs)
                 {
-                    @*foreach nhu 1 list*@
                     if (cookie.Value.Equals("vi"))
                     {
                         <article class="single-blog-post img-cap-effect">
@@ -99,9 +87,7 @@
                             <p>@Html.Raw(item.DescriptionENG)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
                         </article>
                     }
-
                 }
-
                 <div>
                     @Html.PagedListPager(Model.ListBlogs, page => Url.Action("Index", new { page }))
                 </div>
@@ -109,4 +95,3 @@
         </div>
     </div>
 </section>
-<script></script>

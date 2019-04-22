@@ -32,11 +32,6 @@ namespace Labixa.Controllers
             return RedirectToAction("ShortRoom");
         }
 
-        /// <summary>
-        /// danh sách các phòng ngắn hạn
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
         public ActionResult ShortRoom(int? page)
         {
             int pageNumber = (page ?? 1);
@@ -45,11 +40,6 @@ namespace Labixa.Controllers
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
 
-        /// <summary>
-        /// chi tiết phòng ngắn hạn
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
         public ActionResult LongRoom(int? page)
         {
             int pageNumber = (page ?? 1);
@@ -89,7 +79,6 @@ namespace Labixa.Controllers
                              "<th> Ngày Check Out</th>" +
                              "<th> Email Khách Hàng</th>" +
                              "<th> Số Điện Thoại</th>" +
-                             //"<th> Tên Phòng</th>" +
                              "<th> Số Lượng Người</th>" +
                              "<th> Số Tiền</th>" +
                              "</thead>" +
@@ -99,7 +88,6 @@ namespace Labixa.Controllers
                              "<td>" + modelBooking.CheckOut + "</td>" +
                              "<td>" + Email + "</td>" +
                              "<td>" + Phone + "</td>" +
-                             //"<td>" + Name + "</td>" +
                              "<td>" + modelBooking.AmountOfPeople + "</td>" +
                              "<td>" + modelBooking.Price + "</td>" +
                              "</tbody></table>";
@@ -117,10 +105,8 @@ namespace Labixa.Controllers
             }
 
             modelBooking.CustomerId = customer.Id;
-
-
-            //modelBooking.CheckIn = DateTime.Now;
-            //modelBooking.CheckOut = DateTime.Now;
+            modelBooking.Status = true;
+            modelBooking.Deleted = false;
             _roomOrderService.Create(modelBooking);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
@@ -151,7 +137,6 @@ namespace Labixa.Controllers
                              "<th> Họ Tên Khách Hàng </th>" +
                              "<th> Email Khách Hàng</th>" +
                              "<th> Số Điện Thoại</th>" +
-                             //"<th> Tên Phòng</th>" +
                              "<th> Số Lượng Người</th>" +
                              "<th> Số Tiền</th>" +
                              "</thead>" +
@@ -159,7 +144,6 @@ namespace Labixa.Controllers
                              "<td>" + Name + "</td>" +
                              "<td>" + Email + "</td>" +
                              "<td>" + Phone + "</td>" +
-                             //"<td>" + name + "</td>" +
                              "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                              "<td>" + modelBookingLongRoom.Price + "</td>" +
                              "</tbody></table>";
@@ -179,15 +163,15 @@ namespace Labixa.Controllers
             modelBookingLongRoom.CheckIn = DateTime.Now;
             modelBookingLongRoom.CheckOut = DateTime.Now;
             modelBookingLongRoom.CustomerId = customer.Id;
-
-
+            modelBookingLongRoom.Status = true;
+            modelBookingLongRoom.Deleted = false;
             _roomOrderService.Create(modelBookingLongRoom);
             var mail = new SmtpClient("smtp.gmail.com", 25)
             {
                 Credentials = new NetworkCredential(adminGmail, password),
                 EnableSsl = true
             };
-            var mess = new MailMessage {From = new MailAddress(adminGmail)};
+            var mess = new MailMessage { From = new MailAddress(adminGmail) };
             mess.ReplyToList.Add(adminGmail);
             mess.To.Add(new MailAddress(Email));
             mess.Subject = subject;
