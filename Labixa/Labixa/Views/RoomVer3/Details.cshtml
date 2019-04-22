@@ -83,7 +83,7 @@
                                     <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <form id="contactBookingModal"
+                                <form id="contactBooking"
                                       action="/RoomVer3/BookingRoom" method="post">
                                     <div class="row">
                                         <div class="col-lg-8 col-sm-12">
@@ -92,20 +92,22 @@
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                        <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <small><span class="text-danger error-email-none hidden">Vui lòng nhập email </span></small>
                                                         <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input type="text" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" readonly
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
+                                                              placeholder="Ngày đến" data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input type="text" name="CheckOut" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" readonly
-                                                               data-toggle="tooltip" data-placement="top" title="Ngày Đi" @*placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)"*@ onClick="$(this).removeClass('placeholderclass')">
+                                                               placeholder="Ngày đi" data-toggle="tooltip" data-placement="top" title="Ngày Đi" @*placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)"*@ onClick="$(this).removeClass('placeholderclass')">
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -119,17 +121,21 @@
                                                                 <option value="4">4</option>
                                                             </select>
                                                         </div>
+                                                        <small><span class="text-danger error-numberPeople hidden">Vui lòng nhập số lượng người</span></small>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                class="form-control" onkeypress="return isNumberKey(event)">
-                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không đúng </span></small>
+                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không hợp lệ </span></small>
+                                                        <small><span class="text-danger error-phone-none hidden">vui lòng nhập số điện thoại </span></small>
+
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                   class="form-control" style="height:200px;"></textarea>
+                                                        <small><span class="text-danger error-content hidden">vui lòng không để trống nội dung</span></small>
                                                     </div>
                                                 </div>
                                                 <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -639,7 +645,7 @@
 <script>
     var check = false;
     var check;
-    var contactBooking = $('#contactBookingModal');
+    var contactBooking = $('#contactBooking');
     var submitBtn = $('#submitBtn');
     $(function () {
         pickingDate();
@@ -655,7 +661,8 @@
                 alert("Đặt Phòng Thành Công");
                 contactBooking.submit();
             } else {
-                e.preventDefault();
+                alert("Đặt Phòng Không thành công");
+                //e.preventDefault();
             }
         });
     }
@@ -732,25 +739,50 @@
         return true;
     }
     function validateModalForm() {
-        var customerName, customerEmail, customerPhone;
+        var customerName, customerEmail, customerPhone,message,numberPeople;
         $('.error-phone').addClass('hidden');
         $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
         customerName = $('#CustomerName').val();   
         message = $('#message').val();
-        
-        if (customerEmail == "" || customerPhone == "" || customerName == "" || message == "") {
+   
+        if (customerName == "") {
+            $('.error-name').removeClass('hidden');
             return false;
+        } else {
+            $('.error-name').addClass('hidden');
+        }
+        if (customerEmail == "") {
+            $('.error-email-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-email-none').addClass('hidden');
         }
         if (!isValidGmail(customerEmail)) {
             $('.error-email').removeClass('hidden');
             return false;
         }
+
+       
+
+        if (customerPhone == "") {
+            $('.error-phone-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-phone-none').addClass('hidden');
+        }
         if (!isValidPhone(customerPhone)) {
             $('.error-phone').removeClass('hidden');
             return false;
-        }      
+        }     
+        if (message == "") {
+            $('.error-content').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-content').addClass('hidden');
+
+        }  
         return true;
     }
   
