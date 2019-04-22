@@ -5,30 +5,30 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Labixa.Areas.HMSAdmin.Controllers
+namespace Labixa.Areas.Portal.Controllers
 {
-    public class ContactUsController : Controller
+    public class DepositController : Controller
     {
         #region Fields
-        private readonly IVendorService _vendorService;
+        private readonly IColorService _colorService;
         #endregion
 
         #region Ctor
-        public ContactUsController(IVendorService vendorService)
+        public DepositController(IColorService colorService)
         {
-            _vendorService = vendorService;
+            _colorService = colorService;
         }
         #endregion
 
         #region Index
         /// <summary>
-        /// Index
+        /// Index - GET
         /// </summary>
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var vendors = await _vendorService.FindAll().AsNoTracking().ToListAsync();
-            return View(vendors);
+            var colors = await _colorService.FindAll().AsNoTracking().ToListAsync();
+            return View(colors);
         }
         #endregion
 
@@ -44,12 +44,12 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ContactUs contactUs = _vendorService.FindById((int)id);
-            if (contactUs == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(contactUs);
+            return View(deposit);
         }
         #endregion
 
@@ -66,25 +66,25 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="contactUs"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ContactUs contactUs)
+        public ActionResult Create(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                _vendorService.Create(contactUs);
+                _colorService.Create(deposit);
                 return RedirectToAction("Index");
             }
 
-            return View(contactUs);
+            return View(deposit);
         }
         #endregion
 
         #region Edit
         /// <summary>
-        /// Edit - GET 
+        /// Edit - GET
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -94,30 +94,35 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ContactUs contactUs = _vendorService.FindById((int)id);
-            if (contactUs == null)
+            Deposit deposit = _colorService.FindById((int)id);
+            if (deposit == null)
             {
                 return HttpNotFound();
             }
-            return View(contactUs);
+            return View(deposit);
         }
 
+        /// <summary>
+        /// Edit - POST
+        /// </summary>
+        /// <param name="deposit"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ContactUs contactUs)
+        public ActionResult Edit(Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                _vendorService.Edit(contactUs);
+                _colorService.Edit(deposit);
                 return RedirectToAction("Index");
             }
-            return View(contactUs);
+            return View(deposit);
         }
         #endregion
 
         #region Delete
         /// <summary>
-        /// Delete
+        /// Delete - GET
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -127,27 +132,26 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var vendors = _vendorService.FindById((int)id);
-            if (vendors == null)
+            var colors = _colorService.FindById((int)id);
+            if (colors == null)
             {
                 return HttpNotFound();
             }
-            return View(vendors);
+            return View(colors);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var vendors = _vendorService.FindById(id);
-            if (vendors == null)
+            var colors = _colorService.FindById(id);
+            if (colors == null)
             {
                 return HttpNotFound();
             }
-            _vendorService.Delete(vendors);
+            _colorService.Delete(colors);
             return RedirectToAction("Index");
         }
         #endregion
-
     }
 }

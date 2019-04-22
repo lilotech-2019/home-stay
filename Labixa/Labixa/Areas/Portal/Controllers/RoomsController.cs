@@ -61,11 +61,12 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Create - GET
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Create()
+        public ActionResult Create(int hotelId)
         {
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
-            return View(new Room { SharePercent = 0 });
+            return View(new Room { SharePercent = 0, HotelId = hotelId });
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 room.Slug = StringConvert.ConvertShortName(room.Name);
                 _roomService.Create(room);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Hotels",1);
             }
 
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");

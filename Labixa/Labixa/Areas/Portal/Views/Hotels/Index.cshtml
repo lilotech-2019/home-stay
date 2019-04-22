@@ -26,7 +26,6 @@
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th>
-                        @*TODO*@
                         Số phòng
                     </th>
                     <th>
@@ -55,9 +54,10 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rooms.Count) <a href="@Url.Action("Create","Rooms", new {hotelId = item.Id,returnUrl = ViewContext.HttpContext.Request.Url.PathAndQuery})" class="btn btn-xs btn-success" title="Tạo Phòng">
-                                <i class="fa fa-edit"></i>
-                            </a>
+                        @Html.DisplayFor(modelItem => item.Rooms.Count) 
+                        <a href="@Url.Action("Create","Rooms", new {hotelId = item.Id})" class="btn btn-xs btn-success" title="Tạo Phòng">
+                            <i class="fa fa-edit"></i>
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Address)
