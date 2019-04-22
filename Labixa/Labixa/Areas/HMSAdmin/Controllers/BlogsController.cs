@@ -1,10 +1,10 @@
-﻿using Outsourcing.Core.Common;
-using Outsourcing.Data.Models;
-using Outsourcing.Service;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Core.Common;
+using Outsourcing.Data.Models;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
@@ -14,7 +14,6 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         private readonly IBlogService _blogsService;
         private readonly IBlogCategoryService _blogCategoryService;
         #endregion
-
 
         #region Ctor
         public BlogsController(IBlogService blogsService, IBlogCategoryService blogCategoryService)
@@ -66,7 +65,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(null), "Id", "Name");
-            return View(new Blog { Position = 0 });
+            return View();
         }
 
         /// <summary>

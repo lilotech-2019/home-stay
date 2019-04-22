@@ -8,7 +8,6 @@
         public string Rename { get; set; }
         public string Description { get; set; }
         public int Type { get; set; }
-        public bool Deleted { get; set; }
         public string Yahoo { get; set; }
         public string Skype { get; set; }
     }

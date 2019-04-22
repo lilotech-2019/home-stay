@@ -1,6 +1,7 @@
 ﻿using Outsourcing.Data.Models.HMS;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Outsourcing.Data.Models;
 
 namespace Labixa.Areas.HMSAdmin.ViewModels
 {
