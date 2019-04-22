@@ -615,12 +615,10 @@
         pickingDateModal()
         submitForm();
         submitFormLR();
-
     });
     function submitForm() {
         submitBtn.click(function (e) {
             check = validateModalForm();
-            console.log(check);
             if (check) {
                 alert("Đặt Phòng Thành Công");
                 contactBooking.submit();
@@ -632,7 +630,6 @@
     function submitFormLR() {
         submitLR.click(function (e) {
             checkLR = validateModelLongRoom();
-            console.log(checkLR);
             if (checkLR) {
                 alert("Đặt Phòng Thành Công");
                 contactBoookingLR.submit();
@@ -642,35 +639,44 @@
         });
     }
     function pickingDate() {
+        var currentDate = new Date();
+        var fromModal = $("#startDayRoom");
+        var toModal = $("#endDayRoom");
         var dateFormat = "dd/mm/yy",
             from = $("#startDay")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 2
+                    numberOfMonths: 1,
+                    minDate: currentDate
                 })
                 .on("change", function () {
                     to.datepicker("option", "minDate", convertDate(this, dateFormat));
+                    toModal.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDay").datepicker({
                 dateFormat: 'dd/mm/yy',
                 defaultDate: "+1w",
                 changeMonth: true,
-                numberOfMonths: 2
+                numberOfMonths: 1,
+                minDate: currentDate
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));  
+                    fromModal.datepicker("option", "maxDate", convertDate(this, dateFormat));  
                 });
     }
     function pickingDateModal() {
+        var currentDate = new Date();
         var dateFormat = "dd/mm/yy",
             from = $("#startDayRoom")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 2,
+                    numberOfMonths: 1,
+                    minDate: currentDate
                 })
                 .on("change", function () {
                     to.datepicker("option", "minDate", convertDate(this, dateFormat));
@@ -679,7 +685,8 @@
                 dateFormat: 'dd/mm/yy',
                 defaultDate: "+1w",
                 changeMonth: true,
-                numberOfMonths: 2
+                numberOfMonths: 1,
+                minDate: currentDate
             })
                 .on("change", function () {
                     from.datepicker("option", "maxDate", convertDate(this, dateFormat));
@@ -713,9 +720,7 @@
         return true;
     }
     function validateModalForm() {
-        var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;
-        $('.error-phone').addClass('hidden');
-        $('.error-email').addClass('hidden');
+        var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;      
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
         customerName = $('#CustomerName').val();
@@ -723,7 +728,6 @@
         dateStart = $('#startDayRoom').val();
         dateEnd = $('#endDayRoom').val();
         message = $('#message').val();
-
         if (customerName == "") {
             $('.error-name').removeClass('hidden');
             return false;
@@ -739,15 +743,15 @@
         if (!isValidGmail(customerEmail)) {
             $('.error-email').removeClass('hidden');
             return false;
+        } else {
+            $('.error-email').addClass('hidden');
         }
-
         if (dateStart == "") {
             $('.error-start-none').removeClass('hidden');
             return false;
         } else {
             $('.error-start-none').addClass('hidden');
         }
-
         if (dateEnd == "") {
             $('.error-end-none').removeClass('hidden');
             return false;
@@ -769,6 +773,8 @@
         if (!isValidPhone(customerPhone)) {
             $('.error-phone').removeClass('hidden');
             return false;
+        } else {
+            $('.error-phone').addClass('hidden');
         }
         if (message == "") {
             $('.error-content').removeClass('hidden');
@@ -780,9 +786,7 @@
         return true;
     }
     function validateModelLongRoom() {
-        var nameLR, emailLR, phoneLR, messageLR, numberLR;
-        $('.errorLR-phone').addClass('hidden');
-        $('.errorLR-email').addClass('hidden');
+        var nameLR, emailLR, phoneLR, messageLR, numberLR; 
         emailLR = $('#EmailLR').val();
         phoneLR = $('#PhoneLR').val();
         nameLR = $('#NameLR').val();
@@ -803,6 +807,8 @@
         if (!isValidGmail(emailLR)) {
             $('.errorLR-email').removeClass('hidden');
             return false;
+        } else {
+            $('.errorLR-email').addClass('hidden');
         }
         if (numberLR == "default") {
             $('.errorLR-numberPeople').removeClass('hidden');
@@ -819,6 +825,8 @@
         if (!isValidPhone(phoneLR)) {
             $('.errorLR-phone').removeClass('hidden');
             return false;
+        } else {
+            $('.errorLR-phone').addClass('hidden');
         }
         if (messageLR == "") {
             $('.errorLR-content').removeClass('hidden');
