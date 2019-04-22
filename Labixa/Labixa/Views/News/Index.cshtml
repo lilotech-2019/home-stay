@@ -47,7 +47,7 @@
                                         <div class="content">
                                             <a href="/tintuc/@item.Slug">
                                                 <h4>@item.Title</h4>
-                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
                                         </div>
                                     </li>
                                 }
@@ -57,8 +57,8 @@
                                         <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
                                         <div class="content">
                                             <a href="/tintuc/@item.Slug">
-                                                <h4>@item.TitleENG</h4>
-                                            </a><span>@item.DateCreated.ToShortDateString()</span>
+                                                <h4>@item.TitleEnglish</h4>
+                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
                                         </div>
                                     </li>
                                 }
@@ -95,8 +95,8 @@
                                     <img src="@item.BlogImage" alt="" class="img-responsive">
                                 </a>
                             </div>
-                            <h3><a href="/tintuc/@item.Slug">@item.TitleENG</a></h3>
-                            <p>@Html.Raw(item.DescriptionENG)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
+                            <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
+                            <p>@Html.Raw(item.DescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
                         </article>
                     }
 
