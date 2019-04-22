@@ -1615,6 +1615,10 @@
     <Content Include="Areas\Portal\Views\Rooms\Details.cshtml" />
     <Content Include="Areas\Portal\Views\Rooms\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Rooms\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Customers\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
