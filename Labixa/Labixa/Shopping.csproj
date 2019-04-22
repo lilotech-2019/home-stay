@@ -61,6 +61,7 @@
     <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\DepositController.cs" />
+    <Compile Include="Areas\HMSAdmin\Controllers\FileController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\HotelsController.cs" />
     <Compile Include="Areas\HMSAdmin\Controllers\OrdersController.cs" />
@@ -1631,6 +1632,9 @@
     <Content Include="Areas\Portal\Views\Messages\Create.cshtml" />
     <Content Include="Areas\Portal\Views\Messages\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Messages\Delete.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\File\_Elfinder.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\File\_ElfinderTextBox.cshtml" />
+    <Content Include="Areas\HMSAdmin\Views\File\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
