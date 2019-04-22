@@ -56,7 +56,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = _blogsService.FindById((int) id);
+            Blog blog = _blogsService.FindById((int)id);
             if (blog == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.BlogCategoryId = _blogCategoryService.FindSelectList();
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name");
             return View();
         }
 
@@ -112,7 +112,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var blog = _blogsService.FindById((int) id);
+            var blog = _blogsService.FindById((int)id);
             if (blog == null)
             {
                 return HttpNotFound();
@@ -158,7 +158,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var blogs = _blogsService.FindById((int) id);
+            var blogs = _blogsService.FindById((int)id);
             if (blogs == null)
             {
                 return HttpNotFound();

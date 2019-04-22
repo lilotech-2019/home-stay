@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Style/Common")
-    @RenderSection("head", required: false)
+
+    @RenderSection("head", false)
     @Scripts.Render("~/Scripts/Common")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
 </head>
 <body>
     <div class="navbar navbar-default" id="navbar">
