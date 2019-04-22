@@ -20,7 +20,10 @@
         </ul>
     </div>
 }
-
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 
 
 <div class="page-content">
@@ -53,7 +56,7 @@
 
                     <div class="col-sm-9">
                         @* <input class="col-xs-10 col-sm-10 valid" data-val="true" data-val-required="Tên Danh Mục không được bỏ trống" name="Name" type="text" placeholder="Tên Danh Mục">*@
-                        @Html.EditorFor(model => model.Name)
+                        @Html.EditorFor(model => model.Name, "CkEditor")
                         @Html.ValidationMessageFor(model => model.Name)
                     </div>
                 </div>

@@ -1,0 +1,118 @@
+﻿
+
+@{
+    ViewBag.Title = "chuỗi đại lý";
+    ViewBag.No = 7;
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+<style>
+    .k-grid tr td, .k-pivot-layout .k-grid tr td {
+        border-bottom-width: 1px;
+        border-style: solid;
+        font-size:20px;
+    }
+    .k-grid-header th.k-header > .k-link {
+        padding: 0;
+        margin: 0;
+        min-height: 16px;
+        line-height: inherit;
+        font-size:20px;
+        font-weight:bold;
+    }
+</style>
+
+
+<h1>Phone: @ViewBag.phone</h1>
+<div id="grid">
+
+</div>
+
+<script>
+    var gridElement = $("#grid");
+
+    function resizeGrid() {
+        gridElement.data("kendoGrid").resize();
+    }
+
+    //$(window).resize(function () {
+    //    resizeGrid();
+    //});
+    //var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+    dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "ReadDiagramE/0",
+                dataType: "json"
+            },
+        },
+        aggregate: [
+            { field: "Numer_2", aggregate: "sum" },
+            { field: "Numer_3", aggregate: "sum" },
+        ]
+        ,
+        batch: true,
+        pageSize: 20,
+
+        schema: {
+            model: {
+                id: "ID",
+                fields: {
+                    Username: { type: "text" /*editable: false, nullable: true*/ },
+                    Numer_2: { type: "number" },
+                    Numer_3: { type: "number" }
+                }
+            }
+        }
+    });
+    $(document).ready(function () {
+        kendo.ui.progress($("#grid"), true);
+        var baseUrl = '/Content/Kendo-Material/kendo.messages.vi-VN.min.js';
+        $.getScript(baseUrl, function () {
+            kendo.ui.progress($("#grid"), false);
+            createGrid();
+        });
+    });
+
+    function createGrid() {
+        var element = $("#grid");
+
+        if (element.data("kendoGrid")) {
+            element.data("kendoGrid").destroy();
+            element.empty();
+        }
+
+        element.kendoGrid({
+            dataSource: dataSource,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+            },
+            height: 800,
+            filterable: true,
+            sortable: true,
+            columnMenu: true,
+            columns: [
+                { field: "Username", title: "Tên Đại lý" },
+                { field: "Numer_2", title: "Điểm", footerTemplate: "Tổng điểm: #=sum#" },
+                { field: "Numer_3", title: "Hàng", footerTemplate: "Tổng hàng: #=sum#" }],
+        });
+    }
+</script>
+
+
+
+
+
+
+
+

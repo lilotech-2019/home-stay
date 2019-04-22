@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Sơ đồ";
+    ViewBag.No = 2;
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+    <div id="diagram" style="min-height:800px"></div>
+    <script>
+        var data;
+        function visualTemplate(options) {
+            var dataviz = kendo.dataviz;
+            var g = new dataviz.diagram.Group();
+            var dataItem = options.dataItem;
+            g.append(new dataviz.diagram.Rectangle({
+                width: 450,
+                height: 100,
+                stroke: {
+                    width: 0
+                },
+                fill: {
+                    gradient: {
+                        type: "linear",
+                        stops: [{
+                            color: "#ef6944",
+                            offset: 0,
+                            opacity: 0.5
+                        }, {
+                            color: "#ef6944",
+                            offset: 1,
+                            opacity: 1
+                        }]
+                    }
+                }
+            }));
+
+            g.append(new dataviz.diagram.TextBlock({
+                text: "Tên chi nhánh: " + dataItem.Name,
+                x: 50,
+                y: 20,
+                fill: "#fff"
+            }));
+
+            g.append(new dataviz.diagram.TextBlock({
+                text: "Tỉnh / Thành phố: " + dataItem.Address,
+                x: 50,
+                y: 40,
+                fill: "#fff"
+            }));
+
+            g.append(new dataviz.diagram.TextBlock({
+                text: "Ngày đăng ký: " + dataItem.CreateDate,
+                x: 50,
+                y: 60,
+                fill: "#fff"
+            }));
+
+            return g;
+        }
+
+        function createDiagram() {
+            $("#diagram").kendoDiagram({
+                editable: false,
+                readOnly: true,
+                dataSource: new kendo.data.HierarchicalDataSource({
+                    data: data,
+                    schema: {
+                        model: {
+                            children: "Items"
+                        }
+                    }
+                }),
+                layout: {
+                    type: "tree",
+                    subtype: "right"
+                },
+                shapeDefaults: {
+                    visual: visualTemplate
+                },
+                connectionDefaults: {
+                    stroke: {
+                        color: "#979797",
+                        width: 2
+                    }
+                }
+            });
+
+            var diagram = $("#diagram").getKendoDiagram();
+            diagram.bringIntoView(diagram.shapes);
+        }
+        $.ajax({
+            type: "get",
+            @*url: "@Url.Action("ReadDiagram?id=","Member")",*@
+            dataType: "json",
+            url: "ReadDiagram?id=@ViewBag.userId",
+            success: function (dataSource) {
+                data = dataSource;
+                console.log(data);
+                createDiagram();
+            }
+        })
+    </script>
+</div>
+

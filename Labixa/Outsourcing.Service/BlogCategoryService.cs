@@ -81,7 +81,7 @@ namespace Outsourcing.Service
 
         public IEnumerable<BlogCategories> GetBlogCategories()
         {
-            throw new NotImplementedException();
+return            _blogCategoryRepository.GetAll();
         }
 
         public void Delete(BlogCategories entity)
