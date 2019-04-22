@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+    ViewBag.No = 3;
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+}
+
+<h2>LIÊN HỆ</h2>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <form action="Contact" class="form-horizontal" method="post">
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">Ghi chú (*): </label>
+                        <div class="col-sm-9">
+                            <textarea name="Message" class="form-control" cols="5" rows="8" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-10" style="text-align:center">
+                        <div class="col-lg-5 col-md-5 col-sm-5"></div>
+                        <button type="submit" style="background-color:#fcd637!important; width:auto; height:auto; font-size:20px; padding: 0px 30px 0px 30px; color:white;"><b>Gửi</b></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

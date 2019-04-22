@@ -10,7 +10,7 @@ namespace Labixa
             //CSS for  Ace admin
             bundles.Add(new StyleBundle("~/Style/Common").Include(
                 "~/Content/admin/css/bootstrap.min.css",
-                "~/Content/font-awesome.min.css",
+      "~/Content/admin/css/font-awesome.min.css",
                 "~/Content/admin/css/ace.min.css",
                 "~/Content/admin/css/ace-rtl.min.css",
                 "~/Content/admin/css/ace-skins.min.css",

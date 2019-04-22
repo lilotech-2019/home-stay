@@ -1,0 +1,49 @@
+﻿@model Outsourcing.Data.Models.Appliant
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.No = 6;
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+    if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<h1>THÔNG TIN</h1>
+<link href="~/Content/Lilotech/css/Style.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12 hieu">
+        <div class="col-sm-3 col-xs-12 db-div">CẤP BẬC</div>
+        <div class="col-sm-7 col-xs-8 db-div-info rank" style="font-size:2em">@Model.UrlFile.ToUpper()</div>
+        <div class="col-sm-2 col-xs-4 db-div-button"><a href="/Member/Index"><button>XEM THÊM</button></a></div>
+        <div class="col-sm-3 col-xs-12 db-div">TỔNG ĐIỂM</div>
+        <div class="col-sm-7 col-xs-8 db-div-info">
+            <span style="font-size:50px; font-style:italic; color:red">@Model.Numer_2.ToString("#,##0")</span>
+            <span>ĐIỂM</span>
+        </div>
+        <div class="col-sm-2 col-xs-4 db-div-button"><a href="/Member/PointHistory"><button>XEM LỊCH SỬ ĐIỂM</button></a></div>
+        <div class="col-sm-3 col-xs-12 db-div">TỔNG HÀNG</div>
+        <div class="col-sm-7 col-xs-8 db-div-info">
+            <span style="font-size:50px; font-style:italic; color:red">@Model.Numer_3.ToString("#,##0")</span>
+            <span>SET</span>
+        </div>
+        <div class="col-sm-2 col-xs-4 db-div-button"><a href="/Member/StockHistory"><button>XEM LỊCH SỬ HÀNG</button></a></div>
+        <div class="col-sm-3 col-xs-12 db-div">ĐẠI LÝ</div>
+        <div class="col-sm-7 col-xs-8 db-div-info nm"><span style="font-size:1em; font-weight:bold">@Model.Name.ToUpper()</span></div>
+        <div class="col-sm-2 col-xs-4 db-div-button"><a href="/Member/Index"><button>XEM THÔNG TIN</button></a></div>
+        <div class="col-sm-3 db-div">THÀNH PHỐ</div>
+        <div class="col-sm-9 db-div-info nm">@Model.City</div>
+        <div class="col-sm-3 db-div">NGÀY ĐĂNG KÝ</div>
+        <div class="col-sm-9 db-div-info nm">@Model.CreateDate.ToString("dd/MM/yyyy hh:MM")</div>
+        <div class="col-sm-3 db-div">THÔNG TIN <br /> CHUYỂN HÀNG</div>
+        <div class="col-sm-9 db-div-info">
+            <span><Strong>Họ và tên: </Strong>@Model.PSName</span><br />
+            <span><Strong>Địa chỉ: </Strong>@Model.PSAddress</span><br />
+            <span><Strong>Số điện thoại: </Strong>@Model.PSPhoneNumber</span><br />
+        </div>
+    </div>
+</div>
+<div style="padding-top:14%">
+
+</div>
+
+

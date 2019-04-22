@@ -1,18 +1,11 @@
-﻿
-@using PagedList.Mvc;
-@*khai bao thu vien pagelist*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
-@*don nhan du lieu dang IPagedList<Blog>*@
-
-
-
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Room>
 @{
 
     ViewBag.Title = "ShortRoom";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
     HttpCookie cookie = Request.Cookies["_culture"];
 }
-
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_LongRoom)</h2>
@@ -26,9 +19,6 @@
         </ol>
     </div>
 </section>
-<!-- Header  Slider style-->
-<!-- News style-->
-<!-- About Resort style-->
 <section class="container clearfix common-pad-inner about-info-box nasir-room-grid-header">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -39,11 +29,9 @@
         </div>
     </div>
 </section>
-<!-- About Resort style-->
 <section class="row nasir-room-grid">
     <div class="container">
         <div class="row">
-
             @foreach (var iterm in Model)
             {
                 if (cookie.Value.Equals("vi"))
@@ -67,15 +55,12 @@
                 else
                 {
                     <div class="col-sm-4 nroom-grid">
-
                         <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
-
                             <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
-
                         </a>
                         <div class="row this-conts">
                             <div class="media">
-                                <div class="media-body this-title">@iterm.NameEnglish</div>
+                                <div class="media-body this-title">@iterm.EnglishName</div>
                                 <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
                             </div>
                             <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
@@ -88,6 +73,4 @@
             @Html.PagedListPager(Model, page => Url.Action("LongRoom", new { page }))
         </div>
     </div>
-
 </section>
-<!-- Welcome banner  style-->

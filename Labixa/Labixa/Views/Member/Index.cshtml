@@ -1,0 +1,131 @@
+﻿@model Outsourcing.Data.Models.Appliant
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+    if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+@*account's detail*@
+<style>
+    label{
+        font-size:20px;
+    }
+    label p{
+       font-size:20px;
+    }
+</style>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <form action="/Member/Edit" class="form-horizontal" method="post" novalidate="novalidate">
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>THÔNG TIN:</b> </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Họ và Tên: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.Name</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Giới tính: </b></label>
+                        <div class="col-sm-8 ">
+                            <label class="control-label no-padding-right"><p>@(Model.Gender == 0 ? "Nam" : "Nữ")</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Ngày sinh: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.DOB.ToString("dd-MM-yyyy")</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Thành phố: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.City</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Địa chỉ: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.Address</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Số điện thoại: </b> </label>
+                        <div class="col-sm-8">
+                            <label class="control-label" style="padding-bottom:4px"><p>@Model.Phone</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Điện thoại di động: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.String_1</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4"><b>Email: </b></label>
+                        <div class="col-sm-8">
+                            <label  class="control-label no-padding-right"><p>@Model.Email</p></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label class="col-sm-6"><b>THÔNG TIN NGÂN HÀNG:</b> </label>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4"><b>Ngân hàng: </b></label>
+                        <div class="col-sm-8">
+                            <label  class="control-label no-padding-right"><p>@Model.String_2</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4"><b>Chi nhánh:</b> </label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.String_4</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4"><b>Số tài khoản: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.String_6</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4"><b>Chủ thẻ: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.ExpectedPosition</p></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-6"><b>THÔNG TIN CHUYỂN HÀNG:</b> </label>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4" ><b>Tên: </b></label>
+                        <div class="col-sm-8">
+                        <label class="control-label no-padding-right"><p>@Model.PSName</p></label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4" for="BlogCategoryId"><b>Địa chỉ: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.PSAddress</label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-4"><b>Số điện thoại: </b></label>
+                        <div class="col-sm-8">
+                            <label class="control-label no-padding-right"><p>@Model.PSPhoneNumber</p></label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

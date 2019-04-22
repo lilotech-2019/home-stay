@@ -1,0 +1,111 @@
+﻿@model int
+@{
+    ViewBag.Title = "Lịch sử hàng";
+    ViewBag.No = 0;
+    Layout = "~/Views/Shared/_BellazaLayout.cshtml";
+}
+@*<link href="~/Content/Kendo-Material/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/Content/Kendo-Material/kendo.material.min.css" rel="stylesheet" />
+    <link href="~/Content/Kendo-Material/kendo.material.mobile.min.css" rel="stylesheet" />
+
+    <script src="~/Content/Kendo-Material/jquery.min.js"></script>
+    <script src="~/Content/Kendo-Material/kendo.all.min.js"></script>*@
+<style>
+    #grid .k-header{
+        height:30px;
+    }
+</style>
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.material.mobile.min.css" />
+
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+
+
+<h1><span style="padding-right:60%">Lịch sử hàng</span><span>Tổng hàng: @Model</span></h1>
+<div id="grid">
+
+</div>
+
+
+<script>
+    var gridElement = $("#grid");
+
+    function resizeGrid() {
+        gridElement.data("kendoGrid").resize();
+    }
+
+    $(window).resize(function () {
+        resizeGrid();
+    });
+    dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "ReadStock",
+                dataType: "jsonp"
+            },
+            //create: {
+            //    url: "EditStock",
+            //    dataType: "jsonp"
+            //},
+            parameterMap: function (options, operation) {
+                if (operation !== "read" && options.models) {
+                    return { models: kendo.stringify(options.models) };
+                }
+            }
+        },
+        aggregate: [{ field: "Value", aggregate: "sum" }],
+        batch: true,
+        pageSize: 20,
+        schema: {
+            model: {
+                id: "Id",
+                fields: {
+                    CreateDate: { type: "date" },
+                    Value: {},
+                    Description: { type: "text" },
+                    Note1: {type: "text"}
+                }
+            }
+        }
+    });
+    $(document).ready(function () {
+        kendo.ui.progress($("#grid"), true);
+        var baseUrl = '/Content/Kendo-Material/kendo.messages.vi-VN.min.js';
+        $.getScript(baseUrl, function () {
+            kendo.ui.progress($("#grid"), false);
+            createGrid();
+        });
+    });
+
+    function createGrid() {
+        var element = $("#grid");
+
+        if (element.data("kendoGrid")) {
+            element.data("kendoGrid").destroy();
+            element.empty();
+        }
+
+        element.kendoGrid({
+            //editable: "popup",
+            //toolbar: ["create"],
+            dataSource: dataSource,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+            },
+            
+            height: 700,
+            filterable: true,
+            sortable: true,
+            columnMenu: true,
+            columns: [
+                { field: "CreateDate", title: "Ngày", format: "{0:dd/MM/yyyy}" },
+                { field: "Value", title: "Giá trị", format: "", footerTemplate: "Tổng: #=sum#" },
+                { field: "Description", title: "Thông tin", encoded: false },
+                { field: "Note1", title: "Mô tả"}
+            ],
+        });
+    }
+</script>
