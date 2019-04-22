@@ -86,6 +86,7 @@
     <Compile Include="Areas\Portal\Controllers\FileController.cs" />
     <Compile Include="Areas\Portal\Controllers\HotelCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\HotelsController.cs" />
+    <Compile Include="Areas\Portal\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Portal\Controllers\RoomsController.cs" />
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -1625,6 +1626,11 @@
     <Content Include="Areas\Portal\Views\Assets\Details.cshtml" />
     <Content Include="Areas\Portal\Views\Assets\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Assets\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
