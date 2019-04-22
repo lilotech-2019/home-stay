@@ -83,7 +83,7 @@
                                     <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <form id="contactBookingModal"
+                                <form id="contactBooking"
                                       action="/RoomVer3/BookingRoom" method="post">
                                     <div class="row">
                                         <div class="col-lg-8 col-sm-12">
@@ -92,10 +92,12 @@
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                        <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
-                                                        <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
+                                                        <input id="CustomerEmail" type="text" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <small><span class="text-danger error-email hidden">Email không hợp lệ </span></small>
+                                                        <small><span class="text-danger error-email-none hidden">Vui lòng nhập email </span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -122,14 +124,16 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
-                                                               class="form-control" onkeypress="return isNumberKey(event)">
-                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không đúng </span></small>
+                                                               class="form-control" @*onkeypress="return isNumberKey(event)"*@>
+                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không hợp lệ </span></small>
+                                                        <small><span class="text-danger error-phone-none hidden">vui lòng nhập số điện thoại </span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                   class="form-control" style="height:200px;"></textarea>
+                                                        <small><span class="text-danger error-content hidden">vui lòng không để trống nội dung</span></small>
                                                     </div>
                                                 </div>
                                                 <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -638,7 +642,7 @@
 </section>
 <script>
     var check = false;
-    var contactBooking = $('#contactBookingModal');    
+    var contactBooking = $('#contactBooking');    
     var submitBtn = $('#submitBtn');
     $(function () {
         pickingDate();
@@ -648,7 +652,9 @@
             check = validateModalForm();
             if (check) {
                 alert("Đặt Phòng Thành Công");
-                $('#contactBookingModal').submit();
+                $('#contactBooking').submit();
+            } else {
+                alert("Đặt phòng không thành công");
             }
         });
     });
@@ -759,23 +765,53 @@
         
     }
     function validateModalForm(){
-        var customerName, customerEmail, customerPhone, contactBooking;
+        var customerName, customerEmail, customerPhone, contactBooking, message;
         $('.error-phone').addClass('hidden');
         $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();      
+        customerName = $('#CustomerName').val();  
+        message = $('#message').val();  
+        
         customerPhone = customerPhone.replace(/[^0-9]/g, '');
+        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+        if (customerName == "") {
+            $('.error-name').removeClass('hidden');
+            return false;
+        }else {
+            $('.error-name').addClass('hidden');
+        }
+        if (customerEmail == "") {
+            $('.error-email-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-email-none').addClass('hidden');
+        }
+        if (!regex.test(customerEmail)) {
+            $('.error-email').removeClass('hidden');
+            return false;
+        }
+        if (customerPhone == "") {
+            $('.error-phone-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-phone-none').addClass('hidden');
+        }
         if (customerPhone.length != 10) {
             $('.error-phone').removeClass('hidden');
             return false;
         }
 
-        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-        if (!regex.test(customerEmail)) {
-            $('.error-email').removeClass('hidden');
-           return false;
+        if (message == "") {
+            $('.error-content').removeClass('hidden');
+            return false;
+        } else {
+            $('.error-content').addClass('hidden');
+           
         }
+       
+
+       
         if (check && customerPhone != "" && customerEmail != "" && customerName != "") {
             return true;           
         }
