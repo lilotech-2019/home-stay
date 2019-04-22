@@ -54,6 +54,7 @@ namespace Outsourcing.Data
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Asset> Assets { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -94,7 +95,5 @@ namespace Outsourcing.Data
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public System.Data.Entity.DbSet<Outsourcing.Data.Models.Asset> Assets { get; set; }
     }
 }
