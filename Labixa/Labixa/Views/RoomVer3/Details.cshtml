@@ -83,7 +83,7 @@
                                     <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <form id="contactBooking"
+                                <form id="contactBookingModal"
                                       action="/RoomVer3/BookingRoom" method="post">
                                     <div class="row">
                                         <div class="col-lg-8 col-sm-12">
@@ -92,12 +92,10 @@
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
-                                                        <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerEmail" type="text" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
-                                                        <small><span class="text-danger error-email hidden">Email không hợp lệ </span></small>
-                                                        <small><span class="text-danger error-email-none hidden">Vui lòng nhập email </span></small>
+                                                        <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
@@ -124,16 +122,14 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
-                                                               class="form-control" @*onkeypress="return isNumberKey(event)"*@>
-                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không hợp lệ </span></small>
-                                                        <small><span class="text-danger error-phone-none hidden">vui lòng nhập số điện thoại </span></small>
+                                                               class="form-control" onkeypress="return isNumberKey(event)">
+                                                        <small><span class="text-danger error-phone hidden">Số điện thoại không đúng </span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                   class="form-control" style="height:200px;"></textarea>
-                                                        <small><span class="text-danger error-content hidden">vui lòng không để trống nội dung</span></small>
                                                     </div>
                                                 </div>
                                                 <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -642,47 +638,26 @@
 </section>
 <script>
     var check = false;
-    var contactBooking = $('#contactBooking');    
+    var check;
+    var contactBooking = $('#contactBookingModal');
     var submitBtn = $('#submitBtn');
     $(function () {
         pickingDate();
-        validateForm();
         pickingDateModal()
+        submitForm();
+       
+    });
+    function submitForm() {
         submitBtn.click(function (e) {
             check = validateModalForm();
+            console.log(check);
             if (check) {
                 alert("Đặt Phòng Thành Công");
-                $('#contactBooking').submit();
+                contactBooking.submit();
             } else {
-                alert("Đặt phòng không thành công");
+                e.preventDefault();
             }
         });
-    });
-
-    function validateForm() {
-        var checkFrom = $("#startDay");
-        var checkTo = $("#endDay");
-        checkFrom.change(function () {
-            $('.error-check-in').addClass('hidden');
-            var checkDate = isValidDate(checkFrom);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-in').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });
-
-        checkTo.change(function () {
-            $('.error-check-out').addClass('hidden');
-            var checkDate = isValidDate(checkTo);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-out').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });   
     }
     function pickingDate() {
         var dateFormat = "dd/mm/yy",
@@ -694,8 +669,7 @@
                     numberOfMonths: 2
                 })
                 .on("change", function () {
-                    to.datepicker("option", "minDate", getDate(this));
-
+                    to.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDay").datepicker({
                 dateFormat: 'dd/mm/yy',
@@ -704,19 +678,8 @@
                 numberOfMonths: 2
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", getDate(this));
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
                 });
-
-        function getDate(element) {
-            var date;
-            try {
-                date = $.datepicker.parseDate(dateFormat, element.value);
-            } catch (error) {
-                date = null;
-            }
-            return date;
-        }
-       
     }
     function pickingDateModal() {
         var dateFormat = "dd/mm/yy",
@@ -728,7 +691,7 @@
                     numberOfMonths: 2,
                 })
                 .on("change", function () {
-                    to.datepicker("option", "minDate", getDateModal(this));
+                    to.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDayRoom").datepicker({
                 dateFormat: 'dd/mm/yy',
@@ -737,18 +700,18 @@
                 numberOfMonths: 2
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", getDateModal(this));
-                });
-
-        function getDateModal(element) {
-            var date;
-            try {
-                date = $.datepicker.parseDate(dateFormat, element.value);
-            } catch (error) {
-                date = null;
-            }
-            return date;
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
+                });       
+    }
+    //convert-date-function
+    function convertDate(element, dateFormat) {
+        var date;
+        try {
+            date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+            date = null;
         }
+        return date;
     }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
@@ -756,68 +719,41 @@
         if (dateString.val().length > 10)  return false; 
         return true;
     }
-    function BookingRooom() { 
-        
-
-            
-          
-        
-        
+    function isValidGmail(gmailString) {
+        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+        if (!regex.test(gmailString))
+            return false;
+        return true;
     }
-    function validateModalForm(){
-        var customerName, customerEmail, customerPhone, contactBooking, message;
+    function isValidPhone(phoneString) {
+        if (phoneString.length != 10) {
+            return false;
+        }
+        return true;
+    }
+    function validateModalForm() {
+        var customerName, customerEmail, customerPhone;
         $('.error-phone').addClass('hidden');
         $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();  
-        message = $('#message').val();  
+        customerName = $('#CustomerName').val();   
+        message = $('#message').val();
         
-        customerPhone = customerPhone.replace(/[^0-9]/g, '');
-        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-        if (customerName == "") {
-            $('.error-name').removeClass('hidden');
+        if (customerEmail == "" || customerPhone == "" || customerName == "" || message == "") {
             return false;
-        }else {
-            $('.error-name').addClass('hidden');
         }
-        if (customerEmail == "") {
-            $('.error-email-none').removeClass('hidden');
-            return false;
-        } else {
-            $('.error-email-none').addClass('hidden');
-        }
-        if (!regex.test(customerEmail)) {
+        if (!isValidGmail(customerEmail)) {
             $('.error-email').removeClass('hidden');
             return false;
         }
-        if (customerPhone == "") {
-            $('.error-phone-none').removeClass('hidden');
-            return false;
-        } else {
-            $('.error-phone-none').addClass('hidden');
-        }
-        if (customerPhone.length != 10) {
+        if (!isValidPhone(customerPhone)) {
             $('.error-phone').removeClass('hidden');
             return false;
-        }
-
-        if (message == "") {
-            $('.error-content').removeClass('hidden');
-            return false;
-        } else {
-            $('.error-content').addClass('hidden');
-           
-        }
-       
-
-       
-        if (check && customerPhone != "" && customerEmail != "" && customerName != "") {
-            return true;           
-        }
+        }      
         return true;
     }
-    
+  
     function bookingShortRoom() {
         var startDay, endDay, selectMenu;
         startDay = $('#startDay').val();
@@ -826,10 +762,7 @@
         $('#startDayRoom').val(startDay);
         $('#endDayRoom').val(endDay);
         $('#CustomeNumber').val(selectMenu);
-        if (check) {
-            $("#exampleModalCenter").modal('show');
-        }
-
+        $("#exampleModalCenter").modal('show');
     }
 </script>
 <!-- News style-->
