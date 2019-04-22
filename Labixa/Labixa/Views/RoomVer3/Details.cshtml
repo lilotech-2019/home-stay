@@ -290,7 +290,7 @@
                                     <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <form id="contactBooking"
+                                <form id="contactBookingLongRoom"
                                       action="/RoomVer3/BookingLongRoom" method="post">
                                     <div class="row">
                                         <div class="col-lg-8 col-sm-12">
@@ -298,17 +298,21 @@
 
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                        <input id="NameLR" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                        <small><span class="text-danger errorLR-name hidden">Vui lòng nhập tên </span></small>
+                                                       
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <input id="EmailLR" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
+                                                        <small><span class="text-danger errorLR-email-none hidden">Vui lòng nhập email </span></small>
+                                                        <small><span class="text-danger errorLR-email hidden">Sai Định Dạng Email</span></small>
                                                     </div>
                                                 </div>
 
                                                 <div class="row form-group">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                         <div class="select-box">
-                                                            <select name="AmountOfPeople" class="form-control" style="cursor: pointer;" id="CustomeNumber" required>
+                                                            <select name="AmountOfPeople" class="form-control" style="cursor: pointer;" id="CustomeNumberLR" required>
                                                                 <option value="default">@Html.Raw(Resources.Resources.HMS_PeopleNumber)</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
@@ -316,16 +320,22 @@
                                                                 <option value="4">4</option>
                                                             </select>
                                                         </div>
+                                                        <small><span class="text-danger errorLR-numberPeople hidden">Vui lòng chọn số lượng người </span></small>
+                                                       
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                        <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
+                                                        <input id="PhoneLR" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                class="form-control" onkeypress="return isNumberKey(event)">
+                                                        <small><span class="text-danger errorLR-phone-none hidden">Vui lòng nhập email </span></small>
+                                                        <small><span class="text-danger errorLR-phone hidden">Sai Định Dạng Email</span></small>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
+                                                        <textarea id="messageLR" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                   class="form-control" style="height:200px;"></textarea>
+                                                        <small><span class="text-danger errorLR-content hidden">Vui lòng nhập email </span></small>
+                                                  
                                                     </div>
                                                 </div>
                                                 <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -333,8 +343,8 @@
                                                 <input type="text" name="Name" value="@Model.Room.Name" style="display:none;">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <button type="submit" class="res-btn"
-                                                                onclick="BookingRooom()">
+                                                        <button type="submit" class="res-btn" id="submitBtnLR">
+                                                           
                                                             @Html.Raw(Resources.Resources.HMS_Booking)
                                                         </button>
                                                     </div>
@@ -646,13 +656,16 @@
 </section>
 <script>
     var check = false;
-    var check;
+    var checkLR = false;
     var contactBooking = $('#contactBooking');
+    var contactBoookingLR = $('#contactBookingLongRoom');
     var submitBtn = $('#submitBtn');
+    var submitLR = $('#submitBtnLR');
     $(function () {
         pickingDate();
         pickingDateModal()
         submitForm();
+        submitFormLR();
        
     });
     function submitForm() {
@@ -668,6 +681,19 @@
             }
         });
     }
+    function submitFormLR() {
+        submitLR.click(function (e) {
+            checkLR = validateModelLongRoom();
+            console.log(checkLR);
+            if (checkLR) {
+                alert("Đặt Phòng Thành Công");
+                contactBoookingLR.submit();
+            } else {
+                alert("Đặt Phòng Không thành công");
+                //e.preventDefault();
+            }
+        });
+    } 
     function pickingDate() {
         var dateFormat = "dd/mm/yy",
             from = $("#startDay")
@@ -805,6 +831,56 @@
             $('.error-content').addClass('hidden');
 
         }  
+        return true;
+    }
+    function validateModelLongRoom() {
+        var nameLR, emailLR, phoneLR, messageLR, numberLR;
+        $('.errorLR-phone').addClass('hidden');
+        $('.errorLR-email').addClass('hidden');
+        emailLR = $('#EmailLR').val();
+        phoneLR = $('#PhoneLR').val();
+        nameLR = $('#NameLR').val();
+        numberLR = $('#CustomeNumberLR').val();
+        messageLR = $('#messageLR').val();
+        if (nameLR == "") {
+            $('.errorLR-name').removeClass('hidden');
+            return false;
+        } else {
+            $('.errorLR-name').addClass('hidden');
+        }
+        if (emailLR == "") {
+            $('.errorLR-email-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.errorLR-email-none').addClass('hidden');
+        }
+        if (!isValidGmail(emailLR)) {
+            $('.errorLR-email').removeClass('hidden');
+            return false;
+        }
+        if (numberLR == "default") {
+            $('.errorLR-numberPeople').removeClass('hidden');
+            return false;
+        } else {
+            $('.errorLR-numberPeople').addClass('hidden');
+        }
+        if (phoneLR == "") {
+            $('.errorLR-phone-none').removeClass('hidden');
+            return false;
+        } else {
+            $('.errorLR-phone-none').addClass('hidden');
+        }
+        if (!isValidPhone(phoneLR)) {
+            $('.errorLR-phone').removeClass('hidden');
+            return false;
+        }
+        if (messageLR == "") {
+            $('.errorLR-content').removeClass('hidden');
+            return false;
+        } else {
+            $('.errorLR-content').addClass('hidden');
+
+        }
         return true;
     }
   
