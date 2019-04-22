@@ -20,13 +20,13 @@ namespace Labixa.Controllers
         }
         public ActionResult Index(int? page = 1)
         {
-            int pageNumber = (page ?? 1); 
-            int pageSize = 4; 
+            int pageNumber = (page ?? 1);
+            int pageSize = 4;
             BlogViewModel viewModel = new BlogViewModel();
-            viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w =>w.Id);
+            viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w => w.Id);
             var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated);
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
-            return View(viewModel); 
+            return View(viewModel);
         }
 
         public ActionResult Detail(string slug)
@@ -53,12 +53,10 @@ namespace Labixa.Controllers
 
         public ActionResult SetCulture(string slug)
         {
-            // Validate input
             slug = CultureHelper.GetImplementedCulture(slug);
-            // Save culture in a cookie
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
-                cookie.Value = slug; // update cookie value
+                cookie.Value = slug;
             else
             {
                 cookie = new HttpCookie("_culture");
@@ -68,7 +66,6 @@ namespace Labixa.Controllers
             Response.Cookies.Add(cookie);
             return RedirectToAction("Index", "Home");
         }
-
         #endregion
     }
 }

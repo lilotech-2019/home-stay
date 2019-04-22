@@ -1,9 +1,7 @@
-﻿@*@model Outsourcing.Data.Models.Blog*@
-@model Labixa.ViewModels.BlogViewModel
-@{ 
-                HttpCookie cookie = Request.Cookies["_culture"];
+﻿@model Labixa.ViewModels.BlogViewModel
+@{
+    HttpCookie cookie = Request.Cookies["_culture"];
 }
-
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_BlogDetail)</h2>
@@ -17,19 +15,12 @@
         </ol>
     </div>
 </section>
-<!-- Header  Slider style-->
-<!-- News style-->
 <section class="container clearfix common-pad-inner">
     <div class="row">
         <div class="col-md-4 col-sm-12 pull-left">
             <div class="single-sidebar-widget">
-
-                <!-- Categories style-->
                 <div class="single-sidebar-widget-outer" style="display:none">
-
                 </div>
-                <!-- Categories style-->
-                <!-- Popular Posts style-->
                 <div class="single-sidebar-widget-outer">
                     <div class="sec-title">
                         <h2>@Html.Raw(Resources.Resources.HMS_BlogNew)</h2>
@@ -64,50 +55,36 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="col-md-8 col-sm-12 pull-right">
             <div class="single-post-wrapper">
-          
-            @if (cookie.Value.Equals("vi"))
-            {
-            <article class="single-blog-post img-cap-effect">
-                <div class="img-box">
-                    <a href="@Model.listBlogNew.Slug">
-                        <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
-
-                    </a>
-                </div>
-
-                <h3>@Model.listBlogNew.Title</h3>
-                <p> @Html.Raw(Model.listBlogNew.Description)</p>
-
-                @*<p>@Html.Raw(Model.listBlogNew.Content) </p>*@
-            </article>
-            }
-            else
-            {
-            <article class="single-blog-post img-cap-effect">
-                <div class="img-box">
-                    <a href="@Model.listBlogNew.Slug">
-                        <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
-
-                    </a>
-                </div>
-
-                <h3>@Model.listBlogNew.TitleENG</h3>
-     
-
-                <p>@Html.Raw(Model.listBlogNew.DescriptionENG) </p>
-            </article>
-            }
-                
-
+                @if (cookie.Value.Equals("vi"))
+                {
+                    <article class="single-blog-post img-cap-effect">
+                        <div class="img-box">
+                            <a href="@Model.listBlogNew.Slug">
+                                <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <h3>@Model.listBlogNew.Title</h3>
+                        <p> @Html.Raw(Model.listBlogNew.Description)</p>
+                    </article>
+                }
+                else
+                {
+                    <article class="single-blog-post img-cap-effect">
+                        <div class="img-box">
+                            <a href="@Model.listBlogNew.Slug">
+                                <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <h3>@Model.listBlogNew.TitleENG</h3>
+                        <p>@Html.Raw(Model.listBlogNew.DescriptionENG) </p>
+                    </article>
+                }
             </div>
         </div>
     </div>
 </section>
-<!-- News style-->
-<!-- Welcome banner  style-->
-<!-- Welcome banner  style-->
+
