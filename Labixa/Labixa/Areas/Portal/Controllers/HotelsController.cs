@@ -1,10 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Outsourcing.Core.Common;
+using Outsourcing.Data.Models;
+using Outsourcing.Service.Portal;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Outsourcing.Core.Common;
-using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -32,14 +32,14 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Index - Get
         /// </summary>
-        /// <param name="id">HotelCategoryId</param>
+        /// <param name="hotelCategoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? hotelCategoryId)
         {
             var hotels = _hotelService.FindAll();
-            if (id != null)
+            if (hotelCategoryId != null)
             {
-                hotels = hotels.Where(w => w.HotelCategoryId == id);
+                hotels = hotels.Where(w => w.HotelCategoryId == hotelCategoryId);
             }
             hotels = hotels.AsNoTracking();
             return View(hotels);
@@ -60,7 +60,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var hotel = _hotelService.FindById((int) id);
+            var hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -116,7 +116,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int) id);
+            Hotel hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -159,7 +159,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelService.FindById((int) id);
+            var categoryHotels = _hotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();

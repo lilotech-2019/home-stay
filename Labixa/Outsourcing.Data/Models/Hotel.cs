@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -50,6 +51,8 @@ namespace Outsourcing.Data.Models
 
         [ForeignKey("HotelCategoryId")]
         public virtual HotelCategory HotelCategory { get; set; }
+
+        public virtual ICollection<Room> Rooms { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string MetaDescription { get; set; }

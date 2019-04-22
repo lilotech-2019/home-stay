@@ -1,0 +1,25 @@
+﻿@model  Labixa.Areas.Portal.ViewModels.HotelCategory.PartialSubMenuCategoryViewModel
+
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-list"></i>
+            <span class="menu-text">
+                Quản lý khách sạn
+                <span class="badge badge-primary ">@Model.Count</span>
+            </span>
+            <b class=""></b>
+        </a>
+        <ul class="submenu" style="overflow: hidden; display: none;">
+
+            @foreach (var item in Model.HotelCategories)
+            {
+                <li>
+                    <a href="@Url.Action("Index","Hotels",new { hotelCategoryId = item.Id})">
+                        <i class="icon-double-angle-right"></i>
+                        @item.Name
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </li>

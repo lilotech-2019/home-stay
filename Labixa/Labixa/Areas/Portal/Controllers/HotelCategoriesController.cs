@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Labixa.Areas.Portal.ViewModels.HotelCategory;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
@@ -175,5 +177,14 @@ namespace Labixa.Areas.Portal.Controllers
         #region MyRegion
 
         #endregion
+
+        public ActionResult PartialSubMenuCategory() {
+            var data = _hotelCategoryService.FindAll().AsNoTracking();
+            var viewModel = new PartialSubMenuCategoryViewModel();
+            viewModel.Count = data.Count();
+            viewModel.HotelCategories = data;
+            return PartialView("_PartialSubMenuCategory",viewModel);
+        }
+
     }
 }

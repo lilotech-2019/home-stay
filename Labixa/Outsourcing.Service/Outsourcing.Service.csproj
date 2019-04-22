@@ -94,7 +94,7 @@
     <Compile Include="Portal\HotelCategoryService.cs" />
     <Compile Include="Portal\HotelService.cs" />
     <Compile Include="Portal\MessageService.cs" />
-    <Compile Include="Portal\RoomServices.cs" />
+    <Compile Include="Portal\RoomService.cs" />
     <Compile Include="ProductAttributeService.cs" />
     <Compile Include="ProductAttributeMappingervice.cs" />
     <Compile Include="ProductCategoryMappingServices.cs" />

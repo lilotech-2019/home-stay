@@ -23,7 +23,7 @@
                 <a href="#" class="navbar-brand">
                     <small>
                         <i class="icon-money icon-large"></i>
-                        Quản lý website 
+                        Quản lý website
                     </small>
                 </a>
             </div>
@@ -172,16 +172,9 @@
                 <b class=""></b>
             </a>
         </li>*@
-                <li>
-                    <a href="@Url.Action("Index","Hotels")" class="dropdown-toggle">
-                        <i class="icon-desktop"></i>
-                        <span class="menu-text">
-                            Quản lý Khách sạn
-                            <span class="badge badge-primary ">1</span>
-                        </span>
-                        <b class=""></b>
-                    </a>
-                </li>
+                <!--Quản lý khách sạn-->
+                @Html.Action("PartialSubMenuCategory", "HotelCategories")
+
                 <li>
                     <a href="@Url.Action("Index","Rooms")" class="dropdown-toggle">
                         <i class="icon-desktop"></i>
@@ -242,7 +235,7 @@
                         <b class=""></b>
                     </a>
                 </li>
-               
+
                 <li>
                     <a href="/Account/SignOut">
                         <i class="icon-home"></i>

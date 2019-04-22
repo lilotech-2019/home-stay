@@ -141,6 +141,8 @@
     <Compile Include="Repository\HMS\CostOrderItemRepository.cs" />
     <Compile Include="Repository\HMS\CostOrderRepository.cs" />
     <Compile Include="Repository\HMS\CostRepository.cs" />
+    <Compile Include="Repository\HMS\AssetRepository.cs" />
+    <Compile Include="Repository\HMS\MessageRepository.cs" />
     <Compile Include="Repository\HMS\CustomerRepository.cs" />
     <Compile Include="Repository\HMS\HotelRepository.cs" />
     <Compile Include="Repository\HMS\ProductRepository.cs" />
@@ -177,7 +179,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\Portal\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{f1c27911-ce4d-429e-9483-14e73ac120c8}</Project>
