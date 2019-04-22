@@ -14,7 +14,7 @@ namespace Outsourcing.Data.Models
         public string Type { get; set; }
         public string Value { get; set; }
         public bool IsPublic { get; set; }
-        public bool Deleted { get; set; }
+        
 
     }
 }

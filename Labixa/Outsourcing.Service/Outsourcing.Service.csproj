@@ -86,12 +86,14 @@
     <Compile Include="NotificationServices.cs" />
     <Compile Include="OrderItemService.cs" />
     <Compile Include="PictureService.cs" />
+    <Compile Include="Portal\AssetService.cs" />
     <Compile Include="Portal\BlogCategoryService.cs" />
     <Compile Include="Portal\BlogService.cs" />
     <Compile Include="Portal\CustomerService.cs" />
     <Compile Include="Portal\Base\IServiceBase.cs" />
     <Compile Include="Portal\HotelCategoryService.cs" />
     <Compile Include="Portal\HotelService.cs" />
+    <Compile Include="Portal\MessageService.cs" />
     <Compile Include="Portal\RoomServices.cs" />
     <Compile Include="ProductAttributeService.cs" />
     <Compile Include="ProductAttributeMappingervice.cs" />

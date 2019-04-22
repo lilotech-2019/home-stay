@@ -77,6 +77,7 @@
     <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
+    <Compile Include="Areas\Portal\Controllers\AssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\BaseController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogsController.cs" />
@@ -1619,6 +1620,11 @@
     <Content Include="Areas\Portal\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Portal\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Delete.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

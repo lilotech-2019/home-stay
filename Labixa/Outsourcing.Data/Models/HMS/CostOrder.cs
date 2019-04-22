@@ -23,11 +23,8 @@ namespace Outsourcing.Data.Models.HMS
         /// just count total of booking room, not include sum of service and other
         /// </summary>
         public double? TotalPaymentRoom_DraftCheckIn { get; set; }
-        public int? Status { get; set; }
         public int? ShipmentId { get; set; }
         public Double? ShipmentFee { get; set; }
-        public bool Deleted { get; set; }
-        public DateTime DateCreated { get; set; }
         public DateTime? Deadline { get; set; }
         
         public string Note { get; set; }
