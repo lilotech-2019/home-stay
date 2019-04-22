@@ -1,0 +1,10 @@
+﻿@model double?
+@if (Model != null)
+{
+    @Html.TextBox("", @Model, new { @class = "col-xs-12 col-md-8", @type = "number" })
+}
+else
+{
+    @Html.TextBox("", 0, new { @class = "col-xs-12 col-md-8", @type = "number" })
+
+}

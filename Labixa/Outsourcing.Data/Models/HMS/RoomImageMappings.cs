@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Outsourcing.Data.Models.HMS
+﻿namespace Outsourcing.Data.Models.HMS
 {
 
     public class RoomImageMappings : BaseEntity
@@ -15,7 +9,7 @@ namespace Outsourcing.Data.Models.HMS
         public int RoomId { get; set; }
         public int RoomImageId { get; set; }
 
-        public virtual Rooms Room { get; set; }
+        public virtual Room Room { get; set; }
         public virtual RoomImages RoomImage { get; set; }
 
     }

@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class ProductAttributeMappingService : IProductAttributeMappingService
     {
         #region Field
-        private readonly IProductAttributeMappingRepository productAttributeMappingRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductAttributeMappingRepository _productAttributeMappingRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public ProductAttributeMappingService(IProductAttributeMappingRepository productAttributeMappingRepository, IUnitOfWork unitOfWork)
         {
-            this.productAttributeMappingRepository = productAttributeMappingRepository;
-            this.unitOfWork = unitOfWork;
+            this._productAttributeMappingRepository = productAttributeMappingRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<ProductAttributeMapping> GetProductAttributeMappings()
         {
-            var productAttributeMappings = productAttributeMappingRepository.GetAll();
+            var productAttributeMappings = _productAttributeMappingRepository.GetAll();
             return productAttributeMappings;
         }
 
         public ProductAttributeMapping GetProductAttributeMappingById(int productAttributeMappingId)
         {
-            var productAttributeMapping = productAttributeMappingRepository.GetById(productAttributeMappingId);
+            var productAttributeMapping = _productAttributeMappingRepository.GetById(productAttributeMappingId);
             return productAttributeMapping;
         }
 
         public void CreateProductAttributeMapping(ProductAttributeMapping productAttributeMapping)
         {
-            productAttributeMappingRepository.Add(productAttributeMapping);
+            _productAttributeMappingRepository.Add(productAttributeMapping);
             SaveProductAttributeMapping();
         }
 
         public void EditProductAttributeMapping(ProductAttributeMapping productAttributeMappingToEdit)
         {
-            productAttributeMappingRepository.Update(productAttributeMappingToEdit);
+            _productAttributeMappingRepository.Update(productAttributeMappingToEdit);
             SaveProductAttributeMapping();
         }
 
         public void DeleteProductAttributeMapping(int productAttributeMappingId)
         {
             //Get productAttributeMapping by id.
-            var productAttributeMapping = productAttributeMappingRepository.GetById(productAttributeMappingId);
+            var productAttributeMapping = _productAttributeMappingRepository.GetById(productAttributeMappingId);
             if (productAttributeMapping != null)
             {
-                productAttributeMappingRepository.Delete(productAttributeMapping);
+                _productAttributeMappingRepository.Delete(productAttributeMapping);
                 SaveProductAttributeMapping();
             }
         }
 
         public void SaveProductAttributeMapping()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddProductAttributeMapping(ProductAttributeMapping productAttributeMapping)

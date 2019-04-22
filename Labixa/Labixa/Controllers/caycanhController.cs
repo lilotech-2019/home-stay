@@ -99,7 +99,7 @@ namespace Labixa.Controllers
                     // ignored
                 }
             }
-            List<Blogs> listBlog = new List<Blogs>();
+            List<Blog> listBlog = new List<Blog>();
             IEnumerable<string> list = listProductUrl;
             foreach (var urlProduct in list.Reverse())
             {
@@ -112,7 +112,7 @@ namespace Labixa.Controllers
                     web = new HtmlWeb();
                     doc = web.Load(urlProduct);
                     Thread.Sleep(500);
-                    var item = new Blogs();
+                    var item = new Blog();
                     var id = urlProduct.Split('.').LastOrDefault().Replace("/", null).Trim();
                     var blog = _blogService.GetBlogs().FirstOrDefault(p => p.Id == int.Parse(id));
                     if (blog != null)
@@ -162,7 +162,7 @@ namespace Labixa.Controllers
                             "<a href='/tin-tuc/" + StringConvert.ConvertShortName(item.Slug) + "' alt='" + item.Title +
                             "'>")
                         .Replace("</strong>", "</a>").Replace("<b>", null).Replace("</b>", null).Trim();
-                    _blogService.CreateBlog(item);
+                    _blogService.Create(item);
                     listBlog.Add(item);
                 }
 

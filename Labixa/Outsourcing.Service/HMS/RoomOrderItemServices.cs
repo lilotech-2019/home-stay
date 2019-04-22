@@ -15,26 +15,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<RoomOrderItem> GetRoomOrderItems();
-        RoomOrderItem GetRoomOrderItemById(int RoomOrderItemId);
-        void CreateRoomOrderItem(RoomOrderItem RoomOrderItem);
+        RoomOrderItem GetRoomOrderItemById(int roomOrderItemId);
+        void CreateRoomOrderItem(RoomOrderItem roomOrderItem);
         void EditRoomOrderItem(RoomOrderItem roomOrderItemToEdit);
-        void DeleteRoomOrderItem(int RoomOrderItemId);
+        void DeleteRoomOrderItem(int roomOrderItemId);
         void SaveRoomOrderItem();
-        IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem RoomOrderItem);
+        IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem roomOrderItem);
 
     }
     public class RoomOrderItemService : IRoomOrderItemService
     {
         #region Field
-        private readonly IRoomOrderItemRepository RoomOrderItemRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IRoomOrderItemRepository _roomOrderItemRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public RoomOrderItemService(IRoomOrderItemRepository RoomOrderItemRepository, IUnitOfWork unitOfWork)
+        public RoomOrderItemService(IRoomOrderItemRepository roomOrderItemRepository, IUnitOfWork unitOfWork)
         {
-            this.RoomOrderItemRepository = RoomOrderItemRepository;
-            this.unitOfWork = unitOfWork;
+            this._roomOrderItemRepository = roomOrderItemRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,45 +42,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<RoomOrderItem> GetRoomOrderItems()
         {
-            var RoomOrderItems = RoomOrderItemRepository.GetAll();
-            return RoomOrderItems;
+            var roomOrderItems = _roomOrderItemRepository.GetAll();
+            return roomOrderItems;
         }
 
-        public RoomOrderItem GetRoomOrderItemById(int RoomOrderItemId)
+        public RoomOrderItem GetRoomOrderItemById(int roomOrderItemId)
         {
-            var RoomOrderItem = RoomOrderItemRepository.GetById(RoomOrderItemId);
-            return RoomOrderItem;
+            var roomOrderItem = _roomOrderItemRepository.GetById(roomOrderItemId);
+            return roomOrderItem;
         }
 
-        public void CreateRoomOrderItem(RoomOrderItem RoomOrderItem)
+        public void CreateRoomOrderItem(RoomOrderItem roomOrderItem)
         {
-            RoomOrderItemRepository.Add(RoomOrderItem);
+            _roomOrderItemRepository.Add(roomOrderItem);
             SaveRoomOrderItem();
         }
 
         public void EditRoomOrderItem(RoomOrderItem roomOrderItemToEdit)
         {
-            RoomOrderItemRepository.Update(roomOrderItemToEdit);
+            _roomOrderItemRepository.Update(roomOrderItemToEdit);
             SaveRoomOrderItem();
         }
 
-        public void DeleteRoomOrderItem(int RoomOrderItemId)
+        public void DeleteRoomOrderItem(int roomOrderItemId)
         {
             //Get RoomOrderItem by id.
-            var RoomOrderItem = RoomOrderItemRepository.GetById(RoomOrderItemId);
-            if (RoomOrderItem != null)
+            var roomOrderItem = _roomOrderItemRepository.GetById(roomOrderItemId);
+            if (roomOrderItem != null)
             {
-                RoomOrderItemRepository.Delete(RoomOrderItem);
+                _roomOrderItemRepository.Delete(roomOrderItem);
                 SaveRoomOrderItem();
             }
         }
 
         public void SaveRoomOrderItem()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem RoomOrderItem)
+        public IEnumerable<ValidationResult> CanAddRoomOrderItem(RoomOrderItem roomOrderItem)
         {
 
             //    yield return new ValidationResult("RoomOrderItem", "ErrorString");

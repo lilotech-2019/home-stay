@@ -20,8 +20,8 @@ namespace Outsourcing.Core.Common
         /// <param name="message">The message.</param>
         public ValidationResult(string memeberName, string message)
         {
-            this.MemberName = memeberName;
-            this.Message = message;
+            MemberName = memeberName;
+            Message = message;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Outsourcing.Core.Common
         /// <param name="message">The message.</param>
         public ValidationResult(string message)
         {
-            this.Message = message;
+            Message = message;
         }
 
         /// <summary>

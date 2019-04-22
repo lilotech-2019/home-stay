@@ -3,11 +3,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
     HttpCookie cookie = Request.Cookies["_culture"];
-    //if(cookie == null)
-    //{
-    //    var thread = Thread.CurrentThread.CurrentCulture;
-    //    cookie = new HttpCookie("", thread.CultureTypes.ToString());
-    //}
 }
 
 <!-- Home Slider-->
@@ -272,7 +267,7 @@
                 {
                     <div class="room-suite">
                         <div class="item">
-                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                 <div class="ro-img">
                                     <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
                                 </div>
@@ -294,13 +289,13 @@
                 {
                     <div class="room-suite">
                         <div class="item">
-                            <a href="/chi-tiet-phong-ngan-han/@iterm.Slug">
+                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                 <div class="ro-img">
                                     <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
                                 </div>
                                 <div class="ro-txt">
                                     <div class="left-h pull-left">
-                                        <p>@iterm.NameEN</p>
+                                        <p>@iterm.NameEnglish</p>
                                     </div>
                                     <div class="right-p pull-right">
                                         <p>
@@ -729,10 +724,10 @@ else
                         </div>
                         <div class="news-evn-cont">
                             <div class="news-meta"></div><a href="/tintuc/@iterm.Slug">
-                                <h3>@iterm.TitleENG</h3>
+                                <h3>@iterm.TitleEnglish</h3>
                             </a>
                             <p>
-                                @iterm.MetaTitleEN
+                                @iterm.MetaTitleEnglish
                             </p>
                         </div>
                     </div>

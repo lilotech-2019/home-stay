@@ -1,19 +1,26 @@
-﻿@model Outsourcing.Data.Models.Colors
+﻿@model Outsourcing.Data.Models.Deposit
 @{
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
     HttpCookie cookie = Request.Cookies["_culture"];
 }
 <script>
+   
     function sendContact() {
         var Name, Email, PhoneNumber, message;
+       
         Name = document.getElementById("CustomerName").value;
         Email = document.getElementById("Email").value;
         PhoneNumber = document.getElementById("PhoneNumber").value;
         message = document.getElementById("content").value;
-        if (Name != "" && Email != "" && PhoneNumber != "" && message != "") {
+        
+        if (Name != "" && Email != "" && PhoneNumber !="" && message != "") {
             alert("Gửi Tin Nhắn Thành Công");
+        
         }
+       
+        
+       
 
     }
 </script>
@@ -48,7 +55,7 @@
         <div class="col-md-8">
             <div class="book-left-content input_form">
                 @* form để submit data *@
-                <form id="contactForm" action="/Home/ContactBookingRooom" method="post">
+                <form id="contactForm" action="/Home/ContactBookingRooom" method="post" name="contactForm">
                     @*@Html.HiddenFor(model => model.IsDelete)
                     @Html.HiddenFor(model => model.Note)*@
                     <div class="row">

@@ -27,7 +27,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-              this IEnumerable<CategoryHotels> CategoryHotel, int selectedId)
+              this IEnumerable<HotelCategory> CategoryHotel, int selectedId)
         {
             return
 
@@ -41,7 +41,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-             this IEnumerable<Hotels> Hotels, int selectedId)
+             this IEnumerable<Hotel> Hotels, int selectedId)
         {
             return
 
@@ -97,7 +97,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-            this IEnumerable<Vendors> blogCategory, int selectedId)
+            this IEnumerable<ContactUs> blogCategory, int selectedId)
         {
             return
 
@@ -125,7 +125,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-           this IEnumerable<Colors> blogCategory, int selectedId)
+           this IEnumerable<Deposit> blogCategory, int selectedId)
         {
             return
 

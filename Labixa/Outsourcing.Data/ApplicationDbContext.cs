@@ -15,7 +15,7 @@ namespace Outsourcing.Data
         }
 
 
-        public DbSet<Blogs> Blogs { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogCategories> BlogCategories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -27,7 +27,7 @@ namespace Outsourcing.Data
         public DbSet<ProductPictureMapping> ProductPictureMappings { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<WebsiteAttributes> WebsiteAttributes { get; set; }
-        public DbSet<Colors> Colors { get; set; }
+        public DbSet<Deposit> Deposits { get; set; }
         public DbSet<Inventory> Inventorys { get; set; }
         public DbSet<InventoryLog> InventoryLogs { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -36,23 +36,25 @@ namespace Outsourcing.Data
         public DbSet<ProductCategoryMapping> ProductCategoryMappings { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
-        public DbSet<Vendors> Vendors { get; set; }
-        public DbSet<CategoryHotels> CategoryHotels { get; set; }
+        public DbSet<ContactUs> Vendors { get; set; }
+        public DbSet<HotelCategory> HotelCategories { get; set; }
         public DbSet<CategoryProducts> CategoryProducts { get; set; }
         public DbSet<CostCategory> CostCategorys { get; set; }
         public DbSet<CostOrderItem> CostOrderItems { get; set; }
         public DbSet<CostOrder> CostOrders { get; set; }
         public DbSet<Costs> Costs { get; set; }
-        public DbSet<Hotels> Hotels { get; set; }
-        public DbSet<Rooms> Room { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Room> Room { get; set; }
         public DbSet<RoomImageMappings> RoomImageMappings { get; set; }
         public DbSet<RoomOrder> RoomOrders { get; set; }
         public DbSet<RoomOrderItem> RoomOrderItems { get; set; }
-        public DbSet<RoomUtilities> RoomUtilitys { get; set; }
-        public DbSet<RoomUtilityRoomMappings> RoomUtilityRoomMappings { get; set; }
         public DbSet<RoomImages> RoomImages { get; set; }
-        public DbSet<HMSProduct> HmsProducts { get; set; } //a
+        public DbSet<HmsProduct> HmsProducts { get; set; } //a
 
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Asset> Assets { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -93,7 +95,5 @@ namespace Outsourcing.Data
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public System.Data.Entity.DbSet<Outsourcing.Data.Models.HMS.Customer> Customers { get; set; }
     }
 }

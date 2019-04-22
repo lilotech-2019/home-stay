@@ -4,6 +4,10 @@ using Outsourcing.Service;
 using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
+using System;
+using System.Net.Mail;
+using System.Net;
+using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Controllers
@@ -11,24 +15,23 @@ namespace Labixa.Controllers
     public class RoomVer3Controller : BaseHomeController
     {
         private readonly IRoomService _roomService;
-        
+        private readonly ICustomerService _customerservice;
 
         private readonly IRoomOrderService _roomOrderService;
 
-        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService, IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem)
+        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService,
+            IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem, ICustomerService customerService)
         {
             _roomService = roomService;
             _roomOrderService = roomOrderService;
+            _customerservice = customerService;
         }
-        //do mặc định khi gọi, /room/ -> nó sẽ nhảy vô index cho nên mặc định khi vô đây
-        // mình sẽ auto chuyển sang action Shortroom
-        //vay la phia view minh se sua thanh , phong ngan hang va phong dai han thoi pk a
-        // cái menu mà Minh kêu e sửa , em sửa chưa, cho a xem đi
-        // GET: /Room/
+
         public ActionResult Index()
         {
             return RedirectToAction("ShortRoom");
         }
+
         /// <summary>
         /// danh sách các phòng ngắn hạn
         /// </summary>
@@ -38,26 +41,12 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.GetRooms().Where(p=>p.Hotel.Layout==0);
+            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(_ => _.Name);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
+
         /// <summary>
         /// chi tiết phòng ngắn hạn
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <returns></returns>
-        public ActionResult DetailShortRoom(string slug)
-        {
-            //var model = _RoomService.GetRoomByUrlName(Slug);
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
-            {
-                RelatedRoom = _roomService.Get3RoomShortNews(),
-                listRoom = _roomService.GetRoomByUrlName(slug)
-            };
-            return View(viewModel);
-        }
-        /// <summary>
-        /// danh sách phòng dài hạn
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
@@ -65,36 +54,147 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 3;
-            var listLongRoom = _roomService.GetRooms().Where(p => p.Hotel.Layout == 2);
+            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_ => _.Name);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
-        /// <summary>
-        /// chi tiết phòng dài hạn
-        /// </summary>
-        /// <param name="slug"></param>
-        /// <returns></returns>
-        public ActionResult DetailLongRoom(string slug)
-        {
-            RoomVer3ViewModel viewModel = new RoomVer3ViewModel
-            {
-                RelatedRoomLong = _roomService.Get3RoomLongNews(),
-                listRoom = _roomService.GetRoomByUrlName(slug)
-            };
-            return View(viewModel);
-        }
-        [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking)
-        {
-            _roomOrderService.Create(modelBooking);
-            return RedirectToAction("ShortRoom", "RoomVer3");
-          
-        }
-        [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom)
-        {
-            _roomOrderService.Create(modelBookingLongRoom);
-            return RedirectToAction("LongRoom", "RoomVer3");
 
+        public ActionResult Details(int id, string slug)
+        {
+            var room = _roomService.FindByIdAndSlug(id, slug);
+            if (room != null)
+            {
+                var relatedRooms = _roomService.FindByType(room.Type);
+                var viewModel = new RoomDetailViewModel
+                {
+                    RelatedRooms = relatedRooms,
+                    Room = room
+                };
+                return View(viewModel);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult BookingRoom(RoomOrder modelBooking, String customerName, String customerEmail,
+            String customerPhone, String name)
+        {
+            Room room = new Room();
+            room.Name = name;
+            string adminGmail = "minhtrungmessi@gmail.com";
+            string password = "abc65432abc65432";
+            string subject = "Đặt phòng thành công";
+            string content = "<table border=" + 1 + "><thead>" +
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Ngày Check In</th>" +
+                             "<th> Ngày Check Out</th>" +
+                             "<th> Email Khách Hàng</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Tên Phòng</th>" +
+                             "<th> Số Lượng Người</th>" +
+                             "<th> Số Tiền</th>" +
+                             "</thead>" +
+                             "<tbody>" +
+                             "<td>" + customerName + "</td>" +
+                             "<td>" + modelBooking.CheckIn + "</td>" +
+                             "<td>" + modelBooking.CheckOut + "</td>" +
+                             "<td>" + customerEmail + "</td>" +
+                             "<td>" + customerPhone + "</td>" +
+                             "<td>" + name + "</td>" +
+                             "<td>" + modelBooking.AmountOfPeople + "</td>" +
+                             "<td>" + modelBooking.Price + "</td>" +
+                             "</tbody></table>";
+
+            var customer = _customerservice.FindByPhone(customerPhone);
+            if (customer == null)
+            {
+                customer = new Customer
+                {
+                    Name = customerName,
+                    Email = customerEmail,
+                    Phone = customerPhone
+                };
+                _customerservice.Create(customer);
+            }
+
+            modelBooking.CustomerId = customer.Id;
+
+
+            modelBooking.CheckIn = DateTime.Now;
+            modelBooking.CheckOut = DateTime.Now;
+            _roomOrderService.Create(modelBooking);
+            var mail = new SmtpClient("smtp.gmail.com", 25)
+            {
+                Credentials = new NetworkCredential(adminGmail, password),
+                EnableSsl = true
+            };
+            var mess = new MailMessage();
+            mess.From = new MailAddress(adminGmail);
+            mess.ReplyToList.Add(adminGmail);
+            mess.To.Add(new MailAddress(customerEmail));
+            mess.Subject = subject;
+            mess.Body = content;
+            mess.IsBodyHtml = true;
+            mail.Send(mess);
+            return RedirectToAction("ShortRoom", "RoomVer3");
+        }
+
+        [HttpPost]
+        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String customerName, String customerEmail,
+            String customerPhone, String name)
+        {
+            Room room = new Room();
+            room.Name = name;
+            string adminGmail = "minhtrungmessi@gmail.com";
+            string password = "abc65432abc65432";
+            string subject = "Đặt phòng thành công";
+            string content = "<table border=" + 1 + "><thead>" +
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Email Khách Hàng</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Tên Phòng</th>" +
+                             "<th> Số Lượng Người</th>" +
+                             "<th> Số Tiền</th>" +
+                             "</thead>" +
+                             "<tbody>" +
+                             "<td>" + customerName + "</td>" +
+                             "<td>" + customerEmail + "</td>" +
+                             "<td>" + customerPhone + "</td>" +
+                             "<td>" + name + "</td>" +
+                             "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
+                             "<td>" + modelBookingLongRoom + "</td>" +
+                             "</tbody></table>";
+
+            var customer = _customerservice.FindByPhone(customerPhone);
+
+            if (customer == null)
+            {
+                customer = new Customer
+                {
+                    Name = customerName,
+                    Email = customerEmail,
+                    Phone = customerPhone
+                };
+                _customerservice.Create(customer);
+            }
+
+            modelBookingLongRoom.CustomerId = customer.Id;
+
+            modelBookingLongRoom.CheckIn = DateTime.Now;
+            modelBookingLongRoom.CheckOut = DateTime.Now;
+            _roomOrderService.Create(modelBookingLongRoom);
+            var mail = new SmtpClient("smtp.gmail.com", 25)
+            {
+                Credentials = new NetworkCredential(adminGmail, password),
+                EnableSsl = true
+            };
+            var mess = new MailMessage {From = new MailAddress(adminGmail)};
+            mess.ReplyToList.Add(adminGmail);
+            mess.To.Add(new MailAddress(customerEmail));
+            mess.Subject = subject;
+            mess.Body = content;
+            mess.IsBodyHtml = true;
+            mail.Send(mess);
+            return RedirectToAction("LongRoom", "RoomVer3");
         }
     }
 }

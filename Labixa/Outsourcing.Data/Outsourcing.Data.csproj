@@ -50,6 +50,9 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -57,32 +60,51 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BlogCategories.cs" />
-    <Compile Include="Models\Blogs.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CategoryProductMapping.cs" />
-    <Compile Include="Models\Colors.cs" />
-    <Compile Include="Models\HMS\CategoryHotels.cs" />
+    <Compile Include="Models\Deposit.cs" />
+    <Compile Include="Models\HotelCategory.cs" />
     <Compile Include="Models\HMS\CategoryProducts.cs" />
     <Compile Include="Models\HMS\Costs.cs" />
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />
-    <Compile Include="Models\HMS\Customer.cs" />
-    <Compile Include="Models\HMS\Hotels.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\HMS\Products.cs" />
-    <Compile Include="Models\HMS\Rooms.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\HMS\RoomImages.cs" />
     <Compile Include="Models\HMS\RoomImageMappings.cs" />
     <Compile Include="Models\HMS\RoomOrder.cs" />
     <Compile Include="Models\HMS\RoomOrderItem.cs" />
-    <Compile Include="Models\HMS\RoomUtilities.cs" />
-    <Compile Include="Models\HMS\RoomUtilityRoomMappings.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\InventoryLog.cs" />
     <Compile Include="Models\Location.cs" />
@@ -100,7 +122,7 @@
     <Compile Include="Models\Shipment.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TypeNotify.cs" />
-    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\ContactUs.cs" />
     <Compile Include="Models\WebsiteAttributes.cs" />
     <Compile Include="OutsourcingSampleData.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />
@@ -119,6 +141,9 @@
     <Compile Include="Repository\HMS\CostOrderItemRepository.cs" />
     <Compile Include="Repository\HMS\CostOrderRepository.cs" />
     <Compile Include="Repository\HMS\CostRepository.cs" />
+    <Compile Include="Repository\HMS\AssetRepository.cs" />
+    <Compile Include="Repository\HMS\MessageRepository.cs" />
+    <Compile Include="Repository\HMS\CustomerRepository.cs" />
     <Compile Include="Repository\HMS\HotelRepository.cs" />
     <Compile Include="Repository\HMS\ProductRepository.cs" />
     <Compile Include="Repository\HMS\RoomImageMappingRepository.cs" />
@@ -155,7 +180,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Entities\" />
+    <Folder Include="Repository\Portal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">

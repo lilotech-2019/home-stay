@@ -4,14 +4,14 @@ using Outsourcing.Data.Models.HMS;
 namespace Outsourcing.Data.Repository.HMS
 {
 
-    public class ProductRepository : RepositoryBase<HMSProduct>, IProductRepository
+    public class ProductRepository : RepositoryBase<HmsProduct>, IProductRepository
     {
         public ProductRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IProductRepository : IRepository<HMSProduct>
+    public interface IProductRepository : IRepository<HmsProduct>
     {
 
     }

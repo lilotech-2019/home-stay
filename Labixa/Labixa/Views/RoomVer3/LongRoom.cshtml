@@ -1,7 +1,7 @@
 ﻿
 @using PagedList.Mvc;
 @*khai bao thu vien pagelist*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.HMS.Rooms>
+@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
 @*don nhan du lieu dang IPagedList<Blog>*@
 
 
@@ -50,7 +50,7 @@
                 {
                     <div class="col-sm-4 nroom-grid">
 
-                        <a href="/chi-tiet-phong-dai-han/@iterm.Slug" class="room-img">
+                        <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
 
                             <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
 
@@ -60,7 +60,7 @@
                                 <div class="media-body this-title">@iterm.Name</div>
                                 <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
                             </div>
-                            <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong-dai-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
+                            <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 }
@@ -68,17 +68,17 @@
                 {
                     <div class="col-sm-4 nroom-grid">
 
-                        <a href="/chi-tiet-phong-dai-han/@iterm.Slug" class="room-img">
+                        <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
 
                             <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
 
                         </a>
                         <div class="row this-conts">
                             <div class="media">
-                                <div class="media-body this-title">@iterm.NameEN</div>
+                                <div class="media-body this-title">@iterm.NameEnglish</div>
                                 <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
                             </div>
-                            <p>@Html.Raw(iterm.string1)</p><a href="/chi-tiet-phong-dai-han/@iterm.Slug" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
+                            <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 }

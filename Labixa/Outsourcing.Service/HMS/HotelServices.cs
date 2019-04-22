@@ -1,197 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Outsourcing.Core.Common;
+﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
+using System.Linq;
+using Outsourcing.Data.Models;
 
 namespace Outsourcing.Service.HMS
 {
     public interface IHotelService
     {
-        IQueryable<Hotels> GetHotels();
-        Hotels GetHotelContact();
-        IEnumerable<Hotels> GetHomePageHotels();
-        IEnumerable<Hotels> GetHotelByCategorySlug(string slug);
-        IEnumerable<Hotels> GetHotelByCategoryId(int id);
-        IEnumerable<Hotels> Get6HotelService();
-        IEnumerable<Hotels> Get2HotelNews();
-        IEnumerable<Hotels> Get3HotelNewsNewest();
-        Hotels GetHotelById(int HotelId);
-        void CreateHotel(Hotels Hotel);
-        void EditHotel(Hotels HotelToEdit);
-        void DeleteHotel(int HotelId);
-        void SaveHotel();
-        IEnumerable<ValidationResult> CanAddHotel(string HotelUrl);
-
-        Hotels GetHotelByUrlName(string urlName);
-
-        IEnumerable<Hotels> GetHotelsByCategory(int HotelTypeId);
-
-        IEnumerable<Hotels> GetStaticPage();
-        IEnumerable<Hotels> GetNewPost();
+        IQueryable<Hotel> FindAll();
+        Hotel FindById(int id);
+        void Create(Hotel entity);
+        void Edit(Hotel entity);
+        void Delete(int id);
+        void Delete(Hotel entity);
+        IQueryable<Hotel> FindSelectList(int? id);
     }
 
     public class HotelService : IHotelService
     {
         #region Field
 
-        private readonly IHotelRepository HotelRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IHotelRepository _hotelRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         #endregion
 
         #region Ctor
 
-        public HotelService(IHotelRepository HotelRepository, IUnitOfWork unitOfWork)
+        public HotelService(IHotelRepository hotelRepository, IUnitOfWork unitOfWork)
         {
-            this.HotelRepository = HotelRepository;
-            this.unitOfWork = unitOfWork;
+            this._hotelRepository = hotelRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         #endregion
 
         #region Implementation for IHotelService
-
-        public IQueryable<Hotels> GetHotels()
+        public IQueryable<Hotel> FindSelectList(int? id)
         {
-            return HotelRepository.FindBy().OrderBy(b => b.Position);
-        }
-
-        public IEnumerable<Hotels> Get3HotelsPosition()
-        {
-            var Hotels = HotelRepository.GetMany(b => !b.Deleted).OrderBy(b => b.Position).Take(3);
-            return Hotels;
-        }
-
-        public IEnumerable<Hotels> GetHomePageHotels()
-        {
-            //var Hotels = HotelRepository.
-            //    GetMany(b => !b.HotelCategory.IsStaticPage && !b.Deleted && b.IsHomePage).
-            //    OrderByDescending(b => b.DateCreated);
-            //return Hotels;
-            return null;
-        }
-
-        public IEnumerable<Hotels> GetHotelByCategoryId(int id)
-        {
-            //var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
-            //    && b.HotelCategory.Id.Equals(id)
-            //    && !b.Deleted).
-            //    OrderByDescending(b => b.DateCreated);
-            //return Hotels;
-            return null;
-        }
-
-        public IEnumerable<Hotels> GetHotelByCategorySlug(string slug)
-        {
-            //    var Hotels = HotelRepository.GetMany(b => !b.HotelCategory.IsStaticPage
-            //        && b.HotelCategory.Slug.Equals(slug)
-            //        && !b.Deleted).
-            //        OrderByDescending(b => b.DateCreated);
-            //    return Hotels;
-            return null;
-        }
-
-        public IEnumerable<Hotels> GetStaticPage()
-        {
-            var Hotels = HotelRepository.GetMany(b => !b.Deleted).OrderByDescending(b => b.DateCreated);
-            return Hotels;
-        }
-
-        public Hotels GetHotelById(int HotelId)
-        {
-            var Hotel = HotelRepository.GetById(HotelId);
-            return Hotel;
-        }
-
-        public void CreateHotel(Hotels Hotel)
-        {
-            HotelRepository.Add(Hotel);
-            SaveHotel();
-        }
-
-        public void EditHotel(Hotels HotelToEdit)
-        {
-            HotelToEdit.LastEditedTime = DateTime.Now;
-            HotelRepository.Update(HotelToEdit);
-            SaveHotel();
-        }
-
-        public void DeleteHotel(int HotelId)
-        {
-            //Get Hotel by id.
-            var Hotel = HotelRepository.GetById(HotelId);
-            if (Hotel != null)
+            var list = _hotelRepository.FindBy(r => r.Deleted == false);
+            if (id != null)
             {
-                Hotel.Deleted = true;
-                HotelRepository.Update(Hotel);
-                SaveHotel();
+                list = list.Where(w => w.Id == id);
+            }
+            return list;
+        }
+
+        public IQueryable<Hotel> FindAll()
+        {
+            var listEntities = _hotelRepository.FindBy(w => w.Deleted == false);
+            return listEntities;
+        }
+
+        public Hotel FindById(int id)
+        {
+            var entity = _hotelRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+            return entity;
+        }
+
+        public void Create(Hotel entity)
+        {
+            _hotelRepository.Add(entity);
+            Commit();
+        }
+
+        public void Edit(Hotel entity)
+        {
+            _hotelRepository.Update(entity);
+            Commit();
+        }
+
+        public void Delete(int id)
+        {
+            var entity = FindById(id);
+            Delete(entity);
+        }
+
+        private void Commit()
+        {
+            _unitOfWork.Commit();
+        }
+
+        public void Delete(Hotel entity)
+        {
+            if (entity != null)
+            {
+                entity.Deleted = true;
+                Edit(entity);
             }
         }
-
-        public void SaveHotel()
-        {
-            unitOfWork.Commit();
-        }
-
-        public IEnumerable<ValidationResult> CanAddHotel(string slug)
-        {
-            ////Get Hotel by url.
-            //var Hotel = HotelRepository.Get(b => b.Slug.Equals(slug));
-            ////Check if slug is exist
-            //if (Hotel != null)
-            //{
-            //    yield return new ValidationResult("Hotel", Resources.HotelExist);
-            //}
-            return null;
-        }
-
-        public Hotels GetHotelByUrlName(string urlName)
-        {
-            var Hotel = HotelRepository.Get(b => b.Slug == urlName);
-            return Hotel;
-        }
-
-        public IEnumerable<Hotels> GetHotelsByCategory(int HotelTypeId)
-        {
-            var Hotels = this.GetHotels().Where(b => b.CategoryHotelId == HotelTypeId);
-            return Hotels;
-        }
-
-        public IEnumerable<Hotels> Get6HotelService()
-        {
-            var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 6).Take(6);
-            return Hotels;
-        }
-
-        public IEnumerable<Hotels> Get2HotelNews()
-        {
-            var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(2);
-            return Hotels;
-        }
-
-        public IEnumerable<Hotels> Get3HotelNewsNewest()
-        {
-            var Hotels = this.GetHotels().Where(p => p.CategoryHotelId == 3).OrderBy(p => p.Position).Take(3);
-            return Hotels;
-        }
-
         #endregion
-
-
-        public Hotels GetHotelContact()
-        {
-            var item = HotelRepository.Get(p => p.Slug.Equals("lien-he"));
-            return item;
-        }
-
-
-        public IEnumerable<Hotels> GetNewPost()
-        {
-            return HotelRepository.GetAll().Where(p => p.CategoryHotelId == 3).OrderByDescending(p => p.DateCreated)
-                .Take(5);
-        }
     }
 }

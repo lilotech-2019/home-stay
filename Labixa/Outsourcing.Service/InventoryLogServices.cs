@@ -14,26 +14,26 @@ namespace Outsourcing.Service
     {
 
         IEnumerable<InventoryLog> GetInventoryLogs();
-        InventoryLog GetInventoryLogById(int InventoryLogId);
-        void CreateInventoryLog(InventoryLog InventoryLog);
-        void EditInventoryLog(InventoryLog InventoryLogToEdit);
-        void DeleteInventoryLog(int InventoryLogId);
+        InventoryLog GetInventoryLogById(int inventoryLogId);
+        void CreateInventoryLog(InventoryLog inventoryLog);
+        void EditInventoryLog(InventoryLog inventoryLogToEdit);
+        void DeleteInventoryLog(int inventoryLogId);
         void SaveInventoryLog();
-        IEnumerable<ValidationResult> CanAddInventoryLog(InventoryLog InventoryLog);
+        IEnumerable<ValidationResult> CanAddInventoryLog(InventoryLog inventoryLog);
 
     }
     public class InventoryLogService : IInventoryLogService
     {
         #region Field
-        private readonly IInventoryLogRepository InventoryLogRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IInventoryLogRepository _inventoryLogRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public InventoryLogService(IInventoryLogRepository InventoryLogRepository, IUnitOfWork unitOfWork)
+        public InventoryLogService(IInventoryLogRepository inventoryLogRepository, IUnitOfWork unitOfWork)
         {
-            this.InventoryLogRepository = InventoryLogRepository;
-            this.unitOfWork = unitOfWork;
+            this._inventoryLogRepository = inventoryLogRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -41,45 +41,45 @@ namespace Outsourcing.Service
 
         public IEnumerable<InventoryLog> GetInventoryLogs()
         {
-            var InventoryLogs = InventoryLogRepository.GetAll();
-            return InventoryLogs;
+            var inventoryLogs = _inventoryLogRepository.GetAll();
+            return inventoryLogs;
         }
 
-        public InventoryLog GetInventoryLogById(int InventoryLogId)
+        public InventoryLog GetInventoryLogById(int inventoryLogId)
         {
-            var InventoryLog = InventoryLogRepository.GetById(InventoryLogId);
-            return InventoryLog;
+            var inventoryLog = _inventoryLogRepository.GetById(inventoryLogId);
+            return inventoryLog;
         }
 
-        public void CreateInventoryLog(InventoryLog InventoryLog)
+        public void CreateInventoryLog(InventoryLog inventoryLog)
         {
-            InventoryLogRepository.Add(InventoryLog);
+            _inventoryLogRepository.Add(inventoryLog);
             SaveInventoryLog();
         }
 
-        public void EditInventoryLog(InventoryLog InventoryLogToEdit)
+        public void EditInventoryLog(InventoryLog inventoryLogToEdit)
         {
-            InventoryLogRepository.Update(InventoryLogToEdit);
+            _inventoryLogRepository.Update(inventoryLogToEdit);
             SaveInventoryLog();
         }
 
-        public void DeleteInventoryLog(int InventoryLogId)
+        public void DeleteInventoryLog(int inventoryLogId)
         {
             //Get InventoryLog by id.
-            var InventoryLog = InventoryLogRepository.GetById(InventoryLogId);
-            if (InventoryLog != null)
+            var inventoryLog = _inventoryLogRepository.GetById(inventoryLogId);
+            if (inventoryLog != null)
             {
-                InventoryLogRepository.Delete(InventoryLog);
+                _inventoryLogRepository.Delete(inventoryLog);
                 SaveInventoryLog();
             }
         }
 
         public void SaveInventoryLog()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddInventoryLog(InventoryLog InventoryLog)
+        public IEnumerable<ValidationResult> CanAddInventoryLog(InventoryLog inventoryLog)
         {
 
             //    yield return new ValidationResult("InventoryLog", "ErrorString");

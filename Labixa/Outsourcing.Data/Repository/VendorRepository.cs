@@ -1,23 +1,17 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Repository
 {
- 
-    public class VendorRepository : RepositoryBase<Vendors>, IVendorRepository
+    public class VendorRepository : RepositoryBase<ContactUs>, IVendorRepository
     {
         public VendorRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IVendorRepository : IRepository<Vendors>
-    {
 
+    public interface IVendorRepository : IRepository<ContactUs>
+    {
     }
 }

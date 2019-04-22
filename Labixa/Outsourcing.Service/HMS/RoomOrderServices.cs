@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
@@ -44,14 +43,14 @@ namespace Outsourcing.Service.HMS
         }
 
         public RoomOrder FindById(int id)
-        {
+        {          
             return _roomOrderRepository.FindBy(w => w.Id == id && w.Deleted == false).SingleOrDefault();
         }
 
         public void UpdateStatus(int id, RoomOrderStatus status)
         {
             var entity = FindById(id);
-            entity.Status = status;
+            entity.OrderStatus = status;
             //if (status == RoomOrderStatus.CheckIn)
             //{
             //    entity.CheckInDate = DateTime.Today;

@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class ProductPictureMappingService : IProductPictureMappingService
     {
         #region Field
-        private readonly IProductPictureMappingRepository productPictureMappingRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductPictureMappingRepository _productPictureMappingRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public ProductPictureMappingService(IProductPictureMappingRepository productPictureMappingRepository, IUnitOfWork unitOfWork)
         {
-            this.productPictureMappingRepository = productPictureMappingRepository;
-            this.unitOfWork = unitOfWork;
+            this._productPictureMappingRepository = productPictureMappingRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<ProductPictureMapping> GetProductPictureMappings()
         {
-            var productPictureMappings = productPictureMappingRepository.GetAll();
+            var productPictureMappings = _productPictureMappingRepository.GetAll();
             return productPictureMappings;
         }
 
         public ProductPictureMapping GetProductPictureMappingById(int productPictureMappingId)
         {
-            var productPictureMapping = productPictureMappingRepository.GetById(productPictureMappingId);
+            var productPictureMapping = _productPictureMappingRepository.GetById(productPictureMappingId);
             return productPictureMapping;
         }
 
         public void CreateProductPictureMapping(ProductPictureMapping productPictureMapping)
         {
-            productPictureMappingRepository.Add(productPictureMapping);
+            _productPictureMappingRepository.Add(productPictureMapping);
             SaveProductPictureMapping();
         }
 
         public void EditProductPictureMapping(ProductPictureMapping productPictureMappingToEdit)
         {
-            productPictureMappingRepository.Update(productPictureMappingToEdit);
+            _productPictureMappingRepository.Update(productPictureMappingToEdit);
             SaveProductPictureMapping();
         }
 
         public void DeleteProductPictureMapping(int productPictureMappingId)
         {
             //Get productPictureMapping by id.
-            var productPictureMapping = productPictureMappingRepository.GetById(productPictureMappingId);
+            var productPictureMapping = _productPictureMappingRepository.GetById(productPictureMappingId);
             if (productPictureMapping != null)
             {
-                productPictureMappingRepository.Delete(productPictureMapping);
+                _productPictureMappingRepository.Delete(productPictureMapping);
                 SaveProductPictureMapping();
             }
         }
 
         public void SaveProductPictureMapping()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddProductPictureMapping(ProductPictureMapping productPictureMapping)

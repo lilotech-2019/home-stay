@@ -5,13 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-    public class RoomOrder : BaseEntity, IValidatableObject
+    public class RoomOrder : BaseEntity
     {
         public RoomOrder()
         {
-            DateCreated = CheckInDate = CheckOutDate = DateTime.Now;
-            CheckInTime = CheckOutTime = DateCreated.TimeOfDay;
-            ShipmentId = 0;
+            DateCreated = CheckIn = CheckOut = DateTime.Now;
         }
 
 
@@ -20,47 +18,17 @@ namespace Outsourcing.Data.Models.HMS
         /// </summary>
         public double Total { get; set; }
 
-        public double Draff => TotalDraff();
+        public double Price { get; set; }
+        public RoomOrderStatus OrderStatus { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH-mm}")]
-        public DateTime CheckIn => CheckInDate + CheckInTime;
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH-mm}")]
-        public DateTime CheckOut => CheckOutDate + CheckOutTime;
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime CheckOut { get; set; }
 
-        private double TotalDraff()
-        {
-            if (Room == null)
-            {
-                return 0.1;
-            }
-            var calculateDay = (DateTime.Now - CheckIn).TotalDays;
-
-            return Room.Price * calculateDay;
-        }
-
-        private double Discount()
-        {
-            if (Room == null)
-            {
-                return 0;
-            }
-            return Room.Price * Room.DiscountPercent * (CheckOut - CheckIn).TotalDays;
-        }
-        private double Price { get; set; }
-        public RoomOrderStatus Status { get; set; }
-        public int? ShipmentId { get; set; }
-        public double? ShipmentFee { get; set; }
-        public bool Deleted { get; set; }
-        public DateTime DateCreated { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime CheckOutDate { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime CheckInDate { get; set; }
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime CheckIn { get; set; }
 
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
@@ -94,18 +62,10 @@ namespace Outsourcing.Data.Models.HMS
         public int? CustomerId { get; set; }
 
         [ForeignKey("RoomId")]
-        public virtual Rooms Room { get; set; }
+        public virtual Room Room { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
-
-        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            if (CheckIn < CheckOut)
-            {
-                yield return new ValidationResult("CheckInDate must be greater than CheckOutDate");
-            }
-        }
     }
 
     public enum RoomOrderStatus

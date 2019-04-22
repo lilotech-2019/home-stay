@@ -10,8 +10,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            string cultureName = null;
-            cultureName = "vi";
+            var cultureName = "vi";
             // Validate culture name
             HttpCookie cultureCookie = Request.Cookies["_culture"];
             if (cultureCookie != null)
@@ -23,9 +22,8 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             //            Request.UserLanguages[0] :  // obtain it from HTTP header AcceptLanguages
             //            null;
             // Validate culture name
-            cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
+            CultureHelper.GetImplementedCulture(cultureName); // This is safe
 
-            cultureName = "vi";
             // Modify current thread's cultures            
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("vi");
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;

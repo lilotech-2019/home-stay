@@ -7,19 +7,15 @@ using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.ViewModels
 {
-    public class RoomVer3ViewModel
+    public class RoomDetailViewModel
     {
-        public RoomVer3ViewModel()
-        {
-            RelatedRoom = new List<Rooms>();
-            RelatedRoomLong = new List<Rooms>();
-        }
+        
 
-        public IEnumerable<Rooms> RelatedRoom { get; set; }
+        public IEnumerable<Room> RelatedRooms { get; set; }
 
-        public IEnumerable<Rooms> RelatedRoomLong { get; set; }
+        //public IEnumerable<Rooms> RelatedRoomLong { get; set; }
 
-        public Rooms listRoom { get; set; }
+        public Room Room { get; set; }
 
 
 

@@ -16,26 +16,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<RoomImages> GetRoomImages();
-        RoomImages GetRoomImageById(int RoomImageId);
-        void CreateRoomImage(RoomImages RoomImage);
-        void EditRoomImage(RoomImages RoomImageToEdit);
-        void DeleteRoomImage(int RoomImageId);
+        RoomImages GetRoomImageById(int roomImageId);
+        void CreateRoomImage(RoomImages roomImage);
+        void EditRoomImage(RoomImages roomImageToEdit);
+        void DeleteRoomImage(int roomImageId);
         void SaveRoomImage();
-        IEnumerable<ValidationResult> CanAddRoomImage(RoomImages RoomImage);
+        IEnumerable<ValidationResult> CanAddRoomImage(RoomImages roomImage);
 
     }
     public class RoomImageService : IRoomImageService
     {
         #region Field
-        private readonly IRoomImageRepository RoomImageRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IRoomImageRepository _roomImageRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public RoomImageService(IRoomImageRepository RoomImageRepository, IUnitOfWork unitOfWork)
+        public RoomImageService(IRoomImageRepository roomImageRepository, IUnitOfWork unitOfWork)
         {
-            this.RoomImageRepository = RoomImageRepository;
-            this.unitOfWork = unitOfWork;
+            this._roomImageRepository = roomImageRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -43,45 +43,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<RoomImages> GetRoomImages()
         {
-            var RoomImages = RoomImageRepository.GetAll();
-            return RoomImages;
+            var roomImages = _roomImageRepository.GetAll();
+            return roomImages;
         }
 
-        public RoomImages GetRoomImageById(int RoomImageId)
+        public RoomImages GetRoomImageById(int roomImageId)
         {
-            var RoomImage = RoomImageRepository.GetById(RoomImageId);
-            return RoomImage;
+            var roomImage = _roomImageRepository.GetById(roomImageId);
+            return roomImage;
         }
 
-        public void CreateRoomImage(RoomImages RoomImage)
+        public void CreateRoomImage(RoomImages roomImage)
         {
-            RoomImageRepository.Add(RoomImage);
+            _roomImageRepository.Add(roomImage);
             SaveRoomImage();
         }
 
-        public void EditRoomImage(RoomImages RoomImageToEdit)
+        public void EditRoomImage(RoomImages roomImageToEdit)
         {
-            RoomImageRepository.Update(RoomImageToEdit);
+            _roomImageRepository.Update(roomImageToEdit);
             SaveRoomImage();
         }
 
-        public void DeleteRoomImage(int RoomImageId)
+        public void DeleteRoomImage(int roomImageId)
         {
             //Get RoomImage by id.
-            var RoomImage = RoomImageRepository.GetById(RoomImageId);
-            if (RoomImage != null)
+            var roomImage = _roomImageRepository.GetById(roomImageId);
+            if (roomImage != null)
             {
-                RoomImageRepository.Delete(RoomImage);
+                _roomImageRepository.Delete(roomImage);
                 SaveRoomImage();
             }
         }
 
         public void SaveRoomImage()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddRoomImage(RoomImages RoomImage)
+        public IEnumerable<ValidationResult> CanAddRoomImage(RoomImages roomImage)
         {
 
             //    yield return new ValidationResult("RoomImage", "ErrorString");

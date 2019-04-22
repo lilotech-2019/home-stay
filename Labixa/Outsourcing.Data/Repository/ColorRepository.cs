@@ -1,21 +1,16 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Repository
 {
-    public class ColorRepository : RepositoryBase<Colors>, IColorRepository
+    public class ColorRepository : RepositoryBase<Deposit>, IColorRepository
     {
         public ColorRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
         }
     }
-    public interface IColorRepository : IRepository<Colors>
+    public interface IColorRepository : IRepository<Deposit>
     {
 
     }

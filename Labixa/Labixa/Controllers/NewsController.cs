@@ -7,61 +7,50 @@ using PagedList;
 using Labixa.ViewModels;
 using Labixa.Helpers;
 
+
 namespace Labixa.Controllers
 {
     public class NewsController : BaseHomeController
     {
         private readonly IBlogService _blogService;
-        private readonly IBlogCategoryService _blogCategoryService;
-        public NewsController(IBlogService blogService, IBlogCategoryService blogCategoryService)
+
+        public NewsController(IBlogService blogService)
         {
-            this._blogCategoryService = blogCategoryService;
-            this._blogService = blogService;
+            _blogService = blogService;
         }
-        //
-        // GET: /Blog/
-        //public ActionResult Index()
-        //{
-        //    var news = _blogService.GetBlogs();
-        //    return View(model: news);
-        //}
-        //int? page = 1:
-
-
-        //Index(int? page = 1): mac dinh page la trang dau tien, neu user bam page o ngoai view thi no tu gan page =xxx
-//noi chung ky moi nhanh dc, 
         public ActionResult Index(int? page = 1)
         {
-            var model = _blogService.GetBlogs().ToList();//em chi can get het data
-            int pageNumber = (page ?? 1);// day la so thu tu page
-            int pageSize = 4;//day la so bai viet tren 1 page
-                             //model.ToPagedList(pageNumber, pageSize): em lay model. ToPagedList(PageNumper, pagesize) la no tu phan trang cho em
-                             // khởi tạo BlogView vừa mới tạo
+            int pageNumber = (page ?? 1); 
+            int pageSize = 4; 
             BlogViewModel viewModel = new BlogViewModel();
-            viewModel.RelatedBlogs = _blogService.Get3BlogNewsNewest();
+            viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w =>w.Id);
+            var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated);
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
-
-            return View(viewModel);//no truyen kieu du lieu la IPagedList<Blog>
+            return View(viewModel); 
         }
+
         public ActionResult Detail(string slug)
         {
-            BlogViewModel viewModel = new BlogViewModel();
-            viewModel.RelatedBlogs = _blogService.Get3BlogNewsNewest();
-            viewModel.listBlogNew = _blogService.GetBlogByUrlName(slug);
+            var viewModel = new BlogViewModel
+            {
+                RelatedBlogs = _blogService.FindAll(),
+                listBlogNew = _blogService.FindBySlug(slug)
+            };
             return View(viewModel);
         }
 
         public ActionResult Event()
         {
             return View();
-
         }
+
         public ActionResult ActitityNews()
         {
             return View();
-
         }
+
         #region[Multi Language]
+
         public ActionResult SetCulture(string slug)
         {
             // Validate input
@@ -69,7 +58,7 @@ namespace Labixa.Controllers
             // Save culture in a cookie
             HttpCookie cookie = Request.Cookies["_culture"];
             if (cookie != null)
-                cookie.Value = slug;   // update cookie value
+                cookie.Value = slug; // update cookie value
             else
             {
                 cookie = new HttpCookie("_culture");
@@ -77,8 +66,9 @@ namespace Labixa.Controllers
                 cookie.Expires = DateTime.Now.AddYears(1);
             }
             Response.Cookies.Add(cookie);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
         #endregion
     }
 }

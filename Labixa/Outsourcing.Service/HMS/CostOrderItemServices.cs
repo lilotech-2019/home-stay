@@ -17,26 +17,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<CostOrderItem> GetCostOrderItems();
-        CostOrderItem GetCostOrderItemById(int CostOrderItemId);
-        void CreateCostOrderItem(CostOrderItem CostOrderItem);
-        void EditCostOrderItem(CostOrderItem CostOrderItemToEdit);
-        void DeleteCostOrderItem(int CostOrderItemId);
+        CostOrderItem GetCostOrderItemById(int costOrderItemId);
+        void CreateCostOrderItem(CostOrderItem costOrderItem);
+        void EditCostOrderItem(CostOrderItem costOrderItemToEdit);
+        void DeleteCostOrderItem(int costOrderItemId);
         void SaveCostOrderItem();
-        IEnumerable<ValidationResult> CanAddCostOrderItem(CostOrderItem CostOrderItem);
+        IEnumerable<ValidationResult> CanAddCostOrderItem(CostOrderItem costOrderItem);
 
     }
     public class CostOrderItemService : ICostOrderItemService
     {
         #region Field
-        private readonly ICostOrderItemRepository CostOrderItemRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICostOrderItemRepository _costOrderItemRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CostOrderItemService(ICostOrderItemRepository CostOrderItemRepository, IUnitOfWork unitOfWork)
+        public CostOrderItemService(ICostOrderItemRepository costOrderItemRepository, IUnitOfWork unitOfWork)
         {
-            this.CostOrderItemRepository = CostOrderItemRepository;
-            this.unitOfWork = unitOfWork;
+            this._costOrderItemRepository = costOrderItemRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -44,45 +44,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CostOrderItem> GetCostOrderItems()
         {
-            var CostOrderItems = CostOrderItemRepository.GetAll();
-            return CostOrderItems;
+            var costOrderItems = _costOrderItemRepository.GetAll();
+            return costOrderItems;
         }
 
-        public CostOrderItem GetCostOrderItemById(int CostOrderItemId)
+        public CostOrderItem GetCostOrderItemById(int costOrderItemId)
         {
-            var CostOrderItem = CostOrderItemRepository.GetById(CostOrderItemId);
-            return CostOrderItem;
+            var costOrderItem = _costOrderItemRepository.GetById(costOrderItemId);
+            return costOrderItem;
         }
 
-        public void CreateCostOrderItem(CostOrderItem CostOrderItem)
+        public void CreateCostOrderItem(CostOrderItem costOrderItem)
         {
-            CostOrderItemRepository.Add(CostOrderItem);
+            _costOrderItemRepository.Add(costOrderItem);
             SaveCostOrderItem();
         }
 
-        public void EditCostOrderItem(CostOrderItem CostOrderItemToEdit)
+        public void EditCostOrderItem(CostOrderItem costOrderItemToEdit)
         {
-            CostOrderItemRepository.Update(CostOrderItemToEdit);
+            _costOrderItemRepository.Update(costOrderItemToEdit);
             SaveCostOrderItem();
         }
 
-        public void DeleteCostOrderItem(int CostOrderItemId)
+        public void DeleteCostOrderItem(int costOrderItemId)
         {
             //Get CostOrderItem by id.
-            var CostOrderItem = CostOrderItemRepository.GetById(CostOrderItemId);
-            if (CostOrderItem != null)
+            var costOrderItem = _costOrderItemRepository.GetById(costOrderItemId);
+            if (costOrderItem != null)
             {
-                CostOrderItemRepository.Delete(CostOrderItem);
+                _costOrderItemRepository.Delete(costOrderItem);
                 SaveCostOrderItem();
             }
         }
 
         public void SaveCostOrderItem()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCostOrderItem(CostOrderItem CostOrderItem)
+        public IEnumerable<ValidationResult> CanAddCostOrderItem(CostOrderItem costOrderItem)
         {
 
             //    yield return new ValidationResult("CostOrderItem", "ErrorString");

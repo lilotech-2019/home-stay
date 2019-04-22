@@ -16,26 +16,26 @@ namespace Outsourcing.Service.HMS
     {
 
         IEnumerable<CategoryProducts> GetProductCategories();
-        CategoryProducts GetCategoryProductById(int CategoryProductId);
-        void CreateCategoryProduct(CategoryProducts CategoryProduct);
-        void EditCategoryProduct(CategoryProducts CategoryProductToEdit);
-        void DeleteProductCategories(int CategoryProductId);
+        CategoryProducts GetCategoryProductById(int categoryProductId);
+        void CreateCategoryProduct(CategoryProducts categoryProduct);
+        void EditCategoryProduct(CategoryProducts categoryProductToEdit);
+        void DeleteProductCategories(int categoryProductId);
         void SaveCategoryProduct();
-        IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts CategoryProduct);
+        IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts categoryProduct);
 
     }
     public class CategoryProductService : ICategoryProductService
     {
         #region Field
-        private readonly ICategoryProductRepository CategoryProductRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly ICategoryProductRepository _categoryProductRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public CategoryProductService(ICategoryProductRepository CategoryProductRepository, IUnitOfWork unitOfWork)
+        public CategoryProductService(ICategoryProductRepository categoryProductRepository, IUnitOfWork unitOfWork)
         {
-            this.CategoryProductRepository = CategoryProductRepository;
-            this.unitOfWork = unitOfWork;
+            this._categoryProductRepository = categoryProductRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -43,45 +43,45 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CategoryProducts> GetProductCategories()
         {
-            var CategoryProducts = CategoryProductRepository.GetAll().Where(p => p.Deleted == false);
-            return CategoryProducts;
+            var categoryProducts = _categoryProductRepository.GetAll().Where(p => p.Deleted == false);
+            return categoryProducts;
         }
 
-        public CategoryProducts GetCategoryProductById(int CategoryProductId)
+        public CategoryProducts GetCategoryProductById(int categoryProductId)
         {
-            var CategoryProduct = CategoryProductRepository.GetById(CategoryProductId);
-            return CategoryProduct;
+            var categoryProduct = _categoryProductRepository.GetById(categoryProductId);
+            return categoryProduct;
         }
 
-        public void CreateCategoryProduct(CategoryProducts CategoryProduct)
+        public void CreateCategoryProduct(CategoryProducts categoryProduct)
         {
-            CategoryProductRepository.Add(CategoryProduct);
+            _categoryProductRepository.Add(categoryProduct);
             SaveCategoryProduct();
         }
 
-        public void EditCategoryProduct(CategoryProducts CategoryProductToEdit)
+        public void EditCategoryProduct(CategoryProducts categoryProductToEdit)
         {
-            CategoryProductRepository.Update(CategoryProductToEdit);
+            _categoryProductRepository.Update(categoryProductToEdit);
             SaveCategoryProduct();
         }
 
-        public void DeleteProductCategories(int CategoryProductId)
+        public void DeleteProductCategories(int categoryProductId)
         {
             //Get CategoryProduct by id.
-            var CategoryProduct = CategoryProductRepository.GetById(CategoryProductId);
-            if (CategoryProduct != null)
+            var categoryProduct = _categoryProductRepository.GetById(categoryProductId);
+            if (categoryProduct != null)
             {
-                CategoryProductRepository.Delete(CategoryProduct);
+                _categoryProductRepository.Delete(categoryProduct);
                 SaveCategoryProduct();
             }
         }
 
         public void SaveCategoryProduct()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
-        public IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts CategoryProduct)
+        public IEnumerable<ValidationResult> CanAddCategoryProduct(CategoryProducts categoryProduct)
         {
 
             //    yield return new ValidationResult("CategoryProduct", "ErrorString");

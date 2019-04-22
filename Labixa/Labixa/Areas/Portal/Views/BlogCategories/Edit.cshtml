@@ -1,0 +1,59 @@
+﻿@model Outsourcing.Data.Models.BlogCategories
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BlogCategories</h4>
+        <hr/>
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group col-sm-6 col-md-12">
+            @Html.LabelFor(model => model.Name, new {@class = "col-sm-3 control-label no-padding-right"})
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Name, null, new {@class = "col-xs-10 col-sm-5"})
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6 col-md-12">
+            @Html.LabelFor(model => model.Status, new {@class = "col-sm-3 control-label no-padding-right"})
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Status, null, new {@class = "col-xs-10 col-sm-5"})
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+
+        <div class="form-group col-sm-6 col-md-12">
+            @Html.LabelFor(model => model.Description, new {@class = "col-sm-3 control-label no-padding-right"})
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.Description, "CkEditor")
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

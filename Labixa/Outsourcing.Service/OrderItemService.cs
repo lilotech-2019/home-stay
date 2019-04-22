@@ -26,15 +26,15 @@ namespace Outsourcing.Service
     public class OrderItemService : IOrderItemService
     {
         #region Field
-        private readonly IOrderItemRepository orderItemRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
         public OrderItemService(IOrderItemRepository orderItemRepository, IUnitOfWork unitOfWork)
         {
-            this.orderItemRepository = orderItemRepository;
-            this.unitOfWork = unitOfWork;
+            this._orderItemRepository = orderItemRepository;
+            this._unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -42,42 +42,42 @@ namespace Outsourcing.Service
 
         public IEnumerable<OrderItem> GetOrderItems()
         {
-            var orderItems = orderItemRepository.GetAll();
+            var orderItems = _orderItemRepository.GetAll();
             return orderItems;
         }
 
         public OrderItem GetOrderItemById(int orderItemId)
         {
-            var orderItem = orderItemRepository.GetById(orderItemId);
+            var orderItem = _orderItemRepository.GetById(orderItemId);
             return orderItem;
         }
 
         public void CreateOrderItem(OrderItem orderItem)
         {
-            orderItemRepository.Add(orderItem);
+            _orderItemRepository.Add(orderItem);
             SaveOrderItem();
         }
 
         public void EditOrderItem(OrderItem orderItemToEdit)
         {
-            orderItemRepository.Update(orderItemToEdit);
+            _orderItemRepository.Update(orderItemToEdit);
             SaveOrderItem();
         }
 
         public void DeleteOrderItem(int orderItemId)
         {
             //Get orderItem by id.
-            var orderItem = orderItemRepository.GetById(orderItemId);
+            var orderItem = _orderItemRepository.GetById(orderItemId);
             if (orderItem != null)
             {
-                orderItemRepository.Delete(orderItem);
+                _orderItemRepository.Delete(orderItem);
                 SaveOrderItem();
             }
         }
         
         public void SaveOrderItem()
         {
-            unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public IEnumerable<ValidationResult> CanAddOrderItem(OrderItem orderItem)

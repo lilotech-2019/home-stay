@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models.HMS
 {
@@ -26,11 +23,8 @@ namespace Outsourcing.Data.Models.HMS
         /// just count total of booking room, not include sum of service and other
         /// </summary>
         public double? TotalPaymentRoom_DraftCheckIn { get; set; }
-        public int? Status { get; set; }
         public int? ShipmentId { get; set; }
         public Double? ShipmentFee { get; set; }
-        public bool Deleted { get; set; }
-        public DateTime DateCreated { get; set; }
         public DateTime? Deadline { get; set; }
         
         public string Note { get; set; }
@@ -40,6 +34,6 @@ namespace Outsourcing.Data.Models.HMS
 
         public int HotelId { get; set; }
         [ForeignKey("HotelId")]
-        public virtual Hotels Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
     }
 }

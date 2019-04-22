@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Outsourcing.Core.Framework.Controllers
@@ -18,8 +14,8 @@ namespace Outsourcing.Core.Framework.Controllers
 
         public ParameterBasedOnFormNameAttribute(string name, string actionParameterName)
         {
-            this._name = name;
-            this._actionParameterName = actionParameterName;
+            _name = name;
+            _actionParameterName = actionParameterName;
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
