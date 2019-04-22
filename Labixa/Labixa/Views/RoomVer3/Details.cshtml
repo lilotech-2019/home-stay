@@ -638,45 +638,26 @@
 </section>
 <script>
     var check = false;
-    var contactBooking = $('#contactBookingModal');    
+    var check;
+    var contactBooking = $('#contactBookingModal');
     var submitBtn = $('#submitBtn');
     $(function () {
         pickingDate();
-        validateForm();
         pickingDateModal()
+        submitForm();
+       
+    });
+    function submitForm() {
         submitBtn.click(function (e) {
             check = validateModalForm();
+            console.log(check);
             if (check) {
                 alert("Đặt Phòng Thành Công");
-                $('#contactBookingModal').submit();
+                contactBooking.submit();
+            } else {
+                e.preventDefault();
             }
         });
-    });
-
-    function validateForm() {
-        var checkFrom = $("#startDay");
-        var checkTo = $("#endDay");
-        checkFrom.change(function () {
-            $('.error-check-in').addClass('hidden');
-            var checkDate = isValidDate(checkFrom);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-in').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });
-
-        checkTo.change(function () {
-            $('.error-check-out').addClass('hidden');
-            var checkDate = isValidDate(checkTo);
-            if (!checkDate) {
-                check = false;
-                $('.error-check-out').removeClass('hidden');
-            } else {
-                check = true;
-            }
-        });   
     }
     function pickingDate() {
         var dateFormat = "dd/mm/yy",
@@ -688,8 +669,7 @@
                     numberOfMonths: 2
                 })
                 .on("change", function () {
-                    to.datepicker("option", "minDate", getDate(this));
-
+                    to.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDay").datepicker({
                 dateFormat: 'dd/mm/yy',
@@ -698,19 +678,8 @@
                 numberOfMonths: 2
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", getDate(this));
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
                 });
-
-        function getDate(element) {
-            var date;
-            try {
-                date = $.datepicker.parseDate(dateFormat, element.value);
-            } catch (error) {
-                date = null;
-            }
-            return date;
-        }
-       
     }
     function pickingDateModal() {
         var dateFormat = "dd/mm/yy",
@@ -722,7 +691,7 @@
                     numberOfMonths: 2,
                 })
                 .on("change", function () {
-                    to.datepicker("option", "minDate", getDateModal(this));
+                    to.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDayRoom").datepicker({
                 dateFormat: 'dd/mm/yy',
@@ -731,18 +700,18 @@
                 numberOfMonths: 2
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", getDateModal(this));
-                });
-
-        function getDateModal(element) {
-            var date;
-            try {
-                date = $.datepicker.parseDate(dateFormat, element.value);
-            } catch (error) {
-                date = null;
-            }
-            return date;
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
+                });       
+    }
+    //convert-date-function
+    function convertDate(element, dateFormat) {
+        var date;
+        try {
+            date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+            date = null;
         }
+        return date;
     }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
@@ -750,38 +719,41 @@
         if (dateString.val().length > 10)  return false; 
         return true;
     }
-    function BookingRooom() { 
-        
-
-            
-          
-        
-        
+    function isValidGmail(gmailString) {
+        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+        if (!regex.test(gmailString))
+            return false;
+        return true;
     }
-    function validateModalForm(){
-        var customerName, customerEmail, customerPhone, contactBooking;
+    function isValidPhone(phoneString) {
+        if (phoneString.length != 10) {
+            return false;
+        }
+        return true;
+    }
+    function validateModalForm() {
+        var customerName, customerEmail, customerPhone;
         $('.error-phone').addClass('hidden');
         $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();      
-        customerPhone = customerPhone.replace(/[^0-9]/g, '');
-        if (customerPhone.length != 10) {
-            $('.error-phone').removeClass('hidden');
+        customerName = $('#CustomerName').val();   
+        message = $('#message').val();
+        
+        if (customerEmail == "" || customerPhone == "" || customerName == "" || message == "") {
             return false;
         }
-
-        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-        if (!regex.test(customerEmail)) {
+        if (!isValidGmail(customerEmail)) {
             $('.error-email').removeClass('hidden');
-           return false;
+            return false;
         }
-        if (check && customerPhone != "" && customerEmail != "" && customerName != "") {
-            return true;           
-        }
+        if (!isValidPhone(customerPhone)) {
+            $('.error-phone').removeClass('hidden');
+            return false;
+        }      
         return true;
     }
-    
+  
     function bookingShortRoom() {
         var startDay, endDay, selectMenu;
         startDay = $('#startDay').val();
@@ -790,10 +762,7 @@
         $('#startDayRoom').val(startDay);
         $('#endDayRoom').val(endDay);
         $('#CustomeNumber').val(selectMenu);
-        if (check) {
-            $("#exampleModalCenter").modal('show');
-        }
-
+        $("#exampleModalCenter").modal('show');
     }
 </script>
 <!-- News style-->
