@@ -83,7 +83,7 @@
                                     <h2>@Html.Raw(Resources.Resources.HMS_Booking)</h2>
                                     @*<h3>@Html.Raw(Resources.Resources.HMS_Rooms)</h3>*@
                                 </div>
-                                <form id="contactBooking"
+                                <form id="contactBookingModal"
                                       action="/RoomVer3/BookingRoom" method="post">
                                     <div class="row">
                                         <div class="col-lg-8 col-sm-12">
@@ -138,8 +138,7 @@
 
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <button type="submit" class="res-btn"
-                                                                onclick="BookingRooom()">
+                                                        <button type="submit" class="res-btn" id="submitBtn">
                                                             @Html.Raw(Resources.Resources.HMS_Booking)
                                                         </button>
                                                     </div>
@@ -639,11 +638,19 @@
 </section>
 <script>
     var check = false;
-    
+    var contactBooking = $('#contactBookingModal');    
+    var submitBtn = $('#submitBtn');
     $(function () {
         pickingDate();
         validateForm();
-        pickingDateModal()    
+        pickingDateModal()
+        submitBtn.click(function (e) {
+            check = validateModalForm();
+            if (check) {
+                alert("Đặt Phòng Thành Công");
+                $('#contactBookingModal').submit();
+            }
+        });
     });
 
     function validateForm() {
@@ -712,7 +719,7 @@
                     dateFormat: 'dd/mm/yy',
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 2
+                    numberOfMonths: 2,
                 })
                 .on("change", function () {
                     to.datepicker("option", "minDate", getDateModal(this));
@@ -744,28 +751,35 @@
         return true;
     }
     function BookingRooom() { 
-        var check = true;
-        var customerName, customerEmail, customerPhone;
+        
+
+            
+          
+        
+        
+    }
+    function validateModalForm(){
+        var customerName, customerEmail, customerPhone, contactBooking;
         $('.error-phone').addClass('hidden');
         $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();
-
+        customerName = $('#CustomerName').val();      
         customerPhone = customerPhone.replace(/[^0-9]/g, '');
         if (customerPhone.length != 10) {
             $('.error-phone').removeClass('hidden');
-            check = false;
-        } 
+            return false;
+        }
 
-        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+ ([a - zA - Z0 - 9]{ 2, 4})+$ /;        
+        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
         if (!regex.test(customerEmail)) {
             $('.error-email').removeClass('hidden');
-            check = false;
-        } 
-        if (check && CustomerPhone != "" && CustomerEmail != "" && CustomerName != "") {
-            alert("Đặt Phòng Thành Công");
+           return false;
         }
+        if (check && customerPhone != "" && customerEmail != "" && customerName != "") {
+            return true;           
+        }
+        return true;
     }
     
     function bookingShortRoom() {
