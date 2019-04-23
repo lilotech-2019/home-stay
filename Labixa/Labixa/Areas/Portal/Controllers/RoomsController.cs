@@ -1,10 +1,11 @@
-﻿using System.Data.Entity;
+﻿using Outsourcing.Core.Common;
+using Outsourcing.Data.Models;
+using Outsourcing.Service.Portal;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Core.Common;
-using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -29,9 +30,17 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotelId">Room Id</param>
         /// <returns></returns>
-        public async Task<ActionResult> Index(int hotelId)
+        public async Task<ActionResult> Index(int? hotelId)
         {
-            var rooms = await _roomService.FindByHotelId(hotelId).AsNoTracking().ToListAsync();
+            IEnumerable<Room> rooms;
+            if (hotelId == null)
+            {
+                rooms = await _roomService.FindAll().AsNoTracking().ToListAsync();
+            }
+            else
+            {
+                rooms = await _roomService.FindByHotelId((int)hotelId).AsNoTracking().ToListAsync();
+            }
             return View(rooms);
         }
         #endregion
@@ -81,10 +90,102 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var asset = new List<Asset>();
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "DryHair",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "TiVi",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "TuDo",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "HotWater",
+                        Price = 1,
+                        Quantity = "1 khối"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "Iron",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "Kitchen",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "TeaCoffee",
+                        Price = 1,
+                        Quantity = "1 ly"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "Snack",
+                        Price = 1,
+                        Quantity = "1 bịch"
+                    });
+                }
+
+                if (room.Utility_DryHair)
+                {
+                    asset.Add(new Asset
+                    {
+                        Name = "WashMachine",
+                        Price = 1,
+                        Quantity = "1 Cái"
+                    });
+                }
+
                 room.Slug = StringConvert.ConvertShortName(room.Name);
+                room.Assets = asset;
                 _roomService.Create(room);
                 var hotelCategoryId = _hotelService.FindById(room.HotelId).HotelCategoryId;
-                return RedirectToAction("Index","Hotels", hotelCategoryId);
+                return RedirectToAction("Index", "Hotels", hotelCategoryId);
             }
 
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
