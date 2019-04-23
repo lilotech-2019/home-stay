@@ -1,6 +1,7 @@
 ﻿using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -12,14 +13,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IAssetService _assertService;
+        private readonly IRoomService _roomService;
 
         #endregion
 
         #region Ctor
 
-        public AssetsController(IAssetService assertService)
+        public AssetsController(IAssetService assertService, IRoomService roomService)
         {
             _assertService = assertService;
+            _roomService = roomService;
         }
 
         #endregion
@@ -29,10 +32,14 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int roomId)
         {
-            var assets = await _assertService.FindAll().AsNoTracking()
-                            .ToListAsync();
+            var assets = _assertService.FindAll();
+            if (assets != null)
+            {
+                assets = assets.Where(w => w.RoomId == roomId);
+            }
+            assets = assets.AsNoTracking();
             return View(assets);
         }
         #endregion
@@ -66,6 +73,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
             return View();
         }
 
