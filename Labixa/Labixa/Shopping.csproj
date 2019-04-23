@@ -899,6 +899,7 @@
     <Content Include="Content\HMS\images\welcome\icon-2.png" />
     <Content Include="Content\HMS\images\welcome\icon-3.png" />
     <Content Include="Content\HMS\js\bootstrap.min.js" />
+    <Content Include="Content\HMS\js\checkformDeposit.js" />
     <Content Include="Content\HMS\js\contact.js" />
     <Content Include="Content\HMS\js\custom.js" />
     <Content Include="Content\HMS\js\email.js" />

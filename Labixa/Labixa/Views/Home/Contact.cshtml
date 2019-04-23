@@ -160,13 +160,13 @@
             }
         });
     }
-    function isValidGmail(gmailString) {
+    function isValidGmailContact(gmailString) {
         var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
         if (!regex.test(gmailString))
             return false;
         return true;
     }
-    function isValidPhone(phoneString) {
+    function isValidPhoneContact(phoneString) {
         if (phoneString.length != 10) {
             return false;
         }
@@ -190,7 +190,7 @@
         } else {
             $('.error-ContactEmail-none').addClass('hidden');
         }
-        if (!isValidGmail(ContactEmail)) {
+        if (!isValidGmailContact(ContactEmail)) {
             $('.error-ContactEmail').removeClass('hidden');
             return false;
         }
@@ -200,7 +200,7 @@
         } else {
             $('.error-ContactPhonel-none').addClass('hidden');
         }
-        if (!isValidPhone(ContactPhone)) {
+        if (!isValidPhoneContact(ContactPhone)) {
             $('.error-ContactPhone').removeClass('hidden');
             return false;
         }

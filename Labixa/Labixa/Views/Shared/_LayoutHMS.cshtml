@@ -124,35 +124,43 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="book-left-content input_form">
-                                <form id="contactBooking" action="/Home/Deposit"
+                                <form id="formDeposit" action="/Home/Deposit"
                                       method="post">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="type" type="text" name="Type" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                            <input id="depositType" type="text" name="Type" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositType-none hidden">Vui lòng nhập loại hình cho thuê </span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="address" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="price" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="email" type="email" name="Description" placeholder="Email" class="form-control">
+                                            <input id="depositAddress" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositAddress-none hidden">Vui lòng nhập địa chỉ </span></small>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="name" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
+                                            <input id="depositPrice" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositPrice-none hidden">Vui lòng nhập giá</span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="phone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
+                                            <input id="depositName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
+                                            <small><span class="text-danger error-DepositName-none hidden">Vui lòng nhập Tên </span></small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="depositPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
+                                            <small><span class="text-danger error-DepositPhone-none hidden">Vui lòng nhập số điện thoại </span></small>
+                                            <small><span class="text-danger error-DepositPhone hidden">Sai Định Dạng số điện thoại</span></small>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="depositEmail" type="email" name="Description" placeholder="Email" class="form-control">
+                                            <small><span class="text-danger error-DepositEmail-none hidden">Vui lòng nhập email </span></small>
+                                            <small><span class="text-danger error-DepositEmail hidden">Sai Định Dạng Email</span></small>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="submit" class="res-btn" onclick="SendMess()">@Html.Raw(Resources.Resources.HMS_Send)</button>
+                                            <button type="submit" class="res-btn" id="btn-submit-depositForm">@Html.Raw(Resources.Resources.HMS_Send)</button>
                                         </div>
                                     </div>
                                 </form>
@@ -238,6 +246,7 @@
             </div>
         </section>
     </footer>
+
     <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
     <script src="/Content/HMS/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Content/HMS/js/jquery.bxslider.js"></script>
@@ -248,6 +257,7 @@
     <script src="/Content/HMS/js/jquery.mixitup.min.js"></script>
     <script src="/Content/HMS/js/jquery.fancybox.pack.js"></script>
     <script src="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script src="~/Content/HMS/js/checkformDeposit.js"></script>
     <script src="~/Content/HMS/js/custom.js"></script>
     <script src="~/Content/HMS/js/map.js"></script>
 </body>

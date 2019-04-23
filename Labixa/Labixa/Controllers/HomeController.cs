@@ -55,8 +55,8 @@ namespace Labixa.Controllers
         [HttpPost]
         public ActionResult Deposit(ContactUs model)
         {
-            model.Status = true;
-            model.Deleted = false;
+            //model.Status = true;
+            //model.Deleted = false;
             _vendorService.Create(model);
             return RedirectToAction("Index", "Home");
         }
