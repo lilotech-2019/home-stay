@@ -121,7 +121,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 
@@ -140,7 +140,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _hotelService.Edit(hotel);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name", hotel.Id);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 

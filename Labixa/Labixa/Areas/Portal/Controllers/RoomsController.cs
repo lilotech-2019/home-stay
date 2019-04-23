@@ -72,11 +72,18 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Create(int hotelId)
+        public ActionResult Create(int? hotelId)
         {
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
-            ViewBag.HotelCategoryId = _hotelService.FindById(hotelId).HotelCategoryId;
-            return View(new Room { SharePercent = 0, HotelId = hotelId });
+            if (hotelId != null)
+            {
+                ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(hotelId), "Id", "Name", hotelId);
+                ViewBag.HotelCategoryId = _hotelService.FindById((int)hotelId).HotelCategoryId;
+                return View(new Room { SharePercent = 0, HotelId = (int)hotelId });
+            }
+            else {
+                ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
+                return View(new Room { SharePercent = 0 });
+            }
         }
 
         /// <summary>
