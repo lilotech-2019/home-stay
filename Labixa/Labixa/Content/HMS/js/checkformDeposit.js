@@ -2,11 +2,16 @@
 var checkDeposit = false;
 var formDeposit = $('#formDeposit');
 var submitBtnDeposit = $('#btn-submit-depositForm');
-function isValidGmailDeposit(gmailString) {
-    var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-    if (!regex.test(gmailString))
-        return false;
-    return true;
+//function isValidGmailDeposit(gmailString) {
+//    var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+//    if (!regex.test(gmailString)) {
+//        return false;
+//    }
+//    return true;
+//}
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 function isValidPhoneDeposit(phoneString) {
     if (phoneString.length != 10) {
@@ -29,6 +34,9 @@ function submitFormDeposit() {
     });
 }
 function validateFormDeposit() {
+    $('.error-DepositPhone').addClass('hidden');
+    $('.error-DepositEmail').addClass('hidden');
+    $('.error-DepositPrice').addClass('hidden');
     var depositName, depositEmail, depositPhone, depositAddress, depositType, depositPrice;
     depositType = $('#depositType').val();
     depositAddress = $('#depositAddress').val();
@@ -53,6 +61,10 @@ function validateFormDeposit() {
         return false;
     } else {
         $('.error-DepositPrice-none').addClass('hidden');
+    }
+    if (isNaN(parseInt(depositPrice))) {
+        $('.error-DepositPrice').removeClass('hidden');
+        return false;
     }
 
     if (depositName == "") {
@@ -79,9 +91,11 @@ function validateFormDeposit() {
     } else {
         $('.error-DepositEmail-none').addClass('hidden');
     }
-    if (!isValidGmailDeposit(depositEmail)) {
+    if (!validateEmail(depositEmail)) {
         $('.error-DepositEmail').removeClass('hidden');
         return false;
+    } else {
+        $('.error-DepositEmail').addClass('hidden');
     }
     return true;
 }

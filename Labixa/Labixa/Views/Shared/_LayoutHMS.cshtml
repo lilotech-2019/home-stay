@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from galaxyanalytics.net/demos/lakeresort/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 13:21:48 GMT -->
+
 <head>
     <meta charset="UTF-8">
     <title>Da Lat Amazing</title>
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/Content/HMS/vendors/owlcarousel/owl.carousel.css">
     <link rel="stylesheet" href="/Content/HMS/vendors/imagelightbox/imagelightbox.min.css">
     <link rel="stylesheet" href="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
     <!-- Main Css-->
     <link href="~/Content/HMS/css/style.css" rel="stylesheet" />
 
@@ -39,6 +40,8 @@
     script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 
     -->
+    <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 </head>
 <body>
 
@@ -156,11 +159,11 @@
                                 <form id="formDeposit" action="/Home/Deposit"
                                       method="post">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">                                            
-                                            <input id="depositType" type="text" name="Type" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="depositType" type="text" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
                                             <small><span class="text-danger error-DepositType-none hidden">Vui lòng nhập loại hình cho thuê </span></small>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">                                       
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositAddress" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
                                             <small><span class="text-danger error-DepositAddress-none hidden">Vui lòng nhập địa chỉ </span></small>
                                         </div>
@@ -169,6 +172,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositPrice" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
                                             <small><span class="text-danger error-DepositPrice-none hidden">Vui lòng nhập giá</span></small>
+                                            <small><span class="text-danger error-DepositPrice hidden">Vui lòng nhập giá là số</span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
@@ -179,12 +183,12 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
                                             <small><span class="text-danger error-DepositPhone-none hidden">Vui lòng nhập số điện thoại </span></small>
-                                            <small><span class="text-danger error-DepositPhone hidden">Sai Định Dạng số điện thoại</span></small>
+                                            <small><span class="text-danger error-DepositPhone hidden">Sai định dạng số điện thoại</span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositEmail" type="email" name="Description" placeholder="Email" class="form-control">
                                             <small><span class="text-danger error-DepositEmail-none hidden">Vui lòng nhập email </span></small>
-                                            <small><span class="text-danger error-DepositEmail hidden">Sai Định Dạng Email</span></small>
+                                            <small><span class="text-danger error-DepositEmail hidden">Sai định dạng  Email</span></small>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -195,15 +199,15 @@
                                 </form>
 
                             </div>
-                            </div>
-                        </div>
-                    </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
-                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @RenderBody()
     <footer>
@@ -213,7 +217,7 @@
                     <a href="."><img src="/Content/HMS/images/footer/logo.png" alt="" class="img-responsive"></a>
                     @if (cookie != null && cookie.Value.Equals("vi"))
                     {
-                        <p> HomeStay ch?c h?n s? cho b?n c?m giác m?i l?, giúp b?n l?y l?i tinh th?n, t?o c?m h?ng cho ngày m?i.</p>
+                        <p> homstay cho bạn cảm giác thoải mái, ngày mới trở nên vui tươi, năng lượng tích cực.</p>
                     }
                     else
                     {
@@ -249,7 +253,7 @@
                                 <i class="fa fa-map-marker"></i>
                                 @if (cookie != null && cookie.Value.Equals("vi"))
                                 {
-                                    <div class="fleft location_address">Qu?n 1 , Thành Ph? H? Chí Minh</div>
+                                    <div class="fleft location_address">Quận 1, thành phố HCM</div>
                                 }
                                 else
                                 {
@@ -283,7 +287,7 @@
 
 
     <!-- footer  style-->
-    <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
+    @*<script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>*@
     <script src="/Content/HMS/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Content/HMS/js/jquery.bxslider.js"></script>
     <!-- owl carousel-->
@@ -297,8 +301,8 @@
     <script src="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="~/Content/HMS/js/custom.js"></script>
     <script src="~/Content/HMS/js/checkformDeposit.js"></script>
-    <script src="~/Content/HMS/js/email.js"></script>
-    <script src="~/Content/HMS/js/map.js"></script>
+    @*<script src="~/Content/HMS/js/email.js"></script>
+    <script src="~/Content/HMS/js/map.js"></script>*@
 </body>
 
 

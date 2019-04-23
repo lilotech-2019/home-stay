@@ -44,12 +44,12 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Name)</span>
                             <input id="ContactName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
-                            <small><span class="text-danger error-contactName hidden">Vui lòng nhập Tên  </span></small>
+                            <small><span class="text-danger error-contactName hidden"> Vui lòng nhập Tên  </span></small>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                             <span>@Html.Raw(Resources.Resources.HMS_Email) </span>
                             <input id="ContactEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
-                            <small><span class="text-danger error-ContactEmail-none hidden">Vui lòng nhập địa chỉ email </span></small>
+                            <small><span class="text-danger error-ContactEmail-none  hidden">Vui lòng nhập địa chỉ email </span></small>
                             <small><span class="text-danger error-ContactEmail hidden">Sai Định Dạng Email</span></small>
                         </div>
                     </div>
@@ -143,36 +143,40 @@
 <div class="addresses-block"><a data-lat="10.8851677" data-marker="" data-lng="106.5786695" data-string="1. Here is some address or email or phone or something else..."></a></div>
 <script>
 
-    var check = false;
-    var contactForm = $('#contactForm');//id form
-    var submitBtnContact = $('#btn-submit-contact');//id nut submit
+    var checkContact = false;
+    var contactForm = $('#contactForm');
+    var submitBtnContact = $('#btn-submit-contact');
     $(function () {
         submitFormContact();
     });
     function submitFormContact() {
         submitBtnContact.click(function (e) {
-            check = validateFormContact();
-            if (check) {
+            checkContact = validateFormContact();
+            if (checkContact) {
                 alert("Gửi thông tin liên hệ thành công");
+
                 contactForm.submit();
             } else {
                 e.preventDefault();
             }
         });
     }
-    function isValidGmailContact(gmailString) {
-        var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-        if (!regex.test(gmailString))
+    function isValidGmailContact(stringMail) {
+        var reg = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+        if (!reg.test(stringMail)) {
             return false;
+        }
         return true;
     }
-    function isValidPhoneContact(phoneString) {
-        if (phoneString.length != 10) {
+    function isValidPhoneContact(stringPhone) {
+        if (stringPhone.length != 10) {
             return false;
         }
         return true;
     }
     function validateFormContact() {
+        $('.error-ContactEmail').addClass('hidden');
+        $('.error-ContactPhone').addClass('hidden');
         var ContactName, ContactEmail, ContactPhone, ContactMesss;
         ContactName = $('#ContactName').val();
         ContactEmail = $('#ContactEmail').val();
@@ -185,7 +189,7 @@
             $('.error-contactName').addClass('hidden');
         }
         if (ContactEmail == "") {
-            $('.error-ContactEmail-none').removeClass('hidden');
+            $('.error-ContactEmail-none ').removeClass('hidden');
             return false;
         } else {
             $('.error-ContactEmail-none').addClass('hidden');
@@ -193,6 +197,8 @@
         if (!isValidGmailContact(ContactEmail)) {
             $('.error-ContactEmail').removeClass('hidden');
             return false;
+        } else {
+            $('.error-ContactEmail').addClass('hidden');
         }
         if (ContactPhone == "") {
             $('.error-ContactPhonel-none').removeClass('hidden');
