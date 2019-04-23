@@ -4,7 +4,6 @@
     /**/
 
     ViewBag.Title = "Create Room";
-    string previousUrl = Request.UrlReferrer.AbsolutePath;
 }
 @section scripts{
     @*<script src="~/Content/ckeditor/ckeditor.js"></script>
@@ -254,6 +253,6 @@
                 </div>
             }
         </div>
-        <a href="@previousUrl">Back To Link</a>
+        <a href="@Url.Action("Index","Hotels",new { hotelCategoryId = ViewBag.HotelCategoryId})">Back To Link</a>
     </div>
 </div>
