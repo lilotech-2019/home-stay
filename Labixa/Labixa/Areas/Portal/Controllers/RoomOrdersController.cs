@@ -5,7 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Labixa.Areas.HMSAdmin.Controllers
+namespace Labixa.Areas.Portal.Controllers
 {
     public class RoomOrdersController : Controller
     {
