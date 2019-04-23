@@ -1,0 +1,298 @@
+﻿@{
+    HttpCookie cookie = Request.Cookies["_culture"];
+}
+
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from galaxyanalytics.net/demos/lakeresort/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 13:21:48 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <title>Da Lat Amazing</title>
+    <!-- reponsive meta-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap-->
+    <link href="/Content/HMS/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/HMS/css/font-awesome.min.css" rel="stylesheet">
+    <!-- strock gap icons-->
+
+    <link rel="stylesheet" href="/Content/HMS/vendors/Stroke-Gap-Icons-Webfont/style.css">
+    <link rel="stylesheet" href="/Content/HMS/css/animate.min.css">
+    <!-- owl-carousel-->
+    <link rel="stylesheet" href="/Content/HMS/vendors/owlcarousel/owl.carousel.css">
+    <link rel="stylesheet" href="/Content/HMS/vendors/imagelightbox/imagelightbox.min.css">
+    <link rel="stylesheet" href="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.css">
+    <!-- Main Css-->
+    <link href="~/Content/HMS/css/style.css" rel="stylesheet" />
+
+    <link href="~/Content/HMS/css/reponsiveTest.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/Content/HMS/css/responsive.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Content/HMS/favicon/favicon-16x16.png">
+    <!--if IE-->
+    <link rel="stylesheet" type="text/css" href="/Content/HMS/css/all-ie-only.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries-->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+    script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
+    -->
+</head>
+<body>
+
+    <section id="sidebarCollapse" class="side-menu">
+        <button type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse" class="close-button"><i class="fa fa-times"></i></button>
+        <div class="side-menu-widget about-widget">
+            <a href="." class="logo">
+                <img src="~/Content/HMS/images/icon/lr-home.png"
+                     alt="Awesome Image">
+            </a>
+            <h3 class="title playball-font">Welcome to Resort</h3>
+            <!-- /.title playball-font-->
+            <p>
+                Edolor sit amet, consectetur, adipis civelit sed quia non qui dolorem ipsum quia dolor sit amet, consectetur,
+                adipis civelit.
+            </p>
+        </div>
+        <div class="side-menu-widget gallery-widget">
+            <div class="title-box">
+                <h4>From Our Gallery</h4><span class="decor-line inline"></span>
+            </div>
+            <ul class="list-inline">
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/1.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/2.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/3.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/4.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/5.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/6.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/7.jpg" alt="Awesome Image"></a></li>
+                <li><a href="#"><img src="~/Content/HMS/images/gallery-thumb/8.jpg" alt="Awesome Image"></a></li>
+            </ul>
+            <ul class="contact-info">
+                <li>hello@youremail.com</li>
+                <li>+1234567890</li>
+            </ul>
+        </div>
+        <div class="side-menu-widget subscribe-widget">
+            <div class="title-box">
+                <h4>Subscribe for our Special Offers</h4><span class="decor-line inline"></span>
+            </div>
+            <form action="#" class="clearfix">
+                <input type="text" placeholder="Enter email address">
+                <button type="submit" class="res-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    <section class="top-bar dhomev">
+        <div class="container">
+
+            <!-- /.pull-left left-infos-->
+            <div class="pull-right right-infos link-list">
+                <ul class="list-inline">
+                    <li>
+                        <a href="/language/vi">
+                            VN <img width="20" height="20"
+                                    src="http://icons.iconarchive.com/icons/iconscity/flags/256/vietnam-icon.png" />
+                        </a>
+                    </li>
+                    <!--comment for inline hack
+                      -->
+                    <li>
+                        <a href="/language/en">
+                            ENG <img width="20" height="20"
+                                     src="https://cdn1.iconfinder.com/data/icons/world-flags-circular/1000/Flag_of_United_Kingdom_-_Circle-512.png" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.pull-right right-infos link-list-->
+        </div>
+        <!-- /.container-->
+    </section>
+    <!-- /.side-menu-->
+    <nav id="main-navigation-wrapper"
+         class="navbar navbar-default transBg-main-menu-header _fixed-header _light-header stricky">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false"
+                        class="navbar-toggle collapsed">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button><a href="."
+                            class="navbar-brand">
+                    <img alt="Awesome Image" <img src="~/Content/HMS/images/header/logo.png" class="default-logo"><img src="~/Content/HMS/images/header/logo2.png" alt="Awesome Logo" class="secondary-logo">
+                </a>
+            </div>
+            <div id="main-navigation" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">@Html.Raw(Resources.Resources.HMS_Home)</a></li>
+                    <li><a href="/gioi-thieu">@Html.Raw(Resources.Resources.HMS_AboutUs)</a></li>
+                    <li><a href="/danh-sach-phong-ngan-han" onclick="localStorage.setItem('nameMenu', 'datphong')">@Html.Raw(Resources.Resources.HMS_ShortRoom)</a></li>
+                    <li><a href="/danh-sach-phong-dai-han" onclick="localStorage.setItem('nameMenu', 'daihan')">@Html.Raw(Resources.Resources.HMS_LongRoom)</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#exampleModalDeposit">@Html.Raw(Resources.Resources.HMS_Deposit)</a></li>
+                    <li><a href="/danh-sach-tin-tuc">@Html.Raw(Resources.Resources.HMS_News)</a></li>
+                    <li><a href="/lien-he">@Html.Raw(Resources.Resources.HMS_Contact)</a></li>
+                    <!-- <li><a href="#">EN|VN</a></li> -->
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade bd-example-modal-lg" id="exampleModalDeposit" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="min-height:70%">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="sec-header">
+                        <h2 style="font-family: Arial, Helvetica, sans-serif">@Html.Raw(Resources.Resources.HMS_Deposit)</h2>
+                        <!-- <h3 style="margin: auto;">Pick a room that best suits your taste and budget</h3> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="book-left-content input_form">
+                                <form id="contactBooking" action="/Home/Deposit"
+                                      method="post">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="type" type="text" name="Type" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="address" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="price" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="email" type="email" name="Description" placeholder="Email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="name" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="phone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <button type="submit" class="res-btn" onclick="SendMess()">@Html.Raw(Resources.Resources.HMS_Send)</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+    <footer>
+        <section class="clearfix footer-wrapper">
+            <section class="container clearfix footer-pad">
+                <div class="widget about-us-widget col-md-6 col-sm-6">
+                    <a href="."><img src="/Content/HMS/images/footer/logo.png" alt="" class="img-responsive"></a>
+                    @if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                        <p> HomeStay chắc hẳn sẽ cho bạn cảm giác mới lạ, giúp bạn lấy lại tinh thần, tạo cảm hứng cho ngày mới.</p>
+                    }
+                    else
+                    {
+                        <p>Lorem ipsum dolor sit amet, consecte- tur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p>}
+                    <ul class="nav">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="widget widget-links col-md-3 col-sm-6">
+                    <h4 class="widget_title">@Html.Raw(Resources.Resources.HMS_QUICKLINKS)</h4>
+                    <div class="widget-contact-list">
+                        <ul>
+                            <li><a href="/">@Html.Raw(Resources.Resources.HMS_Home)</a></li>
+                            <li><a href="/lien-he">@Html.Raw(Resources.Resources.HMS_Contact)</a></li>
+                            <li><a href="/danh-sach-phong-ngan-han">@Html.Raw(Resources.Resources.HMS_ShortRoom)</a></li>
+                            <li><a href="/danh-sach-phong-dai-han">@Html.Raw(Resources.Resources.HMS_footerExpartService)</a></li>
+                            <li><a href="/danh-sach-tin-tuc">@Html.Raw(Resources.Resources.HMS_News)</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget get-in-touch col-md-3 col-sm-6">
+                    <h4 class="widget_title">@Html.Raw(Resources.Resources.HMS_GETINTOUCH)</h4>
+                    <div class="widget-contact-list">
+                        <ul>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                    <div class="fleft location_address">Quận 1 , Thành Phố Hồ Chí Minh</div>
+                                }
+                                else
+                                {
+                                    <div class="fleft location_address">Lorance 542B, Tailstoi Town 5248 MT, Wordwide Country</div>
+                                }
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <div class="fleft contact_no"><a href="tel:+018655248503">+ 01865 524 8503</a>  /  <a href="tel:+12549547854">1254 954 7854</a></div>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <div class="fleft contact_mail"><a href="mailto:info@resorthotel.com">info@resorthotel.com</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="container clearfix footer-b-pad">
+            <div class="footer-copy">
+                <div class="pull-left fo-txt">
+                    <p>©2019 Lilotech website  </p>
+                </div>
+                <div class="pull-right fo-txt">
+                    <p>Created by: <a href="http://themeforest.net/user/designarc"> LILOTECH</a></p>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+
+    <!-- footer  style-->
+    <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
+    <script src="/Content/HMS/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/HMS/js/jquery.bxslider.js"></script>
+    <!-- owl carousel-->
+    <script src="/Content/HMS/vendors/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/Content/HMS/js/jquery.easing.min.js"></script>
+    <script src="/Content/HMS/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/Content/HMS/js/zebra_datepicker.js"></script>
+    <!-- jQuery ui js-->
+    <script src="/Content/HMS/js/jquery.mixitup.min.js"></script>
+    <script src="/Content/HMS/js/jquery.fancybox.pack.js"></script>
+    <script src="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script src="~/Content/HMS/js/custom.js"></script>
+
+    <script src="~/Content/HMS/js/email.js"></script>
+    <script src="~/Content/HMS/js/map.js"></script>
+</body>
+
+
+</html>

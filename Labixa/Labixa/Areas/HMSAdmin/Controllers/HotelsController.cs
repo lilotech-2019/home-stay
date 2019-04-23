@@ -1,11 +1,11 @@
 ﻿using Outsourcing.Core.Common;
-using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.HMS;
+using Outsourcing.Service.Portal;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Data.Models;
+using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Areas.HMSAdmin.Controllers
 {
@@ -13,11 +13,11 @@ namespace Labixa.Areas.HMSAdmin.Controllers
     {
         #region Fields
         private readonly IHotelService _hotelService;
-        private readonly ICategoryHotelService _categoryHotelService;
+        private readonly IHotelCategoryService _categoryHotelService;
         #endregion
 
         #region Ctor
-        public HotelsController(IHotelService hotelService, ICategoryHotelService categoryHotelService)
+        public HotelsController(IHotelService hotelService, IHotelCategoryService categoryHotelService)
         {
             _hotelService = hotelService;
             _categoryHotelService = categoryHotelService;
@@ -72,8 +72,8 @@ namespace Labixa.Areas.HMSAdmin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
-            return View(new Hotel { SharePercent = 0 });
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(), "Id", "Name");
+            return View();
         }
 
         /// <summary>

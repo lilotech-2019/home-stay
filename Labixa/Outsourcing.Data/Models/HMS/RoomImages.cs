@@ -10,9 +10,7 @@ namespace Outsourcing.Data.Models.HMS
         public string Url { get; set; }
 
         public string Description { get; set; }
-
-        public bool IsDeleted { get; set; }
-
+        
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
     }
 }

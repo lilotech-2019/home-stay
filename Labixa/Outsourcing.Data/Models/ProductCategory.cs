@@ -17,7 +17,6 @@ namespace Outsourcing.Data.Models
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }    
-        public bool Deleted { get; set; }
 
         public virtual ICollection<ProductCategoryMapping> ProductCategoryMappings { get; set; }
 

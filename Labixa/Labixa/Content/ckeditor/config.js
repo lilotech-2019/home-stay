@@ -11,6 +11,6 @@
             //get id
             var id = $(this).parent().find('input')[0].id;
             // set id to controller
-            window.open('/Admin/File/GetImageFromElfinder?elementId='+ id+'', 'GetImageFromElfinder', 'height=' + (window.screen.height - 100));
+            window.open("/Portal/File/GetImageFromElfinder?elementId="+ id+'', 'GetImageFromElfinder', 'height=' + (window.screen.height - 100));
         });
     });

@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Labixa.Areas.Admin.Mappings;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Outsourcing.Core.Authentication;
@@ -11,7 +10,6 @@ using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Repository;
 using Outsourcing.Service;
-using SocialGoal.Mappings;
 
 namespace Labixa
 {
@@ -21,7 +19,7 @@ namespace Labixa
         {
             SetAutofacContainer();
             //Configure AutoMapper
-            AutoMapperConfiguration.Configure();
+           // AutoMapperConfiguration.Configure();
         }
 
         private static void SetAutofacContainer()
