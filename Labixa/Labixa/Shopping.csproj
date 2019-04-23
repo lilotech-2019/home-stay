@@ -1902,7 +1902,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Shared\_LayoutHMS.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
     <Content Include="Views\RoomVer3\ShortRoom.cshtml" />
@@ -1930,6 +1929,7 @@
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\RoomVer3\Details.cshtml" />
+    <Content Include="Views\Shared\_LayoutHMS.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
