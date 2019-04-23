@@ -15,12 +15,14 @@ namespace Labixa.Areas.Portal.Controllers
     {
         #region Fields
         private readonly IMessageService _messageService;
+        private readonly ICustomerService _customerService;
         #endregion
 
         #region Ctor
-        public MessagesController(IMessageService messageService)
+        public MessagesController(IMessageService messageService, ICustomerService customerService)
         {
             _messageService = messageService;
+            _customerService = customerService;
         }
         #endregion
 
@@ -64,6 +66,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.CustomerId = new SelectList(_customerService.FindSelectList(), "Id", "Name");
             return View();
         }
 
@@ -81,6 +84,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _messageService.Create(message);
                 return RedirectToAction("Index");
             }
+            ViewBag.CustomerId = new SelectList(_customerService.FindSelectList(), "Id", "Name");
             return View(message);
         }
         #endregion

@@ -1,27 +1,42 @@
 ﻿@model Outsourcing.Data.Models.Deposit
 
 @{
-    ViewBag.Title = "Custom Create";
+    ViewBag.Title = "Create Deposit";
 }
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed');
+            } catch (e) {
+            }
+        </script>
 
-
-<div class="page-header">
-    <h1>
-        Create
-    </h1>
-</div>
-
-
-<div class="row">
-    <div class="col-xs-12">
-
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="@Url.Action("Index")">Deposits management</a>
+            </li>
+            <li class="active">Add new a deposit</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Add new a deposit
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>Colors</h4>
                 <hr />
                 @Html.ValidationSummary(true)
 
@@ -33,15 +48,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-sm-6 col-md-12">
-                    @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label no-padding-right" })
-                    <div class="col-sm-9">
-                        @Html.EditorFor(model => model.Email, null, new { @class = "col-xs-10 col-sm-5" })
-                        @Html.ValidationMessageFor(model => model.Email)
-                    </div>
-                </div>
-
-                <div class="form-group col-sm-6 col-md-12">
+                <div class="form-group">
                     @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
                         @Html.EditorFor(model => model.Content, null, new { @class = "col-xs-10 col-sm-5" })
@@ -49,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-sm-6 col-md-12">
+                <div class="form-group">
                     @Html.LabelFor(model => model.Note, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
                         @Html.EditorFor(model => model.Note, null, new { @class = "col-xs-10 col-sm-5" })
@@ -67,19 +74,15 @@
 
                 <div class="form-group ">
                     <div class="col-md-offset-4 col-md-8">
-                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                         <input type="reset" value="Reset" class="btn" />
                     </div>
                 </div>
             </div>
-        }
+            }
+        </div>
     </div>
 </div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section scripts{
-    <script src="~/Content/ckeditor/ckeditor.js"></script>
-    <script src="~/Content/ckeditor/config.js"></script>
-}
