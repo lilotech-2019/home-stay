@@ -3,8 +3,15 @@
     HttpCookie cookie = Request.Cookies["_culture"];
     var longRooom = Outsourcing.Data.Models.RoomType.LongTemp;
     var shortRoom = Outsourcing.Data.Models.RoomType.ShortTemp;
+    ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
+    ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
+        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
+        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
+    ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
+    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
 }
-<style>9
+<style>
     .text-danger {
         color: #a94442 !important;
     }
@@ -663,8 +670,8 @@
                 minDate: currentDate
             })
                 .on("change", function () {
-                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));  
-                    fromModal.datepicker("option", "maxDate", convertDate(this, dateFormat));  
+                    from.datepicker("option", "maxDate", convertDate(this, dateFormat));
+                    fromModal.datepicker("option", "maxDate", convertDate(this, dateFormat));
                 });
     }
     function pickingDateModal() {
@@ -720,7 +727,7 @@
         return true;
     }
     function validateModalForm() {
-        var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;      
+        var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
         customerName = $('#CustomerName').val();
@@ -786,7 +793,7 @@
         return true;
     }
     function validateModelLongRoom() {
-        var nameLR, emailLR, phoneLR, messageLR, numberLR; 
+        var nameLR, emailLR, phoneLR, messageLR, numberLR;
         emailLR = $('#EmailLR').val();
         phoneLR = $('#PhoneLR').val();
         nameLR = $('#NameLR').val();
