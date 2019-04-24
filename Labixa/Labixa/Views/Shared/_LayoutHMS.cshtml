@@ -1,14 +1,35 @@
 ﻿@{
     HttpCookie cookie = Request.Cookies["_culture"];
 }
-
 <!DOCTYPE html>
 <html>
-
-<!-- Mirrored from galaxyanalytics.net/demos/lakeresort/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Mar 2019 13:21:48 GMT -->
 <head>
     <meta charset="UTF-8">
     <title>Da Lat Amazing</title>
+    @if (ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title</title>
+    }
+    else
+    {
+        <title>HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn |dalatamazing.com.vn</title>
+    }
+    <meta name="adx:sections" content="http://www.dalatamazing.com.vn" />
+    @if (ViewBag.Description != null)
+    {
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    else
+    {
+        <meta name="description" content="Xu hướng nghỉ dưỡng, năm 2019, Homestay Sang Trọng, Đầy Đủ Tiện Nghi
+              giúp Khách Hàng Thoải Mái , Đội ngũ nhân viên  Hỗ Trợ 24/7. Giá Rẻ nhất, lại tiên nghi, phòng sang trọng mang một đẳng cấp khác biệt." />
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing" />
+    <meta property="og:image" content="http://www.dalatamazing.com.vn/Content/HMS/images/header/logo.png" />
+    <meta property="og:url" content="http://www.dalatamazing.com.vn" />
+    <meta property="og:site_name" content="Dalatamazing" />
+
     <!-- reponsive meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap-->
@@ -22,6 +43,7 @@
     <link rel="stylesheet" href="/Content/HMS/vendors/owlcarousel/owl.carousel.css">
     <link rel="stylesheet" href="/Content/HMS/vendors/imagelightbox/imagelightbox.min.css">
     <link rel="stylesheet" href="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
     <!-- Main Css-->
     <link href="~/Content/HMS/css/style.css" rel="stylesheet" />
 
@@ -39,6 +61,8 @@
     script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 
     -->
+    <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 </head>
 <body>
 
@@ -153,40 +177,48 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="book-left-content input_form">
-                                <form id="contactBooking" action="/Home/Deposit"
+                                <form id="formDeposit" action="/Home/Deposit"
                                       method="post">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="type" type="text" name="Type" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                            <input id="depositType" type="text" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositType-none hidden">Vui lòng nhập loại hình cho thuê </span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="address" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="price" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="email" type="email" name="Description" placeholder="Email" class="form-control">
+                                            <input id="depositAddress" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositAddress-none hidden">Vui lòng nhập địa chỉ </span></small>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="name" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
+                                            <input id="depositPrice" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
+                                            <small><span class="text-danger error-DepositPrice-none hidden">Vui lòng nhập giá</span></small>
+                                            <small><span class="text-danger error-DepositPrice hidden">Vui lòng nhập giá là số</span></small>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                            <input id="phone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
+                                            <input id="depositName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
+                                            <small><span class="text-danger error-DepositName-none hidden">Vui lòng nhập Tên </span></small>
                                         </div>
-
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="depositPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
+                                            <small><span class="text-danger error-DepositPhone-none hidden">Vui lòng nhập số điện thoại </span></small>
+                                            <small><span class="text-danger error-DepositPhone hidden">Sai định dạng số điện thoại</span></small>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                            <input id="depositEmail" type="email" name="Description" placeholder="Email" class="form-control">
+                                            <small><span class="text-danger error-DepositEmail-none hidden">Vui lòng nhập email </span></small>
+                                            <small><span class="text-danger error-DepositEmail hidden">Sai định dạng  Email</span></small>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="submit" class="res-btn" onclick="SendMess()">@Html.Raw(Resources.Resources.HMS_Send)</button>
+                                            <button type="submit" class="res-btn" id="btn-submit-depositForm">@Html.Raw(Resources.Resources.HMS_Send)</button>
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -206,7 +238,7 @@
                     <a href="."><img src="/Content/HMS/images/footer/logo.png" alt="" class="img-responsive"></a>
                     @if (cookie != null && cookie.Value.Equals("vi"))
                     {
-                        <p> HomeStay chắc hẳn sẽ cho bạn cảm giác mới lạ, giúp bạn lấy lại tinh thần, tạo cảm hứng cho ngày mới.</p>
+                        <p> homstay cho bạn cảm giác thoải mái, ngày mới trở nên vui tươi, năng lượng tích cực.</p>
                     }
                     else
                     {
@@ -242,7 +274,7 @@
                                 <i class="fa fa-map-marker"></i>
                                 @if (cookie != null && cookie.Value.Equals("vi"))
                                 {
-                                    <div class="fleft location_address">Quận 1 , Thành Phố Hồ Chí Minh</div>
+                                    <div class="fleft location_address">Quận 1, thành phố HCM</div>
                                 }
                                 else
                                 {
@@ -276,7 +308,7 @@
 
 
     <!-- footer  style-->
-    <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
+    @*<script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>*@
     <script src="/Content/HMS/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Content/HMS/js/jquery.bxslider.js"></script>
     <!-- owl carousel-->
@@ -289,9 +321,9 @@
     <script src="/Content/HMS/js/jquery.fancybox.pack.js"></script>
     <script src="/Content/HMS/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="~/Content/HMS/js/custom.js"></script>
-
-    <script src="~/Content/HMS/js/email.js"></script>
-    <script src="~/Content/HMS/js/map.js"></script>
+    <script src="~/Content/HMS/js/checkformDeposit.js"></script>
+    @*<script src="~/Content/HMS/js/email.js"></script>
+        <script src="~/Content/HMS/js/map.js"></script>*@
 </body>
 
 

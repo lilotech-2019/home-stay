@@ -57,6 +57,7 @@ namespace Labixa.Controllers
         {
             model.Status = true;
             model.Deleted = false;
+            model.Type = 0;
             _vendorService.Create(model);
             return RedirectToAction("Index", "Home");
         }

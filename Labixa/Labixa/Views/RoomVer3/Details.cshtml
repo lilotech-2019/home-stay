@@ -1,8 +1,15 @@
 ﻿@model Labixa.ViewModels.RoomDetailViewModel
 @{
     HttpCookie cookie = Request.Cookies["_culture"];
-    var longRooom = Outsourcing.Data.Models.HMS.RoomType.LongTemp;
-    var shortRoom = Outsourcing.Data.Models.HMS.RoomType.ShortTemp;
+    var longRooom = Outsourcing.Data.Models.RoomType.LongTemp;
+    var shortRoom = Outsourcing.Data.Models.RoomType.ShortTemp;
+    ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
+    ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
+        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
+        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
+    ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
+    Layout = "~/Views/Shared/_LayoutHMS.cshtml";
 }
 <style>
     .text-danger {
@@ -78,7 +85,7 @@
                                                 <div class="col-lg-8 col-sm-12">
                                                     <div class="book-left-content input_form">
                                                         <div class="row form-group">
-                                                            <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 formbooking">
                                                                 <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
                                                                 <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
                                                             </div>
@@ -89,7 +96,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
-                                                            <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 formbooking">
                                                                 <input type="text" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" readonly
                                                                        placeholder="Ngày đến" data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
                                                                 <small><span class="text-danger error-start-none hidden">Vui lòng nhập ngày đến </span></small>
@@ -131,13 +138,7 @@
                                                         <input type="text" name="Price" value="@Model.Room.Price" style="display:none;">
                                                         <input type="text" name="Name" value="@Model.Room.Name" style="display:none;">
 
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                <button type="submit" class="res-btn" id="submitBtn">
-                                                                    @Html.Raw(Resources.Resources.HMS_Booking)
-                                                                </button>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-12">
@@ -234,6 +235,13 @@
 
                                                     </div>
                                                 </div>
+                                                @*<div class="row">*@
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <button type="submit" class="res-btn" id="submitBtn">
+                                                            @Html.Raw(Resources.Resources.HMS_Booking)
+                                                        </button>
+                                                    </div>
+                                                @*</div>*@
 
                                             </div>
                                         </form>
@@ -276,7 +284,7 @@
 
                                                         <div class="row form-group">
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
-                                                                <input id="NameLR" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
+                                                                <input id="NameLR" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control formbooking" required>
                                                                 <small><span class="text-danger errorLR-name hidden">Vui lòng nhập tên </span></small>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
@@ -301,27 +309,27 @@
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="PhoneLR" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                        class="form-control" onkeypress="return isNumberKey(event)">
-                                                                <small><span class="text-danger errorLR-phone-none hidden">Vui lòng nhập email </span></small>
-                                                                <small><span class="text-danger errorLR-phone hidden">Sai Định Dạng Email</span></small>
+                                                                <small><span class="text-danger errorLR-phone-none hidden">Vui lòng nhập Số điện thoại </span></small>
+                                                                <small><span class="text-danger errorLR-phone hidden">Sai Định Dạng Số điện thoại sai</span></small>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <textarea id="messageLR" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                           class="form-control" style="height:200px;"></textarea>
-                                                                <small><span class="text-danger errorLR-content hidden">Vui lòng nhập email </span></small>
+                                                                <small><span class="text-danger errorLR-content hidden">Vui lòng nhập  nội dung  </span></small>
                                                             </div>
                                                         </div>
                                                         <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
                                                         <input type="text" name="Price" value="@Model.Room.Price" style="display:none;">
                                                         <input type="text" name="Name" value="@Model.Room.Name" style="display:none;">
-                                                        <div class="row">
+                                                        @*<div class="row">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <button type="submit" class="res-btn" id="submitBtnLR">
                                                                     @Html.Raw(Resources.Resources.HMS_Booking)
                                                                 </button>
                                                             </div>
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-12">
@@ -419,6 +427,14 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <button type="submit" class="res-btn" id="submitBtnLR">
+                                                        @Html.Raw(Resources.Resources.HMS_Booking)
+                                                    </button>
+                                                </div>
+
+
+
 
                                             </div>
                                         </form>
@@ -615,12 +631,10 @@
         pickingDateModal()
         submitForm();
         submitFormLR();
-
     });
     function submitForm() {
         submitBtn.click(function (e) {
             check = validateModalForm();
-            console.log(check);
             if (check) {
                 alert("Đặt Phòng Thành Công");
                 contactBooking.submit();
@@ -632,7 +646,6 @@
     function submitFormLR() {
         submitLR.click(function (e) {
             checkLR = validateModelLongRoom();
-            console.log(checkLR);
             if (checkLR) {
                 alert("Đặt Phòng Thành Công");
                 contactBoookingLR.submit();
@@ -642,35 +655,44 @@
         });
     }
     function pickingDate() {
+        var currentDate = new Date();
+        var fromModal = $("#startDayRoom");
+        var toModal = $("#endDayRoom");
         var dateFormat = "dd/mm/yy",
             from = $("#startDay")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 2
+                    numberOfMonths: 1,
+                    minDate: currentDate
                 })
                 .on("change", function () {
                     to.datepicker("option", "minDate", convertDate(this, dateFormat));
+                    toModal.datepicker("option", "minDate", convertDate(this, dateFormat));
                 }),
             to = $("#endDay").datepicker({
                 dateFormat: 'dd/mm/yy',
                 defaultDate: "+1w",
                 changeMonth: true,
-                numberOfMonths: 2
+                numberOfMonths: 1,
+                minDate: currentDate
             })
                 .on("change", function () {
                     from.datepicker("option", "maxDate", convertDate(this, dateFormat));
+                    fromModal.datepicker("option", "maxDate", convertDate(this, dateFormat));
                 });
     }
     function pickingDateModal() {
+        var currentDate = new Date();
         var dateFormat = "dd/mm/yy",
             from = $("#startDayRoom")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 2,
+                    numberOfMonths: 1,
+                    minDate: currentDate
                 })
                 .on("change", function () {
                     to.datepicker("option", "minDate", convertDate(this, dateFormat));
@@ -679,7 +701,8 @@
                 dateFormat: 'dd/mm/yy',
                 defaultDate: "+1w",
                 changeMonth: true,
-                numberOfMonths: 2
+                numberOfMonths: 1,
+                minDate: currentDate
             })
                 .on("change", function () {
                     from.datepicker("option", "maxDate", convertDate(this, dateFormat));
@@ -714,8 +737,6 @@
     }
     function validateModalForm() {
         var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;
-        $('.error-phone').addClass('hidden');
-        $('.error-email').addClass('hidden');
         customerEmail = $('#CustomerEmail').val();
         customerPhone = $('#CustomerPhone').val();
         customerName = $('#CustomerName').val();
@@ -723,7 +744,6 @@
         dateStart = $('#startDayRoom').val();
         dateEnd = $('#endDayRoom').val();
         message = $('#message').val();
-
         if (customerName == "") {
             $('.error-name').removeClass('hidden');
             return false;
@@ -739,15 +759,15 @@
         if (!isValidGmail(customerEmail)) {
             $('.error-email').removeClass('hidden');
             return false;
+        } else {
+            $('.error-email').addClass('hidden');
         }
-
         if (dateStart == "") {
             $('.error-start-none').removeClass('hidden');
             return false;
         } else {
             $('.error-start-none').addClass('hidden');
         }
-
         if (dateEnd == "") {
             $('.error-end-none').removeClass('hidden');
             return false;
@@ -769,6 +789,8 @@
         if (!isValidPhone(customerPhone)) {
             $('.error-phone').removeClass('hidden');
             return false;
+        } else {
+            $('.error-phone').addClass('hidden');
         }
         if (message == "") {
             $('.error-content').removeClass('hidden');
@@ -781,8 +803,6 @@
     }
     function validateModelLongRoom() {
         var nameLR, emailLR, phoneLR, messageLR, numberLR;
-        $('.errorLR-phone').addClass('hidden');
-        $('.errorLR-email').addClass('hidden');
         emailLR = $('#EmailLR').val();
         phoneLR = $('#PhoneLR').val();
         nameLR = $('#NameLR').val();
@@ -803,6 +823,8 @@
         if (!isValidGmail(emailLR)) {
             $('.errorLR-email').removeClass('hidden');
             return false;
+        } else {
+            $('.errorLR-email').addClass('hidden');
         }
         if (numberLR == "default") {
             $('.errorLR-numberPeople').removeClass('hidden');
@@ -819,6 +841,8 @@
         if (!isValidPhone(phoneLR)) {
             $('.errorLR-phone').removeClass('hidden');
             return false;
+        } else {
+            $('.errorLR-phone').addClass('hidden');
         }
         if (messageLR == "") {
             $('.errorLR-content').removeClass('hidden');

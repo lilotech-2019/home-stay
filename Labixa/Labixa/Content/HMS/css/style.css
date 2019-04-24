@@ -89,6 +89,9 @@
 @import url("jquery.bxslider.css");
 @import url("strock-icon.css");
 @import url("jquery.fancybox.css");
+.text-danger {
+    color: #a94442 !important;
+}
 ul, li {
   margin: 0;
   padding: 0;

@@ -399,11 +399,14 @@
 }
 
 @media (max-width: 768px) {
+   .formbooking {
+        margin-bottom: 15px;
+    }
     
-    .search-sec{
+    .search-sec {
         width: 100%;
-		position: relative;
-		margin: 0;
+        position: relative;
+        margin: 0;
     }
     
      .ser-in-box{
@@ -565,6 +568,9 @@
 }
 
 @media (max-width: 767px) {
+    .formbooking {
+        margin-bottom: 15px;
+    }
   .fo-txt {
     width: 100%;
     display: block;
@@ -579,6 +585,9 @@
 }
 
 @media (max-width: 650px) {
+    .formbooking {
+        margin-bottom: 15px;
+    }
    .search-sec{
         position: relative;
         margin-top:0;
@@ -732,11 +741,17 @@
 
 
 @media (max-width: 414px) {
+    .formbooking {
+        margin-bottom: 15px;
+    }
 
     
 }
 
 @media (max-width: 480px) {
+    .formbooking {
+        margin-bottom: 15px;
+    }
     .home-slider .carousel-caption{
         position: relative;
         color: #0e1322;
@@ -861,8 +876,20 @@
 
 
 @media (min-width: 768px) {
+    .formbooking {
+        margin-bottom: 15px;
+    }
   .modal-dialog {
       width: 900px;
       margin: 30px auto;
   }
+    .form-contact {
+        margin-left: 20px;
+    }
+}
+@media (min-width:812px) and (max-width:991px) {
+    .form-contact
+    { 
+        margin-left:13px;
+    }
 }
