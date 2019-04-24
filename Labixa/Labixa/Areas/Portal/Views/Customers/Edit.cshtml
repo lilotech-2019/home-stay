@@ -35,7 +35,7 @@
             <div class="alert alert-block alert-info">
                 Edit customer
             </div>
-            @using (Html.BeginForm("Edit", "Customer", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)

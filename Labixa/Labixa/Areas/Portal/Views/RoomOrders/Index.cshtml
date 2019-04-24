@@ -71,31 +71,32 @@
                                 <td class="">@item.CheckOut</td>
 
                                 <td class="hidden-480 ">
-                                        @{
-                                            var status = item.OrderStatus;
-                                            switch (status)
-                                            {
-                                                case RoomOrderStatus.New:
-                                                    <span class="label label-sm label-warning">Đợi xác nhận</span>
+                                    @{
+                                        var status = item.OrderStatus;
+                                        switch (status)
+                                        {
+                                            case RoomOrderStatus.New:
+                                                <span class="label label-sm label-warning">Đợi xác nhận</span>
 
-                                                    <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
-                                                    break;
-                                                case RoomOrderStatus.Processed:
-                                                    <span class="label label-sm label-success">Đã xử lý</span>
-                                                    break;
-                                                case RoomOrderStatus.CheckIn:
-                                                    <span class="label label-sm label-success">Đã check in</span>
-                                                    <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
-                                                    break;
-                                                case RoomOrderStatus.CheckOut:
-                                                    <span class="label label-sm label-success">Đã check out</span>
-                                                    <button id="processed" data-href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</button>
-                                                    break;
-                                                default:
-                                                    throw new ArgumentOutOfRangeException();
-                                            }
+                                                <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
+                                                break;
+                                            case RoomOrderStatus.Processed:
+                                                <span class="label label-sm label-success">Đã xử lý</span>
+                                                break;
+                                            case RoomOrderStatus.CheckIn:
+                                                <span class="label label-sm label-success">Đã check in</span>
+                                                <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
+                                                break;
+                                            case RoomOrderStatus.CheckOut:
+                                                <span class="label label-sm label-success">Đã check out</span>
+                                                <button id="processed" data-href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</button>
+                                                break;
+                                            default:
+                                                throw new ArgumentOutOfRangeException();
                                         }
-                                    </td>
+                                    }
+                                    <a href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</a>
+                                </td>
 
 
                                 <td class=" ">

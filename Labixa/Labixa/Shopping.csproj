@@ -87,6 +87,7 @@
     <Compile Include="Areas\Portal\Controllers\RoomsController.cs" />
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Areas\Portal\ViewModels\HotelCategory\PartialSubMenuCategoryViewModel.cs" />
+    <Compile Include="Areas\Portal\ViewModels\RoomOrders\CreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />

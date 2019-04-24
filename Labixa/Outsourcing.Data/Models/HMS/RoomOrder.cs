@@ -10,6 +10,9 @@ namespace Outsourcing.Data.Models.HMS
         public RoomOrder()
         {
             DateCreated =  DateTime.Now;
+            CheckIn = DateTime.Now;
+            CheckOut = CheckIn.AddDays(1);
+            AmountOfPeople = 1;
         }
 
 
@@ -22,11 +25,11 @@ namespace Outsourcing.Data.Models.HMS
         public RoomOrderStatus OrderStatus { get; set; }
 
 
-        //[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CheckOut { get; set; }
 
-        //[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CheckIn { get; set; }
 
@@ -58,8 +61,8 @@ namespace Outsourcing.Data.Models.HMS
 
         public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
 
-        public int? RoomId { get; set; }
-        public int? CustomerId { get; set; }
+        public int RoomId { get; set; }
+        public int CustomerId { get; set; }
 
         [ForeignKey("RoomId")]
         public virtual Room Room { get; set; }

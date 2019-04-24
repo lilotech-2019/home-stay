@@ -1,5 +1,8 @@
-﻿using Outsourcing.Data.Models.HMS;
+﻿using Labixa.Areas.Portal.ViewModels.RoomOrders;
+using Outsourcing.Data.Models;
+using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
@@ -79,17 +82,27 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpGet]
         public ActionResult Create(int? roomId, string phone)
         {
+            var room = new Room();
+            if (roomId != null)
+            {
+                room = _roomService.FindById((int)roomId);
+            }
+            if (room == null || roomId == null)
+            {
+                return RedirectToAction("Index", "Hotels");
+            }
+            ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name", roomId);
+
+            var entity = new CreateViewModel{ Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
+
             if (phone != null)
             {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
                 var customer = _customerService.FindByPhone(phone);
-                return View(new RoomOrder { RoomId = roomId, CustomerId = customer.Id });
+                entity.Customer = customer;
             }
-            else
-            {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
-                return View(new RoomOrder { RoomId = roomId });
-            }
+
+            return View(entity);
+
         }
 
         /// <summary>
@@ -99,17 +112,18 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RoomOrder roomOrder)
+        public ActionResult Create(CreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                roomOrder.OrderStatus = RoomOrderStatus.New;
-                _roomOrderService.Create(roomOrder);
+                viewModel.RoomOrders.OrderStatus = RoomOrderStatus.New;
+                viewModel.RoomOrders.CustomerId = viewModel.Customer.Id;
+                _roomOrderService.Create(viewModel.RoomOrders);
                 return RedirectToAction("Index");
             }
 
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
-            return View(roomOrder);
+            return View(viewModel);
         }
         #endregion
 
@@ -180,6 +194,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Checkout(int id)
         {
             var entity = _roomOrderService.FindById(id);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
             return View(entity);
         }
     }

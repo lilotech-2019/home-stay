@@ -1,12 +1,11 @@
 ﻿
 
 @model IEnumerable<Outsourcing.Data.Models.Room>
-@Scripts.Render("~/Content/dataTable")
 
 @{
     ViewBag.Title = "Index";
     var count = 0;
-    var roomId = 1;
+    var roomId = 0;
 }
 
 <h2>Tên trang</h2>
@@ -54,7 +53,7 @@
                         <td>@count</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
-                            <button class="btn btn-xs btn-success" data-toggle="modal" data-target="#phoneModal" onclick="@roomId = @item.Id">Order</button>
+                            <button class="btn btn-xs btn-success" data-toggle="modal" data-target="#phoneModal" onclick="setRoomId(@item.Id)">Order</button>
 
                         </td>
                         <td>
@@ -86,7 +85,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Create", "RoomOrders", new { @RoomId = roomId } , FormMethod.Get, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Create", "RoomOrders", null , FormMethod.Get, new { @class = "form-horizontal" }))
 {
     <div id="phoneModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -96,6 +95,7 @@
                     <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
                 </div>
                 <div class="modal-body">
+                    <input hidden name="roomId" id="txtRoomId" type="text"/>
                     @Html.TextBox("phone")
                 </div>
                 <div class="modal-footer">
@@ -110,6 +110,10 @@
 
 
 <script type="text/javascript">
+
+    function setRoomId(id) {
+        document.getElementById("txtRoomId").value = id;
+    }
 
     $(document).ready(function () {
         var table = $("#datatable").DataTable();
