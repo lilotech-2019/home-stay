@@ -5,8 +5,8 @@ using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
 using System;
-using System.Net.Mail;
-using System.Net;
+using System.Threading.Tasks;
+using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 
@@ -65,13 +65,12 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult BookingRoom(RoomOrder modelBooking, String Name, String Email,
-            String Phone)
+        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email,
+            string Phone)
         {
             Room room = new Room();
             room.Name = Name;
-            string adminGmail = "minhtrungmessi@gmail.com";
-            string password = "abc65432abc65432";
+           
             string subject = "Đặt phòng thành công";
             string content = "<table border=" + 1 + "><thead>" +
                              "<th> Họ Tên Khách Hàng </th>" +
@@ -108,32 +107,20 @@ namespace Labixa.Controllers
             modelBooking.Status = true;
             modelBooking.Deleted = false;
             _roomOrderService.Create(modelBooking);
-            var mail = new SmtpClient("smtp.gmail.com", 25)
-            {
-                Credentials = new NetworkCredential(adminGmail, password),
-                EnableSsl = true
-            };
-            var mess = new MailMessage();
-            mess.From = new MailAddress(adminGmail);
-            mess.ReplyToList.Add(adminGmail);
-            mess.To.Add(new MailAddress(Email));
-            mess.Subject = subject;
-            mess.Body = content;
-            mess.IsBodyHtml = true;
-            mail.Send(mess);
+            await EmailHelper.SendEmailAsync(Email, content, subject);
             return RedirectToAction("ShortRoom", "RoomVer3");
         }
 
         [HttpPost]
-        public ActionResult BookingLongRoom(RoomOrder modelBookingLongRoom, String Name, String Email,
-            String Phone, String name)
+        public async Task<ActionResult> BookingLongRoom(RoomOrder modelBookingLongRoom, string Name, string Email,
+            string phone, string name)
         {
             Room room = new Room();
             room.Name = name;
-            string adminGmail = "minhtrungmessi@gmail.com";
-            string password = "abc65432abc65432";
+         
             string subject = "Đặt phòng thành công";
-            string content = "<table border=" + 1 + "><thead>" +
+            string content = "Dear Mr/Ms " + Name + ", <br/>" +
+                             "<table border=" + 1 + "><thead>" +
                              "<th> Họ Tên Khách Hàng </th>" +
                              "<th> Email Khách Hàng</th>" +
                              "<th> Số Điện Thoại</th>" +
@@ -143,12 +130,12 @@ namespace Labixa.Controllers
                              "<tbody>" +
                              "<td>" + Name + "</td>" +
                              "<td>" + Email + "</td>" +
-                             "<td>" + Phone + "</td>" +
+                             "<td>" + phone + "</td>" +
                              "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                              "<td>" + modelBookingLongRoom.Price + "</td>" +
                              "</tbody></table>";
 
-            var customer = _customerservice.FindByPhone(Phone);
+            var customer = _customerservice.FindByPhone(phone);
 
             if (customer == null)
             {
@@ -156,7 +143,7 @@ namespace Labixa.Controllers
                 {
                     Name = Name,
                     Email = Email,
-                    Phone = Phone
+                    Phone = phone
                 };
                 _customerservice.Create(customer);
             }
@@ -166,19 +153,10 @@ namespace Labixa.Controllers
             modelBookingLongRoom.Status = true;
             modelBookingLongRoom.Deleted = false;
             _roomOrderService.Create(modelBookingLongRoom);
-            var mail = new SmtpClient("smtp.gmail.com", 25)
-            {
-                Credentials = new NetworkCredential(adminGmail, password),
-                EnableSsl = true
-            };
-            var mess = new MailMessage { From = new MailAddress(adminGmail) };
-            mess.ReplyToList.Add(adminGmail);
-            mess.To.Add(new MailAddress(Email));
-            mess.Subject = subject;
-            mess.Body = content;
-            mess.IsBodyHtml = true;
-            mail.Send(mess);
+
+            await EmailHelper.SendEmailAsync(Email, content, subject);
             return RedirectToAction("LongRoom", "RoomVer3");
         }
+
     }
 }
