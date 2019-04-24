@@ -1,5 +1,5 @@
 ﻿using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.HMS;
+using Outsourcing.Service.Portal;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,13 +12,15 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
         private readonly IRoomOrderService _roomOrderService;
         private readonly IRoomService _roomService;
+        private readonly ICustomerService _customerService;
         #endregion
 
         #region Ctor
-        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService)
+        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService, ICustomerService customerService)
         {
             _roomOrderService = roomOrderService;
             _roomService = roomService;
+            _customerService = customerService;
         }
         #endregion
 
@@ -74,10 +76,20 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(int? roomId, string phone)
         {
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
-            return View(new RoomOrder());
+            if (phone != null)
+            {
+                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
+                var customer = _customerService.FindByPhone(phone);
+                return View(new RoomOrder { RoomId = roomId, CustomerId = customer.Id });
+            }
+            else
+            {
+                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
+                return View(new RoomOrder { RoomId = roomId });
+            }
         }
 
         /// <summary>

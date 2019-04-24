@@ -8,6 +8,7 @@ namespace Outsourcing.Service.Portal
 {
     public interface IRoomOrderService : IServiceBase<RoomOrder>
     {
+        void UpdateStatus(int id, RoomOrderStatus status);
     }
 
     public class RoomOrderService : ServiceBase<RoomOrder>, IRoomOrderService
@@ -21,7 +22,24 @@ namespace Outsourcing.Service.Portal
         #endregion
 
         #region BaseMethod
+        public void UpdateStatus(int id, RoomOrderStatus status)
+        {
+            var entity = FindById(id);
+            entity.OrderStatus = status;
+            //if (status == RoomOrderStatus.CheckIn)
+            //{
+            //    entity.CheckInDate = DateTime.Today;
+            //    entity.CheckInTime = DateTime.Now.TimeOfDay;
+            //}
+            //else if (status == RoomOrderStatus.CheckOut)
+            //{
+            //    entity.CheckOutDate = DateTime.Today;
+            //    entity.CheckOutTime = DateTime.Now.TimeOfDay;
+            //   entity.Total = (entity.CheckOut - entity.CheckIn).TotalDays * entity.Room.Price;
+            //}
 
+            Edit(entity);
+        }
         #endregion
     }
 }

@@ -1638,12 +1638,13 @@
     <Content Include="Areas\Portal\Views\Deposit\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Deposit\Index.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Checkout.cshtml" />
-    <Content Include="Areas\Portal\Views\RoomOrders\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\RoomOrders\Create_bk.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Delete.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Details.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Edit_bak.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\RoomOrders\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

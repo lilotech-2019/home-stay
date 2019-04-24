@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "Index";
     var count = 0;
+    var roomId = 1;
 }
 
 <h2>Tên trang</h2>
@@ -13,9 +14,9 @@
     <script src="~/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="~/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
 }
-    <p>
-        @Html.ActionLink("Tạo mới", "Create", new { hotelId = ViewBag.HotelId }, new { @class = "btn btn-primary" })
-    </p>
+<p>
+    @Html.ActionLink("Tạo mới", "Create", new { hotelId = ViewBag.HotelId }, new { @class = "btn btn-primary" })
+</p>
 <div class="row">
     <div class="col-xs-12">
         <h3 class="header smaller lighter blue">Tên Trang</h3>
@@ -37,7 +38,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Price)
                     </th>
-                  
+
                     <th>@Resources.Resources.Action</th>
                 </tr>
             </thead>
@@ -53,6 +54,8 @@
                         <td>@count</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
+                            <button class="btn btn-xs btn-success" data-toggle="modal" data-target="#phoneModal" onclick="@roomId = @item.Id">Order</button>
+
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SharePercent)
@@ -63,7 +66,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
-                    
+
                         <td class=" ">
                             <div class="visible-md visible-lg  btn-group">
 
@@ -82,6 +85,27 @@
         </table>
     </div>
 </div>
+
+@using (Html.BeginForm("Create", "RoomOrders", new { @RoomId = roomId } , FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div id="phoneModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextBox("phone")
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Done</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 
 
