@@ -48,12 +48,12 @@
             <div class="book-left-content input_form">
                 <form id="contactForm" action="/Home/ContactBookingRooom" method="post" name="contactForm">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Name)</span>
                             <input id="ContactName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
                             <small><span class="text-danger error-contactName hidden"> Vui lòng nhập Tên  </span></small>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Email) </span>
                             <input id="ContactEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
                             <small><span class="text-danger error-ContactEmail-none  hidden">Vui lòng nhập địa chỉ email </span></small>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Phone)</span>
                             <input id="ContactPhone" type="text" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
                             <small><span class="text-danger error-ContactPhonel-none hidden">Vui lòng nhập số điện thoại </span></small>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Message)</span>
                             <textarea id="ContactMesss" rows="6" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" class="form-control" required></textarea>
                         </div>
