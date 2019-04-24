@@ -80,7 +80,8 @@ namespace Labixa.Areas.Portal.Controllers
                 ViewBag.HotelCategoryId = _hotelService.FindById((int)hotelId).HotelCategoryId;
                 return View(new Room { SharePercent = 0, HotelId = (int)hotelId });
             }
-            else {
+            else
+            {
                 ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
                 return View(new Room { SharePercent = 0 });
             }
@@ -108,7 +109,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_Tivi)
                 {
                     asset.Add(new Asset
                     {
@@ -118,7 +119,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_TuDo)
                 {
                     asset.Add(new Asset
                     {
@@ -128,7 +129,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_HotWater)
                 {
                     asset.Add(new Asset
                     {
@@ -138,7 +139,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_Iron)
                 {
                     asset.Add(new Asset
                     {
@@ -148,7 +149,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_Kitchen)
                 {
                     asset.Add(new Asset
                     {
@@ -158,7 +159,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_TeaCoffee)
                 {
                     asset.Add(new Asset
                     {
@@ -168,7 +169,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_Snack)
                 {
                     asset.Add(new Asset
                     {
@@ -178,7 +179,7 @@ namespace Labixa.Areas.Portal.Controllers
                     });
                 }
 
-                if (room.Utility_DryHair)
+                if (room.Utility_WashMachine)
                 {
                     asset.Add(new Asset
                     {

@@ -70,9 +70,9 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create()
+        public ActionResult Create(int roomId)
         {
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
             return View();
         }
 
