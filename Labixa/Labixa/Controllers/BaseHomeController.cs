@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Labixa.Controllers
 {
+    [RequireHttps]
     public class BaseHomeController : Controller
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
