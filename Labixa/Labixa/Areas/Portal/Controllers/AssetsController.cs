@@ -39,6 +39,7 @@ namespace Labixa.Areas.Portal.Controllers
                 assets = assets.Where(w => w.RoomId == roomId);
             }
             assets = assets.AsNoTracking();
+            ViewBag.RoomId = roomId;
             return View(assets);
         }
         #endregion
@@ -73,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create(int roomId)
         {
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
-            return View();
+            return View(new Asset { RoomId = roomId});
         }
 
         [HttpPost]

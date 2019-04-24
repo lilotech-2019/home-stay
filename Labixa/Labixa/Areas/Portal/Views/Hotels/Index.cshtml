@@ -51,7 +51,9 @@
                         @count
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <a href="@Url.Action("Index","Rooms",new { hotelId = item.Id })">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Rooms.Count) 

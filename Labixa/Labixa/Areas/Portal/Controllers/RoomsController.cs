@@ -41,6 +41,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 rooms = await _roomService.FindByHotelId((int)hotelId).AsNoTracking().ToListAsync();
             }
+            ViewBag.HotelId = hotelId;
             return View(rooms);
         }
         #endregion
@@ -192,8 +193,7 @@ namespace Labixa.Areas.Portal.Controllers
                 room.Slug = StringConvert.ConvertShortName(room.Name);
                 room.Assets = asset;
                 _roomService.Create(room);
-                var hotelCategoryId = _hotelService.FindById(room.HotelId).HotelCategoryId;
-                return RedirectToAction("Index", "Hotels", hotelCategoryId);
+                return RedirectToAction("Index", new { hotelId = room.HotelId });
             }
 
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");

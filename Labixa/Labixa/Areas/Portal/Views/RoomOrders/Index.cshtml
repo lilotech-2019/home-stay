@@ -37,82 +37,82 @@
 
             <table id="productTable" class="table table-bordered table-striped table-fixed-header">
                 <thead>
-                <tr role="row">
-                    <th>#</th>
-                    <th>Tên Khách sạn</th>
-                    <th>Tên phòng</th>
-                    <th>Tên khách hàng</th>
-                    <th>Điện Thoại</th>
-                    <th>Ngày Checkin</th>
-                    <th>Ngày Checkout</th>
-                    @*<th>Trạng Thái</th>*@
-                    <th>@Resources.Resources.Action</th>
-                </tr>
+                    <tr role="row">
+                        <th>#</th>
+                        <th>Tên Khách sạn</th>
+                        <th>Tên phòng</th>
+                        <th>Tên khách hàng</th>
+                        <th>Điện Thoại</th>
+                        <th>Ngày Checkin</th>
+                        <th>Ngày Checkout</th>
+                        <th>Trạng Thái</th>
+                        <th>@Resources.Resources.Action</th>
+                    </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                @if (Model != null && Model.Any())
-                {
-                    var count = 0;
-                    foreach (var item in Model)
+                    @if (Model != null && Model.Any())
                     {
-                        count++;
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
 
-                        <tr class="">
-                            <td>@count</td>
-                            <td class="">
-                                <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
-                            </td>
-                            <td class="">
-                                <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
-                            </td>
-                            <td class="">@item.Customer.Name</td>
-                            <td class="">@item.Customer.Phone</td>
-                            <td class="">@item.CheckIn</td>
-                            <td class="">@item.CheckOut</td>
+                            <tr class="">
+                                <td>@count</td>
+                                <td class="">
+                                    <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
+                                </td>
+                                <td class="">
+                                    <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
+                                </td>
+                                <td class="">@item.Customer.Name</td>
+                                <td class="">@item.Customer.Phone</td>
+                                <td class="">@item.CheckIn</td>
+                                <td class="">@item.CheckOut</td>
 
-                            @*<td class="hidden-480 ">
-                                @{
-                                    var status = item.Status;
-                                    switch (status)
-                                    {
-                                        case RoomOrderStatus.New:
-                                            <span class="label label-sm label-warning">Đợi xác nhận</span>
+                                <td class="hidden-480 ">
+                                        @{
+                                            var status = item.OrderStatus;
+                                            switch (status)
+                                            {
+                                                case RoomOrderStatus.New:
+                                                    <span class="label label-sm label-warning">Đợi xác nhận</span>
 
-                                            <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
-                                            break;
-                                        case RoomOrderStatus.Processed:
-                                            <span class="label label-sm label-success">Đã xử lý</span>
-                                            break;
-                                        case RoomOrderStatus.CheckIn:
-                                            <span class="label label-sm label-success">Đã check in</span>
-                                            <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
-                                            break;
-                                        case RoomOrderStatus.CheckOut:
-                                            <span class="label label-sm label-success">Đã check out</span>
-                                            <button id="processed" data-href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</button>
-                                            break;
-                                        default:
-                                            throw new ArgumentOutOfRangeException();
-                                    }
-                                }
-                            </td>*@
+                                                    <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
+                                                    break;
+                                                case RoomOrderStatus.Processed:
+                                                    <span class="label label-sm label-success">Đã xử lý</span>
+                                                    break;
+                                                case RoomOrderStatus.CheckIn:
+                                                    <span class="label label-sm label-success">Đã check in</span>
+                                                    <button id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
+                                                    break;
+                                                case RoomOrderStatus.CheckOut:
+                                                    <span class="label label-sm label-success">Đã check out</span>
+                                                    <button id="processed" data-href="@Url.Action("Checkout", new {id = item.Id})">Thanh Toán</button>
+                                                    break;
+                                                default:
+                                                    throw new ArgumentOutOfRangeException();
+                                            }
+                                        }
+                                    </td>
 
 
-                            <td class=" ">
-                                <div class="visible-md visible-lg  btn-group">
+                                <td class=" ">
+                                    <div class="visible-md visible-lg  btn-group">
 
-                                    <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                        <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
 
-                                </div>
-                            </td>
-                        </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
                 </tbody>
             </table>
         </div>
@@ -126,26 +126,26 @@
     //   status = this.value;
     //});
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#updateStatus").on("click",
-            function() {
+            function () {
                 var url = $(this).attr("data-url");
                 $.ajax({
                     url: url,
-                    success: function() {
+                    success: function () {
                         window.location.reload();
                     }
                 });
             });
         $("#processed").on("click",
-            function() {
+            function () {
                 var url = $(this).attr("data-href");
                 window.location.href = url;
             });
     });
     // $("updateStatus").getJSON();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var table = $("#productTable").DataTable();
         //var arrayfilter = [2, 4];
 
@@ -155,17 +155,17 @@
     });
 
     function createDropFilter(table, array) {
-        array.forEach(function(i) {
+        array.forEach(function (i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function() {
+                function () {
                     table.column(i)
                         .search($(this).val())
                         .draw();
                 });
 
-            table.column(i).data().unique().sort().each(function(d, j) {
+            table.column(i).data().unique().sort().each(function (d, j) {
                 filter1.append('<option value="' + d + '">' + d + '</option>');
             });
 
@@ -173,11 +173,11 @@
     }
 
     function bindDropFilter(table, array) {
-        array.forEach(function(i) {
+        array.forEach(function (i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function() {
+                function () {
                     table.column(i)
                         .search($(this).val())
                         .draw();
