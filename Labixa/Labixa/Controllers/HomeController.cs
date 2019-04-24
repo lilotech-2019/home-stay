@@ -6,6 +6,8 @@ using Labixa.ViewModels;
 using Outsourcing.Service;
 using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
+using Outsourcing.Core.Email;
+using System.Threading.Tasks;
 
 namespace Labixa.Controllers
 {
@@ -53,12 +55,33 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Deposit(ContactUs model)
+        public async Task<ActionResult> Deposit(ContactUs model)
         {
+            string subject = "Đặt phòng thành công";
+            string content = "Dear Mr/Ms Admin, <br/>" +
+                             "<table border=" + 1 + "><thead>" +
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Loại hình cho thuê</th>" +
+                             "<th> Địa chỉ</th>" +
+                             "<th> Số Tiền</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Email Khách Hàng</th>" + 
+                             "</thead>" +
+                             "<tbody>" +
+                             "<tr>" +
+                             "<td>" + model.Name + "</td>" +
+                             "<td>" + model.Content + "</td>" +
+                             "<td>" + model.Address + "</td>" +
+                             "<td>" + model.Price + "</td>" +
+                             "<td>" + model.Phone + "</td>" +
+                             "<td>" + model.Description + "</td>" + 
+                             "</tr>" +
+                             "</tbody></table>";
             model.Status = true;
             model.Deleted = false;
             model.Type = 0;
             _vendorService.Create(model);
+            await EmailHelper.SendEmailAsync(model.Description, content, subject);
             return RedirectToAction("Index", "Home");
         }
 
@@ -89,11 +112,28 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public ActionResult ContactBookingRooom(Deposit modelContact)
+        public async Task<ActionResult> ContactBookingRooom(Deposit modelContact)
         {
+            string subject = "Đặt phòng thành công";
+            string content = "Dear Mr/Ms Admin, <br/>" +
+                             "<table border=" + 1 + "><thead>" +
+                             "<th> Họ Tên Khách Hàng </th>" +
+                             "<th> Email Khách Hàng</th>" +
+                             "<th> Số Điện Thoại</th>" +
+                             "<th> Nội Dung</th>" +
+                             "</thead>" +
+                             "<tbody>" +
+                             "<tr>" +
+                             "<td>" + modelContact.Name + "</td>" +
+                             "<td>" + modelContact.Email + "</td>" +
+                             "<td>" + modelContact.Description + "</td>" +
+                             "<td>" + modelContact.Content + "</td>" +
+                             "</tr>" +
+                             "</tbody></table>";
             modelContact.Status = true;
             modelContact.Deleted = false;
             _colorService.Create(modelContact);
+            await EmailHelper.SendEmailAsync(modelContact.Email, content, subject);
             return RedirectToAction("Contact", "Home");
         }
 

@@ -82,6 +82,7 @@ namespace Labixa.Controllers
                              "<th> Số Tiền</th>" +
                              "</thead>" +
                              "<tbody>" +
+                             "<tr>" +
                              "<td>" + Name + "</td>" +
                              "<td>" + modelBooking.CheckIn + "</td>" +
                              "<td>" + modelBooking.CheckOut + "</td>" +
@@ -89,6 +90,7 @@ namespace Labixa.Controllers
                              "<td>" + Phone + "</td>" +
                              "<td>" + modelBooking.AmountOfPeople + "</td>" +
                              "<td>" + modelBooking.Price + "</td>" +
+                             "</tr>" +
                              "</tbody></table>";
 
             var customer = _customerservice.FindByPhone(Phone);
@@ -128,11 +130,13 @@ namespace Labixa.Controllers
                              "<th> Số Tiền</th>" +
                              "</thead>" +
                              "<tbody>" +
+                             "<tr>" + 
                              "<td>" + Name + "</td>" +
                              "<td>" + Email + "</td>" +
                              "<td>" + phone + "</td>" +
                              "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                              "<td>" + modelBookingLongRoom.Price + "</td>" +
+                             "</tr>" +
                              "</tbody></table>";
 
             var customer = _customerservice.FindByPhone(phone);
