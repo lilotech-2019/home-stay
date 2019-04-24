@@ -97,6 +97,7 @@
     <Compile Include="Common\slitString.cs" />
     <Compile Include="Common\StringConvert.cs" />
     <Compile Include="Common\ValidationResult.cs" />
+    <Compile Include="Email\EmailHelper.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
@@ -117,6 +118,10 @@
     <ProjectReference Include="..\Outsourcing.Data\Outsourcing.Data.csproj">
       <Project>{6bdb3e77-b09c-4514-add2-19b03b1ac35b}</Project>
       <Name>Outsourcing.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{F1C27911-CE4D-429E-9483-14E73AC120C8}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
