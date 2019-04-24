@@ -21,9 +21,9 @@ namespace Labixa
 
             //Scipts for  Ace admin
             bundles.Add(new ScriptBundle("~/Scripts/Common").Include(
-                "~/Content/admin/js/jquery-2.0.3.min.js",
+                "~/Scripts/jquery-3.3.1.js",
                 "~/Content/admin/js/bootstrap.min.js",
-                "~/Content/admin/js/jquery-ui-1.10.3.full.min.js",
+                "~/Scripts/jquery-ui-1.12.1.min.js",
                 "~/Content/admin/js/date-time/bootstrap-datepicker.min.js",
                 "~/Content/assets/js/ace-elements.min.js",
                 "~/Content/admin/js/ace.min.js",

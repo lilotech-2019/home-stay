@@ -5,10 +5,10 @@
 }
 
 
-@*@section scripts{
+@section scripts{
         <script src="~/Content/ckeditor/ckeditor.js"></script>
         <script src="~/Content/ckeditor/config.js"></script>
-    }*@
+    }
 
 @section breadcrumb
 {
@@ -60,13 +60,7 @@
                                 Chỉnh sửa SEO
                             </a>
                         </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#tab3">
-                                <i class="blue  icon-picture bigger-120"></i>
-                                Contact
-                            </a>
-                        </li>
-
+                    
                     </ul>
 
                     <div class="tab-content">
@@ -111,7 +105,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="tab2" class="tab-pane">
+                       
+                        <div id="tab2" class="tab-pane fade">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.MetaTitle, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
@@ -134,9 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="tab3" class="tab-pane fade in">
-
-                        </div>
+                   
                     </div>
                 </div>
                 <div class="form-group ">
