@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
-
+using System.Web;
 
 namespace Labixa.Controllers
 {
@@ -66,13 +66,12 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email,String CheckIn, String CheckOut,
+        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email, String CheckIn, String CheckOut,
             string Phone)
         {
-            //Room room = new Room();
-            //room.Name = Name;
-            modelBooking.CheckIn = DateTime.Parse(CheckIn);
-            modelBooking.CheckOut = DateTime.Parse(CheckOut);
+
+            HttpCookie cookie = Request.Cookies["_culture"];
+            var n = cookie;
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -114,26 +113,7 @@ namespace Labixa.Controllers
                "<td>" + modelBooking.Price + "</td>" +
                "</tr>" +
                "</table></div></div></html>";
-            //string content = "<table border=" + 1 + "><thead>" +
-            //                 "<th> Họ Tên Khách Hàng </th>" +
-            //                 "<th> Ngày Check In</th>" +
-            //                 "<th> Ngày Check Out</th>" +
-            //                 "<th> Email Khách Hàng</th>" +
-            //                 "<th> Số Điện Thoại</th>" +
-            //                 "<th> Số Lượng Người</th>" +
-            //                 "<th> Số Tiền</th>" +
-            //                 "</thead>" +
-            //                 "<tbody>" +
-            //                 "<tr>" +
-            //                 "<td>" + Name + "</td>" +
-            //                 "<td>" + modelBooking.CheckIn + "</td>" +
-            //                 "<td>" + modelBooking.CheckOut + "</td>" +
-            //                 "<td>" + Email + "</td>" +
-            //                 "<td>" + Phone + "</td>" +
-            //                 "<td>" + modelBooking.AmountOfPeople + "</td>" +
-            //                 "<td>" + modelBooking.Price + "</td>" +
-            //                 "</tr>" +
-            //                 "</tbody></table>";
+
 
             var customer = _customerservice.FindByPhone(Phone);
             if (customer == null)
@@ -146,8 +126,19 @@ namespace Labixa.Controllers
                 };
                 _customerservice.Create(customer);
             }
-       ;
 
+            if (cookie.Value == "vi")
+            {
+                modelBooking.CheckIn = DateTime.Parse(CheckIn);
+                modelBooking.CheckOut = DateTime.Parse(CheckOut);
+            }
+            else
+            {
+                modelBooking.CheckIn = DateTime.ParseExact(CheckIn,"dd/MM/yyyy",null);
+                modelBooking.CheckOut = DateTime.ParseExact(CheckOut, "dd/MM/yyyy", null);
+
+
+            }
 
             modelBooking.CustomerId = customer.Id;
             modelBooking.Status = true;
@@ -163,7 +154,7 @@ namespace Labixa.Controllers
         {
             //Room room = new Room();
             //room.Name = name;
-         
+
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -178,27 +169,27 @@ namespace Labixa.Controllers
                 "<table>" +
                 "<tr>" +
                 "<th>Họ và Tên Khách Hàng: </th>" +
-                "<td>"+ Name +"</td>" +
+                "<td>" + Name + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Ngày CheckIn: </th>" +
-                "<td>"+modelBookingLongRoom.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
+                "<td>" + modelBookingLongRoom.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Ngày CheckOut: </th>" +
-                "<td>"+modelBookingLongRoom.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
+                "<td>" + modelBookingLongRoom.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Email Khách Hàng: </th>" +
-                "<td>"+ Email+"</td>" +
+                "<td>" + Email + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Số Điện Thoại: </th>" +
-                "<td>"+ phone + "</td>" +
+                "<td>" + phone + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Số Lượng Người: </th>" +
-                "<td>"+modelBookingLongRoom.AmountOfPeople+"</td>" +
+                "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Tạm Tính: </th>" +
