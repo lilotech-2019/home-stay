@@ -63,6 +63,14 @@
     -->
     <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <style>
+        @@media (min-width: 768px) {
+            .modal-dialog {
+                width: 700px;
+                margin: 30px auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -229,7 +237,7 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
                         </div>
                     </div>
-                 
+
                 </div>
             </div>
         </div>
