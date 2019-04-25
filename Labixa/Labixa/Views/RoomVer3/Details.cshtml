@@ -549,76 +549,12 @@
                     <div class="row">
                         <div class="ro-facilitie">
                             <ul class="clearfix">
-                                @if (Model.Room.Utility_Tivi)
+                                @foreach (var item in Model.RoomAssets)
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
 
-                                            <h3>@Resources.Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_TuDo)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_DryHair)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_HotWater)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Iron)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Kitchen)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Snack)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_TeaCoffee)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_WashMachine)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@item.Asset.Name</h3>
                                         </div>
                                     </li>
                                 }

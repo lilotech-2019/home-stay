@@ -51,17 +51,22 @@
                 General
             </a>
         </li>
-
         <li class="">
             <a data-toggle="tab" href="#tab2">
+                <i class="blue  icon-picture bigger-120"></i>
+                Hình ảnh
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#tab3">
                 <i class="red  icon-rocket bigger-120"></i>
                 Chỉnh sửa SEO
             </a>
         </li>
         <li class="">
-            <a data-toggle="tab" href="#tab3">
+            <a data-toggle="tab" href="#tab4">
                 <i class="blue  icon-picture bigger-120"></i>
-                Utility
+                Tiện Nghi Phòng
             </a>
         </li>
 
@@ -142,8 +147,16 @@
                 </div>
             </div>
         </div>
-
         <div id="tab2" class="tab-pane">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoomImageMappings, new {@class = "col-sm-3 control-label no-padding-right"})
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.RoomImageMappings,"GetImageFromElfinder")
+                    @Html.ValidationMessageFor(model => model.MetaTitle)
+                </div>
+            </div>
+        </div>
+        <div id="tab3" class="tab-pane">
             <div class="form-group">
                 @Html.LabelFor(model => model.MetaTitle, new {@class = "col-sm-3 control-label no-padding-right"})
                 <div class="col-sm-9">
@@ -188,6 +201,7 @@
                     }
                 }
             }
+
             @*<div class="form-group">
                                     @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
