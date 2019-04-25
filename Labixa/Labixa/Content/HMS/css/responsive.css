@@ -1,5 +1,6 @@
 /* mainmenu responsive styles */
 @media (max-width: 1100px) {
+  
    .nav-holder {
 		width: 90%;
        position: absolute;
@@ -237,6 +238,9 @@
     
 }
 @media (max-width: 1024px) {
+    /*.form-contact {
+        margin-left: 0px;
+    }*/
    .ser-in-box{
         width: 25%;
     } 
@@ -398,173 +402,211 @@
     
 }
 
-@media (max-width: 768px) {
-   .formbooking {
+@media (min-width:768px) and (max-width:991px) {
+    .formbooking {
         margin-bottom: 15px;
     }
-    
+}
+
+@media (max-width: 768px) {
+   
+
     .search-sec {
         width: 100%;
         position: relative;
         margin: 0;
     }
-    
-     .ser-in-box{
+
+    .ser-in-box {
         width: 25%;
     }
-    .chk-button{
+
+    .chk-button {
         width: 100%;
         text-align: center;
         margin: 0.5em 0 0;
-    }    
-    
-    .our-res .left-pad{
+    }
+
+    .our-res .left-pad {
         margin: 0;
     }
-    .fluid-know-area .service-promo .promo-content{
+
+    .fluid-know-area .service-promo .promo-content {
         padding: 2em 0 0px 0em;
     }
-    
-    .common-pad{
-/*
+
+    .common-pad {
+        /*
         padding-top: 3em;
         padding-bottom: 3em;
 */
     }
-    .space-pad{
-    margin: 1em 0 0;
-}
-    .wel-ad-inner .wel-text{
+
+    .space-pad {
+        margin: 1em 0 0;
+    }
+
+    .wel-ad-inner .wel-text {
         padding-left: 0.8em;
     }
-    .subscribe-wrp button{
+
+    .subscribe-wrp button {
         padding: 0.6em 1em;
     }
-    .res-btn i{
+
+    .res-btn i {
         margin-left: 7px;
     }
-    
-    .promo-outer{
+
+    .promo-outer {
         padding-top: 2em;
         position: relative;
     }
-    .widget-links{
+
+    .widget-links {
         padding-bottom: 2em;
     }
-    .wel-box-outer ul li{
-        width:92%;
+
+    .wel-box-outer ul li {
+        width: 92%;
         margin: 0 4%;
     }
-    .wel-box .icon-box{
-       width: 100%;
-       text-align: center;
-    }
-    .wel-box .icon-box img{
-        width: auto;
-        display: inline-block;
-    }
-    .room-wrapper .media-left,.room-wrapper .media-right,.room-wrapper .media-body{
-        display: block;
-       
-    }    
-    .room-wrapper .media-left{
-        padding-right: 0; 
-    }
-    .room-wrapper .media-left .img-holder img{
+
+    .wel-box .icon-box {
         width: 100%;
-        max-width: 100%;
-        display:block;
-        height: 25em;
+        text-align: center;
     }
-    .room-wrapper .media-right{
-       width: 100%;
+
+        .wel-box .icon-box img {
+            width: auto;
+            display: inline-block;
+        }
+
+    .room-wrapper .media-left, .room-wrapper .media-right, .room-wrapper .media-body {
+        display: block;
+    }
+
+    .room-wrapper .media-left {
+        padding-right: 0;
+    }
+
+        .room-wrapper .media-left .img-holder img {
+            width: 100%;
+            max-width: 100%;
+            display: block;
+            height: 25em;
+        }
+
+    .room-wrapper .media-right {
+        width: 100%;
         display: inline-block;
         float: left;
-		text-align: left;
-		padding-bottom: 35px;
+        text-align: left;
+        padding-bottom: 35px;
     }
-    .room-wrapper .media-right p{
-        padding-left: 0;
-        padding-top: 0.5em;
-        margin: 0;
-    }
-    .room-wrapper .media-right a{
-        margin-right: 0;
-        margin-top: 3em;
-    }
-    .room-wrapper .media-body{
+
+        .room-wrapper .media-right p {
+            padding-left: 0;
+            padding-top: 0.5em;
+            margin: 0;
+        }
+
+        .room-wrapper .media-right a {
+            margin-right: 0;
+            margin-top: 3em;
+        }
+
+    .room-wrapper .media-body {
         padding-left: 0;
         padding-right: 0;
         width: 100%;
         padding-top: 40px;
         padding-bottom: 40px;
     }
+
     .room-t-wrapper .content {
-    right: 15px;
-    overflow: hidden;
-    margin-left: 27px;
-        top:0;
+        right: 15px;
+        overflow: hidden;
+        margin-left: 27px;
+        top: 0;
     }
-    .wel-band .top-right, .wel-band .top-left{
+
+    .wel-band .top-right, .wel-band .top-left {
         text-align: center;
     }
+
     .home-slider2 .carousel-caption {
-    top: 0;
-    width: 100%;
-    left: 0;
-    right: 0;
-    }    
-    .search-sec-homet{
-/*        background:rgba(13, 26, 65, 0.3) ;*/
-		width: 100%;
+        top: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
     }
-    .search-sec-homet .overlay .border{
-      border: 1px solid rgba(13, 26, 65, 0.3);  
+
+    .search-sec-homet {
+        /*        background:rgba(13, 26, 65, 0.3) ;*/
+        width: 100%;
     }
-    .rest-fact-counter .text-box h4{
+
+        .search-sec-homet .overlay .border {
+            border: 1px solid rgba(13, 26, 65, 0.3);
+        }
+
+    .rest-fact-counter .text-box h4 {
         font-size: 1.8em;
     }
-    .get-touch-wrapper .touch-img{
+
+    .get-touch-wrapper .touch-img {
         width: 25%;
     }
-    .wel-box-outer ul li{
+
+    .wel-box-outer ul li {
         margin: 0.2em 0;
     }
-    .nav-holder .nav-header{
+
+    .nav-holder .nav-header {
         padding-right: 15px;
     }
-    .main-menu-wrapper-two .nav-holder .nav-header{
+
+    .main-menu-wrapper-two .nav-holder .nav-header {
         padding-right: 15px;
     }
-    .sec-header-pad{
+
+    .sec-header-pad {
         padding-top: 2em;
     }
-    .offer-right .offer-img-box2 .box2 .img_holder .overlay p,.offer-right .offer-img-box2 .box1 .img_holder .overlay .offertext1 .winter-txt{
+
+    .offer-right .offer-img-box2 .box2 .img_holder .overlay p, .offer-right .offer-img-box2 .box1 .img_holder .overlay .offertext1 .winter-txt {
         display: none;
     }
-    .our-resort-value .img-l-box img, .our-resort-value .img-r-box img{
+
+    .our-resort-value .img-l-box img, .our-resort-value .img-r-box img {
         max-width: 100%;
     }
-    .our-resort-value .img-l-box{
+
+    .our-resort-value .img-l-box {
         width: 41%;
     }
-    .family-content h2, .m-traking .maount-content h2{
-/*        padding-top: 1em;*/
+
+    .family-content h2, .m-traking .maount-content h2 {
+        /*        padding-top: 1em;*/
     }
-    .book-right{
+
+    .book-right {
         padding-left: 0;
     }
-    .table-form{
+
+    .table-form {
         padding-left: 0;
         padding-right: 0;
     }
-    .pull-right .single-sidebar-widget, .contact-info{
+
+    .pull-right .single-sidebar-widget, .contact-info {
         padding-left: 0;
     }
-    .room-l-wrapper .content{
+
+    .room-l-wrapper .content {
         left: auto;
     }
-    
 }
 
 @media (max-width: 767px) {
@@ -883,13 +925,11 @@
       width: 900px;
       margin: 30px auto;
   }
-    .form-contact {
-        margin-left: 20px;
-    }
+   
 }
 @media (min-width:812px) and (max-width:991px) {
-    .form-contact
+    /*.form-contact
     { 
         margin-left:13px;
-    }
+    }*/
 }

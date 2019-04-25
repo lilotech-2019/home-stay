@@ -25,7 +25,7 @@ namespace Outsourcing.Data.Models
         [Range(0, 100)]
         public string Noted { get; set; }
         
-        public bool Utility_Tivi { get; set; }
+      //  public bool Utility_Tivi { get; set; }
         public bool Utility_TuDo { get; set; }
         public bool Utility_HotWater { get; set; }
         public bool Utility_DryHair { get; set; }

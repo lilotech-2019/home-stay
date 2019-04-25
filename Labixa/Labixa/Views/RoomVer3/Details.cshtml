@@ -236,18 +236,23 @@
                                                     </div>
                                                 </div>
                                                 @*<div class="row">*@
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <button type="submit" class="res-btn" id="submitBtn">
-                                                            @Html.Raw(Resources.Resources.HMS_Booking)
-                                                        </button>
-                                                    </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <button type="submit" class="res-btn" id="submitBtn">
+                                                        @Html.Raw(Resources.Resources.HMS_Booking)
+                                                    </button>
+                                                </div>
                                                 @*</div>*@
 
                                             </div>
                                         </form>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
 
                                 </div>
@@ -324,12 +329,12 @@
                                                         <input type="text" name="Price" value="@Model.Room.Price" style="display:none;">
                                                         <input type="text" name="Name" value="@Model.Room.Name" style="display:none;">
                                                         @*<div class="row">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                <button type="submit" class="res-btn" id="submitBtnLR">
-                                                                    @Html.Raw(Resources.Resources.HMS_Booking)
-                                                                </button>
-                                                            </div>
-                                                        </div>*@
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                    <button type="submit" class="res-btn" id="submitBtnLR">
+                                                                        @Html.Raw(Resources.Resources.HMS_Booking)
+                                                                    </button>
+                                                                </div>
+                                                            </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-12">
@@ -438,8 +443,12 @@
 
                                             </div>
                                         </form>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                                        <div class=row>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -468,6 +477,7 @@
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.Name</h4>
                                             </a>
+                                           
                                             <p>@iterm.Price.ToString("#,##0")/Ngày</p>
 
                                         </div>
@@ -485,6 +495,7 @@
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.NameEnglish</h4>
                                             </a>
+                                           
                                             <p>@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$ / Day</p>
                                         </div>
                                     </li>
@@ -538,76 +549,12 @@
                     <div class="row">
                         <div class="ro-facilitie">
                             <ul class="clearfix">
-                                @if (Model.Room.Utility_Tivi)
+                                @foreach (var item in Model.RoomAssets)
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
 
-                                            <h3>@Resources.Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_TuDo)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_DryHair)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_HotWater)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Iron)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Kitchen)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_Snack)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_TeaCoffee)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
-                                        </div>
-                                    </li>
-                                }
-                                @if (Model.Room.Utility_WashMachine)
-                                {
-                                    <li>
-                                        <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@item.Asset.Name</h3>
                                         </div>
                                     </li>
                                 }
@@ -662,7 +609,6 @@
             from = $("#startDay")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
-                    defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 1,
                     minDate: currentDate
@@ -673,7 +619,6 @@
                 }),
             to = $("#endDay").datepicker({
                 dateFormat: 'dd/mm/yy',
-                defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 minDate: currentDate
@@ -689,7 +634,6 @@
             from = $("#startDayRoom")
                 .datepicker({
                     dateFormat: 'dd/mm/yy',
-                    defaultDate: "+1w",
                     changeMonth: true,
                     numberOfMonths: 1,
                     minDate: currentDate
@@ -699,7 +643,6 @@
                 }),
             to = $("#endDayRoom").datepicker({
                 dateFormat: 'dd/mm/yy',
-                defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 minDate: currentDate
