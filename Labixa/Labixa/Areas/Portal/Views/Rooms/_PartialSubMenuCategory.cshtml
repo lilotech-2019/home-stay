@@ -1,0 +1,25 @@
+﻿@model  Labixa.Areas.Portal.ViewModels.Rooms.PartialSubMenuCategoryViewModel
+
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-list"></i>
+            <span class="menu-text">
+                Quản lý phòng
+                <span class="badge badge-primary ">@Model.Count</span>
+            </span>
+            <b class=""></b>
+        </a>
+        <ul class="submenu" style="overflow: hidden; display: none;">
+
+            @foreach (var item in Model.RoomOrders)
+            {
+                <li>
+                    <a href="@Url.Action("Index","Rooms",new { hotelId = item.RoomId})">
+                        <i class="icon-double-angle-right"></i>
+                        @item.OrderStatus
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </li>

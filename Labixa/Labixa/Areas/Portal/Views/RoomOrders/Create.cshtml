@@ -1,8 +1,6 @@
 ﻿@model Labixa.Areas.Portal.ViewModels.RoomOrders.CreateViewModel
 
 @{
-    /**/
-
     ViewBag.Title = "Create Room Order";
 }
 @section breadcrumb
@@ -36,6 +34,10 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.Customer.Id)
+                @Html.HiddenFor(model => model.RoomOrders.Id)
+                @Html.HiddenFor(model => model.RoomOrders.RoomId)
 
                 <div class="row">
                     <h3 class="col-sm-12">Thông Tin Khách Hàng</h3>
@@ -126,77 +128,77 @@
 
                 <div class="row">
                     <h3 class="col-sm-12">Thông Tin Dịch Vụ</h3>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6">
                         @Html.LabelFor(model => model.RoomOrders.Book_Motobike, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Motobike, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Motobike)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.BookCar, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.BookCar, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.BookCar)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_Tour, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Tour, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Tour)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_BBQService, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_BBQService, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_BBQService)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_Gift, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Gift, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Gift)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_Laundry, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Laundry, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Laundry)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6">
                         @Html.LabelFor(model => model.RoomOrders.Book_FlightTicket, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_FlightTicket, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_FlightTicket)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_Visa, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Visa, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Visa)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_Taxi, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_Taxi, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_Taxi)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_SuggestionTour, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_SuggestionTour, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.RoomOrders.Book_SuggestionTour)
                         </div>
                     </div>
-                    <div class="form-group col-sm-6 col-md-12">
+                    <div class="form-group col-sm-6 ">
                         @Html.LabelFor(model => model.RoomOrders.Book_RegisterResidence, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.RoomOrders.Book_RegisterResidence, null, new { @class = "col-xs-10 col-sm-5" })
@@ -211,9 +213,10 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6 col-md-12">
-                        <strong class="col-sm-3 control-label no-padding-right">Giá dịch vụ</strong>
+                        @Html.LabelFor(model => model.RoomOrders.TotalBookPrice, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            <input class="col-xs-10 col-sm-5" type="text" />
+                            @Html.EditorFor(model => model.RoomOrders.TotalBookPrice, null, new { @class = "col-xs-10 col-sm-5" })
+                            @Html.ValidationMessageFor(model => model.RoomOrders.TotalBookPrice)
                         </div>
                     </div>
                 </div>

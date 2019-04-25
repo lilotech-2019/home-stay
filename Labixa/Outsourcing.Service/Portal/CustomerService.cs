@@ -18,7 +18,7 @@ namespace Outsourcing.Service.Portal
 
         public Customer FindByPhone(string phone)
         {
-            return Repository.FindBy(w => w.Deleted == false & w.Phone.Contains(phone)).FirstOrDefault();
+            return Repository.FindBy(w => w.Deleted == false & w.Phone.Equals(phone)).FirstOrDefault();
         }
     }
 }
