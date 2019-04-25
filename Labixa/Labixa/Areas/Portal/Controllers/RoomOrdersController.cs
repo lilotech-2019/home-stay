@@ -213,9 +213,19 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Preview(CreateViewModel viewModel)
+        public ActionResult Preview(int?customerId, int? roomId,RoomOrder roomOrder)
         {
-            return View(viewModel);
+            if (customerId != null) {
+                var customer = _customerService.FindById((int)customerId);
+                roomOrder.Customer = customer;
+            }
+            if (roomId != null)
+            {
+                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
+                var room = _roomService.FindById((int)roomId);
+                roomOrder.Room = room;
+            }
+            return View(roomOrder);
         }
         #endregion
 
