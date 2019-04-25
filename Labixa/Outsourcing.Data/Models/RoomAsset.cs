@@ -7,10 +7,10 @@
 
         public string Quantity { get; set; }
 
-        public  int RoomId { get; set; }
+        public int RoomId { get; set; }
         public virtual Room Room { get; set; }
 
-        public  int AssetId { get; set; }
+        public int AssetId { get; set; }
         public virtual Asset Asset { get; set; }
     }
 }

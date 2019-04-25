@@ -56,7 +56,7 @@ namespace Outsourcing.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<RoomAsset> RoomAssets { get; set; }
-        public DbSet<RoomAsset> Assets { get; set; }
+        public DbSet<Asset> Assets { get; set; }
 
         public static ApplicationDbContext Create()
         {

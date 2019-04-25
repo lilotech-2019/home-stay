@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    public class AssetsController : Controller
+    public class RoomAssetsController : Controller
     {
         #region Fields
 
@@ -18,7 +18,7 @@ namespace Labixa.Areas.Portal.Controllers
 
         #region Ctor
 
-        public AssetsController(IRoomAssetService assertService, IRoomService roomService)
+        public RoomAssetsController(IRoomAssetService assertService, IRoomService roomService)
         {
             _assertService = assertService;
             _roomService = roomService;
@@ -33,12 +33,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Index(int roomId)
         {
-            var assets = _assertService.FindAll();
-            if (assets != null)
-            {
-                assets = assets.Where(w => w.RoomId == roomId);
-            }
-            assets = assets.AsNoTracking();
+            var assets = _assertService.FindAll().AsNoTracking().Where(w => w.RoomId == roomId);
+         
             ViewBag.RoomId = roomId;
             return View(assets);
         }
