@@ -58,25 +58,60 @@ namespace Labixa.Controllers
         public async Task<ActionResult> Deposit(ContactUs model)
         {
             string subject = "Đặt phòng thành công";
-            string content = "Dear Mr/Ms Admin, <br/>" +
-                             "<table border=" + 1 + "><thead>" +
-                             "<th> Họ Tên Khách Hàng </th>" +
-                             "<th> Loại hình cho thuê</th>" +
-                             "<th> Địa chỉ</th>" +
-                             "<th> Số Tiền</th>" +
-                             "<th> Số Điện Thoại</th>" +
-                             "<th> Email Khách Hàng</th>" + 
-                             "</thead>" +
-                             "<tbody>" +
-                             "<tr>" +
-                             "<td>" + model.Name + "</td>" +
-                             "<td>" + model.Content + "</td>" +
-                             "<td>" + model.Address + "</td>" +
-                             "<td>" + model.Price + "</td>" +
-                             "<td>" + model.Phone + "</td>" +
-                             "<td>" + model.Description + "</td>" + 
-                             "</tr>" +
-                             "</tbody></table>";
+            string content = "<html><head><style type='text/css'>" +
+              ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+              ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+              ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+              ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+               "<div class='mail'>" +
+               "<div class='content-mail'>" +
+               "<div class='logo-img'>" +
+               "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+               "</div>" +
+               "<table>" +
+               "<tr>" +
+               "<th>Họ và Tên Khách Hàng: </th>" +
+               "<td>" + model.Name + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Loại Hình Cho Thuê </th>" +
+               "<td>" + model.Type + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Địa Chỉ: </th>" +
+               "<td>" + model.Address + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Số Tiền: </th>" +
+               "<td>" + model.Price + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Số Điện Thoại: </th>" +
+               "<td>" + model.Phone + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Email Khách Hàng: </th>" +
+               "<td>" + model.Description + "</td>" +
+               "</tr></table></div></div></html>";
+            //string content = "Dear Mr/Ms Admin, <br/>" +
+            //                 "<table border=" + 1 + "><thead>" +
+            //                 "<th> Họ Tên Khách Hàng </th>" +
+            //                 "<th> Loại hình cho thuê</th>" +
+            //                 "<th> Địa chỉ</th>" +
+            //                 "<th> Số Tiền</th>" +
+            //                 "<th> Số Điện Thoại</th>" +
+            //                 "<th> Email Khách Hàng</th>" + 
+            //                 "</thead>" +
+            //                 "<tbody>" +
+            //                 "<tr>" +
+            //                 "<td>" + model.Name + "</td>" +
+            //                 "<td>" + model.Content + "</td>" +
+            //                 "<td>" + model.Address + "</td>" +
+            //                 "<td>" + model.Price + "</td>" +
+            //                 "<td>" + model.Phone + "</td>" +
+            //                 "<td>" + model.Description + "</td>" + 
+            //                 "</tr>" +
+            //                 "</tbody></table>";
             model.Status = true;
             model.Deleted = false;
             model.Type = 0;
@@ -115,21 +150,49 @@ namespace Labixa.Controllers
         public async Task<ActionResult> ContactBookingRooom(Deposit modelContact)
         {
             string subject = "Đặt phòng thành công";
-            string content = "Dear Mr/Ms Admin, <br/>" +
-                             "<table border=" + 1 + "><thead>" +
-                             "<th> Họ Tên Khách Hàng </th>" +
-                             "<th> Email Khách Hàng</th>" +
-                             "<th> Số Điện Thoại</th>" +
-                             "<th> Nội Dung</th>" +
-                             "</thead>" +
-                             "<tbody>" +
-                             "<tr>" +
-                             "<td>" + modelContact.Name + "</td>" +
-                             "<td>" + modelContact.Email + "</td>" +
-                             "<td>" + modelContact.Description + "</td>" +
-                             "<td>" + modelContact.Content + "</td>" +
-                             "</tr>" +
-                             "</tbody></table>";
+            string content = "<html><head><style type='text/css'>" +
+            ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+            ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+            ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+            ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+             "<div class='mail'>" +
+             "<div class='content-mail'>" +
+             "<div class='logo-img'>" +
+             "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+             "</div>" +
+             "<table>" +
+             "<tr>" +
+             "<th>Họ và Tên Khách Hàng: </th>" +
+             "<td>" + modelContact.Name + "</td>" +
+             "</tr>" +
+             "<tr>" +
+             "<th>Email Khách Hàng: </th>" +
+             "<td>" + modelContact.Email + "</td>" +
+             "</tr>" +
+             "<tr>" +
+             "<th>Số Điện Thoại: </th>" +
+             "<td>" + modelContact.Description + "</td>" +
+             "</tr>" +
+             "<tr>" +
+             "<th>Nội Dung: </th>" +
+             "<td>" + modelContact.Content + "</td>" +
+             "</tr>" +
+             "</table></div></div></html>";
+            //string content = "Dear Mr/Ms Admin, <br/>" +
+            //                 "<table border=" + 1 + "><thead>" +
+            //                 "<th> Họ Tên Khách Hàng </th>" +
+            //                 "<th> Email Khách Hàng</th>" +
+            //                 "<th> Số Điện Thoại</th>" +
+            //                 "<th> Nội Dung</th>" +
+            //                 "</thead>" +
+            //                 "<tbody>" +
+            //                 "<tr>" +
+            //                 "<td>" + modelContact.Name + "</td>" +
+            //                 "<td>" + modelContact.Email + "</td>" +
+            //                 "<td>" + modelContact.Description + "</td>" +
+            //                 "<td>" + modelContact.Content + "</td>" +
+            //                 "</tr>" +
+            //                 "</tbody></table>";
             modelContact.Status = true;
             modelContact.Deleted = false;
             _colorService.Create(modelContact);

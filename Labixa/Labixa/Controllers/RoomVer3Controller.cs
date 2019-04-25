@@ -72,26 +72,61 @@ namespace Labixa.Controllers
             room.Name = Name;
            
             string subject = "Đặt phòng thành công";
-            string content = "<table border=" + 1 + "><thead>" +
-                             "<th> Họ Tên Khách Hàng </th>" +
-                             "<th> Ngày Check In</th>" +
-                             "<th> Ngày Check Out</th>" +
-                             "<th> Email Khách Hàng</th>" +
-                             "<th> Số Điện Thoại</th>" +
-                             "<th> Số Lượng Người</th>" +
-                             "<th> Số Tiền</th>" +
-                             "</thead>" +
-                             "<tbody>" +
-                             "<tr>" +
-                             "<td>" + Name + "</td>" +
-                             "<td>" + modelBooking.CheckIn + "</td>" +
-                             "<td>" + modelBooking.CheckOut + "</td>" +
-                             "<td>" + Email + "</td>" +
-                             "<td>" + Phone + "</td>" +
-                             "<td>" + modelBooking.AmountOfPeople + "</td>" +
-                             "<td>" + modelBooking.Price + "</td>" +
-                             "</tr>" +
-                             "</tbody></table>";
+            string content = "<html><head><style type='text/css'>" +
+               ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+               ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+               ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+               ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+               "<div class='mail'>" +
+               "<div class='content-mail'>" +
+               "<div class='logo-img'>" +
+               "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+               "</div>" +
+               "<table>" +
+               "<tr>" +
+               "<th>Họ và Tên Khách Hàng: </th>" +
+               "<td>" + Name + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Ngày CheckIn: </th>" +
+               "<td>" + modelBooking.CheckIn + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Ngày CheckOut: </th>" +
+               "<td>" + modelBooking.CheckOut + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Email Khách Hàng: </th>" +
+               "<td>" + Email + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Số Điện Thoại: </th>" +
+               "<td>" + Phone + "</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Số Lượng Người: </th>" +
+               "<td>" + modelBooking.AmountOfPeople + "</td>" +
+               "</tr></table></div></div></html>";
+            //string content = "<table border=" + 1 + "><thead>" +
+            //                 "<th> Họ Tên Khách Hàng </th>" +
+            //                 "<th> Ngày Check In</th>" +
+            //                 "<th> Ngày Check Out</th>" +
+            //                 "<th> Email Khách Hàng</th>" +
+            //                 "<th> Số Điện Thoại</th>" +
+            //                 "<th> Số Lượng Người</th>" +
+            //                 "<th> Số Tiền</th>" +
+            //                 "</thead>" +
+            //                 "<tbody>" +
+            //                 "<tr>" +
+            //                 "<td>" + Name + "</td>" +
+            //                 "<td>" + modelBooking.CheckIn + "</td>" +
+            //                 "<td>" + modelBooking.CheckOut + "</td>" +
+            //                 "<td>" + Email + "</td>" +
+            //                 "<td>" + Phone + "</td>" +
+            //                 "<td>" + modelBooking.AmountOfPeople + "</td>" +
+            //                 "<td>" + modelBooking.Price + "</td>" +
+            //                 "</tr>" +
+            //                 "</tbody></table>";
 
             var customer = _customerservice.FindByPhone(Phone);
             if (customer == null)
@@ -121,23 +156,59 @@ namespace Labixa.Controllers
             room.Name = name;
          
             string subject = "Đặt phòng thành công";
-            string content = "Dear Mr/Ms " + Name + ", <br/>" +
-                             "<table border=" + 1 + "><thead>" +
-                             "<th> Họ Tên Khách Hàng </th>" +
-                             "<th> Email Khách Hàng</th>" +
-                             "<th> Số Điện Thoại</th>" +
-                             "<th> Số Lượng Người</th>" +
-                             "<th> Số Tiền</th>" +
-                             "</thead>" +
-                             "<tbody>" +
-                             "<tr>" + 
-                             "<td>" + Name + "</td>" +
-                             "<td>" + Email + "</td>" +
-                             "<td>" + phone + "</td>" +
-                             "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
-                             "<td>" + modelBookingLongRoom.Price + "</td>" +
-                             "</tr>" +
-                             "</tbody></table>";
+            string content = "<html><head><style type='text/css'>" +
+               ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+               ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+               ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+               ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+                "<div class='mail'>" +
+                "<div class='content-mail'>" +
+                "<div class='logo-img'>" +
+                "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                "</div>" +
+                "<table>" +
+                "<tr>" +
+                "<th>Họ và Tên Khách Hàng: </th>" +
+                "<td>"+ Name +"</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>Ngày CheckIn: </th>" +
+                "<td>"+modelBookingLongRoom.CheckIn+"</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>Ngày CheckOut: </th>" +
+                "<td>"+modelBookingLongRoom.CheckOut+"</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>Email Khách Hàng: </th>" +
+                "<td>"+ Email+"</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>Số Điện Thoại: </th>" +
+                "<td>"+ phone + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>Số Lượng Người: </th>" +
+                "<td>"+modelBookingLongRoom.AmountOfPeople+"</td>" +
+                "</tr></table></div></div></html>";
+
+            //string content = "Dear Mr/Ms " + Name + ", <br/>" +
+            //                 "<table border=" + 1 + "><thead>" +
+            //                 "<th> Họ Tên Khách Hàng </th>" +
+            //                 "<th> Email Khách Hàng</th>" +
+            //                 "<th> Số Điện Thoại</th>" +
+            //                 "<th> Số Lượng Người</th>" +
+            //                 "<th> Số Tiền</th>" +
+            //                 "</thead>" +
+            //                 "<tbody>" +
+            //                 "<tr>" + 
+            //                 "<td>" + Name + "</td>" +
+            //                 "<td>" + Email + "</td>" +
+            //                 "<td>" + phone + "</td>" +
+            //                 "<td>" + modelBookingLongRoom.AmountOfPeople + "</td>" +
+            //                 "<td>" + modelBookingLongRoom.Price + "</td>" +
+            //                 "</tr>" +
+            //                 "</tbody></table>";
 
             var customer = _customerservice.FindByPhone(phone);
 
