@@ -152,12 +152,13 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Room room = _roomService.FindById((int)id);
             if (room == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(room.HotelId), "Id", "Name", room.HotelId);
             return View(room);
         }
 
@@ -176,7 +177,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(room.HotelId), "Id", "Name", room.HotelId);
             return View(room);
         }
 
