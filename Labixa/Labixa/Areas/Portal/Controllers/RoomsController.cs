@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Service.Portal.Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -15,15 +16,17 @@ namespace Labixa.Areas.Portal.Controllers
 
         private readonly IRoomService _roomService;
         private readonly IHotelService _hotelService;
+        private readonly IAssetService _assetService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService, IAssetService assetService)
         {
             _roomService = roomService;
             _hotelService = hotelService;
+            _assetService = assetService;
         }
 
         #endregion
@@ -82,21 +85,35 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotelId"></param>
         /// <returns></returns>
-        public ActionResult Create(int? hotelId)
+        public async Task<ActionResult> Create(int? hotelId)
         {
+            var asset = _assetService.FindAll().AsNoTracking().ToListAsync();
+            var roomAssets = new List<RoomAsset>();
+
+            foreach (var item in await asset)
+            {
+                roomAssets.Add(new RoomAsset
+                {
+                    AssetId = item.Id,
+                    IsAvaiable = true,
+                    Price = 1,
+                    Quantity = "1 Cái"
+                });
+            }
+            var room = new Room
+            {
+                SharePercent = 0,
+                RoomAssets = roomAssets
+            };
             if (hotelId != null)
             {
                 ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(hotelId), "Id", "Name", hotelId);
                 ViewBag.HotelCategoryId = _hotelService.FindById((int)hotelId).HotelCategoryId;
-                var room = new Room
-                {
-                    SharePercent = 0,
-                    HotelId = (int)hotelId
-                };
+                room.HotelId = (int)hotelId;
                 return View(room);
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
-            return View(new Room { SharePercent = 0 });
+            return View(room);
         }
 
         /// <summary>
@@ -110,99 +127,7 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var asset = new List<RoomAsset>();
-                if (room.Utility_DryHair)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "DryHair",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
-                if (room.Utility_Tivi)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "TiVi",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
-                if (room.Utility_TuDo)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "TuDo",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
-                if (room.Utility_HotWater)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "HotWater",
-                        Price = 1,
-                        Quantity = "1 khối"
-                    });
-                }
-
-                if (room.Utility_Iron)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "Iron",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
-                if (room.Utility_Kitchen)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "Kitchen",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
-                if (room.Utility_TeaCoffee)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "TeaCoffee",
-                        Price = 1,
-                        Quantity = "1 ly"
-                    });
-                }
-
-                if (room.Utility_Snack)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "Snack",
-                        Price = 1,
-                        Quantity = "1 bịch"
-                    });
-                }
-
-                if (room.Utility_WashMachine)
-                {
-                    asset.Add(new RoomAsset
-                    {
-                        Name = "WashMachine",
-                        Price = 1,
-                        Quantity = "1 Cái"
-                    });
-                }
-
                 room.Slug = StringConvert.ConvertShortName(room.Name);
-                room.Assets = asset;
                 _roomService.Create(room);
                 return RedirectToAction("Index", new { hotelId = room.HotelId });
             }
@@ -250,7 +175,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name", room.HotelId);
             return View(room);
         }
 
