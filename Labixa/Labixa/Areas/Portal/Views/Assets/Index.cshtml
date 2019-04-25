@@ -27,6 +27,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Slug)
+                    </th>
                     <th>@Resources.Resources.Action</th>
                 </tr>
             </thead>
@@ -38,24 +41,28 @@
                 @foreach (var item in Model)
                 {
                     count++;
-                    <tr>
-                        <td>@count</td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td class=" ">
-                            <div class="visible-md visible-lg  btn-group">
+                <tr>
+                    <td>@count</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
 
-                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Slug)
+                    </td>
+                    <td class=" ">
+                        <div class="visible-md visible-lg  btn-group">
 
-                            </div>
-                        </td>
-                    </tr>
+                            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

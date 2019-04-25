@@ -40,6 +40,7 @@ namespace Labixa.Areas.Portal.Controllers
             if (hotelCategoryId != null)
             {
                 hotels = hotels.Where(w => w.HotelCategoryId == hotelCategoryId);
+                ViewBag.hotelCategoryId = hotelCategoryId;
             }
             hotels = hotels.AsNoTracking();
             return View(hotels);
@@ -76,9 +77,9 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create()
+        public ActionResult Create(int? hotelCategoryId)
         {
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(), "Id", "Name");
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
             return View();
         }
 
@@ -97,7 +98,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _hotelService.Create(hotel);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindAll(), "Id", "Name");
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
             return View(hotel);
         }
 
