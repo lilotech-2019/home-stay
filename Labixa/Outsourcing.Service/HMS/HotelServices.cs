@@ -1,8 +1,7 @@
 ﻿using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Models.HMS;
-using Outsourcing.Data.Repository.HMS;
 using System.Linq;
 using Outsourcing.Data.Models;
+using Outsourcing.Data.Repository;
 
 namespace Outsourcing.Service.HMS
 {

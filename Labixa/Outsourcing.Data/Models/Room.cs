@@ -47,7 +47,7 @@ namespace Outsourcing.Data.Models
         public RoomType Type { get; set; }
 
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
-        public virtual ICollection<Asset> Assets { get; set; }
+        public virtual ICollection<RoomAsset> Assets { get; set; }
     }
 
     public enum RoomType

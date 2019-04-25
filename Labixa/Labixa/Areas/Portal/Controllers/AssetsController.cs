@@ -11,14 +11,14 @@ namespace Labixa.Areas.Portal.Controllers
     {
         #region Fields
 
-        private readonly IAssetService _assertService;
+        private readonly IRoomAssetService _assertService;
         private readonly IRoomService _roomService;
 
         #endregion
 
         #region Ctor
 
-        public AssetsController(IAssetService assertService, IRoomService roomService)
+        public AssetsController(IRoomAssetService assertService, IRoomService roomService)
         {
             _assertService = assertService;
             _roomService = roomService;
@@ -56,12 +56,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = _assertService.FindById((int)id);
-            if (asset == null)
+            RoomAsset roomAsset = _assertService.FindById((int)id);
+            if (roomAsset == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(roomAsset);
         }
         #endregion
 
@@ -74,20 +74,20 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create(int roomId)
         {
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
-            return View(new Asset { RoomId = roomId});
+            return View(new RoomAsset { RoomId = roomId});
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Asset asset)
+        public ActionResult Create(RoomAsset roomAsset)
         {
             if (ModelState.IsValid)
             {
-                _assertService.Create(asset);
+                _assertService.Create(roomAsset);
                 return RedirectToAction("Index");
             }
 
-            return View(asset);
+            return View(roomAsset);
         }
         #endregion
 
@@ -104,24 +104,24 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = _assertService.FindById((int)id);
-            if (asset == null)
+            RoomAsset roomAsset = _assertService.FindById((int)id);
+            if (roomAsset == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(roomAsset);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Asset asset)
+        public ActionResult Edit(RoomAsset roomAsset)
         {
             if (ModelState.IsValid)
             {
-                _assertService.Edit(asset);
+                _assertService.Edit(roomAsset);
                 return RedirectToAction("Index");
             }
-            return View(asset);
+            return View(roomAsset);
         }
         #endregion
 
@@ -138,12 +138,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asset asset = _assertService.FindById((int)id);
-            if (asset == null)
+            RoomAsset roomAsset = _assertService.FindById((int)id);
+            if (roomAsset == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(roomAsset);
         }
 
         /// <summary>
@@ -155,12 +155,12 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Asset asset = _assertService.FindById(id);
-            if (asset == null)
+            RoomAsset roomAsset = _assertService.FindById(id);
+            if (roomAsset == null)
             {
                 return HttpNotFound();
             }
-            _assertService.Delete(asset);
+            _assertService.Delete(roomAsset);
             return RedirectToAction("Index");
         }
         #endregion

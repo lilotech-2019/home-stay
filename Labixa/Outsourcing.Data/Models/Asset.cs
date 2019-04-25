@@ -1,13 +1,10 @@
-﻿namespace Outsourcing.Data.Models
+﻿using System.Collections.Generic;
+
+namespace Outsourcing.Data.Models
 {
-    public class Asset:BaseEntity
+    public class Asset : BaseEntity
     {
         public string Name { get; set; }
-        public float Price { get; set; }
-
-        public string Quantity { get; set; }
-
-        public virtual int RoomId { get; set; }
-        public virtual Room Room { get; set; }
+        public ICollection<RoomAsset> RoomAssets { get; set; }
     }
 }
