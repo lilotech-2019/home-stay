@@ -175,10 +175,13 @@
                 {
                     foreach (var item in Model.RoomAssets)
                     {
+                        @Html.HiddenFor(model=>item.AssetId)
+                        @Html.HiddenFor(model=>item.Price)
+                        @Html.HiddenFor(model=>item.Quantity)
                         <div class="form-group">
 
                             <div class="col-sm-9">
-                                @Html.EditorFor(model => item.IsAvaiable) @item.Asset.Name
+                                @Html.EditorFor(model => item.IsAvaiable) @item.Name
                                 @Html.ValidationMessageFor(model => item.IsAvaiable)
                             </div>
                         </div>
