@@ -10,6 +10,7 @@ using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 
+
 namespace Labixa.Controllers
 {
     public class RoomVer3Controller : BaseHomeController
@@ -65,12 +66,13 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email,
+        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email,String CheckIn, String CheckOut,
             string Phone)
         {
-            Room room = new Room();
-            room.Name = Name;
-           
+            //Room room = new Room();
+            //room.Name = Name;
+            modelBooking.CheckIn = DateTime.Parse(CheckIn);
+            modelBooking.CheckOut = DateTime.Parse(CheckOut);
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -139,6 +141,8 @@ namespace Labixa.Controllers
                 };
                 _customerservice.Create(customer);
             }
+       ;
+
 
             modelBooking.CustomerId = customer.Id;
             modelBooking.Status = true;
@@ -150,10 +154,10 @@ namespace Labixa.Controllers
 
         [HttpPost]
         public async Task<ActionResult> BookingLongRoom(RoomOrder modelBookingLongRoom, string Name, string Email,
-            string phone, string name)
+            string phone)
         {
-            Room room = new Room();
-            room.Name = name;
+            //Room room = new Room();
+            //room.Name = name;
          
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +

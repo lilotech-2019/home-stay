@@ -146,8 +146,11 @@
         </div>
     </div>
 </section>
-<div id="map-canvas" data-lat="10.8851677" data-lng="106.5786695" data-zoom="14" class="tt-contact-map map-block"></div>
-<div class="addresses-block"><a data-lat="10.8851677" data-marker="" data-lng="106.5786695" data-string="1. Here is some address or email or phone or something else..."></a></div>
+<div id="map-canvas" @*data-lat="10.8851677" data-lng="106.5786695" data-zoom="14"*@ class="tt-contact-map map-block">
+
+    <iframe class="actAsDiv" style="width:100%;height:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=16&amp;iwloc=A&amp;output=embed"></iframe>
+</div>
+@*<div class="addresses-block"><a data-lat="10.8851677" data-marker="" data-lng="106.5786695" data-string="1. Here is some address or email or phone or something else..."></a></div>*@
 <script>
 
     var checkContact = false;
