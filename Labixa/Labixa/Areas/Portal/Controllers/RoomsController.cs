@@ -94,6 +94,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 roomAssets.Add(new RoomAsset
                 {
+                    Name = item.Name,
                     AssetId = item.Id,
                     IsAvaiable = true,
                     Price = 1,
