@@ -167,7 +167,7 @@
     <div class="modal fade bd-example-modal-lg" id="exampleModalDeposit" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="min-height:70%">
+            <div class="modal-content" style="min-height:55%">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="sec-header">
@@ -224,7 +224,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                    <div class="row" style="margin-bottom:15px;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
+                        </div>
+                    </div>
+                 
                 </div>
             </div>
         </div>
