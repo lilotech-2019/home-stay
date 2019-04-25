@@ -91,11 +91,11 @@ namespace Labixa.Controllers
                "</tr>" +
                "<tr>" +
                "<th>Ngày CheckIn: </th>" +
-               "<td>" + modelBooking.CheckIn + "</td>" +
+               "<td>" + modelBooking.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Ngày CheckOut: </th>" +
-               "<td>" + modelBooking.CheckOut + "</td>" +
+               "<td>" + modelBooking.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Email Khách Hàng: </th>" +
@@ -108,7 +108,12 @@ namespace Labixa.Controllers
                "<tr>" +
                "<th>Số Lượng Người: </th>" +
                "<td>" + modelBooking.AmountOfPeople + "</td>" +
-               "</tr></table></div></div></html>";
+               "</tr>" +
+               "<tr>" +
+               "<th>Tạm Tính </th>" +
+               "<td>" + modelBooking.Price + "</td>" +
+               "</tr>" +
+               "</table></div></div></html>";
             //string content = "<table border=" + 1 + "><thead>" +
             //                 "<th> Họ Tên Khách Hàng </th>" +
             //                 "<th> Ngày Check In</th>" +
@@ -177,11 +182,11 @@ namespace Labixa.Controllers
                 "</tr>" +
                 "<tr>" +
                 "<th>Ngày CheckIn: </th>" +
-                "<td>"+modelBookingLongRoom.CheckIn+"</td>" +
+                "<td>"+modelBookingLongRoom.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Ngày CheckOut: </th>" +
-                "<td>"+modelBookingLongRoom.CheckOut+"</td>" +
+                "<td>"+modelBookingLongRoom.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Email Khách Hàng: </th>" +
@@ -194,7 +199,12 @@ namespace Labixa.Controllers
                 "<tr>" +
                 "<th>Số Lượng Người: </th>" +
                 "<td>"+modelBookingLongRoom.AmountOfPeople+"</td>" +
-                "</tr></table></div></div></html>";
+                "</tr>" +
+                "<tr>" +
+                "<th>Tạm Tính: </th>" +
+                "<td>" + modelBookingLongRoom.Price + "</td>" +
+                "</tr>" +
+                "</table></div></div></html>";
 
             //string content = "Dear Mr/Ms " + Name + ", <br/>" +
             //                 "<table border=" + 1 + "><thead>" +
