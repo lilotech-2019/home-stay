@@ -70,7 +70,7 @@ namespace Resources.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tramanhc9p@gmail.com.
+        ///   Looks up a localized string similar to lilotech2019hotel@gmail.com.
         /// </summary>
         public static string FROM_EMAIL_ACCOUNT {
             get {
@@ -79,7 +79,7 @@ namespace Resources.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to fantramanh.
+        ///   Looks up a localized string similar to trung123123.
         /// </summary>
         public static string FROM_EMAIL_PASSWORD {
             get {
