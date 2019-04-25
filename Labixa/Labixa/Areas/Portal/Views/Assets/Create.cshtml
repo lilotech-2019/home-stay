@@ -1,0 +1,73 @@
+﻿@model Outsourcing.Data.Models.Asset
+
+@{
+    /**/
+
+    ViewBag.Title = "Custom Create";
+}
+@section breadcrumb
+{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed');
+            } catch (e) {
+            }
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i>
+                <a href="@Url.Action("Index")">Quản lý Tài Sản</a>
+            </li>
+            <li class="active">Thêm mới Tài Sản</li>
+        </ul>
+    </div>
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Thêm Mới Tài Sản
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true)
+
+                <div class="form-group col-sm-6 col-md-12">
+                    @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 col-md-12">
+                    @Html.LabelFor(model => model.Slug, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Slug, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Slug)
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        <input type="reset" value="Reset" class="btn" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<div>
+</div>

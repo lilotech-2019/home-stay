@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44379</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -72,6 +73,7 @@
     <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
+    <Compile Include="Areas\Portal\Controllers\AssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\RoomAssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\BaseController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogCategoriesController.cs" />
@@ -1650,6 +1652,11 @@
     <Content Include="Areas\Portal\Views\RoomOrders\Create.cshtml" />
     <Content Include="Areas\Portal\Views\RoomOrders\Preview.cshtml" />
     <Content Include="Areas\Portal\Views\Rooms\_PartialSubMenuCategory.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Create.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Delete.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Assets\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

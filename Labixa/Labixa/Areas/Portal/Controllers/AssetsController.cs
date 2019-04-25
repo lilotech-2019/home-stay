@@ -1,55 +1,39 @@
-﻿using Outsourcing.Core.Common;
-using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+﻿using Outsourcing.Data.Models;
+using Outsourcing.Service;
+using Outsourcing.Service.Portal.Outsourcing.Service.Portal;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    public class HotelsController : Controller
+    public class AssetsController : Controller
     {
         #region Fields
-
-        private readonly IHotelService _hotelService;
-        private readonly IHotelCategoryService _categoryHotelService;
-
+        private readonly IAssetService _assetService;
         #endregion
 
         #region Ctor
-
-        public HotelsController(IHotelService hotelService, IHotelCategoryService categoryHotelService)
+        public AssetsController(IAssetService assetService)
         {
-            _hotelService = hotelService;
-            _categoryHotelService = categoryHotelService;
+            _assetService = assetService;
         }
-
         #endregion
 
         #region Index
-
         /// <summary>
-        /// Index - Get
+        /// Index - GET
         /// </summary>
-        /// <param name="hotelCategoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? hotelCategoryId)
+        public async Task<ActionResult> Index()
         {
-            var hotels = _hotelService.FindAll();
-            if (hotelCategoryId != null)
-            {
-                hotels = hotels.Where(w => w.HotelCategoryId == hotelCategoryId);
-                ViewBag.hotelCategoryId = hotelCategoryId;
-            }
-            hotels = hotels.AsNoTracking();
-            return View(hotels);
+            var assets = await _assetService.FindAll().AsNoTracking().ToListAsync();
+            return View(assets);
         }
-
         #endregion
 
         #region Details
-
         /// <summary>
         /// Details
         /// </summary>
@@ -61,51 +45,45 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var hotel = _hotelService.FindById((int)id);
-            if (hotel == null)
+            var asset = _assetService.FindById((int)id);
+            if (asset == null)
             {
                 return HttpNotFound();
             }
-            return View(hotel);
+            return View(asset);
         }
-
         #endregion
 
         #region Create
-
         /// <summary>
         /// Create - GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int? hotelCategoryId)
+        public ActionResult Create()
         {
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
             return View();
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="hotel"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Hotel hotel)
+        public ActionResult Create(Asset asset)
         {
             if (ModelState.IsValid)
             {
-                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
-                _hotelService.Create(hotel);
+                _assetService.Create(asset);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
-            return View(hotel);
-        }
 
+            return View(asset);
+        }
         #endregion
 
         #region Edit
-
         /// <summary>
         /// Edit - GET
         /// </summary>
@@ -117,40 +95,35 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int)id);
-            if (hotel == null)
+            var asset = _assetService.FindById((int)id);
+            if (asset == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
-            return View(hotel);
+            return View(asset);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="hotel"></param>
+        /// <param name="deposit"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Hotel hotel)
+        public ActionResult Edit(Asset asset)
         {
             if (ModelState.IsValid)
             {
-                hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
-                _hotelService.Edit(hotel);
+                _assetService.Edit(asset);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
-            return View(hotel);
+            return View(asset);
         }
-
         #endregion
 
         #region Delete
-
         /// <summary>
-        /// Delete
+        /// Delete - GET
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -160,28 +133,26 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelService.FindById((int)id);
-            if (categoryHotels == null)
+            var asset = _assetService.FindById((int)id);
+            if (asset == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryHotels);
+            return View(asset);
         }
 
-        // POST: /HMSAdmin/Hotels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var hotels = _hotelService.FindById(id);
-            if (hotels == null)
+            var asset = _assetService.FindById(id);
+            if (asset == null)
             {
                 return HttpNotFound();
             }
-            _hotelService.Delete(hotels);
+            _assetService.Delete(asset);
             return RedirectToAction("Index");
         }
-
         #endregion
     }
 }
