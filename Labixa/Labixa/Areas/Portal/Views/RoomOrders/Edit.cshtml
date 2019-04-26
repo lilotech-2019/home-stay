@@ -151,7 +151,17 @@
                                         @Html.EditorFor(model => model.AmountOfPeople, null, new { @class = "col-xs-10 col-sm-5" })
                                         @Html.ValidationMessageFor(model => model.AmountOfPeople)
                                     </div>
-                                </div>  <div class="form-group col-sm-6 col-md-12">
+                                </div>
+
+                                <div class="form-group col-sm-6 col-md-12">
+                                    @Html.LabelFor(model => model.Price, new { @class = "col-sm-3 control-label no-padding-right" })
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Price, null, new { @class = "col-xs-10 col-sm-5" })
+                                        @Html.ValidationMessageFor(model => model.Price)
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.Note, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
                                         @Html.EditorFor(model => model.Note, null, new { @class = "col-xs-10 col-sm-5" })
