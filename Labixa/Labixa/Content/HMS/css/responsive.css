@@ -406,6 +406,10 @@
     .formbooking {
         margin-bottom: 15px;
     }
+    .model-dialog-cs {
+        width: 700px;
+        margin: 30px auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -921,10 +925,17 @@
     .formbooking {
         margin-bottom: 15px;
     }
-  .modal-dialog {
-      width: 900px;
-      margin: 30px auto;
-  }
+    .model-dialog-room {
+        width: 900px;
+      
+    }
+    #model-dialog-cs {
+        width: 700px;
+       
+    }
+    .modal-dialog {
+        margin: 30px auto;
+    }
    
 }
 @media (min-width:812px) and (max-width:991px) {

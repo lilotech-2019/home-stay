@@ -63,6 +63,14 @@
     -->
     <script src="/Content/HMS/js/jquery-2.2.4.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <style>
+        /*@@media (min-width: 768px) {
+            .modal-dialog {
+                width: 700px;
+                margin: 30px auto;
+            }
+        }*/
+    </style>
 </head>
 <body>
 
@@ -166,7 +174,7 @@
 
     <div class="modal fade bd-example-modal-lg" id="exampleModalDeposit" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" id="model-dialog-cs">
             <div class="modal-content" style="min-height:55%">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -229,7 +237,7 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">@Html.Raw(Resources.Resources.HMS_Close)</button>
                         </div>
                     </div>
-                 
+
                 </div>
             </div>
         </div>
