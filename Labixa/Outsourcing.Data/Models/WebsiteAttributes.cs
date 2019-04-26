@@ -14,6 +14,11 @@ namespace Outsourcing.Data.Models
         public string Type { get; set; }
         public string Value { get; set; }
         public bool IsPublic { get; set; }
+        public string Title { get; set; }
+        public string TitleEnglish { get; set; }
+        public string Caption { get; set; }
+        public string CaptionEnglish { get; set; }
+        
         
 
     }

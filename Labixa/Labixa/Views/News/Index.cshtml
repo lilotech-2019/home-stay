@@ -33,65 +33,175 @@
                         <h2>@Html.Raw(Resources.Resources.HMS_BlogNew)</h2>
                     </div>
                     <div class="popular-post">
-                        <ul>
-                            @foreach (var item in Model.RelatedBlogs)
+                        @{
+                            if (!Model.RelatedBlogs.Any())
                             {
-                                if (cookie.Value.Equals("vi"))
-                                {
-                                    <li class="img-cap-effect">
-                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
-                                        <div class="content">
-                                            <a href="/tintuc/@item.Slug">
-                                                <h4>@item.Title</h4>
-                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
-                                        </div>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="img-cap-effect">
-                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
-                                        <div class="content">
-                                            <a href="/tintuc/@item.Slug">
-                                                <h4>@item.TitleEnglish</h4>
-                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
-                                        </div>
-                                    </li>
-                                }
+                                <ul>
+                                    @if (cookie.Value.Equals("vi"))
+                                    {
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/1.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>Bài Tin Tức số 1</h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/2.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>Bài Tin Tức số 2</h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/3.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>Bài Tin Tức số 3</h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/1.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>New 01 </h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/2.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>New 2</h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                        <li class="img-cap-effect">
+                                            <div class="img-box"><a href="/danh-sach-tin-tuc"><img src="~/Content/HMS/images/news/3.jpg" alt="" style="width:100px"></a></div>
+                                            <div class="content">
+                                                <a href="/danh-sach-tin-tuc">
+                                                    <h4>New 3</h4>
+                                                </a><span>6/4/2019</span>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul>
 
                             }
-                        </ul>
+                            else
+                            {
+                                <ul>
+                                    @foreach (var item in Model.RelatedBlogs)
+                                    {
+                                        if (cookie.Value.Equals("vi"))
+                                        {
+                                            <li class="img-cap-effect">
+                                                <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                                <div class="content">
+                                                    <a href="/tintuc/@item.Slug">
+                                                        <h4>@item.Title</h4>
+                                                    </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="img-cap-effect">
+                                                <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                                <div class="content">
+                                                    <a href="/tintuc/@item.Slug">
+                                                        <h4>@item.TitleEnglish</h4>
+                                                    </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
+                                                </div>
+                                            </li>
+                                        }
+
+                                    }
+                                </ul>
+
+                            }
+                        }
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8 col-sm-12 pull-right">
             <div class="single-post-wrapper">
-                @foreach (var item in Model.ListBlogs)
-                {
-                    if (cookie.Value.Equals("vi"))
+                @{
+                    if (!Model.ListBlogs.Any())
                     {
-                        <article class="single-blog-post img-cap-effect">
-                            <div class="img-box">
-                                <a href="/tintuc/@item.Slug">
-                                    <img src="@item.BlogImage" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
-                            <p>@Html.Raw(item.Description)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
-                        </article>
+                        if (cookie.Value.Equals("vi"))
+                        {
+                            <article class="single-blog-post img-cap-effect">
+                                <div class="img-box">
+                                    <a href="/danh-sach-tin-tuc">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <h3><a href="/danh-sach-tin-tuc">Bài Tin Tức số 1</a></h3>
+                                <p>
+                                    Không khí se lạnh, từng cánh hoa dã quỳ vàng ươm trên từng triền núi, hàng thông xanh reo trong gió,
+                                    những con đường vòng vo triền dốc mà du khách có thể đi bộ lang thang hàng giờ không biết mỏi mệt,
+                                    chỉ để ngắm những mái hiên nhà đầy hoa hay một hàng mimosa vàng ươm trong nắng là những gì mà du
+                                    khách muốn tận hưởng tại Đà Lạt
+                                </p><a href="/danh-sach-tin-tuc" class="read-more btn submit">xem thêm</a>
+                            </article>
+                        }
+                        else
+                        {
+                            <article class="single-blog-post img-cap-effect">
+                                <div class="img-box">
+                                    <a href="/danh-sach-tin-tuc">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <h3><a href="/danh-sach-tin-tuc">New-01</a></h3>
+                                <p>
+                                    Feeling the breeze cool air, the yellow wild sunflowers covering the mountains,
+                                    the green pine trees whispering in the wind, the winding roads where you can walk for hours without tired.
+                                    Located on Le Hong Phong Street – a central street of Da Lat, our 4-bedroom house
+                                    will never let you down. The accommodation is designed in liberty and bohemian style with a
+                                    lot of colors – giving a confused but reasonably and strange feeling.
+                                </p><a href="/danh-sach-tin-tuc" class="read-more btn submit">read more</a>
+                            </article>
+                        }
                     }
                     else
                     {
-                        <article class="single-blog-post img-cap-effect">
-                            <div class="img-box">
-                                <a href="/tintuc/@item.Slug">
-                                    <img src="@item.BlogImage" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
-                            <p>@Html.Raw(item.DescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
-                        </article>
+                        foreach (var item in Model.ListBlogs)
+                        {
+                            if (cookie.Value.Equals("vi"))
+                            {
+                                <article class="single-blog-post img-cap-effect">
+                                    <div class="img-box">
+                                        <a href="/tintuc/@item.Slug">
+                                            <img src="@item.BlogImage" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
+                                    <p>@Html.Raw(item.Description)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
+                                </article>
+                            }
+                            else
+                            {
+                                <article class="single-blog-post img-cap-effect">
+                                    <div class="img-box">
+                                        <a href="/tintuc/@item.Slug">
+                                            <img src="@item.BlogImage" alt="" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
+                                    <p>@Html.Raw(item.DescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
+                                </article>
+                            }
+                        }
                     }
                 }
                 <div>

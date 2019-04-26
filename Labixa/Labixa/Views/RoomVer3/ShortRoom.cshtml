@@ -37,37 +37,82 @@
 <section class="row nasir-room-grid">
     <div class="container">
         <div class="row">
-            @foreach (var iterm in Model)
-            {
-                if (cookie.Value.Equals("vi"))
+            @{
+                if (!Model.Any())
                 {
-                    <div class="col-sm-4 nroom-grid">
-                        <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
-                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
-                        </a>
-                        <div class="row this-conts">
-                            <div class="media">
-                                <div class="media-body this-title">@iterm.Name</div>
-                                <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
+                    if (cookie.Value.Equals("vi"))
+                    {
+                        <div class="col-sm-4 nroom-grid">
+                            <a href="/danh-sach-phong-ngan-han" class="room-img">
+                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="">
+                            </a>
+                            <div class="row this-conts">
+                                <div class="media">
+                                    <div class="media-body this-title">Phòng số 1</div>
+                                    <div class="media-right">1200.000<small>Ngày</small></div>
+                                </div>
+                                <p>
+                                    Không khí se lạnh, từng cánh hoa dã quỳ vàng ươm trên từng triền núi, hàng thông xanh reo trong gió
+
+                                </p><a href="/danh-sach-phong-ngan-han" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
                             </div>
-                            <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-4 nroom-grid">
+                            <a href="/danh-sach-phong-ngan-han" class="room-img">
+                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="">
+                            </a>
+                            <div class="row this-conts">
+                                <div class="media">
+                                    <div class="media-body this-title">room 01</div>
+                                    <div class="media-right">35$<small>Day</small></div>
+                                </div>
+                                <p>
+                                    Feeling the breeze cool air, the yellow wild sunflowers covering the mountains,
+                                    the green pine trees whispering in the wind, the winding roads where you can walk for hours without tired.
+
+                                </p><a href="/danh-sach-phong-ngan-han" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    }
                 }
                 else
                 {
-                    <div class="col-sm-4 nroom-grid">
-                        <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
-                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
-                        </a>
-                        <div class="row this-conts">
-                            <div class="media">
-                                <div class="media-body this-title">@iterm.NameEnglish</div>
-                                <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
+                    foreach (var iterm in Model)
+                    {
+                        if (cookie.Value.Equals("vi"))
+                        {
+                            <div class="col-sm-4 nroom-grid">
+                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                                </a>
+                                <div class="row this-conts">
+                                    <div class="media">
+                                        <div class="media-body this-title">@iterm.Name</div>
+                                        <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
+                                    </div>
+                                    <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">xem phòng<i class="fa fa-arrow-right"></i></a>
+                                </div>
                             </div>
-                            <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-4 nroom-grid">
+                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                                </a>
+                                <div class="row this-conts">
+                                    <div class="media">
+                                        <div class="media-body this-title">@iterm.NameEnglish</div>
+                                        <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
+                                    </div>
+                                    <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        }
+                    }
                 }
             }
         </div>
