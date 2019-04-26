@@ -3,6 +3,7 @@ using Labixa.Areas.Portal.ViewModels.Rooms;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -201,8 +202,14 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Checkout(int id)
         {
-            var entity = _roomOrderService.FindById(id);
+            var entity = new RoomOrder() ;
+
+            TimeSpan dayTptal = entity.CheckOutTime - entity.CheckInTime;
+            entity.Total = (dayTptal.TotalDays * entity.Price) + entity.TotalBookPrice;
+
+            entity = _roomOrderService.FindById(id);
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            
             return View(entity);
         }
         #endregion
@@ -213,9 +220,10 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Preview(CreateViewModel viewModel)
+        public ActionResult Preview(RoomOrder roomOrder)
         {
-            return View(viewModel);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
+            return View(roomOrder);
         }
         #endregion
 
