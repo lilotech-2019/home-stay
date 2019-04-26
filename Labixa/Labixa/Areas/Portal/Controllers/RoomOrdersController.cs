@@ -204,8 +204,6 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.Total = _roomOrderService.GetTotalPrice(id);
-            //TimeSpan dayTptal = entity.CheckOutTime - entity.CheckInTime;
-            //entity.Total = (dayTptal.TotalDays * entity.Price) + entity.TotalBookPrice;
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
             
             return View(entity);
@@ -220,8 +218,24 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Preview(RoomOrder roomOrder)
         {
+            var entity = roomOrder;
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
+        }
+
+        /// <summary>
+        /// Preview - POST
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Preview(int id)
+        {
+            var entity = _roomOrderService.FindById(id);
+            entity.OrderStatus = RoomOrderStatus.CheckOut;
+            _roomOrderService.Edit(entity);
+            return RedirectToAction("Index");
         }
         #endregion
 

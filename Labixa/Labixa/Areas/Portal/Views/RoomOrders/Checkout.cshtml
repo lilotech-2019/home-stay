@@ -36,7 +36,8 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-
+                @Html.HiddenFor(model=>model.Id)
+                
                 <div class="row">
                     <h3 class="col-sm-12">Thông Tin Khách Hàng</h3>
                     <!--Customer Information Start-->
