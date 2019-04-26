@@ -84,6 +84,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\FileData.cs" />
     <Compile Include="Models\RoomAsset.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\User.cs" />

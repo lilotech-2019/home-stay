@@ -6,8 +6,8 @@
     ViewBag.Title = "Create Room";
 }
 @section scripts{
-    @*<script src="~/Content/ckeditor/ckeditor.js"></script>
-        <script src="~/Content/ckeditor/config.js"></script>*@
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
 }
 @section breadcrumb
 {
@@ -148,12 +148,8 @@
             </div>
         </div>
         <div id="tab2" class="tab-pane">
-            <div class="form-group">
-                @Html.LabelFor(model => model.RoomImageMappings, new {@class = "col-sm-3 control-label no-padding-right"})
-                <div class="col-sm-9">
-                    @Html.EditorFor(model => model.RoomImageMappings,"GetImageFromElfinder")
-                    @Html.ValidationMessageFor(model => model.MetaTitle)
-                </div>
+            <div class="row">
+                @Html.EditorFor(model => model.RoomImageMappings)
             </div>
         </div>
         <div id="tab3" class="tab-pane">
@@ -182,27 +178,11 @@
             </div>
 
         </div>
-        <div id="tab3" class="tab-pane fade in">
-            @{
-                if (!Model.RoomAssets.Any()|| Model.RoomAssets != null)
-                {
-                    foreach (var item in Model.RoomAssets)
-                    {
-                        @Html.HiddenFor(model=>item.AssetId)
-                        @Html.HiddenFor(model=>item.Price)
-                        @Html.HiddenFor(model=>item.Quantity)
-                        <div class="form-group">
+        <div id="tab4" class="tab-pane fade in">
+            
+                    
 
-                            <div class="col-sm-9">
-                                @Html.EditorFor(model => item.IsAvaiable) @item.Name
-                                @Html.ValidationMessageFor(model => item.IsAvaiable)
-                            </div>
-                        </div>
-                    }
-                }
-            }
-
-            @*<div class="form-group">
+            <div class="form-group">
                                     @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
                                         @Html.EditorFor(model => model.Utility_Tivi, null, new { @class = "col-xs-10 col-sm-5" })
@@ -271,7 +251,7 @@
                                         @Html.EditorFor(model => model.Utility_WashMachine, null, new { @class = "col-xs-10 col-sm-5" })
                                         @Html.ValidationMessageFor(model => model.Utility_WashMachine)
                                     </div>
-                                </div>*@
+                                </div>
         </div>
     </div>
     </div>

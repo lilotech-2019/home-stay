@@ -23,9 +23,12 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <IISExpressSSLPort>44379</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -1523,6 +1526,20 @@
     <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Content\themes\base\menu.css" />
     <Content Include="Content\themes\base\progressbar.css" />
     <Content Include="Content\themes\base\resizable.css" />
@@ -1534,7 +1551,180 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\smoothness\jquery-ui-1.8.23.custom.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.all.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.base.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.button.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.core.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.slider.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\smoothness\jquery.ui.theme.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="plugins\elfinder\css\elfinder.full.css" />
+    <Content Include="plugins\elfinder\css\elfinder.min.css" />
+    <Content Include="plugins\elfinder\css\theme.css" />
+    <Content Include="plugins\elfinder\elfinder.html" />
+    <Content Include="plugins\elfinder\elfinder.legacy.html" />
+    <Content Include="plugins\elfinder\img\arrows-active.png" />
+    <Content Include="plugins\elfinder\img\arrows-normal.png" />
+    <Content Include="plugins\elfinder\img\crop.gif" />
+    <Content Include="plugins\elfinder\img\dialogs.png" />
+    <Content Include="plugins\elfinder\img\editor-icons.png" />
+    <Content Include="plugins\elfinder\img\edit_aceeditor.png" />
+    <Content Include="plugins\elfinder\img\edit_ckeditor.png" />
+    <Content Include="plugins\elfinder\img\edit_ckeditor5.png" />
+    <Content Include="plugins\elfinder\img\edit_codemirror.png" />
+    <Content Include="plugins\elfinder\img\edit_creativecloud.png" />
+    <Content Include="plugins\elfinder\img\edit_onlineconvert.png" />
+    <Content Include="plugins\elfinder\img\edit_pixlreditor.png" />
+    <Content Include="plugins\elfinder\img\edit_pixlrexpress.png" />
+    <Content Include="plugins\elfinder\img\edit_simplemde.png" />
+    <Content Include="plugins\elfinder\img\edit_tinymce.png" />
+    <Content Include="plugins\elfinder\img\edit_tuiimgedit.png" />
+    <Content Include="plugins\elfinder\img\edit_zohooffice.png" />
+    <Content Include="plugins\elfinder\img\icons-big.png" />
+    <Content Include="plugins\elfinder\img\icons-big.svg" />
+    <Content Include="plugins\elfinder\img\icons-small.png" />
+    <Content Include="plugins\elfinder\img\logo.png" />
+    <Content Include="plugins\elfinder\img\progress.gif" />
+    <Content Include="plugins\elfinder\img\quicklook-bg.png" />
+    <Content Include="plugins\elfinder\img\quicklook-icons.png" />
+    <Content Include="plugins\elfinder\img\resize.png" />
+    <Content Include="plugins\elfinder\img\spinner-mini.gif" />
+    <Content Include="plugins\elfinder\img\toolbar.png" />
+    <Content Include="plugins\elfinder\img\trashmesh.png" />
+    <Content Include="plugins\elfinder\img\tui-icon-a.svg" />
+    <Content Include="plugins\elfinder\img\tui-icon-b.svg" />
+    <Content Include="plugins\elfinder\img\tui-icon-c.svg" />
+    <Content Include="plugins\elfinder\img\tui-icon-d.svg" />
+    <Content Include="plugins\elfinder\img\ui-icons_ffffff_256x240.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_box.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_box.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_dropbox.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_dropbox.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_ftp.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_ftp.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_googledrive.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_googledrive.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_local.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_local.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_network.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_network.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_onedrive.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_onedrive.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_sql.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_sql.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_trash.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_trash.svg" />
+    <Content Include="plugins\elfinder\img\volume_icon_zip.png" />
+    <Content Include="plugins\elfinder\img\volume_icon_zip.svg" />
+    <Content Include="plugins\elfinder\js\elfinder.full.js" />
+    <Content Include="plugins\elfinder\js\elfinder.min.js" />
+    <Content Include="plugins\elfinder\js\extras\editors.default.js" />
+    <Content Include="plugins\elfinder\js\extras\editors.default.min.js" />
+    <Content Include="plugins\elfinder\js\extras\quicklook.googledocs.js" />
+    <Content Include="plugins\elfinder\js\extras\quicklook.googledocs.min.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ar.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.bg.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ca.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.cs.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.da.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.de.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.el.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.es.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.fa.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.fallback.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.fo.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.fr.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.he.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.hr.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.hu.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.id.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.it.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ja.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ko.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.LANG.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.nl.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.no.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.pl.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.pt_BR.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ro.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ru.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.si.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.sk.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.sl.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.sr.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.sv.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.tr.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.ug_CN.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.uk.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.vi.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.zh_CN.js" />
+    <Content Include="plugins\elfinder\js\i18n\elfinder.zh_TW.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\cs.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\en.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\es.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\ja.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\ko.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\pl.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\ru.html.js" />
+    <Content Include="plugins\elfinder\js\i18n\help\sk.html.js" />
+    <Content Include="plugins\elfinder\js\proxy\elFinderSupportVer1.js" />
+    <Content Include="plugins\elfinder\main.default.js" />
+    <Content Include="plugins\elfinder\php\autoload.php" />
+    <Content Include="plugins\elfinder\php\editors\editor.php" />
+    <Content Include="plugins\elfinder\php\editors\OnlineConvert\editor.php" />
+    <Content Include="plugins\elfinder\php\editors\ZipArchive\editor.php" />
+    <Content Include="plugins\elfinder\php\editors\ZohoOffice\editor.php" />
+    <Content Include="plugins\elfinder\php\elFinder.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderConnector.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderFlysystemGoogleDriveNetmount.php" />
+    <Content Include="plugins\elfinder\php\elFinderPlugin.php" />
+    <Content Include="plugins\elfinder\php\elFinderSession.php" />
+    <Content Include="plugins\elfinder\php\elFinderSessionInterface.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeBox.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeDriver.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeDropbox.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeDropbox2.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeFTP.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeGoogleDrive.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeGroup.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeLocalFileSystem.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeMySQL.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeOneDrive.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeTrash.class.php" />
+    <Content Include="plugins\elfinder\php\elFinderVolumeTrashMySQL.class.php" />
+    <Content Include="plugins\elfinder\php\libs\GdBmp.php" />
+    <Content Include="plugins\elfinder\php\MySQLStorage.sql" />
+    <Content Include="plugins\elfinder\php\plugins\AutoResize\plugin.php" />
+    <Content Include="plugins\elfinder\php\plugins\AutoRotate\plugin.php" />
+    <Content Include="plugins\elfinder\php\plugins\Normalizer\plugin.php" />
+    <Content Include="plugins\elfinder\php\plugins\Sanitizer\plugin.php" />
+    <Content Include="plugins\elfinder\php\plugins\Watermark\logo.png" />
+    <Content Include="plugins\elfinder\php\plugins\Watermark\plugin.php" />
+    <Content Include="plugins\elfinder\php\resources\image.png" />
+    <Content Include="plugins\elfinder\php\resources\video.png" />
+    <Content Include="plugins\elfinder\sounds\rm.wav" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -1591,7 +1781,7 @@
     <Content Include="Areas\Portal\Views\Shared\EditorTemplates\PhotoAlbum.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\EditorTemplates\ProductAttributeMapping.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\EditorTemplates\ProductPictureMapping.cshtml" />
-    <Content Include="Areas\Portal\Views\Shared\EditorTemplates\RoomImageMapping.cshtml" />
+    <Content Include="Areas\Portal\Views\Shared\EditorTemplates\RoomImageMappings.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\EditorTemplates\WebsiteAttribute.cshtml" />
     <Content Include="Areas\Portal\Views\_ViewStart.cshtml" />
@@ -1661,6 +1851,19 @@
     <Content Include="Areas\Portal\Views\Assets\Details.cshtml" />
     <Content Include="Areas\Portal\Views\Assets\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Assets\Index.cshtml" />
+    <Content Include="plugins\elfinder\.gitignore" />
+    <Content Include="plugins\elfinder\bower.json" />
+    <Content Include="plugins\elfinder\Changelog" />
+    <Content Include="plugins\elfinder\composer.json" />
+    <Content Include="plugins\elfinder\files\.gitkeep" />
+    <Content Include="plugins\elfinder\files\.trash\.gitkeep" />
+    <Content Include="plugins\elfinder\LICENSE.md" />
+    <Content Include="plugins\elfinder\package.json" />
+    <Content Include="plugins\elfinder\php\.tmp\.htaccess" />
+    <Content Include="plugins\elfinder\php\connector.minimal.php-dist" />
+    <Content Include="plugins\elfinder\php\mime.types" />
+    <Content Include="plugins\elfinder\README.md" />
+    <Content Include="Areas\Portal\Views\Shared\EditorTemplates\RoomAssets.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1938,6 +2141,9 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery.UI.Combined, Version=1.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.UI.Combined.1.12.1\lib\net45\AspNet.ScriptManager.jQuery.UI.Combined.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
@@ -1950,8 +2156,8 @@
     <Reference Include="Autofac.Integration.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Owin.4.2.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="ElFinder.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ElFinder.Net.1.0.0\lib\net45\ElFinder.Net.dll</HintPath>
@@ -1990,11 +2196,14 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ScriptManager.jQuery.UI.Combined, Version=1.8.20.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ScriptManager.jQuery.UI.Combined.1.8.20.1\lib\net40\Microsoft.ScriptManager.jQuery.UI.Combined.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>

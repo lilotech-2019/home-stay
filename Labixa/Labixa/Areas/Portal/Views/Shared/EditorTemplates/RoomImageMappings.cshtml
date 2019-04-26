@@ -1,0 +1,12 @@
+﻿@model Outsourcing.Data.Models.HMS.RoomImageMappings
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.RoomId)
+@Html.HiddenFor(model => model.RoomImageId)
+@Html.HiddenFor(model => model.RoomImage.Id)
+
+<label class="col-sm-3 control-label no-padding-right">Hình ảnh</label>
+<div class="col-sm-9">
+    @Html.EditorFor(model => model.RoomImage.Url, "GetImageFromElfinder")
+    @Html.ValidationMessageFor(model => model.RoomImage.Url)
+</div>
