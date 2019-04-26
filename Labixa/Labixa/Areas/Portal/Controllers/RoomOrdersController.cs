@@ -202,12 +202,10 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Checkout(int id)
         {
-            var entity = new RoomOrder() ;
-
-            TimeSpan dayTptal = entity.CheckOutTime - entity.CheckInTime;
-            entity.Total = (dayTptal.TotalDays * entity.Price) + entity.TotalBookPrice;
-
-            entity = _roomOrderService.FindById(id);
+            var entity = _roomOrderService.FindById(id);
+            entity.Total = _roomOrderService.GetTotalPrice(id);
+            //TimeSpan dayTptal = entity.CheckOutTime - entity.CheckInTime;
+            //entity.Total = (dayTptal.TotalDays * entity.Price) + entity.TotalBookPrice;
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
             
             return View(entity);
