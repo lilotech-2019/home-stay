@@ -824,8 +824,8 @@
     }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
-        if (!dateString.val().match(regEx)) return false;  // Invalid format
-        if (dateString.val().length > 10) return false;
+        if (!dateString.val().trim().match(regEx)) return false;  // Invalid format
+        if (dateString.val().trim().length > 10) return false;
         return true;
     }
     function isValidGmail(gmailString) {
@@ -842,13 +842,13 @@
     }
     function validateModalForm() {
         var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;
-        customerEmail = $('#CustomerEmail').val();
-        customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();
-        CustomeNumber = $('#CustomeNumber').val();
-        dateStart = $('#startDayRoom').val();
-        dateEnd = $('#endDayRoom').val();
-        message = $('#message').val();
+        customerEmail = $('#CustomerEmail').val().trim();
+        customerPhone = $('#CustomerPhone').val().trim();
+        customerName = $('#CustomerName').val().trim();
+        CustomeNumber = $('#CustomeNumber').val().trim();
+        dateStart = $('#startDayRoom').val().trim();
+        dateEnd = $('#endDayRoom').val().trim();
+        message = $('#message').val().trim();
         if (customerName == "") {
             $('.error-name').removeClass('hidden');
             return false;
@@ -908,11 +908,11 @@
     }
     function validateModelLongRoom() {
         var nameLR, emailLR, phoneLR, messageLR, numberLR;
-        emailLR = $('#EmailLR').val();
-        phoneLR = $('#PhoneLR').val();
-        nameLR = $('#NameLR').val();
-        numberLR = $('#CustomeNumberLR').val();
-        messageLR = $('#messageLR').val();
+        emailLR = $('#EmailLR').val().trim();
+        phoneLR = $('#PhoneLR').val().trim();
+        nameLR = $('#NameLR').val().trim();
+        numberLR = $('#CustomeNumberLR').val().trim();
+        messageLR = $('#messageLR').val().trim();
         if (nameLR == "") {
             $('.errorLR-name').removeClass('hidden');
             return false;
@@ -960,9 +960,9 @@
     }
     function bookingShortRoom() {
         var startDay, endDay, selectMenu;
-        startDay = $('#startDay').val();
-        endDay = $('#endDay').val();
-        selectMenu = $('#selectMenu').val();
+        startDay = $('#startDay').val().trim();
+        endDay = $('#endDay').val().trim();
+        selectMenu = $('#selectMenu').val().trim();
         $('#startDayRoom').val(startDay);
         $('#endDayRoom').val(endDay);
         $('#CustomeNumber').val(selectMenu);
