@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-
+    <input type="hidden" id="languageDeposit" value="@cookie.Value" />
     <section id="sidebarCollapse" class="side-menu">
         <button type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse" class="close-button"><i class="fa fa-times"></i></button>
         <div class="side-menu-widget about-widget">
@@ -127,7 +127,7 @@
                     <li>
                         <a href="/language/vi">
                             VN <img width="20" height="20"
-                                    src="http://icons.iconarchive.com/icons/iconscity/flags/256/vietnam-icon.png"  alt="icon-vi"/>
+                                    src="http://icons.iconarchive.com/icons/iconscity/flags/256/vietnam-icon.png" alt="icon-vi" />
                         </a>
                     </li>
                     <!--comment for inline hack
@@ -135,7 +135,7 @@
                     <li>
                         <a href="/language/en">
                             ENG <img width="20" height="20"
-                                     src="https://cdn1.iconfinder.com/data/icons/world-flags-circular/1000/Flag_of_United_Kingdom_-_Circle-512.png" alt="icon-enlo"/>
+                                     src="https://cdn1.iconfinder.com/data/icons/world-flags-circular/1000/Flag_of_United_Kingdom_-_Circle-512.png" alt="icon-enlo" />
                         </a>
                     </li>
                 </ul>
@@ -191,34 +191,81 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositType" type="text" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_TypeForRent)" class="form-control">
-                                            <small><span class="text-danger error-DepositType-none hidden">Vui lòng nhập loại hình cho thuê </span></small>
+
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositType-none hidden">Vui lòng nhập loại hình cho thuê </span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositType-none hidden">Input type for rent</span></small>
+                                            }
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositAddress" type="text" name="Address" placeholder="@Html.Raw(Resources.Resources.HMS_AddressforRent)" class="form-control">
-                                            <small><span class="text-danger error-DepositAddress-none hidden">Vui lòng nhập địa chỉ </span></small>
+
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositAddress-none hidden">Vui lòng nhập địa chỉ </span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositAddress-none hidden">Input your address </span></small>
+                                            }
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositPrice" type="text" name="Price" placeholder="@Html.Raw(Resources.Resources.HMS_PriceForRent)" class="form-control">
-                                            <small><span class="text-danger error-DepositPrice-none hidden">Vui lòng nhập giá</span></small>
-                                            <small><span class="text-danger error-DepositPrice hidden">Vui lòng nhập giá là số</span></small>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositPrice-none hidden">Vui lòng nhập giá</span></small>
+                                                <small><span class="text-danger error-DepositPrice hidden">Vui lòng nhập giá là số</span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositPrice-none hidden">Input price</span></small>
+                                                <small><span class="text-danger error-DepositPrice hidden">Prices is a number integer</span></small>
+                                            }
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
-                                            <small><span class="text-danger error-DepositName-none hidden">Vui lòng nhập Tên </span></small>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositName-none hidden">Vui lòng nhập Tên </span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositName-none hidden">Input your Name</span></small>
+                                            }
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control">
-                                            <small><span class="text-danger error-DepositPhone-none hidden">Vui lòng nhập số điện thoại </span></small>
-                                            <small><span class="text-danger error-DepositPhone hidden">Sai định dạng số điện thoại</span></small>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositPhone-none hidden">Vui lòng nhập số điện thoại </span></small>
+                                                <small><span class="text-danger error-DepositPhone hidden">Sai định dạng số điện thoại</span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositPhone-none hidden">Input your Phone Number</span></small>
+                                                <small><span class="text-danger error-DepositPhone hidden">Invalid phone number</span></small>
+                                            }
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                             <input id="depositEmail" type="email" name="Description" placeholder="Email" class="form-control">
-                                            <small><span class="text-danger error-DepositEmail-none hidden">Vui lòng nhập email </span></small>
-                                            <small><span class="text-danger error-DepositEmail hidden">Sai định dạng  Email</span></small>
+                                            @if (cookie != null && cookie.Value.Equals("vi"))
+                                            {
+                                                <small><span class="text-danger error-DepositEmail-none hidden">Vui lòng nhập email </span></small>
+                                                <small><span class="text-danger error-DepositEmail hidden">Sai định dạng  Email</span></small>
+                                            }
+                                            else
+                                            {
+                                                <small><span class="text-danger error-DepositEmail-none hidden">Input your email </span></small>
+                                                <small><span class="text-danger error-DepositEmail hidden">Invalid Email</span></small>
+                                            }
                                         </div>
                                     </div>
                                     <div class="row">
