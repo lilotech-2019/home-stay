@@ -32,38 +32,38 @@
                         <h2>@Html.Raw(Resources.Resources.HMS_BlogNew)</h2>
                     </div>
                     <div class="popular-post">
-                      
-                                <ul>
-                                    @foreach (var item in Model.RelatedBlogs)
-                                    {
-                                        if (cookie.Value.Equals("vi"))
-                                        {
-                                            <li class="img-cap-effect">
-                                                <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
-                                                <div class="content">
-                                                    <a href="/tintuc/@item.Slug">
-                                                        <h4>@item.Title</h4>
-                                                    </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
-                                                </div>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li class="img-cap-effect">
-                                                <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
-                                                <div class="content">
-                                                    <a href="/tintuc/@item.Slug">
-                                                        <h4>@item.TitleEnglish</h4>
-                                                    </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
-                                                </div>
-                                            </li>
-                                        }
 
-                                    }
-                                </ul>
+                        <ul>
+                            @foreach (var item in Model.RelatedBlogs)
+                            {
+                                if (cookie.Value.Equals("vi"))
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.Title</h4>
+                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="img-cap-effect">
+                                        <div class="img-box"><a href="/tintuc/@item.Slug"><img src="@item.BlogImage" alt="" style="width:100px"></a></div>
+                                        <div class="content">
+                                            <a href="/tintuc/@item.Slug">
+                                                <h4>@item.TitleEnglish</h4>
+                                            </a><span>@item.DateCreated.GetValueOrDefault().ToShortDateString()</span>
+                                        </div>
+                                    </li>
+                                }
 
-                            
-                        
+                            }
+                        </ul>
+
+
+
                     </div>
                 </div>
             </div>
@@ -98,9 +98,20 @@
                             {
                                 <article class="single-blog-post img-cap-effect">
                                     <div class="img-box">
-                                        <a href="/tintuc/@item.Slug">
-                                            <img src="@item.BlogImage" alt="" class="img-responsive">
-                                        </a>
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="@item.BlogImage" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
                                     </div>
                                     <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
                                     <p>@Html.Raw(item.Description)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
@@ -110,9 +121,20 @@
                             {
                                 <article class="single-blog-post img-cap-effect">
                                     <div class="img-box">
-                                        <a href="/tintuc/@item.Slug">
-                                            <img src="@item.BlogImage" alt="" class="img-responsive">
-                                        </a>
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="@item.BlogImage" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
                                     </div>
                                     <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
                                     <p>@Html.Raw(item.DescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>

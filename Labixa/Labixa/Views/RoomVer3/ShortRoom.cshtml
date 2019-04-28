@@ -63,9 +63,19 @@
                         if (cookie.Value.Equals("vi"))
                         {
                             <div class="col-sm-4 nroom-grid">
-                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
-                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
-                                </a>
+                                @if (!iterm.RoomImageMappings.Any())
+                                {
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                        <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                                    </a>
+                                }
+
                                 <div class="row this-conts">
                                     <div class="media">
                                         <div class="media-body this-title">@iterm.Name</div>
@@ -78,9 +88,18 @@
                         else
                         {
                             <div class="col-sm-4 nroom-grid">
-                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
-                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
-                                </a>
+                                @if (!iterm.RoomImageMappings.Any())
+                                {
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="room-img">
+                                        <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="">
+                                    </a>
+                                }
                                 <div class="row this-conts">
                                     <div class="media">
                                         <div class="media-body this-title">@iterm.NameEnglish</div>
