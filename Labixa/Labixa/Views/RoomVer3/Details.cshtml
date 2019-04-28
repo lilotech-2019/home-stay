@@ -571,49 +571,39 @@
                                 if (cookie.Value.Equals("vi"))
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-
-                                            @*@if (iterm.RoomImageMappings.Any())
-                                                {
-                                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="" style="width:100px">
-                                                    </a>
-                                                }
-                                                else
-                                                {*@
-                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
-                                            </a>
-
-
-                                        </div>
+                                        @if (!iterm.RoomImageMappings.Any())
+                                        {
+                                            <div class="img-box"></div>
+                                        }
+                                        else
+                                        {<div class="img-box">
+                                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.Name</h4>
                                             </a>
-
                                             <p>@iterm.Price.ToString("#,##0")/Ngày</p>
-
                                         </div>
                                     </li>
                                 }
                                 else
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-                                            @*@if (iterm.RoomImageMappings.Any())
-                                                {
-                                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="" style="width:100px">
-                                                    </a>
-                                                }
-                                                else
-                                                {*@
-                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
-                                            </a>
-
-                                        </div>
+                                        @if (!iterm.RoomImageMappings.Any())
+                                        {
+                                            <div class="img-box"></div>
+                                        }
+                                        else
+                                        {<div class="img-box">
+                                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.NameEnglish</h4>
@@ -634,37 +624,37 @@
             <div class="single-room-wrapper">
                 <div class="room-slider-wrapper">
                     <div class="single-r-wrapper">
-                        @*@if (Model.Room.RoomImageMappings.Any())
-                            {
-                                <div class="single-sl-room">
-                                    <div data-hash="zero" class="owl-itemm"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></div>
-                                    <div data-hash="one" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></div>
-                                    <div data-hash="two" class="owl-itemm">   <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></div>
-                                    <div data-hash="three" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></div>
-                                    <div data-hash="four" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></div>
-                                </div>
-                                <a href="#zero" class="button secondary url"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></a>
-                                <a href="#one" class="button secondary url"> <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></a>
-                                <a href="#two" class="button secondary url"> <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></a>
-                                <a href="#three" class="button secondary url"> <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></a>
-                                <a href="#four" class="button secondary url"> <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></a>
-                            }
-                            else
-                            {*@
-                        <div class="single-sl-room">
-                            <div data-hash="zero" class="owl-itemm"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></div>
-                            <div data-hash="one" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></div>
-                            <div data-hash="two" class="owl-itemm">   <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></div>
-                            <div data-hash="three" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></div>
-                            <div data-hash="four" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></div>
-                        </div>
-                        <a href="#zero" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></a>
-                        <a href="#one" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></a>
-                        <a href="#two" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></a>
-                        <a href="#three" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></a>
-                        <a href="#four" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></a>
+                        @if (!Model.Room.RoomImageMappings.Any())
+                        {
+                            <div class="single-sl-room">
+                                <div data-hash="zero" class="owl-itemm"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></div>
+                                <div data-hash="one" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></div>
+                                <div data-hash="two" class="owl-itemm">   <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></div>
+                                <div data-hash="three" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></div>
+                                <div data-hash="four" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></div>
+                            </div>
+                            <a href="#zero" class="button secondary url"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></a>
+                            <a href="#one" class="button secondary url"> <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></a>
+                            <a href="#two" class="button secondary url"> <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></a>
+                            <a href="#three" class="button secondary url"> <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></a>
+                            <a href="#four" class="button secondary url"> <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></a>
+                        }
+                        else
+                        {
+                            <div class="single-sl-room">
+                                <div data-hash="zero" class="owl-itemm"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></div>
+                                <div data-hash="one" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></div>
+                                <div data-hash="two" class="owl-itemm">   <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></div>
+                                <div data-hash="three" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></div>
+                                <div data-hash="four" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></div>
+                            </div>
+                            <a href="#zero" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></a>
+                            <a href="#one" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></a>
+                            <a href="#two" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></a>
+                            <a href="#three" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></a>
+                            <a href="#four" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></a>
 
-
+                        }
 
                     </div>
                 </div>

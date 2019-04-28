@@ -48,11 +48,22 @@
                                 if (cookie.Value.Equals("vi"))
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-                                            <a href="/tintuc/@item.Slug">
-                                                <img src="@item.BlogImage" alt="" style="width: 100px">
-                                            </a>
-                                        </div>
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <div class="img-box">
+                                                <a href="/tintuc/@item.Slug">
+                                                    <img src="~/Content/HMS/images/news/5.jpg" alt="" style="width: 100px">
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="img-box">
+                                                <a href="/tintuc/@item.Slug">
+                                                    <img src="@item.BlogImage" alt="" style="width: 100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/tintuc/@item.Slug">
                                                 <h4>@item.Title</h4>
@@ -63,11 +74,22 @@
                                 else
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-                                            <a href="/tintuc/@item.Slug">
-                                                <img src="@item.BlogImage" alt="" style="width: 100px">
-                                            </a>
-                                        </div>
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <div class="img-box">
+                                                <a href="/tintuc/@item.Slug">
+                                                    <img src="~/Content/HMS/images/news/5.jpg" alt="" style="width: 100px">
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="img-box">
+                                                <a href="/tintuc/@item.Slug">
+                                                    <img src="@item.BlogImage" alt="" style="width: 100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/tintuc/@item.Slug">
                                                 <h4>@item.TitleEnglish</h4>
@@ -89,10 +111,21 @@
                 {
                     <article class="single-blog-post img-cap-effect">
                         <div class="img-box">
-                            <a href="@Model.listBlogNew.Slug">
-                                <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
 
-                            </a>
+                            @if (Model.listBlogNew.BlogImage == null)
+                            {
+                                <a href="@Model.listBlogNew.Slug">
+                                    <img src="~/Content/HMS/images/news/5.jpg" alt="" class="img-responsive">
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Model.listBlogNew.Slug">
+                                    <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+
+                                </a>
+                            }
                         </div>
 
                         <h3>@Model.listBlogNew.Title</h3>
@@ -105,10 +138,20 @@
                 {
                     <article class="single-blog-post img-cap-effect">
                         <div class="img-box">
-                            <a href="@Model.listBlogNew.Slug">
-                                <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+                            @if (Model.listBlogNew.BlogImage == null)
+                            {
+                                <a href="@Model.listBlogNew.Slug">
+                                    <img src="~/Content/HMS/images/news/5.jpg" alt="" class="img-responsive">
 
-                            </a>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Model.listBlogNew.Slug">
+                                    <img src="@Model.listBlogNew.BlogImage" alt="" class="img-responsive">
+
+                                </a>
+                            }
                         </div>
 
                         <h3>@Model.listBlogNew.TitleEnglish</h3>

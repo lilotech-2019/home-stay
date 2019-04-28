@@ -994,7 +994,7 @@
                                     <h3>@iterm.Title</h3>
                                 </a>
                                 <p>
-                                    @iterm.MetaTitle
+                                    @Html.Raw(iterm.MetaDescription)
                                 </p>
                             </div>
                         </div>
@@ -1028,7 +1028,7 @@
                                     <h3>@iterm.TitleEnglish</h3>
                                 </a>
                                 <p>
-                                    @iterm.MetaTitleEnglish
+                                    @Html.Raw(iterm.MetaDescriptionEnglish)
                                 </p>
                             </div>
                         </div>
