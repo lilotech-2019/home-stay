@@ -2,6 +2,8 @@
 var checkDeposit = false;
 var formDeposit = $('#formDeposit');
 var submitBtnDeposit = $('#btn-submit-depositForm');
+var languageDeposit = $('#languageDeposit').val().trim();
+//languageDe
 //function isValidGmailDeposit(gmailString) {
 //    var regex = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
 //    if (!regex.test(gmailString)) {
@@ -26,7 +28,12 @@ function submitFormDeposit() {
     submitBtnDeposit.click(function (e) {
         checkDeposit = validateFormDeposit();
         if (checkDeposit) {
-            alert("Gửi thông tin ký gởi thành công");
+           
+            if (languageDeposit == 'vi') {
+                alert("Gửi thông tin kí gởi thành công");
+            } else {
+                alert("Successfully");
+            }
             formDeposit.submit();
         } else {
             e.preventDefault();

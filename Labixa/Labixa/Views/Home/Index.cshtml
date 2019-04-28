@@ -327,7 +327,7 @@
                     {
                         <div class="room-suite">
                             <div class="item">
-                               <a href="/danh-sach-phong-ngan-han">
+                                <a href="/danh-sach-phong-ngan-han">
                                     <div class="ro-img">
                                         <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
                                     </div>
@@ -346,7 +346,7 @@
                         </div>
                         <div class="room-suite">
                             <div class="item">
-                               <a href="/danh-sach-phong-ngan-han">
+                                <a href="/danh-sach-phong-ngan-han">
                                     <div class="ro-img">
                                         <img src="~/Content/HMS/images/rooms/2.jpg" alt="" class="img-responsive">
                                     </div>
@@ -365,7 +365,7 @@
                         </div>
                         <div class="room-suite">
                             <div class="item">
-                               <a href="/danh-sach-phong-ngan-han">
+                                <a href="/danh-sach-phong-ngan-han">
                                     <div class="ro-img">
                                         <img src="~/Content/HMS/images/rooms/3.jpg" alt="" class="img-responsive">
                                     </div>
@@ -394,7 +394,15 @@
                                 <div class="item">
                                     <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                         <div class="ro-img">
-                                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            @if (!iterm.RoomImageMappings.Any())
+                                            {
+                                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            }
+
                                         </div>
                                         <div class="ro-txt">
                                             <div class="left-h pull-left">
@@ -416,7 +424,15 @@
                                 <div class="item">
                                     <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                         <div class="ro-img">
-                                            <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            @if (!iterm.RoomImageMappings.Any())
+                                            {
+                                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            }
+                                            @*<img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">*@
                                         </div>
                                         <div class="ro-txt">
                                             <div class="left-h pull-left">
@@ -953,10 +969,20 @@
                     {
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="news-evn-img">
-                                <a href="/tintuc/@iterm.Slug">
-                                    <img src="@iterm.BlogImage" alt=""
-                                         class="img-responsive">
-                                </a>
+                                @if (iterm.BlogImage == null)
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="@iterm.BlogImage" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
                                 <div class="event-date" style="display: none;">
                                     <h3>
                                         05 <small>Aug</small>
@@ -968,7 +994,7 @@
                                     <h3>@iterm.Title</h3>
                                 </a>
                                 <p>
-                                    @iterm.MetaTitle
+                                    @Html.Raw(iterm.MetaDescription)
                                 </p>
                             </div>
                         </div>
@@ -977,10 +1003,20 @@
                     {
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="news-evn-img">
-                                <a href="/tintuc/@iterm.Slug">
-                                    <img src="@iterm.BlogImage" alt=""
-                                         class="img-responsive">
-                                </a>
+                                @if (iterm.BlogImage == null)
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="@iterm.BlogImage" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
                                 <div class="event-date" style="display: none;">
                                     <h3>
                                         05 <small>Aug</small>
@@ -992,7 +1028,7 @@
                                     <h3>@iterm.TitleEnglish</h3>
                                 </a>
                                 <p>
-                                    @iterm.MetaTitleEnglish
+                                    @Html.Raw(iterm.MetaDescriptionEnglish)
                                 </p>
                             </div>
                         </div>
