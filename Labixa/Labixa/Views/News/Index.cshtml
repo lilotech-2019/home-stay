@@ -11,14 +11,14 @@
 }
 <section class="row final-inner-header">
     <div class="container">
-        <h2 class="this-title">News</h2>
+        <h2 class="this-title">@Html.Raw(Resources.Resources.News)</h2>
     </div>
 </section>
 <section class="row final-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li class="active">News</li>
+            <li><a href="/">@Html.Raw(Resources.Resources.Home)</a></li>
+            <li class="active"><a href="/danh-sach-tin-tuc">@Html.Raw(Resources.Resources.News)</a></li>
         </ol>
     </div>
 </section>
