@@ -7,7 +7,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.Portal.Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -17,17 +16,16 @@ namespace Labixa.Areas.Portal.Controllers
 
         private readonly IRoomService _roomService;
         private readonly IHotelService _hotelService;
-        private readonly IAssetService _assetService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService, IAssetService assetService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService)
         {
             _roomService = roomService;
             _hotelService = hotelService;
-            _assetService = assetService;
+       
         }
 
         #endregion
