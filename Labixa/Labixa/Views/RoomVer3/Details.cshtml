@@ -5,8 +5,7 @@
     var shortRoom = Outsourcing.Data.Models.RoomType.ShortTemp;
     ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
     ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
-        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
-        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
         "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
     ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
@@ -16,6 +15,7 @@
         color: #a94442 !important;
     }
 </style>
+<input type="hidden" id="language" value="@cookie.Value" />
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_RoomDetail)</h2>
@@ -41,13 +41,28 @@
                                 <b>@Html.Raw(Resources.Resources.HMS_StartDate)</b>
                                 <input type="text" name="CheckIn" id="startDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" readonly
                                        data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)" onClick="$(this).removeClass('placeholderclass')">
-                                <small><span class="text-danger error-check-in hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                    <small><span class="text-danger error-check-in hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
+                                }
+                                else
+                                {
+                                    <small><span class="text-danger error-check-in hidden">Wrong Date Format(dd/MM/yyyy)</span></small>
+                                }
                             </div>
                             <div class="col-md-12" style="padding-bottom:10px">
                                 <b>@Html.Raw(Resources.Resources.HMS_EndDate)</b>
                                 <input type="text" name="CheckOut" id="endDay" max="3000-12-31" min="1000-01-01" class="form-control dateclass placeholderclass" readonly
                                        data-toggle="tooltip" data-placement="top" title="Ngày Đến" placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)" onClick="$(this).removeClass('placeholderclass')">
-                                <small><span class="text-danger error-check-out hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
+
+                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                {
+                                    <small><span class="text-danger error-check-out hidden">Sai Định Dạng Ngày (dd/MM/yyyy)</span></small>
+                                }
+                                else
+                                {
+                                    <small><span class="text-danger error-check-out hidden">Wrong Date Format (dd/MM/yyyy)</span></small>
+                                }
                             </div>
                             <div class="col-md-12" style="padding-bottom:10px">
                                 <b>@Html.Raw(Resources.Resources.HMS_PeopleNumber)</b>
@@ -72,7 +87,7 @@
                         </div>
                         <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered model-dialog-room" role="document" >
+                            <div class="modal-dialog modal-dialog-centered model-dialog-room" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -87,24 +102,53 @@
                                                         <div class="row form-group">
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 formbooking">
                                                                 <input id="CustomerName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control">
-                                                                <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-name hidden">Vui lòng nhập tên</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-name hidden">Enter a name</span></small>
+                                                                }
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="CustomerEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control">
-                                                                <small><span class="text-danger error-email-none hidden">Vui lòng nhập email </span></small>
-                                                                <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-email-none hidden">Vui lòng nhập email </span></small>
+                                                                    <small><span class="text-danger error-email hidden">Sai Định Dạng Email</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-email-none hidden">Enter a valid Email </span></small>
+                                                                    <small><span class="text-danger error-email hidden">Invalid Email</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 formbooking">
                                                                 <input type="text" name="CheckIn" id="startDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" readonly
                                                                        placeholder="Ngày đến" data-toggle="tooltip" data-placement="top" title="Ngày Đến" @*placeholder="@Html.Raw(Resources.Resources.HMS_StartDate)"*@ onClick="$(this).removeClass('placeholderclass')">
-                                                                <small><span class="text-danger error-start-none hidden">Vui lòng nhập ngày đến </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-start-none hidden">Vui lòng nhập ngày đến </span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-start-none hidden">Enter a checkin date</span></small>
+                                                                }
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input type="text" name="CheckOut" id="endDayRoom" max="3000-12-31" min="1000-01-01" class="form-control dateclass" readonly
                                                                        placeholder="Ngày đi" data-toggle="tooltip" data-placement="top" title="Ngày Đi" @*placeholder="@Html.Raw(Resources.Resources.HMS_EndDate)"*@ onClick="$(this).removeClass('placeholderclass')">
-                                                                <small><span class="text-danger error-end-none hidden">Vui lòng nhập ngày đi </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-end-none hidden">Vui lòng nhập ngày đi </span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-end-none hidden">Enter a checkout date</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -118,20 +162,42 @@
                                                                         <option value="4">4</option>
                                                                     </select>
                                                                 </div>
-                                                                <small><span class="text-danger error-numberPeople hidden">Vui lòng nhập số lượng người</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-numberPeople hidden">Vui lòng nhập số lượng người</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-numberPeople hidden">Enter a quantity people</span></small>
+                                                                }
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="CustomerPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)"
                                                                        class="form-control" onkeypress="return isNumberKey(event)">
-                                                                <small><span class="text-danger error-phone hidden">Số điện thoại không hợp lệ </span></small>
-                                                                <small><span class="text-danger error-phone-none hidden">vui lòng nhập số điện thoại </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-phone-none hidden">Vui lòng nhập số điện thoại </span></small>
+                                                                    <small><span class="text-danger error-phone hidden">Số điện thoại không hợp lệ</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-phone-none hidden">Enter a phone number</span></small>
+                                                                    <small><span class="text-danger error-phone hidden">Invalid phone number </span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <textarea id="message" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)"
                                                                           class="form-control" style="height:200px;"></textarea>
-                                                                <small><span class="text-danger error-content hidden">vui lòng không để trống nội dung</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger error-content hidden">Vui lòng không để trống nội dung</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger error-content hidden">Enter a description</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -290,12 +356,27 @@
                                                         <div class="row form-group">
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="NameLR" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control formbooking" required>
-                                                                <small><span class="text-danger errorLR-name hidden">Vui lòng nhập tên </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger errorLR-name hidden">Vui lòng nhập tên </span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger errorLR-name hidden">Input your name </span></small>
+                                                                }
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="EmailLR" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
-                                                                <small><span class="text-danger errorLR-email-none hidden">Vui lòng nhập email </span></small>
-                                                                <small><span class="text-danger errorLR-email hidden">Sai Định Dạng Email</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger errorLR-email-none hidden">Vui lòng nhập email </span></small>
+                                                                    <small><span class="text-danger errorLR-email hidden">Sai Định Dạng Email</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger errorLR-email-none hidden">Enter a valid email </span></small>
+                                                                    <small><span class="text-danger errorLR-email hidden">Invalid email</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
@@ -309,20 +390,42 @@
                                                                         <option value="4">4</option>
                                                                     </select>
                                                                 </div>
-                                                                <small><span class="text-danger errorLR-numberPeople hidden">Vui lòng chọn số lượng người </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger errorLR-numberPeople hidden">Vui lòng chọn số lượng người </span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger errorLR-numberPeople hidden">Enter a quantity people </span></small>
+                                                                }
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12">
                                                                 <input id="PhoneLR" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" required
                                                                        class="form-control" onkeypress="return isNumberKey(event)">
-                                                                <small><span class="text-danger errorLR-phone-none hidden">Vui lòng nhập Số điện thoại </span></small>
-                                                                <small><span class="text-danger errorLR-phone hidden">Sai Định Dạng Số điện thoại sai</span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger errorLR-phone-none hidden">Vui lòng nhập Số điện thoại </span></small>
+                                                                    <small><span class="text-danger errorLR-phone hidden">Sai Định Dạng Số điện thoại sai</span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger errorLR-phone-none hidden">Enter a phone number </span></small>
+                                                                    <small><span class="text-danger errorLR-phone hidden">Invalid phone number</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <textarea id="messageLR" rows="6" name="Note" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" required
                                                                           class="form-control" style="height:200px;"></textarea>
-                                                                <small><span class="text-danger errorLR-content hidden">Vui lòng nhập  nội dung  </span></small>
+                                                                @if (cookie != null && cookie.Value.Equals("vi"))
+                                                                {
+                                                                    <small><span class="text-danger errorLR-content hidden">Vui lòng nhập nội dung </span></small>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <small><span class="text-danger errorLR-content hidden">Enter a description</span></small>
+                                                                }
                                                             </div>
                                                         </div>
                                                         <input type="text" name="RoomId" value="@Model.Room.Id" style="display:none;">
@@ -468,29 +571,39 @@
                                 if (cookie.Value.Equals("vi"))
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
-                                            </a>
-                                        </div>
+                                        @if (!iterm.RoomImageMappings.Any())
+                                        {
+                                            <div class="img-box"></div>
+                                        }
+                                        else
+                                        {<div class="img-box">
+                                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.Name</h4>
                                             </a>
-
                                             <p>@iterm.Price.ToString("#,##0")/Ngày</p>
-
                                         </div>
                                     </li>
                                 }
                                 else
                                 {
                                     <li class="img-cap-effect">
-                                        <div class="img-box">
-                                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
-                                            </a>
-                                        </div>
+                                        @if (!iterm.RoomImageMappings.Any())
+                                        {
+                                            <div class="img-box"></div>
+                                        }
+                                        else
+                                        {<div class="img-box">
+                                                <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" style="width:100px">
+                                                </a>
+                                            </div>
+                                        }
                                         <div class="content">
                                             <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
                                                 <h4>@iterm.NameEnglish</h4>
@@ -511,18 +624,38 @@
             <div class="single-room-wrapper">
                 <div class="room-slider-wrapper">
                     <div class="single-r-wrapper">
-                        <div class="single-sl-room">
-                            <div data-hash="zero" class="owl-itemm"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></div>
-                            <div data-hash="one" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></div>
-                            <div data-hash="two" class="owl-itemm">   <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></div>
-                            <div data-hash="three" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></div>
-                            <div data-hash="four" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></div>
-                        </div>
-                        <a href="#zero" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></a>
-                        <a href="#one" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></a>
-                        <a href="#two" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></a>
-                        <a href="#three" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></a>
-                        <a href="#four" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></a>
+                        @if (!Model.Room.RoomImageMappings.Any())
+                        {
+                            <div class="single-sl-room">
+                                <div data-hash="zero" class="owl-itemm"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></div>
+                                <div data-hash="one" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></div>
+                                <div data-hash="two" class="owl-itemm">   <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></div>
+                                <div data-hash="three" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></div>
+                                <div data-hash="four" class="owl-itemm">  <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></div>
+                            </div>
+                            <a href="#zero" class="button secondary url"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></a>
+                            <a href="#one" class="button secondary url"> <img src="~/Content/HMS/images/rooms/2.jpg" alt=""></a>
+                            <a href="#two" class="button secondary url"> <img src="~/Content/HMS/images/rooms/3.jpg" alt=""></a>
+                            <a href="#three" class="button secondary url"> <img src="~/Content/HMS/images/rooms/4.jpg" alt=""></a>
+                            <a href="#four" class="button secondary url"> <img src="~/Content/HMS/images/rooms/5.jpg" alt=""></a>
+                        }
+                        else
+                        {
+                            <div class="single-sl-room">
+                                <div data-hash="zero" class="owl-itemm"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></div>
+                                <div data-hash="one" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></div>
+                                <div data-hash="two" class="owl-itemm">   <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></div>
+                                <div data-hash="three" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></div>
+                                <div data-hash="four" class="owl-itemm">  <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></div>
+                            </div>
+                            <a href="#zero" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt=""></a>
+                            <a href="#one" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(1).RoomImage.Url" alt=""></a>
+                            <a href="#two" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(2).RoomImage.Url" alt=""></a>
+                            <a href="#three" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.ElementAt(3).RoomImage.Url" alt=""></a>
+                            <a href="#four" class="button secondary url"> <img src="@Model.Room.RoomImageMappings.LastOrDefault().RoomImage.Url  " alt=""></a>
+
+                        }
+
                     </div>
                 </div>
                 <div class="room-dec-wrapper">
@@ -554,7 +687,7 @@
                                     <li>
                                         <div class="facilitie-i-box">
 
-                                            <h3>@Resources.Resources.HMS_UtilityTivi</h3><span>@*<img src="images/rooms/icon1.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityTivi</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -562,7 +695,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityTuDo</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityTuDo</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -570,7 +703,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityDryHair</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityDryHair</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -578,7 +711,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_UtilityHotWater</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_UtilityHotWater</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -586,7 +719,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Iron</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Iron</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -594,7 +727,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Kitchen</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Kitchen</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -602,7 +735,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_Snack</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_Snack</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -610,7 +743,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_TeaCoffee</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_TeaCoffee</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -618,7 +751,7 @@
                                 {
                                     <li>
                                         <div class="facilitie-i-box">
-                                            <h3>@Resources.Resources.HMS_Utility_WashMachine</h3><span>@*<img src="images/rooms/icon2.gif" alt="">*@</span>
+                                            <h3>@Resources.Resources.HMS_Utility_WashMachine</h3><span></span>
                                         </div>
                                     </li>
                                 }
@@ -637,6 +770,7 @@
     var contactBoookingLR = $('#contactBookingLongRoom');
     var submitBtn = $('#submitBtn');
     var submitLR = $('#submitBtnLR');
+    var language = $('#language').val().trim();
     $(function () {
         pickingDate();
         pickingDateModal()
@@ -647,7 +781,11 @@
         submitBtn.click(function (e) {
             check = validateModalForm();
             if (check) {
-                alert("Đặt Phòng Thành Công");
+                if (language == 'vi') {
+                    alert("Đặt Phòng Thành Công");
+                } else {
+                    alert("Successfully");
+                }
                 contactBooking.submit();
             } else {
                 e.preventDefault();
@@ -658,7 +796,11 @@
         submitLR.click(function (e) {
             checkLR = validateModelLongRoom();
             if (checkLR) {
-                alert("Đặt Phòng Thành Công");
+                if (language == 'vi') {
+                    alert("Đặt Phòng Thành Công");
+                } else {
+                    alert("Successfully");
+                }
                 contactBoookingLR.submit();
             } else {
                 e.preventDefault();
@@ -726,8 +868,8 @@
     }
     function isValidDate(dateString) {
         var regEx = /(?:0[1-9]|[12][0-9]|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20\d{2})/;
-        if (!dateString.val().match(regEx)) return false;  // Invalid format
-        if (dateString.val().length > 10) return false;
+        if (!dateString.val().trim().match(regEx)) return false;  // Invalid format
+        if (dateString.val().trim().length > 10) return false;
         return true;
     }
     function isValidGmail(gmailString) {
@@ -744,13 +886,13 @@
     }
     function validateModalForm() {
         var customerName, customerEmail, customerPhone, message, CustomeNumber, dateStart, dateEnd;
-        customerEmail = $('#CustomerEmail').val();
-        customerPhone = $('#CustomerPhone').val();
-        customerName = $('#CustomerName').val();
-        CustomeNumber = $('#CustomeNumber').val();
-        dateStart = $('#startDayRoom').val();
-        dateEnd = $('#endDayRoom').val();
-        message = $('#message').val();
+        customerEmail = $('#CustomerEmail').val().trim();
+        customerPhone = $('#CustomerPhone').val().trim();
+        customerName = $('#CustomerName').val().trim();
+        CustomeNumber = $('#CustomeNumber').val().trim();
+        dateStart = $('#startDayRoom').val().trim();
+        dateEnd = $('#endDayRoom').val().trim();
+        message = $('#message').val().trim();
         if (customerName == "") {
             $('.error-name').removeClass('hidden');
             return false;
@@ -810,11 +952,11 @@
     }
     function validateModelLongRoom() {
         var nameLR, emailLR, phoneLR, messageLR, numberLR;
-        emailLR = $('#EmailLR').val();
-        phoneLR = $('#PhoneLR').val();
-        nameLR = $('#NameLR').val();
-        numberLR = $('#CustomeNumberLR').val();
-        messageLR = $('#messageLR').val();
+        emailLR = $('#EmailLR').val().trim();
+        phoneLR = $('#PhoneLR').val().trim();
+        nameLR = $('#NameLR').val().trim();
+        numberLR = $('#CustomeNumberLR').val().trim();
+        messageLR = $('#messageLR').val().trim();
         if (nameLR == "") {
             $('.errorLR-name').removeClass('hidden');
             return false;
@@ -862,9 +1004,9 @@
     }
     function bookingShortRoom() {
         var startDay, endDay, selectMenu;
-        startDay = $('#startDay').val();
-        endDay = $('#endDay').val();
-        selectMenu = $('#selectMenu').val();
+        startDay = $('#startDay').val().trim();
+        endDay = $('#endDay').val().trim();
+        selectMenu = $('#selectMenu').val().trim();
         $('#startDayRoom').val(startDay);
         $('#endDayRoom').val(endDay);
         $('#CustomeNumber').val(selectMenu);

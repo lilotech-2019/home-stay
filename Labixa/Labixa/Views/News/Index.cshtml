@@ -4,22 +4,21 @@
     HttpCookie cookie = Request.Cookies["_culture"];
     ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
     ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
-        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
-        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
         "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
     ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
 }
 <section class="row final-inner-header">
     <div class="container">
-        <h2 class="this-title">News</h2>
+        <h2 class="this-title">@Html.Raw(Resources.Resources.News)</h2>
     </div>
 </section>
 <section class="row final-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li class="active">News</li>
+            <li><a href="/">@Html.Raw(Resources.Resources.Home)</a></li>
+            <li class="active"><a href="/danh-sach-tin-tuc">@Html.Raw(Resources.Resources.News)</a></li>
         </ol>
     </div>
 </section>
@@ -33,6 +32,7 @@
                         <h2>@Html.Raw(Resources.Resources.HMS_BlogNew)</h2>
                     </div>
                     <div class="popular-post">
+
                         <ul>
                             @foreach (var item in Model.RelatedBlogs)
                             {
@@ -61,37 +61,86 @@
 
                             }
                         </ul>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8 col-sm-12 pull-right">
             <div class="single-post-wrapper">
-                @foreach (var item in Model.ListBlogs)
-                {
-                    if (cookie.Value.Equals("vi"))
+                @{
+                    if (!Model.ListBlogs.Any())
                     {
-                        <article class="single-blog-post img-cap-effect">
-                            <div class="img-box">
-                                <a href="/tintuc/@item.Slug">
-                                    <img src="@item.BlogImage" alt="" class="img-responsive">
-                                </a>
+                        if (cookie.Value.Equals("vi"))
+                        {
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h1 style="padding-left:10px;">Không có dữ liệu</h1>
+                                </div>
                             </div>
-                            <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
-                            <p>@Html.Raw(item.Description)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
-                        </article>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h1 style="padding-left:10px;">No Data</h1>
+                                </div>
+                            </div>
+                        }
                     }
                     else
                     {
-                        <article class="single-blog-post img-cap-effect">
-                            <div class="img-box">
-                                <a href="/tintuc/@item.Slug">
-                                    <img src="@item.BlogImage" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                            <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
-                            <p>@Html.Raw(item.DescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
-                        </article>
+                        foreach (var item in Model.ListBlogs)
+                        {
+                            if (cookie.Value.Equals("vi"))
+                            {
+                                <article class="single-blog-post img-cap-effect">
+                                    <div class="img-box">
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="@item.BlogImage" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                    </div>
+                                    <h3><a href="/tintuc/@item.Slug">@item.Title</a></h3>
+                                    <p>@Html.Raw(item.MetaDescription)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">xem thêm</a>
+                                </article>
+                            }
+                            else
+                            {
+                                <article class="single-blog-post img-cap-effect">
+                                    <div class="img-box">
+                                        @if (item.BlogImage == null)
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/tintuc/@item.Slug">
+                                                <img src="@item.BlogImage" alt=""
+                                                     class="img-responsive">
+                                            </a>
+                                        }
+                                    </div>
+                                    <h3><a href="/tintuc/@item.Slug">@item.TitleEnglish</a></h3>
+                                    <p>@Html.Raw(item.MetaDescriptionEnglish)</p><a href="/tintuc/@item.Slug" class="read-more btn submit">Read More</a>
+                                </article>
+                            }
+                        }
                     }
                 }
                 <div>
