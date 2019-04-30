@@ -3,6 +3,7 @@ using Labixa.Areas.Portal.ViewModels.Rooms;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -202,7 +203,9 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Checkout(int id)
         {
             var entity = _roomOrderService.FindById(id);
+            entity.Total = _roomOrderService.GetTotalPrice(id);
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            
             return View(entity);
         }
         #endregion
@@ -213,19 +216,26 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Preview(int?customerId, int? roomId,RoomOrder roomOrder)
+        public ActionResult Preview(RoomOrder roomOrder)
         {
-            if (customerId != null) {
-                var customer = _customerService.FindById((int)customerId);
-                roomOrder.Customer = customer;
-            }
-            if (roomId != null)
-            {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
-                var room = _roomService.FindById((int)roomId);
-                roomOrder.Room = room;
-            }
+            var entity = roomOrder;
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
+        }
+
+        /// <summary>
+        /// Preview - POST
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Preview(int id)
+        {
+            var entity = _roomOrderService.FindById(id);
+            entity.OrderStatus = RoomOrderStatus.CheckOut;
+            _roomOrderService.Edit(entity);
+            return RedirectToAction("Index");
         }
         #endregion
 

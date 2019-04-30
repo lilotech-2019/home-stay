@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Service.Portal.Outsourcing.Service.Portal;
+using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -16,17 +16,16 @@ namespace Labixa.Areas.Portal.Controllers
 
         private readonly IRoomService _roomService;
         private readonly IHotelService _hotelService;
-        private readonly IAssetService _assetService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService, IAssetService assetService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService)
         {
             _roomService = roomService;
             _hotelService = hotelService;
-            _assetService = assetService;
+       
         }
 
         #endregion
@@ -47,7 +46,7 @@ namespace Labixa.Areas.Portal.Controllers
             }
             else
             {
-                rooms = await _roomService.FindByHotelId((int)hotelId).AsNoTracking().ToListAsync();
+                rooms = await _roomService.FindByHotelId((int) hotelId).AsNoTracking().ToListAsync();
             }
             ViewBag.HotelId = hotelId;
             return View(rooms);
@@ -68,7 +67,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomService.FindById((int)id);
+            Room room = _roomService.FindById((int) id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -85,26 +84,36 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotelId"></param>
         /// <returns></returns>
-        public async Task<ActionResult> Create(int? hotelId)
+        public ActionResult Create(int? hotelId)
         {
-            var asset = _assetService.FindAll().AsNoTracking().ToListAsync();
-            var roomAssets = new List<RoomAsset>();
+            //var asset = _assetService.FindAll().AsNoTracking().ToListAsync();
+            //var roomAssets = new List<RoomAsset>();
 
-            foreach (var item in await asset)
+            //foreach (var item in await asset)
+            //{
+            //    roomAssets.Add(new RoomAsset
+            //    {
+            //        Name = item.Name,
+            //        AssetId = item.Id,
+            //        IsAvaiable = true,
+            //        Price = 1,
+            //        Quantity = "1 Cái"
+            //    });
+            //}
+
+            var roomImage = new List<RoomImageMappings>
             {
-                roomAssets.Add(new RoomAsset
+                new RoomImageMappings
                 {
-                    Name = item.Name,
-                    AssetId = item.Id,
-                    IsAvaiable = true,
-                    Price = 1,
-                    Quantity = "1 Cái"
-                });
-            }
+                    IsMainPicture = true,
+                    Title = "Cover"
+                }
+            };
             var room = new Room
             {
                 SharePercent = 0,
-                RoomAssets = roomAssets
+             //   RoomAssets = roomAssets,
+                RoomImageMappings = roomImage
             };
             if (hotelId != null)
             {
@@ -126,15 +135,15 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Room room)
         {
-            if (ModelState.IsValid)
-            {
+         
                 room.Slug = StringConvert.ConvertShortName(room.Name);
+                room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
                 _roomService.Create(room);
-                return RedirectToAction("Index", new { hotelId = room.HotelId });
-            }
+                return RedirectToAction("Index", new {hotelId = room.HotelId});
+      
 
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
-            return View(room);
+            //ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
+            //return View(room);
         }
 
         #endregion
@@ -152,13 +161,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Room room = _roomService.FindById((int)id);
+            Room room = _roomService.FindById((int) id);
             if (room == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(room.HotelId), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);
         }
 
@@ -177,7 +185,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(room.HotelId), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);
         }
 
@@ -191,7 +199,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var rooms = _roomService.FindById((int)id);
+            var rooms = _roomService.FindById((int) id);
             if (rooms == null)
             {
                 return HttpNotFound();

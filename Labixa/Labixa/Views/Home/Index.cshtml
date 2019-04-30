@@ -4,108 +4,95 @@
     HttpCookie cookie = Request.Cookies["_culture"];
     ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
     ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
-        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
-        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi. " +
         "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
     ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
 }
+<script>
+    $(document).ready(function () {
+        $('.item').first().addClass('active');
+        $('#minimal-bootstrap-carousel').carousel();
+    });
+</script>
 <div id="minimal-bootstrap-carousel" data-ride="carousel"
-     class="carousel home2carousel slide carousel-fade shop-slider">
+     class="carousel slide home2carousel carousel-fade shop-slider">
     <div role="listbox" class="carousel-inner">
-        @foreach (var iterm in Model.imageHome1)
-        {
-            <div style="background-image: url(@iterm.Value); -ms-background-position: center right;"
-                 class="item active slide-1">
-                <div class="carousel-caption nhs-caption nhs-caption1">
-                    <div class="thm-container">
-                        <div class="box valign-middle">
-                            <div class="content text-left">
-                                @if (cookie != null && cookie.Value.Equals("vi"))
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ</h2>
-                                    <p data-animation="animated fadeInDown">
-                                        Rời bỏ nội đô ồn ào và chật chội để kiếm tìm một không gian sống riêng tư mà thoáng đãng, an nhiên giữa sông nước, cây cỏ và nắng gió
-                                    </p>
-                                }
-                                else
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
-                                    <p data-animation="animated fadeInDown">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                                        aut fugit, sed quia consequuntur magni dolores eos quit.
-                                    </p>
-                                }
+        @{
+            if (!Model.Slider.Any())
+            {
+                <div style="background-image: url('../../Content/HMS/images/slider/1.jpg'); -ms-background-position: center right;"
+                     class="item active slide-1">
+                    <div class="carousel-caption nhs-caption nhs-caption1">
+                        <div class="thm-container">
+                            <div class="box valign-middle">
+                                <div class="content text-left">
+                                    @if (cookie != null && cookie.Value.Equals("vi"))
+                                    {
+                                        <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ </h2>
+                                        <p data-animation="animated fadeInDown">
+                                            Căn hộ dịch vụ cao cấp được xây dựng với các tiện nghi, sang trọng cùng với cách bố trí hài hòa theo phong cách hiện đại.
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
+                                        <p data-animation="animated fadeInDown">
+                                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                                            aut fugit, sed quia consequuntur magni dolores eos quit.
+                                        </p>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-        @foreach (var iterm in Model.imageHome2)
-        {
-            <div style="background-image: url(@iterm.Value); -ms-background-position: center right; background-position: center right;" class="item slide-2">
-                <div class="carousel-caption nhs-caption nhs-caption2">
-                    <div class="thm-container">
-                        <div class="box valign-middle">
-                            <div class="content text-center">
-                                @if (cookie != null && cookie.Value.Equals("vi"))
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ </h2>
-                                    <p data-animation="animated fadeInDown">
-                                        công trình kiến trúc nhà vườn được thiết kế để phục vụ cho những trải nghiệm cảm xúc vợ chồng đỉnh cao, văn minh hiện
-                                    </p>
-                                }
-                                else
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
-                                    <p data-animation="animated fadeInDown">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                                        aut fugit, sed quia consequuntur magni dolores eos quit.
-                                    </p>
-                                }
+
+            }
+            else
+            {
+
+                var count = 0;
+                foreach (var iterm in Model.Slider)
+                {
+                    count++;
+                    <div style="background-image: url(@iterm.ImageURL); -ms-background-position: center right;"
+                         class="item slide-@count">
+                        <div class="carousel-caption nhs-caption @iterm.Style">
+                            <div class="thm-container">
+                                <div class="box valign-middle">
+                                    <div class="content text-left">
+                                        @if (cookie != null && cookie.Value.Equals("vi"))
+                                        {
+                                            <h2 data-animation="animated fadeInUp" class="this-title">@iterm.Title</h2>
+                                            <p data-animation="animated fadeInDown">
+                                                @iterm.Caption
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <h2 data-animation="animated fadeInUp" class="this-title">@iterm.TitleEnglish\</h2>
+                                            <p data-animation="animated fadeInDown">
+                                                @iterm.CaptionEnglish
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                }
+            }
         }
-        @foreach (var iterm in Model.imageHome3)
-        {
-            <div style="background-image: url(@iterm.Value); -ms-background-position: center right; background-position: center right;" class="item slide-3">
-                <div class="carousel-caption nhs-caption nhs-caption3">
-                    <div class="thm-container">
-                        <div class="box valign-middle">
-                            <div class="content text-left">
-                                @if (cookie != null && cookie.Value.Equals("vi"))
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Hãy dành thời gian cho kỳ nghỉ </h2>
-                                    <p data-animation="animated fadeInDown">
-                                        Căn hộ dịch vụ cao cấp được xây dựng với các tiện nghi, sang trọng cùng với cách bố trí hài hòa theo phong cách hiện đại.
-                                    </p>
-                                }
-                                else
-                                {
-                                    <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
-                                    <p data-animation="animated fadeInDown">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                                        aut fugit, sed quia consequuntur magni dolores eos quit.
-                                    </p>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
+        <a href="#minimal-bootstrap-carousel" role="button" data-slide="prev"
+           class="left carousel-control">
+            <i class="fa fa-angle-left"></i><span class="sr-only">Previous</span>
+        </a><a href="#minimal-bootstrap-carousel" role="button" data-slide="next" class="right carousel-control">
+            <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
+        </a>
     </div>
-    <a href="#minimal-bootstrap-carousel" role="button" data-slide="prev"
-       class="left carousel-control">
-        <i class="fa fa-angle-left"></i><span class="sr-only">Previous</span>
-    </a><a href="#minimal-bootstrap-carousel" role="button" data-slide="next" class="right carousel-control">
-        <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
-    </a>
 </div>
+
 <div class="search-wrapper">
 
 </div>
@@ -136,7 +123,7 @@
             <div class="single_wel_cont home4v col-md-3 col-sm-6">
                 <a href="#" class="wel-box">
                     <div class="icon-box">
-                        <img src="~/Content/HMS/images/welcome/icon-3.png" alt="">
+                        <img src="~/Content/HMS/images/welcome/icon-3.png" alt="icon-spa">
                     </div>
                     @if (cookie != null && cookie.Value.Equals("vi"))
                     {
@@ -273,52 +260,197 @@
     </div>
     <div class="room-slider">
         <div class="roomsuite-slider">
-            @foreach (var iterm in Model.roomHome)
-            {
-                if (cookie != null && cookie.Value.Equals("vi"))
+            @{
+                if (!Model.roomHome.Any())
                 {
-                    <div class="room-suite">
-                        <div class="item">
-                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                <div class="ro-img">
-                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
-                                </div>
-                                <div class="ro-txt">
-                                    <div class="left-h pull-left">
-                                        <p>@iterm.Name</p>
+                    if (cookie != null && cookie.Value.Equals("vi"))
+                    {
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
                                     </div>
-                                    <div class="right-p pull-right">
-                                        <p>
-                                            $@iterm.Price.ToString("#,##0")<span>Ngày</span>
-                                        </p>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Phòng 01</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                1200.000<span>Ngày</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/2.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Phòng 02</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                1200.000<span>Ngày</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/3.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Phòng 03</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                1200.000<span>Ngày</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Room 01</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                30$<span>Day</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/2.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Room 02</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                30$<span>Day</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="room-suite">
+                            <div class="item">
+                                <a href="/danh-sach-phong-ngan-han">
+                                    <div class="ro-img">
+                                        <img src="~/Content/HMS/images/rooms/3.jpg" alt="" class="img-responsive">
+                                    </div>
+                                    <div class="ro-txt">
+                                        <div class="left-h pull-left">
+                                            <p>Room 03</p>
+                                        </div>
+                                        <div class="right-p pull-right">
+                                            <p>
+                                                30$<span>Day</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
                 }
                 else
                 {
-                    <div class="room-suite">
-                        <div class="item">
-                            <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
-                                <div class="ro-img">
-                                    <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                    foreach (var iterm in Model.roomHome)
+                    {
+                        if (cookie != null && cookie.Value.Equals("vi"))
+                        {
+                            <div class="room-suite">
+                                <div class="item">
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                        <div class="ro-img">
+                                            @if (!iterm.RoomImageMappings.Any())
+                                            {
+                                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            }
+
+                                        </div>
+                                        <div class="ro-txt">
+                                            <div class="left-h pull-left">
+                                                <p>@iterm.Name</p>
+                                            </div>
+                                            <div class="right-p pull-right">
+                                                <p>
+                                                    $@iterm.Price.ToString("#,##0")<span>Ngày</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="ro-txt">
-                                    <div class="left-h pull-left">
-                                        <p>@iterm.NameEnglish</p>
-                                    </div>
-                                    <div class="right-p pull-right">
-                                        <p>
-                                            @{ var value = (iterm.Price / 23000).ToString("#,##0"); } @value$<span>Day</span>
-                                        </p>
-                                    </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="room-suite">
+                                <div class="item">
+                                    <a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id">
+                                        <div class="ro-img">
+                                            @if (!iterm.RoomImageMappings.Any())
+                                            {
+                                                <img src="~/Content/HMS/images/rooms/1.jpg" alt="" class="img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">
+                                            }
+                                            @*<img src="@iterm.RoomImageMappings.FirstOrDefault().RoomImage.Url" alt="" class="img-responsive">*@
+                                        </div>
+                                        <div class="ro-txt">
+                                            <div class="left-h pull-left">
+                                                <p>@iterm.NameEnglish</p>
+                                            </div>
+                                            <div class="right-p pull-right">
+                                                <p>
+                                                    @{ var value = (iterm.Price / 23000).ToString("#,##0"); } @value$<span>Day</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
+                            </div>
+                        }
+                    }
                 }
+
             }
 
         </div>
@@ -688,14 +820,14 @@
             <h3></h3>
         </div>
         <div class="row event-pad">
-            @foreach (var iterm in Model.blogHome)
+            @if (!Model.blogHome.Any())
             {
                 if (cookie.Value.Equals("vi"))
                 {
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="news-evn-img">
-                            <a href="/tintuc/@iterm.Slug">
-                                <img src="@iterm.BlogImage" alt=""
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/6.jpg" alt=""
                                      class="img-responsive">
                             </a>
                             <div class="event-date" style="display: none;">
@@ -705,11 +837,56 @@
                             </div>
                         </div>
                         <div class="news-evn-cont">
-                            <div class="news-meta"></div><a href="/tintuc/@iterm.Slug">
-                                <h3>@iterm.Title</h3>
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>Bài Viết Số 1</h3>
                             </a>
                             <p>
-                                @iterm.MetaTitle
+                                Không khí se lạnh, từng cánh hoa dã quỳ vàng ươm trên từng triền núi, hàng thông xanh reo trong gió,
+                                những con đường vòng vo triền dốc mà du khách có thể đi bộ lang thang hàng giờ không biết mỏi mệt
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="news-evn-img">
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/7.jpg" alt=""
+                                     class="img-responsive">
+                            </a>
+                            <div class="event-date" style="display: none;">
+                                <h3>
+                                    05 <small>Aug</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="news-evn-cont">
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>Bài Viết Số 1</h3>
+                            </a>
+                            <p>
+                                Không khí se lạnh, từng cánh hoa dã quỳ vàng ươm trên từng triền núi, hàng thông xanh reo trong gió,
+                                những con đường vòng vo triền dốc mà du khách có thể đi bộ lang thang hàng giờ không biết mỏi mệt
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="news-evn-img">
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                     class="img-responsive">
+                            </a>
+                            <div class="event-date" style="display: none;">
+                                <h3>
+                                    05 <small>Aug</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="news-evn-cont">
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>Bài Viết Số 1</h3>
+                            </a>
+                            <p>
+                                Không khí se lạnh, từng cánh hoa dã quỳ vàng ươm trên từng triền núi, hàng thông xanh reo trong gió,
+                                những con đường vòng vo triền dốc mà du khách có thể đi bộ lang thang hàng giờ không biết mỏi mệt
                             </p>
                         </div>
                     </div>
@@ -718,8 +895,8 @@
                 {
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="news-evn-img">
-                            <a href="/tintuc/@iterm.Slug">
-                                <img src="@iterm.BlogImage" alt=""
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/6.jpg" alt=""
                                      class="img-responsive">
                             </a>
                             <div class="event-date" style="display: none;">
@@ -729,16 +906,137 @@
                             </div>
                         </div>
                         <div class="news-evn-cont">
-                            <div class="news-meta"></div><a href="/tintuc/@iterm.Slug">
-                                <h3>@iterm.TitleEnglish</h3>
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>NEW 01</h3>
                             </a>
                             <p>
-                                @iterm.MetaTitleEnglish
+                                Feeling the breeze cool air, the yellow wild sunflowers covering the mountains, the green pine
+                                trees whispering in the wind, the winding roads where you can walk for hours without tired.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="news-evn-img">
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                     class="img-responsive">
+                            </a>
+                            <div class="event-date" style="display: none;">
+                                <h3>
+                                    05 <small>Aug</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="news-evn-cont">
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>NEW 01</h3>
+                            </a>
+                            <p>
+                                Feeling the breeze cool air, the yellow wild sunflowers covering the mountains, the green pine
+                                trees whispering in the wind, the winding roads where you can walk for hours without tired.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="news-evn-img">
+                            <a href="/danh-sach-tin-tuc">
+                                <img src="~/Content/HMS/images/news/7.jpg" alt=""
+                                     class="img-responsive">
+                            </a>
+                            <div class="event-date" style="display: none;">
+                                <h3>
+                                    05 <small>Aug</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="news-evn-cont">
+                            <div class="news-meta"></div><a href="/tintuc">
+                                <h3>NEW 01</h3>
+                            </a>
+                            <p>
+                                Feeling the breeze cool air, the yellow wild sunflowers covering the mountains, the green pine
+                                trees whispering in the wind, the winding roads where you can walk for hours without tired.
                             </p>
                         </div>
                     </div>
                 }
             }
+            else
+            {
+                foreach (var iterm in Model.blogHome)
+                {
+                    if (cookie.Value.Equals("vi"))
+                    {
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="news-evn-img">
+                                @if (iterm.BlogImage == null)
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="@iterm.BlogImage" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                <div class="event-date" style="display: none;">
+                                    <h3>
+                                        05 <small>Aug</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="news-evn-cont">
+                                <div class="news-meta"></div><a href="/tintuc/@iterm.Slug">
+                                    <h3>@iterm.Title</h3>
+                                </a>
+                                <p>
+                                    @Html.Raw(iterm.MetaDescription)
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="news-evn-img">
+                                @if (iterm.BlogImage == null)
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="~/Content/HMS/images/news/5.jpg" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/tintuc/@iterm.Slug">
+                                        <img src="@iterm.BlogImage" alt=""
+                                             class="img-responsive">
+                                    </a>
+                                }
+                                <div class="event-date" style="display: none;">
+                                    <h3>
+                                        05 <small>Aug</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="news-evn-cont">
+                                <div class="news-meta"></div><a href="/tintuc/@iterm.Slug">
+                                    <h3>@iterm.TitleEnglish</h3>
+                                </a>
+                                <p>
+                                    @Html.Raw(iterm.MetaDescriptionEnglish)
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+
         </div>
     </section>
 </section>

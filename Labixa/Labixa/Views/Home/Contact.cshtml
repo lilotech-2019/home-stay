@@ -4,8 +4,7 @@
     HttpCookie cookie = Request.Cookies["_culture"];
     ViewBag.Title = "HomeStay, cho thuê phòng ngắn hạn , phòng dài hạn, nơi trãi nghiệm sự sang trọng, tiện nghi và thoải mái - DalatAmazing |dalatamazing.com.vn";
     ViewBag.Description = "Chúng tôi tin tưởng trong việc cung cấp dịch vụ khách hàng tuyệt vời." +
-        "Homestay của chúng tôi Sang Trọng, Đầy Đủ Tiện Nghi giúp Khách Hàng Thoải Mái cho kì nghỉ của mình" +
-        "Chúng tôi sẽ đáp ứng các nhu cầu của khách hàng một cách tốt nhất. Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi " +
+        "Nếu bạn có bất kỳ câu hỏi, ý kiến hoặc đề nghị, vui lòng liên hệ cho chúng tôi. " +
         "Chúng tôi rất mong nhận được phản hồi từ bạn. ";
     ViewBag.Keywords = "dalatamazing.com.vn, dalatamazing, homestay, phòng đẹp , chỗ nghỉ dưỡng tốt";
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
@@ -18,11 +17,13 @@
 </style>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=en"></script>
+<input type="hidden" id="language" value="@cookie.Value" />
 <section class="row final-inner-header">
     <div class="container">
         <h2 class="this-title">@Html.Raw(Resources.Resources.HMS_Contact)</h2>
     </div>
 </section>
+
 <section class="row final-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
@@ -51,21 +52,46 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Name)</span>
                             <input id="ContactName" type="text" name="Name" placeholder="@Html.Raw(Resources.Resources.HMS_Name)" class="form-control" required>
-                            <small><span class="text-danger error-contactName hidden"> Vui lòng nhập Tên  </span></small>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                                <small><span class="text-danger error-contactName hidden"> Vui lòng nhập Tên  </span></small>
+                            }
+                            else
+                            {
+                                <small><span class="text-danger error-contactName hidden"> Input your Name </span></small>
+                            }
+
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 m0 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Email) </span>
                             <input id="ContactEmail" type="email" name="Email" placeholder="@Html.Raw(Resources.Resources.HMS_Email)" class="form-control" required>
-                            <small><span class="text-danger error-ContactEmail-none  hidden">Vui lòng nhập địa chỉ email </span></small>
-                            <small><span class="text-danger error-ContactEmail hidden">Sai Định Dạng Email</span></small>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                                <small><span class="text-danger error-ContactEmail-none  hidden">Vui lòng nhập địa chỉ email </span></small>
+                                <small><span class="text-danger error-ContactEmail hidden">Sai Định Dạng Email</span></small>
+                            }
+                            else
+                            {
+                                <small><span class="text-danger error-ContactEmail-none  hidden">Input your Email </span></small>
+                                <small><span class="text-danger error-ContactEmail hidden">Invalid Email</span></small>
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Phone)</span>
                             <input id="ContactPhone" type="text" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
-                            <small><span class="text-danger error-ContactPhonel-none hidden">Vui lòng nhập số điện thoại </span></small>
-                            <small><span class="text-danger error-ContactPhone hidden">Sai định dạng số điện thoại</span></small>
+                            @if (cookie != null && cookie.Value.Equals("vi"))
+                            {
+                                <small><span class="text-danger error-ContactPhonel-none hidden">Vui lòng nhập số điện thoại </span></small>
+                                <small><span class="text-danger error-ContactPhone hidden">Sai định dạng số điện thoại</span></small>
+                            }
+                            else
+                            {
+                                <small><span class="text-danger error-ContactPhonel-none hidden">Input phone number </span></small>
+                                <small><span class="text-danger error-ContactPhone hidden">Invalid phone number</span></small>
+                            }
+
                         </div>
                     </div>
                     <div class="row">
@@ -73,7 +99,14 @@
                             <span>@Html.Raw(Resources.Resources.HMS_Message)</span>
                             <textarea id="ContactMesss" rows="6" name="Content" placeholder="@Html.Raw(Resources.Resources.HMS_Message)" class="form-control" required></textarea>
                         </div>
-                        <small><span class="text-danger error-ContactMesss-none hidden">Vui lòng nhập nội dung </span></small>
+                        @if (cookie != null && cookie.Value.Equals("vi"))
+                        {
+                            <small><span class="text-danger error-ContactMesss-none hidden">Vui lòng nhập nội dung </span></small>
+                        }
+                        else
+                        {
+                            <small><span class="text-danger error-ContactMesss-none hidden">INput your content</span></small>
+                        }
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -156,6 +189,7 @@
     var checkContact = false;
     var contactForm = $('#contactForm');
     var submitBtnContact = $('#btn-submit-contact');
+    var language = $('#language').val().trim();
     $(function () {
         submitFormContact();
     });
@@ -163,7 +197,11 @@
         submitBtnContact.click(function (e) {
             checkContact = validateFormContact();
             if (checkContact) {
-                alert("Gửi thông tin liên hệ thành công");
+                if (language == 'vi') {
+                    alert("Gửi thông tin liên hệ thành công");
+                } else {
+                    alert("Successfully");
+                }
 
                 contactForm.submit();
             } else {

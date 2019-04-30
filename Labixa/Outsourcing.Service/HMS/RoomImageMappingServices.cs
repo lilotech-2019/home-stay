@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS

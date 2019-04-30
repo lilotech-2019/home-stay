@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
@@ -9,6 +10,7 @@ namespace Outsourcing.Service.Portal
     public interface IRoomOrderService : IServiceBase<RoomOrder>
     {
         void UpdateStatus(int id, RoomOrderStatus status);
+        double GetTotalPrice(int id);
     }
 
     public class RoomOrderService : ServiceBase<RoomOrder>, IRoomOrderService
@@ -22,6 +24,17 @@ namespace Outsourcing.Service.Portal
         #endregion
 
         #region BaseMethod
+        #region GetTotal
+        public double  GetTotalPrice(int id)
+        {
+
+            var entity = FindById(id);
+            TimeSpan dayTotal = entity.CheckOut - entity.CheckIn;
+            entity.Total = (dayTotal.TotalDays * entity.Price) + entity.TotalBookPrice;
+            return entity.Total;
+        }
+        #endregion
+
         public void UpdateStatus(int id, RoomOrderStatus status)
         {
             var entity = FindById(id);

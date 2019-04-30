@@ -1,7 +1,6 @@
 ﻿using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -33,7 +32,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Index(int roomId)
         {
-            var assets = _assertService.FindAll().AsNoTracking().Where(w => w.RoomId == roomId);
+            var assets = _assertService.FindAll().AsNoTracking();
          
             ViewBag.RoomId = roomId;
             return View(assets);
@@ -70,7 +69,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create(int roomId)
         {
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomId), "Id", "Name", roomId);
-            return View(new RoomAsset { RoomId = roomId});
+            return View(new RoomAsset());
         }
 
         [HttpPost]

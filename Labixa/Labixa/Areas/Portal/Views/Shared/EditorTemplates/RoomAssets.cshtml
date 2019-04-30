@@ -1,0 +1,14 @@
+﻿@model Outsourcing.Data.Models.RoomAsset
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Name)
+@Html.HiddenFor(model => model.Price)
+@Html.HiddenFor(model => model.Quantity)
+@Html.HiddenFor(model => model.RoomId)
+@Html.HiddenFor(model => model.AssetId)
+
+<label class="col-sm-3 control-label no-padding-right">Hình ảnh</label>
+<div class="col-sm-9">
+    @Html.CheckBoxFor(model => model.IsAvaiable)
+    @Html.DisplayFor(model => model.Name)
+</div>

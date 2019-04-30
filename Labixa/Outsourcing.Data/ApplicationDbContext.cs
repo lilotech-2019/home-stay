@@ -27,7 +27,7 @@ namespace Outsourcing.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductPictureMapping> ProductPictureMappings { get; set; }
         public DbSet<Staff> Staffs { get; set; }
-        public DbSet<WebsiteAttributes> WebsiteAttributes { get; set; }
+        public DbSet<WebsiteAtribute> WebsiteAtributes { get; set; }
         public DbSet<Deposit> Deposits { get; set; }
         public DbSet<Inventory> Inventorys { get; set; }
         public DbSet<InventoryLog> InventoryLogs { get; set; }
@@ -56,8 +56,7 @@ namespace Outsourcing.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<RoomAsset> RoomAssets { get; set; }
-        public DbSet<Asset> Assets { get; set; }
-
+       
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -8,6 +8,8 @@ using Outsourcing.Service.HMS;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Email;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using static Labixa.ViewModels.IndexViewModel;
 
 namespace Labixa.Controllers
 {
@@ -43,13 +45,29 @@ namespace Labixa.Controllers
 
         public ActionResult Index()
         {
-            IndexViewModel model = new IndexViewModel
+            var slideAtrributes = _websiteAttributeService.GetWebsiteAttributes()
+                .Where(p => p.Name.Equals("Labixa.Home.Index.Banner"));
+            var slideViewModel = new List<SlideViewModel>();
+            var count = 0;
+            foreach(var item in slideAtrributes)
             {
+                ++count;
+                slideViewModel.Add(new SlideViewModel()
+                {
+                    Style = count%2==0? "nhs-caption2" : "nhs-caption3",
+                    ImageURL = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
+                    Title = item.Title,
+                    TitleEnglish = item.TitleEnglish,
+                    Caption = item.Caption,
+                    CaptionEnglish = item.CaptionEnglish,
+
+                });
+            }
+            var model = new IndexViewModel
+            {           
                 roomHome = _roomService.FindAll(),
                 blogHome = _blogService.FindAll().Take(3),
-                imageHome1 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner1")),
-                imageHome2 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner2")),
-                imageHome3 = _websiteAttributeService.GetWebsiteAttributes().Where(p => p.Name.Equals("Banner3"))
+                Slider = slideViewModel
             };
             return View(model);
         }

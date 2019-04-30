@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Repository;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 namespace Outsourcing.Service.HMS
 {
@@ -77,7 +72,7 @@ namespace Outsourcing.Service.HMS
         }
         public IEnumerable<Costs> GetCostByCategorySlug(string slug)
         {
-            var costs = _costRepository.GetAll();
+            var costs = _costRepository.FindBy();
 
             return costs;
         }
