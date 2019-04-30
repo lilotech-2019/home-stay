@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Outsourcing.Data.Models;
+﻿using Outsourcing.Data.Models;
 
 namespace Labixa.ViewModels
 {
     public class MenuViewModel
     {
-        public WebsiteAttributes pageLogo { get; set; }
-        public WebsiteAttributes pageTitle { get; set; }
-        public WebsiteAttributes pageSlogan { get; set; }
+        public WebsiteAtribute pageLogo { get; set; }
+        public WebsiteAtribute pageTitle { get; set; }
+        public WebsiteAtribute pageSlogan { get; set; }
     }
 }

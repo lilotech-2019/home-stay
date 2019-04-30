@@ -44,7 +44,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
                 var cost = new Costs();
                 cost = newCost.Cost;
                 cost.IsDelete = false;
-                cost.isImport = false;
+                cost.IsImport = false;
                 cost.OrginalPrice = 0;
                 cost.Price = 0;
                 cost.Quantity = 0;

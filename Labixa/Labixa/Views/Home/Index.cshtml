@@ -273,7 +273,7 @@
     </div>
     <div class="room-slider">
         <div class="roomsuite-slider">
-            @foreach (var iterm in Model.roomHome)
+            @foreach (var iterm in Model.RoomHome)
             {
                 if (cookie != null && cookie.Value.Equals("vi"))
                 {
@@ -688,7 +688,7 @@
             <h3></h3>
         </div>
         <div class="row event-pad">
-            @foreach (var iterm in Model.blogHome)
+            @foreach (var iterm in Model.BlogHome)
             {
                 if (cookie.Value.Equals("vi"))
                 {

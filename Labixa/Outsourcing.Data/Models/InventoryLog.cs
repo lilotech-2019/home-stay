@@ -13,7 +13,6 @@ namespace Outsourcing.Data.Models
         public string Note { get; set; }
         public int Quantity { get; set; }
         public Double Price { get; set; }
-        public DateTime DateCreated{ get; set; }
         public int InventoryId { get; set; }
         public int ProductId { get; set; }
         public int LocationId { get; set; }

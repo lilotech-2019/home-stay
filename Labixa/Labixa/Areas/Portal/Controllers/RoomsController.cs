@@ -137,16 +137,15 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Room room)
         {
-            if (ModelState.IsValid)
-            {
+         
                 room.Slug = StringConvert.ConvertShortName(room.Name);
                 room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
                 _roomService.Create(room);
                 return RedirectToAction("Index", new {hotelId = room.HotelId});
-            }
+      
 
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
-            return View(room);
+            //ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
+            //return View(room);
         }
 
         #endregion
@@ -169,7 +168,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);
         }
 
@@ -188,7 +187,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
                 return RedirectToAction("Index");
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name", room.HotelId);
+            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);
         }
 

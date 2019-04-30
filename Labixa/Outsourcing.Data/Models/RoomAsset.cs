@@ -10,9 +10,9 @@ namespace Outsourcing.Data.Models
         public string Quantity { get; set; }
         public bool IsAvaiable { get; set; }
 
-        [ForeignKey("Room")]
-        public int RoomId { get; set; }
-        public virtual Room Room { get; set; }
+        //[ForeignKey("Room")]
+        //public int RoomId { get; set; }
+        //public virtual Room Room { get; set; }
 
         [ForeignKey("Asset")]
         public int AssetId { get; set; }

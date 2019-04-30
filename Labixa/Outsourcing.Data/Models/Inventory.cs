@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
@@ -15,8 +11,7 @@ namespace Outsourcing.Data.Models
         //public int ProductId { get; set; }
         public int Quantity { get; set; }
         public Double Price { get; set; }
-        public DateTime DateCreated { get; set; }
-        public bool isImport { get; set; }
+        public bool IsImport { get; set; }
         public bool IsDelete{ get; set; }
 
         //[ForeignKey("ProductId")]

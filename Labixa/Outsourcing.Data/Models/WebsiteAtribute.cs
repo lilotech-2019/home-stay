@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Outsourcing.Data.Models
 {
-    public class WebsiteAttributes : BaseEntity
+    public class WebsiteAtribute : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,7 +14,5 @@ namespace Outsourcing.Data.Models
         public string Type { get; set; }
         public string Value { get; set; }
         public bool IsPublic { get; set; }
-        
-
     }
 }

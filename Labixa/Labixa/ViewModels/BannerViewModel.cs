@@ -8,9 +8,9 @@ namespace Labixa.ViewModels
 {
     public class BannerViewModel
     {
-        public WebsiteAttributes bannerLogo { get; set; }
-        public WebsiteAttributes bannerTitle { get; set; }
-        public WebsiteAttributes bannerImage { get; set; }
+        public WebsiteAtribute bannerLogo { get; set; }
+        public WebsiteAtribute bannerTitle { get; set; }
+        public WebsiteAtribute bannerImage { get; set; }
 
     }
 }
