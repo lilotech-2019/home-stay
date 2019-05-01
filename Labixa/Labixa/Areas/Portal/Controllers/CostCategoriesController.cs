@@ -77,7 +77,7 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Slug);
+                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Name);
                 _costCategoriesService.Create(costCategory);
                 return RedirectToAction("Index");
             }
@@ -100,6 +100,7 @@ namespace Labixa.Areas.Portal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CostCategory costCategory = _costCategoriesService.FindById((int)id);
+            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(costCategory.CategoryParentId), "Id","Name", costCategory.CategoryParentId);
             if (costCategory == null)
             {
                 return HttpNotFound();
@@ -118,7 +119,8 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Slug);
+                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Name);
+                _costCategoriesService.Edit(costCategory);
                 return RedirectToAction("Index");
             }
             return View(costCategory);
