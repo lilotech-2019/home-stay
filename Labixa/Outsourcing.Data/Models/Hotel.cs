@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
 {
@@ -53,6 +54,7 @@ namespace Outsourcing.Data.Models
         public virtual HotelCategory HotelCategory { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Cost> Costs { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string MetaDescription { get; set; }

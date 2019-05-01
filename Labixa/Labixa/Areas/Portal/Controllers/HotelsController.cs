@@ -79,7 +79,13 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create(int? hotelCategoryId)
         {
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
+            if (hotelCategoryId != null)
+            {
+                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
+            }
+            else {
+                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(null), "Id", "Name");
+            }
             return View();
         }
 
@@ -98,7 +104,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _hotelService.Create(hotel);
                 return RedirectToAction("Index",new { hotelCategoryId = hotel.HotelCategoryId});
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 
@@ -111,7 +117,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int?hotelCategoryId, int? id)
         {
             if (id == null)
             {
@@ -122,7 +128,13 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
+            if (hotelCategoryId != null)
+            {
+                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
+            }
+            else {
+                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(null), "Id", "Name");
+            }
             return View(hotel);
         }
 

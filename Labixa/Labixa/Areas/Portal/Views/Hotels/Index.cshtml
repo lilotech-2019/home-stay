@@ -71,7 +71,7 @@
                     <td class=" ">
                         <div class="visible-md visible-lg  btn-group">
 
-                            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                            <a href="@Url.Action("Edit", new {id = item.Id, hotelCategoryId = ViewBag.hotelCategoryId})" class="btn btn-xs btn-info">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
