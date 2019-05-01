@@ -1762,7 +1762,6 @@
     <Content Include="Areas\HMSAdmin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Portal\Views\web.config" />
     <Content Include="Areas\Portal\Views\Customers\Index.cshtml" />
-    <Content Include="Areas\Portal\Views\Shared\_PotalLayout.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\_PartialButtonGroup.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\DisplayTemplates\DetailsInt32.cshtml" />
