@@ -23,6 +23,7 @@
             <tr>
                 <th>#</th>
                 <th>
+
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
@@ -51,7 +52,7 @@
                         @count
                     </td>
                     <td>
-                        <a href="@Url.Action("Create","Cost", new {hotelId = item.Id})" class="btn btn-xs btn-success">
+                        <a href="@Url.Action("Create","Costs", new {hotelId = item.Id})" class="btn btn-xs btn-success">
                             Chi phí
                         </a>
 
