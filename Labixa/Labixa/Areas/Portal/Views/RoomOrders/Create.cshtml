@@ -75,7 +75,7 @@
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.RoomOrders.RoomId, "RoomId", new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.RoomOrders.RoomId,null,new { @disabled = disabled})
+                            @Html.TextBoxFor(model => model.RoomOrders.RoomId,null,new { @disabled = "disabled"})
                             @Html.ValidationMessageFor(model => model.RoomOrders.RoomId)
                         </div>
                     </div>
