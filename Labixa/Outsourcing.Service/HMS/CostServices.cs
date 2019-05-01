@@ -4,9 +4,11 @@ using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository.HMS;
+using Outsourcing.Service.Portal.Base;
+
 namespace Outsourcing.Service.HMS
 {
-    public interface ICostService
+    public interface ICostService 
     {
 
         IEnumerable<Cost> GetCosts();
@@ -49,7 +51,7 @@ namespace Outsourcing.Service.HMS
         #region Implementation for ICostService
         public IEnumerable<Cost> GetCosts()
         {
-            var costs = _costRepository.GetAll().Where(p=>!p.Deleted);
+            var costs = _costRepository.GetAll().Where(p => !p.Deleted);
             return costs;
         }
         public IEnumerable<Cost> Get3CostsPosition()

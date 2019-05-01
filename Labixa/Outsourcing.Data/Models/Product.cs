@@ -9,6 +9,7 @@ namespace Outsourcing.Data.Models
         {
             LastEditedTime = DateTime.Now;
             DateCreated = DateTime.Now;
+
         }
 
         public string Name { get; set; }

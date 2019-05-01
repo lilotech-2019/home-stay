@@ -185,7 +185,11 @@ namespace Labixa.Areas.Portal.Controllers
             return View(categoryHotels);
         }
 
-        // POST: /HMSAdmin/Hotels/Delete/5
+        /// <summary>
+        /// Delete - POST
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
