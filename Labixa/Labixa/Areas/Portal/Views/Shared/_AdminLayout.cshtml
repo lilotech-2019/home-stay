@@ -174,7 +174,8 @@
             </a>
         </li>*@
             <!--Quản lý khách sạn-->
-            @Html.Action("PartialSubMenuCategory", "HotelCategories")
+
+            @Html.Action("HotelCategorySubMenu", "HotelCategories")
 
             <li>
                 <a href="@Url.Action("Index", "Rooms")" class="dropdown-toggle">

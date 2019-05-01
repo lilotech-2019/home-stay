@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [RouteArea("Portal")]
+    [RoutePrefix("Hotels")]
     public class HotelsController : Controller
     {
         #region Fields
@@ -32,15 +34,15 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Index - Get
         /// </summary>
-        /// <param name="hotelCategoryId">Hotel Category Id</param>
+        /// <param name="categoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? hotelCategoryId)
+        public ActionResult Index(int? categoryId)
         {
             var hotels = _hotelService.FindAll();
-            if (hotelCategoryId != null)
+            if (categoryId != null)
             {
-                hotels = hotels.Where(w => w.HotelCategoryId == hotelCategoryId);
-                ViewBag.hotelCategoryId = hotelCategoryId;
+                hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
+                ViewBag.hotelCategoryId = categoryId;
             }
             hotels = hotels.AsNoTracking();
             return View(hotels);
@@ -61,7 +63,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var hotel = _hotelService.FindById((int)id);
+            var hotel = _hotelService.FindById((int) id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -79,13 +81,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create(int? hotelCategoryId)
         {
-            if (hotelCategoryId != null)
-            {
-                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
-            }
-            else {
-                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(null), "Id", "Name");
-            }
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id",
+                "Name", hotelCategoryId);
             return View();
         }
 
@@ -102,9 +99,10 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index",new { hotelCategoryId = hotel.HotelCategoryId});
+                return RedirectToAction("Index", new {hotelCategoryId = hotel.HotelCategoryId});
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
+            ViewBag.HotelCategoryId =
+                new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
             return View(hotel);
         }
 
@@ -116,25 +114,25 @@ namespace Labixa.Areas.Portal.Controllers
         /// Edit - GET
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="categoryId"></param>
         /// <returns></returns>
-        public ActionResult Edit(int?hotelCategoryId, int? id)
+        public ActionResult Edit(int? id, int? categoryId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int)id);
+            Hotel hotel = _hotelService.FindById((int) id);
             if (hotel == null)
             {
                 return HttpNotFound();
             }
-            if (hotelCategoryId != null)
+            var category = _categoryHotelService.FindSelectList();
+            if (categoryId != null)
             {
-                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id", "Name", hotelCategoryId);
+                category = category.Where(_ => _.Id == categoryId);
             }
-            else {
-                ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(null), "Id", "Name");
-            }
+            ViewBag.HotelCategoryId = new SelectList(category, "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 
@@ -151,9 +149,10 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new { hotelCategoryId = hotel.HotelCategoryId });
+                return RedirectToAction("Index", new {hotelCategoryId = hotel.HotelCategoryId});
             }
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
+                "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 
@@ -172,7 +171,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelService.FindById((int)id);
+            var categoryHotels = _hotelService.FindById((int) id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
@@ -199,5 +198,6 @@ namespace Labixa.Areas.Portal.Controllers
         }
 
         #endregion
+
     }
 }

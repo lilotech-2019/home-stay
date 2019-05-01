@@ -8,8 +8,15 @@ namespace Labixa.Areas.Portal
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.Routes.LowercaseUrls = true;
             context.MapRoute(
-                "Portal_default",
+                "Portal_default_2",
+                "Portal",
+                new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "",
                 "Portal/{controller}/{action}/{id}",
                 new {action = "Index", id = UrlParameter.Optional}
             );
