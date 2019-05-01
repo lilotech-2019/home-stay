@@ -25,7 +25,6 @@ namespace Labixa.Areas.Portal.Controllers
         {
             _roomService = roomService;
             _hotelService = hotelService;
-       
         }
 
         #endregion
@@ -103,23 +102,24 @@ namespace Labixa.Areas.Portal.Controllers
 
             var roomImage = new List<RoomImageMappings>
             {
-                new RoomImageMappings
-                {
-                    IsMainPicture = true,
-                    Title = "Cover"
-                }
+                new RoomImageMappings {IsMainPicture = true, Title = "Cover"},
+                new RoomImageMappings {IsMainPicture = false, Title = "1"},
+                new RoomImageMappings {IsMainPicture = false, Title = "2"},
+                new RoomImageMappings {IsMainPicture = false, Title = "3"},
+                new RoomImageMappings {IsMainPicture = false, Title = "4"},
+                new RoomImageMappings {IsMainPicture = false, Title = "5"}
             };
             var room = new Room
             {
                 SharePercent = 0,
-             //   RoomAssets = roomAssets,
+                //   RoomAssets = roomAssets,
                 RoomImageMappings = roomImage
             };
             if (hotelId != null)
             {
                 ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(hotelId), "Id", "Name", hotelId);
-                ViewBag.HotelCategoryId = _hotelService.FindById((int)hotelId).HotelCategoryId;
-                room.HotelId = (int)hotelId;
+                ViewBag.HotelCategoryId = _hotelService.FindById((int) hotelId).HotelCategoryId;
+                room.HotelId = (int) hotelId;
                 return View(room);
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
@@ -135,12 +135,11 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Room room)
         {
-         
-                room.Slug = StringConvert.ConvertShortName(room.Name);
-                room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
-                _roomService.Create(room);
-                return RedirectToAction("Index", new {hotelId = room.HotelId});
-      
+            room.Slug = StringConvert.ConvertShortName(room.Name);
+            room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
+            _roomService.Create(room);
+            return RedirectToAction("Index", new {hotelId = room.HotelId});
+
 
             //ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
             //return View(room);
