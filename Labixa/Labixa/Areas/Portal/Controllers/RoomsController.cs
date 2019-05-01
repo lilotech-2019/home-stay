@@ -3,6 +3,7 @@ using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -34,21 +35,17 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Index
         /// </summary>
-        /// <param name="hotelId">Room Id</param>
+        /// <param name="hotelId">Hotel Id</param>
         /// <returns></returns>
         public async Task<ActionResult> Index(int? hotelId)
         {
-            IEnumerable<Room> rooms;
-            if (hotelId == null)
+            var rooms = _roomService.FindAll();
+            if (hotelId != null)
             {
-                rooms = await _roomService.FindAll().AsNoTracking().ToListAsync();
+                rooms = rooms.Where(w => w.HotelId == hotelId);
             }
-            else
-            {
-                rooms = await _roomService.FindByHotelId((int) hotelId).AsNoTracking().ToListAsync();
-            }
-            ViewBag.HotelId = hotelId;
-            return View(rooms);
+
+            return View(await rooms.AsNoTracking().ToListAsync());
         }
 
         #endregion
@@ -85,21 +82,6 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create(int? hotelId)
         {
-            //var asset = _assetService.FindAll().AsNoTracking().ToListAsync();
-            //var roomAssets = new List<RoomAsset>();
-
-            //foreach (var item in await asset)
-            //{
-            //    roomAssets.Add(new RoomAsset
-            //    {
-            //        Name = item.Name,
-            //        AssetId = item.Id,
-            //        IsAvaiable = true,
-            //        Price = 1,
-            //        Quantity = "1 Cái"
-            //    });
-            //}
-
             var roomImage = new List<RoomImageMappings>
             {
                 new RoomImageMappings {IsMainPicture = true, Title = "Cover"},
@@ -115,14 +97,15 @@ namespace Labixa.Areas.Portal.Controllers
                 //   RoomAssets = roomAssets,
                 RoomImageMappings = roomImage
             };
+            var hotels = _hotelService.FindSelectList();
             if (hotelId != null)
             {
-                ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(hotelId), "Id", "Name", hotelId);
+                ViewBag.HotelId = new SelectList(hotels.Where(w => w.Id == hotelId), "Id", "Name", hotelId);
                 ViewBag.HotelCategoryId = _hotelService.FindById((int) hotelId).HotelCategoryId;
                 room.HotelId = (int) hotelId;
-                return View(room);
+                return View();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
+            ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
 

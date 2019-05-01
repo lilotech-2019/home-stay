@@ -1882,6 +1882,7 @@
     <Content Include="Areas\Portal\Views\CostCategories\Create.cshtml" />
     <Content Include="Areas\Portal\Views\CostCategories\Index.cshtml" />
     <Content Include="Areas\Portal\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Hotels\_HotelSubMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

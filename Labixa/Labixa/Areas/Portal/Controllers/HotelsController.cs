@@ -79,10 +79,14 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int? hotelCategoryId)
+        public ActionResult Create(int? categoryId)
         {
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotelCategoryId), "Id",
-                "Name", hotelCategoryId);
+            var category = _categoryHotelService.FindSelectList();
+            if (categoryId != null)
+            {
+                category = category.Where(w => w.Id == categoryId);
+            }
+            ViewBag.HotelCategoryId = new SelectList(category, "Id", "Name", categoryId);
             return View();
         }
 
@@ -99,8 +103,9 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new {hotelCategoryId = hotel.HotelCategoryId});
+                return RedirectToAction("Index", new {categoryId = hotel.HotelCategoryId});
             }
+
             ViewBag.HotelCategoryId =
                 new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
             return View(hotel);
@@ -151,6 +156,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _hotelService.Edit(hotel);
                 return RedirectToAction("Index", new {hotelCategoryId = hotel.HotelCategoryId});
             }
+
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
                 "Name", hotel.HotelCategoryId);
             return View(hotel);
@@ -199,5 +205,11 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
+
+        public ActionResult HotelSubMenu()
+        {
+            var hotels = _hotelService.FindAll();
+            return PartialView("_HotelSubMenu", hotels.AsNoTracking().ToList());
+        }
     }
 }
