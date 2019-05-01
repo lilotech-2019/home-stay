@@ -181,13 +181,15 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
-        public ActionResult PartialSubMenuCategory()
+        public ActionResult HotelCategorySubMenu()
         {
             var data = _hotelCategoryService.FindAll().AsNoTracking();
-            var viewModel = new PartialSubMenuCategoryViewModel();
-            viewModel.Count = data.Count();
-            viewModel.HotelCategories = data;
-            return PartialView("_PartialSubMenuCategory", viewModel);
+            var viewModel = new HotelCategorySubMenuViewModel
+            {
+                Count = data.Count(),
+                HotelCategories = data
+            };
+            return PartialView("_HotelCategorySubMenu", viewModel);
         }
     }
 }
