@@ -1,35 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Outsourcing.Data.Models.HMS
 {
-  
+    public enum CostType
+    {
+        Others = 0,
+        Income = 1,
+        Outcome = 2,
+    }
     public class Costs : BaseEntity
     {
         public Costs()
         {
             DateCreated = DateTime.Now;
+            DateLogged = DateTime.Now;
         }
+        [Required]
         public string Name { get; set; }
-        public string Email { get; set; }
-        public int Adults { get; set; }
-        public int Children { get; set; }
-        public string Note { get; set; }
+        public double Amount { get; set; }
+        public CostType Type { get; set; }
+        public DateTime DateLogged { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        public int Quantity { get; set; }
-        public Double Price { get; set; }
-        public double OrginalPrice { get; set; }
-    
-        public DateTime DateEnd { get; set; }
-        public bool IsImport { get; set; }
-        public bool IsDelete { get; set; }
+
+        public int HotelId { get; set; }
+        [ForeignKey("HotelId")]
+        public virtual Hotel Hotel { get; set; }
 
         public int CostCategoryId { get; set; }
         [ForeignKey("CostCategoryId")]
         public virtual CostCategory CostCategory { get; set; }
-        public virtual ICollection<CostOrderItem> CostOrderItem { get; set; }
-
 
     }
 }
