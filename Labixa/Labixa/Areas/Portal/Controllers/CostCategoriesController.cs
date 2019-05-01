@@ -61,6 +61,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(null), "Id",
+                "Name");
             return View();
         }
 

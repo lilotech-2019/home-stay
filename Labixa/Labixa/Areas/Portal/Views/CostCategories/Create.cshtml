@@ -68,9 +68,10 @@
 
 
                             <div class="form-group col-sm-6">
-                                @Html.LabelFor(model => model.CategoryParentId, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                                @Html.LabelFor(model => model.CategoryParentId, "CategoryParentId", new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.CategoryParentId, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.DropDownList("CategoryParentId")
                                     @Html.ValidationMessageFor(model => model.CategoryParentId)
                                 </div>
                             </div>
@@ -156,10 +157,6 @@
                                     @Html.ValidationMessageFor(model => model.Deleted)
                                 </div>
                             </div>
-
-                        </div>
-                        <div id="tab3" class="tab-pane fade in">
-
 
                         </div>
                     </div>
