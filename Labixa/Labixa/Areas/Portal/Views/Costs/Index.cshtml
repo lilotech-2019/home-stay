@@ -2,7 +2,10 @@
 
 @model IEnumerable<Outsourcing.Data.Models.HMS.Cost>
 @Scripts.Render("~/Content/dataTable")
-
+@section scripts{
+    <script src="~/Content/admin/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
+}
 @{
     ViewBag.Title = "Quản lý chi phí";
     var count = 0;
@@ -113,27 +116,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $("#updateStatus").on("click",
-            function () {
-                var url = $(this).attr("data-url");
-                $.ajax({
-                    url: url,
-                    success: function () {
-                        window.location.reload();
-                    }
-                });
-            });
-        $("#processed").on("click",
-            function () {
-                var url = $(this).attr("data-href");
-                window.location.href = url;
-            });
-    });
-    // $("updateStatus").getJSON();
-
-    $(document).ready(function () {
-        var table = $("#productTable").DataTable();
-        //var arrayfilter = [2, 4];
+        var table = $("#datatable").DataTable();
 
         createDropFilter(table, [2]);
         bindDropFilter(table, [5]);
