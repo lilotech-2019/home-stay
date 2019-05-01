@@ -57,58 +57,62 @@
                         {
                             count++;
 
-                            <tr class="">
-                                <td>@count</td>
-                                <td class="">
-                                    <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
-                                </td>
-                                <td class="">
-                                    <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
-                                </td>
-                                <td class="">@item.Customer.Name</td>
-                                <td class="">@item.Customer.Phone</td>
-                                <td class="">@item.CheckIn</td>
-                                <td class="">@item.CheckOut</td>
+                    <tr class="">
+                        <td>@count</td>
+                        <td class="">
+                            <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
+                        </td>
+                        <td class="">
+                            <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
+                        </td>
 
-                                <td class="hidden-480 ">
-                                    @{
-                                        var status = item.OrderStatus;
-                                        switch (status)
-                                        {
-                                            case RoomOrderStatus.New:
-                                                <span class="label label-sm label-warning">Đợi xác nhận</span>
-                                                <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Thanh toán</a>
-                                                break;
-                                            case RoomOrderStatus.Processed:
-                                                <span class="label label-sm label-success">Đã xử lý</span>
-                                                break;
-                                            case RoomOrderStatus.CheckIn:
-                                                <span class="label label-sm label-success">Đã check in</span>
-                                                <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
-                                                break;
-                                            case RoomOrderStatus.CheckOut:
-                                                <span class="label label-sm label-success">Đã check out</span>
-                                                break;
-                                            default:
-                                                throw new ArgumentOutOfRangeException();
-                                        }
-                                    }
-                                </td>
+                        <td class="">
+                            <a href="@Url.Action("Index", "RoomOrders", new {id = item.RoomId})">@item.Room.Name</a>
+                        </td>
+                        <td class="">@item.Customer.Name</td>
+                        <td class="">@item.Customer.Phone</td>
+                        <td class="">@item.CheckIn</td>
+                        <td class="">@item.CheckOut</td>
+
+                        <td class="hidden-480 ">
+                            @{
+                                var status = item.OrderStatus;
+                                switch (status)
+                                {
+                                    case RoomOrderStatus.New:
+                                        <span class="label label-sm label-warning">Đợi xác nhận</span>
+                                        <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Thanh toán</a>
+                                        break;
+                                    case RoomOrderStatus.Processed:
+                                        <span class="label label-sm label-success">Đã xử lý</span>
+                                        break;
+                                    case RoomOrderStatus.CheckIn:
+                                        <span class="label label-sm label-success">Đã check in</span>
+                                        <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                        break;
+                                    case RoomOrderStatus.CheckOut:
+                                        <span class="label label-sm label-success">Đã check out</span>
+                                        break;
+                                    default:
+                                        throw new ArgumentOutOfRangeException();
+                                }
+                            }
+                        </td>
 
 
-                                <td class=" ">
-                                    <div class="visible-md visible-lg  btn-group">
+                        <td class=" ">
+                            <div class="visible-md visible-lg  btn-group">
 
-                                        <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
 
-                                    </div>
-                                </td>
-                            </tr>
+                            </div>
+                        </td>
+                    </tr>
                         }
                     }
                 </tbody>
