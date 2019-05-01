@@ -80,7 +80,6 @@
     <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
     <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
-    <Compile Include="Areas\Portal\Controllers\AssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\RoomAssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\BaseController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogCategoriesController.cs" />

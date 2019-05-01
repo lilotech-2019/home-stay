@@ -94,7 +94,7 @@
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\HotelCategory.cs" />
     <Compile Include="Models\HMS\CategoryProducts.cs" />
-    <Compile Include="Models\HMS\Costs.cs" />
+    <Compile Include="Models\HMS\Cost.cs" />
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />

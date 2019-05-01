@@ -55,7 +55,7 @@ namespace Outsourcing.Core.Extensions
                           });
         }
         public static IEnumerable<SelectListItem> ToSelectListItems(
-             this IEnumerable<Costs> Cost, int selectedId)
+             this IEnumerable<Cost> Cost, int selectedId)
         {
             return
 

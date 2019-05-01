@@ -19,7 +19,7 @@ namespace Outsourcing.Data.Models.HMS
         /// </summary>
         public string Slug { get; set; }
 
-        public virtual ICollection<Costs> Costs { get; set; }
+        public virtual ICollection<Cost> Costs { get; set; }
 
         //public string Test { get; set; }
     }
