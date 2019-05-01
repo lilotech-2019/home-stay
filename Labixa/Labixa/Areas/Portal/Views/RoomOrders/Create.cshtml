@@ -34,7 +34,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-
+                @Html.HiddenFor(model => model.RoomOrders.RoomId)
                 <div class="row">
                     <h3 class="col-sm-12">Thông Tin Khách Hàng</h3>
                     <!--Customer Information Start-->
@@ -75,7 +75,7 @@
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.RoomOrders.RoomId, "RoomId", new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.RoomOrders.RoomId,null,new { @disabled = "disabled"})
+                            @Html.DropDownList("RoomId")
                             @Html.ValidationMessageFor(model => model.RoomOrders.RoomId)
                         </div>
                     </div>
