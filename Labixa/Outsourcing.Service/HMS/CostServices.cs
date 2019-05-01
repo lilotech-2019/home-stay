@@ -49,7 +49,7 @@ namespace Outsourcing.Service.HMS
         #region Implementation for ICostService
         public IEnumerable<Cost> GetCosts()
         {
-            var costs = _costRepository.GetAll().Where(p=>!p.IsDelete);
+            var costs = _costRepository.GetAll().Where(p=>!p.Deleted);
             return costs;
         }
         public IEnumerable<Cost> Get3CostsPosition()
@@ -107,7 +107,7 @@ namespace Outsourcing.Service.HMS
             var cost = _costRepository.GetById(costId);
             if (cost != null)
             {
-                cost.IsDelete = true;
+                cost.Deleted = true;
                 _costRepository.Update(cost);
                 SaveCost();
             }
