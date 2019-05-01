@@ -260,8 +260,8 @@
     </div>
     <div class="room-slider">
         <div class="roomsuite-slider">
-            @{
-                if (!Model.roomHome.Any())
+            @{          
+                if (Model.roomHome == null || Model.roomHome.Count() < 3)
                 {
                     if (cookie != null && cookie.Value.Equals("vi"))
                     {
@@ -820,7 +820,7 @@
             <h3></h3>
         </div>
         <div class="row event-pad">
-            @if (!Model.blogHome.Any())
+            @if (Model.blogHome == null || Model.blogHome.Count() < 3 )
             {
                 if (cookie.Value.Equals("vi"))
                 {
