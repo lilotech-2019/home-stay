@@ -7,9 +7,6 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    /// <summary>
-    /// code merge rồi nek
-    /// </summary>
     public class CostsController : Controller
     {
         #region Field
