@@ -43,7 +43,7 @@ namespace Outsourcing.Data
         public DbSet<CostCategory> CostCategorys { get; set; }
         public DbSet<CostOrderItem> CostOrderItems { get; set; }
         public DbSet<CostOrder> CostOrders { get; set; }
-        public DbSet<Costs> Costs { get; set; }
+        public DbSet<Cost> Costs { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<RoomImageMappings> RoomImageMappings { get; set; }
