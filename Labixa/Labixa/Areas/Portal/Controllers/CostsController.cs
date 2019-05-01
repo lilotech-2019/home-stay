@@ -28,7 +28,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(int? costCategoryId)
+        public ActionResult Index(int hotelId, int? costCategoryId)
         {
             var costs = _costsnewService.FindAll();
             if (costCategoryId != null)
