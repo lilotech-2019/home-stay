@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using System.ComponentModel
+@model dynamic
 
 <!DOCTYPE html>
 <html>
@@ -176,17 +177,21 @@
             <!--Quản lý khách sạn-->
 
             @Html.Action("HotelCategorySubMenu", "HotelCategories")
-
-            <li>
-                <a href="@Url.Action("Index", "Rooms")" class="dropdown-toggle">
-                    <i class="icon-desktop"></i>
-                    <span class="menu-text">
-                        Quản lý Phòng
-                        <span class="badge badge-primary ">1</span>
-                    </span>
-                    <b class=""></b>
-                </a>
-            </li>
+            <!--Quản lý khách sạn-->
+            <!--Quản lý phòng-->
+          
+            @Html.Action("HotelSubMenu", "Hotels")
+            <!--Quản lý phòng-->
+            @*<li>
+            <a href="@Url.Action("Index", "Rooms")" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">
+                    Quản lý Phòng
+                    <span class="badge badge-primary ">1</span>
+                </span>
+                <b class=""></b>
+            </a>
+        </li>*@
             <li>
                 <a href="@Url.Action("Index", "Orders")" class="dropdown-toggle">
                     <i class="icon-desktop"></i>

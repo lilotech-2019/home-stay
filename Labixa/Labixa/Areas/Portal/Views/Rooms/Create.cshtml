@@ -1,11 +1,11 @@
 ﻿@model Outsourcing.Data.Models.Room
 
 @{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "Create Room";
+    ViewBag.Title = "Create Room";
 }
 @section scripts{
     <script src="~/Content/ckeditor/ckeditor.js"></script>
@@ -248,6 +248,6 @@
                 </div>
             }
         </div>
-        <a href="@Url.Action("Index", "Hotels", new {hotelCategoryId = ViewBag.HotelCategoryId})">Back To List</a>
+        <a href="@Url.Action("Index", "Hotels", new {categoryId = Request.Params["categoryId"] })">Back To List</a>
     </div>
 </div>

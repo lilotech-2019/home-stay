@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Outsourcing.Data.Models.Hotel>
+@{ var count = Model.Count() + 1; }
+<li class="">
+    <a href="#" class="dropdown-toggle">
+        <i class="icon-list"></i>
+        <span class="menu-text">
+            Quản lý phòng
+            <span class="badge badge-primary ">@count</span>
+        </span>
+        <b class=""></b>
+    </a>
+    <ul class="submenu" style="overflow: hidden; display: none;">
+        <li>
+            <a href="@Url.Action("Index", "Rooms")">
+                <i class="icon-double-angle-right"></i>
+                Tất Cả
+            </a>
+        </li>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Rooms", new {hotelId = item.Id})">
+                        <i class="icon-double-angle-right"></i>
+                        @item.Name
+                    </a>
+                </li>
+            }
+        }
+
+    </ul>
+</li>

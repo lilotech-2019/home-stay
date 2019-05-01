@@ -11,7 +11,7 @@
 <h2>Tên trang</h2>
 @Styles.Render("~/Content/dataTable")
 <p>
-    @Html.ActionLink("Tạo mới", "Create", new { @class = "btn btn-primary" })
+    <a href="@Url.Action("Create", new {categoryId = Request.Params["categoryId"]})" class="btn btn-primary">Thêm</a>
 </p>
 <div class="row">
     <div class="col-xs-12">
@@ -20,44 +20,44 @@
         <table id="datatable" class="table table-striped table-bordered table-hover">
             <thead>
 
-                <tr>
-                    <th>#</th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        Số phòng
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </th>
+            <tr>
+                <th>#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    Số phòng
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
 
-                    <th>@Resources.Resources.Action</th>
-                </tr>
+                <th>@Resources.Resources.Action</th>
+            </tr>
             </thead>
 
             <tbody>
 
 
 
-                @foreach (var item in Model)
-                {
-                    count++;
+            @foreach (var item in Model)
+            {
+                count++;
                 <tr>
                     <td>
                         @count
                     </td>
                     <td>
-                        <a href="@Url.Action("Index","Rooms",new { hotelId = item.Id })">
+                        <a href="@Url.Action("Index", "Rooms", new {hotelId = item.Id})">
                             @Html.DisplayFor(modelItem => item.Name)
                         </a>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rooms.Count) 
-                        <a href="@Url.Action("Create","Rooms", new {hotelId = item.Id})" class="btn btn-xs btn-success" title="Tạo Phòng">
+                        @Html.DisplayFor(modelItem => item.Rooms.Count)
+                        <a href="@Url.Action("Create", "Rooms", new {hotelId = item.Id})" class="btn btn-xs btn-success" title="Tạo Phòng">
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
@@ -81,7 +81,7 @@
                         </div>
                     </td>
                 </tr>
-                }
+            }
             </tbody>
         </table>
     </div>
@@ -89,7 +89,7 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         var table = $("#datatable").DataTable();
 
         createDropFilter(table, [2]);
@@ -98,17 +98,17 @@
     });
 
     function createDropFilter(table, array) {
-        array.forEach(function (i) {
+        array.forEach(function(i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function () {
+                function() {
                     table.column(i)
                         .search($(this).val())
                         .draw();
                 });
 
-            table.column(i).data().unique().sort().each(function (d, j) {
+            table.column(i).data().unique().sort().each(function(d, j) {
                 filter1.append('<option value="' + d + '">' + d + '</option>');
             });
 
@@ -116,11 +116,11 @@
     }
 
     function bindDropFilter(table, array) {
-        array.forEach(function (i) {
+        array.forEach(function(i) {
             var selector = ".filter_" + i;
             var filter1 = $(selector);
             filter1.on('change',
-                function () {
+                function() {
                     table.column(i)
                         .search($(this).val())
                         .draw();
