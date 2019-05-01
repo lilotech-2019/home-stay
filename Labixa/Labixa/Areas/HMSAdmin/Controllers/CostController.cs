@@ -5,6 +5,7 @@ using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Extensions;
 using Outsourcing.Core.Framework.Controllers;
 using Labixa.Areas.HMSAdmin.ViewModels;
+using Labixa.Areas.HMSAdmin.ViewModels.Costs;
 
 
 namespace Labixa.Areas.HMSAdmin.Controllers
@@ -43,11 +44,7 @@ namespace Labixa.Areas.HMSAdmin.Controllers
             {
                 var cost = new Cost();
                 cost = newCost.Cost;
-                cost.IsDelete = false;
-                cost.IsImport = false;
-                cost.OrginalPrice = 0;
-                cost.Price = 0;
-                cost.Quantity = 0;
+          
                 cost.DateCreated = DateTime.Now.Date;
                 //Create Hotel
                 _costService.CreateCost(cost);

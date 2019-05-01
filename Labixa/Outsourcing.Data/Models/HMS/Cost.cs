@@ -10,9 +10,9 @@ namespace Outsourcing.Data.Models.HMS
         Income = 1,
         Outcome = 2,
     }
-    public class Costs : BaseEntity
+    public class Cost : BaseEntity
     {
-        public Costs()
+        public Cost()
         {
             DateCreated = DateTime.Now;
             DateLogged = DateTime.Now;
