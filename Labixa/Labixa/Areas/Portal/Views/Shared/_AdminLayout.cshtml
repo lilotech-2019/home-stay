@@ -179,7 +179,7 @@
             @Html.Action("HotelCategorySubMenu", "HotelCategories")
             <!--Quản lý khách sạn-->
             <!--Quản lý phòng-->
-          
+
             @Html.Action("HotelSubMenu", "Hotels")
             <!--Quản lý phòng-->
             @*<li>
@@ -202,8 +202,11 @@
                     <b class=""></b>
                 </a>
             </li>
-            <li>
-                <a href="/HMSAdmin/CostOrder" class="dropdown-toggle">
+            <!--Quản lý chi phí-->
+            @Html.Action("CostCategorySubMenu", "CostCategories")
+            <!--Quản lý chi phí-->
+            @*<li>
+                <a href="@Url.Action("Index", "Costs")" class="dropdown-toggle">
                     <i class="icon-desktop"></i>
                     <span class="menu-text">
                         Quản lý Chi Phí
@@ -211,7 +214,7 @@
                     </span>
                     <b class=""></b>
                 </a>
-            </li>
+            </li>*@
             <li>
                 <a href="/Admin/reportIncome" class="dropdown-toggle">
                     <i class="icon-desktop"></i>

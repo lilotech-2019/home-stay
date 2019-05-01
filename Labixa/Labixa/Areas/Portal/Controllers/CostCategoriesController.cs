@@ -1,7 +1,9 @@
-﻿using Outsourcing.Core.Common;
+﻿using Labixa.Areas.Portal.ViewModels.CostCategory;
+using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -167,5 +169,16 @@ namespace Labixa.Areas.Portal.Controllers
         }
 
         #endregion
+
+        public ActionResult CostCategorySubMenu()
+        {
+            var data = _costCategoriesService.FindAll().AsNoTracking();
+            var viewModel = new CostCategorySubMenuViewModel
+            {
+                Count = data.Count(),
+                CostCategories = data
+            };
+            return PartialView("_CostCategorySubMenu", viewModel);
+        }
     }
 }
