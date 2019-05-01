@@ -83,15 +83,18 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create(int roomId, string phone)
+        public ActionResult Create(int? roomId, string phone)
         {
-            var room = _roomService.FindById(roomId);
-            if (room == null )
+            var room = new Room();
+            if (roomId != null)
             {
-                //TODO - ADD HOTELCATEGORY
-                return RedirectToAction("Index", "Hotels");
+                room = _roomService.FindById((int)roomId);
+                ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
-            ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
+            else {
+                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            }
+
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
 
             if (phone != "")
@@ -126,7 +129,8 @@ namespace Labixa.Areas.Portal.Controllers
                 {
                     roomOrder.Customer = viewModel.Customer;
                 }
-                else {
+                else
+                {
                     roomOrder.CustomerId = customer.Id;
                     customer.Name = viewModel.Customer.Name;
                     customer.Address = viewModel.Customer.Address;
@@ -220,7 +224,7 @@ namespace Labixa.Areas.Portal.Controllers
             var entity = _roomOrderService.FindById(id);
             entity.Total = _roomOrderService.GetTotalPrice(id);
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
-            
+
             return View(entity);
         }
         #endregion

@@ -51,6 +51,10 @@
                         @count
                     </td>
                     <td>
+                        <a href="@Url.Action("Create","Cost", new {hotelId = item.Id})" class="btn btn-xs btn-success">
+                            Chi phí
+                        </a>
+
                         <a href="@Url.Action("Index", "Rooms", new {hotelId = item.Id})">
                             @Html.DisplayFor(modelItem => item.Name)
                         </a>

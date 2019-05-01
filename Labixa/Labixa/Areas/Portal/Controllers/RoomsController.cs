@@ -103,7 +103,7 @@ namespace Labixa.Areas.Portal.Controllers
                 ViewBag.HotelId = new SelectList(hotels.Where(w => w.Id == hotelId), "Id", "Name", hotelId);
                 ViewBag.HotelCategoryId = _hotelService.FindById((int) hotelId).HotelCategoryId;
                 room.HotelId = (int) hotelId;
-                return View();
+                return View(room);
             }
             ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
