@@ -13,6 +13,7 @@ namespace Labixa
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute("culture", "language/{slug}", new { controller = "News", action = "SetCulture", slug = UrlParameter.Optional });
             routes.MapRoute("Room", "danh-sach-phong-ngan-han", new { controller = "RoomVer3", action = "ShortRoom" });
@@ -28,6 +29,7 @@ namespace Labixa
             routes.MapRoute("Booking", "dat-phong", new { controller = "Home", action = "Booking" });
             routes.MapRoute("Event", "su-kien", new { controller = "News", action = "Event" });
             routes.MapRoute("ActitityNews", "hoat-dong-moi", new { controller = "News", action = "ActitityNews" });
+            
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

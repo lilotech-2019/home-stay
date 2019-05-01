@@ -11,7 +11,7 @@
 <h2>Tên trang</h2>
 @Styles.Render("~/Content/dataTable")
 <p>
-    @Html.ActionLink("Tạo mới", "Create", new { hotelCategoryId = ViewBag.hotelCategoryId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Tạo mới", "Create", new { @class = "btn btn-primary" })
 </p>
 <div class="row">
     <div class="col-xs-12">
@@ -71,7 +71,7 @@
                     <td class=" ">
                         <div class="visible-md visible-lg  btn-group">
 
-                            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                            <a href="@Url.Action("Edit", new {id = item.Id, categoryId = item.HotelCategoryId})" class="btn btn-xs btn-info">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">

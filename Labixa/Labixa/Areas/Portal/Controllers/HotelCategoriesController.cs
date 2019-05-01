@@ -10,6 +10,8 @@ using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [RouteArea("Portal")]
+    [RoutePrefix("HotelCategories")]
     public class HotelCategoriesController : Controller
     {
         #region Fields
@@ -33,6 +35,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index - GET
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             var categories = await _hotelCategoryService.FindAll().AsNoTracking().ToListAsync();
@@ -178,13 +181,13 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
-        public ActionResult PartialSubMenuCategory() {
+        public ActionResult PartialSubMenuCategory()
+        {
             var data = _hotelCategoryService.FindAll().AsNoTracking();
             var viewModel = new PartialSubMenuCategoryViewModel();
             viewModel.Count = data.Count();
             viewModel.HotelCategories = data;
-            return PartialView("_PartialSubMenuCategory",viewModel);
+            return PartialView("_PartialSubMenuCategory", viewModel);
         }
-
     }
 }
