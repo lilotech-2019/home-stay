@@ -1,7 +1,10 @@
-﻿using Outsourcing.Core.Common;
+﻿using ClosedXML.Excel;
+using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
+using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -15,14 +18,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IHotelService _hotelService;
+        private readonly ICostsService _costsService;
         private readonly IHotelCategoryService _categoryHotelService;
 
         #endregion
 
         #region Ctor
 
-        public HotelsController(IHotelService hotelService, IHotelCategoryService categoryHotelService)
+        public HotelsController(IHotelService hotelService, ICostsService costsService, IHotelCategoryService categoryHotelService)
         {
+            _costsService = costsService;
             _hotelService = hotelService;
             _categoryHotelService = categoryHotelService;
         }
@@ -63,7 +68,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var hotel = _hotelService.FindById((int) id);
+            var hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -103,7 +108,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new {categoryId = hotel.HotelCategoryId});
+                return RedirectToAction("Index", new { categoryId = hotel.HotelCategoryId });
             }
 
             ViewBag.HotelCategoryId =
@@ -127,7 +132,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int) id);
+            Hotel hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -154,7 +159,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new {hotelCategoryId = hotel.HotelCategoryId});
+                return RedirectToAction("Index", new { hotelCategoryId = hotel.HotelCategoryId });
             }
 
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
@@ -177,7 +182,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelService.FindById((int) id);
+            var categoryHotels = _hotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
@@ -210,6 +215,55 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var hotels = _hotelService.FindAll();
             return PartialView("_HotelSubMenu", hotels.AsNoTracking().ToList());
+        }
+
+        public ActionResult Preview(int hotelId)
+        {
+            var hotel = _hotelService.FindById(hotelId);
+            return View(hotel);
+        }
+
+        [HttpPost]
+        public FileResult ExportData(int id)
+        {
+            var costs = _costsService.FindAll().Where(w => w.HotelId == id);
+            var costsIncome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Income);
+            var costsOutcome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Outcome);
+
+            //Income
+            DataTable dtIncome = new DataTable("Income");
+            dtIncome.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
+                                            new DataColumn("Name"),
+                                            new DataColumn("Amount")});
+
+            foreach (var item in costsIncome)
+            {
+                dtIncome.Rows.Add(item.Id, item.Name, item.Amount);
+            }
+
+            //Outcome
+            DataTable dtOutcome = new DataTable("Outcome");
+            dtOutcome.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
+                                            new DataColumn("Name"),
+                                            new DataColumn("Amount")});
+
+            foreach (var item in costsOutcome)
+            {
+                dtOutcome.Rows.Add(item.Id, item.Name, item.Amount);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dtIncome);
+                wb.Worksheets.Add(dtOutcome);
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Report.xlsx");
+                }
+
+            }
         }
     }
 }

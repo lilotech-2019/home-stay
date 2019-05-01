@@ -1,0 +1,56 @@
+﻿@model Outsourcing.Data.Models.Hotel
+
+@{
+    ViewBag.Title = "Preview";
+}
+
+<h2>Preview</h2>
+
+<div>
+    <h4>Hotels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HotelCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HotelCategory.Name)
+        </dd>
+
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Type</th>
+            </tr>
+            @foreach (var item in Model.Costs)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Amount</td>
+                <td>@item.Type</td>
+
+            </tr>
+            }
+        </table>
+    </dl>
+</div>
+<p>
+    @using (Html.BeginForm("ExportData", "Hotels", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+        <input type="submit" value="Export" class="btn btn-primary" />
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>
