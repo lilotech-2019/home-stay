@@ -7,7 +7,8 @@ namespace Outsourcing.Data.Models
     {
         public Product()
         {
-            LastEditedTime = DateCreated = DateTime.Now;
+            LastEditedTime = DateTime.Now;
+            DateCreated = DateTime.Now;
         }
 
         public string Name { get; set; }
