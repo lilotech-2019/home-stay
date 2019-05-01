@@ -101,8 +101,10 @@ namespace Labixa.Areas.Portal.Controllers
             if (phone != "")
             {
                 var customer = _customerService.FindByPhone(phone);
-                entity.Customer = customer;
-                entity.Customer.Id = customer.Id;
+                if (customer != null)
+                {
+                    entity.Customer = customer;
+                }
             }
 
             return View(entity);
@@ -121,6 +123,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 viewModel.RoomOrders.OrderStatus = RoomOrderStatus.New;
                 viewModel.RoomOrders.CustomerId = viewModel.Customer.Id;
+                viewModel.RoomOrders.RoomId = viewModel.RoomOrders.RoomId;
                 _roomOrderService.Create(viewModel.RoomOrders);
                 return RedirectToAction("Index");
             }
@@ -220,7 +223,8 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = roomOrder;
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
-            return View(roomOrder);
+            entity.Total = _roomOrderService.GetTotalPrice(roomOrder.Id);
+            return View(entity);
         }
 
         /// <summary>

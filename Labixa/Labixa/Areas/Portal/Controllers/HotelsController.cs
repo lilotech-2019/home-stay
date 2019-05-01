@@ -96,7 +96,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { hotelCategoryId = hotel.HotelCategoryId});
             }
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
             return View(hotel);
@@ -139,7 +139,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { hotelCategoryId = hotel.HotelCategoryId });
             }
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
