@@ -106,7 +106,7 @@ namespace Labixa.Areas.Portal.Controllers
                 }
                 entity.Customer = customer;
             }
-
+            ViewBag.Phone = phone;
             return View(entity);
 
         }
