@@ -69,7 +69,18 @@ namespace Labixa.Controllers
         public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email, String CheckIn, String CheckOut,
             string Phone)
         {
-
+            bool[] service = { modelBooking.Book_Motobike, modelBooking.Book_Tour, modelBooking.BookCar, modelBooking.Book_BBQService, modelBooking.Book_Gift, modelBooking.Book_Laundry, modelBooking.Book_FlightTicket, modelBooking.Book_Visa, modelBooking.Book_Taxi, modelBooking.Book_SuggestionTour };
+            string[] serviceName = { "Thuê Xe Máy(Tay Ga, Xe Số)", "Đặt Tour", "Xe Hơi 4,7,16 chỗ", "Dịch vụ BBQ", "Quà Lưu Niệm", "Giặt Ủi", "Vé máy bay", "Visa", "Xe Đưa Đón Sân Bay", "Ăn uống, Tham Quan, Check-In" };
+            string chooseService = "";
+            for (int i = 0; i < service.Length; i++)
+            {
+                if (service[i])
+                {
+                    chooseService += serviceName[i] + " ,";
+                }
+            }
+            if (!chooseService.Equals("")) { chooseService = chooseService.TrimEnd(','); }
+            else { chooseService = "Không có";}
             HttpCookie cookie = Request.Cookies["_culture"];
             var n = cookie;
             string subject = "Đặt phòng thành công";
@@ -109,8 +120,12 @@ namespace Labixa.Controllers
                "<td>" + modelBooking.AmountOfPeople + "</td>" +
                "</tr>" +
                "<tr>" +
-               "<th>Tạm Tính </th>" +
+               "<th>Tạm Tính: </th>" +
                "<td>" + modelBooking.Price.ToString("#,##0") + " VNĐ</td>" +
+               "</tr>" +
+               "<tr>" +
+               "<th>Yêu Cầu Thêm: </th>" +
+               "<td>" + chooseService + "</td>" +
                "</tr>" +
                "</table></div></div></html>";
 
@@ -134,7 +149,7 @@ namespace Labixa.Controllers
             }
             else
             {
-                modelBooking.CheckIn = DateTime.ParseExact(CheckIn,"dd/MM/yyyy",null);
+                modelBooking.CheckIn = DateTime.ParseExact(CheckIn, "dd/MM/yyyy", null);
                 modelBooking.CheckOut = DateTime.ParseExact(CheckOut, "dd/MM/yyyy", null);
 
 
@@ -154,7 +169,18 @@ namespace Labixa.Controllers
         {
             //Room room = new Room();
             //room.Name = name;
-
+            bool[] service = { modelBookingLongRoom.Book_Motobike, modelBookingLongRoom.Book_Tour, modelBookingLongRoom.BookCar, modelBookingLongRoom.Book_BBQService, modelBookingLongRoom.Book_Gift, modelBookingLongRoom.Book_Laundry, modelBookingLongRoom.Book_FlightTicket, modelBookingLongRoom.Book_Visa, modelBookingLongRoom.Book_Taxi, modelBookingLongRoom.Book_SuggestionTour };
+            string[] serviceName = { "Thuê Xe Máy(Tay Ga, Xe Số)", "Đặt Tour", "Xe Hơi 4,7,16 chỗ", "Dịch vụ BBQ", "Quà Lưu Niệm", "Giặt Ủi", "Vé máy bay", "Visa", "Xe Đưa Đón Sân Bay", "Ăn uống, Tham Quan, Check-In" };
+            string chooseService = "";
+            for (int i = 0; i < service.Length; i++)
+            {
+                if (service[i])
+                {
+                    chooseService += "," + serviceName[i];
+                }
+            }
+            if (!chooseService.Equals("")) { chooseService = chooseService.TrimEnd(','); }
+            else { chooseService = "Không có"; }
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -193,7 +219,11 @@ namespace Labixa.Controllers
                 "</tr>" +
                 "<tr>" +
                 "<th>Tạm Tính: </th>" +
-                "<td>" + modelBookingLongRoom.Price.ToString("#,##0") +" VND</td>" +
+                "<td>" + modelBookingLongRoom.Price.ToString("#,##0") + " VND</td>" + 
+                "</tr>" +
+                "<tr>" +
+                "<th>Yêu Cầu Thêm: </th>" +
+                "<td>" + chooseService + "</td>" + 
                 "</tr>" +
                 "</table></div></div></html>";
 
