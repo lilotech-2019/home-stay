@@ -110,7 +110,7 @@ namespace Labixa.Controllers
                "</tr>" +
                "<tr>" +
                "<th>Tạm Tính </th>" +
-               "<td>" + modelBooking.Price + "</td>" +
+               "<td>" + modelBooking.Price.ToString("#,##0") + " VNĐ</td>" +
                "</tr>" +
                "</table></div></div></html>";
 
@@ -193,7 +193,7 @@ namespace Labixa.Controllers
                 "</tr>" +
                 "<tr>" +
                 "<th>Tạm Tính: </th>" +
-                "<td>" + modelBookingLongRoom.Price + "</td>" +
+                "<td>" + modelBookingLongRoom.Price.ToString("#,##0") +" VND</td>" +
                 "</tr>" +
                 "</table></div></div></html>";
 

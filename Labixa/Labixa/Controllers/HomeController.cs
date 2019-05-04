@@ -101,7 +101,7 @@ namespace Labixa.Controllers
                "</tr>" +
                "<tr>" +
                "<th>Số Tiền: </th>" +
-               "<td>" + model.Price + "</td>" +
+               "<td>" + model.Price.ToString("#,##0") + "VNĐ</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Số Điện Thoại: </th>" +
