@@ -7,8 +7,8 @@
 
 }
 @section scripts{
-    @*<script src="~/Content/ckeditor/ckeditor.js"></script>
-        <script src="~/Content/ckeditor/config.js"></script>*@
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
 }
 @section breadcrumb
 {
@@ -232,7 +232,7 @@
                 </div>
             }
         </div>
-        <a href="@Url.Action("Index","Hotels",new { hotelCategoryId = ViewBag.HotelCategoryId})">Back To Link</a>
+        <a href="@Url.Action("Index","Hotels",new { categoryId = Request.Params["categoryId"]})">Back To Link</a>
 
     </div>
 </div>

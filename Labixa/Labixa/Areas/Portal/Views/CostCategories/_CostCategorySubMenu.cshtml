@@ -1,0 +1,30 @@
+﻿@model Labixa.Areas.Portal.ViewModels.CostCategory.CostCategorySubMenuViewModel
+@{ var count = Model.Count + 1; }
+<li class="">
+    <a href="#" class="dropdown-toggle">
+        <i class="icon-list"></i>
+        <span class="menu-text">
+            Quản lý Chi Phí
+            <span class="badge badge-primary ">@count</span>
+        </span>
+        <b class=""></b>
+    </a>
+    <ul class="submenu" style="overflow: hidden; display: none;">
+        <li>
+            <a href="@Url.Action("Index", "Costs")">
+                <i class="icon-double-angle-right"></i>
+                Tất Cả
+            </a>
+        </li>
+        @foreach (var item in Model.CostCategories)
+        {
+            <li>
+                <a href="@Url.Action("Index", "Costs", new {costCategoryId = item.Id})">
+                    <i class="icon-double-angle-right"></i>
+                    @item.Name
+                </a>
+            </li>
+        }
+
+    </ul>
+</li>

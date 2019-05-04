@@ -1,35 +1,37 @@
-﻿using Outsourcing.Data.Models;
-using Outsourcing.Service;
-using Outsourcing.Service.Portal.Outsourcing.Service.Portal;
+﻿using Labixa.Areas.Portal.ViewModels.CostCategory;
+using Outsourcing.Core.Common;
+using Outsourcing.Data.Models.HMS;
+using Outsourcing.Service.Portal;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    public class AssetsController : Controller
+    public class CostCategoriesController : Controller
     {
-        #region Fields
-        private readonly IAssetService _assetService;
+        #region Field
+        private readonly ICostCategoriesService _costCategoriesService;
         #endregion
 
         #region Ctor
-        public AssetsController(IAssetService assetService)
+        public CostCategoriesController(ICostCategoriesService costCategoryService)
         {
-            _assetService = assetService;
+            _costCategoriesService = costCategoryService;
         }
         #endregion
 
         #region Index
         /// <summary>
-        /// Index - GET
+        /// Index
         /// </summary>
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var assets = await _assetService.FindAll().AsNoTracking().ToListAsync();
-            return View(assets);
+            var costCategories = await _costCategoriesService.FindAll().AsNoTracking().ToListAsync();
+            return View(costCategories);
         }
         #endregion
 
@@ -45,12 +47,12 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var asset = _assetService.FindById((int)id);
-            if (asset == null)
+            CostCategory costCategory = _costCategoriesService.FindById((int)id);
+            if (costCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(costCategory);
         }
         #endregion
 
@@ -61,31 +63,35 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(null), "Id",
+                "Name");
             return View();
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="deposit"></param>
+        /// <param name="costCategory"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Asset asset)
+        public ActionResult Create(CostCategory costCategory)
         {
             if (ModelState.IsValid)
             {
-                _assetService.Create(asset);
+                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Name);
+                _costCategoriesService.Create(costCategory);
                 return RedirectToAction("Index");
             }
 
-            return View(asset);
+            return View(costCategory);
         }
+
         #endregion
 
         #region Edit
         /// <summary>
-        /// Edit - GET
+        /// Edit - GET 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -95,29 +101,31 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var asset = _assetService.FindById((int)id);
-            if (asset == null)
+            CostCategory costCategory = _costCategoriesService.FindById((int)id);
+            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(costCategory.CategoryParentId), "Id","Name", costCategory.CategoryParentId);
+            if (costCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(costCategory);
         }
 
         /// <summary>
         /// Edit - POST
         /// </summary>
-        /// <param name="deposit"></param>
+        /// <param name="costCategory"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Asset asset)
+        public ActionResult Edit(CostCategory costCategory)
         {
             if (ModelState.IsValid)
             {
-                _assetService.Edit(asset);
+                costCategory.Slug = StringConvert.ConvertShortName(costCategory.Name);
+                _costCategoriesService.Edit(costCategory);
                 return RedirectToAction("Index");
             }
-            return View(asset);
+            return View(costCategory);
         }
         #endregion
 
@@ -133,26 +141,44 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var asset = _assetService.FindById((int)id);
-            if (asset == null)
+            var costCategory = _costCategoriesService.FindById((int)id);
+            if (costCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(asset);
+            return View(costCategory);
         }
 
+        /// <summary>
+        /// Delete - POST
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var asset = _assetService.FindById(id);
-            if (asset == null)
+            var costCategory = _costCategoriesService.FindById((int)id);
+            if (costCategory == null)
             {
                 return HttpNotFound();
             }
-            _assetService.Delete(asset);
+
+            _costCategoriesService.Delete(costCategory);
             return RedirectToAction("Index");
         }
+
         #endregion
+
+        public ActionResult CostCategorySubMenu()
+        {
+            var data = _costCategoriesService.FindAll().AsNoTracking();
+            var viewModel = new CostCategorySubMenuViewModel
+            {
+                Count = data.Count(),
+                CostCategories = data
+            };
+            return PartialView("_CostCategorySubMenu", viewModel);
+        }
     }
 }

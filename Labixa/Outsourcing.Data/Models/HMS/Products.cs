@@ -8,7 +8,8 @@ namespace Outsourcing.Data.Models.HMS
     {
         public HmsProduct()
         {
-            LastEditedTime = DateCreated = DateTime.Now;
+            LastEditedTime = DateTime.Now;
+            DateCreated = DateTime.Now;
         }
 
         public string Name { get; set; }
@@ -22,7 +23,6 @@ namespace Outsourcing.Data.Models.HMS
         public string MetaKeywords { get; set; }
         public string MetaTitle { get; set; }
         public string MetaDescription { get; set; }
-        public DateTime DateCreated { get; set; }
         public DateTime LastEditedTime { get; set; }
 
         public bool IsHomePage { get; set; }

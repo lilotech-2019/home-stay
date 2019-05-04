@@ -162,9 +162,9 @@ namespace Outsourcing.Data.Migrations
 
             #region Website Attributes
 
-            if (context.WebsiteAttributes.AsNoTracking().Any() == false)
+            if (context.WebsiteAtributes.AsNoTracking().Any() == false)
             {
-                context.WebsiteAttributes.Add(new WebsiteAttributes
+                context.WebsiteAtributes.Add(new WebsiteAtribute
                 {
                     Name = "Labixa.PopupWebsite",
                     IsPublic = true,

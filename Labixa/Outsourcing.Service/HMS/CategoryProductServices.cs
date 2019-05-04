@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Repository;
-using Outsourcing.Service.Properties;
 using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
@@ -34,8 +29,8 @@ namespace Outsourcing.Service.HMS
         #region Ctor
         public CategoryProductService(ICategoryProductRepository categoryProductRepository, IUnitOfWork unitOfWork)
         {
-            this._categoryProductRepository = categoryProductRepository;
-            this._unitOfWork = unitOfWork;
+            _categoryProductRepository = categoryProductRepository;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -43,14 +38,14 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CategoryProducts> GetProductCategories()
         {
-            var categoryProducts = _categoryProductRepository.GetAll().Where(p => p.Deleted == false);
+            var categoryProducts = _categoryProductRepository.FindBy();
             return categoryProducts;
         }
 
         public CategoryProducts GetCategoryProductById(int categoryProductId)
         {
-            var categoryProduct = _categoryProductRepository.GetById(categoryProductId);
-            return categoryProduct;
+            var categoryProduct = _categoryProductRepository.FindBy(w => w.Id == categoryProductId);
+            return categoryProduct.FirstOrDefault();
         }
 
         public void CreateCategoryProduct(CategoryProducts categoryProduct)
@@ -68,7 +63,7 @@ namespace Outsourcing.Service.HMS
         public void DeleteProductCategories(int categoryProductId)
         {
             //Get CategoryProduct by id.
-            var categoryProduct = _categoryProductRepository.GetById(categoryProductId);
+            var categoryProduct = GetCategoryProductById(categoryProductId);
             if (categoryProduct != null)
             {
                 _categoryProductRepository.Delete(categoryProduct);

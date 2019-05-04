@@ -11,6 +11,8 @@ namespace Outsourcing.Data.Models
         [MaxLength(255)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(255)]
         public string NameEnglish { get; set; }
         public string Slug { get; set; }
         public string SlugEnglish { get; set; }
@@ -47,7 +49,7 @@ namespace Outsourcing.Data.Models
         public RoomType Type { get; set; }
 
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
-        public virtual ICollection<RoomAsset> RoomAssets { get; set; }
+       public virtual ICollection<RoomAsset> RoomAssets { get; set; }
     }
 
     public enum RoomType

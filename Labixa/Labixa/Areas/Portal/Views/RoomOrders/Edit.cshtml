@@ -33,11 +33,13 @@
             <div class="alert alert-block alert-info">
                 Cập nhật Khách Sạn
             </div>
-            @using (Html.BeginForm("Edit", "Hotels", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", "RoomOrders", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CustomerId)
+                @Html.HiddenFor(model => model.Customer.Id)
 
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -267,6 +269,8 @@
                 </div>
             }
         </div>
+        <a href="@Url.Action("Index","RoomOrders",new { CostCategoryId = ViewBag.CostCategoryId})">Back To Link</a>
+
     </div>
 </div>
 

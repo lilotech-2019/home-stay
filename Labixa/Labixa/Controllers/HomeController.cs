@@ -148,7 +148,7 @@ namespace Labixa.Controllers
             return View();
         }
 
-        public ActionResult BookingRoom(Costs modelBooking)
+        public ActionResult BookingRoom(Cost modelBooking)
         {
             modelBooking.CostCategoryId = 1;
             _costService.CreateCost(modelBooking);

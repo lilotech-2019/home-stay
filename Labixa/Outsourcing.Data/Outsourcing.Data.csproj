@@ -83,7 +83,6 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\FileData.cs" />
     <Compile Include="Models\RoomAsset.cs" />
     <Compile Include="Models\Message.cs" />
@@ -95,7 +94,7 @@
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\HotelCategory.cs" />
     <Compile Include="Models\HMS\CategoryProducts.cs" />
-    <Compile Include="Models\HMS\Costs.cs" />
+    <Compile Include="Models\HMS\Cost.cs" />
     <Compile Include="Models\HMS\CostCategory.cs" />
     <Compile Include="Models\HMS\CostOrder.cs" />
     <Compile Include="Models\HMS\CostOrderItem.cs" />
@@ -125,7 +124,7 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TypeNotify.cs" />
     <Compile Include="Models\ContactUs.cs" />
-    <Compile Include="Models\WebsiteAttributes.cs" />
+    <Compile Include="Models\WebsiteAtribute.cs" />
     <Compile Include="OutsourcingSampleData.cs" />
     <Compile Include="Infrastructure\DatabaseFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />

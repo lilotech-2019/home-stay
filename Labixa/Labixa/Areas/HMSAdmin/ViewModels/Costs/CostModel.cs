@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Outsourcing.Data.Models.HMS;
 
-namespace Labixa.Areas.HMSAdmin.ViewModels
+namespace Labixa.Areas.HMSAdmin.ViewModels.Costs
 {
     public class CostModel
     {
         public CostModel()
         {
-            Cost = new Costs();
+            Cost = new Outsourcing.Data.Models.HMS.Cost();
         }
-        public Costs Cost { get; set; }
+        public Outsourcing.Data.Models.HMS.Cost Cost { get; set; }
         public IEnumerable<SelectListItem> ListCostCategory { get; set; }
     }
 }

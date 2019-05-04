@@ -32,8 +32,8 @@ namespace Outsourcing.Data.Models.HMS
         public string Description2 { get; set; }
         public virtual ICollection<CostOrderItem> CostOrderItems { get; set; }
 
-        public int HotelId { get; set; }
-        [ForeignKey("HotelId")]
-        public virtual Hotel Hotel { get; set; }
+        //public int HotelId { get; set; }
+        //[ForeignKey("HotelId")]
+        //public virtual Hotel Hotel { get; set; }
     }
 }

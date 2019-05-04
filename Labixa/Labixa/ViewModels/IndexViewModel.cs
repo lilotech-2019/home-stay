@@ -9,16 +9,16 @@ namespace Labixa.ViewModels
 {
     public class IndexViewModel
     {
-        public List<WebsiteAttributes> websiteAttribute { get; set; }
+        public List<WebsiteAtribute> websiteAttribute { get; set; }
         public List<Blog> blog { get; set; }
         public List<Product> product { get; set; }
         public IEnumerable<Room> roomHome { get; set; }
 
         public IEnumerable<Blog> blogHome { get; set; }      
 
-        public IEnumerable<WebsiteAttributes> imageHome1 { get; set; }
-        public IEnumerable<WebsiteAttributes> imageHome2 { get; set; }
-        public IEnumerable<WebsiteAttributes> imageHome3 { get; set; }
+        public IEnumerable<WebsiteAtribute> imageHome1 { get; set; }
+        public IEnumerable<WebsiteAtribute> imageHome2 { get; set; }
+        public IEnumerable<WebsiteAtribute> imageHome3 { get; set; }
         public List<SlideViewModel> Slider { get; set; }
 
         public class SlideViewModel
