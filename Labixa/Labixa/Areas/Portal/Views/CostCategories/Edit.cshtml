@@ -23,7 +23,7 @@
                 <i class="icon-edit"></i>
                 <a href="@Url.Action("Index")">Quản lý Chi Phí</a>
             </li>
-            <li class="active">Chinh sua Chi Phí</li>
+            <li class="active">Chỉnh Sửa Chi Phí</li>
         </ul>
     </div>
 }
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-block alert-info">
-                Thêm Mới Khách Sạn
+                Chỉnh Sửa Chi Phí
             </div>
             @using (Html.BeginForm("Edit", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -82,15 +82,6 @@
                 </div>
 
                 <div class="form-group col-sm-6 col-md-12">
-                    @Html.LabelFor(model => model.DateCreated, new { @class = "col-sm-3 control-label no-padding-right" })
-                    <div class="col-sm-9">
-                        @Html.EditorFor(model => model.DateCreated, null, new { @class = "col-xs-10 col-sm-5" })
-                        @Html.ValidationMessageFor(model => model.DateCreated)
-                    </div>
-                </div>
-
-
-                <div class="form-group col-sm-6 col-md-12">
                     @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
                         @Html.EditorFor(model => model.Description, "CkEditor")
@@ -100,7 +91,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
-                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-primary" />
                         <input type="reset" value="Reset" class="btn" />
                     </div>
                 </div>

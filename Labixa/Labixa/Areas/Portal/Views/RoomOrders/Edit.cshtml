@@ -74,28 +74,28 @@
                                 <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.Customer.Name, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Customer.Name, null, new { @class = "col-xs-10 col-sm-5", @disabled = "disabled" })
+                                        @Html.TextBoxFor(model => model.Customer.Name, null, new { @class = "col-xs-10 col-sm-5"})
                                         @Html.ValidationMessageFor(model => model.Customer.Name)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.Customer.Address, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Customer.Address, null, new { @class = "col-xs-10 col-sm-5" , @disabled = "disabled"})
+                                        @Html.TextBoxFor(model => model.Customer.Address, null, new { @class = "col-xs-10 col-sm-5" })
                                         @Html.ValidationMessageFor(model => model.Customer.Address)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.Customer.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Customer.Phone, null, new { @class = "col-xs-10 col-sm-5", @disabled = "disabled" })
+                                        @Html.TextBoxFor(model => model.Customer.Phone, null, new { @class = "col-xs-10 col-sm-5" })
                                         @Html.ValidationMessageFor(model => model.Customer.Phone)
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.Customer.Email, new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Customer.Email, null, new { @class = "col-xs-10 col-sm-5", @disabled = "disabled" })
+                                        @Html.TextBoxFor(model => model.Customer.Email, null, new { @class = "col-xs-10 col-sm-5"})
                                         @Html.ValidationMessageFor(model => model.Customer.Email)
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                 <div class="form-group col-sm-6 col-md-12">
                                     @Html.LabelFor(model => model.RoomId, "RoomId", new { @class = "col-sm-3 control-label no-padding-right" })
                                     <div class="col-sm-9">
-                                        @Html.DropDownList("RoomId", string.Empty)
+                                        @Html.DropDownList("RoomId")
                                         @Html.ValidationMessageFor(model => model.RoomId)
                                     </div>
                                 </div>
@@ -269,15 +269,9 @@
                 </div>
             }
         </div>
-        <a href="@Url.Action("Index","RoomOrders",new { CostCategoryId = ViewBag.CostCategoryId})">Back To Link</a>
-
     </div>
 </div>
 
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

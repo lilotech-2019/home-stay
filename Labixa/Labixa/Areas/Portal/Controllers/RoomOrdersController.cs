@@ -166,7 +166,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name", roomOrder.RoomId);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
         }
 
@@ -179,7 +179,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomOrderService.Edit(roomOrder);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name", roomOrder.RoomId);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
         }
         #endregion
