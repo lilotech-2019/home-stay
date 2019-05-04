@@ -755,6 +755,9 @@
     <Content Include="Content\HMS\images\gallery\7.jpg" />
     <Content Include="Content\HMS\images\header\logo.png" />
     <Content Include="Content\HMS\images\header\logo2.png" />
+    <Content Include="Content\HMS\images\icon\logo.png" />
+    <Content Include="Content\HMS\images\icon\logo2.png" />
+    <Content Include="Content\HMS\images\icon\logo3.jpg" />
     <Content Include="Content\HMS\images\icon\lr-home.png" />
     <Content Include="Content\HMS\images\inner-header2.jpg" />
     <Content Include="Content\HMS\images\inner-header\1.jpg" />

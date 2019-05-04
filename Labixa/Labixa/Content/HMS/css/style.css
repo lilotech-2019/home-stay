@@ -8768,6 +8768,7 @@ body {
   color: #888;
 }
     .nroom-grid p {
+        text-align:left;
         margin: 20px 0 25px;
         font-weight: 600;
         color: #8e8e8e;
@@ -9734,15 +9735,16 @@ body {
         letter-spacing: 0.3px;
         font-family: normal;
         text-transform: capitalize;
-        font-size: 55px;
+        font-size: 45px;
         color: #fff;
+        text-align:center;
     }
 
         .final-inner-header .this-title:after {
             content: '';
             width: 60px;
             height: 2px;
-            background: #92ba19;
+            /*background: #92ba19;*/
             display: inline-block;
             margin-left: 20px;
         }
