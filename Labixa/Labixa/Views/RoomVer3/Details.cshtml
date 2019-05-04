@@ -624,7 +624,7 @@
             <div class="single-room-wrapper">
                 <div class="room-slider-wrapper">
                     <div class="single-r-wrapper">
-                        @if (!Model.Room.RoomImageMappings.Any())
+                        @if (Model.Room.RoomImageMappings == null || Model.Room.RoomImageMappings.Count() < 6)
                         {
                             <div class="single-sl-room">
                                 <div data-hash="zero" class="owl-itemm"> <img src="~/Content/HMS/images/rooms/1.jpg" alt=""></div>
@@ -678,7 +678,14 @@
                     }
                 </div>
                 <div class="room-fac-wrapper">
-                    <h2>Room Facilities</h2>
+                    @if (cookie.Value.Equals("vi"))
+                    {
+                        <h2>Tiện Ích</h2>
+                    }
+                    else
+                    {
+                        <h2>Room Facilities</h2>
+                    }
                     <div class="row">
                         <div class="ro-facilitie">
                             <ul class="clearfix">
