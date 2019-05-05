@@ -92,7 +92,7 @@ namespace Labixa.Areas.Portal.Controllers
                 ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
             else {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
             }
 
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
@@ -114,7 +114,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="roomOrder"></param>
+        /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -144,7 +144,7 @@ namespace Labixa.Areas.Portal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
             return View(viewModel);
         }
         #endregion
@@ -223,17 +223,18 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.Total = _roomOrderService.GetTotalPrice(id);
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
 
             return View(entity);
         }
         #endregion
 
         #region Preview
+
         /// <summary>
         /// Preview
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="roomOrder"></param>
         /// <returns></returns>
         public ActionResult Preview(RoomOrder roomOrder)
         {
@@ -262,9 +263,11 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult PartialSubMenuCategory()
         {
             var data = _roomOrderService.FindAll().AsNoTracking();
-            var viewModel = new PartialSubMenuCategoryViewModel();
-            viewModel.Count = data.Count();
-            viewModel.RoomOrders = data;
+            var viewModel = new PartialSubMenuCategoryViewModel
+            {
+                Count = data.Count(),
+                RoomOrders = data
+            };
             return PartialView("_PartialSubMenuCategory", viewModel);
         }
     }
