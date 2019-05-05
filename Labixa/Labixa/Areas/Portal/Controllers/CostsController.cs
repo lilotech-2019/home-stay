@@ -29,7 +29,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(int? hotelId, int? costCategoryId)
+        public ActionResult Index(int? hotelId, int? costCategoryId,CostType? costType)
         {
             var costs = _costService.FindAll();
             if (costCategoryId != null)
@@ -40,6 +40,9 @@ namespace Labixa.Areas.Portal.Controllers
             if (hotelId != null)
             {
                 costs = costs.Where(w => w.HotelId == hotelId);
+            }
+            if (costType != null) {
+                costs = costs.Where(w => w.Type == costType);
             }
             costs = costs.AsNoTracking();
             return View(costs);

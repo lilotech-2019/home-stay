@@ -19,14 +19,16 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IRoomOrderService _roomOrderService;
         private readonly IRoomService _roomService;
         private readonly ICustomerService _customerService;
+        private readonly IHotelService _hotelService;
         #endregion
 
         #region Ctor
-        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService, ICustomerService customerService)
+        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService, ICustomerService customerService, IHotelService hotelService)
         {
             _roomOrderService = roomOrderService;
             _roomService = roomService;
             _customerService = customerService;
+            _hotelService = hotelService;
         }
         #endregion
 
@@ -49,9 +51,13 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index - GET
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? hotelId)
         {
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
+            if (hotelId != null) {
+                var hotel = _hotelService.FindById((int)hotelId);
+                roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotel.Id);
+            }
             return View(await roomOrders.ToListAsync());
         }
         #endregion
@@ -83,7 +89,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create(int? roomId, string phone)
+        public ActionResult Create(int? hotelId, int? roomId, string phone)
         {
             var room = new Room();
             if (roomId != null)
@@ -92,7 +98,7 @@ namespace Labixa.Areas.Portal.Controllers
                 ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
             else {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
+                ViewBag.RoomId = new SelectList(hotelId==null?_roomService.FindSelectList(): _roomService.FindSelectList().Where(w=>w.HotelId==hotelId), "Id", "Name");
             }
 
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };

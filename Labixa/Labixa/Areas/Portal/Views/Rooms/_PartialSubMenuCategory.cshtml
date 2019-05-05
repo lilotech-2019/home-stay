@@ -10,7 +10,12 @@
             <b class=""></b>
         </a>
         <ul class="submenu" style="overflow: hidden; display: none;">
-
+            <li>
+                <a href="@Url.Action("Index", "roomOrders")">
+                    <i class="icon-double-angle-right"></i>
+                    Tất Cả
+                </a>
+            </li>
             @foreach (var item in Model.RoomOrders)
             {
                 <li>

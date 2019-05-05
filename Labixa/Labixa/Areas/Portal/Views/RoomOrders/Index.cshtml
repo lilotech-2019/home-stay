@@ -78,17 +78,19 @@
                                 {
                                     case RoomOrderStatus.New:
                                         <span class="label label-sm label-warning">Đợi xác nhận</span>
-                                        <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Thanh toán</a>
+                                        <button class="btn btn-xs btn-default" id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckIn})">Checkin</button>
                                         break;
                                     case RoomOrderStatus.Processed:
                                         <span class="label label-sm label-success">Đã xử lý</span>
                                         break;
                                     case RoomOrderStatus.CheckIn:
                                         <span class="label label-sm label-success">Đã check in</span>
-                                        <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                        <button class="btn btn-xs btn-default" id="updateStatus" data-url="@Url.Action("UpdateStatus", new {id = item.Id, status = RoomOrderStatus.CheckOut})">Checkout</button>
                                         break;
                                     case RoomOrderStatus.CheckOut:
                                         <span class="label label-sm label-success">Đã check out</span>
+                                        <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Thanh Toán</a>
+
                                         break;
                                     default:
                                         throw new ArgumentOutOfRangeException();

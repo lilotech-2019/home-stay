@@ -1,5 +1,8 @@
 ﻿@model Labixa.Areas.Portal.ViewModels.CostCategory.CostCategorySubMenuViewModel
-@{ var count = Model.Count + 1; }
+@{ 
+    var count = Enum.GetValues(typeof(Outsourcing.Data.Models.HMS.CostType)).Length + 1;
+    string nameType = string.Empty;
+}
 <li class="">
     <a href="#" class="dropdown-toggle">
         <i class="icon-list"></i>
@@ -16,12 +19,24 @@
                 Tất Cả
             </a>
         </li>
-        @foreach (var item in Model.CostCategories)
+        @foreach (Outsourcing.Data.Models.HMS.CostType item in Enum.GetValues(typeof(Outsourcing.Data.Models.HMS.CostType)))
         {
+            switch (item)
+            {
+                case Outsourcing.Data.Models.HMS.CostType.Others:
+                    nameType = "Others";
+                    break;
+                case Outsourcing.Data.Models.HMS.CostType.Income:
+                    nameType = "Thu";
+                    break;
+                case Outsourcing.Data.Models.HMS.CostType.Outcome:
+                    nameType = "Chi";
+                    break;
+            }
             <li>
-                <a href="@Url.Action("Index", "Costs", new {costCategoryId = item.Id})">
+                <a href="@Url.Action("Index", "Costs", new {costType = item})">
                     <i class="icon-double-angle-right"></i>
-                    @item.Name
+                    @nameType
                 </a>
             </li>
         }

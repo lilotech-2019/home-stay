@@ -75,7 +75,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name");
-            return View();
+            return View(new Blog { PictureId = 0});
         }
 
         /// <summary>
