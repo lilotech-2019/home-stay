@@ -25,6 +25,7 @@ namespace Outsourcing.Data.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string DescriptionEnglish { get; set; }
         public string Content { get; set; }
         public string ContentEnglish { get; set; }

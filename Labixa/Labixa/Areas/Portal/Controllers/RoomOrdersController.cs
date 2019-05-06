@@ -19,14 +19,16 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IRoomOrderService _roomOrderService;
         private readonly IRoomService _roomService;
         private readonly ICustomerService _customerService;
+        private readonly IHotelService _hotelService;
         #endregion
 
         #region Ctor
-        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService, ICustomerService customerService)
+        public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService, ICustomerService customerService, IHotelService hotelService)
         {
             _roomOrderService = roomOrderService;
             _roomService = roomService;
             _customerService = customerService;
+            _hotelService = hotelService;
         }
         #endregion
 
@@ -49,9 +51,13 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index - GET
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? hotelId)
         {
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
+            if (hotelId != null) {
+                var hotel = _hotelService.FindById((int)hotelId);
+                roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotel.Id);
+            }
             return View(await roomOrders.ToListAsync());
         }
         #endregion
@@ -83,7 +89,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create(int? roomId, string phone)
+        public ActionResult Create(int? hotelId, int? roomId, string phone)
         {
             var room = new Room();
             if (roomId != null)
@@ -92,7 +98,7 @@ namespace Labixa.Areas.Portal.Controllers
                 ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
             else {
-                ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+                ViewBag.RoomId = new SelectList(hotelId==null?_roomService.FindSelectList(): _roomService.FindSelectList().Where(w=>w.HotelId==hotelId), "Id", "Name");
             }
 
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
@@ -106,7 +112,7 @@ namespace Labixa.Areas.Portal.Controllers
                 }
                 entity.Customer = customer;
             }
-
+            ViewBag.Phone = phone;
             return View(entity);
 
         }
@@ -114,7 +120,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Create - POST
         /// </summary>
-        /// <param name="roomOrder"></param>
+        /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -144,7 +150,7 @@ namespace Labixa.Areas.Portal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
             return View(viewModel);
         }
         #endregion
@@ -166,7 +172,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name", roomOrder.RoomId);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
         }
 
@@ -179,7 +185,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomOrderService.Edit(roomOrder);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name", roomOrder.RoomId);
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(roomOrder.RoomId), "Id", "Name", roomOrder.RoomId);
             return View(roomOrder);
         }
         #endregion
@@ -223,17 +229,18 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.Total = _roomOrderService.GetTotalPrice(id);
-            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(null), "Id", "Name");
+            ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");
 
             return View(entity);
         }
         #endregion
 
         #region Preview
+
         /// <summary>
         /// Preview
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="roomOrder"></param>
         /// <returns></returns>
         public ActionResult Preview(RoomOrder roomOrder)
         {
@@ -262,9 +269,11 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult PartialSubMenuCategory()
         {
             var data = _roomOrderService.FindAll().AsNoTracking();
-            var viewModel = new PartialSubMenuCategoryViewModel();
-            viewModel.Count = data.Count();
-            viewModel.RoomOrders = data;
+            var viewModel = new PartialSubMenuCategoryViewModel
+            {
+                Count = data.Count(),
+                RoomOrders = data
+            };
             return PartialView("_PartialSubMenuCategory", viewModel);
         }
     }

@@ -42,7 +42,7 @@
                 <div class="form-group col-sm-6 col-md-12">
                     @Html.LabelFor(model => model.CustomerId, "CustomerId", new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.DropDownList("CustomerId", string.Empty)
+                        @Html.DropDownList("CustomerId")
                         @Html.ValidationMessageFor(model => model.CustomerId)
                     </div>
                 </div>

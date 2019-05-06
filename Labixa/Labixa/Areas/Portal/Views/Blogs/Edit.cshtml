@@ -23,7 +23,7 @@
                 <i class="icon-edit"></i>
                 <a href="@Url.Action("Index")">Bolg management</a>
             </li>
-            <li class="active">Edit a bolg</li>
+            <li class="active">Edit a blog</li>
         </ul>
     </div>
 }
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-block alert-info">
-                Cập nhật Khách Sạn
+                Cập nhật Tin Tức
             </div>
             @using (Html.BeginForm("Edit", "Blogs", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -51,7 +51,7 @@
 
                         <li class="">
                             <a data-toggle="tab" href="#tab2">
-                                <i class="red  icon-rocket bigger-120"></i>
+                                <i class="red icon-rocket bigger-120"></i>
                                 Chỉnh sửa SEO
                             </a>
                         </li>
@@ -59,11 +59,10 @@
 
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane fade active in">
-
                             <div class="form-group col-sm-6 col-md-12">
                                 @Html.LabelFor(model => model.BlogCategoryId, "BlogCategoryId", new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.DropDownList("BlogCategoryId", string.Empty)
+                                    @Html.DropDownList("BlogCategoryId")
                                     @Html.ValidationMessageFor(model => model.BlogCategoryId)
                                 </div>
                             </div>
@@ -95,16 +94,8 @@
                             <div class="form-group col-sm-6 col-md-12">
                                 @Html.LabelFor(model => model.ContentEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.ContentEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.EditorFor(model => model.ContentEnglish, "CkEditor")
                                     @Html.ValidationMessageFor(model => model.ContentEnglish)
-                                </div>
-                            </div>
-
-                            <div class="form-group col-sm-6 col-md-12">
-                                @Html.LabelFor(model => model.Slug, new { @class = "col-sm-3 control-label no-padding-right" })
-                                <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Slug, null, new { @class = "col-xs-10 col-sm-5" })
-                                    @Html.ValidationMessageFor(model => model.Slug)
                                 </div>
                             </div>
 
@@ -129,6 +120,14 @@
                                 <div class="col-sm-9">
                                     @Html.EditorFor(model => model.Description, null, new { @class = "col-xs-10 col-sm-5" })
                                     @Html.ValidationMessageFor(model => model.Description)
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6 col-md-12">
+                                @Html.LabelFor(model => model.DescriptionEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.DescriptionEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.DescriptionEnglish)
                                 </div>
                             </div>
                         </div>

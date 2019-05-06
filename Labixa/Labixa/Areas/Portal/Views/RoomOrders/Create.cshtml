@@ -55,7 +55,7 @@
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.Customer.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.EditorFor(model => model.Customer.Phone, null, new { @class = "col-xs-10 col-sm-5" })
+                            @Html.TextBoxFor(model => model.Customer.Phone, new { @class = "col-xs-10 col-sm-5",@Value=ViewBag.Phone })
                             @Html.ValidationMessageFor(model => model.Customer.Phone)
                         </div>
                     </div>
