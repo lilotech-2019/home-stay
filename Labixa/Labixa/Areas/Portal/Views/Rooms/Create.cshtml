@@ -134,6 +134,14 @@
                             </div>
 
                             <div class="form-group">
+                                @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Status)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
                                     @Html.EditorFor(model => model.Description, "CkEditor")

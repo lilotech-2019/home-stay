@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
     <div class="breadcrumbs" id="breadcrumbs">
@@ -34,7 +37,7 @@
             <div class="alert alert-block alert-info">
                 Cập nhật Khách Sạn
             </div>
-            @using (Html.BeginForm("Edit","Hotels", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", "Hotels", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -125,6 +128,7 @@
                                 @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
                                     @Html.EditorFor(model => model.Description, "CkEditor")
+                                    @*@Html.EditorFor(model => model.Description, null, new { @class = "col-xs-10 col-sm-5" })*@
                                     @Html.ValidationMessageFor(model => model.Description)
                                 </div>
                             </div>
