@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Outsourcing.Data.Models
 {
@@ -23,9 +24,11 @@ namespace Outsourcing.Data.Models
         public string BlogImage { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Description { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string DescriptionEnglish { get; set; }
         public string Content { get; set; }
         public string ContentEnglish { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Outsourcing.Data.Models.HMS
 {
@@ -24,6 +25,7 @@ namespace Outsourcing.Data.Models.HMS
         public DateTime DateLogged { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Description { get; set; }
 
         public int HotelId { get; set; }

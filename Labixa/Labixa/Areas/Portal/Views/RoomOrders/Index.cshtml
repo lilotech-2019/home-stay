@@ -60,10 +60,10 @@
                     <tr class="">
                         <td>@count</td>
                         <td class="">
-                            <a href="@Url.Action("Index", "Hotel", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
+                            <a href="@Url.Action("Index", "Hotels", new {id = item.Room.Hotel.Id})">@item.Room.Hotel.Name</a>
                         </td>
                         <td class="">
-                            <a href="@Url.Action("Index", "Room", new {id = item.RoomId})">@item.Room.Name</a>
+                            <a href="@Url.Action("Index", "Rooms", new {id = item.RoomId})">@item.Room.Name</a>
                         </td>
 
                         <td class="">@item.Customer.Name</td>
@@ -135,6 +135,9 @@
                     url: url,
                     success: function () {
                         window.location.reload();
+                    },
+                    error: function (err) {
+                        console.log(err);
                     }
                 });
             });

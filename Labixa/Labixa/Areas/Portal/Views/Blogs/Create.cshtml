@@ -122,7 +122,9 @@
                             <div class="form-group col-sm-6 col-md-12">
                                 @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Description, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @*@Html.EditorFor(model => model.Description, null, new { @class = "col-xs-10 col-sm-5" })*@
+                                    @Html.TextAreaFor(model => model.Description)
+
                                     @Html.ValidationMessageFor(model => model.Description)
                                 </div>
                             </div>
@@ -130,7 +132,9 @@
                             <div class="form-group col-sm-6 col-md-12">
                                 @Html.LabelFor(model => model.DescriptionEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.DescriptionEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @*@Html.EditorFor(model => model.DescriptionEnglish, null, new { @class = "col-xs-10 col-sm-5" })*@
+                                    @Html.TextAreaFor(model => model.DescriptionEnglish)
+
                                     @Html.ValidationMessageFor(model => model.DescriptionEnglish)
                                 </div>
                             </div>
@@ -190,3 +194,7 @@
 
     </div>
 </div>
+<script>
+    CKEDITOR.replace('Description');
+    CKEDITOR.replace('DescriptionEnglish');
+</script>
