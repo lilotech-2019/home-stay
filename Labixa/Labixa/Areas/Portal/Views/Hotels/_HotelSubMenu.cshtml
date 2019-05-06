@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Outsourcing.Data.Models.Hotel>
-@{ var count = Model.Count() + 1; }
+@{
+    var count = Enum.GetValues(typeof(Outsourcing.Data.Models.RoomType)).Length + 1;
+    string nameType = string.Empty;
+}
 <li class="">
     <a href="#" class="dropdown-toggle">
         <i class="icon-list"></i>
@@ -16,17 +19,27 @@
                 Tất Cả
             </a>
         </li>
-        @if (Model.Any())
+        @foreach (Outsourcing.Data.Models.RoomType item in Enum.GetValues(typeof(Outsourcing.Data.Models.RoomType)))
         {
-            foreach (var item in Model)
+            switch (item)
             {
-                <li>
-                    <a href="@Url.Action("Index", "Rooms", new {hotelId = item.Id})">
-                        <i class="icon-double-angle-right"></i>
-                        @item.Name
-                    </a>
-                </li>
+                case Outsourcing.Data.Models.RoomType.ShortTempDeposit:
+                    nameType = "Ký Gửi";
+                    break;
+                case Outsourcing.Data.Models.RoomType.LongTemp:
+                    nameType = "Dài Hạn";
+                    break;
+                case Outsourcing.Data.Models.RoomType.ShortTemp:
+                    nameType = "Ngắn Hạn";
+                    break;
             }
+
+            <li>
+                <a href="@Url.Action("Index", "Rooms", new {type = item})">
+                    <i class="icon-double-angle-right"></i>
+                    @nameType
+                </a>
+            </li>
         }
 
     </ul>

@@ -106,6 +106,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CustomerId = new SelectList(_customerService.FindSelectList(message.CustomerId), "Id", "Name", message.CustomerId);
             return View(message);
         }
 

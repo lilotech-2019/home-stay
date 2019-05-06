@@ -159,7 +159,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new { hotelCategoryId = hotel.HotelCategoryId });
+                return RedirectToAction("Index", new { categoryId = hotel.HotelCategoryId });
             }
 
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",

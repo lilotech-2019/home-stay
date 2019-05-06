@@ -39,17 +39,17 @@ namespace Outsourcing.Service.Portal
         {
             var entity = FindById(id);
             entity.OrderStatus = status;
-            //if (status == RoomOrderStatus.CheckIn)
-            //{
-            //    entity.CheckInDate = DateTime.Today;
-            //    entity.CheckInTime = DateTime.Now.TimeOfDay;
-            //}
-            //else if (status == RoomOrderStatus.CheckOut)
-            //{
-            //    entity.CheckOutDate = DateTime.Today;
-            //    entity.CheckOutTime = DateTime.Now.TimeOfDay;
-            //   entity.Total = (entity.CheckOut - entity.CheckIn).TotalDays * entity.Room.Price;
-            //}
+            if (status == RoomOrderStatus.CheckIn)
+            {
+                entity.CheckIn = DateTime.Today;
+                entity.CheckInTime = DateTime.Now.TimeOfDay;
+            }
+            else if (status == RoomOrderStatus.CheckOut)
+            {
+                entity.CheckOut = DateTime.Today;
+                entity.CheckOutTime = DateTime.Now.TimeOfDay;
+                entity.Total = (entity.CheckOut - entity.CheckIn).TotalDays * entity.Room.Price;
+            }
 
             Edit(entity);
         }

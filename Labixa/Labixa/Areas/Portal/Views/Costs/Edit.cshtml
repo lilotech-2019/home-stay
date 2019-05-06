@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Edit Cost";
 }
-
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
     <div class="breadcrumbs" id="breadcrumbs">
@@ -32,7 +35,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-block alert-info">
-                Thêm Mới Chi Phí
+                Chỉnh sửa Chi Phí
             </div>
             @using (Html.BeginForm("Edit", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -72,28 +75,6 @@
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.Amount, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.Amount)
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-6 col-md-12">
-                        @Html.LabelFor(model => model.DateCreated, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.DateCreated, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.DateCreated)
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6 col-md-12">
-                        @Html.LabelFor(model => model.DateLogged, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.DateLogged, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.DateLogged)
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6 col-md-12">
-                        @Html.LabelFor(model => model.LastModify, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.LastModify, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.LastModify)
                         </div>
                     </div>
 
