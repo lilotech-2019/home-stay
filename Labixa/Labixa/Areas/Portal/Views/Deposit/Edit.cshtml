@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Edit Deposit";
 }
-
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
     <div class="breadcrumbs" id="breadcrumbs">
@@ -21,9 +24,9 @@
             </li>
             <li>
                 <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Deposit management</a>
+                <a href="@Url.Action("Index")">Quản lý Ký Gửi</a>
             </li>
-            <li class="active">Edit a deposit</li>
+            <li class="active">Chỉnh sửa Ký Gửi</li>
         </ul>
     </div>
 }
@@ -33,7 +36,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-block alert-info">
-                Edit deposit
+                Chỉnh sửa Ký Gửi
             </div>
             @using (Html.BeginForm("Edit", "Deposit", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -53,35 +56,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-sm-6 col-md-12">
-                        @Html.LabelFor(model => model.Address, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.Address, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.Address)
-                        </div>
-                    </div>
-
-                    <div class="form-group col-sm-6 col-md-12">
-                        @Html.LabelFor(model => model.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.Phone, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.Phone)
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
                             @Html.EditorFor(model => model.Content, null, new { @class = "col-xs-10 col-sm-5" })
                             @Html.ValidationMessageFor(model => model.Content)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Type, new { @class = "col-sm-3 control-label no-padding-right" })
-                        <div class="col-sm-9">
-                            @Html.EditorFor(model => model.Type, null, new { @class = "col-xs-10 col-sm-5" })
-                            @Html.ValidationMessageFor(model => model.Type)
                         </div>
                     </div>
 
@@ -96,7 +75,9 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.EditorFor(model => model.Description, "CkEditor")
+                            @*@Html.EditorFor(model => model.Description, "CkEditor")*@
+                            @Html.TextAreaFor(model => model.Description)
+
                             @Html.ValidationMessageFor(model => model.Description)
                         </div>
                     </div>
@@ -115,3 +96,6 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script>
+    CKEDITOR.replace('Description');
+</script>
