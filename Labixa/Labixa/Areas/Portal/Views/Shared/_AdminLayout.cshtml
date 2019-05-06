@@ -100,80 +100,80 @@
             </div>
             <ul class="nav nav-list">
                 @*<li>
-                        <a href="~/">
-                            <i class="icon-dashboard"></i>
-                            <span class="menu-text">Thống kê </span>
-                        </a>
-                    </li>*@
+            <a href="~/">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text">Thống kê </span>
+            </a>
+        </li>*@
                 @*<li>
-                        <a href="/Admin/File">
-                            <i class="icon-file"></i>
-                            <span class="menu-text">Thư mục lưu trữ</span>
-                        </a>
-                    </li>*@
+            <a href="/Admin/File">
+                <i class="icon-file"></i>
+                <span class="menu-text">Thư mục lưu trữ</span>
+            </a>
+        </li>*@
 
                 @*<li class="">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-list"></i>
-                            <span class="menu-text">
-                                Danh mục
-                                <span class="badge badge-primary ">2</span>
-                            </span>
-                            <b class=""></b>
-                        </a>
-                        <ul class="submenu" style="overflow: hidden; display: none;">
-                            <li>
-                                <a href="/Admin/BlogCategory">
-                                    <i class="icon-double-angle-right"></i>
-                                    Xem tất cả danh mục
-                                </a>
-                            </li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text">
+                    Danh mục
+                    <span class="badge badge-primary ">2</span>
+                </span>
+                <b class=""></b>
+            </a>
+            <ul class="submenu" style="overflow: hidden; display: none;">
+                <li>
+                    <a href="/Admin/BlogCategory">
+                        <i class="icon-double-angle-right"></i>
+                        Xem tất cả danh mục
+                    </a>
+                </li>
 
-                            <li>
-                                <a href="/Admin/BlogCategory/Create">
-                                    <i class="icon-double-angle-right"></i>
-                                    Thêm danh mục
-                                </a>
-                            </li>
+                <li>
+                    <a href="/Admin/BlogCategory/Create">
+                        <i class="icon-double-angle-right"></i>
+                        Thêm danh mục
+                    </a>
+                </li>
 
-                        </ul>
-                    </li>*@
+            </ul>
+        </li>*@
                 @*<li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text">
-                                Quản lý bài viết
-                                <span class="badge badge-primary ">2</span>
-                            </span>
-                            <b class=""></b>
-                        </a>
-                        <ul class="submenu" style="overflow: hidden; display: none;">
-                            <li>
-                                <a href="/Admin/Blog">
-                                    <i class="icon-double-angle-right"></i>
-                                    Xem tất cả bài viết
-                                </a>
-                            </li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-edit"></i>
+                <span class="menu-text">
+                    Quản lý bài viết
+                    <span class="badge badge-primary ">2</span>
+                </span>
+                <b class=""></b>
+            </a>
+            <ul class="submenu" style="overflow: hidden; display: none;">
+                <li>
+                    <a href="/Admin/Blog">
+                        <i class="icon-double-angle-right"></i>
+                        Xem tất cả bài viết
+                    </a>
+                </li>
 
-                            <li>
-                                <a href="/Admin/Blog/Create">
-                                    <i class="icon-double-angle-right"></i>
-                                    Thêm bài viết
-                                </a>
-                            </li>
+                <li>
+                    <a href="/Admin/Blog/Create">
+                        <i class="icon-double-angle-right"></i>
+                        Thêm bài viết
+                    </a>
+                </li>
 
-                        </ul>
-                    </li>*@
+            </ul>
+        </li>*@
                 @*<li>
-                        <a href="/Admin/Blog" class="dropdown-toggle">
-                            <i class="icon-desktop"></i>
-                            <span class="menu-text">
-                                Tin Tức
-                                <span class="badge badge-primary ">1</span>
-                            </span>
-                            <b class=""></b>
-                        </a>
-                    </li>*@
+            <a href="/Admin/Blog" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">
+                    Tin Tức
+                    <span class="badge badge-primary ">1</span>
+                </span>
+                <b class=""></b>
+            </a>
+        </li>*@
                 <!--Quản lý khách sạn-->
 
                 @Html.Action("HotelCategorySubMenu", "HotelCategories")
@@ -183,15 +183,15 @@
                 @Html.Action("HotelSubMenu", "Hotels")
                 <!--Quản lý phòng-->
                 @*<li>
-                        <a href="@Url.Action("Index", "Rooms")" class="dropdown-toggle">
-                            <i class="icon-desktop"></i>
-                            <span class="menu-text">
-                                Quản lý Phòng
-                                <span class="badge badge-primary ">1</span>
-                            </span>
-                            <b class=""></b>
-                        </a>
-                    </li>*@
+            <a href="@Url.Action("Index", "Rooms")" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">
+                    Quản lý Phòng
+                    <span class="badge badge-primary ">1</span>
+                </span>
+                <b class=""></b>
+            </a>
+        </li>*@
                 <li>
                     <a href="@Url.Action("Index", "RoomOrders")" class="dropdown-toggle">
                         <i class="icon-desktop"></i>
@@ -202,29 +202,41 @@
                         <b class=""></b>
                     </a>
                 </li>
-                <!--Quản lý chi phí-->
-                @Html.Action("CostCategorySubMenu", "CostCategories")
-                <!--Quản lý chi phí-->
-                @*<li>
-                        <a href="@Url.Action("Index", "Costs")" class="dropdown-toggle">
-                            <i class="icon-desktop"></i>
-                            <span class="menu-text">
-                                Quản lý Chi Phí
-                                <span class="badge badge-primary ">1</span>
-                            </span>
-                            <b class=""></b>
-                        </a>
-                    </li>*@
-                @*<li>
-                    <a href="/Admin/reportIncome" class="dropdown-toggle">
+
+                <li>
+                    <a href="@Url.Action("Index", "Deposit")" class="dropdown-toggle">
                         <i class="icon-desktop"></i>
                         <span class="menu-text">
-                            Thống kê doanh thu
+                            Quản lý Ký Gửi
                             <span class="badge badge-primary ">1</span>
                         </span>
                         <b class=""></b>
                     </a>
-                </li>*@
+                </li>
+
+                <!--Quản lý chi phí-->
+                @Html.Action("CostCategorySubMenu", "CostCategories")
+                <!--Quản lý chi phí-->
+                @*<li>
+            <a href="@Url.Action("Index", "Costs")" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">
+                    Quản lý Chi Phí
+                    <span class="badge badge-primary ">1</span>
+                </span>
+                <b class=""></b>
+            </a>
+        </li>*@
+                @*<li>
+            <a href="/Admin/reportIncome" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">
+                    Thống kê doanh thu
+                    <span class="badge badge-primary ">1</span>
+                </span>
+                <b class=""></b>
+            </a>
+        </li>*@
                 <li>
                     <a href="@Url.Action("Index", "Blogs")" class="dropdown-toggle">
                         <i class="icon-desktop"></i>

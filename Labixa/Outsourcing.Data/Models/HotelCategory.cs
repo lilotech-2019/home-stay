@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Outsourcing.Data.Models
 {
@@ -17,6 +18,7 @@ namespace Outsourcing.Data.Models
         public string Slug { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Description { get; set; }
 
         public virtual ICollection<Hotel> Hotels { get; set; }

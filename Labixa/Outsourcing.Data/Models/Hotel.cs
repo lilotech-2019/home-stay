@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
@@ -21,6 +22,8 @@ namespace Outsourcing.Data.Models
         [MaxLength(255)]
         public string Name { get; set; }
 
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
 

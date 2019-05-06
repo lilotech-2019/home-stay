@@ -229,6 +229,18 @@ namespace Labixa.Areas.Portal.Controllers
             var costs = _costsService.FindAll().Where(w => w.HotelId == id);
             var costsIncome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Income);
             var costsOutcome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Outcome);
+            var costsOthers = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Others);
+
+            //All
+            DataTable dtAll = new DataTable("Report");
+            dtAll.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
+                                            new DataColumn("Name"),
+                                            new DataColumn("Amount")});
+
+            foreach (var item in costs)
+            {
+                dtAll.Rows.Add(item.Id, item.Name, item.Amount);
+            }
 
             //Income
             DataTable dtIncome = new DataTable("Income");
@@ -252,10 +264,24 @@ namespace Labixa.Areas.Portal.Controllers
                 dtOutcome.Rows.Add(item.Id, item.Name, item.Amount);
             }
 
+            //Others
+            DataTable dtOthers = new DataTable("Others");
+            dtOthers.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
+                                            new DataColumn("Name"),
+                                            new DataColumn("Amount")});
+
+            foreach (var item in costsOthers)
+            {
+                dtOthers.Rows.Add(item.Id, item.Name, item.Amount);
+            }
+
+
             using (XLWorkbook wb = new XLWorkbook())
             {
+                wb.Worksheets.Add(dtAll);
                 wb.Worksheets.Add(dtIncome);
                 wb.Worksheets.Add(dtOutcome);
+                wb.Worksheets.Add(dtOthers);
 
                 using (MemoryStream stream = new MemoryStream())
                 {

@@ -27,9 +27,9 @@
             </li>
             <li>
                 <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Chi Phí</a>
+                <a href="@Url.Action("Index")">Quản lý Khách Sạn</a>
             </li>
-            <li class="active">Thêm mới Chi Phí</li>
+            <li class="active">Thêm mới Khách Sạn</li>
         </ul>
     </div>
 }
@@ -128,7 +128,9 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Description, "CkEditor")
+                                    @*@Html.EditorFor(model => model.Description, "CkEditor")*@
+                                    @*@Html.EditorFor(model => model.Description, null, new { @class = "col-xs-10 col-sm-5" })*@
+                                    @Html.TextAreaFor(model => model.Description)
                                     @Html.ValidationMessageFor(model => model.Description)
                                 </div>
                             </div>
@@ -236,3 +238,7 @@
 
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace('Description');
+</script>

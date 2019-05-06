@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@section scripts{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
     <div class="breadcrumbs" id="breadcrumbs">
@@ -21,9 +24,9 @@
             </li>
             <li>
                 <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Chi Phí</a>
+                <a href="@Url.Action("Index")">Quản lý Phòng</a>
             </li>
-            <li class="active">Thêm mới Chi Phí</li>
+            <li class="active">Chỉnh Sửa Phòng</li>
         </ul>
     </div>
 }
@@ -131,9 +134,18 @@
                             </div>
 
                             <div class="form-group">
+                                @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Status)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Description, "CkEditor")
+                                    @*@Html.EditorFor(model => model.Description, "CkEditor")*@
+                                    @Html.TextAreaFor(model => model.Description)
                                     @Html.ValidationMessageFor(model => model.Description)
                                 </div>
                             </div>
@@ -141,7 +153,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DescriptionEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.DescriptionEnglish, "CkEditor")
+                                    @*@Html.EditorFor(model => model.DescriptionEnglish, "CkEditor")*@
+                                    @Html.TextAreaFor(model => model.DescriptionEnglish)
                                     @Html.ValidationMessageFor(model => model.DescriptionEnglish)
                                 </div>
                             </div>
@@ -179,77 +192,77 @@
 
                         </div>
                         <div id="tab3" class="tab-pane fade in">
-                        
+
                             <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_Tivi, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_Tivi)
-                                    </div>
+                                @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_Tivi, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_Tivi)
                                 </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_TuDo, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_TuDo, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_TuDo)
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_TuDo, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_TuDo, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_TuDo)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_HotWater, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_HotWater, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_HotWater)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_HotWater, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_HotWater, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_HotWater)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_DryHair, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_DryHair, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_DryHair)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_DryHair, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_DryHair, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_DryHair)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_Iron, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_Iron, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_Iron)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_Iron, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_Iron, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_Iron)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_Kitchen, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_Kitchen, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_Kitchen)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_Kitchen, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_Kitchen, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_Kitchen)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_TeaCoffee, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_TeaCoffee, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_TeaCoffee)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_TeaCoffee, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_TeaCoffee, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_TeaCoffee)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_Snack, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_Snack, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_Snack)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_Snack, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_Snack, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_Snack)
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Utility_WashMachine, new { @class = "col-sm-3 control-label no-padding-right" })
-                                    <div class="col-sm-9">
-                                        @Html.EditorFor(model => model.Utility_WashMachine, null, new { @class = "col-xs-10 col-sm-5" })
-                                        @Html.ValidationMessageFor(model => model.Utility_WashMachine)
-                                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Utility_WashMachine, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Utility_WashMachine, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Utility_WashMachine)
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,3 +277,7 @@
         </div>
     </div>
 </div>
+<script>
+    CKEDITOR.replace('Description');
+    CKEDITOR.replace('DescriptionEnglish');
+</script>

@@ -39,9 +39,9 @@ namespace Labixa.Areas.Portal.Controllers
         /// <param name="id"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public ActionResult UpdateStatus(int id, int status)
+        public ActionResult UpdateStatus(int id, RoomOrderStatus status)
         {
-            _roomOrderService.UpdateStatus(id, (RoomOrderStatus)status);
+            _roomOrderService.UpdateStatus(id, status);
             return Json(HttpStatusCode.OK, JsonRequestBehavior.AllowGet);
         }
         #endregion

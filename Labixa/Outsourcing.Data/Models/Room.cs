@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
@@ -16,7 +17,13 @@ namespace Outsourcing.Data.Models
         public string NameEnglish { get; set; }
         public string Slug { get; set; }
         public string SlugEnglish { get; set; }
+
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         public string DescriptionEnglish { get; set; }
 
         [Range(0, 100)]
