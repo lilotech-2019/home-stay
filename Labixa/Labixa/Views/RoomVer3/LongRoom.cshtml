@@ -79,7 +79,7 @@
                                 <div class="row this-conts">
                                     <div class="media">
                                         <div class="media-body this-title">@iterm.Name</div>
-                                        <div class="media-right">@iterm.Price.ToString("#,##0")<small>Ngày</small></div>
+                                        <div class="media-right">@iterm.Price.ToString("#,##0")<small>Tháng</small></div>
                                     </div>
                                     <p>@Html.Raw(iterm.MetaTitle)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">Xem Thêm<i class="fa fa-arrow-right"></i></a>
                                 </div>
@@ -103,7 +103,7 @@
                                 <div class="row this-conts">
                                     <div class="media">
                                         <div class="media-body this-title">@iterm.NameEnglish</div>
-                                        <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Day</small></div>
+                                        <div class="media-right">@{var value = (iterm.Price / 23000).ToString("#,##0");} @value$<small>Month</small></div>
                                     </div>
                                     <p>@Html.Raw(iterm.MetaDescription)</p><a href="/chi-tiet-phong/@iterm.Slug-@iterm.Id" class="read-more">view room<i class="fa fa-arrow-right"></i></a>
                                 </div>
