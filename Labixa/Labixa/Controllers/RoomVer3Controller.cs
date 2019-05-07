@@ -66,8 +66,8 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email, String CheckIn, String CheckOut,
-            string Phone)
+        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string name, string email, string checkIn, string checkOut,
+            string phone)
         {
 
             HttpCookie cookie = Request.Cookies["_culture"];
@@ -86,7 +86,7 @@ namespace Labixa.Controllers
                "<table>" +
                "<tr>" +
                "<th>Họ và Tên Khách Hàng: </th>" +
-               "<td>" + Name + "</td>" +
+               "<td>" + name + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Ngày CheckIn: </th>" +
@@ -98,11 +98,11 @@ namespace Labixa.Controllers
                "</tr>" +
                "<tr>" +
                "<th>Email Khách Hàng: </th>" +
-               "<td>" + Email + "</td>" +
+               "<td>" + email + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Số Điện Thoại: </th>" +
-               "<td>" + Phone + "</td>" +
+               "<td>" + phone + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Số Lượng Người: </th>" +
@@ -115,27 +115,27 @@ namespace Labixa.Controllers
                "</table></div></div></html>";
 
 
-            var customer = _customerservice.FindByPhone(Phone);
+            var customer = _customerservice.FindByPhone(phone);
             if (customer == null)
             {
                 customer = new Customer
                 {
-                    Name = Name,
-                    Email = Email,
-                    Phone = Phone
+                    Name = name,
+                    Email = email,
+                    Phone = phone
                 };
                 _customerservice.Create(customer);
             }
 
             if (cookie.Value == "vi")
             {
-                modelBooking.CheckIn = DateTime.Parse(CheckIn);
-                modelBooking.CheckOut = DateTime.Parse(CheckOut);
+                modelBooking.CheckIn = DateTime.Parse(checkIn);
+                modelBooking.CheckOut = DateTime.Parse(checkOut);
             }
             else
             {
-                modelBooking.CheckIn = DateTime.ParseExact(CheckIn,"dd/MM/yyyy",null);
-                modelBooking.CheckOut = DateTime.ParseExact(CheckOut, "dd/MM/yyyy", null);
+                modelBooking.CheckIn = DateTime.ParseExact(checkIn,"dd/MM/yyyy",null);
+                modelBooking.CheckOut = DateTime.ParseExact(checkOut, "dd/MM/yyyy", null);
 
 
             }
@@ -144,7 +144,7 @@ namespace Labixa.Controllers
             modelBooking.Status = true;
             modelBooking.Deleted = false;
             _roomOrderService.Create(modelBooking);
-            await EmailHelper.SendEmailAsync(Email, content, subject);
+            await EmailHelper.SendEmailAsync(email, content, subject);
             return RedirectToAction("ShortRoom", "RoomVer3");
         }
 

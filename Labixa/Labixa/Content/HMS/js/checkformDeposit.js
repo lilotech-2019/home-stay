@@ -28,7 +28,7 @@ function submitFormDeposit() {
     submitBtnDeposit.click(function (e) {
         checkDeposit = validateFormDeposit();
         if (checkDeposit) {
-           
+
             if (languageDeposit == 'vi') {
                 alert("Gửi thông tin kí gởi thành công");
             } else {
@@ -106,5 +106,5 @@ function validateFormDeposit() {
     }
     return true;
 }
-  
+
 

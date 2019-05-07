@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogCategoryService.cs" />
-    <Compile Include="ColorServices.cs" />
+    <Compile Include="DepositServices.cs" />
     <Compile Include="HMS\CategoryHotelServices.cs" />
     <Compile Include="HMS\CategoryProductServices.cs" />
     <Compile Include="HMS\CostCategoryServices.cs" />

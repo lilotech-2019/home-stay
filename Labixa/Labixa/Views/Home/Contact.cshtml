@@ -1,4 +1,4 @@
-﻿@model Outsourcing.Data.Models.Deposit
+﻿@model Outsourcing.Data.Models.Message
 @{
     Layout = "~/Views/Shared/_LayoutHMS.cshtml";
     HttpCookie cookie = Request.Cookies["_culture"];
@@ -80,7 +80,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-contact">
                             <span>@Html.Raw(Resources.Resources.HMS_Phone)</span>
-                            <input id="ContactPhone" type="text" name="Description" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
+                            <input id="ContactPhone" type="text" name="Phone" placeholder="@Html.Raw(Resources.Resources.HMS_Phone)" class="form-control" required>
                             @if (cookie != null && cookie.Value.Equals("vi"))
                             {
                                 <small><span class="text-danger error-ContactPhonel-none hidden">Vui lòng nhập số điện thoại </span></small>

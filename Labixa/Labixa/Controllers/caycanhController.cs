@@ -114,7 +114,7 @@ namespace Labixa.Controllers
                     Thread.Sleep(500);
                     var item = new Blog();
                     var id = urlProduct.Split('.').LastOrDefault().Replace("/", null).Trim();
-                    var blog = _blogService.GetBlogs().FirstOrDefault(p => p.Id == int.Parse(id));
+                    var blog = _blogService.FindById(int.Parse(id));
                     if (blog != null)
                     {
                         continue;

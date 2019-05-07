@@ -10,13 +10,13 @@ namespace Labixa.Areas.Portal.Controllers
     public class DepositController : Controller
     {
         #region Fields
-        private readonly IColorService _colorService;
+        private readonly IDepositService _depositService;
         #endregion
 
         #region Ctor
-        public DepositController(IColorService colorService)
+        public DepositController(IDepositService depositService)
         {
-            _colorService = colorService;
+            _depositService = depositService;
         }
         #endregion
 
@@ -27,7 +27,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var colors = await _colorService.FindAll().AsNoTracking().ToListAsync();
+            var colors = await _depositService.FindAll().AsNoTracking().ToListAsync();
             return View(colors);
         }
         #endregion
@@ -44,7 +44,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Deposit deposit = _colorService.FindById((int)id);
+            Deposit deposit = _depositService.FindById((int)id);
             if (deposit == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _colorService.Create(deposit);
+                _depositService.Create(deposit);
                 return RedirectToAction("Index");
             }
 
@@ -94,7 +94,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Deposit deposit = _colorService.FindById((int)id);
+            Deposit deposit = _depositService.FindById((int)id);
             if (deposit == null)
             {
                 return HttpNotFound();
@@ -113,7 +113,7 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _colorService.Edit(deposit);
+                _depositService.Edit(deposit);
                 return RedirectToAction("Index");
             }
             return View(deposit);
@@ -132,7 +132,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var colors = _colorService.FindById((int)id);
+            var colors = _depositService.FindById((int)id);
             if (colors == null)
             {
                 return HttpNotFound();
@@ -144,12 +144,12 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var colors = _colorService.FindById(id);
+            var colors = _depositService.FindById(id);
             if (colors == null)
             {
                 return HttpNotFound();
             }
-            _colorService.Delete(colors);
+            _depositService.Delete(colors);
             return RedirectToAction("Index");
         }
         #endregion
