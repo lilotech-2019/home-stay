@@ -166,5 +166,45 @@ namespace Labixa.Areas.Portal.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region Reply
+        /// <summary>
+        /// Reply - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Reply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var message = _messageService.FindById((int)id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CustomerId = new SelectList(_customerService.FindSelectList(message.CustomerId), "Id", "Name", message.CustomerId);
+            return View(message);
+        }
+
+        /// <summary>
+        /// Reply - POST
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply(Message message)
+        {
+            if (ModelState.IsValid)
+            {
+                message.Type = MessageType.Replied;
+                _messageService.Edit(message);
+                return RedirectToAction("Index");
+            }
+            return View(message);
+        }
+        #endregion
     }
 }

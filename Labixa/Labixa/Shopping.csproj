@@ -1886,6 +1886,7 @@
     <Content Include="Areas\Portal\Views\Hotels\_HotelSubMenu.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\Preview.cshtml" />
     <Content Include="Areas\Portal\Views\CostCategories\_CostCategorySubMenu.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Reply.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

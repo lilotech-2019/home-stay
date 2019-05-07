@@ -93,7 +93,7 @@ namespace Labixa.Areas.Portal.Controllers
             }
             else
             {
-                ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(null), "Id", "Name");
+                return RedirectToAction("Index");
             }
             return View();
         }

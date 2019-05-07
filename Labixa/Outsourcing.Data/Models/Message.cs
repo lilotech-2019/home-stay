@@ -9,6 +9,8 @@ namespace Outsourcing.Data.Models
         public string Name { get; set; }
         public string Email { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        public string Answer { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }
