@@ -7,6 +7,7 @@ namespace Outsourcing.Data.Models
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
+        public string Email { get; set; }
 
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -15,7 +16,7 @@ namespace Outsourcing.Data.Models
         public MessageType Type { get; set; }
         public string Note { get; set; }
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Web.Mvc;
 using Outsourcing.Service;
 using Outsourcing.Service.HMS;
@@ -66,21 +66,10 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string Name, string Email, String CheckIn, String CheckOut,
-            string Phone)
+        public async Task<ActionResult> BookingRoom(RoomOrder modelBooking, string name, string email, string checkIn, string checkOut,
+            string phone)
         {
-            bool[] service = { modelBooking.Book_Motobike, modelBooking.Book_Tour, modelBooking.BookCar, modelBooking.Book_BBQService, modelBooking.Book_Gift, modelBooking.Book_Laundry, modelBooking.Book_FlightTicket, modelBooking.Book_Visa, modelBooking.Book_Taxi, modelBooking.Book_SuggestionTour };
-            string[] serviceName = { "Thuê Xe Máy(Tay Ga, Xe Số)", "Đặt Tour", "Xe Hơi 4,7,16 chỗ", "Dịch vụ BBQ", "Quà Lưu Niệm", "Giặt Ủi", "Vé máy bay", "Visa", "Xe Đưa Đón Sân Bay", "Ăn uống, Tham Quan, Check-In" };
-            string chooseService = "";
-            for (int i = 0; i < service.Length; i++)
-            {
-                if (service[i])
-                {
-                    chooseService += serviceName[i] + " ,";
-                }
-            }
-            if (!chooseService.Equals("")) { chooseService = chooseService.TrimEnd(','); }
-            else { chooseService = "Không có";}
+
             HttpCookie cookie = Request.Cookies["_culture"];
             var n = cookie;
             string subject = "Đặt phòng thành công";
@@ -97,7 +86,7 @@ namespace Labixa.Controllers
                "<table>" +
                "<tr>" +
                "<th>Họ và Tên Khách Hàng: </th>" +
-               "<td>" + Name + "</td>" +
+               "<td>" + name + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Ngày CheckIn: </th>" +
@@ -109,48 +98,44 @@ namespace Labixa.Controllers
                "</tr>" +
                "<tr>" +
                "<th>Email Khách Hàng: </th>" +
-               "<td>" + Email + "</td>" +
+               "<td>" + email + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Số Điện Thoại: </th>" +
-               "<td>" + Phone + "</td>" +
+               "<td>" + phone + "</td>" +
                "</tr>" +
                "<tr>" +
                "<th>Số Lượng Người: </th>" +
                "<td>" + modelBooking.AmountOfPeople + "</td>" +
                "</tr>" +
                "<tr>" +
-               "<th>Tạm Tính: </th>" +
-               "<td>" + modelBooking.Price.ToString("#,##0") + " VNĐ</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Yêu Cầu Thêm: </th>" +
-               "<td>" + chooseService + "</td>" +
+               "<th>Tạm Tính </th>" +
+               "<td>" + modelBooking.Price + "</td>" +
                "</tr>" +
                "</table></div></div></html>";
 
 
-            var customer = _customerservice.FindByPhone(Phone);
+            var customer = _customerservice.FindByPhone(phone);
             if (customer == null)
             {
                 customer = new Customer
                 {
-                    Name = Name,
-                    Email = Email,
-                    Phone = Phone
+                    Name = name,
+                    Email = email,
+                    Phone = phone
                 };
                 _customerservice.Create(customer);
             }
 
             if (cookie.Value == "vi")
             {
-                modelBooking.CheckIn = DateTime.Parse(CheckIn);
-                modelBooking.CheckOut = DateTime.Parse(CheckOut);
+                modelBooking.CheckIn = DateTime.Parse(checkIn);
+                modelBooking.CheckOut = DateTime.Parse(checkOut);
             }
             else
             {
-                modelBooking.CheckIn = DateTime.ParseExact(CheckIn, "dd/MM/yyyy", null);
-                modelBooking.CheckOut = DateTime.ParseExact(CheckOut, "dd/MM/yyyy", null);
+                modelBooking.CheckIn = DateTime.ParseExact(checkIn,"dd/MM/yyyy",null);
+                modelBooking.CheckOut = DateTime.ParseExact(checkOut, "dd/MM/yyyy", null);
 
 
             }
@@ -159,7 +144,7 @@ namespace Labixa.Controllers
             modelBooking.Status = true;
             modelBooking.Deleted = false;
             _roomOrderService.Create(modelBooking);
-            await EmailHelper.SendEmailAsync(Email, content, subject);
+            await EmailHelper.SendEmailAsync(email, content, subject);
             return RedirectToAction("ShortRoom", "RoomVer3");
         }
 
@@ -169,18 +154,7 @@ namespace Labixa.Controllers
         {
             //Room room = new Room();
             //room.Name = name;
-            bool[] service = { modelBookingLongRoom.Book_Motobike, modelBookingLongRoom.Book_Tour, modelBookingLongRoom.BookCar, modelBookingLongRoom.Book_BBQService, modelBookingLongRoom.Book_Gift, modelBookingLongRoom.Book_Laundry, modelBookingLongRoom.Book_FlightTicket, modelBookingLongRoom.Book_Visa, modelBookingLongRoom.Book_Taxi, modelBookingLongRoom.Book_SuggestionTour };
-            string[] serviceName = { "Thuê Xe Máy(Tay Ga, Xe Số)", "Đặt Tour", "Xe Hơi 4,7,16 chỗ", "Dịch vụ BBQ", "Quà Lưu Niệm", "Giặt Ủi", "Vé máy bay", "Visa", "Xe Đưa Đón Sân Bay", "Ăn uống, Tham Quan, Check-In" };
-            string chooseService = "";
-            for (int i = 0; i < service.Length; i++)
-            {
-                if (service[i])
-                {
-                    chooseService += "," + serviceName[i];
-                }
-            }
-            if (!chooseService.Equals("")) { chooseService = chooseService.TrimEnd(','); }
-            else { chooseService = "Không có"; }
+
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -219,11 +193,7 @@ namespace Labixa.Controllers
                 "</tr>" +
                 "<tr>" +
                 "<th>Tạm Tính: </th>" +
-                "<td>" + modelBookingLongRoom.Price.ToString("#,##0") + " VND</td>" + 
-                "</tr>" +
-                "<tr>" +
-                "<th>Yêu Cầu Thêm: </th>" +
-                "<td>" + chooseService + "</td>" + 
+                "<td>" + modelBookingLongRoom.Price + "</td>" +
                 "</tr>" +
                 "</table></div></div></html>";
 

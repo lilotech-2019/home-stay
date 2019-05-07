@@ -16,14 +16,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IRoomService _roomService;
+        private readonly Outsourcing.Service.HMS.IRoomImageMappingService _roomImageMappingService;
         private readonly IHotelService _hotelService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService, Outsourcing.Service.HMS.IRoomImageMappingService roomImageMappingService)
         {
+            _roomImageMappingService = roomImageMappingService;
             _roomService = roomService;
             _hotelService = hotelService;
         }
@@ -167,7 +169,12 @@ namespace Labixa.Areas.Portal.Controllers
             if (ModelState.IsValid)
             {
                 room.Slug = StringConvert.ConvertShortName(room.Name);
+                var roomImage = room.RoomImageMappings;
                 _roomService.Edit(room);
+
+                foreach (RoomImageMappings image in roomImage) {
+                    _roomImageMappingService.EditRoomImageMapping(image);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");

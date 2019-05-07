@@ -1,13 +1,12 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Repository;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Outsourcing.Service
 {
 
-    public interface IColorService
+    public interface IDepositService
     {
 
         IQueryable<Deposit> FindAll();
@@ -18,7 +17,7 @@ namespace Outsourcing.Service
         void Delete(Deposit entity);
         IQueryable<Deposit> FindSelectList(int? id);
     }
-    public class ColorService : IColorService
+    public class DepositService : IDepositService
     {
         #region Field
         private readonly IColorRepository _colorRepository;
@@ -26,7 +25,7 @@ namespace Outsourcing.Service
         #endregion
 
         #region Ctor
-        public ColorService(IColorRepository colorRepository, IUnitOfWork unitOfWork)
+        public DepositService(IColorRepository colorRepository, IUnitOfWork unitOfWork)
         {
             _colorRepository = colorRepository;
             _unitOfWork = unitOfWork;
