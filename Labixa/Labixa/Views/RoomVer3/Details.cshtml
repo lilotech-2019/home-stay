@@ -663,7 +663,7 @@
                     {
                         <div class="room-dec-wrapper">
                             <h2>@Model.Room.Name</h2>
-                            <p>@Html.Raw(Model.Room.MetaDescription)</p>
+                            <p>@Html.Raw(Model.Room.MetaTitle)</p>
                             <p>@Html.Raw(Model.Room.Description)</p>
                         </div>
                     }
@@ -671,7 +671,7 @@
                     {
                         <div class="room-dec-wrapper">
                             <h2>@Model.Room.NameEnglish</h2>
-                            <p>@Html.Raw(Model.Room.MetaTitle)</p>
+                            <p>@Html.Raw(Model.Room.MetaDescription)</p>
                             <p>@Html.Raw(Model.Room.DescriptionEnglish)</p>
                             <input type="text" name="@Model.Room.Id" value="@Model.Room.Id" style="display:none;">
                         </div>
