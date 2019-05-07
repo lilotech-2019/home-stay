@@ -1,45 +1,36 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Outsourcing.Data.Models;
-using PagedList;
 using Labixa.ViewModels;
 using Outsourcing.Service;
 using Outsourcing.Service.HMS;
-using Outsourcing.Data.Models.HMS;
 using Outsourcing.Core.Email;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Outsourcing.Service.Portal;
 using static Labixa.ViewModels.IndexViewModel;
+using IBlogService = Outsourcing.Service.IBlogService;
+using IRoomService = Outsourcing.Service.HMS.IRoomService;
 
 namespace Labixa.Controllers
 {
     public class HomeController : BaseHomeController
     {
-        private readonly IProductService _productService;
         private readonly IBlogService _blogService;
         private readonly IWebsiteAttributeService _websiteAttributeService;
-
-        //khởi tạo service Vendor
-        private readonly IVendorService _vendorService;
-
         private readonly IRoomService _roomService;
-
-
-        private readonly IColorService _colorService;
-
-        private readonly ICostService _costService;
+        private readonly IDepositService _depositService;
+        private readonly IMessageService _messageService;
 
         public HomeController(IVendorService vendorService, IProductService productService, IBlogService blogService,
-            IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IColorService colorService,
-            ICostService costService)
+            IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IDepositService depositService,
+            ICostService costService, IMessageService messageService)
         {
-            _vendorService = vendorService;
-            _productService = productService;
             _blogService = blogService;
             _websiteAttributeService = websiteAttributeService;
             _roomService = roomService;
-            _colorService = colorService;
-            _costService = costService;
+            _depositService = depositService;
+            _messageService = messageService;
         }
 
 
@@ -49,22 +40,21 @@ namespace Labixa.Controllers
                 .Where(p => p.Name.Equals("Labixa.Home.Index.Banner"));
             var slideViewModel = new List<SlideViewModel>();
             var count = 0;
-            foreach(var item in slideAtrributes)
+            foreach (var item in slideAtrributes)
             {
                 ++count;
                 slideViewModel.Add(new SlideViewModel()
                 {
-                    Style = count%2==0? "nhs-caption2" : "nhs-caption3",
+                    Style = count % 2 == 0 ? "nhs-caption2" : "nhs-caption3",
                     ImageURL = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
                     Title = item.Title,
                     TitleEnglish = item.TitleEnglish,
                     Caption = item.Caption,
                     CaptionEnglish = item.CaptionEnglish,
-
                 });
             }
             var model = new IndexViewModel
-            {           
+            {
                 roomHome = _roomService.FindAll(),
                 blogHome = _blogService.FindAll().Take(3),
                 Slider = slideViewModel
@@ -73,44 +63,44 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Deposit(ContactUs model)
+        public async Task<ActionResult> Deposit(Deposit model)
         {
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
-              ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
-              ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
-              ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
-              ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
-               "<div class='mail'>" +
-               "<div class='content-mail'>" +
-               "<div class='logo-img'>" +
-               "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
-               "</div>" +
-               "<table>" +
-               "<tr>" +
-               "<th>Họ và Tên Khách Hàng: </th>" +
-               "<td>" + model.Name + "</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Loại Hình Cho Thuê </th>" +
-               "<td>" + model.Type + "</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Địa Chỉ: </th>" +
-               "<td>" + model.Address + "</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Số Tiền: </th>" +
-               "<td>" + model.Price + "</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Số Điện Thoại: </th>" +
-               "<td>" + model.Phone + "</td>" +
-               "</tr>" +
-               "<tr>" +
-               "<th>Email Khách Hàng: </th>" +
-               "<td>" + model.Description + "</td>" +
-               "</tr></table></div></div></html>";
+                             ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+                             ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+                             ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+                             ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+                             "<div class='mail'>" +
+                             "<div class='content-mail'>" +
+                             "<div class='logo-img'>" +
+                             "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                             "</div>" +
+                             "<table>" +
+                             "<tr>" +
+                             "<th>Họ và Tên Khách Hàng: </th>" +
+                             "<td>" + model.Name + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Loại Hình Cho Thuê </th>" +
+                             "<td>" + (model.Type == RoomType.ShortTempDeposit) + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Địa Chỉ: </th>" +
+                             "<td>" + model.Address + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Số Tiền: </th>" +
+                             "<td>" + model.Price + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Số Điện Thoại: </th>" +
+                             "<td>" + model.Phone + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Email Khách Hàng: </th>" +
+                             "<td>" + model.Description + "</td>" +
+                             "</tr></table></div></div></html>";
             //string content = "Dear Mr/Ms Admin, <br/>" +
             //                 "<table border=" + 1 + "><thead>" +
             //                 "<th> Họ Tên Khách Hàng </th>" +
@@ -132,8 +122,8 @@ namespace Labixa.Controllers
             //                 "</tbody></table>";
             model.Status = true;
             model.Deleted = false;
-            model.Type = 0;
-            _vendorService.Create(model);
+            model.Type = RoomType.ShortTempDeposit;
+            _depositService.Create(model);
             await EmailHelper.SendEmailAsync(model.Description, content, subject);
             return RedirectToAction("Index", "Home");
         }
@@ -143,59 +133,44 @@ namespace Labixa.Controllers
             return View();
         }
 
-        public ActionResult Booking()
-        {
-            return View();
-        }
 
-        public ActionResult BookingRoom(Cost modelBooking)
-        {
-            modelBooking.CostCategoryId = 1;
-            _costService.CreateCost(modelBooking);
-            return RedirectToAction("Booking", "Home");
-        }
-
-        public ActionResult Activities()
-        {
-            return View();
-        }
         public ActionResult Contact()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> ContactBookingRooom(Deposit modelContact)
+        public async Task<ActionResult> ContactBookingRooom(Message modelContact)
         {
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
-            ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
-            ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
-            ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
-            ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
-             "<div class='mail'>" +
-             "<div class='content-mail'>" +
-             "<div class='logo-img'>" +
-             "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
-             "</div>" +
-             "<table>" +
-             "<tr>" +
-             "<th>Họ và Tên Khách Hàng: </th>" +
-             "<td>" + modelContact.Name + "</td>" +
-             "</tr>" +
-             "<tr>" +
-             "<th>Email Khách Hàng: </th>" +
-             "<td>" + modelContact.Email + "</td>" +
-             "</tr>" +
-             "<tr>" +
-             "<th>Số Điện Thoại: </th>" +
-             "<td>" + modelContact.Description + "</td>" +
-             "</tr>" +
-             "<tr>" +
-             "<th>Nội Dung: </th>" +
-             "<td>" + modelContact.Content + "</td>" +
-             "</tr>" +
-             "</table></div></div></html>";
+                             ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+                             ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+                             ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+                             ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+                             "<div class='mail'>" +
+                             "<div class='content-mail'>" +
+                             "<div class='logo-img'>" +
+                             "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                             "</div>" +
+                             "<table>" +
+                             "<tr>" +
+                             "<th>Họ và Tên Khách Hàng: </th>" +
+                             "<td>" + modelContact.Name + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Email Khách Hàng: </th>" +
+                             "<td>" + modelContact.Email + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Số Điện Thoại: </th>" +
+                             "<td>" + modelContact.Phone + "</td>" +
+                             "</tr>" +
+                             "<tr>" +
+                             "<th>Nội Dung: </th>" +
+                             "<td>" + modelContact.Content + "</td>" +
+                             "</tr>" +
+                             "</table></div></div></html>";
             //string content = "Dear Mr/Ms Admin, <br/>" +
             //                 "<table border=" + 1 + "><thead>" +
             //                 "<th> Họ Tên Khách Hàng </th>" +
@@ -213,78 +188,10 @@ namespace Labixa.Controllers
             //                 "</tbody></table>";
             modelContact.Status = true;
             modelContact.Deleted = false;
-            _colorService.Create(modelContact);
+            modelContact.Type = MessageType.New;
+            _messageService.Create(modelContact);
             await EmailHelper.SendEmailAsync(modelContact.Email, content, subject);
             return RedirectToAction("Contact", "Home");
-        }
-
-        public ActionResult Detail(string slug)
-        {
-            var obj = _productService.GetProducts().FirstOrDefault(p => p.Slug.Equals(slug));
-            return View(obj);
-        }
-
-        public ActionResult ImageLogo()
-        {
-            var url = _websiteAttributeService.GetWebsiteAttributes()
-                .FirstOrDefault(p => p.Name.Equals("LoadPageImage"));
-            return PartialView("_logoPartial", url);
-        }
-
-        public ActionResult BannerAttribute()
-        {
-            BannerViewModel bannerViewModel = new BannerViewModel();
-            bannerViewModel.bannerLogo = _websiteAttributeService
-                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerLogo"));
-            bannerViewModel.bannerTitle = _websiteAttributeService
-                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerTitle"));
-            bannerViewModel.bannerImage = _websiteAttributeService
-                .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("BannerImage"));
-
-            return PartialView("_bannerPartial", bannerViewModel);
-        }
-
-        public ActionResult ContactValue()
-        {
-            var model = _websiteAttributeService.GetWebsiteAttributes()
-                .FirstOrDefault(p => p.Name.Equals("Contact"));
-            return PartialView("_contactPartial", model);
-        }
-
-        public ActionResult Menu()
-        {
-            MenuViewModel menuViewModel = new MenuViewModel
-            {
-                pageLogo = _websiteAttributeService
-                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageLogo")),
-                pageSlogan = _websiteAttributeService
-                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageSlogan")),
-                pageTitle = _websiteAttributeService
-                    .GetWebsiteAttributes().FirstOrDefault(p => p.Name.Equals("PageTitle"))
-            };
-            return PartialView("_menuPartial", menuViewModel);
-        }
-
-        public ActionResult DetailService(string slug)
-        {
-            var model = _blogService.FindAll().FirstOrDefault(p => p.Slug.Equals(slug));
-
-            return View(model);
-        }
-
-        public ActionResult DetailBlog(string slug)
-        {
-            var model = _blogService.FindAll().Where(w => w.BlogCategory.Id == 3)
-                .FirstOrDefault(p => p.Slug.Equals(slug));
-            return View(model);
-        }
-
-        public ActionResult BlogsCategories(int? page = 1)
-        {
-            var model = _blogService.FindAll().Where(w => w.BlogCategory.Id == 3);
-            int pageNumber = (page ?? 1);
-
-            return View(model.ToPagedList(pageNumber, 1));
         }
     }
 }
