@@ -39,7 +39,7 @@
             <div class="alert alert-block alert-info">
                 Thêm Mới Khách Sạn
             </div>
-            @using (Html.BeginForm("Create", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Create", "Hotels", new { categoryId = Request.Params["categoryId"] }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)

@@ -101,20 +101,25 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotel"></param>
         /// <returns></returns>
-        [HttpPost]        
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(Hotel hotel)
+        public ActionResult Create(int? categoryId, Hotel hotel)
         {
             if (ModelState.IsValid)
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new { categoryId = hotel.HotelCategoryId });
+                return RedirectToAction("Index", new { categoryId = categoryId });
             }
 
-            ViewBag.HotelCategoryId =
-                new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
+            var hotelCategories = _categoryHotelService.FindSelectList();
+            if (categoryId != null)
+            {
+                hotelCategories = hotelCategories.Where(w => w.Id == categoryId);
+            }
+            ViewBag.HotelCategoryId = new SelectList(hotelCategories, "Id", "Name", hotel.HotelCategoryId);
+            
             return View(hotel);
         }
 
