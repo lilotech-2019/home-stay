@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Linq.Expressions;
+﻿using Outsourcing.Data.Models;
 using PagedList;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Outsourcing.Data.Infrastructure
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> where T : BaseEntity
     {
         private ApplicationDbContext _dataContext;
-        private readonly IDbSet<T> _dbset;
+        private readonly DbSet<T> _dbset;
 
         protected RepositoryBase(IDatabaseFactory databaseFactory)
         {
@@ -29,8 +30,15 @@ namespace Outsourcing.Data.Infrastructure
 
         public virtual void Update(T entity)
         {
-            _dbset.Attach(entity);
-            _dataContext.Entry(entity).State = EntityState.Modified;
+            // _dbset.Attach(entity);
+            // _dataContext.Entry(entity).State = EntityState.Modified;
+            var item = _dbset.Find(entity.Id);
+            if (item == null)
+            {
+                return;
+            }            
+            _dataContext.Entry(item).CurrentValues.SetValues(entity);
+
         }
 
         public virtual void Delete(T entity)
@@ -42,7 +50,9 @@ namespace Outsourcing.Data.Infrastructure
         {
             var objects = _dbset.Where(where).AsEnumerable();
             foreach (T obj in objects)
+            {
                 _dbset.Remove(obj);
+            }
         }
         public virtual IQueryable<T> FindBy()
         {
@@ -68,7 +78,7 @@ namespace Outsourcing.Data.Infrastructure
             return _dbset.ToList();
         }
 
-     
+
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
         {
