@@ -153,13 +153,13 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Hotel hotel)
+        public ActionResult Edit(int? categoryId, Hotel hotel)
         {
             if (ModelState.IsValid)
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new { categoryId = hotel.HotelCategoryId });
+                return RedirectToAction("Index", new { categoryId = categoryId});
             }
 
             ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
