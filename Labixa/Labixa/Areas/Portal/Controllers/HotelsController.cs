@@ -102,17 +102,17 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Hotel hotel)
+        public ActionResult Create(int? categoryId, Hotel hotel)
         {
             if (ModelState.IsValid)
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new { categoryId = hotel.HotelCategoryId });
+                return RedirectToAction("Index", new { categoryId });
             }
 
             ViewBag.HotelCategoryId =
-                new SelectList(_categoryHotelService.FindSelectList(hotel.Id), "Id", "Name", hotel.Id);
+                new SelectList(_categoryHotelService.FindSelectList(categoryId), "Id", "Name");
             return View(hotel);
         }
 
@@ -159,10 +159,10 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new { categoryId = categoryId});
+                return RedirectToAction("Index", new {  categoryId});
             }
-
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
+            var tets = _categoryHotelService.FindSelectList(categoryId).ToList();
+            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(categoryId), "Id",
                 "Name", hotel.HotelCategoryId);
             return View(hotel);
         }

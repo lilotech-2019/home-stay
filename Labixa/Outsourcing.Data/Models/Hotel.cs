@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Outsourcing.Data.Models.HMS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
-using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
 {
@@ -15,6 +15,8 @@ namespace Outsourcing.Data.Models
             LastModify = DateTime.Now;
         }
 
+        [DataType(DataType.MultilineText)]
+        public string MetaDescription { get; set; }
         public string MetaKeywords { get; set; }
         public string MetaTitle { get; set; }
 
@@ -26,17 +28,24 @@ namespace Outsourcing.Data.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-
+        [Required]
         public string Address { get; set; }
+        [Required]
         public string District { get; set; }
+        [Required]
         public string Ward { get; set; }
+
         public string ManagerName { get; set; }
         public string ManagerPhone { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string ManagerEmail { get; set; }
         public string HostName { get; set; }
         public string HostPhone { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string HostEmail { get; set; }
         public string HostAddress { get; set; }
+        [Required]
+        [MaxLength(10)]
         public string ContractNumber { get; set; }
         public DateTime? ContractDate { get; set; }
         public DateTime? ContractExpire { get; set; }
@@ -59,7 +68,5 @@ namespace Outsourcing.Data.Models
         public virtual ICollection<Room> Rooms { get; set; }
         public virtual ICollection<Cost> Costs { get; set; }
 
-        [DataType(DataType.MultilineText)]
-        public string MetaDescription { get; set; }
     }
 }
