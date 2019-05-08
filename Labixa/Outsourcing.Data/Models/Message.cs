@@ -6,6 +6,7 @@ namespace Outsourcing.Data.Models
     {
         [Required]
         [MaxLength(255)]
+        [Display(Name = "Subject")]
         public string Name { get; set; }
         public string Email { get; set; }
 

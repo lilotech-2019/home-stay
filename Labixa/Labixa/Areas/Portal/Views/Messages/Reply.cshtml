@@ -36,6 +36,7 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CustomerId)
 
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myTab">
@@ -51,10 +52,10 @@
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane fade active in">
                             <div class="form-group col-sm-6 col-md-12">
-                                @Html.LabelFor(model => model.CustomerId, "CustomerId", new { @class = "col-sm-3 control-label no-padding-right" })
+                                @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.DropDownList("CustomerId")
-                                    @Html.ValidationMessageFor(model => model.CustomerId)
+                                    @Html.EditorFor(model => model.Email, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Email)
                                 </div>
                             </div>
 
