@@ -37,7 +37,7 @@
             <div class="alert alert-block alert-info">
                 Thêm Mới Chi Phí
             </div>
-            @using (Html.BeginForm("Create","Costs" ,null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Create", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)

@@ -121,19 +121,16 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RoomType type, Room room)
+        public ActionResult Create(Room room)
         {
-            if (ModelState.IsValid)
-            {
-                room.Slug = StringConvert.ConvertShortName(room.Name);
-                room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
-                _roomService.Create(room);
-                return RedirectToAction("Index", new { type = type });
-            }
+            room.Slug = StringConvert.ConvertShortName(room.Name);
+            room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
+            _roomService.Create(room);
+            return RedirectToAction("Index", new {hotelId = room.HotelId});
 
 
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(room.HotelId), "Id", "Name", room.HotelId);
-            return View(room);
+            //ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
+            //return View(room);
         }
 
         #endregion

@@ -26,7 +26,6 @@ namespace Outsourcing.Data.Models
         [DataType(DataType.MultilineText)]
         public string DescriptionEnglish { get; set; }
 
-        [Required]
         [Range(0, 100)]
         public int SharePercent { get; set; }
 
