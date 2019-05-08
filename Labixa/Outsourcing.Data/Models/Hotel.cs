@@ -23,7 +23,7 @@ namespace Outsourcing.Data.Models
         public string Name { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]        
         public string Description { get; set; }
 
 

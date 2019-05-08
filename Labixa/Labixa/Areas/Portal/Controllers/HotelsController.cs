@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
@@ -100,8 +101,9 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotel"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost]        
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Hotel hotel)
         {
             if (ModelState.IsValid)
@@ -159,11 +161,14 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new { categoryId = categoryId});
+                return RedirectToAction("Index", new { categoryId });
             }
-
-            ViewBag.HotelCategoryId = new SelectList(_categoryHotelService.FindSelectList(hotel.HotelCategoryId), "Id",
-                "Name", hotel.HotelCategoryId);
+            var category = _categoryHotelService.FindSelectList();
+            if (categoryId != null)
+            {
+                category = category.Where(_ => _.Id == categoryId);
+            }
+            ViewBag.HotelCategoryId = new SelectList(category, "Id", "Name", hotel.HotelCategoryId);
             return View(hotel);
         }
 
