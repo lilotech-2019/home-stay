@@ -110,14 +110,14 @@
 
                         @Html.LabelFor(model => model.CheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" , @onkeyup = "keyupFunction();" })
+                            @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" , @onkeyup = "keyupFunction();", @disabled = "disabled" })
                             @Html.ValidationMessageFor(model => model.CheckIn)
                         </div>
                     </div>
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.CheckOut, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();" })
+                            @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();", @disabled = "disabled" })
                             @Html.ValidationMessageFor(model => model.CheckOut)
                         </div>
                     </div>

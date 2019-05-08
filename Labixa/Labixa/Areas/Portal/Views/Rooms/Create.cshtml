@@ -40,7 +40,7 @@
             <div class="alert alert-block alert-info">
                 Thêm Mới Phòng
             </div>
-            @using (Html.BeginForm("Create", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"] }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -88,8 +88,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
-                                    @Html.ValidationMessageFor(model => model.Name)
+                                    @Html.TextBoxFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5",@required="required" })
+                                    @*@Html.ValidationMessageFor(model => model.Name)*@
                                 </div>
                             </div>
 
@@ -112,7 +112,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.SharePercent, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.TextBoxFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5", type = "number", min = 0, max = 100 })
                                     @Html.ValidationMessageFor(model => model.SharePercent)
                                 </div>
                             </div>
@@ -277,10 +277,11 @@
                 </div>
             }
         </div>
-        <a href="@Url.Action("Index", "Hotels", new {categoryId = Request.Params["categoryId"] })">Back To List</a>
     </div>
 </div>
 <script>
     CKEDITOR.replace('Description');
     CKEDITOR.replace('DescriptionEnglish');
+
+
 </script>
