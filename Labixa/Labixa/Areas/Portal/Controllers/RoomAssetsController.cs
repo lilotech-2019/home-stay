@@ -74,6 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(RoomAsset roomAsset)
         {
             if (ModelState.IsValid)
@@ -109,6 +110,7 @@ namespace Labixa.Areas.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(RoomAsset roomAsset)
         {
             if (ModelState.IsValid)

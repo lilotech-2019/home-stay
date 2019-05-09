@@ -160,6 +160,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(int? categoryId, Hotel hotel)
         {
             if (ModelState.IsValid)
@@ -220,13 +221,17 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
-
+        #region HotelSubMenu
+        /// <summary>
+        /// HotelSubMenu
+        /// </summary>
+        /// <returns></returns>
         public ActionResult HotelSubMenu()
         {
             var hotels = _hotelService.FindAll();
             return PartialView("_HotelSubMenu", hotels.AsNoTracking().ToList());
         }
-
+        #endregion
         public ActionResult Preview(int hotelId)
         {
             var hotel = _hotelService.FindById(hotelId);

@@ -22,9 +22,9 @@
             </li>
             <li>
                 <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Chi Phí</a>
+                <a href="@Url.Action("Index")">Quản lý Khach sạn</a>
             </li>
-            <li class="active">Thêm mới Chi Phí</li>
+            <li class="active">Thêm mới Khách sạn</li>
         </ul>
     </div>
 }
@@ -69,16 +69,13 @@
                     <div class="form-group ">
                         <div class="col-md-offset-4 col-md-8">
                             <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                            <input type="reset" value="Reset" class="btn" />
+                            <a href="@Url.Action("Index","HotelCategories",new { hotelCategory = Request.Params["hotelCategory"]})" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-</div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 @section scripts{
     <script src="~/Content/ckeditor/ckeditor.js"></script>

@@ -79,6 +79,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(BlogCategories blogCategories)
         {
             if (ModelState.IsValid)
@@ -123,6 +124,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(BlogCategories blogCategories)
         {
             if (ModelState.IsValid)

@@ -75,6 +75,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(CostCategory costCategory)
         {
             if (ModelState.IsValid)
@@ -117,6 +118,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(CostCategory costCategory)
         {
             if (ModelState.IsValid)

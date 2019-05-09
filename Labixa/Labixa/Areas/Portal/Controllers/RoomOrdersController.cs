@@ -124,6 +124,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(CreateViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -179,6 +180,7 @@ namespace Labixa.Areas.Portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(RoomOrder roomOrder)
         {
             if (ModelState.IsValid)

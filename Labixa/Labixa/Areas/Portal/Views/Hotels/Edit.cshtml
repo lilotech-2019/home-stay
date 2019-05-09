@@ -228,7 +228,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Save" class="btn btn-primary" />
-                        <input type="reset" value="Reset" class="btn" />
+                        <a href="@Url.Action("Index","Hotels",new { categoryId = Request.Params["categoryId"]})" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }
