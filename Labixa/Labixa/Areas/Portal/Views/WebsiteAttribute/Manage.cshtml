@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
-
+    var count = 0;
 }
 @section scripts{
     <script src="~/Content/ckeditor/ckeditor.js"></script>
@@ -43,12 +43,13 @@
                         <ul class="nav nav-tabs" id="myTab">
                             @foreach (var listItem in Model)
                             {
-                                var href = "#" + listItem.Type;
+                                count++;
+                                var href = "#tab" + count;
                                 var isActive = Model.IndexOf(listItem) == 0 ? "active" : "";
                                 <li class="@isActive">
                                     <a data-toggle="tab" href="@href">
                                         @*<i class="green icon icon-home bigger-120"></i>*@
-                                        @listItem.Type
+                                        @count
                                     </a>
                                 </li>
                             }
@@ -60,15 +61,95 @@
                             @for (int i = 0; i < Model.Count(); i++)
                             {
                                 var isActive = i == 0 ? "active" : "";
+                                var href = "tab" + (i + 1);
+                            <div id="@href" class="tab-pane fade @isActive in">
+                                @for (int f = 0; f < Model[i].WebsiteAttributes.Count(); f++)
+                                {
+                                    @*@Html.EditorFor(model => Model[i].WebsiteAttributes[f])*@
+                                    @Html.HiddenFor(model => Model[i].WebsiteAttributes[f].Id)
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Name, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Name, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Name)
+                                        </div>
+                                    </div>
 
-                                <div id="@Model[i].Type" class="tab-pane fade @isActive in">
-                                    @for (int f = 0; f < Model[i].WebsiteAttributes.Count(); f++)
-                                    {
-                                        @Html.EditorFor(model => Model[i].WebsiteAttributes[f])
-                                    }
-                                </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Description, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Description, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Description)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].ControlType, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].ControlType, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].ControlType)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Type, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Type, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Type)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Value, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Value, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Value)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].IsPublic, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].IsPublic, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].IsPublic)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Title, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Title, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Title)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].TitleEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].TitleEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].TitleEnglish)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Caption, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Caption, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Caption)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].CaptionEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].CaptionEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].CaptionEnglish)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
                             }
-                   
+
 
                         </div>
                     </div>
