@@ -199,8 +199,11 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                message.Type = MessageType.Replied;
-                _messageService.Edit(message);
+                var entity = _messageService.FindById(message.Id);
+
+                entity.Type = MessageType.Replied;                                               
+                entity.Answer = message.Answer;
+                _messageService.Edit(entity);
                 return RedirectToAction("Index");
             }
             return View(message);

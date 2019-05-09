@@ -9,48 +9,45 @@
 <div>
     <h4>Hotels</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div>
+        <div>
+            <strong>@Html.DisplayNameFor(model => model.Name)</strong>: @Html.DisplayFor(model => model.Name)
+        </div>
+        <div>
+            <strong>@Html.DisplayNameFor(model => model.HotelCategory.Name)</strong>: @Html.DisplayFor(model => model.HotelCategory.Name)
+        </div>
+    </div>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HotelCategory.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HotelCategory.Name)
-        </dd>
-
-        <table class="table">
+    <table class="table">
+        <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Amount</th>
                 <th>Type</th>
             </tr>
+        </thead>
+        <tbody>
             @foreach (var item in Model.Costs)
             {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Amount</td>
-                <td>@item.Type</td>
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Type</td>
 
-            </tr>
+                </tr>
             }
-        </table>
-    </dl>
+        </tbody>
+    </table>
+
 </div>
 <p>
     @using (Html.BeginForm("ExportData", "Hotels", FormMethod.Post))
     {
         @Html.HiddenFor(model => model.Id)
         <input type="submit" value="Export" class="btn btn-primary" />
+        <a href="@Url.Action("Index")" class="btn btn-secondary" >Back</a>
     }
-    @Html.ActionLink("Back to List", "Index")
 </p>

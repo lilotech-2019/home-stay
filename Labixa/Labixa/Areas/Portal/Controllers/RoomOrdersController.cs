@@ -138,13 +138,14 @@ namespace Labixa.Areas.Portal.Controllers
                 else
                 {
                     roomOrder.CustomerId = customer.Id;
-                    customer.Name = viewModel.Customer.Name;
-                    customer.Address = viewModel.Customer.Address;
-                    customer.Phone = viewModel.Customer.Phone;
-                    customer.Email = viewModel.Customer.Email;
+                    customer.Name = viewModel.Customer.Name.Trim();
+                    customer.Address = viewModel.Customer.Address.Trim();
+                    customer.Phone = viewModel.Customer.Phone.Trim();
+                    customer.Email = viewModel.Customer.Email.Trim();
                     customer.LastModify = DateTime.Now;
                     _customerService.Edit(customer);
                 }
+
 
                 _roomOrderService.Create(roomOrder);
                 return RedirectToAction("Index");
@@ -261,6 +262,12 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.OrderStatus = RoomOrderStatus.CheckOut;
+
+            entity.Customer.Name.Trim();
+            entity.Customer.Address.Trim();
+            entity.Customer.Phone.Trim();
+            entity.Customer.Email.Trim();
+
             _roomOrderService.Edit(entity);
             return RedirectToAction("Index");
         }
