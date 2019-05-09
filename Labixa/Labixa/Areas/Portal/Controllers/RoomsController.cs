@@ -126,24 +126,10 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateInput(false)]
         public ActionResult Create(int? hotelId, RoomType? type, Room room)
         {
-            if (ModelState.IsValid)
-            {
-                room.Slug = StringConvert.ConvertShortName(room.Name);
-                room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
-                _roomService.Create(room);
-                return RedirectToAction("Index", new { hotelId = room.HotelId, type = type });
-            }
-            var hotels = _hotelService.FindSelectList();
-            if (hotelId != null)
-            {
-                hotels = hotels.Where(w => w.Id == hotelId);
-            }
-            
-            ViewBag.HotelId = new SelectList(hotels, "Id", "Name", hotelId);
-
-            return View(room);
-
-
+            room.Slug = StringConvert.ConvertShortName(room.Name);
+            room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
+            _roomService.Create(room);
+            return RedirectToAction("Index", new { hotelId = room.HotelId, type = type });
         }
 
         #endregion
@@ -155,7 +141,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id,int? hotelId, RoomType? type)
         {
             if (id == null)
             {
@@ -166,7 +152,19 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
+            var hotels = _hotelService.FindSelectList();
+            if (hotelId != null) {
+                hotels = hotels.Where(w => w.Id == hotelId);
+            }
+
+            var rooms = _roomService.FindSelectList();
+            if (type != null)
+            {
+                rooms = rooms.Where(w => w.Type == type);
+            }
+
+            ViewBag.RoomType = new SelectList(rooms, "Id", "Name");
+            ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
 
@@ -178,7 +176,7 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(Room room)
+        public ActionResult Edit(Room room, int? hotelId, RoomType? type)
         {
             if (ModelState.IsValid)
             {
@@ -193,7 +191,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { hotelId, type });
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);

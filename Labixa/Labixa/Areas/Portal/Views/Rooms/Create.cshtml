@@ -40,7 +40,7 @@
             <div class="alert alert-block alert-info">
                 Thêm Mới Phòng
             </div>
-            @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"] }, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -272,7 +272,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                        <a href="@Url.Action("Index","Rooms",null)" class="btn btn-warning">Back</a>
+                        <a href="@Url.Action("Index","Rooms",new { hotelId = Request.Params["hotelId"], type = Request.Params["type"]})" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }

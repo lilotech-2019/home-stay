@@ -15,8 +15,6 @@
 
     
     function keyupFunction() {
-        console.log(dateIn);
-        console.log(dateOut);
         if (day == 0 && hours > 0) {
             document.getElementById("Total").value = Number(document.getElementById("TotalBookPrice").value) + Number(document.getElementById("Price").value);
         }
@@ -58,8 +56,8 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @Html.HiddenFor(model=>model.Id)
-                
+                @Html.HiddenFor(model => model.Id)
+
                 <div class="row">
                     <h3 class="col-sm-12">Thông Tin Khách Hàng</h3>
                     <!--Customer Information Start-->
@@ -110,14 +108,15 @@
 
                         @Html.LabelFor(model => model.CheckIn, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5" , @onkeyup = "keyupFunction();", @disabled = "disabled" })
+                            @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();" })
                             @Html.ValidationMessageFor(model => model.CheckIn)
                         </div>
                     </div>
                     <div class="form-group col-sm-6 col-md-12">
+
                         @Html.LabelFor(model => model.CheckOut, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();", @disabled = "disabled" })
+                            @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();" })
                             @Html.ValidationMessageFor(model => model.CheckOut)
                         </div>
                     </div>
@@ -238,18 +237,18 @@
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.TotalBookPrice, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.TotalBookPrice, null, new { @type ="number", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();" })
+                            @Html.TextBoxFor(model => model.TotalBookPrice, null, new { @type = "number", @class = "col-xs-10 col-sm-5", @onkeyup = "keyupFunction();" })
                             @Html.ValidationMessageFor(model => model.TotalBookPrice)
                         </div>
                     </div>
 
                     <h3 class="col-sm-12">Thành Tiền</h3>
                     @*<div class="form-group col-sm-6 col-md-12">
-                            <strong class="col-sm-3 control-label no-padding-right">Tổng</strong>
-                            <div class="col-sm-9">
-                                <input class="col-xs-10 col-sm-5" type="text" />
-                            </div>
-                        </div>*@
+                    <strong class="col-sm-3 control-label no-padding-right">Tổng</strong>
+                    <div class="col-sm-9">
+                        <input class="col-xs-10 col-sm-5" type="text" />
+                    </div>
+                </div>*@
 
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.Total, new { @class = "col-sm-3 control-label no-padding-right" })
@@ -264,11 +263,11 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Preview" class="btn btn-primary" />
+                        <a href="@Url.Action("Index","RoomOrders")" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }
         </div>
-        <a href="@Url.Action("Index","RoomOrders",null)">Back To List</a>
 
     </div>
 </div>

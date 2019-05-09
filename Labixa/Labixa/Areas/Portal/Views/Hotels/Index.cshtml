@@ -76,7 +76,7 @@
                         <td class=" ">
                             <div class="visible-md visible-lg  btn-group">
 
-                                <a href="@Url.Action("Edit", new {id = item.Id, categoryId = Request.Params["categoryId"]})" class="btn btn-xs btn-info">
+                                <a href="@Url.Action("Edit", new {id = item.Id, categoryId = Request.Params["categoryId"], type = Request.Params["type"]})" class="btn btn-xs btn-info">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">

@@ -18,11 +18,11 @@ namespace Outsourcing.Data.Models
         public string SlugEnglish { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         public string Description { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         public string DescriptionEnglish { get; set; }
 
         [Range(0, 100)]
