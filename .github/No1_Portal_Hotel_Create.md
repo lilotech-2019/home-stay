@@ -2,8 +2,8 @@
 name: Create Hotel No 1
 about: Create a report to help us improve
 title: 'Tạo mới Hotel Thiếu description'
-labels: ''
-assignees: ''
+labels: 'bug'
+assignees: 'Phạm Trung Phi Thành'
 
 ---
 
