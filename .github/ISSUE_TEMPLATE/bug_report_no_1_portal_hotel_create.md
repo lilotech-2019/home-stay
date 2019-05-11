@@ -3,7 +3,7 @@ name: Bug Report No 1 Portal Hotel Create
 about: Create a report to help us improve
 title: 'Tạo mới Hotel Thiếu description'
 labels: 'bug'
-assignees: 'ThaPha'
+assignees: 'Thapha'
 
 ---
 
