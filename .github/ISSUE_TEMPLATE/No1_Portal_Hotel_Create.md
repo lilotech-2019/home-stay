@@ -1,5 +1,5 @@
 ---
-name: Create Hotel No 1
+name: [No1] Portal Hotel Create
 about: Create a report to help us improve
 title: 'Tạo mới Hotel Thiếu description'
 labels: 'bug'
