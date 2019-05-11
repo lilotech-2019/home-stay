@@ -23,12 +23,14 @@ namespace Outsourcing.Data.Models
         public string Name { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]        
         public string Description { get; set; }
 
-
+        [Required]
         public string Address { get; set; }
+        [Required]
         public string District { get; set; }
+        [Required]
         public string Ward { get; set; }
         public string ManagerName { get; set; }
         public string ManagerPhone { get; set; }

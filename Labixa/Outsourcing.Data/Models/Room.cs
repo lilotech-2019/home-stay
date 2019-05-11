@@ -12,18 +12,17 @@ namespace Outsourcing.Data.Models
         [MaxLength(255)]
         public string Name { get; set; }
 
-        [Required]
         [MaxLength(255)]
         public string NameEnglish { get; set; }
         public string Slug { get; set; }
         public string SlugEnglish { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         public string Description { get; set; }
 
         [AllowHtml]
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         public string DescriptionEnglish { get; set; }
 
         [Range(0, 100)]

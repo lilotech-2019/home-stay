@@ -86,6 +86,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(HotelCategory hotelCategory)
         {
             if (ModelState.IsValid)
@@ -128,6 +129,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(HotelCategory hotelCategory)
         {
             if (ModelState.IsValid)

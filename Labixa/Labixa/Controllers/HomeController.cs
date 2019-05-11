@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Web.Mvc;
 using Outsourcing.Data.Models;
 using Labixa.ViewModels;

@@ -23,9 +23,12 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <IISExpressSSLPort>44379</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -59,24 +62,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\BaseController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\CostController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\CostOrderController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\FileController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\HotelController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\RoomController.cs" />
-    <Compile Include="Areas\HMSAdmin\Controllers\RoomOrderController.cs" />
-    <Compile Include="Areas\HMSAdmin\HMSAdminAreaRegistration.cs" />
-    <Compile Include="Areas\HMSAdmin\Mappings\AutoMapperConfiguration.cs" />
-    <Compile Include="Areas\HMSAdmin\Mappings\DomainToViewModelMappingProfile.cs" />
-    <Compile Include="Areas\HMSAdmin\Mappings\ViewModelToDomainMappingProfile.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderCreateModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\Costs\CostOrderEditModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\Hotels\HotelModel.cs" />
-    <Compile Include="Areas\HMSAdmin\ViewModels\Rooms\RoomModel.cs" />
     <Compile Include="Areas\Portal\Controllers\CostCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\CostsController.cs" />
     <Compile Include="Areas\Portal\Controllers\RoomAssetsController.cs" />
@@ -755,6 +740,9 @@
     <Content Include="Content\HMS\images\gallery\7.jpg" />
     <Content Include="Content\HMS\images\header\logo.png" />
     <Content Include="Content\HMS\images\header\logo2.png" />
+    <Content Include="Content\HMS\images\icon\logo.png" />
+    <Content Include="Content\HMS\images\icon\logo2.png" />
+    <Content Include="Content\HMS\images\icon\logo3.jpg" />
     <Content Include="Content\HMS\images\icon\lr-home.png" />
     <Content Include="Content\HMS\images\inner-header2.jpg" />
     <Content Include="Content\HMS\images\inner-header\1.jpg" />
@@ -1748,17 +1736,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\HMSAdmin\Views\Orders\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Orders\Delete.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Orders\Details.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Orders\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Orders\Index.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Areas\HMSAdmin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Portal\Views\web.config" />
     <Content Include="Areas\Portal\Views\Customers\Index.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\_AdminLayout.cshtml" />
@@ -1828,9 +1810,6 @@
     <Content Include="Areas\Portal\Views\Messages\Create.cshtml" />
     <Content Include="Areas\Portal\Views\Messages\Edit.cshtml" />
     <Content Include="Areas\Portal\Views\Messages\Delete.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\File\_Elfinder.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\File\_ElfinderTextBox.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\File\Index.cshtml" />
     <Content Include="Areas\Portal\Views\HotelCategories\_HotelCategorySubMenu.cshtml" />
     <Content Include="Areas\Portal\Views\Deposit\Create.cshtml" />
     <Content Include="Areas\Portal\Views\Deposit\Delete.cshtml" />
@@ -1883,6 +1862,7 @@
     <Content Include="Areas\Portal\Views\Hotels\_HotelSubMenu.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\Preview.cshtml" />
     <Content Include="Areas\Portal\Views\CostCategories\_CostCategorySubMenu.cshtml" />
+    <Content Include="Areas\Portal\Views\Messages\Reply.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2033,45 +2013,6 @@
     <Content Include="Content\hotel\themes\custom\scalac\fonts\travel\Flaticon.woff" />
     <Content Include="Content\hotel\themes\custom\scalac\fonts\travel\Flaticond41d.eot" />
     <Content Include="Content\hotel\themes\custom\scalac\images\video\350950598.webm" />
-    <Content Include="Areas\HMSAdmin\Views\web.config" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\_PartialButtonGroup.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\DetailsInt32.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\Int32.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\IsRight.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\IsTransferMoneyToBank.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\Label.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\DisplayTemplates\String.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\CheckBox.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\CkEditor.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\ControlType.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\GetImageFromElfinder.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\GetImageFromElfinderPhoto.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\Int32.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\Password.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\PhotoAlbum.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\ProductAttributeMapping.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\ProductPictureMapping.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\WebsiteAttribute.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Hotel\Index.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Hotel\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Hotel\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Room\Index.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Room\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Room\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\RoomImageMapping.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Cost\Index.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Cost\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Cost\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CostOrder\Index.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CostOrder\Create.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CostOrder\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\CostOrder\_OrderItem.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\CostOrderItemEditModel.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\Shared\EditorTemplates\CostOrderItem.cshtml" />
     <Content Include="Content\HMS\fonts\fontawesome-webfont3295.eot" />
     <Content Include="Content\HMS\fonts\fontawesome-webfont3295.ttf" />
     <Content Include="Content\HMS\fonts\fontawesome-webfont3295.woff" />
@@ -2083,9 +2024,6 @@
     <Content Include="Content\HMS\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\HMS\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="Content\HMS\vendors\Stroke-Gap-Icons-Webfont\fonts\Stroke-Gap-Icons.eot" />
-    <Content Include="Areas\HMSAdmin\Views\RoomOrder\CreateRoomOrder.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\RoomOrder\Edit.cshtml" />
-    <Content Include="Areas\HMSAdmin\Views\RoomOrder\Index.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -2146,7 +2084,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\HMSAdmin\Views\Shared\Partial\" />
     <Folder Include="Areas\Portal\Views\Shared\Partial\" />
     <Folder Include="Content\admin\fonts\" />
     <Folder Include="images\uploaded\caycanh\" />

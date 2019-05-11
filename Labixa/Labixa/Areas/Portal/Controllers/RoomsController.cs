@@ -16,6 +16,7 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IRoomService _roomService;
+        private readonly Outsourcing.Service.HMS.IRoomImageService _roomImageService;
         private readonly Outsourcing.Service.HMS.IRoomImageMappingService _roomImageMappingService;
         private readonly IHotelService _hotelService;
 
@@ -23,8 +24,9 @@ namespace Labixa.Areas.Portal.Controllers
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService, Outsourcing.Service.HMS.IRoomImageMappingService roomImageMappingService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService, Outsourcing.Service.HMS.IRoomImageMappingService roomImageMappingService, Outsourcing.Service.HMS.IRoomImageService roomImageService)
         {
+            _roomImageService = roomImageService;
             _roomImageMappingService = roomImageMappingService;
             _roomService = roomService;
             _hotelService = hotelService;
@@ -121,16 +123,13 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Room room)
+        [ValidateInput(false)]
+        public ActionResult Create(int? hotelId, RoomType? type, Room room)
         {
             room.Slug = StringConvert.ConvertShortName(room.Name);
             room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
             _roomService.Create(room);
-            return RedirectToAction("Index", new {hotelId = room.HotelId});
-
-
-            //ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name",room.HotelId);
-            //return View(room);
+            return RedirectToAction("Index", new { hotelId = room.HotelId, type = type });
         }
 
         #endregion
@@ -142,7 +141,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id,int? hotelId, RoomType? type)
         {
             if (id == null)
             {
@@ -153,7 +152,19 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
+            var hotels = _hotelService.FindSelectList();
+            if (hotelId != null) {
+                hotels = hotels.Where(w => w.Id == hotelId);
+            }
+
+            var rooms = _roomService.FindSelectList();
+            if (type != null)
+            {
+                rooms = rooms.Where(w => w.Type == type);
+            }
+
+            ViewBag.RoomType = new SelectList(rooms, "Id", "Name");
+            ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
 
@@ -164,18 +175,23 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Room room)
+        [ValidateInput(false)]
+        public ActionResult Edit(Room room, int? hotelId, RoomType? type)
         {
             if (ModelState.IsValid)
             {
                 room.Slug = StringConvert.ConvertShortName(room.Name);
-                var roomImage = room.RoomImageMappings;
-                _roomService.Edit(room);
 
-                foreach (RoomImageMappings image in roomImage) {
+                foreach (RoomImageMappings image in room.RoomImageMappings)
+                {
+                    _roomImageService.EditRoomImage(image.RoomImage);
                     _roomImageMappingService.EditRoomImageMapping(image);
                 }
-                return RedirectToAction("Index");
+
+                _roomService.Edit(room);
+
+
+                return RedirectToAction("Index", new { hotelId, type });
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);

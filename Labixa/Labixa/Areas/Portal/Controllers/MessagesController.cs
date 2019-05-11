@@ -77,6 +77,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Message message)
         {
             if (ModelState.IsValid)
@@ -117,6 +118,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Message message)
         {
             if (ModelState.IsValid)
@@ -164,6 +166,49 @@ namespace Labixa.Areas.Portal.Controllers
             }
             _messageService.Delete(message);
             return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Reply
+        /// <summary>
+        /// Reply - GET
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Reply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var message = _messageService.FindById((int)id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CustomerId = new SelectList(_customerService.FindSelectList(message.CustomerId), "Id", "Name", message.CustomerId);
+            return View(message);
+        }
+
+        /// <summary>
+        /// Reply - POST
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply(Message message)
+        {
+            if (ModelState.IsValid)
+            {
+                var entity = _messageService.FindById(message.Id);
+
+                entity.Type = MessageType.Replied;                                               
+                entity.Answer = message.Answer;
+                _messageService.Edit(entity);
+                return RedirectToAction("Index");
+            }
+            return View(message);
         }
         #endregion
     }

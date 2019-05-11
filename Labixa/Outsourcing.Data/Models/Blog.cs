@@ -13,6 +13,7 @@ namespace Outsourcing.Data.Models
             LastEditedTime = DateTime.Now;
         }
 
+        [Required]
         public string Title { get; set; }
         public string TitleEnglish { get; set; }
 
@@ -23,11 +24,11 @@ namespace Outsourcing.Data.Models
 
         public string BlogImage { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         [AllowHtml]
         public string Description { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Html)]
         [AllowHtml]
         public string DescriptionEnglish { get; set; }
         public string Content { get; set; }

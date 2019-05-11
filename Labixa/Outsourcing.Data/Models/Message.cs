@@ -6,9 +6,12 @@ namespace Outsourcing.Data.Models
     {
         [Required]
         [MaxLength(255)]
+        [Display(Name = "Subject")]
         public string Name { get; set; }
         public string Email { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        public string Answer { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }

@@ -1,0 +1,99 @@
+﻿@model Outsourcing.Data.Models.Message
+
+@{
+    ViewBag.Title = "Reply";
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('breadcrumbs', 'fixed');
+        } catch (e) {
+        }
+    </script>
+
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home home-icon"></i>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <i class="icon-edit"></i>
+            <a href="@Url.Action("Index")">Quản lý Tin Nhắn</a>
+        </li>
+        <li class="active">Phản Hồi Tin Nhắn</li>
+    </ul>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-info">
+                Edit message
+            </div>
+            @using (Html.BeginForm("Reply", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CustomerId)
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab1">
+                                <i class="green icon icon-home bigger-120"></i>
+                                General
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane fade active in">
+                            <div class="form-group col-sm-6 col-md-12">
+                                @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Email, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Email)
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6 col-md-12">
+                                @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Content, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Content)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Answer, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(model => model.Answer, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Answer)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" value="Send" class="btn btn-primary" />
+                        <a href="@Url.Action("Index")" class="btn btn-warning" >Back</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -93,7 +93,7 @@ namespace Labixa.Areas.Portal.Controllers
             }
             else
             {
-                ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(null), "Id", "Name");
+                ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(), "Id", "Name");
             }
             return View();
         }
@@ -105,6 +105,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Cost cost)
         {
             if (ModelState.IsValid)
@@ -147,6 +148,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Cost cost)
         {
             if (ModelState.IsValid)
