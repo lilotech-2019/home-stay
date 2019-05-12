@@ -198,7 +198,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ReplyAsync(Message message)
+        public async Task<ActionResult> Reply(Message message)
         {
             if (ModelState.IsValid)
             {
@@ -222,7 +222,7 @@ namespace Labixa.Areas.Portal.Controllers
                    "<tr><th>Title</th> <th>Content</th></tr>" +
                    "<tr><td>"+message.Name+"</td> <td>"+message.Content+"</td></tr>" +
                    "</table>" +
-                   "<p>Replied: "+ message.Answer +"</p>";
+                   "<p>Replied: "+ message.Answer +"</p></html>";
                 await EmailHelper.SendEmailAsync(message.Email, content, subject);
                 //====================</Mail>==============================
                 return RedirectToAction("Index");

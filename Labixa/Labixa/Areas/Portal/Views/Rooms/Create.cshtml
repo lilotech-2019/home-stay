@@ -24,7 +24,7 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home home-icon"></i>
-                <a href="/">Home</a>
+                <a href="/portal">Home</a>
             </li>
             <li>
                 <i class="icon-edit"></i>
@@ -126,7 +126,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.HotelId, "RoomType", new { @class = "col-sm-3 control-label no-padding-right" })
+                                @Html.LabelFor(model => model.Type, "RoomType", new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
                                     @Html.DropDownList("RoomType")
                                     @Html.ValidationMessageFor(model => model.Type)

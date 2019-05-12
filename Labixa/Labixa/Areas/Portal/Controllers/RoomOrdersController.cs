@@ -56,7 +56,8 @@ namespace Labixa.Areas.Portal.Controllers
         public async Task<ActionResult> Index(int? hotelId)
         {
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
-            if (hotelId != null) {
+            if (hotelId != null)
+            {
                 var hotel = _hotelService.FindById((int)hotelId);
                 roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotel.Id);
             }
@@ -99,8 +100,9 @@ namespace Labixa.Areas.Portal.Controllers
                 room = _roomService.FindById((int)roomId);
                 ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
-            else {
-                ViewBag.RoomId = new SelectList(hotelId==null?_roomService.FindSelectList(): _roomService.FindSelectList().Where(w=>w.HotelId==hotelId), "Id", "Name");
+            else
+            {
+                return RedirectToAction("Index", "Rooms");
             }
 
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
@@ -128,7 +130,7 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> CreateAsync(CreateViewModel viewModel)
+        public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -142,10 +144,10 @@ namespace Labixa.Areas.Portal.Controllers
                 else
                 {
                     roomOrder.CustomerId = customer.Id;
-                    customer.Name = viewModel.Customer.Name.Trim();
-                    customer.Address = viewModel.Customer.Address.Trim();
-                    customer.Phone = viewModel.Customer.Phone.Trim();
-                    customer.Email = viewModel.Customer.Email.Trim();
+                    customer.Name = viewModel.Customer.Name != null ? viewModel.Customer.Name.Trim() : "";
+                    customer.Address = viewModel.Customer.Address != null ? viewModel.Customer.Address.Trim() : "";
+                    customer.Phone = viewModel.Customer.Phone != null ? viewModel.Customer.Phone.Trim() : "";
+                    customer.Email = viewModel.Customer.Email != null ? viewModel.Customer.Email.Trim(): "";
                     customer.LastModify = DateTime.Now;
                     _customerService.Edit(customer);
                 }
@@ -315,11 +317,6 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.OrderStatus = RoomOrderStatus.CheckOut;
-
-            entity.Customer.Name.Trim();
-            entity.Customer.Address.Trim();
-            entity.Customer.Phone.Trim();
-            entity.Customer.Email.Trim();
 
             _roomOrderService.Edit(entity);
             return RedirectToAction("Index");

@@ -87,9 +87,18 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <param name="hotelId"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public ActionResult Create(int? hotelId, RoomType? type)
         {
+            var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
+            if (type != null)
+            {
+                roomTypes = new List<RoomType> { (RoomType)type };
+            }
+
+            ViewBag.RoomType = new SelectList(roomTypes, type);
+
             var roomImage = new List<RoomImageMappings>
             {
                 new RoomImageMappings {IsMainPicture = true, Title = "Cover"},
@@ -113,13 +122,6 @@ namespace Labixa.Areas.Portal.Controllers
                 room.HotelId = (int) hotelId;
                 return View(room);
             }
-            var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
-            if (type != null)
-            {
-                roomTypes = new List<RoomType> { (RoomType)type };
-            }
-
-            ViewBag.RoomType = new SelectList(roomTypes, type);
             ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
