@@ -33,6 +33,10 @@
                         @Html.DisplayNameFor(model => model.TitleEnglish)
                     </th>
 
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+
                     <th>@Resources.Resources.Action</th>
                 </tr>
             </thead>
@@ -44,34 +48,37 @@
                 @foreach (var item in Model)
                 {
                     count++;
-                    <tr>
-                        <td>
-                            @count
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BlogCategory.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
+                <tr>
+                    <td>
+                        @count
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BlogCategory.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TitleEnglish)
-                        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleEnglish)
+                    </td>
 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
 
-                        <td class=" ">
-                            <div class="visible-md visible-lg  btn-group">
+                    <td class=" ">
+                        <div class="visible-md visible-lg  btn-group">
 
-                                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
+                            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-xs btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
 
-                            </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
