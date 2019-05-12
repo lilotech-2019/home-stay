@@ -36,7 +36,7 @@ namespace Labixa.Controllers
 
         public ActionResult Index()
         {
-            var slideAtrributes = _websiteAttributeService.GetWebsiteAttributes()
+            var slideAtrributes = _websiteAttributeService.GetWebsiteAttributes().OrderBy(q => q.Status == true)
                 .Where(p => p.Name.Equals("Labixa.Home.Index.Banner"));
             var slideViewModel = new List<SlideViewModel>();
             var count = 0;
