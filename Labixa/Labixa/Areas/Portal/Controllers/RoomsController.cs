@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Data.Models.HMS;
+using System;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -87,7 +88,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="hotelId"></param>
         /// <returns></returns>
-        public ActionResult Create(int? hotelId)
+        public ActionResult Create(int? hotelId, RoomType? type)
         {
             var roomImage = new List<RoomImageMappings>
             {
@@ -112,6 +113,13 @@ namespace Labixa.Areas.Portal.Controllers
                 room.HotelId = (int) hotelId;
                 return View(room);
             }
+            var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
+            if (type != null)
+            {
+                roomTypes = new List<RoomType> { (RoomType)type };
+            }
+
+            ViewBag.RoomType = new SelectList(roomTypes, type);
             ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
@@ -157,13 +165,13 @@ namespace Labixa.Areas.Portal.Controllers
                 hotels = hotels.Where(w => w.Id == hotelId);
             }
 
-            var rooms = _roomService.FindSelectList();
+            var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
             if (type != null)
             {
-                rooms = rooms.Where(w => w.Type == type);
+                roomTypes = new List<RoomType> { (RoomType)type };
             }
 
-            ViewBag.RoomType = new SelectList(rooms, "Id", "Name");
+            ViewBag.RoomType = new SelectList(roomTypes, type);
             ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }

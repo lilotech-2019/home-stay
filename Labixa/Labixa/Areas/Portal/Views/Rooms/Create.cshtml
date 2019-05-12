@@ -88,7 +88,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.TextBoxFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5",@required="required" })
+                                    @Html.TextBoxFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5", @required = "required" })
                                     @*@Html.ValidationMessageFor(model => model.Name)*@
                                 </div>
                             </div>
@@ -126,9 +126,9 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Type, new { @class = "col-sm-3 control-label no-padding-right" })
+                                @Html.LabelFor(model => model.HotelId, "RoomType", new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Type, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.DropDownList("RoomType")
                                     @Html.ValidationMessageFor(model => model.Type)
                                 </div>
                             </div>
