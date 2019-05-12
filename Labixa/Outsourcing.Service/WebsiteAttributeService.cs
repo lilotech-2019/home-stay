@@ -49,7 +49,7 @@ namespace Outsourcing.Service
 
         public IEnumerable<WebsiteAtribute> GetWebsiteAttributes()
         {
-            var list = _websiteAttributeRepository.GetAll().Where(p => p.Deleted == false);
+            var list = _websiteAttributeRepository.GetAll().Where(p => p.Deleted == false && p.Status == true);
             return list;
         }
 

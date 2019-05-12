@@ -95,13 +95,13 @@ namespace Outsourcing.Service.HMS
 
         public IQueryable<Room> FindByType(RoomType type)
         {
-            var result = _roomRepository.FindBy(w => w.Deleted == false & w.Type == type);
+            var result = _roomRepository.FindBy(w => w.Deleted == false & w.Type == type & w.Status == true);
             return result;
         }
 
         public Room FindByIdAndSlug(int id, string slug)
         {
-            return _roomRepository.FindBy(w => w.Deleted == false & w.Id == id & w.Slug == slug).SingleOrDefault();
+            return _roomRepository.FindBy(w => w.Deleted == false & w.Id == id & w.Slug == slug & w.Status == true).SingleOrDefault();
         }
 
         #endregion
