@@ -24,7 +24,7 @@ namespace Labixa.Controllers
 
         public HomeController(IVendorService vendorService, IProductService productService, IBlogService blogService,
             IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IDepositService depositService,
-            ICostService costService, IMessageService messageService)
+            IMessageService messageService)
         {
             _blogService = blogService;
             _websiteAttributeService = websiteAttributeService;

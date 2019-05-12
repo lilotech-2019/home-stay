@@ -81,7 +81,7 @@ namespace Outsourcing.Service
 
         public IEnumerable<BlogCategories> GetBlogCategories()
         {
-return            _blogCategoryRepository.GetAll();
+return            _blogCategoryRepository.FindBy();
         }
 
         public void Delete(BlogCategories entity)

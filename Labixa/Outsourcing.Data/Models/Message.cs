@@ -20,6 +20,8 @@ namespace Outsourcing.Data.Models
 
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 
     public enum MessageType
