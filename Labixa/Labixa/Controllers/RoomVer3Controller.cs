@@ -37,7 +37,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(_ => _.Name);
+            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(q => q.Status == true);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
 
@@ -45,7 +45,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(_ => _.Name);
+            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(q => q.Status == true);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
 
