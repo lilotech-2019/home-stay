@@ -48,7 +48,7 @@ namespace Outsourcing.Service
 
         public IQueryable<Blog> FindAll()
         {
-            var listEntities = _blogsRepository.FindBy(w => w.Deleted == false);
+            var listEntities = _blogsRepository.FindBy(w => w.Deleted == false & w.Status == true);
             return listEntities;
         }
 
@@ -69,7 +69,7 @@ namespace Outsourcing.Service
 
         public Blog FindBySlug(string slug)
         {
-            return _blogsRepository.FindBy(w => w.Deleted == false & w.Slug == slug).SingleOrDefault();
+            return _blogsRepository.FindBy(w => w.Deleted == false & w.Slug == slug & w.Status == true).SingleOrDefault();
         }
 
         public Blog GetBlogById(int id)
