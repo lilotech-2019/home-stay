@@ -1,4 +1,5 @@
-﻿using Outsourcing.Data.Models;
+﻿using Outsourcing.Core.Email;
+using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
 using System;
 using System.Collections.Generic;
@@ -197,7 +198,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reply(Message message)
+        public async Task<ActionResult> ReplyAsync(Message message)
         {
             if (ModelState.IsValid)
             {
@@ -206,6 +207,24 @@ namespace Labixa.Areas.Portal.Controllers
                 entity.Type = MessageType.Replied;                                               
                 entity.Answer = message.Answer;
                 _messageService.Edit(entity);
+
+                //====================<Mail>==============================
+                HttpCookie cookie = Request.Cookies["_culture"];
+                var n = cookie;
+                string subject = "Đã trả lời tin nhắn";
+                string content = "<html><head><style type='text/css'>" +
+                   "table, th, td {border: 1px solid black;padding: 15px;}th {text-align: left;}</style></head>" +
+                   "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                   "<i><p>From: Dalat Amazing</p>" +
+                   "<p>To: "+ message.Email +"</p></i><br>" +
+                   "<p>Your Question:</p>" +
+                   "<table width=100%>" +
+                   "<tr><th>Title</th> <th>Content</th></tr>" +
+                   "<tr><td>"+message.Name+"</td> <td>"+message.Content+"</td></tr>" +
+                   "</table>" +
+                   "<p>Replied: "+ message.Answer +"</p>";
+                await EmailHelper.SendEmailAsync(message.Email, content, subject);
+                //====================</Mail>==============================
                 return RedirectToAction("Index");
             }
             return View(message);
