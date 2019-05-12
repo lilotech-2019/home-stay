@@ -1,0 +1,12 @@
+{
+  "ServerUri": "http://103.109.36.125:8077",
+  "Organization": null,
+  "ProjectKey": "HOMESTAY",
+  "ProjectName": "HOMESTAY",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AWqtNWEGMOxoCT_9ILVs",
+      "ProfileTimestamp": "2019-05-13T01:01:57+07:00"
+    }
+  }
+}

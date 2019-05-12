@@ -7,7 +7,6 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
@@ -156,6 +155,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Edit - POST
         /// </summary>
+        /// <param name="categoryId"></param>
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
