@@ -8,12 +8,11 @@ namespace Outsourcing.Data.Models
         [MaxLength(255)]
         [Display(Name = "Subject")]
         public string Name { get; set; }
-        public string Email { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Answer { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
+        //public string Address { get; set; }
+        //public string Phone { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
         public MessageType Type { get; set; }

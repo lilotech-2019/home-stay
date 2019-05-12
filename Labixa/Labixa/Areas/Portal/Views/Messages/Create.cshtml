@@ -56,18 +56,18 @@
                 </div>
 
                 <div class="form-group col-sm-6 col-md-12">
-                    @Html.LabelFor(model => model.Address, new { @class = "col-sm-3 control-label no-padding-right" })
+                    @Html.LabelFor(model => model.Customer.Address, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.EditorFor(model => model.Address, null, new { @class = "col-xs-10 col-sm-5" })
-                        @Html.ValidationMessageFor(model => model.Address)
+                        @Html.EditorFor(model => model.Customer.Address, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Customer.Address)
                     </div>
                 </div>
 
                 <div class="form-group col-sm-6 col-md-12">
-                    @Html.LabelFor(model => model.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
+                    @Html.LabelFor(model => model.Customer.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.EditorFor(model => model.Phone, null, new { @class = "col-xs-10 col-sm-5" })
-                        @Html.ValidationMessageFor(model => model.Phone)
+                        @Html.EditorFor(model => model.Customer.Phone, null, new { @class = "col-xs-10 col-sm-5" })
+                        @Html.ValidationMessageFor(model => model.Customer.Phone)
                     </div>
                 </div>
 

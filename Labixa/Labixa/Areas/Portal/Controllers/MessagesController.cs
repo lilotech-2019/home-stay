@@ -216,14 +216,14 @@ namespace Labixa.Areas.Portal.Controllers
                    "table, th, td {border: 1px solid black;padding: 15px;}th {text-align: left;}</style></head>" +
                    "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
                    "<i><p>From: Dalat Amazing</p>" +
-                   "<p>To: "+ message.Email +"</p></i><br>" +
+                   "<p>To: "+ message.Customer.Email +"</p></i><br>" +
                    "<p>Your Question:</p>" +
                    "<table width=100%>" +
                    "<tr><th>Title</th> <th>Content</th></tr>" +
                    "<tr><td>"+message.Name+"</td> <td>"+message.Content+"</td></tr>" +
                    "</table>" +
                    "<p>Replied: "+ message.Answer +"</p></html>";
-                await EmailHelper.SendEmailAsync(message.Email, content, subject);
+                await EmailHelper.SendEmailAsync(message.Customer.Email, content, subject);
                 //====================</Mail>==============================
                 return RedirectToAction("Index");
             }
