@@ -24,7 +24,7 @@ namespace Labixa.Controllers
             int pageSize = 4;
             BlogViewModel viewModel = new BlogViewModel();
             viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w => w.Id);
-            var model = _blogService.FindAll().AsEnumerable().OrderBy(o => o.DateCreated);
+            var model = _blogService.FindAll().AsEnumerable().OrderBy(q => q.Status == true);
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
         }

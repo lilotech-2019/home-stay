@@ -15,7 +15,7 @@
     <ul class="breadcrumb">
         <li>
             <i class="icon-home home-icon"></i>
-            <a href="/">Home</a>
+            <a href="/portal">Home</a>
         </li>
         <li>
             <i class="icon-edit"></i>
@@ -52,10 +52,10 @@
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane fade active in">
                             <div class="form-group col-sm-6 col-md-12">
-                                @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label no-padding-right" })
+                                @Html.LabelFor(model => model.Customer.Email, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.EditorFor(model => model.Email, null, new { @class = "col-xs-10 col-sm-5" })
-                                    @Html.ValidationMessageFor(model => model.Email)
+                                    @Html.EditorFor(model => model.Customer.Email, null, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.ValidationMessageFor(model => model.Customer.Email)
                                 </div>
                             </div>
 

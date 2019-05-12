@@ -1,5 +1,6 @@
 ﻿using Labixa.Areas.Portal.ViewModels.RoomOrders;
 using Labixa.Areas.Portal.ViewModels.Rooms;
+using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using Outsourcing.Service.Portal;
@@ -9,6 +10,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
@@ -54,7 +56,8 @@ namespace Labixa.Areas.Portal.Controllers
         public async Task<ActionResult> Index(int? hotelId)
         {
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
-            if (hotelId != null) {
+            if (hotelId != null)
+            {
                 var hotel = _hotelService.FindById((int)hotelId);
                 roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotel.Id);
             }
@@ -97,8 +100,9 @@ namespace Labixa.Areas.Portal.Controllers
                 room = _roomService.FindById((int)roomId);
                 ViewBag.RoomId = new SelectList(new List<Room> { room }, "Id", "Name");
             }
-            else {
-                ViewBag.RoomId = new SelectList(hotelId==null?_roomService.FindSelectList(): _roomService.FindSelectList().Where(w=>w.HotelId==hotelId), "Id", "Name");
+            else
+            {
+                return RedirectToAction("Index", "Rooms");
             }
 
             var entity = new CreateViewModel { Customer = new Customer(), RoomOrders = new RoomOrder { Price = room.Price, RoomId = room.Id } };
@@ -113,6 +117,7 @@ namespace Labixa.Areas.Portal.Controllers
                 entity.Customer = customer;
             }
             ViewBag.Phone = phone;
+
             return View(entity);
 
         }
@@ -125,7 +130,7 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(CreateViewModel viewModel)
+        public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -139,16 +144,64 @@ namespace Labixa.Areas.Portal.Controllers
                 else
                 {
                     roomOrder.CustomerId = customer.Id;
-                    customer.Name = viewModel.Customer.Name.Trim();
-                    customer.Address = viewModel.Customer.Address.Trim();
-                    customer.Phone = viewModel.Customer.Phone.Trim();
-                    customer.Email = viewModel.Customer.Email.Trim();
+                    customer.Name = viewModel.Customer.Name != null ? viewModel.Customer.Name.Trim() : "";
+                    customer.Address = viewModel.Customer.Address != null ? viewModel.Customer.Address.Trim() : "";
+                    customer.Phone = viewModel.Customer.Phone != null ? viewModel.Customer.Phone.Trim() : "";
+                    customer.Email = viewModel.Customer.Email != null ? viewModel.Customer.Email.Trim(): "";
                     customer.LastModify = DateTime.Now;
                     _customerService.Edit(customer);
                 }
 
 
                 _roomOrderService.Create(roomOrder);
+
+                //====================<Mail>==============================
+                HttpCookie cookie = Request.Cookies["_culture"];
+                var n = cookie;
+                string subject = "Đặt phòng thành công";
+                string content = "<html><head><style type='text/css'>" +
+                   ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+                   ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+                   ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+                   ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+                   "<div class='mail'>" +
+                   "<div class='content-mail'>" +
+                   "<div class='logo-img'>" +
+                   "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                   "</div>" +
+                   "<table>" +
+                   "<tr>" +
+                   "<th>Họ và Tên Khách Hàng: </th>" +
+                   "<td>" + customer.Name + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Ngày CheckIn: </th>" +
+                   "<td>" + roomOrder.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Ngày CheckOut: </th>" +
+                   "<td>" + roomOrder.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Email Khách Hàng: </th>" +
+                   "<td>" + customer.Email + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Số Điện Thoại: </th>" +
+                   "<td>" + customer.Phone + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Số Lượng Người: </th>" +
+                   "<td>" + roomOrder.AmountOfPeople + "</td>" +
+                   "</tr>" +
+                   "<tr>" +
+                   "<th>Tạm Tính </th>" +
+                   "<td>" + roomOrder.Price + "</td>" +
+                   "</tr>" +
+                   "</table></div></div></html>";
+                await EmailHelper.SendEmailAsync(customer.Email, content, subject);
+                //====================</Mail>==============================
+
                 return RedirectToAction("Index");
             }
 
@@ -264,11 +317,6 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var entity = _roomOrderService.FindById(id);
             entity.OrderStatus = RoomOrderStatus.CheckOut;
-
-            entity.Customer.Name.Trim();
-            entity.Customer.Address.Trim();
-            entity.Customer.Phone.Trim();
-            entity.Customer.Email.Trim();
 
             _roomOrderService.Edit(entity);
             return RedirectToAction("Index");

@@ -11,7 +11,7 @@
     <script src="~/Content/admin/js/jquery.dataTables.bootstrap.js" type="text/javascript"></script>
 }
 <p>
-    @Html.ActionLink("Tạo mới", "Create", new {hotelId = Request.Params["hotelId"]}, new {@class = "btn btn-primary"})
+    @Html.ActionLink("Tạo mới", "Create", new {hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, new {@class = "btn btn-primary"})
 </p>
 <div class="row">
     <div class="col-xs-12">
