@@ -99,10 +99,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    @*<div class="form-group">
                                         @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Value, new { @class = "col-sm-3 control-label no-padding-right" })
                                         <div class="col-sm-9">
                                             @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Value, null, new { @class = "col-xs-10 col-sm-5" })
+                                            @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Value)
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group col-sm-6 col-md-12">
+                                        @Html.LabelFor(model => Model[i].WebsiteAttributes[f].Value, new { @class = "col-sm-3 control-label no-padding-right" })
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => Model[i].WebsiteAttributes[f].Value, "GetImageFromElfinder")
                                             @Html.ValidationMessageFor(model => Model[i].WebsiteAttributes[f].Value)
                                         </div>
                                     </div>
