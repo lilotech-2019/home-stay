@@ -40,6 +40,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index
         /// </summary>
         /// <param name="hotelId">Hotel Id</param>
+        /// <param name="type">Room Type</param>
         /// <returns></returns>
         public async Task<ActionResult> Index(int? hotelId, RoomType? type)
         {
@@ -49,7 +50,7 @@ namespace Labixa.Areas.Portal.Controllers
                 rooms = rooms.Where(w => w.HotelId == hotelId);
             }
             if (type != null) {
-                rooms = rooms = rooms.Where(w => w.Type == type);
+                rooms = rooms.Where(w => w.Type == type);
             }
 
             return View(await rooms.AsNoTracking().ToListAsync());
