@@ -83,7 +83,8 @@ namespace Labixa.Controllers
                              "</tr>" +
                              "<tr>" +
                              "<th>Loại Hình Cho Thuê </th>" +
-                             "<td>" + (model.Type == RoomType.ShortTempDeposit) + "</td>" +
+                                  //"<td>" + (model.Type == RoomType.ShortTempDeposit) + "</td>" +
+                             "<td>" + model.Content + "</td>" +
                              "</tr>" +
                              "<tr>" +
                              "<th>Địa Chỉ: </th>" +
@@ -99,7 +100,7 @@ namespace Labixa.Controllers
                              "</tr>" +
                              "<tr>" +
                              "<th>Email Khách Hàng: </th>" +
-                             "<td>" + model.Description + "</td>" +
+                             "<td>" + model.Email + "</td>" +
                              "</tr></table></div></div></html>";
             //string content = "Dear Mr/Ms Admin, <br/>" +
             //                 "<table border=" + 1 + "><thead>" +
@@ -124,7 +125,7 @@ namespace Labixa.Controllers
             model.Deleted = false;
             model.Type = RoomType.ShortTempDeposit;
             _depositService.Create(model);
-            await EmailHelper.SendEmailAsync(model.Description, content, subject);
+            await EmailHelper.SendEmailAsync(model.Email, content, subject);
             return RedirectToAction("Index", "Home");
         }
 
