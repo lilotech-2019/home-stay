@@ -171,10 +171,10 @@ namespace Labixa.Areas.Portal.Controllers
             var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
             if (type != null)
             {
-                roomTypes = new List<RoomType> { (RoomType)type };
+                roomTypes = new List<RoomType> { (RoomType)type }; 
             }
 
-            ViewBag.RoomType = new SelectList(roomTypes, type);
+            ViewBag.RoomType = new SelectList(roomTypes, room.Type);
             ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
             return View(room);
         }
