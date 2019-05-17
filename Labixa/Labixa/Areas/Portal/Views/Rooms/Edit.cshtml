@@ -37,7 +37,7 @@
             <div class="alert alert-block alert-info">
                 Cập nhật Khách Sạn
             </div>
-            @using (Html.BeginForm("Edit", "Rooms", new { categoryId = Request.Params["categoryId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
