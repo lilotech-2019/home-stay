@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class RoomAssetsController : Controller
     {
         #region Fields

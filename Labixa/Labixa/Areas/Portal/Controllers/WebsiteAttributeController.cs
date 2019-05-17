@@ -10,9 +10,9 @@ using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class WebsiteAttributeController : Controller
     {
-
         #region Field
         readonly IWebsiteAttributeService _websiteAttributeService;
         #endregion

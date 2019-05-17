@@ -2,6 +2,7 @@
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         public ActionResult Index()

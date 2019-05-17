@@ -6,6 +6,7 @@ using ElFinder;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class FileController : Controller
     {
         private Connector _connector;

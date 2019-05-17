@@ -12,6 +12,7 @@ namespace Labixa.Areas.Portal.Controllers
 {
     [RouteArea("Portal")]
     [RoutePrefix("HotelCategories")]
+    [Authorize]
     public class HotelCategoriesController : Controller
     {
         #region Fields
