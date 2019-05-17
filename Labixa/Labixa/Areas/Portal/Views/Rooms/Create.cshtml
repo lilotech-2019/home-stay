@@ -7,32 +7,14 @@
 
     ViewBag.Title = "Create Room";
 }
-@section scripts{
+@section head{
     <script src="~/Content/ckeditor/ckeditor.js"></script>
     <script src="~/Content/ckeditor/config.js"></script>
 }
 @section breadcrumb
 {
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');
-            } catch (e) {
-            }
-        </script>
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/portal">Home</a>
-            </li>
-            <li>
-                <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Phòng</a>
-            </li>
-            <li class="active">Thêm mới Phòng</li>
-        </ul>
-    </div>
+    <li><a href="@Url.Action("Index")">Rooms</a></li>
+    <li class="active">Create</li>
 }
 <div class="page-content">
     <div class="row">
