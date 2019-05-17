@@ -2,10 +2,11 @@
     var fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
 }
 
-    @Html.TextAreaFor(x => x, new { @class = "col-xs-10 col-sm-10 ", id = fieldName })
+@Html.TextAreaFor(x => x, new {@class = "col-xs-10 col-sm-10 ", id = fieldName})
 <script>
-    $(document).ready(function () {
-        CKEDITOR.replace('@fieldName', {
+    $(document).ready(function() {
+        CKEDITOR.replace('@fieldName',
+        {
             height: 450,
             extraPlugins: 'uploadimage',
             filebrowserBrowseUrl: '@Url.Action("BrowseFile", "File")'

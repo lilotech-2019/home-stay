@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Outsourcing.Data.Models
 {
@@ -31,12 +35,20 @@ namespace Outsourcing.Data.Models
 
         public bool Deleted { get; set; }
         public bool IsSubcribe{get;set;}
-        public int promotionID { get; set; }
+        public int PromotionId { get; set; }
 
-        public string DisplayName
+        public string DisplayName => LastName + " " + FirstName;
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
-            get { return LastName + " " + FirstName; }
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
         }
+
+        [Display(Name = "Full Name")]
+        public string FullName => LastName + ", " + FirstName;
     }
     public enum SystemRoles
     {

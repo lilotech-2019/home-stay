@@ -38,7 +38,7 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<CostOrderItem> GetCostOrderItems()
         {
-            var costOrderItems = _costOrderItemRepository.GetAll();
+            var costOrderItems = _costOrderItemRepository.FindBy();
             return costOrderItems;
         }
 

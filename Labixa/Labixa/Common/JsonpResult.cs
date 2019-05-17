@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace Labixa.Areas.Common
+namespace Labixa.Common
 {
     public class JsonpResult : JsonResult
     {
@@ -24,21 +21,21 @@ namespace Labixa.Areas.Common
         {
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             var request = context.HttpContext.Request;
             var response = context.HttpContext.Response;
 
-            string jsoncallback = ((context.RouteData.Values[CallbackName] as string) ?? request[CallbackName]) ?? CallbackName;
+            var jsoncallback = (context.RouteData.Values[CallbackName] as string ?? request[CallbackName]) ?? CallbackName;
 
             if (!string.IsNullOrEmpty(jsoncallback))
             {
-                if (string.IsNullOrEmpty(base.ContentType))
+                if (string.IsNullOrEmpty(ContentType))
                 {
-                    base.ContentType = "application/x-javascript";
+                    ContentType = "application/x-javascript";
                 }
-                response.Write(string.Format("{0}(", jsoncallback));
+                response.Write($"{jsoncallback}(");
             }
 
             base.ExecuteResult(context);

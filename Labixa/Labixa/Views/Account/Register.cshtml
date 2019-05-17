@@ -1,7 +1,9 @@
-﻿@model Labixa.Models.RegisterViewModel
-@{
-    ViewBag.Title = "Register";
+﻿@{
+    ViewBag.Title = "Đăng Ký Thành Viên";
 }
+@model VietDucDakNong.Models.RegisterViewModel
+@*
+
 
 <h2>@ViewBag.Title.</h2>
 
@@ -10,11 +12,11 @@
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -34,8 +36,95 @@
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-}
+}*@
+<!--inner content start-->
+<!--inner header start-->
+<div class="inner-heading">
+    <div class="container">
+        <h3>Đăng Ký Thành Viên</h3>
+    </div>
+</div>
+<!--inner header end-->
+<div class="inner-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="contctxt">* Thông tin bắt buộc.</div>
+                <div class="formint conForm">
 
-@section Scripts {
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr/>
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
+                        <div class="input-group">
+                            <label class="input-group-addon">Họ <span>*</span></label>
+                            @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-addon">Tên <span>*</span></label>
+                            @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.LastName, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-addon">Email của bạn<span>*</span></label>
+                            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-addon">Tạo mật khẩu <span>*</span></label>
+                            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-addon">Xác nhận mật khẩu của bạn <span>*</span></label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "text-danger"})
+                        </div>
+
+
+                        <div class="input-group">
+                            <label class="input-group-addon">Địa chỉ <span>*</span></label>
+                            @Html.TextBoxFor(m => m.Address, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Address, "", new {@class = "text-danger"})
+                        </div>
+                        @*<div class="input-group">
+                            <label class="input-group-addon">City <span>*</span></label>
+                            <select name="" class="form-control">
+                                <option>Select state </option>
+                                <option value="new-york">New York </option>
+                                <option value="new-york">London </option>
+                                <option value="new-york">Washington </option>
+                                <option value="new-york">New Jercy </option>
+                            </select>
+                        </div>*@
+                        @*<div class="input-group">
+                            <label class="input-group-addon">Mã bưu chính <span>*</span></label>
+                            @Html.TextBoxFor(m => m.ZipCode, new {@class = "form-control"})
+                        </div>*@
+                        <div class="input-group">
+                            <label class="input-group-addon">Điện Thoại<span>*</span></label>
+                            @Html.TextBoxFor(m => m.Phone, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="sub-btn">
+                            <input type="submit" class="sbutn" value="Đăng Ký Thành Viên">
+                        </div>
+                        <div class="newuser">
+                            <i class="fa fa-user" aria-hidden="true"></i> Đã có tài khoản? <a href="@Url.Action("Login")">Đăng nhập</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+</div>
+<!--inner content end-->
+
+@*@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

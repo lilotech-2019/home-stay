@@ -1,0 +1,22 @@
+﻿@model Outsourcing.Data.Models.BlogImage
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Title)
+@Html.HiddenFor(model => model.Name)
+@Html.HiddenFor(model => model.BlogId)
+@Html.HiddenFor(model => model.Position)
+@Html.HiddenFor(model => model.IsPublic)
+@Html.HiddenFor(model => model.IsDeleted)
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="">@Model.Title</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Path, "GetImageFromElfinder")
+        @Html.ValidationMessageFor(model => model.Path, "", new { @class = "text-danger" })
+    </div>
+    <label class="control-label col-md-2" for="">@Model.Title Alt</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Alternative, new { @class = "form-control" } )
+        @Html.ValidationMessageFor(model => model.Alternative, "", new { @class = "text-danger" })
+    </div>
+</div>

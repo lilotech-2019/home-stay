@@ -1,0 +1,48 @@
+﻿<aside class="left-panel">
+
+    <!-- brand -->
+    <div class="logo">
+        <a asp-controller="Dashboard" asp-action="Index" class="logo-expanded">
+            <i class="ion-social-buffer"></i>
+            <span class="nav-label">CRM</span>
+        </a>
+    </div>
+    <!-- / brand -->
+    <!-- Navbar Start -->
+    <nav class="navigation">
+        <ul class="list-unstyled">
+            <li>
+                <a href="@Url.Action("Index", "Dashboard")">
+                    <i class="zmdi zmdi-view-dashboard"></i> <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "BlogCategories")">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Quản Lý Danh Mục Tin Tức</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Blogs")">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Quản Lý Tin Tức</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Index", "CareerCategories")">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Quản Lý Danh Mục Việc Làm</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Careers")">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Quản Lý Việc Làm</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Companies")">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Quản Lý Công Ty</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+<!-- Aside Ends-->

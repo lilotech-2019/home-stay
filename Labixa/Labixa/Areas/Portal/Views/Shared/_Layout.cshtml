@@ -1,172 +1,88 @@
-﻿
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="Generator" content="Drupal 8 (https://www.drupal.org)" />
-    <meta name="MobileOptimized" content="width" />
-    <meta name="HandheldFriendly" content="true" />
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@ViewBag.description" />
-    <meta name="keywords" content="@ViewBag.keyword" />
-    <meta name="author" content="www.yourjobs.com" />
-    <meta property="og:url" content="@ViewBag.url" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="@ViewBag.title" />
-    <meta property="og:description" content="@Html.Raw(ViewBag.description)" />
-    <meta property="og:image" content="@ViewBag.image" />
-    <title>@ViewBag.title</title>
+    <title>@ViewBag.Title -Trang Quản Lý Việt Đức Đăk Nông</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
 
+   
 
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
 
-    <style media="all">
-    </style>
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/ajax-progress.module05ce.css" />
+    <script src="~/assets/js/modernizr.min.js"></script>
 
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/autocomplete-loading.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/fieldgroup.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/container-inline.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/clearfix.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/details.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/hidden.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/item-list.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/js.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/nowrap.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/position-container.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/progress.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/reset-appearance.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/resize.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/sticky-header.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/system-status-counter05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/system-status-report-counters05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/system-status-report-general-info05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/tabledrag.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/tablesort.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/stable/css/system/components/tree-child.module05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_order/css/uc_order05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_order/css/uc_order05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_product/css/uc_product05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_store/css/uc_store05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/nvt_block_settings/css/ntv_block_settings05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_cart/css/uc_cart_block05ce.css" />
-
-    <style media="all">
-    </style>
-    <link rel="stylesheet" href="~/Content/hotel/core/themes/classy/css/components/messages05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/css/library05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/fonts/themify-icons05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/fonts/travel/flaticon05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/fonts/eco/flaticon05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/fonts/sport/flaticon05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/fonts/fitness/flaticon05ce.css" />
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/css/style05ce.css" />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:300,400,600,700%7COpen+Sans:300,400,700%7CPlayfair+Display:400,400i,700,700i" media="all" />
-    <style media="all">
-    </style>
-    <link rel="stylesheet" href="~/Content/hotel/themes/custom/scalac/css/update05ce.css" />
-    <!--[if lte IE 8]>
-    <script src="/core/assets/vendor/html5shiv/html5shiv.min.js?v=3.7.3"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/html5shiv.js"></script>
+        <script src="~/Scripts/respond.js"></script>
     <![endif]-->
-    <link href="~/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/css/animate05ce.css" rel="stylesheet" />
-    <link href="~/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/css/md-slider05ce.css" rel="stylesheet" />
-    <link href="~/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/css/md-slider-style05ce.css" rel="stylesheet" />
+    @RenderSection("head", false)
 </head>
-<body class="sca_middle_titles">
-    <div class="sca_border_top hidden-sm hidden-xs"></div>
-    <div class="sca_border_bottom hidden-sm hidden-xs"></div>
-    <div class="sca_border_left hidden-sm hidden-xs"></div>
-    <div class="sca_border_right hidden-sm hidden-xs"></div>
-    <div class="sca_page_loader sca_image_bck sca_wht_txt">
-        <div class="sca_over" data-color="#000" data-opacity="0.7"></div>
-        <div class="sca_loader">
-            <div class="sca_spinner">
-                <div class="sca_rect1"></div>
-                <div class="sca_rect2"></div>
-                <div class="sca_rect3"></div>
-                <div class="sca_rect4"></div>
-                <div class="sca_rect5"></div>
-            </div>
+
+
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        @Html.Partial("_TopBar")
+        <!-- Top Bar End -->
+        <!-- ========== Left Sidebar Start ========== -->
+        @Html.Partial("_LeftSidebar")
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <!-- end row -->
+                    @RenderBody()
+
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+
+            <footer class="footer text-right">
+                @DateTime.UtcNow.Year &copy;
+            </footer>
+
         </div>
+
+
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+
     </div>
-    <div class="sca_page" id="sca_page">
-        <a href="#sca_page" class="sca_top ti ti-angle-up sca_go"></a>
-        <a href="#main-content" class="visually-hidden focusable">
-            Skip to main content
-        </a>
-        @Html.Action("menu", "Home")
-        @*banner*@
+    <!-- END wrapper -->
+    <!-- jQuery  -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/metisMenu.min.js"></script>
+    <script src="~/assets/js/waves.js"></script>
+    <script src="~/assets/js/jquery.slimscroll.js"></script>
 
-        @*end banner*@
-        @RenderBody()
-        @*contact*@
-        <section class="sca_section sca_border" id="lienhe">
-            <div class="container-fluid">
-                <div class="row sca_auto_height">
-                    <div class="simplenews-subscriptions-block-142ee087-bac3-4e25-99d5-56d12abbd478 simplenews-subscriber-form col-md-6 sca_bordered_block sca_image_bck sca_grey_border sca_wht_txt scalac-height" id="block-simplenewssubscription-6" data-bg-color="#000000" data-bg-image="http://scala2.drupalet.com/sites/default/files/images/c8wwhcvb9p4-scott-webb_3.jpg">
-                        <div class="sca_over" data-color="#292929" data-opacity="0.8"></div>
-                        <div class="sca_simple_block">
-                            <h2 data-animation="animation_blocks" data-bottom="@@class:noactive" data--100-bottom="@@class:active">Contacts</h2>
-                            <ul class="spa_contacts_form">
-                                @Html.Action("contactValue", "Home")
-                            </ul>
 
-                        </div>
-                    </div>
-                        <iframe class="contact-message-feedback-form contact-message-form contact-form col-md-6 sca_bordered_block sca_image_bck sca_grey_border sca_wht_txt scalac-height bg-no-repeat block-bg" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.344580349986!2d107.43436981427605!3d10.473478692527504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31759863a295cc65%3A0x7133a5f788c90e78!2sQuang+Vinh+Motel!5e0!3m2!1sen!2s!4v1525003455013" width="100%" height="650" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    @*<div class="contact-message-feedback-form contact-message-form contact-form col-md-6 sca_bordered_block sca_image_bck sca_grey_border sca_wht_txt scalac-height bg-no-repeat block-bg" data-user-info-from-browser data-drupal-selector="contact-message-feedback-form" id="block-contactblock-4" data-bg-color="#000000">
+    @RenderSection("scripts", false)
+    <!-- App js -->
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
 
-                    </div>*@
-
-                </div>
-            </div>
-        </section>
-        @*end contact*@
-        @*footer*@
-        <section id="grey" class="sca_section sca_border sca_grey_border sca_image_bck sca_wht_txt" data-color="#292929">
-            <nav class="sca_light_nav sca_transp_nav">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="sca_block">
-                                <p>© 2018 Quang Vinh Motel</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </section>
-        @*end footer*@
-    </div>
-    <script data-cfasync="false" src="~/Content/hotel/cdn-cgi/scripts/af2821b0/cloudflare-static/email-decode.min.js"></script>
-    <script type="application/json" data-drupal-selector="drupal-settings-json">
-        {"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"en"},"pluralDelimiter":"\u0003","ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true,"\/search\/node":true},"user":{"uid":0,"permissionsHash":"9d9e478c9aa07cdeba3a0022c2699c092dc0b77067c1a2c1ca55c1cf609bd47b"}}
-    </script>
-    <script src="~/Content/hotel/core/assets/vendor/domready/ready.min7016.js?v=1.0.8"></script>
-    <script src="~/Content/hotel/core/assets/vendor/domready/ready.min7016.js"></script>
-    <script src="~/Content/hotel/core/assets/vendor/jquery/jquery.min9c45.js?v=2.2.4"></script>
-    <script src="~/Content/hotel/core/assets/vendor/jquery-once/jquery.once.min1036.js?v=2.1.1"></script>
-    <script src="~/Content/hotel/core/misc/drupalSettingsLoadere7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/core/misc/drupale7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/core/misc/drupal.inite7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/core/misc/debouncee7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/core/assets/vendor/jquery.cookie/jquery.cookie.min290d.js?v=1.4.1"></script>
-    <script src="~/Content/hotel/core/misc/forme7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/modules/nvt_block_settings/js/ntv_block_settingse7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/themes/custom/scalac/js/librarye7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/themes/custom/scalac/js/scripte7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/themes/custom/scalac/js/updatee7f9.js?v=8.3.7"></script>
-    <script src="~/Content/hotel/modules/ubercart-8.x-4.0-alpha5/ubercart/uc_cart/js/uc_cart_block05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/libraries/jquery.touchwipe05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/libraries/modernizr05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/libraries/jquery.easing05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/libraries/jquery-migrate-1.2.1.min05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/frontend/md-slider05ce.js"></script>
-    <script src="/Content/hotel/modules/md_slider-8.x-1.0/md_slider/assets/js/frontend/init-md-slider05ce.js"></script>
-
+    @*@RenderSection("breadcrumb", false)*@
 </body>
 </html>

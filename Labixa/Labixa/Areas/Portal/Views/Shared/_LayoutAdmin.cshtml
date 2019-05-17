@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Adminox - Responsive Web App Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="~/assets/css/icons.css" rel="stylesheet" type="text/css"/>
+    <link href="~/assets/css/metismenu.min.css" rel="stylesheet" type="text/css"/>
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <script src="~/assets/js/modernizr.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/html5shiv.js"></script>
+        <script src="~/Scripts/respond.js"></script>
+    <![endif]-->
+    @RenderSection("head", false)
+</head>
+
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    @Html.Partial("_TopBar")
+    <!-- Top Bar End -->
+    <!-- ========== Left Sidebar Start ========== -->
+    @Html.Partial("_LeftSidebar")
+    <!-- Left Sidebar End -->
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+
+              
+                <!-- end row -->
+                @RenderBody()
+
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+        <footer class="footer text-right">
+            @DateTime.UtcNow.Year &copy; <a href="http://jouninsoft.com">Jounin Software Solutions</a>
+        </footer>
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+<!-- jQuery  -->
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/metisMenu.min.js"></script>
+<script src="~/assets/js/waves.js"></script>
+<script src="~/assets/js/jquery.slimscroll.js"></script>
+
+
+@RenderSection("scripts", false)
+<!-- App js -->
+<script src="~/assets/js/jquery.core.js"></script>
+<script src="~/assets/js/jquery.app.js"></script>
+
+//@RenderSection("breadcrumb", false)
+</body>
+</html>

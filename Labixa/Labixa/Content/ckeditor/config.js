@@ -7,6 +7,8 @@
             ['Undo', 'Redo'],
             ['Bold', 'Italic', 'Underline']
         ];
+        CKEDITOR.config.allowedContent = true;
+        CKEDITOR.config.protectedSource.push(/<ins class=\"adsbygoogle\"\>.*?<\/ins\>/g);
         $('.getimagefromelfinder').on('click', function () {
             //get id
             var id = $(this).parent().find('input')[0].id;

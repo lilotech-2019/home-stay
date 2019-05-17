@@ -1,12 +1,11 @@
 ﻿@{
     var fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
     var imageId = "img" + ViewData.TemplateInfo.HtmlFieldPrefix;
-
 }
 
-<img src="@Model" id="@imageId" style="width: 200px;margin-top:10px" />
-@Html.HiddenFor(x => x, new { @class = "col-xs-12 col-md-8 ", @id = fieldName })
+<img src="@Model" id="@imageId" style="width: 200px; margin-top: 10px"/>
+@Html.HiddenFor(x => x, new {@class = "col-xs-12 col-md-8 ", id = fieldName})
 
-<a href="javascrip:void(0)" id="GetElImage" class="btn btn-info  getimagefromelfinder" style="margin-bottom:10px">
-    <i class="icon-upload"></i>Chọn Ảnh
-
+<a href="#" id="GetElImage" class="btn btn-info  getimagefromelfinder" style="margin-bottom: 10px">
+    <i class="icon-upload"></i>Choose Image
+</a>
