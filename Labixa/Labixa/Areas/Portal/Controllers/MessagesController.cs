@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         #region Fields

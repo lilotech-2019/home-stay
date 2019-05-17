@@ -12,6 +12,7 @@ using System;
 
 namespace Labixa.Areas.Portal.Controllers
 {
+    [Authorize]
     public class RoomsController : Controller
     {
         #region Fields
