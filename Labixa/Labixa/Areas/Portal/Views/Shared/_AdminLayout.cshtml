@@ -38,7 +38,6 @@
 
     @RenderSection("head", false)
 
-    @RenderSection("scripts", false)
     @*<script type="text/javascript">
         try {
             ace.settings.check('navbar', 'fixed');
@@ -60,10 +59,10 @@
             </button>
 
             <div class="navbar-header pull-left">
-                <a href="~/index-2.html" class="navbar-brand">
+                <a href="@Url.Action("Index","Dashboard")" class="navbar-brand">
                     <small>
                         <i class="fa fa-leaf"></i>
-                        HomeStay Admin
+                        Portal
                     </small>
                 </a>
             </div>
@@ -353,7 +352,7 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="@Url.Action("SignOut","Account")">
+                                <a href="@Url.Action("SignOut","Account",new { area = string.Empty})">
                                     <i class="ace-icon fa fa-power-off"></i>
                                     Logout
                                 </a>
@@ -412,13 +411,16 @@
 
             <ul class="nav nav-list">
                 <li class="active">
-                    <a href="~/index-2.html">
+                    <a href="@Url.Action("Index","Dashboard")">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text"> Dashboard </span>
                     </a>
 
                     <b class="arrow"></b>
                 </li>
+
+                @Html.Action("HotelCategorySubMenu", "HotelCategories")
+
 
                 <li class="">
                     <a href="#" class="dropdown-toggle">
@@ -904,8 +906,8 @@
                             <a href="#">Home</a>
                         </li>
                         @RenderSection("breadcrumb", false)
-                            @*
-                        <li class="active">Dashboard</li>*@
+                        @*
+                            <li class="active">Dashboard</li>*@
                     </ul><!-- /.breadcrumb -->
 
                     <div class="nav-search" id="nav-search">
@@ -987,7 +989,7 @@
                         </div><!-- /.ace-settings-container -->*@
 
 
-              
+
                     @RenderBody()
 
                 </div><!-- /.page-content -->
@@ -998,11 +1000,11 @@
             <div class="footer-inner">
                 <div class="footer-content">
                     <span class="bigger-120">
-                        <span class="blue bolder">Ace</span>
-                        Application &copy; 2013-2014
+                        <span class="blue bolder">Dalat</span>
+                        Amazing &copy; @DateTime.UtcNow.Year
                     </span>
 
-                    &nbsp; &nbsp;
+                    @*&nbsp; &nbsp;
                     <span class="action-buttons">
                         <a href="#">
                             <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
@@ -1015,7 +1017,7 @@
                         <a href="#">
                             <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
                         </a>
-                    </span>
+                    </span>*@
                 </div>
             </div>
         </div>
@@ -1026,6 +1028,7 @@
     </div><!-- /.main-container -->
 
     <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
 
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement)
@@ -1044,7 +1047,7 @@
     <!-- ace scripts -->
     <script src="~/assets/js/ace-elements.min.js"></script>
     <script src="~/assets/js/ace.min.js"></script>
-
+    @RenderSection("scripts", false)
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function ($) {
