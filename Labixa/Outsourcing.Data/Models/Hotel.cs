@@ -39,6 +39,7 @@ namespace Outsourcing.Data.Models
         public string HostPhone { get; set; }
         public string HostEmail { get; set; }
         public string HostAddress { get; set; }
+        public string Hotline { get; set; }
         public string ContractNumber { get; set; }
         public DateTime? ContractDate { get; set; }
         public DateTime? ContractExpire { get; set; }
