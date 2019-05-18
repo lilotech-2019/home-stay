@@ -3,224 +3,142 @@
 @{
     ViewBag.Title = "Details";
 }
+@section breadcrumb
+    {
+    <li><a href="@Url.Action("Index")">Hotels</a></li>
+    <li class="active">Details</li>
+}
 
-<h2>Details</h2>
+<div class="page-header">
+    <h1>
+        Quản Lý Khách Sạn
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.Name
+        </small>
+    </h1>
+</div><!-- /.page-header -->
 
-<div>
-    <h4>Hotels</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HotelCategory.Name)
-        </dt>
+<div class="col-xs-12">
+    <div class="row">
+        <div class="search-area well col-xs-12">
+            <div class="pull-left">
+                <b class="text-primary">Display</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.HotelCategory.Name)
-        </dd>
+                &nbsp;
+                <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
+                    @*<label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
+                            <input type="radio" value="2" autocomplete="off" />
+                            <i class="icon-only ace-icon fa fa-th"></i>
+                        </label>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaKeywords)
-        </dt>
+                    <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
+                        <input type="radio" value="1" checked="" autocomplete="off" />
+                        <i class="icon-only ace-icon fa fa-list"></i>
+                    </label>
 
-        <dd>
-            @Html.DisplayFor(model => model.MetaKeywords)
-        </dd>
+                    @*<label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
+                            <input type="radio" value="3" autocomplete="off" />
+                            <i class="icon-only ace-icon fa fa-crosshairs"></i>
+                        </label>*@
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </dt>
+            <div class="pull-right">
+                <b class="text-primary">Order</b>
 
-        <dd>
-            @Html.DisplayFor(model => model.MetaTitle)
-        </dd>
+                &nbsp;
+                <select>
+                    <option>Relevance</option>
+                    @*<option>Newest First</option>
+                        <option>Rating</option>*@
+                </select>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="row">
+        <div class="col-xs-12">
+            @foreach (var item in Model.Rooms)
+            {
+                <div class="media search-media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/72x72" />
+                        </a>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                    <div class="media-body">
+                        <div>
+                            <h4 class="media-heading">
+                                <a href="@Url.Action("Details","Rooms",new { id = item.Id})" class="blue">@item.Name</a>
+                            </h4>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        @if (item.Description != null)
+                        {
+                            <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description, 200)</p>
+                        }
+                        else
+                        {
+                            <p>Hiện chưa có bất kỳ mô tả nào về phòng này...</p>
+                        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        <div class="search-actions text-center">
+                            <span class="text-info">$</span>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+                            <span class="blue bolder bigger-150">@string.Format("{0:#,##0}", item.Price)</span>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+                            @*monthly*@
+                            <div class="action-buttons bigger-125">
+                                <a href="#">
+                                    <i class="ace-icon fa fa-phone green"></i>
+                                </a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                                @*<a href="#">
+                    <i class="ace-icon fa fa-heart red"></i>
+                </a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ward)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerPhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ManagerPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ManagerEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HostName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HostName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HostPhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HostPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HostEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HostEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HostAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HostAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContractNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContractNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContractDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContractDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContractExpire)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContractExpire)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlImage1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UrlImage1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlImage2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UrlImage2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlImage3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UrlImage3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Deleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Noted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Noted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MetaDescription)
-        </dd>
-
-    </dl>
+                <a href="#">
+                    <i class="ace-icon fa fa-star orange2"></i>
+                </a>*@
+                            </div>
+                            <a onclick="setRoomId(@item.Id)" data-toggle="modal" data-target="#phoneModal" class="search-btn-action btn btn-sm btn-block btn-info">
+                                Book it!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+@using (Html.BeginForm("Create", "RoomOrders", null, FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div id="phoneModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
+                </div>
+                <div class="modal-body">
+                    <input hidden name="roomId" id="txtRoomId" type="text" />
+                    @Html.TextBox("phone")
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function setRoomId(id) {
+        document.getElementById("txtRoomId").value = id;
+    }
+</script>
