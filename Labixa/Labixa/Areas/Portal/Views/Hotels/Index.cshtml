@@ -5,7 +5,20 @@
     var count = 0;
 }
 
-<h2>QUẢN LÝ KHÁCH SẠN</h2>
+@section breadcrumb
+    {
+    <li class="active">Hotel</li>
+}
+
+<div class="page-header">
+    <h1>
+        Quản Lý Khách Sạn
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            overview
+        </small>
+    </h1>
+</div><!-- /.page-header -->
 <p>
     <a href="@Url.Action("Create", new {categoryId = Request.Params["categoryId"]})" class="btn btn-primary">Thêm</a>
 </p>
