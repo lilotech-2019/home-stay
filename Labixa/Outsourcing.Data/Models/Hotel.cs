@@ -22,16 +22,22 @@ namespace Outsourcing.Data.Models
         [MaxLength(255)]
         public string Name { get; set; }
 
-        [AllowHtml]
-        [DataType(DataType.Html)]        
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [AllowHtml]
+        [DataType(DataType.Html)]
+        public string Content { get; set; }
 
         [Required]
         public string Address { get; set; }
+
         [Required]
         public string District { get; set; }
+
         [Required]
         public string Ward { get; set; }
+
         public string ManagerName { get; set; }
         public string ManagerPhone { get; set; }
         public string ManagerEmail { get; set; }
@@ -46,6 +52,7 @@ namespace Outsourcing.Data.Models
         public string UrlImage1 { get; set; }
         public string UrlImage2 { get; set; }
         public string UrlImage3 { get; set; }
+
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
