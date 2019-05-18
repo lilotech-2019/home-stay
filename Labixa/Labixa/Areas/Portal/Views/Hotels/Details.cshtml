@@ -20,48 +20,36 @@
 </div><!-- /.page-header -->
 
 <div class="col-xs-12">
-    <div class="row">
-        <div class="search-area well col-xs-12">
-            <div class="pull-left">
-                <b class="text-primary">Display</b>
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="clearfix">
+        <div class="pull-right">
+            <span class="green middle bolder">Choose result page: &nbsp;</span>
 
-                &nbsp;
-                <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
-                    @*<label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
-                            <input type="radio" value="2" autocomplete="off" />
-                            <i class="icon-only ace-icon fa fa-th"></i>
-                        </label>*@
+            <div class="btn-toolbar inline middle no-margin">
+                <div id="toggle-result-page" data-toggle="buttons" class="btn-group no-margin">
+                    <label class="btn btn-sm btn-yellow active">
+                        <span class="bigger-110">1</span>
 
-                    <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
-                        <input type="radio" value="1" checked="" autocomplete="off" />
-                        <i class="icon-only ace-icon fa fa-list"></i>
+                        <input type="radio" value="1" />
                     </label>
 
-                    @*<label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
-                            <input type="radio" value="3" autocomplete="off" />
-                            <i class="icon-only ace-icon fa fa-crosshairs"></i>
-                        </label>*@
+                    <label class="btn btn-sm btn-yellow">
+                        <span class="bigger-110">2</span>
+
+                        <input type="radio" value="2" />
+                    </label>
                 </div>
-            </div>
-
-            <div class="pull-right">
-                <b class="text-primary">Order</b>
-
-                &nbsp;
-                <select>
-                    <option>Relevance</option>
-                    @*<option>Newest First</option>
-                        <option>Rating</option>*@
-                </select>
             </div>
         </div>
     </div>
+
+    <div class="space-10"></div>
 
     <div class="row">
         <div class="col-xs-12">
             @foreach (var item in Model.Rooms)
             {
-                <div class="media search-media">
+                <div style="height:90px" class="media search-media">
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object" data-src="holder.js/72x72" />
@@ -75,34 +63,14 @@
                             </h4>
                         </div>
 
-                        @if (item.Description != null)
-                        {
-                            <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description, 200)</p>
-                        }
-                        else
-                        {
-                            <p>Hiện chưa có bất kỳ mô tả nào về phòng này...</p>
-                        }
+
+                        <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description, 200)</p>
 
                         <div class="search-actions text-center">
                             <span class="text-info">$</span>
 
                             <span class="blue bolder bigger-150">@string.Format("{0:#,##0}", item.Price)</span>
 
-                            @*monthly*@
-                            <div class="action-buttons bigger-125">
-                                <a href="#">
-                                    <i class="ace-icon fa fa-phone green"></i>
-                                </a>
-
-                                @*<a href="#">
-                    <i class="ace-icon fa fa-heart red"></i>
-                </a>
-
-                <a href="#">
-                    <i class="ace-icon fa fa-star orange2"></i>
-                </a>*@
-                            </div>
                             <a onclick="setRoomId(@item.Id)" data-toggle="modal" data-target="#phoneModal" class="search-btn-action btn btn-sm btn-block btn-info">
                                 Book it!
                             </a>

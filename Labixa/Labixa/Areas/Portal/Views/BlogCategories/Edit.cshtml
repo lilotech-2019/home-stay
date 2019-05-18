@@ -20,7 +20,7 @@
             <div class="alert alert-block alert-info">
                 Edit Blog Categories
             </div>
-            @using (Html.BeginForm("Edit", "Hotels", null, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", "BlogCategories", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -61,7 +61,7 @@
                 <div class="form-group col-sm-6 col-md-12">
                     @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.TextAreaFor(model => model.Description, "CkEditor")
+                        @Html.TextAreaFor(model => model.Description)
                         @Html.ValidationMessageFor(model => model.Description)
                     </div>
                 </div>
