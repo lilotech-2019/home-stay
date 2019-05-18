@@ -14,7 +14,7 @@
 
 <div class="page-header">
     <h1>
-        Quản Lý HotelCategories
+        Quản Lý Chỉ Mục Khách Sạn
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
             overview
@@ -31,14 +31,14 @@
             <thead>
 
                 <tr>
-                    <th>
+                    <th class="center">
                         #
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
 
-                    <th>
+                    <th class="hidden-480">
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
                     <th>@Resources.Resources.Action</th>
@@ -50,7 +50,7 @@
                 {
                     count++;
                     <tr>
-                        <td>
+                        <td class="center">
                             @count
                         </td>
                         <td>
@@ -59,13 +59,15 @@
                             </a>
                         </td>
 
-                        <td>
+                        <td class="hidden-480">
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
 
                         <td class=" ">
                             <div class="visible-md visible-lg  btn-group">
-
+                                <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-xs btn-secondary">
+                                    <i class="fa fa-bookmark"></i>
+                                </a>
                                 <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
                                     <i class="fa fa-edit"></i>
                                 </a>

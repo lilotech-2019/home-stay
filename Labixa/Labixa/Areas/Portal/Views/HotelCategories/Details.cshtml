@@ -4,48 +4,41 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@section breadcrumb
+    {
+    <li><a href="@Url.Action("Index")">HotelCategories</a></li>
+    <li class="active">Details</li>
+}
+<div class="page-header">
+    <h1>
+        Quản Lý Chỉ Mục Khách Sạn
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.Name
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+<div class="col-xs-12 col-sm-9">
+    <div class="row">
+        @foreach (var item in Model.Hotels.Where(w=>w.Deleted != true))
+        {
 
-<div>
-    <h4>CategoryHotels</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <div style="height:735px" class="col-xs-6 col-sm-4 col-md-3">
+                <div class="thumbnail search-thumbnail">
+                    <img style="width:180px;height:200px;" class="media-object" src="@item.Rooms.FirstOrDefault().RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                    <div class="caption">
+                        <div class="clearfix">
+                            <span class="pull-right label label-grey info-label">Số phòng: @item.Rooms.Where(w=>w.Deleted!=true).Count()</span>
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <h3 class="search-title">
+                            <a href="@Url.Action("Details","Hotels", new { id = item.Id})" class="blue">@item.Name</a>
+                        </h3>
+                        <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description,200)</p>
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-
-    </dl>
+        }
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
