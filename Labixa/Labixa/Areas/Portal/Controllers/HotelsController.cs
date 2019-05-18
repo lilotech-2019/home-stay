@@ -127,15 +127,18 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = UserManager.FindByEmail(User.Identity.Name);
-                hotel.HostEmail = user.Email;
-                hotel.HostPhone = user.PhoneNumber;
-                hotel.HostAddress = user.Address;
-                hotel.HostName = user.DisplayName;
+                if (!User.IsInRole(Role.Admin))
+                {
+                    var user = UserManager.FindByEmail(User.Identity.Name);
+                    hotel.HostEmail = user.Email;
+                    hotel.HostPhone = user.PhoneNumber;
+                    hotel.HostAddress = user.Address;
+                    hotel.HostName = user.DisplayName;
+                }
 
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new { categoryId = categoryId });
+                return RedirectToAction("Index", new { categoryId });
             }
 
             var hotelCategories = _categoryHotelService.FindSelectList();
@@ -164,7 +167,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int)id);
+            var hotel = _hotelService.FindAll().FirstOrDefault(w => w.HostEmail == User.Identity.Name & w.Id == id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -191,6 +194,14 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!User.IsInRole(Role.Admin))
+                {
+                    var user = UserManager.FindByEmail(User.Identity.Name);
+                    hotel.HostEmail = user.Email;
+                    hotel.HostPhone = user.PhoneNumber;
+                    hotel.HostAddress = user.Address;
+                    hotel.HostName = user.DisplayName;
+                }
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
                 return RedirectToAction("Index", new { categoryId });
