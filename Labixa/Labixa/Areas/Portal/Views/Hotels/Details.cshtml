@@ -47,12 +47,12 @@
 
     <div class="row">
         <div class="col-xs-12">
-            @foreach (var item in Model.Rooms)
+            @foreach (var item in Model.Rooms.Where(w=>w.Deleted!=true))
             {
                 <div style="height:90px" class="media search-media">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object" data-src="holder.js/72x72" />
+                            <img style="width:72px" class="media-object" src="@item.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
                         </a>
                     </div>
 
