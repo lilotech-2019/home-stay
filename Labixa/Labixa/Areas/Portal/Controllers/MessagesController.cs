@@ -1,10 +1,7 @@
 ﻿using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -205,7 +202,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 var entity = _messageService.FindById(message.Id);
 
-                entity.Type = MessageType.Replied;                                               
+                entity.Type = MessageType.Replied;
                 entity.Answer = message.Answer;
                 _messageService.Edit(entity);
 
@@ -217,13 +214,13 @@ namespace Labixa.Areas.Portal.Controllers
                    "table, th, td {border: 1px solid black;padding: 15px;}th {text-align: left;}</style></head>" +
                    "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
                    "<i><p>From: Dalat Amazing</p>" +
-                   "<p>To: "+ message.Customer.Email +"</p></i><br>" +
+                   "<p>To: " + message.Customer.Email + "</p></i><br>" +
                    "<p>Your Question:</p>" +
                    "<table width=100%>" +
                    "<tr><th>Title</th> <th>Content</th></tr>" +
-                   "<tr><td>"+message.Name+"</td> <td>"+message.Content+"</td></tr>" +
+                   "<tr><td>" + message.Name + "</td> <td>" + message.Content + "</td></tr>" +
                    "</table>" +
-                   "<p>Replied: "+ message.Answer +"</p></html>";
+                   "<p>Replied: " + message.Answer + "</p></html>";
                 await EmailHelper.SendEmailAsync(message.Customer.Email, content, subject);
                 //====================</Mail>==============================
                 return RedirectToAction("Index");
