@@ -45,7 +45,6 @@ namespace Outsourcing.Data.Models
         public string UrlImage1 { get; set; }
         public string UrlImage2 { get; set; }
         public string UrlImage3 { get; set; }
-
         /// <summary>
         /// URL  SEO friendly
         /// </summary>
