@@ -1,113 +1,418 @@
 ﻿@model Outsourcing.Data.Models.Room
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details Room";
 }
-
-
+@section head{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
     <li><a href="@Url.Action("Index")">Rooms</a></li>
     <li class="active">Details</li>
 }
-<div class="page-header">
-    <h1>
-        Quản Lý Khách Sạn
-        <small>
-            <i class="ace-icon fa fa-angle-double-right"></i>
-            @Model.Name
-        </small>
-    </h1>
-</div>
-<div>
-    <!-- PAGE CONTENT BEGINS -->
-    <div class="clearfix">
-        <div class="pull-right">
-            <span class="green middle bolder">Choose result page: &nbsp;</span>
+<div class="main-container ace-save-state" id="main-container">
 
-            <div class="btn-toolbar inline middle no-margin">
-                <div id="toggle-result-page" data-toggle="buttons" class="btn-group no-margin">
-                    <label class="btn btn-sm btn-yellow active">
-                        <span class="bigger-110">1</span>
+    <div class="main-content">
+        <div class="main-content-inner">
 
-                        <input type="radio" value="1" />
-                    </label>
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        Details of room
+                    </h1>
+                </div><!-- /.page-header -->
 
-                    <label class="btn btn-sm btn-yellow">
-                        <span class="bigger-110">2</span>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="clearfix">
+                            <div class="pull-left alert alert-success no-margin alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <i class="ace-icon fa fa-times"></i>
+                                </button>
 
-                        <input type="radio" value="2" />
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
+                                <i class="ace-icon fa fa-umbrella bigger-120 blue"></i>
+                                Click on the image below or on profile fields to edit them ...
+                            </div>
 
+                            <div class="pull-right">
+                                <span class="green middle bolder">Choose profile: &nbsp;</span>
 
-    <div class="space-10"></div>
-
-    <div class="row">
-        <div class="col-xs-12">
-            @foreach (var item in Model.Hotel.Rooms.Where(w => w.Deleted != true))
-            {
-                <div style="height:90px" class="media search-media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img style="width:72px" class="media-object" src="@item.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
-                        </a>
-                    </div>
-
-                    <div class="media-body">
-                        <div>
-                            <h4 class="media-heading">
-                                <a href="@Url.Action("Details","Rooms",new { id = item.Id})" class="blue">@item.Name</a>
-                            </h4>
+                                <div class="btn-toolbar inline middle no-margin">
+                                    <div data-toggle="buttons" class="btn-group no-margin">
+                                        <label class="btn btn-sm btn-yellow">
+                                            <span class="bigger-110"></span>
+                                            <input type="radio" value="" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="hr dotted"></div>
 
-                        <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description, 200)</p>
+                        <div class="hide">
+                            <div id="user-profile-1" class="user-profile">
+                                <div class="tabbable">
+                                    <ul class="nav nav-tabs padding-18">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#home">
+                                                <i class="green ace-icon fa fa-user bigger-120"></i>
+                                                General
+                                            </a>
+                                        </li>
 
-                        <div class="search-actions text-center">
-                            <span class="text-info">$</span>
+                                        <li>
+                                            <a data-toggle="tab" href="#feed">
+                                                <i class="orange ace-icon fa fa-rss bigger-120"></i>
+                                                Activity Feed
+                                            </a>
+                                        </li>
 
-                            <span class="blue bolder bigger-150">@string.Format("{0:#,##0}", item.Price)</span>
+                                        <li>
+                                            <a data-toggle="tab" href="#friends">
+                                                <i class="blue ace-icon fa fa-users bigger-120"></i>
+                                                Friends
+                                            </a>
+                                        </li>
 
-                            <a onclick="setRoomId(@item.Id)" data-toggle="modal" data-target="#phoneModal" class="search-btn-action btn btn-sm btn-block btn-info">
-                                Book it!
-                            </a>
+                                        <li>
+                                            <a data-toggle="tab" href="#pictures">
+                                                <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
+                                                Pictures
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
+                                    {
+                                        <div class="tab-content no-border padding-24">
+                                            <div id="home" class="tab-pane in active">
+                                                <div class="row">
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <h4 class="blue">
+                                                            <span class="middle">
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.TextBoxFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5", @required = "required" })
+                                                                        @*@Html.ValidationMessageFor(model => model.Name)*@
+                                                                    </div>
+                                                            </span>
+
+                                                            <span class="label label-purple arrowed-in-right">
+                                                                <i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
+                                                                online
+                                                            </span>
+                                                        </h4>
+
+                                                        <div class="profile-user-info">
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Hotel Name </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.HotelId, "HotelId", new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.DropDownList("HotelId")
+                                                                        @Html.ValidationMessageFor(model => model.HotelId)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Room NameEnglish </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.NameEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.EditorFor(model => model.NameEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                        @Html.ValidationMessageFor(model => model.NameEnglish)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> SharePercent </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.SharePercent, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.TextBoxFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5", type = "number", min = 0, max = 100 })
+                                                                        @Html.ValidationMessageFor(model => model.SharePercent)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Price </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.Price, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.EditorFor(model => model.Price, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                        @Html.ValidationMessageFor(model => model.Price)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> RoomType </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.Type, "RoomType", new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.DropDownList("RoomType")
+                                                                        @Html.ValidationMessageFor(model => model.Type)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Status </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                        @Html.ValidationMessageFor(model => model.Status)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Content </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.EditorFor(model => model.Content, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                        @Html.ValidationMessageFor(model => model.Content)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Status </div>
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(model => model.ContentEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                    <div class="col-sm-9">
+                                                                        @Html.EditorFor(model => model.ContentEnglish, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                        @Html.ValidationMessageFor(model => model.ContentEnglish)
+                                                                    </div>
+                                                                </div>>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="hr hr-8 dotted"></div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+
+                                                <div class="space-20"></div>
+
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="widget-box transparent">
+                                                            <div class="widget-header widget-header-small">
+                                                                <h4 class="widget-title smaller">
+                                                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                                                    Description
+                                                                </h4>
+                                                            </div>
+
+                                                            <div class="widget-body">
+                                                                <div class="widget-main">
+                                                                    <div class="form-group">
+                                                                        @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                        <div class="col-sm-9">
+                                                                            @*@Html.EditorFor(model => model.Description, "CkEditor")*@
+                                                                            @Html.TextAreaFor(model => model.Description)
+
+                                                                            @Html.ValidationMessageFor(model => model.Description)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="widget-box transparent">
+                                                            <div class="widget-header widget-header-small header-color-blue2">
+                                                                <h4 class="widget-title smaller">
+                                                                    <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                                                    Tiện nghi
+                                                                </h4>
+                                                            </div>
+
+                                                            <div class="widget-body">
+                                                                <div class="widget-main padding-16">
+                                                                    <div class="clearfix">
+                                                                        <div class="grid3 center">
+                                                                            <div class="form-group">
+                                                                                @Html.LabelFor(model => model.MetaTitle, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                                <div class="col-sm-9">
+                                                                                    @Html.EditorFor(model => model.MetaTitle, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                                    @Html.ValidationMessageFor(model => model.MetaTitle)
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="space-2"></div>
+                                                                            MetaTitle
+                                                                        </div>
+
+                                                                        <div class="grid3 center">
+                                                                            <div class="form-group">
+                                                                                @Html.LabelFor(model => model.MetaKeywords, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                                <div class="col-sm-9">
+                                                                                    @Html.EditorFor(model => model.MetaKeywords, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                                    @Html.ValidationMessageFor(model => model.MetaKeywords)
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="space-2"></div>
+                                                                            MetaKeywords
+                                                                        </div>
+
+                                                                        <div class="grid3 center">
+                                                                            <div class="form-group">
+                                                                                @Html.LabelFor(model => model.MetaDescription, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                                                <div class="col-sm-9">
+                                                                                    @Html.EditorFor(model => model.MetaDescription, null, new { @class = "col-xs-10 col-sm-5" })
+                                                                                    @Html.ValidationMessageFor(model => model.MetaDescription)
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="space-2"></div>
+                                                                            MetaDescription
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="hr hr-16"></div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /#home -->
+
+
+                                            <div id="friends" class="tab-pane">
+                                                <div class="profile-users clearfix">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_Tivi, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_Tivi)
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_TuDo, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_TuDo, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_TuDo)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_HotWater, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_HotWater, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_HotWater)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_DryHair, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_DryHair, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_DryHair)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_Iron, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_Iron, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_Iron)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_Kitchen, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_Kitchen, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_Kitchen)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_TeaCoffee, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_TeaCoffee, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_TeaCoffee)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_Snack, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_Snack, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_Snack)
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Utility_WashMachine, new { @class = "col-sm-3 control-label no-padding-right" })
+                                                        <div class="col-sm-9">
+                                                            @Html.EditorFor(model => model.Utility_WashMachine, null, new { @class = "col-xs-10 col-sm-5" })
+                                                            @Html.ValidationMessageFor(model => model.Utility_WashMachine)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr hr10 hr-double"></div>
+
+                                                <ul class="pager pull-right">
+                                                    <li class="previous disabled">
+                                                        <a href="#">&larr; Prev</a>
+                                                    </li>
+
+                                                    <li class="next">
+                                                        <a href="#">Next &rarr;</a>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- /#friends -->
+
+                                            <div id="pictures" class="tab-pane">
+                                                <ul class="ace-thumbnails">
+                                                    <div class="row">
+                                                        @Html.EditorFor(model => model.RoomImageMappings)
+                                                    </div>
+                                                </ul>
+                                            </div><!-- /#pictures -->
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            }
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+
         </div>
-    </div>
-</div>
+    </div><!-- /.main-content -->
 
 
-@using (Html.BeginForm("Create", "RoomOrders", null, FormMethod.Get, new { @class = "form-horizontal" }))
-{
-    <div id="phoneModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
-                </div>
-                <div class="modal-body">
-                    <input hidden name="roomId" id="txtRoomId" type="text" />
-                    @Html.TextBox("phone")
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Search</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
 <script>
-    function setRoomId(id) {
-        document.getElementById("txtRoomId").value = id;
-    }
+    CKEDITOR.replace('Description');
+    CKEDITOR.replace('DescriptionEnglish');
 </script>
