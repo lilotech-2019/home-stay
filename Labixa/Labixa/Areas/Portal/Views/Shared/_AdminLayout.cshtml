@@ -413,8 +413,13 @@
 
                     <b class="arrow"></b>
                 </li>
-
-                @Html.Action("HotelCategorySubMenu", "HotelCategories")
+                <li>
+                    <a href="@Url.Action("Index","Hotels")">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Quản Lý Khách Sạn </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
 
                 @Html.Action("HotelSubMenu", "Hotels")
 
@@ -430,7 +435,7 @@
                 </li>
 
                 <li>
-                    <a href="@Url.Action("Index", "Deposit")" >
+                    <a href="@Url.Action("Index", "Deposit")">
                         <i class="menu-icon fa fa-edit"></i>
                         <span class="menu-text">
                             Quản lý Ký Gửi

@@ -55,7 +55,12 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Index(int? categoryId)
         {
-            var hotels = _hotelService.FindAll();
+            var hotels = _hotelService.FindAll().Where(w => w.HostEmail == User.Identity.Name);
+            if (User.IsInRole(Role.Admin))
+            {
+                hotels = _hotelService.FindAll();
+            }
+
             if (categoryId != null)
             {
                 hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
@@ -80,7 +85,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var hotel = _hotelService.FindById((int) id);
+            var hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -130,7 +135,7 @@ namespace Labixa.Areas.Portal.Controllers
 
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
-                return RedirectToAction("Index", new {categoryId = categoryId});
+                return RedirectToAction("Index", new { categoryId = categoryId });
             }
 
             var hotelCategories = _categoryHotelService.FindSelectList();
@@ -159,7 +164,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Hotel hotel = _hotelService.FindById((int) id);
+            Hotel hotel = _hotelService.FindById((int)id);
             if (hotel == null)
             {
                 return HttpNotFound();
@@ -188,7 +193,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Edit(hotel);
-                return RedirectToAction("Index", new {categoryId});
+                return RedirectToAction("Index", new { categoryId });
             }
             var category = _categoryHotelService.FindSelectList();
             if (categoryId != null)
@@ -214,7 +219,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var categoryHotels = _hotelService.FindById((int) id);
+            var categoryHotels = _hotelService.FindById((int)id);
             if (categoryHotels == null)
             {
                 return HttpNotFound();
