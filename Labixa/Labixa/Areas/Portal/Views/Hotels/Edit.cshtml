@@ -46,7 +46,12 @@
                                 Contact
                             </a>
                         </li>
-
+                        <li class="">
+                            <a data-toggle="tab" href="#tab4">
+                                <i class="blue  icon-picture bigger-120"></i>
+                                Hình Ảnh
+                            </a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -201,6 +206,30 @@
                                 <div class="col-sm-9">
                                     @Html.EditorFor(model => model.ContractNumber, null, new { @class = "col-xs-10 col-sm-5" })
                                     @Html.ValidationMessageFor(model => model.ContractNumber)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab4" class="tab-pane">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UrlImage1, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage1, "GetImageFromElfinder")
+                                    @Html.ValidationMessageFor(model => model.UrlImage1)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UrlImage2, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage2, "GetImageFromElfinder")
+                                    @Html.ValidationMessageFor(model => model.UrlImage2)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UrlImage3, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.UrlImage3, "GetImageFromElfinder")
+                                    @Html.ValidationMessageFor(model => model.UrlImage3)
                                 </div>
                             </div>
                         </div>

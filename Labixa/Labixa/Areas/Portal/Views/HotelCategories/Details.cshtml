@@ -24,7 +24,7 @@
         {
             <div style="height:735px" class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail search-thumbnail">
-                    <img style="width:180px;height:200px;" class="media-object" src="@item.Rooms.FirstOrDefault().RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                    <img style="width:180px;height:200px;" class="media-object" src="@item.UrlImage1" />
                     <div class="caption">
                         <div class="clearfix">
                             <span class="pull-right label label-grey info-label">Số phòng: @item.Rooms.Where(w => w.Deleted != true).Count()</span>

@@ -4,199 +4,110 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Rooms</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hotel.MetaKeywords)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hotel.MetaKeywords)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EnglishName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EnglishName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DescriptionENG)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DescriptionENG)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SharePercent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SharePercent)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiscountPercent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiscountPercent)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Noted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Noted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_Tivi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_Tivi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_TuDo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_TuDo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_HotWater)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_HotWater)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_DryHair)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_DryHair)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_Iron)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_Iron)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_Kitchen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_Kitchen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_TeaCoffee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_TeaCoffee)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_Snack)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_Snack)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Utility_WashMachine)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Utility_WashMachine)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaKeywords)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MetaKeywords)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MetaTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MetaDescription)
-        </dd>
-
-    </dl>
+@section breadcrumb
+{
+    <li><a href="@Url.Action("Index")">Rooms</a></li>
+    <li class="active">Details</li>
+}
+<div class="page-header">
+    <h1>
+        Quản Lý Khách Sạn
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.Name
+        </small>
+    </h1>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="clearfix">
+        <div class="pull-right">
+            <span class="green middle bolder">Choose result page: &nbsp;</span>
+
+            <div class="btn-toolbar inline middle no-margin">
+                <div id="toggle-result-page" data-toggle="buttons" class="btn-group no-margin">
+                    <label class="btn btn-sm btn-yellow active">
+                        <span class="bigger-110">1</span>
+
+                        <input type="radio" value="1" />
+                    </label>
+
+                    <label class="btn btn-sm btn-yellow">
+                        <span class="bigger-110">2</span>
+
+                        <input type="radio" value="2" />
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="space-10"></div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            @foreach (var item in Model.Hotel.Rooms.Where(w => w.Deleted != true))
+            {
+                <div style="height:90px" class="media search-media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img style="width:72px" class="media-object" src="@item.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                        </a>
+                    </div>
+
+                    <div class="media-body">
+                        <div>
+                            <h4 class="media-heading">
+                                <a href="@Url.Action("Details","Rooms",new { id = item.Id})" class="blue">@item.Name</a>
+                            </h4>
+                        </div>
+
+
+                        <p>@Outsourcing.Core.Common.StringConvert.Chop(item.Description, 200)</p>
+
+                        <div class="search-actions text-center">
+                            <span class="text-info">$</span>
+
+                            <span class="blue bolder bigger-150">@string.Format("{0:#,##0}", item.Price)</span>
+
+                            <a onclick="setRoomId(@item.Id)" data-toggle="modal" data-target="#phoneModal" class="search-btn-action btn btn-sm btn-block btn-info">
+                                Book it!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Create", "RoomOrders", null, FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div id="phoneModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
+                </div>
+                <div class="modal-body">
+                    <input hidden name="roomId" id="txtRoomId" type="text" />
+                    @Html.TextBox("phone")
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function setRoomId(id) {
+        document.getElementById("txtRoomId").value = id;
+    }
+</script>
