@@ -72,6 +72,7 @@
     <Compile Include="Areas\Portal\Controllers\BaseController.cs" />
     <Compile Include="Areas\Portal\Controllers\CostCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\CostsController.cs" />
+    <Compile Include="Areas\Portal\Controllers\ManageController.cs" />
     <Compile Include="Areas\Portal\Controllers\RoomAssetsController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\Portal\Controllers\BlogsController.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Areas\Portal\ViewModels\RoomOrders\CreateViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\CreateRoomViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\PartialSubMenuCategoryViewModel.cs" />
+    <Compile Include="Areas\Portal\ViewModels\User\UserViewModels.cs" />
     <Compile Include="Areas\Portal\ViewModels\WebsiteAtribute\WebsiteAttributeFormModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\WebsiteAtribute\WebsiteAttributeManageModel.cs" />
     <Compile Include="Common\JsonpResult.cs" />
@@ -5034,6 +5036,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Areas\Portal\Views\Manage\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
