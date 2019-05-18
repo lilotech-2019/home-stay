@@ -1,5 +1,11 @@
 ﻿@model Labixa.Areas.Portal.ViewModels.HotelCategory.HotelCategorySubMenuViewModel
-@{ var count = Model.Count + 1; }
+@{
+    var count = Model.Count;
+    if (User.IsInRole(Role.Admin))
+    {
+        count += 1;
+    }
+}
 
 <li class="">
     <a href="#" class="dropdown-toggle">
@@ -14,14 +20,16 @@
     <b class="arrow"></b>
 
     <ul class="submenu">
-        
-        <li class="">
-            <a href="@Url.Action("Index", "Hotels")">
-                <i class="menu-icon fa fa-caret-right"></i>
-                Tất Cả
-            </a>
-            <b class="arrow"></b>
-        </li>
+        @if (User.IsInRole(Role.Admin))
+        {
+            <li class="">
+                <a href="@Url.Action("Index", "Hotels")">
+                    <i class="menu-icon fa fa-caret-right"></i>
+                    Tất Cả
+                </a>
+                <b class="arrow"></b>
+            </li>
+        }
 
         @foreach (var item in Model.HotelCategories)
         {
@@ -34,5 +42,5 @@
                 <b class="arrow"></b>
             </li>
         }
-        </ul>
+    </ul>
 </li>

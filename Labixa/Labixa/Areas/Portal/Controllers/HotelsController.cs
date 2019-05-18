@@ -7,7 +7,10 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -21,16 +24,24 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IHotelService _hotelService;
         private readonly ICostsService _costsService;
         private readonly IHotelCategoryService _categoryHotelService;
+        private ApplicationUserManager _userManager;
 
         #endregion
 
         #region Ctor
 
-        public HotelsController(IHotelService hotelService, ICostsService costsService, IHotelCategoryService categoryHotelService)
+        public HotelsController(IHotelService hotelService, ICostsService costsService,
+            IHotelCategoryService categoryHotelService)
         {
             _costsService = costsService;
             _hotelService = hotelService;
             _categoryHotelService = categoryHotelService;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         #endregion
@@ -44,7 +55,12 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Index(int? categoryId)
         {
-            var hotels = _hotelService.FindAll();
+            var hotels = _hotelService.FindAll().Where(w => w.HostEmail == User.Identity.Name);
+            if (User.IsInRole(Role.Admin))
+            {
+                hotels = _hotelService.FindAll();
+            }
+
             if (categoryId != null)
             {
                 hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
@@ -85,6 +101,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Create - GET
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Create(int? categoryId)
         {
             var category = _categoryHotelService.FindSelectList();
@@ -93,12 +110,14 @@ namespace Labixa.Areas.Portal.Controllers
                 category = category.Where(w => w.Id == categoryId);
             }
             ViewBag.HotelCategoryId = new SelectList(category, "Id", "Name", categoryId);
+
             return View();
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
+        /// <param name="categoryId"></param>
         /// <param name="hotel"></param>
         /// <returns></returns>
         [HttpPost]
@@ -108,6 +127,12 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = UserManager.FindByEmail(User.Identity.Name);
+                hotel.HostEmail = user.Email;
+                hotel.HostPhone = user.PhoneNumber;
+                hotel.HostAddress = user.Address;
+                hotel.HostName = user.DisplayName;
+
                 hotel.Slug = StringConvert.ConvertShortName(hotel.Name);
                 _hotelService.Create(hotel);
                 return RedirectToAction("Index", new { categoryId = categoryId });
@@ -119,7 +144,7 @@ namespace Labixa.Areas.Portal.Controllers
                 hotelCategories = hotelCategories.Where(w => w.Id == categoryId);
             }
             ViewBag.HotelCategoryId = new SelectList(hotelCategories, "Id", "Name", hotel.HotelCategoryId);
-            
+
             return View(hotel);
         }
 
@@ -223,6 +248,7 @@ namespace Labixa.Areas.Portal.Controllers
         #endregion
 
         #region HotelSubMenu
+
         /// <summary>
         /// HotelSubMenu
         /// </summary>
@@ -232,7 +258,9 @@ namespace Labixa.Areas.Portal.Controllers
             var hotels = _hotelService.FindAll();
             return PartialView("_HotelSubMenu", hotels.AsNoTracking().ToList());
         }
+
         #endregion
+
         public ActionResult Preview(int hotelId)
         {
             var hotel = _hotelService.FindById(hotelId);
@@ -249,9 +277,12 @@ namespace Labixa.Areas.Portal.Controllers
 
             //All
             DataTable dtAll = new DataTable("Report");
-            dtAll.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
-                                            new DataColumn("Name"),
-                                            new DataColumn("Amount")});
+            dtAll.Columns.AddRange(new DataColumn[3]
+            {
+                new DataColumn("Id"),
+                new DataColumn("Name"),
+                new DataColumn("Amount")
+            });
 
             foreach (var item in costs)
             {
@@ -260,9 +291,12 @@ namespace Labixa.Areas.Portal.Controllers
 
             //Income
             DataTable dtIncome = new DataTable("Income");
-            dtIncome.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
-                                            new DataColumn("Name"),
-                                            new DataColumn("Amount")});
+            dtIncome.Columns.AddRange(new DataColumn[3]
+            {
+                new DataColumn("Id"),
+                new DataColumn("Name"),
+                new DataColumn("Amount")
+            });
 
             foreach (var item in costsIncome)
             {
@@ -271,9 +305,12 @@ namespace Labixa.Areas.Portal.Controllers
 
             //Outcome
             DataTable dtOutcome = new DataTable("Outcome");
-            dtOutcome.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
-                                            new DataColumn("Name"),
-                                            new DataColumn("Amount")});
+            dtOutcome.Columns.AddRange(new DataColumn[3]
+            {
+                new DataColumn("Id"),
+                new DataColumn("Name"),
+                new DataColumn("Amount")
+            });
 
             foreach (var item in costsOutcome)
             {
@@ -282,9 +319,12 @@ namespace Labixa.Areas.Portal.Controllers
 
             //Others
             DataTable dtOthers = new DataTable("Others");
-            dtOthers.Columns.AddRange(new DataColumn[3] { new DataColumn("Id"),
-                                            new DataColumn("Name"),
-                                            new DataColumn("Amount")});
+            dtOthers.Columns.AddRange(new DataColumn[3]
+            {
+                new DataColumn("Id"),
+                new DataColumn("Name"),
+                new DataColumn("Amount")
+            });
 
             foreach (var item in costsOthers)
             {
@@ -302,9 +342,9 @@ namespace Labixa.Areas.Portal.Controllers
                 using (MemoryStream stream = new MemoryStream())
                 {
                     wb.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Report.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "Report.xlsx");
                 }
-
             }
         }
     }
