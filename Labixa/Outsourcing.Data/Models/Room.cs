@@ -19,10 +19,15 @@ namespace Outsourcing.Data.Models
 
         [AllowHtml]
         [DataType(DataType.Html)]
-        public string Description { get; set; }
-
+        public string Content { get; set; }
         [AllowHtml]
         [DataType(DataType.Html)]
+        public string ContentEnglish { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string DescriptionEnglish { get; set; }
 
         [Range(0, 100)]
