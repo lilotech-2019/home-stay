@@ -19,6 +19,8 @@
     </h1>
 </div><!-- /.page-header -->
 
+@Html.Action("HotelSubMenu", "Hotels")
+
 <p>
     @Html.ActionLink("Tạo mới", "Create", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, new { @class = "btn btn-primary" })
 </p>
@@ -163,7 +165,7 @@
                     });
             });
         }
-    
+
 
         jQuery(function ($) {
             $('#sidebar2').insertBefore('.page-content');
