@@ -24,7 +24,7 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IHotelService _hotelService;
         private readonly ICostsService _costsService;
         private readonly IHotelCategoryService _categoryHotelService;
-        private ApplicationUserManager _userManager;
+      
 
         #endregion
 
@@ -38,11 +38,7 @@ namespace Labixa.Areas.Portal.Controllers
             _categoryHotelService = categoryHotelService;
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            private set => _userManager = value;
-        }
+        private ApplicationUserManager UserManager =>  HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         #endregion
 
