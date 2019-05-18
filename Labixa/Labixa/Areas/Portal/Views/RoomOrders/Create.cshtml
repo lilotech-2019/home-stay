@@ -1,30 +1,16 @@
 ﻿@model Labixa.Areas.Portal.ViewModels.RoomOrders.CreateViewModel
 
 @{
-    ViewBag.Title = "Create Room Order";
+    ViewBag.Title = "Create RoomOrder";
+}
+@section head{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
 }
 @section breadcrumb
 {
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');
-            } catch (e) {
-            }
-        </script>
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/portal">Home</a>
-            </li>
-            <li>
-                <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý booking</a>
-            </li>
-            <li class="active">Booking</li>
-        </ul>
-    </div>
+    <li><a href="@Url.Action("Index")">RoomOrders</a></li>
+    <li class="active">Create</li>
 }
 <div class="page-content">
     <div class="row">
@@ -55,7 +41,7 @@
                     <div class="form-group col-sm-6 col-md-12">
                         @Html.LabelFor(model => model.Customer.Phone, new { @class = "col-sm-3 control-label no-padding-right" })
                         <div class="col-sm-9">
-                            @Html.TextBoxFor(model => model.Customer.Phone, new { @class = "col-xs-10 col-sm-5",@Value=ViewBag.Phone })
+                            @Html.TextBoxFor(model => model.Customer.Phone, new { @class = "col-xs-10 col-sm-5", @Value = ViewBag.Phone })
                             @Html.ValidationMessageFor(model => model.Customer.Phone)
                         </div>
                     </div>

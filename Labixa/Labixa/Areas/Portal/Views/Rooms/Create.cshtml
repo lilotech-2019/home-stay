@@ -1,10 +1,6 @@
 ﻿@model Outsourcing.Data.Models.Room
 
 @{
-    /**/
-
-    /**/
-
     ViewBag.Title = "Create Room";
 }
 @section head{
@@ -257,13 +253,11 @@
                         <a href="@Url.Action("Index","Rooms",new { hotelId = Request.Params["hotelId"], type = Request.Params["type"]})" class="btn btn-warning">Back</a>
                     </div>
                 </div>
-            }
+            }x 
         </div>
     </div>
 </div>
 <script>
     CKEDITOR.replace('Description');
     CKEDITOR.replace('DescriptionEnglish');
-
-
 </script>

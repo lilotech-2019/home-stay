@@ -4,30 +4,15 @@
     ViewBag.Title = "CostCategory Edit";
 }
 
+@section head{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
 @section breadcrumb
 {
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');
-            } catch (e) {
-            }
-        </script>
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/portal">Home</a>
-            </li>
-            <li>
-                <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Chi Phí</a>
-            </li>
-            <li class="active">Chỉnh Sửa Chi Phí</li>
-        </ul>
-    </div>
+    <li><a href="@Url.Action("Index")">CostCategories</a></li>
+    <li class="active">Edit</li>
 }
-
 <div class="page-content">
     <div class="row">
         <div class="col-xs-12">
@@ -84,7 +69,7 @@
                 <div class="form-group col-sm-6 col-md-12">
                     @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
                     <div class="col-sm-9">
-                        @Html.EditorFor(model => model.Description, "CkEditor")
+                        @Html.TextAreaFor(model => model.Description)
                         @Html.ValidationMessageFor(model => model.Description)
                     </div>
                 </div>
@@ -93,12 +78,13 @@
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Save" class="btn btn-primary" />
                         <input type="reset" value="Reset" class="btn" />
+                        <a href="@Url.Action("Index","CostCategories",null)" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    CKEDITOR.replace('Description');
+</script>

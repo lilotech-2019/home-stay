@@ -4,32 +4,20 @@
     ViewBag.Title = "Reply";
 }
 
-<div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('breadcrumbs', 'fixed');
-        } catch (e) {
-        }
-    </script>
-
-    <ul class="breadcrumb">
-        <li>
-            <i class="icon-home home-icon"></i>
-            <a href="/portal">Home</a>
-        </li>
-        <li>
-            <i class="icon-edit"></i>
-            <a href="@Url.Action("Index")">Quản lý Tin Nhắn</a>
-        </li>
-        <li class="active">Phản Hồi Tin Nhắn</li>
-    </ul>
-</div>
-
+@section head{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@section breadcrumb
+{
+    <li><a href="@Url.Action("Index")">Messages</a></li>
+    <li class="active">Replay</li>
+}
 <div class="page-content">
     <div class="row">
         <div class="col-xs-12">
             <div class="alert alert-block alert-info">
-                Edit message
+                Phản hồi tin nhắn
             </div>
             @using (Html.BeginForm("Reply", null, FormMethod.Post, new { @class = "form-horizontal" }))
             {
@@ -78,7 +66,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Answer, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.TextAreaFor(model => model.Answer, new { @class = "col-xs-10 col-sm-5" })
+                                    @Html.TextAreaFor(model => model.Answer)
                                     @Html.ValidationMessageFor(model => model.Answer)
                                 </div>
                             </div>
@@ -90,10 +78,14 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Send" class="btn btn-primary" />
-                        <a href="@Url.Action("Index")" class="btn btn-warning" >Back</a>
+                        <a href="@Url.Action("Index")" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace('Answer');
+</script>

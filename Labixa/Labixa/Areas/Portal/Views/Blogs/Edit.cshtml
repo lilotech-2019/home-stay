@@ -4,34 +4,15 @@
     ViewBag.Title = "Edit";
 }
 
-@section scripts{
+@section head{
     <script src="~/Content/ckeditor/ckeditor.js"></script>
     <script src="~/Content/ckeditor/config.js"></script>
 }
 @section breadcrumb
 {
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');
-            } catch (e) {
-            }
-        </script>
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/portal">Home</a>
-            </li>
-            <li>
-                <i class="icon-edit"></i>
-                <a href="@Url.Action("Index")">Quản lý Tin Tức</a>
-            </li>
-            <li class="active">Chỉnh sửa Tin Tức</li>
-        </ul>
-    </div>
+    <li><a href="@Url.Action("Index")">Blogs</a></li>
+    <li class="active">Edit</li>
 }
-
 <div class="page-content">
     <div class="row">
         <div class="col-xs-12">
