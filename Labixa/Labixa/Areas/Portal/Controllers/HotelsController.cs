@@ -51,7 +51,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="categoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? categoryId)
+        public ActionResult Index(int? categoryId, int? page, string searchString)
         {
             var hotels = _hotelService.FindAll().Where(w => w.HostEmail == User.Identity.Name);
             if (User.IsInRole(Role.Admin))
@@ -64,8 +64,10 @@ namespace Labixa.Areas.Portal.Controllers
                 hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
                 ViewBag.hotelCategoryId = categoryId;
             }
-            hotels = hotels.AsNoTracking();
-            return View(hotels);
+            //hotels = hotels.AsNoTracking();
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(hotels.OrderBy(w=>w.Id).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion
