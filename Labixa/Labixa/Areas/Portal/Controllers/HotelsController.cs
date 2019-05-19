@@ -88,8 +88,9 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
+            ViewBag.HotelName = hotel.Name;
             return View(hotel.Rooms.Where(w=>w.Deleted!=true).ToPagedList(pageNumber, pageSize));
         }
 

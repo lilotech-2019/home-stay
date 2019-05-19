@@ -1,5 +1,4 @@
-﻿@*@model Outsourcing.Data.Models.Hotel*@
-@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
+﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -17,7 +16,7 @@
         Quản Lý Khách Sạn
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            @*@Model.Name*@
+            @ViewBag.HotelName
         </small>
     </h1>
 </div><!-- /.page-header -->
