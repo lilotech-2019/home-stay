@@ -95,7 +95,7 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpGet]
         public ActionResult Create(int? hotelId, int? roomId, string phone)
         {
-            var room = new Room();
+            Room room;
             if (roomId != null)
             {
                 room = _roomService.FindById((int)roomId);
@@ -145,10 +145,10 @@ namespace Labixa.Areas.Portal.Controllers
                 else
                 {
                     roomOrder.CustomerId = customer.Id;
-                    customer.Name = viewModel.Customer.Name != null ? viewModel.Customer.Name.Trim() : "";
-                    customer.Address = viewModel.Customer.Address != null ? viewModel.Customer.Address.Trim() : "";
-                    customer.Phone = viewModel.Customer.Phone != null ? viewModel.Customer.Phone.Trim() : "";
-                    customer.Email = viewModel.Customer.Email != null ? viewModel.Customer.Email.Trim(): "";
+                    customer.Name = viewModel.Customer.Name?.Trim() ?? "";
+                    customer.Address = viewModel.Customer.Address?.Trim() ?? "";
+                    customer.Phone = viewModel.Customer.Phone?.Trim() ?? "";
+                    customer.Email = viewModel.Customer.Email?.Trim() ?? "";
                     customer.LastModify = DateTime.Now;
                     _customerService.Edit(customer);
                 }
@@ -157,50 +157,55 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomOrderService.Create(roomOrder);
 
                 //====================<Mail>==============================
-                HttpCookie cookie = Request.Cookies["_culture"];
-                var n = cookie;
-                string subject = "Đặt phòng thành công";
+               string subject = "Đặt phòng thành công";
+                
+               //TODO a để cái này để fix tạm bug của em. tìm coi còn cách nào làm gọn code chỗ này lại nhé.
+               // TOTO bug xuất hiện khi em không tìm thấy customer. nếu em tìm thấy thì nó gửi mail ngon lành.
+               //TODO THANHPTP
+                    customer = viewModel.Customer;
+                
                 string content = "<html><head><style type='text/css'>" +
-                   ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
-                   ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
-                   ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
-                   ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
-                   "<div class='mail'>" +
-                   "<div class='content-mail'>" +
-                   "<div class='logo-img'>" +
-                   "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
-                   "</div>" +
-                   "<table>" +
-                   "<tr>" +
-                   "<th>Họ và Tên Khách Hàng: </th>" +
-                   "<td>" + customer.Name + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Ngày CheckIn: </th>" +
-                   "<td>" + roomOrder.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Ngày CheckOut: </th>" +
-                   "<td>" + roomOrder.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Email Khách Hàng: </th>" +
-                   "<td>" + customer.Email + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Số Điện Thoại: </th>" +
-                   "<td>" + customer.Phone + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Số Lượng Người: </th>" +
-                   "<td>" + roomOrder.AmountOfPeople + "</td>" +
-                   "</tr>" +
-                   "<tr>" +
-                   "<th>Tạm Tính </th>" +
-                   "<td>" + roomOrder.Price + "</td>" +
-                   "</tr>" +
-                   "</table></div></div></html>";
-                await EmailHelper.SendEmailAsync(customer.Email, content, subject);
+                                     ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
+                                     ".content-mail{width: 60%; background-color: #ffffff; float: left; margin: 100px 20%; border: 1px solid gray;}.logo-img{padding: 2% 5% 0px 5%;}" +
+                                     ".logo-img img{height: 50px; width: 173px}.content-mail table  {margin: 5% 25% 5% 17%;}.content-mail table tr{margin-bottom: 5%; display: grid;}" +
+                                     ".content-mail table tr th {font-size: 20px; text-align: left;}.content-mail table tr td {font-size: 30px; } </style></head>" +
+                                     "<div class='mail'>" +
+                                     "<div class='content-mail'>" +
+                                     "<div class='logo-img'>" +
+                                     "<img src='https://i.ibb.co/5vwLsTR/logo2.png' alt='logo2' border='0'>" +
+                                     "</div>" +
+                                     "<table>" +
+                                     "<tr>" +
+                                     "<th>Họ và Tên Khách Hàng: </th>" +
+                                     "<td>" + customer.Name + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Ngày CheckIn: </th>" +
+                                     "<td>" + roomOrder.CheckIn.ToString("dd/MM/yyyy") + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Ngày CheckOut: </th>" +
+                                     "<td>" + roomOrder.CheckOut.ToString("dd/MM/yyyy") + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Email Khách Hàng: </th>" +
+                                     "<td>" + customer.Email + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Số Điện Thoại: </th>" +
+                                     "<td>" + customer.Phone + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Số Lượng Người: </th>" +
+                                     "<td>" + roomOrder.AmountOfPeople + "</td>" +
+                                     "</tr>" +
+                                     "<tr>" +
+                                     "<th>Tạm Tính </th>" +
+                                     "<td>" + roomOrder.Price + "</td>" +
+                                     "</tr>" +
+                                     "</table></div></div></html>";
+                    await EmailHelper.SendEmailAsync(customer.Email, content, subject);
+                
                 //====================</Mail>==============================
 
                 return RedirectToAction("Index");
