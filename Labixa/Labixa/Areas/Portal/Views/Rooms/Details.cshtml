@@ -14,404 +14,1076 @@
 }
 <div class="main-container ace-save-state" id="main-container">
 
-    <div class="main-content">
-        <div class="main-content-inner">
+    <div class="alert alert-block alert-info">
+        Chi tiết Phòng
+    </div>
+    @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-            <div class="page-content">
-                <div class="page-header">
-                    <h1>
-                        Details of room
-                    </h1>
-                </div><!-- /.page-header -->
+        <div class="tabbable">
+            <ul class="nav nav-tabs padding-18">
+                <li class="active">
+                    <a data-toggle="tab" href="#home">
+                        <i class="green ace-icon fa fa-user bigger-120"></i>
+                        Chi Tiết Phòng
+                    </a>
+                </li><!-- /#VI -->
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="clearfix">
-                            <div class="pull-left alert alert-success no-margin alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert">
-                                    <i class="ace-icon fa fa-times"></i>
-                                </button>
+                <li>
+                    <a data-toggle="tab" href="#feed">
+                        <i class="orange ace-icon fa fa-rss bigger-120"></i>
+                        Detail Room
+                    </a>
+                </li><!-- /#EN -->
 
-                                <i class="ace-icon fa fa-umbrella bigger-120 blue"></i>
-                                Click on the image below or on profile fields to edit them ...
+                <li>
+                    <a data-toggle="tab" href="#friends">
+                        <i class="blue ace-icon fa fa-users bigger-120"></i>
+                        Picture
+                    </a>
+                </li><!-- /#Picture -->
+
+            </ul>
+
+            <div class="tab-content no-border padding-24">
+                <div id="home" class="tab-pane in active">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 center">
+                            <span class="profile-picture">
+                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="@Model.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                            </span>
+                            <div class="space space-4"></div>
+                        </div><!-- /.col -->
+
+                        <div class="col-xs-12 col-sm-9">
+                            <h4 class="blue">
+                                @Html.DisplayFor(model => model.Name)
+                            </h4>
+
+                            <div class="profile-user-info">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Code Khách sạn </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.HotelId)
+
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Noted </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Noted)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Số người </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.SharePercent)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Giá </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Price)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Loại Phòng </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Type)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Status </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Status)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Mô tả </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Description)
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="pull-right">
-                                <span class="green middle bolder">Choose profile: &nbsp;</span>
+                            <div class="hr hr-8 dotted"></div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-                                <div class="btn-toolbar inline middle no-margin">
-                                    <div data-toggle="buttons" class="btn-group no-margin">
-                                        <label class="btn btn-sm btn-yellow">
-                                            <span class="bigger-110"></span>
-                                            <input type="radio" value="" />
-                                        </label>
+                    <div class="space-20"></div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                        Thông tin phòng
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        @Html.Raw(Model.Content)
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="hr dotted"></div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                        Tiện nghi
+                                    </h4>
+                                </div>
 
-                        <div class="hide">
-                            <div id="user-profile-1" class="user-profile">
-                                <div class="tabbable">
-                                    <ul class="nav nav-tabs padding-18">
-                                        <li class="active">
-                                            <a data-toggle="tab" href="#home">
-                                                <i class="green ace-icon fa fa-user bigger-120"></i>
-                                                General
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a data-toggle="tab" href="#feed">
-                                                <i class="orange ace-icon fa fa-rss bigger-120"></i>
-                                                Activity Feed
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a data-toggle="tab" href="#friends">
-                                                <i class="blue ace-icon fa fa-users bigger-120"></i>
-                                                Friends
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a data-toggle="tab" href="#pictures">
-                                                <i class="pink ace-icon fa fa-picture-o bigger-120"></i>
-                                                Pictures
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
-                                    {
-                                        <div class="tab-content no-border padding-24">
-                                            <div id="home" class="tab-pane in active">
-                                                <div class="row">
-
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <h4 class="blue">
-                                                            <span class="middle">
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.Name, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.TextBoxFor(model => model.Name, null, new { @class = "col-xs-10 col-sm-5", @required = "required" })
-                                                                        @*@Html.ValidationMessageFor(model => model.Name)*@
-                                                                    </div>
-                                                            </span>
-
-                                                            <span class="label label-purple arrowed-in-right">
-                                                                <i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
-                                                                online
-                                                            </span>
-                                                        </h4>
-
-                                                        <div class="profile-user-info">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Hotel Name </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.HotelId, "HotelId", new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.DropDownList("HotelId")
-                                                                        @Html.ValidationMessageFor(model => model.HotelId)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Room NameEnglish </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.NameEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.EditorFor(model => model.NameEnglish, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                        @Html.ValidationMessageFor(model => model.NameEnglish)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> SharePercent </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.SharePercent, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.TextBoxFor(model => model.SharePercent, null, new { @class = "col-xs-10 col-sm-5", type = "number", min = 0, max = 100 })
-                                                                        @Html.ValidationMessageFor(model => model.SharePercent)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Price </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.Price, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.EditorFor(model => model.Price, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                        @Html.ValidationMessageFor(model => model.Price)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> RoomType </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.Type, "RoomType", new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.DropDownList("RoomType")
-                                                                        @Html.ValidationMessageFor(model => model.Type)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Status </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.EditorFor(model => model.Status, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                        @Html.ValidationMessageFor(model => model.Status)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Content </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.EditorFor(model => model.Content, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                        @Html.ValidationMessageFor(model => model.Content)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Status </div>
-
-                                                                <div class="form-group">
-                                                                    @Html.LabelFor(model => model.ContentEnglish, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                    <div class="col-sm-9">
-                                                                        @Html.EditorFor(model => model.ContentEnglish, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                        @Html.ValidationMessageFor(model => model.ContentEnglish)
-                                                                    </div>
-                                                                </div>>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="hr hr-8 dotted"></div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-
-                                                <div class="space-20"></div>
-
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="widget-box transparent">
-                                                            <div class="widget-header widget-header-small">
-                                                                <h4 class="widget-title smaller">
-                                                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                                                    Description
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="widget-body">
-                                                                <div class="widget-main">
-                                                                    <div class="form-group">
-                                                                        @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                        <div class="col-sm-9">
-                                                                            @*@Html.EditorFor(model => model.Description, "CkEditor")*@
-                                                                            @Html.TextAreaFor(model => model.Description)
-
-                                                                            @Html.ValidationMessageFor(model => model.Description)
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                <div class="widget-body">
+                                    <div class="widget-main padding-16">
+                                        <div class="clearfix">
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Tivi == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
                                                     </div>
-
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="widget-box transparent">
-                                                            <div class="widget-header widget-header-small header-color-blue2">
-                                                                <h4 class="widget-title smaller">
-                                                                    <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-                                                                    Tiện nghi
-                                                                </h4>
-                                                            </div>
-
-                                                            <div class="widget-body">
-                                                                <div class="widget-main padding-16">
-                                                                    <div class="clearfix">
-                                                                        <div class="grid3 center">
-                                                                            <div class="form-group">
-                                                                                @Html.LabelFor(model => model.MetaTitle, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                                <div class="col-sm-9">
-                                                                                    @Html.EditorFor(model => model.MetaTitle, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                                    @Html.ValidationMessageFor(model => model.MetaTitle)
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="space-2"></div>
-                                                                            MetaTitle
-                                                                        </div>
-
-                                                                        <div class="grid3 center">
-                                                                            <div class="form-group">
-                                                                                @Html.LabelFor(model => model.MetaKeywords, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                                <div class="col-sm-9">
-                                                                                    @Html.EditorFor(model => model.MetaKeywords, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                                    @Html.ValidationMessageFor(model => model.MetaKeywords)
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="space-2"></div>
-                                                                            MetaKeywords
-                                                                        </div>
-
-                                                                        <div class="grid3 center">
-                                                                            <div class="form-group">
-                                                                                @Html.LabelFor(model => model.MetaDescription, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                                                <div class="col-sm-9">
-                                                                                    @Html.EditorFor(model => model.MetaDescription, null, new { @class = "col-xs-10 col-sm-5" })
-                                                                                    @Html.ValidationMessageFor(model => model.MetaDescription)
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="space-2"></div>
-                                                                            MetaDescription
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="hr hr-16"></div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
                                                     </div>
-                                                </div>
-                                            </div><!-- /#home -->
+                                                }
 
+                                                <div class="space-2"></div>
+                                                TiVi
+                                            </div>
 
-                                            <div id="friends" class="tab-pane">
-                                                <div class="profile-users clearfix">
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_Tivi, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_Tivi, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_Tivi)
-                                                        </div>
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_TuDo == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
                                                     </div>
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_TuDo, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_TuDo, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_TuDo)
-                                                        </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
                                                     </div>
+                                                }
 
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_HotWater, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_HotWater, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_HotWater)
-                                                        </div>
+                                                <div class="space-2"></div>
+                                                Tủ đồ
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_HotWater == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_DryHair, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_DryHair, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_DryHair)
-                                                        </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
                                                     </div>
+                                                }
 
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_Iron, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_Iron, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_Iron)
-                                                        </div>
+                                                <div class="space-2"></div>
+                                                Nước nóng
+                                            </div>
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_WashMachine == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_Kitchen, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_Kitchen, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_Kitchen)
-                                                        </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_TeaCoffee, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_TeaCoffee, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_TeaCoffee)
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_Snack, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_Snack, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_Snack)
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        @Html.LabelFor(model => model.Utility_WashMachine, new { @class = "col-sm-3 control-label no-padding-right" })
-                                                        <div class="col-sm-9">
-                                                            @Html.EditorFor(model => model.Utility_WashMachine, null, new { @class = "col-xs-10 col-sm-5" })
-                                                            @Html.ValidationMessageFor(model => model.Utility_WashMachine)
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="hr hr10 hr-double"></div>
-
-                                                <ul class="pager pull-right">
-                                                    <li class="previous disabled">
-                                                        <a href="#">&larr; Prev</a>
-                                                    </li>
-
-                                                    <li class="next">
-                                                        <a href="#">Next &rarr;</a>
-                                                    </li>
-                                                </ul>
-                                            </div><!-- /#friends -->
-
-                                            <div id="pictures" class="tab-pane">
-                                                <ul class="ace-thumbnails">
-                                                    <div class="row">
-                                                        @Html.EditorFor(model => model.RoomImageMappings)
-                                                    </div>
-                                                </ul>
-                                            </div><!-- /#pictures -->
+                                                }
+                                                <div class="space-2"></div>
+                                                Máy giặt
+                                            </div>
                                         </div>
-                                    }
+
+                                        <div class="hr hr-16"></div>
+
+                                        <div class="clearfix">
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Iron == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+                                                <div class="space-2"></div>
+                                                Iron
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Kitchen == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Nhà bếp
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Snack == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Thức ăn nhẹ
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_TeaCoffee == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Cà Phê
+                                            </div>
+                                        </div>
+                                        <div class="hr hr-16"></div>
+
+                                        <div class="hr hr-16"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                        Meta
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-16">
+                                        <div class="clearfix">
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Slug </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.Slug)
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaKeywords </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaKeywords)
+                                                </div>
+                                            </div>
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaTitle </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaTitle)
+
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaDescription </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaDescription)
+                                                </div>
+                                            </div>
+                                            <div class="hr hr-16"></div>
+
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- PAGE CONTENT ENDS -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.page-content -->
+                    </div>
+                </div><!-- /#general -->
 
+                <div id="feed" class="tab-pane">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 center">
+                            <span class="profile-picture">
+                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="@Model.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                            </span>
+                            <div class="space space-4"></div>
+                        </div><!-- /.col -->
+
+                        <div class="col-xs-12 col-sm-9">
+                            <h4 class="blue">
+                                @Html.DisplayFor(model => model.NameEnglish)
+                            </h4>
+
+                            <div class="profile-user-info">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> HotelId </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.HotelId)
+
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Noted </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Noted)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Share Percent </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.SharePercent)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Price </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Price)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Room type </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Type)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Status </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.Status)
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Description </div>
+
+                                    <div class="profile-info-value">
+                                        @Html.DisplayFor(model => model.DescriptionEnglish)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr hr-8 dotted"></div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+                    <div class="space-20"></div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                        Room Information
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        @Html.Raw(Model.ContentEnglish)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                        Utility
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-16">
+                                        <div class="clearfix">
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Tivi == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Television
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_TuDo == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Cabinet
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_HotWater == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                HotWater
+                                            </div>
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_WashMachine == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+                                                <div class="space-2"></div>
+                                                WashMachine
+                                            </div>
+                                        </div>
+
+                                        <div class="hr hr-16"></div>
+
+                                        <div class="clearfix">
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Iron == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+                                                <div class="space-2"></div>
+                                                Iron
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Kitchen == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Kitchen
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_Snack == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                Snack
+                                            </div>
+
+                                            <div class="grid4 center">
+                                                @if (Model.Utility_TeaCoffee == true)
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                        <span class="percent">Yes</span>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                        <span class="percent">No</span>
+                                                    </div>
+                                                }
+
+                                                <div class="space-2"></div>
+                                                TeaCoffee
+                                            </div>
+                                        </div>
+                                        <div class="hr hr-16"></div>
+
+                                        <div class="hr hr-16"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small header-color-blue2">
+                                    <h4 class="widget-title smaller">
+                                        <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                        Meta
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-16">
+                                        <div class="clearfix">
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Slug </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.SlugEnglish)
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaKeywords </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaKeywords)
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaTitle </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaTitle)
+
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> MetaDescription </div>
+
+                                                <div class="profile-info-value">
+                                                    @Html.DisplayFor(model => model.MetaDescription)
+                                                </div>
+                                            </div>
+                                            <div class="hr hr-16"></div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /#Chinh sua CEO -->
+
+                <div id="friends" class="tab-pane">
+                    <div class="profile-users clearfix">
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar4.png" alt="Bob Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-online"></span>
+                                            Bob Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Content Editor</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                            <span class="green"> 20 mins ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar1.png" alt="Rose Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-offline"></span>
+                                            Rose Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Graphic Designer</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                            <span class="grey"> 30 min ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar.png" alt="Jim Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-busy"></span>
+                                            Jim Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">SEO &amp; Advertising</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 red"></i>
+                                            <span class="grey"> 1 hour ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar5.png" alt="Alex Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-idle"></span>
+                                            Alex Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Marketing</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                            <span class=""> 40 minutes idle </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar2.png" alt="Phil Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-online"></span>
+                                            Phil Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Public Relations</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                            <span class="green"> 2 hours ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar3.png" alt="Susan Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-online"></span>
+                                            Susan Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">HR Management</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
+                                            <span class="green"> 20 mins ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar1.png" alt="Jennifer Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-offline"></span>
+                                            Jennifer Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Graphic Designer</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                            <span class="grey"> 2 hours ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="itemdiv memberdiv">
+                            <div class="inline pos-rel">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="assets/images/avatars/avatar3.png" alt="Alexa Doe's avatar" />
+                                    </a>
+                                </div>
+
+                                <div class="body">
+                                    <div class="name">
+                                        <a href="#">
+                                            <span class="user-status status-offline"></span>
+                                            Alexa Doe
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="popover">
+                                    <div class="arrow"></div>
+
+                                    <div class="popover-content">
+                                        <div class="bolder">Accounting</div>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
+                                            <span class="grey"> 4 hours ago </span>
+                                        </div>
+
+                                        <div class="hr dotted hr-8"></div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                            </a>
+
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hr hr10 hr-double"></div>
+
+                    <ul class="pager pull-right">
+                        <li class="previous disabled">
+                            <a href="#">&larr; Prev</a>
+                        </li>
+
+                        <li class="next">
+                            <a href="#">Next &rarr;</a>
+                        </li>
+                    </ul>
+                </div><!-- /#Picture -->
+            </div>
         </div>
-    </div><!-- /.main-content -->
 
 
-    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-    </a>
-</div><!-- /.main-container -->
+    }
+</div>
 <script>
     CKEDITOR.replace('Description');
     CKEDITOR.replace('DescriptionEnglish');
