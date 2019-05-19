@@ -61,6 +61,7 @@ namespace Outsourcing.Data.Models
 
         public virtual ICollection<RoomImageMappings> RoomImageMappings { get; set; }
        public virtual ICollection<RoomAsset> RoomAssets { get; set; }
+       public virtual ICollection<RoomOrder> RoomOrders { get; set; }
     }
 
     public enum RoomType

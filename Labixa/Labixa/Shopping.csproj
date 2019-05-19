@@ -5038,11 +5038,11 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="Areas\Portal\Views\Manage\Index.cshtml" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="widgets.html" />
     <Content Include="wysiwyg.html" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
@@ -5061,8 +5061,8 @@
     <Content Include="Scripts\jquery.jscroll.js" />
     <Content Include="Scripts\jquery.justifiedGallery.js" />
     <Content Include="Scripts\jquery.swipebox.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
