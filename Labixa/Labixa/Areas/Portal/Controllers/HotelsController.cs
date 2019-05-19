@@ -1,7 +1,11 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
+using PagedList;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -9,10 +13,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using PagedList.Mvc;
-using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -26,7 +26,7 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IHotelService _hotelService;
         private readonly ICostsService _costsService;
         private readonly IHotelCategoryService _categoryHotelService;
-      
+
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace Labixa.Areas.Portal.Controllers
             _categoryHotelService = categoryHotelService;
         }
 
-        private ApplicationUserManager UserManager =>  HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="categoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? categoryId, int? page, string searchString)
+        public ActionResult Index(int? categoryId, bool? status, int? page, string searchString)
         {
             var hotels = _hotelService.FindAll().Where(w => w.HostEmail == User.Identity.Name);
             if (User.IsInRole(Role.Admin))
@@ -64,10 +64,20 @@ namespace Labixa.Areas.Portal.Controllers
                 hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
                 ViewBag.hotelCategoryId = categoryId;
             }
-            //hotels = hotels.AsNoTracking();
+
+            if (status != null)
+            {
+                hotels = hotels.Where(w => w.Status == status);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hotels = hotels.Where(s => s.Name.Contains(searchString));
+            }
+
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            return View(hotels.OrderBy(w=>w.Id).ToPagedList(pageNumber, pageSize));
+            return View(hotels.OrderBy(w => w.Id).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion
@@ -93,7 +103,7 @@ namespace Labixa.Areas.Portal.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             ViewBag.HotelName = hotel.Name;
-            return View(hotel.Rooms.Where(w=>w.Deleted!=true).ToPagedList(pageNumber, pageSize));
+            return View(hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion
