@@ -7,6 +7,7 @@ using Labixa.Areas.Portal.ViewModels.HotelCategory;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
+using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -52,7 +53,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
             if (id == null)
             {
@@ -63,7 +64,10 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            return View(hotelCategory);
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            ViewBag.HotelCategoryName = hotelCategory.Name;
+            return View(hotelCategory.Hotels.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion

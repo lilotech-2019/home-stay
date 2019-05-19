@@ -1,4 +1,6 @@
-﻿@model Outsourcing.Data.Models.HotelCategory
+﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Hotel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Details";
@@ -14,17 +16,18 @@
         Quản Lý Chỉ Mục Khách Sạn
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            @Model.Name
+            @ViewBag.HotelCategoryName
         </small>
     </h1>
 </div><!-- /.page-header -->
-<div class="col-xs-12 col-sm-9">
+
+<div class="col-xs-12">
     <div class="row">
-        @foreach (var item in Model.Hotels.Where(w => w.Deleted != true))
+        @foreach (var item in Model)
         {
-            <div style="height:735px" class="col-xs-6 col-sm-4 col-md-3">
+            <div class="col-xs-6 col-sm-4">
                 <div class="thumbnail search-thumbnail">
-                    <img style="width:180px;height:200px;" class="media-object" src="@item.UrlImage1" />
+                    <img style="height:200px" class="media-object" src="@item.UrlImage1" />
                     <div class="caption">
                         <div class="clearfix">
                             <span class="pull-right label label-grey info-label">Số phòng: @item.Rooms.Where(w => w.Deleted != true).Count()</span>
@@ -41,3 +44,7 @@
         }
     </div>
 </div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Details",
+        new { page }))
