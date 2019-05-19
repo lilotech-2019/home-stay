@@ -11,6 +11,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -75,7 +77,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
             if (id == null)
             {
@@ -86,7 +88,9 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            return View(hotel);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(hotel.Rooms.Where(w=>w.Deleted!=true).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion

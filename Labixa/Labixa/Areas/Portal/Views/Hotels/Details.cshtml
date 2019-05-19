@@ -1,4 +1,7 @@
-﻿@model Outsourcing.Data.Models.Hotel
+﻿@*@model Outsourcing.Data.Models.Hotel*@
+@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Details";
@@ -14,40 +17,18 @@
         Quản Lý Khách Sạn
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            @Model.Name
+            @*@Model.Name*@
         </small>
     </h1>
 </div><!-- /.page-header -->
 
 <div class="col-xs-12">
-    <!-- PAGE CONTENT BEGINS -->
-    <div class="clearfix">
-        <div class="pull-right">
-            <span class="green middle bolder">Choose result page: &nbsp;</span>
-
-            <div class="btn-toolbar inline middle no-margin">
-                <div id="toggle-result-page" data-toggle="buttons" class="btn-group no-margin">
-                    <label class="btn btn-sm btn-yellow active">
-                        <span class="bigger-110">1</span>
-
-                        <input type="radio" value="1" />
-                    </label>
-
-                    <label class="btn btn-sm btn-yellow">
-                        <span class="bigger-110">2</span>
-
-                        <input type="radio" value="2" />
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="space-10"></div>
 
     <div class="row">
         <div class="col-xs-12">
-            @foreach (var item in Model.Rooms.Where(w=>w.Deleted!=true))
+            @foreach (var item in Model)
             {
                 <div style="height:90px" class="media search-media">
                     <div class="media-left">
@@ -110,3 +91,8 @@
         document.getElementById("txtRoomId").value = id;
     }
 </script>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Details",
+    new { page }))
