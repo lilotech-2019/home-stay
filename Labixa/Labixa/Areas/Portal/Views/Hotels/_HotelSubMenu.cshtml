@@ -89,7 +89,7 @@
             }
 
             <li class="hover">
-                <a href="@Url.Action("Create","Rooms", new {categoryId = Request.Params["type"]})">
+                <a href="@Url.Action("Create","Rooms", new {hotelId = Request.Params["hotelId"], type = Request.Params["type"]})">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Thêm Phòng</span>
                 </a>
