@@ -187,7 +187,7 @@
                                                         @Model.CheckOut
                                                     </td>
                                                     <td>
-                                                        @Model.Price
+                                                        @String.Format("{0:#,##0}", @Model.Price) $
                                                     </td>
                                                 </tr>
 
@@ -443,7 +443,7 @@
                                         <div class="col-sm-7 pull-right">
                                             <h4 class="pull-right">
 
-                                                <span class="red">Total booking: @Model.TotalBookPrice</span>
+                                                <span style="font-size:15px">Total booking: <b>@String.Format("{0:#,##0}", @Model.TotalBookPrice) $</b></span> 
                                             </h4>
                                         </div>
                                         <div class="col-sm-7 pull-left">  </div>
@@ -462,7 +462,7 @@
                                             <div class="col-sm-4 pull-right">
                                                 <h4 class="pull-right">
 
-                                                    <span class="red">@Model.Total</span>$
+                                                    <span class="blue"><strong>@String.Format("{0:#,##0}", @Model.Total) $</strong></span>
                                                 </h4>
                                             </div>
                                         </div>

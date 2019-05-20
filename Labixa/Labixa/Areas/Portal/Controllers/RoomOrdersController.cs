@@ -89,10 +89,12 @@ namespace Labixa.Areas.Portal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var roomOrder = _roomOrderService.FindById((int) id);
+            roomOrder.Total = _roomOrderService.GetTotalPrice((int)id);
             if (roomOrder == null)
             {
                 return HttpNotFound();
             }
+            
             return View(roomOrder);
         }
 
