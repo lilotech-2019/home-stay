@@ -6,10 +6,8 @@ using Outsourcing.Data.Repository.HMS;
 
 namespace Outsourcing.Service.HMS
 {
-   
     public interface IRoomImageService
     {
-
         IEnumerable<RoomImages> GetRoomImages();
         RoomImages GetRoomImageById(int roomImageId);
         void CreateRoomImage(RoomImages roomImage);
@@ -17,21 +15,25 @@ namespace Outsourcing.Service.HMS
         void DeleteRoomImage(int roomImageId);
         void SaveRoomImage();
         IEnumerable<ValidationResult> CanAddRoomImage(RoomImages roomImage);
-
     }
+
     public class RoomImageService : IRoomImageService
     {
         #region Field
+
         private readonly IRoomImageRepository _roomImageRepository;
         private readonly IUnitOfWork _unitOfWork;
+
         #endregion
 
         #region Ctor
+
         public RoomImageService(IRoomImageRepository roomImageRepository, IUnitOfWork unitOfWork)
         {
-            this._roomImageRepository = roomImageRepository;
-            this._unitOfWork = unitOfWork;
+            _roomImageRepository = roomImageRepository;
+            _unitOfWork = unitOfWork;
         }
+
         #endregion
 
         #region BaseMethod
@@ -78,7 +80,6 @@ namespace Outsourcing.Service.HMS
 
         public IEnumerable<ValidationResult> CanAddRoomImage(RoomImages roomImage)
         {
-
             //    yield return new ValidationResult("RoomImage", "ErrorString");
             return null;
         }
