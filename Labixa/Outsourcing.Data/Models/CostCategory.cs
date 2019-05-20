@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace Outsourcing.Data.Models.HMS
+namespace Outsourcing.Data.Models
 {
 
     public class CostCategory : BaseEntity
     {
         public string Name { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Description { get; set; }
+        public string Icon { get; set; }
         public int? CategoryParentId { get; set; }
         public string Noted { get; set; }
 
@@ -18,10 +20,7 @@ namespace Outsourcing.Data.Models.HMS
         /// URL  SEO friendly
         /// </summary>
         public string Slug { get; set; }
-        public bool Deleted { get; set; }
 
         public virtual ICollection<Cost> Costs { get; set; }
-
-        //public string Test { get; set; }
     }
 }

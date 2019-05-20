@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
-using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data.Models
 {

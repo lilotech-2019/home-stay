@@ -1,4 +1,5 @@
-﻿@model Labixa.Areas.Portal.ViewModels.Rooms.RoomDetailsSubMenuViewModel
+﻿@using Outsourcing.Data.Models
+@model Labixa.Areas.Portal.ViewModels.Rooms.RoomDetailsSubMenuViewModel
 
 @{
     ViewBag.Title = "Details Room";
@@ -76,16 +77,16 @@
                                 <td class="hidden-480">
                                     @switch (item.OrderStatus)
                                     {
-                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.New:
+                                        case RoomOrderStatus.New:
                                             <span class="label label-sm label-danger">New</span>
                                             break;
-                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckIn:
+                                        case RoomOrderStatus.CheckIn:
                                             <span class="label label-sm label-warning">CheckIn</span>
                                             break;
-                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckOut:
+                                        case RoomOrderStatus.CheckOut:
                                             <span class="label label-sm label-success">CheckOut</span>
                                             break;
-                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.Processed:
+                                        case RoomOrderStatus.Processed:
                                             <span class="label label-sm label-success">Processed</span>
                                             break;
                                     }

@@ -1,8 +1,8 @@
-﻿using Outsourcing.Data.Models.HMS;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Outsourcing.Data.Models;
 using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers

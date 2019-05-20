@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Data.Models.HMS;
 using System;
 using System.Data.Entity;
 using Outsourcing.Service;

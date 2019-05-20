@@ -317,9 +317,9 @@ namespace Labixa.Areas.Portal.Controllers
         public FileResult ExportData(int id)
         {
             var costs = _costsService.FindAll().Where(w => w.HotelId == id);
-            var costsIncome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Income);
-            var costsOutcome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Outcome);
-            var costsOthers = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Others);
+            var costsIncome = costs.Where(w => w.Type == CostType.Income);
+            var costsOutcome = costs.Where(w => w.Type == CostType.Outcome);
+            var costsOthers = costs.Where(w => w.Type == CostType.Others);
 
             //All
             DataTable dtAll = new DataTable("Report");
