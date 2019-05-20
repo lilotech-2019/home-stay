@@ -1,7 +1,5 @@
 using System.Linq;
 using System.Web.Mvc;
-using Outsourcing.Service;
-using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
 using System;
@@ -10,6 +8,7 @@ using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using System.Web;
+using Outsourcing.Service.Portal;
 
 namespace Labixa.Controllers
 {
@@ -20,7 +19,7 @@ namespace Labixa.Controllers
 
         private readonly IRoomOrderService _roomOrderService;
 
-        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService,
+        public RoomVer3Controller(IRoomService roomService, 
             IRoomOrderService roomOrderService, ICustomerService customerService)
         {
             _roomService = roomService;

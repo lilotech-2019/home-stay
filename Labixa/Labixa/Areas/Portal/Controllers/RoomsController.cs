@@ -2,13 +2,14 @@
 using Outsourcing.Data.Models;
 using Outsourcing.Service.Portal;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Data.Models.HMS;
 using System;
+using System.Data.Entity;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -18,15 +19,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IRoomService _roomService;
-        private readonly Outsourcing.Service.HMS.IRoomImageService _roomImageService;
-        private readonly Outsourcing.Service.HMS.IRoomImageMappingService _roomImageMappingService;
+        private readonly IRoomImageService _roomImageService;
+        private readonly IRoomImageMappingService _roomImageMappingService;
         private readonly IHotelService _hotelService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService, Outsourcing.Service.HMS.IRoomImageMappingService roomImageMappingService, Outsourcing.Service.HMS.IRoomImageService roomImageService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService,
+            IRoomImageMappingService roomImageMappingService, IRoomImageService roomImageService)
         {
             _roomImageService = roomImageService;
             _roomImageMappingService = roomImageMappingService;
@@ -51,7 +53,8 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 rooms = rooms.Where(w => w.HotelId == hotelId);
             }
-            if (type != null) {
+            if (type != null)
+            {
                 rooms = rooms.Where(w => w.Type == type);
             }
 
@@ -96,7 +99,7 @@ namespace Labixa.Areas.Portal.Controllers
             var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
             if (type != null)
             {
-                roomTypes = new List<RoomType> { (RoomType)type };
+                roomTypes = new List<RoomType> {(RoomType) type};
             }
 
             ViewBag.RoomType = new SelectList(roomTypes, type);
@@ -131,7 +134,9 @@ namespace Labixa.Areas.Portal.Controllers
         /// <summary>
         /// Create - POST
         /// </summary>
+        /// <param name="type"></param>
         /// <param name="room"></param>
+        /// <param name="hotelId"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -141,7 +146,7 @@ namespace Labixa.Areas.Portal.Controllers
             room.Slug = StringConvert.ConvertShortName(room.Name);
             room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
             _roomService.Create(room);
-            return RedirectToAction("Index", new { hotelId = room.HotelId, type = type });
+            return RedirectToAction("Index", new {hotelId = room.HotelId, type});
         }
 
         #endregion
@@ -152,8 +157,10 @@ namespace Labixa.Areas.Portal.Controllers
         /// Edit - GET
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="hotelId"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
-        public ActionResult Edit(int? id,int? hotelId, RoomType? type)
+        public ActionResult Edit(int? id, int? hotelId, RoomType? type)
         {
             if (id == null)
             {
@@ -165,14 +172,15 @@ namespace Labixa.Areas.Portal.Controllers
                 return HttpNotFound();
             }
             var hotels = _hotelService.FindSelectList();
-            if (hotelId != null) {
+            if (hotelId != null)
+            {
                 hotels = hotels.Where(w => w.Id == hotelId);
             }
 
             var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
             if (type != null)
             {
-                roomTypes = new List<RoomType> { (RoomType)type }; 
+                roomTypes = new List<RoomType> {(RoomType) type};
             }
 
             ViewBag.RoomType = new SelectList(roomTypes, room.Type);
@@ -184,6 +192,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// Edit - POST
         /// </summary>
         /// <param name="room"></param>
+        /// <param name="hotelId"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -203,7 +213,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _roomService.Edit(room);
 
 
-                return RedirectToAction("Index", new { hotelId, type });
+                return RedirectToAction("Index", new {hotelId, type});
             }
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(), "Id", "Name");
             return View(room);

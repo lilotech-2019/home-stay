@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Outsourcing.Core.Common;
-using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Infrastructure;
+using Outsourcing.Data.Models.HMS;
 using Outsourcing.Data.Repository.HMS;
 
-namespace Outsourcing.Service.HMS
+namespace Outsourcing.Service
 {
     public interface IRoomImageMappingService
     {

@@ -3,14 +3,12 @@ using System.Web.Mvc;
 using Outsourcing.Data.Models;
 using Labixa.ViewModels;
 using Outsourcing.Service;
-using Outsourcing.Service.HMS;
 using Outsourcing.Core.Email;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Outsourcing.Service.Portal;
 using static Labixa.ViewModels.IndexViewModel;
 using IBlogService = Outsourcing.Service.IBlogService;
-using IRoomService = Outsourcing.Service.HMS.IRoomService;
 
 namespace Labixa.Controllers
 {
@@ -22,7 +20,7 @@ namespace Labixa.Controllers
         private readonly IDepositService _depositService;
         private readonly IMessageService _messageService;
 
-        public HomeController(IVendorService vendorService, IProductService productService, IBlogService blogService,
+        public HomeController(IBlogService blogService,
             IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IDepositService depositService,
             IMessageService messageService)
         {

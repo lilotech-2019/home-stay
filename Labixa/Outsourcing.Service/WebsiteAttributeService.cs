@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Repository;
-using Outsourcing.Service.Properties;
 
 namespace Outsourcing.Service
 {
@@ -43,7 +38,7 @@ namespace Outsourcing.Service
 
         public IEnumerable<WebsiteAtribute> GetAvailableCategorys()
         {
-            var list = _websiteAttributeRepository.GetAll().Where(p=>p.Deleted==true);
+            var list = _websiteAttributeRepository.GetAll().Where(p => p.Deleted);
             return list;
         }
 
@@ -55,12 +50,12 @@ namespace Outsourcing.Service
 
         public WebsiteAtribute GetWebsiteAttributeById(int websiteAttributeId)
         {
-            var item = _websiteAttributeRepository.Get(p => p.Id == websiteAttributeId);
+            var item = _websiteAttributeRepository.FindBy(p => p.Id == websiteAttributeId).FirstOrDefault();
             return item;
         }
-        public WebsiteAtribute GetWebsiteAttributeByName(string  name)
+        public WebsiteAtribute GetWebsiteAttributeByName(string name)
         {
-            var item = _websiteAttributeRepository.Get(p => p.Name == name);
+            var item = _websiteAttributeRepository.FindBy(p => p.Name == name).FirstOrDefault();
             return item;
         }
 
@@ -84,8 +79,9 @@ namespace Outsourcing.Service
 
         public void DeleteWebsiteAttribute(int websiteAttributeId)
         {
-            var item = _websiteAttributeRepository.Get(p => p.Id == websiteAttributeId);
-           // websiteAttributeRepository.Delete(item);
+            var item = _websiteAttributeRepository.FindBy(p => p.Id == websiteAttributeId).FirstOrDefault();
+            // websiteAttributeRepository.Delete(item);
+            if (item == null) return;
             item.Deleted = true;
             _websiteAttributeRepository.Update(item);
             SaveWebsiteAttribute();
