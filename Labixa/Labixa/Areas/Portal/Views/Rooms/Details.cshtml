@@ -1,4 +1,4 @@
-﻿@model Outsourcing.Data.Models.Room
+﻿@model Labixa.Areas.Portal.ViewModels.Rooms.RoomDetailsSubMenuViewModel
 
 @{
     ViewBag.Title = "Details Room";
@@ -12,11 +12,218 @@
     <li><a href="@Url.Action("Index")">Rooms</a></li>
     <li class="active">Details</li>
 }
-<div class="main-container ace-save-state" id="main-container">
 
-    <div class="alert alert-block alert-info">
-        Chi tiết Phòng
-    </div>
+@{
+    var image = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22244%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20244%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16acba8cc09%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A12pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16acba8cc09%22%3E%3Crect%20width%3D%22244%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2290.859375%22%20y%3D%22105.3296875%22%3E244x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E";
+    if (string.IsNullOrEmpty(@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url) == false)
+    {
+        image = @Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url;
+    }
+}
+
+@Html.Action("RoomDetailsSubMenu", "Rooms", new { id = Model.Room.Id })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="simple-table" class="table  table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace">
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th class="detail-col">Details</th>
+                            <th>Customer's Name</th>
+                            <th>CheckIn</th>
+                            <th>CheckOut</th>
+
+                            <th>
+                                Price
+                            </th>
+                            <th class="hidden-480">Status</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.RoomOrders)
+                        {
+
+                            <tr>
+                                <td class="center"></td>
+
+                                <td class="center">
+                                    <div class="action-buttons">
+                                        <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                                            <i class="ace-icon fa fa-angle-double-down"></i>
+                                            <span class="sr-only">Details</span>
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
+                                <td>@item.Price</td>
+
+                                <td class="hidden-480">
+                                    @switch (item.OrderStatus)
+                                    {
+                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.New:
+                                            <span class="label label-sm label-danger">New</span>
+                                            break;
+                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckIn:
+                                            <span class="label label-sm label-warning">CheckIn</span>
+                                            break;
+                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckOut:
+                                            <span class="label label-sm label-success">CheckOut</span>
+                                            break;
+                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.Processed:
+                                            <span class="label label-sm label-success">Processed</span>
+                                            break;
+                                    }
+
+                                </td>
+
+                                <td>
+                                    <div class="hidden-sm hidden-xs btn-group">
+                                        <button class="btn btn-xs btn-success">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </button>
+
+                                        <button class="btn btn-xs btn-info">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button>
+
+                                        <button class="btn btn-xs btn-danger">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </button>
+
+                                        <button class="btn btn-xs btn-warning">
+                                            <i class="ace-icon fa fa-flag bigger-120"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="hidden-md hidden-lg">
+                                        <div class="inline pos-rel">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                <li>
+                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                        <span class="blue">
+                                                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                        <span class="green">
+                                                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                        <span class="red">
+                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="detail-row">
+                                <td colspan="8">
+                                    <div class="table-detail">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <div class="text-center">
+                                                    <img height="150" width="250" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url">
+                                                    <br>
+                                                    <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                                        <div class="inline position-relative">
+                                                            <a class="user-title-label" href="#">
+                                                                <i class="ace-icon fa fa-circle light-green"></i>
+                                                                &nbsp;
+                                                                <span class="white">@item.Room.Name</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="space visible-xs"></div>
+
+                                                <div class="profile-user-info profile-user-info-striped">
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Price</div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>@item.Room.Price</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Room Type </div>
+
+                                                        <div class="profile-info-value">
+                                                            <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                                            <span>@item.Room.Type</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Share Percent </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>@item.Room.SharePercent</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Noted </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span>@item.Room.Noted</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div><!-- /.span -->
+        </div><!-- /.row -->
+
+        <div class="hr hr-18 dotted hr-double"></div>
+
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
     @using (Html.BeginForm("Create", "Rooms", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
@@ -52,14 +259,14 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 center">
                             <span class="profile-picture">
-                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="@Model.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="@image" />
                             </span>
                             <div class="space space-4"></div>
                         </div><!-- /.col -->
 
                         <div class="col-xs-12 col-sm-9">
                             <h4 class="blue">
-                                @Html.DisplayFor(model => model.Name)
+                                @Html.DisplayFor(model => model.Room.Name)
                             </h4>
 
                             <div class="profile-user-info">
@@ -67,7 +274,7 @@
                                     <div class="profile-info-name"> ID Khách sạn </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.HotelId)
+                                        @Html.DisplayFor(model => model.Room.HotelId)
 
                                     </div>
                                 </div>
@@ -76,7 +283,7 @@
                                     <div class="profile-info-name"> Noted </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Noted)
+                                        @Html.DisplayFor(model => model.Room.Noted)
                                     </div>
                                 </div>
 
@@ -84,7 +291,7 @@
                                     <div class="profile-info-name"> Share Percent </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.SharePercent)
+                                        @Html.DisplayFor(model => model.Room.SharePercent)
                                     </div>
                                 </div>
 
@@ -92,7 +299,7 @@
                                     <div class="profile-info-name"> Giá </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Price)
+                                        @Html.DisplayFor(model => model.Room.Price)
                                     </div>
                                 </div>
 
@@ -100,7 +307,7 @@
                                     <div class="profile-info-name"> Loại Phòng </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Type)
+                                        @Html.DisplayFor(model => model.Room.Type)
                                     </div>
                                 </div>
 
@@ -108,7 +315,7 @@
                                     <div class="profile-info-name"> Status </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Status)
+                                        @Html.DisplayFor(model => model.Room.Status)
                                     </div>
                                 </div>
 
@@ -116,7 +323,7 @@
                                     <div class="profile-info-name"> Mô tả </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Description)
+                                        @Html.DisplayFor(model => model.Room.Description)
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +346,7 @@
 
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        @Html.Raw(Model.Content)
+                                        @Html.Raw(Model.Room.Content)
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +365,7 @@
                                     <div class="widget-main padding-16">
                                         <div class="clearfix">
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Tivi == true)
+                                                @if (Model.Room.Utility_Tivi == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -176,7 +383,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_TuDo == true)
+                                                @if (Model.Room.Utility_TuDo == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -194,7 +401,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_HotWater == true)
+                                                @if (Model.Room.Utility_HotWater == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -211,7 +418,7 @@
                                                 Nước nóng
                                             </div>
                                             <div class="grid4 center">
-                                                @if (Model.Utility_WashMachine == true)
+                                                @if (Model.Room.Utility_WashMachine == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -232,7 +439,7 @@
 
                                         <div class="clearfix">
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Iron == true)
+                                                @if (Model.Room.Utility_Iron == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -249,7 +456,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Kitchen == true)
+                                                @if (Model.Room.Utility_Kitchen == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -267,7 +474,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Snack == true)
+                                                @if (Model.Room.Utility_Snack == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -285,7 +492,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_TeaCoffee == true)
+                                                @if (Model.Room.Utility_TeaCoffee == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -325,7 +532,7 @@
                                                 <div class="profile-info-name"> Slug </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.Slug)
+                                                    @Html.DisplayFor(model => model.Room.Slug)
                                                 </div>
                                             </div>
 
@@ -333,14 +540,14 @@
                                                 <div class="profile-info-name"> MetaKeywords </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaKeywords)
+                                                    @Html.DisplayFor(model => model.Room.MetaKeywords)
                                                 </div>
                                             </div>
                                             <div class="profile-info-row">
                                                 <div class="profile-info-name"> MetaTitle </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaTitle)
+                                                    @Html.DisplayFor(model => model.Room.MetaTitle)
 
                                                 </div>
                                             </div>
@@ -349,7 +556,7 @@
                                                 <div class="profile-info-name"> MetaDescription </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaDescription)
+                                                    @Html.DisplayFor(model => model.Room.MetaDescription)
                                                 </div>
                                             </div>
                                             <div class="hr hr-16"></div>
@@ -367,14 +574,14 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 center">
                             <span class="profile-picture">
-                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" src="@Model.RoomImageMappings.FirstOrDefault().RoomImage.Url" />
+                                <img class="editable img-responsive" data-src="holder.js/100px200?theme=gray" alt="Alex's Avatar" id="avatar2" src="@image" />
                             </span>
                             <div class="space space-4"></div>
                         </div><!-- /.col -->
 
                         <div class="col-xs-12 col-sm-9">
                             <h4 class="blue">
-                                @Html.DisplayFor(model => model.NameEnglish)
+                                @Html.DisplayFor(model => model.Room.NameEnglish)
                             </h4>
 
                             <div class="profile-user-info">
@@ -382,7 +589,7 @@
                                     <div class="profile-info-name"> HotelId </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.HotelId)
+                                        @Html.DisplayFor(model => model.Room.HotelId)
 
                                     </div>
                                 </div>
@@ -391,7 +598,7 @@
                                     <div class="profile-info-name"> Noted </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Noted)
+                                        @Html.DisplayFor(model => model.Room.Noted)
                                     </div>
                                 </div>
 
@@ -399,7 +606,7 @@
                                     <div class="profile-info-name"> Share Percent </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.SharePercent)
+                                        @Html.DisplayFor(model => model.Room.SharePercent)
                                     </div>
                                 </div>
 
@@ -407,7 +614,7 @@
                                     <div class="profile-info-name"> Price </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Price)
+                                        @Html.DisplayFor(model => model.Room.Price)
                                     </div>
                                 </div>
 
@@ -415,7 +622,7 @@
                                     <div class="profile-info-name"> Room type </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Type)
+                                        @Html.DisplayFor(model => model.Room.Type)
                                     </div>
                                 </div>
 
@@ -423,7 +630,7 @@
                                     <div class="profile-info-name"> Status </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.Status)
+                                        @Html.DisplayFor(model => model.Room.Status)
                                     </div>
                                 </div>
 
@@ -431,7 +638,7 @@
                                     <div class="profile-info-name"> Description </div>
 
                                     <div class="profile-info-value">
-                                        @Html.DisplayFor(model => model.DescriptionEnglish)
+                                        @Html.DisplayFor(model => model.Room.DescriptionEnglish)
                                     </div>
                                 </div>
                             </div>
@@ -454,7 +661,7 @@
 
                                 <div class="widget-body">
                                     <div class="widget-main">
-                                        @Html.Raw(Model.ContentEnglish)
+                                        @Html.Raw(Model.Room.ContentEnglish)
                                     </div>
                                 </div>
                             </div>
@@ -473,12 +680,13 @@
                                     <div class="widget-main padding-16">
                                         <div class="clearfix">
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Tivi == true)
+                                                @if (Model.Room.Utility_Tivi == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
                                                     </div>
                                                 }
+
                                                 else
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
@@ -491,7 +699,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_TuDo == true)
+                                                @if (Model.Room.Utility_TuDo == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -509,7 +717,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_HotWater == true)
+                                                @if (Model.Room.Utility_HotWater == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -526,7 +734,7 @@
                                                 HotWater
                                             </div>
                                             <div class="grid4 center">
-                                                @if (Model.Utility_WashMachine == true)
+                                                @if (Model.Room.Utility_WashMachine == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -547,7 +755,7 @@
 
                                         <div class="clearfix">
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Iron == true)
+                                                @if (Model.Room.Utility_Iron == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -564,7 +772,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Kitchen == true)
+                                                @if (Model.Room.Utility_Kitchen == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -582,7 +790,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_Snack == true)
+                                                @if (Model.Room.Utility_Snack == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -600,7 +808,7 @@
                                             </div>
 
                                             <div class="grid4 center">
-                                                @if (Model.Utility_TeaCoffee == true)
+                                                @if (Model.Room.Utility_TeaCoffee == true)
                                                 {
                                                     <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
                                                         <span class="percent">Yes</span>
@@ -640,7 +848,7 @@
                                                 <div class="profile-info-name"> Slug </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.SlugEnglish)
+                                                    @Html.DisplayFor(model => model.Room.SlugEnglish)
                                                 </div>
                                             </div>
 
@@ -648,7 +856,7 @@
                                                 <div class="profile-info-name"> MetaKeywords </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaKeywords)
+                                                    @Html.DisplayFor(model => model.Room.MetaKeywords)
                                                 </div>
                                             </div>
 
@@ -656,7 +864,7 @@
                                                 <div class="profile-info-name"> MetaTitle </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaTitle)
+                                                    @Html.DisplayFor(model => model.Room.MetaTitle)
 
                                                 </div>
                                             </div>
@@ -665,7 +873,7 @@
                                                 <div class="profile-info-name"> MetaDescription </div>
 
                                                 <div class="profile-info-value">
-                                                    @Html.DisplayFor(model => model.MetaDescription)
+                                                    @Html.DisplayFor(model => model.Room.MetaDescription)
                                                 </div>
                                             </div>
                                             <div class="hr hr-16"></div>
@@ -681,12 +889,17 @@
 
                 <div id="friends" class="tab-pane">
                     <ul class="ace-thumbnails">
-                        @foreach (var item in Model.RoomImageMappings)
+                        @foreach (var item in Model.Room.RoomImageMappings)
                         {
+                            var imageDetails = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22244%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20244%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16acba8cc09%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A12pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16acba8cc09%22%3E%3Crect%20width%3D%22244%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2290.859375%22%20y%3D%22105.3296875%22%3E244x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E";
+                            if (string.IsNullOrEmpty(item.RoomImage.Url) == false)
+                            {
+                                imageDetails = item.RoomImage.Url;
+                            }
                             <li>
                                 <a href="#" data-rel="colorbox">
-                                    <img style="height:150px" alt="150x150" src="@item.RoomImage.Url" />
-                                    
+                                    <img style="height:150px" alt="150x150" src="@imageDetails" />
+
                                 </a>
                             </li>
                         }
@@ -698,7 +911,81 @@
 
     }
 </div>
-<script>
-    CKEDITOR.replace('Description');
-    CKEDITOR.replace('DescriptionEnglish');
-</script>
+@section scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            //initiate dataTables plugin
+
+
+            //And for the first simple table, which doesn't have TableTools or dataTables
+            //select/deselect all rows according to table header checkbox
+            var active_class = 'active';
+            $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function () {
+                var th_checked = this.checked;//checkbox inside "TH" table header
+
+                $(this).closest('table').find('tbody > tr').each(function () {
+                    var row = this;
+                    if (th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                    else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+                });
+            });
+
+            //select/deselect a row when the checkbox is checked/unchecked
+            $('#simple-table').on('click', 'td input[type=checkbox]', function () {
+                var $row = $(this).closest('tr');
+                if ($row.is('.detail-row ')) return;
+                if (this.checked) $row.addClass(active_class);
+                else $row.removeClass(active_class);
+            });
+
+
+
+            /********************************/
+            //add tooltip for small view action buttons in dropdown menu
+            $('[data-rel="tooltip"]').tooltip({ placement: tooltip_placement });
+
+            //tooltip placement on right or left
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table');
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                //var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+
+
+
+
+            /***************/
+            $('.show-details-btn').on('click', function (e) {
+                e.preventDefault();
+                $(this).closest('tr').next().toggleClass('open');
+                $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+            });
+            /***************/
+
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu',
+                function (e, event_name, event_val) {
+                    if (event_name == 'sidebar_fixed') {
+                        if ($('#sidebar').hasClass('sidebar-fixed')) {
+                            $('#sidebar2').addClass('sidebar-fixed');
+                            $('#navbar').addClass('h-navbar');
+                        } else {
+                            $('#sidebar2').removeClass('sidebar-fixed');
+                            $('#navbar').removeClass('h-navbar');
+                        }
+                    }
+                }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        });
+    </script>
+}

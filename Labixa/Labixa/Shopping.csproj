@@ -23,12 +23,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <IISExpressSSLPort>44379</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -92,6 +89,7 @@
     <Compile Include="Areas\Portal\ViewModels\Hotels\HotelDetailsSubMenuViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\RoomOrders\CreateViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\CreateRoomViewModel.cs" />
+    <Compile Include="Areas\Portal\ViewModels\Rooms\RoomDetailsSubMenuViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\PartialSubMenuCategoryViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\User\UserViewModels.cs" />
     <Compile Include="Areas\Portal\ViewModels\WebsiteAtribute\WebsiteAttributeFormModel.cs" />
@@ -5038,6 +5036,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="Areas\Portal\Views\Manage\Index.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\_HotelDetailsSubMenu.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\_RoomDetailsSubMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

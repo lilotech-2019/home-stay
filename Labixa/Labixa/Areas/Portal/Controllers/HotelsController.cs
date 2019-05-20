@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
+using Outsourcing.Service;
 using PagedList;
 using System;
 using System.Data;
@@ -13,7 +14,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -106,10 +106,11 @@ namespace Labixa.Areas.Portal.Controllers
             int pageNumber = (page ?? 1);
             ViewBag.HotelName = hotel.Name;
 
-            HotelDetailsSubMenuViewModel hotelDetailsSubMenuViewModel = new HotelDetailsSubMenuViewModel();
-            hotelDetailsSubMenuViewModel.HotelId = (int)id;
-            hotelDetailsSubMenuViewModel.Rooms = hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize);
-
+            HotelDetailsSubMenuViewModel hotelDetailsSubMenuViewModel = new HotelDetailsSubMenuViewModel
+            {
+                HotelId = (int)id,
+                Rooms = hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+            };
             return View(hotelDetailsSubMenuViewModel);
         }
 
