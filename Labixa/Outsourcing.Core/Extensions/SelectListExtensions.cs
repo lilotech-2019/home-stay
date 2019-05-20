@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Core.Extensions
 {

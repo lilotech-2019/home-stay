@@ -6,7 +6,6 @@ using System;
 using System.Threading.Tasks;
 using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 using System.Web;
 using Outsourcing.Service;
 

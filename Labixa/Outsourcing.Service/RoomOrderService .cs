@@ -1,6 +1,6 @@
 ﻿using System;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Models.HMS;
+using Outsourcing.Data.Models;
 
 namespace Outsourcing.Service
 {

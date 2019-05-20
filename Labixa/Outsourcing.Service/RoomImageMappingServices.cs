@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Infrastructure;
-using Outsourcing.Data.Models.HMS;
+using Outsourcing.Data.Models;
 using Outsourcing.Data.Repository;
 
 namespace Outsourcing.Service

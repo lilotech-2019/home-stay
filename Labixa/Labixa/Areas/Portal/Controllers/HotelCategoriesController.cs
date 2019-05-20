@@ -11,9 +11,7 @@ using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [RouteArea("Portal")]
-    [RoutePrefix("HotelCategories")]
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class HotelCategoriesController : Controller
     {
         #region Fields
@@ -52,6 +50,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Details
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
         public ActionResult Details(int? id, int? page)
         {

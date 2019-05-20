@@ -5,7 +5,6 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 
 namespace Outsourcing.Data
 {

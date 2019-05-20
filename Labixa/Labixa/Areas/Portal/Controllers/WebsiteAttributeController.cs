@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using AutoMapper;
 using Labixa.Areas.Admin.ViewModel.WebsiteAtribute;
 using Labixa.Areas.Portal.ViewModels.WebsiteAtribute;
@@ -10,7 +11,7 @@ using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class WebsiteAttributeController : Controller
     {
         #region Field

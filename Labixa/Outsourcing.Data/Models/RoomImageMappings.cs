@@ -1,4 +1,4 @@
-﻿namespace Outsourcing.Data.Models.HMS
+﻿namespace Outsourcing.Data.Models
 {
 
     public class RoomImageMappings : BaseEntity
