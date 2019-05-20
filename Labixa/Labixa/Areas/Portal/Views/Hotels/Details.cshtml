@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Outsourcing.Data.Models.Room>
+﻿@model Labixa.Areas.Portal.ViewModels.Hotels.HotelDetailsSubMenuViewModel
 @using Outsourcing.Data.Models.HMS
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -11,6 +11,7 @@
     <li><a href="@Url.Action("Index")">Hotels</a></li>
     <li class="active">Details</li>
 }
+@Html.Action("HotelDetailsSubMenu", "Hotels", new { id = Model.HotelId })
 
 <div class="page-header">
     <h1>
@@ -52,16 +53,14 @@
                     </thead>
 
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Rooms)
                         {
 
                             <tr>
                                 <td class="center">
                                     @if (item.RoomOrders.Count(w => w.OrderStatus != RoomOrderStatus.CheckIn) > 0)
                                     {
-
                                         <button class=" btn btn-sm btn-block btn-info" data-toggle="modal" data-target="#phoneModal" onclick="setRoomId(@item.Id)">Book It</button>
-
                                     }
                                 </td>
 
@@ -75,7 +74,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="#">@Html.DisplayFor(modelItem => item.Name)</a>
+                                    <a href="@Url.Action("Details","Rooms",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Name)</a>
                                 </td>
                                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                 <td class="hidden-480">@item.RoomOrders.Sum(w => w.Total)</td>
@@ -152,9 +151,9 @@
                                 <td colspan="8">
                                     <div class="table-detail">
                                         <div class="row">
-                                            <div class="col-xs-12 col-sm-2">
+                                            <div class="col-xs-12 col-sm-3">
                                                 <div class="text-center">
-                                                    <img height="150" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="@item.RoomImageMappings.FirstOrDefault().RoomImage.Url">
+                                                    <img height="150" width="250" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="@item.RoomImageMappings.FirstOrDefault().RoomImage.Url">
                                                     <br>
                                                     <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
                                                         <div class="inline position-relative">
@@ -168,7 +167,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-xs-12 col-sm-7">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="space visible-xs"></div>
 
                                                 <div class="profile-user-info profile-user-info-striped">
@@ -292,9 +291,9 @@
     }
 </script>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Page @(Model.Rooms.PageCount < Model.Rooms.PageNumber ? 0 : Model.Rooms.PageNumber) of @Model.Rooms.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Details",
+@Html.PagedListPager(Model.Rooms, page => Url.Action("Details",
     new { page }))
 
 @section scripts
@@ -379,5 +378,26 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 
         })
+
+        jQuery(function ($) {
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu',
+                function (e, event_name, event_val) {
+                    if (event_name == 'sidebar_fixed') {
+                        if ($('#sidebar').hasClass('sidebar-fixed')) {
+                            $('#sidebar2').addClass('sidebar-fixed');
+                            $('#navbar').addClass('h-navbar');
+                        } else {
+                            $('#sidebar2').removeClass('sidebar-fixed');
+                            $('#navbar').removeClass('h-navbar');
+                        }
+                    }
+                }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        });
+
     </script>
 }
