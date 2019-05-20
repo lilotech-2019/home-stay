@@ -37,13 +37,12 @@
                                 </label>
                             </th>
                             <th class="detail-col">Details</th>
+                            <th>
+                                Invoice
+                            </th>
                             <th>Customer's Name</th>
                             <th>CheckIn</th>
                             <th>CheckOut</th>
-
-                            <th>
-                                Price
-                            </th>
                             <th class="hidden-480">Status</th>
 
                             <th></th>
@@ -65,22 +64,23 @@
                                         </a>
                                     </div>
                                 </td>
-
+                                <td>
+                                    <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
+                                </td>
                                 <td>
                                     <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
                                 </td>
                                 <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
                                 <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
-                                <td>@item.Price</td>
 
                                 <td class="hidden-480">
                                     @switch (item.OrderStatus)
                                     {
-                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.New:
-                                            <span class="label label-sm label-danger">New</span>
-                                            break;
                                         case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckIn:
                                             <span class="label label-sm label-warning">CheckIn</span>
+                                            break;
+                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.New:
+                                            <span class="label label-sm label-danger">New</span>
                                             break;
                                         case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckOut:
                                             <span class="label label-sm label-success">CheckOut</span>
@@ -151,56 +151,47 @@
                                 <td colspan="8">
                                     <div class="table-detail">
                                         <div class="row">
-                                            <div class="col-xs-12 col-sm-3">
+                                            <div class="col-xs-12 col-sm-2">
                                                 <div class="text-center">
-                                                    <img height="150" width="250" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="@Model.Room.RoomImageMappings.FirstOrDefault().RoomImage.Url">
+                                                    <img height="100" width="100" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="~/assets/images/avatars/avatar.png">
                                                     <br>
                                                     <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
                                                         <div class="inline position-relative">
-                                                            <a class="user-title-label" href="#">
+                                                            <a class="user-title-label" href="@Url.Action("Details","Customers",new { id = item.CustomerId})">
                                                                 <i class="ace-icon fa fa-circle light-green"></i>
                                                                 &nbsp;
-                                                                <span class="white">@item.Room.Name</span>
+                                                                <span class="white">@item.Customer.Name</span>
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-xs-12 col-sm-9">
+                                            <div class="col-xs-12 col-sm-10">
                                                 <div class="space visible-xs"></div>
 
                                                 <div class="profile-user-info profile-user-info-striped">
                                                     <div class="profile-info-row">
-                                                        <div class="profile-info-name">Price</div>
-
-                                                        <div class="profile-info-value">
-                                                            <span>@item.Room.Price</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="profile-info-row">
-                                                        <div class="profile-info-name">Room Type </div>
+                                                        <div class="profile-info-name">Address</div>
 
                                                         <div class="profile-info-value">
                                                             <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                            <span>@item.Room.Type</span>
+                                                            <span>@item.Customer.Address</span>
                                                         </div>
                                                     </div>
 
                                                     <div class="profile-info-row">
-                                                        <div class="profile-info-name">Share Percent </div>
-
+                                                        <div class="profile-info-name">Phone </div>
                                                         <div class="profile-info-value">
-                                                            <span>@item.Room.SharePercent</span>
+                                                            <span>@item.Customer.Phone</span>
                                                         </div>
                                                     </div>
 
                                                     <div class="profile-info-row">
-                                                        <div class="profile-info-name">Noted </div>
+                                                        <div class="profile-info-name">Email </div>
 
                                                         <div class="profile-info-value">
-                                                            <span>@item.Room.Noted</span>
+                                                            <span>@item.Customer.Email</span>
                                                         </div>
                                                     </div>
                                                 </div>
