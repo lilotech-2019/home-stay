@@ -1,6 +1,8 @@
-﻿using Outsourcing.Data.Models;
+﻿using System;
+using Outsourcing.Data.Models;
 using Outsourcing.Service;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -11,29 +13,37 @@ namespace Labixa.Areas.Portal.Controllers
     public class DepositController : Controller
     {
         #region Fields
+
         private readonly IDepositService _depositService;
+
         #endregion
 
         #region Ctor
+
         public DepositController(IDepositService depositService)
         {
             _depositService = depositService;
         }
+
         #endregion
 
         #region Index
+
         /// <summary>
         /// Index - GET
         /// </summary>
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var colors = await _depositService.FindAll().AsNoTracking().ToListAsync();
+            var colors = await _depositService.FindAll().Where(w => w.Email == User.Identity.Name).AsNoTracking()
+                .ToListAsync();
             return View(colors);
         }
+
         #endregion
 
         #region Details
+
         /// <summary>
         /// Details
         /// </summary>
@@ -45,23 +55,29 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Deposit deposit = _depositService.FindById((int)id);
-            if (deposit == null)
+            var deposit = _depositService.FindById((int) id);
+            if (deposit == null || deposit.Email.Equals(User.Identity.Name) == false)
             {
                 return HttpNotFound();
             }
             return View(deposit);
         }
+
         #endregion
 
         #region Create
+
         /// <summary>
         /// Create - GET
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            var deposit = new Deposit
+            {
+                Email = User.Identity.Name
+            };
+            return View(deposit);
         }
 
         /// <summary>
@@ -76,15 +92,19 @@ namespace Labixa.Areas.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
+                deposit.DateCreated = DateTime.Now;
+                deposit.Email = User.Identity.Name;
                 _depositService.Create(deposit);
                 return RedirectToAction("Index");
             }
 
             return View(deposit);
         }
+
         #endregion
 
         #region Edit
+
         /// <summary>
         /// Edit - GET
         /// </summary>
@@ -96,7 +116,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Deposit deposit = _depositService.FindById((int)id);
+            Deposit deposit = _depositService.FindById((int) id);
             if (deposit == null)
             {
                 return HttpNotFound();
@@ -121,9 +141,11 @@ namespace Labixa.Areas.Portal.Controllers
             }
             return View(deposit);
         }
+
         #endregion
 
         #region Delete
+
         /// <summary>
         /// Delete - GET
         /// </summary>
@@ -135,7 +157,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var colors = _depositService.FindById((int)id);
+            var colors = _depositService.FindById((int) id);
             if (colors == null)
             {
                 return HttpNotFound();
@@ -155,6 +177,7 @@ namespace Labixa.Areas.Portal.Controllers
             _depositService.Delete(colors);
             return RedirectToAction("Index");
         }
+
         #endregion
     }
 }
