@@ -14,474 +14,469 @@
 }
 <div class="main-container ace-save-state" id="main-container">
 
-    @using (Html.BeginForm("Details", "RoomOrder", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, FormMethod.Post, new { @class = "form-horizontal" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- PAGE CONTENT BEGINS -->
-                <div class="space-6"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="space-6"></div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="widget-box transparent">
-                            <div class="widget-header widget-header-large">
-                                <div class="page-header pull-left">
-                                    <h1>
-                                        Quản Lý Booking
-                                        <small>
-                                            <i class="ace-icon fa fa-angle-double-right"></i>
-                                            Chi tiết booking
-                                        </small>
-                                    </h1>
-                                </div>
-                                <div class="widget-toolbar no-border invoice-info pull-right">
-                                    
-                                    <span class="invoice-info-label">Invoice:</span>
-                                    <span class="red">#@Model.Id</span>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-large">
+                            <div class="page-header pull-left">
+                                <h1>
+                                    Quản Lý Booking
+                                    <small>
+                                        <i class="ace-icon fa fa-angle-double-right"></i>
+                                        Chi tiết booking
+                                    </small>
+                                </h1>
+                            </div>
+                            <div class="widget-toolbar no-border invoice-info pull-right">
 
-                                    <br />
-                                    <span class="invoice-info-label">Date:</span>
-                                    <span class="blue">@Model.DateCreated</span>
-                                </div>
+                                <span class="invoice-info-label">Invoice:</span>
+                                <span class="red">#@Model.Id</span>
 
-                                <div class="widget-toolbar hidden-480">
-                                    <a href="#">
-                                        <i class="ace-icon fa fa-print"></i>
-                                    </a>
-                                </div>
+                                <br />
+                                <span class="invoice-info-label">Date:</span>
+                                <span class="blue">@Model.DateCreated</span>
                             </div>
 
-                            <div class="widget-body">
-                                <div class="widget-main padding-24">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row">
-                                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
-                                                    <b>Hotel Info</b>
-                                                </div>
-                                            </div>
+                            <div class="widget-toolbar hidden-480">
+                                <a href="#">
+                                    <i class="ace-icon fa fa-print"></i>
+                                </a>
+                            </div>
+                        </div>
 
-                                            <div>
-                                                <ul class="list-unstyled  spaced">
-                                                    <li>
-                                                        <span class="blue profile-info-name">
-                                                            <i fa fa-caret-right blue></i>
-                                                            Name
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Room.Name)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="blue profile-info-name">
-                                                            <i fa fa-caret-right blue></i>
-                                                            Price
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Room.Price)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="blue profile-info-name">
-                                                            <i fa fa-caret-right blue></i>
-                                                            Type
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Room.Type)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="blue profile-info-name">
-                                                            <i fa fa-caret-right blue></i>
-                                                            SharePercent
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Room.SharePercent)
-                                                        </div>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div><!-- /.col -->
-
-                                        <div class="col-sm-6">
-                                            <div class="row">
-                                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
-                                                    <b>Customer Info</b>
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <ul class="list-unstyled  spaced">
-                                                    <li>
-                                                        <span class="green profile-info-name">
-                                                            <i fa-caret-right green></i>
-                                                            Name
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Customer.Name)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="green profile-info-name">
-                                                            <i fa fa-caret-right green></i>
-                                                            Phone
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Customer.Phone)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="green profile-info-name">
-                                                            <i fa fa-caret-right green></i>
-                                                            Address
-                                                        </span>
-                                                        <div profile-info-value>
-                                                            @Html.DisplayFor(model => model.Customer.Address)
-                                                        </div>
-                                                    </li>
-
-                                                    <li>
-                                                        <span class="green profile-info-name">
-                                                            <i fa fa-caret-right green></i>
-                                                            Email
-                                                        </span>
-                                                        <div class="profile-info-value">
-                                                            @Html.DisplayFor(model => model.Customer.Email)
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
-
-                                    <div class="space"></div>
-
-                                    <div>
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Room name</th>
-                                                    <th class="hidden-xs">CheckIn</th>
-                                                    <th class="hidden-480">Checkout</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">@Model.Room.Name</a>
-                                                    </td>
-                                                    <td class="hidden-xs">
-                                                        @Model.CheckIn
-                                                    </td>
-                                                    <td class="hidden-480">
-                                                        @Model.CheckOut
-                                                    </td>
-                                                    <td>
-                                                        @String.Format("{0:#,##0}", @Model.Price) $
-                                                    </td>
-                                                </tr>
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-12">
-                                        <div class="widget-box transparent">
-                                            <div class="widget-header widget-header-small header-color-blue2">
-                                                <h4 class="widget-title smaller">
-                                                    <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-                                                    Booking
-                                                </h4>
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main padding-16">
-                                                    <div class="clearfix">
-                                                        <div class="grid4 center">
-                                                            @if (Model.BookCar == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            BookCar
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_Motobike == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            Motobike
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_Taxi == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            Taxi
-                                                        </div>
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_Tour == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-                                                            <div class="space-2"></div>
-                                                            Tour
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="hr hr-16"></div>
-
-                                                    <div class="clearfix">
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_BBQService == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-                                                            <div class="space-2"></div>
-                                                            BBQService
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_FlightTicket == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            FlightTicket
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_Gift == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            Gift
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_Visa == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            Visa
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="hr hr-16"></div>
-
-                                                    <div class="clearfix">
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_BBQService == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-                                                            <div class="space-2"></div>
-                                                            BBQService
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_RegisterResidence == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            RegisterResidence
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (Model.Book_SuggestionTour == true)
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            SuggestionTour
-                                                        </div>
-
-                                                        <div class="grid4 center">
-                                                            @if (!Model.OtherBookService.IsEmpty())
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
-                                                                    <span class="percent">Yes</span>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
-                                                                    <span class="percent">No</span>
-                                                                </div>
-                                                            }
-
-                                                            <div class="space-2"></div>
-                                                            Other
-                                                        </div>
-                                                    </div>
-                                                    <div class="hr hr-16"></div>
-
-                                                    <div class="hr hr-16"></div>
-                                                </div>
+                        <div class="widget-body">
+                            <div class="widget-main padding-24">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                <b>Hotel Info</b>
                                             </div>
                                         </div>
 
+                                        <div>
+                                            <ul class="list-unstyled  spaced">
+                                                <li>
+                                                    <span class="blue profile-info-name">
+                                                        <i fa fa-caret-right blue></i>
+                                                        Name
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Room.Name)
+                                                    </div>
+                                                </li>
 
-                                    </div>
-                                    <div class="hr hr8 hr-double hr-dotted"></div>
+                                                <li>
+                                                    <span class="blue profile-info-name">
+                                                        <i fa fa-caret-right blue></i>
+                                                        Price
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Room.Price)
+                                                    </div>
+                                                </li>
 
-                                    <div class="row">
-                                        <div class="col-sm-7 pull-right">
-                                            <h4 class="pull-right">
+                                                <li>
+                                                    <span class="blue profile-info-name">
+                                                        <i fa fa-caret-right blue></i>
+                                                        Type
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Room.Type)
+                                                    </div>
+                                                </li>
 
-                                                <span style="font-size:15px">Total booking: <b>@String.Format("{0:#,##0}", @Model.TotalBookPrice) $</b></span> 
-                                            </h4>
+                                                <li>
+                                                    <span class="blue profile-info-name">
+                                                        <i fa fa-caret-right blue></i>
+                                                        SharePercent
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Room.SharePercent)
+                                                    </div>
+                                                </li>
+
+                                            </ul>
                                         </div>
-                                        <div class="col-sm-7 pull-left">  </div>
-                                    </div>
-                                    <div class="space-6"></div>
-                                    <div class="hr hr8 hr-double hr-dotted"></div>
+                                    </div><!-- /.col -->
 
-                                    <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                                <b>Customer Info</b>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <ul class="list-unstyled  spaced">
+                                                <li>
+                                                    <span class="green profile-info-name">
+                                                        <i fa-caret-right green></i>
+                                                        Name
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Customer.Name)
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <span class="green profile-info-name">
+                                                        <i fa fa-caret-right green></i>
+                                                        Phone
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Customer.Phone)
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <span class="green profile-info-name">
+                                                        <i fa fa-caret-right green></i>
+                                                        Address
+                                                    </span>
+                                                    <div profile-info-value>
+                                                        @Html.DisplayFor(model => model.Customer.Address)
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <span class="green profile-info-name">
+                                                        <i fa fa-caret-right green></i>
+                                                        Email
+                                                    </span>
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Customer.Email)
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+
+                                <div class="space"></div>
+
+                                <div>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Room name</th>
+                                                <th class="hidden-xs">CheckIn</th>
+                                                <th class="hidden-480">Checkout</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="#">@Model.Room.Name</a>
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    @Model.CheckIn
+                                                </td>
+                                                <td class="hidden-480">
+                                                    @Model.CheckOut
+                                                </td>
+                                                <td>
+                                                    @String.Format("{0:#,##0}", @Model.Price) $
+                                                </td>
+                                            </tr>
 
 
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="widget-box transparent">
                                         <div class="widget-header widget-header-small header-color-blue2">
                                             <h4 class="widget-title smaller">
                                                 <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-                                                Total amount
+                                                Booking
                                             </h4>
-                                            <div class="col-sm-4 pull-right">
-                                                <h4 class="pull-right">
+                                        </div>
 
-                                                    <span class="blue"><strong>@String.Format("{0:#,##0}", @Model.Total) $</strong></span>
-                                                </h4>
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-16">
+                                                <div class="clearfix">
+                                                    <div class="grid4 center">
+                                                        @if (Model.BookCar == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        BookCar
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_Motobike == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        Motobike
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_Taxi == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        Taxi
+                                                    </div>
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_Tour == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+                                                        <div class="space-2"></div>
+                                                        Tour
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="hr hr-16"></div>
+
+                                                <div class="clearfix">
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_BBQService == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+                                                        <div class="space-2"></div>
+                                                        BBQService
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_FlightTicket == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        FlightTicket
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_Gift == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        Gift
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_Visa == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        Visa
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr hr-16"></div>
+
+                                                <div class="clearfix">
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_BBQService == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+                                                        <div class="space-2"></div>
+                                                        BBQService
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_RegisterResidence == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        RegisterResidence
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (Model.Book_SuggestionTour == true)
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        SuggestionTour
+                                                    </div>
+
+                                                    <div class="grid4 center">
+                                                        @if (!Model.OtherBookService.IsEmpty())
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#59A84B">
+                                                                <span class="percent">Yes</span>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="easy-pie-chart percentage" data-percent="100" data-color="#A83434">
+                                                                <span class="percent">No</span>
+                                                            </div>
+                                                        }
+
+                                                        <div class="space-2"></div>
+                                                        Other
+                                                    </div>
+                                                </div>
+                                                <div class="hr hr-16"></div>
+
+                                                <div class="hr hr-16"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="space-6"></div>
+
 
                                 </div>
+                                <div class="hr hr8 hr-double hr-dotted"></div>
+
+                                <div class="row">
+                                    <div class="col-sm-7 pull-right">
+                                        <h4 class="pull-right">
+
+                                            <span style="font-size:15px">Total booking: <b>@String.Format("{0:#,##0}", @Model.TotalBookPrice) $</b></span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-7 pull-left">  </div>
+                                </div>
+                                <div class="space-6"></div>
+                                <div class="hr hr8 hr-double hr-dotted"></div>
+
+                                <div class="row">
+
+
+                                    <div class="widget-header widget-header-small header-color-blue2">
+                                        <h4 class="widget-title smaller">
+                                            <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
+                                            Total amount
+                                        </h4>
+                                        <div class="col-sm-4 pull-right">
+                                            <h4 class="pull-right">
+
+                                                <span class="blue"><strong>@String.Format("{0:#,##0}", @Model.Total) $</strong></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-6"></div>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-                <!-- PAGE CONTENT ENDS -->
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
 
-    }
 </div>
 <script>
     CKEDITOR.replace('Description');
