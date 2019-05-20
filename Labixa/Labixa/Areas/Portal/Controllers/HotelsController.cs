@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Labixa.Areas.Portal.ViewModels.Hotels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Outsourcing.Core.Common;
@@ -100,10 +101,16 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             ViewBag.HotelName = hotel.Name;
-            return View(hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize));
+
+            HotelDetailsSubMenuViewModel hotelDetailsSubMenuViewModel = new HotelDetailsSubMenuViewModel();
+            hotelDetailsSubMenuViewModel.HotelId = (int)id;
+            hotelDetailsSubMenuViewModel.Rooms = hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize);
+
+            return View(hotelDetailsSubMenuViewModel);
         }
 
         #endregion
@@ -281,6 +288,20 @@ namespace Labixa.Areas.Portal.Controllers
         {
             var hotels = _hotelService.FindAll();
             return PartialView("_HotelSubMenu", hotels.AsNoTracking().ToList());
+        }
+
+        #endregion
+
+        #region HotelDetailsSubMenu
+
+        /// <summary>
+        /// HotelDetailsSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult HotelDetailsSubMenu(int id)
+        {
+            var hotel = _hotelService.FindById(id);
+            return PartialView("_HotelDetailsSubMenu", hotel);
         }
 
         #endregion

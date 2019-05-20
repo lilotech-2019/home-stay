@@ -3,48 +3,6 @@
     var count = Enum.GetValues(typeof(Outsourcing.Data.Models.RoomType)).Length + 1;
     string nameType = string.Empty;
 }
-@*<li class="">
-    <a href="#" class="dropdown-toggle">
-        <i class="menu-icon fa fa-cube"></i>
-        <span class="menu-text">
-            Quản lý phòng
-            <span class="badge badge-primary ">@count</span>
-        </span>
-        <b class="arrow fa fa-angle-down"></b>
-    </a>
-    <ul class="submenu" style="overflow: hidden; display: none;">
-        <li>
-            <a href="@Url.Action("Index", "Rooms")">
-                <i class="icon-double-angle-right"></i>
-                Tất Cả
-            </a>
-        </li>
-        @foreach (Outsourcing.Data.Models.RoomType item in Enum.GetValues(typeof(Outsourcing.Data.Models.RoomType)))
-        {
-            switch (item)
-            {
-                case Outsourcing.Data.Models.RoomType.ShortTempDeposit:
-                    nameType = "Ký Gửi";
-                    break;
-                case Outsourcing.Data.Models.RoomType.LongTemp:
-                    nameType = "Dài Hạn";
-                    break;
-                case Outsourcing.Data.Models.RoomType.ShortTemp:
-                    nameType = "Ngắn Hạn";
-                    break;
-            }
-
-            <li>
-                <a href="@Url.Action("Index", "Rooms", new {type = item})">
-                    <i class="icon-double-angle-right"></i>
-                    @nameType
-                </a>
-            </li>
-        }
-
-    </ul>
-</li>*@
-
 <div class="invisible">
     <button data-target="#sidebar2" data-toggle="collapse" type="button" class="pull-left navbar-toggle collapsed">
         <span class="sr-only">Toggle sidebar</span>
