@@ -2,7 +2,7 @@
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 
-namespace Outsourcing.Service.Portal.Base
+namespace Outsourcing.Service
 {
     public interface IServiceBase<T> where T : BaseEntity
     {

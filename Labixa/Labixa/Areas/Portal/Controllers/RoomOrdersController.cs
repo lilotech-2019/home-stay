@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Service;
 using IHotelService = Outsourcing.Service.Portal.IHotelService;
 using IRoomOrderService = Outsourcing.Service.Portal.IRoomOrderService;
 

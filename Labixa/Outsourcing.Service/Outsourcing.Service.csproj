@@ -74,8 +74,8 @@
     <Compile Include="Portal\RoomAssetService.cs" />
     <Compile Include="BlogCategoryService.cs" />
     <Compile Include="BlogService.cs" />
-    <Compile Include="Portal\CustomerService.cs" />
-    <Compile Include="Portal\Base\IServiceBase.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="IServiceBase.cs" />
     <Compile Include="Portal\HotelCategoryService.cs" />
     <Compile Include="Portal\HotelService.cs" />
     <Compile Include="Portal\MessageService.cs" />

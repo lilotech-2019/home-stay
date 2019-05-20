@@ -1,6 +1,5 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal.Base;
 
 namespace Outsourcing.Service
 {

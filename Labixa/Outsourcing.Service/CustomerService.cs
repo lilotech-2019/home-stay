@@ -1,9 +1,8 @@
-﻿using Outsourcing.Data.Infrastructure;
+﻿using System.Linq;
+using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal.Base;
-using System.Linq;
 
-namespace Outsourcing.Service.Portal
+namespace Outsourcing.Service
 {
     public interface ICustomerService : IServiceBase<Customer>
     {

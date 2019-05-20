@@ -3,7 +3,6 @@ using System.Linq;
 using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.Portal.Base;
 
 namespace Outsourcing.Service.Portal
 {
