@@ -4,13 +4,13 @@ using Outsourcing.Service.Portal.Base;
 
 namespace Outsourcing.Service.Portal
 {
-    public interface ICostCategoriesService : IServiceBase<CostCategory>
+    public interface ICostCategoryService : IServiceBase<CostCategory>
     {
     }
 
-    public class CostCategoriesService : ServiceBase<CostCategory>, ICostCategoriesService
+    public class CostCategoryService : ServiceBase<CostCategory>, ICostCategoryService
     {
-        public CostCategoriesService(IRepository<CostCategory> repository, IUnitOfWork unitOfWork) : base(repository,
+        public CostCategoryService(IRepository<CostCategory> repository, IUnitOfWork unitOfWork) : base(repository,
             unitOfWork)
         {
         }

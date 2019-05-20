@@ -66,11 +66,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlogCategoryService.cs" />
     <Compile Include="DepositServices.cs" />
     <Compile Include="HMS\CategoryHotelServices.cs" />
-    <Compile Include="HMS\CategoryProductServices.cs" />
-    <Compile Include="HMS\CostOrderServices.cs" />
     <Compile Include="CustomerService.cs" />
     <Compile Include="Portal\HotelServices.cs" />
     <Compile Include="HMS\RoomImageMappingServices.cs" />
@@ -83,11 +80,10 @@
     <Compile Include="NotificationServices.cs" />
     <Compile Include="OrderItemService.cs" />
     <Compile Include="PictureService.cs" />
-    <Compile Include="Portal\AssetService.cs" />
     <Compile Include="Portal\CostCategoriesService.cs" />
     <Compile Include="Portal\CostsService.cs" />
     <Compile Include="Portal\RoomAssetService.cs" />
-    <Compile Include="Portal\BlogCategoryService.cs" />
+    <Compile Include="BlogCategoryService.cs" />
     <Compile Include="Portal\BlogService.cs" />
     <Compile Include="Portal\CustomerService.cs" />
     <Compile Include="Portal\Base\IServiceBase.cs" />

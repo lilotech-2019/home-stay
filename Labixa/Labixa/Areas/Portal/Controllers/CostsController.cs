@@ -13,11 +13,11 @@ namespace Labixa.Areas.Portal.Controllers
         #region Field
         private readonly ICostsService _costService;
         private readonly IHotelService _hotelService;
-        private readonly ICostCategoriesService _costCategoryService;
+        private readonly ICostCategoryService _costCategoryService;
         #endregion
 
         #region Ctor
-        public CostsController(ICostsService costService, IHotelService hotelService, ICostCategoriesService costCategoryService)
+        public CostsController(ICostsService costService, IHotelService hotelService, ICostCategoryService costCategoryService)
         {
             _costService = costService;
             _hotelService = hotelService;

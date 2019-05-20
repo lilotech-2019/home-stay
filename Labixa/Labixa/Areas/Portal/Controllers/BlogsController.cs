@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
+using IBlogService = Outsourcing.Service.Portal.IBlogService;
 
 namespace Labixa.Areas.Portal.Controllers
 {
