@@ -1,11 +1,11 @@
 ﻿using Labixa.Areas.Portal.ViewModels.CostCategory;
 using Outsourcing.Core.Common;
-using Outsourcing.Data.Models.HMS;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Data.Models;
 using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
@@ -14,17 +14,22 @@ namespace Labixa.Areas.Portal.Controllers
     public class CostCategoriesController : Controller
     {
         #region Field
+
         private readonly ICostCategoryService _costCategoryService;
+
         #endregion
 
         #region Ctor
+
         public CostCategoriesController(ICostCategoryService costCategoryService)
         {
             _costCategoryService = costCategoryService;
         }
+
         #endregion
 
         #region Index
+
         /// <summary>
         /// Index
         /// </summary>
@@ -34,9 +39,11 @@ namespace Labixa.Areas.Portal.Controllers
             var costCategories = await _costCategoryService.FindAll().AsNoTracking().ToListAsync();
             return View(costCategories);
         }
+
         #endregion
 
         #region Details
+
         /// <summary>
         /// Details
         /// </summary>
@@ -48,20 +55,23 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CostCategory costCategory = _costCategoryService.FindById((int)id);
+            CostCategory costCategory = _costCategoryService.FindById((int) id);
             if (costCategory == null)
             {
                 return HttpNotFound();
             }
             return View(costCategory);
         }
+
         #endregion
 
         #region Create
+
         /// <summary>
         /// Create - GET
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Create()
         {
             ViewBag.CategoryParentId = new SelectList(_costCategoryService.FindSelectList(), "Id",
@@ -74,6 +84,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="costCategory"></param>
         /// <returns></returns>
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -92,19 +103,23 @@ namespace Labixa.Areas.Portal.Controllers
         #endregion
 
         #region Edit
+
         /// <summary>
         /// Edit - GET 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CostCategory costCategory = _costCategoryService.FindById((int)id);
-            ViewBag.CategoryParentId = new SelectList(_costCategoryService.FindSelectList(costCategory.CategoryParentId), "Id","Name", costCategory.CategoryParentId);
+            CostCategory costCategory = _costCategoryService.FindById((int) id);
+            ViewBag.CategoryParentId =
+                new SelectList(_costCategoryService.FindSelectList(costCategory.CategoryParentId), "Id", "Name",
+                    costCategory.CategoryParentId);
             return View(costCategory);
         }
 
@@ -116,6 +131,7 @@ namespace Labixa.Areas.Portal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Edit(CostCategory costCategory)
         {
             if (ModelState.IsValid)
@@ -126,21 +142,24 @@ namespace Labixa.Areas.Portal.Controllers
             }
             return View(costCategory);
         }
+
         #endregion
 
         #region Delete
+
         /// <summary>
         /// Delete - GET
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var costCategory = _costCategoryService.FindById((int)id);
+            var costCategory = _costCategoryService.FindById((int) id);
             if (costCategory == null)
             {
                 return HttpNotFound();
@@ -154,6 +173,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = Role.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

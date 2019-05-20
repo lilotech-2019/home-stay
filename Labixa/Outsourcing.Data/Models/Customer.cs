@@ -1,5 +1,4 @@
-﻿using Outsourcing.Data.Models.HMS;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Outsourcing.Data.Models
