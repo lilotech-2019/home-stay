@@ -58,8 +58,7 @@ namespace Outsourcing.Data.Models.HMS
         public string Note { get; set; }
         public int AmountOfPeople { get; set; }
         public string Description { get; set; }
-
-        public virtual ICollection<RoomOrderItem> RoomOrderItems { get; set; }
+        
 
         public int RoomId { get; set; }
         public int CustomerId { get; set; }

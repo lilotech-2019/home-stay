@@ -68,7 +68,7 @@
     <div class="sca_page_loader sca_image_bck sca_wht_txt">
         <div class="sca_over" data-color="#000" data-opacity="0.7"></div>
         <div class="sca_loader">
-            <p><img src="@Model.websiteAttribute.Where(p => p.Name.Equals("LoadPageImage")).First().Value" class="sca_img_shadow" height="300" alt="pre"></p>
+            <p><img src="@Model.WebsiteAttribute.Where(p => p.Name.Equals("LoadPageImage")).First().Value" class="sca_img_shadow" height="300" alt="pre"></p>
 
             <div class="sca_spinner">
                 <div class="sca_rect1"></div>
@@ -88,9 +88,9 @@
             <nav class="sca_light_nav sca_transp_nav">
                 <div class="container">
                     <div id="block-scalac-branding" class="sca_logo_container clearfix">
-                        <img src="@Model.websiteAttribute.Where(p => p.Name.Equals("PageLogo")).First().Value" alt="Scala | Multi-Purpose Onepage - Multipage Drupal 8 Theme" class="sca_logo_rev"> <div class="sca_logo_txt">
-                            <a href="/home/index" class="sca_logo">@Model.websiteAttribute.Where(p => p.Name.Equals("PageTitle")).First().Value</a>
-                            <div class="sca_logo_und">@Model.websiteAttribute.Where(p => p.Name.Equals("PageSlogan")).First().Value</div>
+                        <img src="@Model.WebsiteAttribute.Where(p => p.Name.Equals("PageLogo")).First().Value" alt="Scala | Multi-Purpose Onepage - Multipage Drupal 8 Theme" class="sca_logo_rev"> <div class="sca_logo_txt">
+                            <a href="/home/index" class="sca_logo">@Model.WebsiteAttribute.Where(p => p.Name.Equals("PageTitle")).First().Value</a>
+                            <div class="sca_logo_und">@Model.WebsiteAttribute.Where(p => p.Name.Equals("PageSlogan")).First().Value</div>
                         </div>
                     </div>
                     <div class="sca_main_menu sca_main_menu_mobile">
@@ -632,14 +632,14 @@
             </nav>
         </header>
         @*banner*@
-        <div id="block-scalacblocksectioncontentthebesthotelreservationtheme" class="sca_slider sca_image_bck sca_fixed sca_wht_txt sca_border bg-no-repeat block-bg" data-bg-color="#000000" data-bg-image="@Model.websiteAttribute.Where(p => p.Name.Equals("BannerImage")).First().Value">
+        <div id="block-scalacblocksectioncontentthebesthotelreservationtheme" class="sca_slider sca_image_bck sca_fixed sca_wht_txt sca_border bg-no-repeat block-bg" data-bg-color="#000000" data-bg-image="@Model.WebsiteAttribute.Where(p => p.Name.Equals("BannerImage")).First().Value">
             <div class="sca_over" data-color="#232323" data-opacity="0.6"></div>
 
             
             <div class="container">
                 <div class="sca_slide_txt sca_slide_center_middle text-center">
-                    <p><img src="@Model.websiteAttribute.Where(p => p.Name.Equals("BannerLogo")).First().Value" class="sca_img_shadow" height="150" alt="alt" data-shadow="drop-shadow(0 0 10px rgba(218, 184, 118, 1 ))"></p>
-                    <div class="sca_slide_subtitle">@Html.Raw(Model.websiteAttribute.Where(p => p.Name.Equals("BannerTitle")).First().Value)</div>
+                    <p><img src="@Model.WebsiteAttribute.Where(p => p.Name.Equals("BannerLogo")).First().Value" class="sca_img_shadow" height="150" alt="alt" data-shadow="drop-shadow(0 0 10px rgba(218, 184, 118, 1 ))"></p>
+                    <div class="sca_slide_subtitle">@Html.Raw(Model.WebsiteAttribute.Where(p => p.Name.Equals("BannerTitle")).First().Value)</div>
                 </div>
             </div>
             <a class="sca_scroll_down sca_go" href="#sca_content">
@@ -658,7 +658,7 @@
                         <div class="sca_simple_block">
                             <h2 data-animation="animation_blocks" data-bottom="@@class:noactive" data--100-bottom="@@class:active">Contacts</h2> 
                             <ul class="spa_contacts_form">
-                                @Html.Raw(Model.websiteAttribute.Where(p=>p.Type.Equals("Contact")).First().Value)
+                                @Html.Raw(Model.WebsiteAttribute.Where(p=>p.Type.Equals("Contact")).First().Value)
                             </ul>
                            
                         </div>

@@ -43,7 +43,7 @@ namespace Labixa.Controllers
                 slideViewModel.Add(new SlideViewModel()
                 {
                     Style = count % 2 == 0 ? "nhs-caption2" : "nhs-caption3",
-                    ImageURL = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
+                    ImageUrl = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
                     Title = item.Title,
                     TitleEnglish = item.TitleEnglish,
                     Caption = item.Caption,
@@ -52,8 +52,8 @@ namespace Labixa.Controllers
             }
             var model = new IndexViewModel
             {
-                roomHome = _roomService.FindAll(),
-                blogHome = _blogService.FindAll().Take(3),
+                RoomHome = _roomService.FindAll(),
+                BlogHome = _blogService.FindAll().Take(3),
                 Slider = slideViewModel
             };
             return View(model);

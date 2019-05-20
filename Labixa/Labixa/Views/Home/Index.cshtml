@@ -58,7 +58,7 @@
                 foreach (var iterm in Model.Slider)
                 {
                     count++;
-                    <div style="background-image: url(@iterm.ImageURL); -ms-background-position: center right;"
+                    <div style="background-image: url(@iterm.ImageUrl); -ms-background-position: center right;"
                          class="item slide-@count">
                         <div class="carousel-caption nhs-caption @iterm.Style">
                             <div class="thm-container">
@@ -265,7 +265,7 @@
     <div class="room-slider">
         <div class="roomsuite-slider">
             @{
-                if (Model.roomHome == null || Model.roomHome.Count() < 3)
+                if (Model.RoomHome == null || Model.RoomHome.Count() < 3)
                 {
                     if (cookie != null && cookie.Value.Equals("vi"))
                     {
@@ -390,7 +390,7 @@
                 }
                 else
                 {
-                    foreach (var iterm in Model.roomHome)
+                    foreach (var iterm in Model.RoomHome)
                     {
                         if (cookie != null && cookie.Value.Equals("vi"))
                         {
@@ -843,7 +843,7 @@
             <h3></h3>
         </div>
         <div class="row event-pad">
-            @if (Model.blogHome == null || Model.blogHome.Count() < 3)
+            @if (Model.BlogHome == null || Model.BlogHome.Count() < 3)
             {
                 if (cookie.Value.Equals("vi"))
                 {
@@ -986,7 +986,7 @@
             }
             else
             {
-                foreach (var iterm in Model.blogHome)
+                foreach (var iterm in Model.BlogHome)
                 {
                     if (cookie.Value.Equals("vi"))
                     {

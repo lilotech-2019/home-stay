@@ -95,8 +95,7 @@
     <Compile Include="Authentication\DefaultFormsAuthentication.cs" />
     <Compile Include="Authentication\IFormsAuthentication.cs" />
     <Compile Include="Authentication\UserAuthenticationTicketBuilder.cs" />
-    <Compile Include="Common\Calculator.cs" />
-    <Compile Include="Common\slitString.cs" />
+    <Compile Include="Common\SlitString.cs" />
     <Compile Include="Common\StringConvert.cs" />
     <Compile Include="Common\ValidationResult.cs" />
     <Compile Include="Email\EmailHelper.cs" />
