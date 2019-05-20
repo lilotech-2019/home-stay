@@ -11,26 +11,32 @@ namespace Labixa.Areas.Portal.Controllers
     public class CostsController : Controller
     {
         #region Field
+
         private readonly ICostsService _costService;
         private readonly IHotelService _hotelService;
         private readonly ICostCategoryService _costCategoryService;
+
         #endregion
 
         #region Ctor
-        public CostsController(ICostsService costService, IHotelService hotelService, ICostCategoryService costCategoryService)
+
+        public CostsController(ICostsService costService, IHotelService hotelService,
+            ICostCategoryService costCategoryService)
         {
             _costService = costService;
             _hotelService = hotelService;
             _costCategoryService = costCategoryService;
         }
+
         #endregion
 
         #region Index
+
         /// <summary>
         /// Index 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(int? hotelId, int? costCategoryId,CostType? costType)
+        public ActionResult Index(int? hotelId, int? costCategoryId, CostType? costType)
         {
             var costs = _costService.FindAll();
             if (costCategoryId != null)
@@ -42,7 +48,8 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 costs = costs.Where(w => w.HotelId == hotelId);
             }
-            if (costType != null) {
+            if (costType != null)
+            {
                 costs = costs.Where(w => w.Type == costType);
             }
             costs = costs.AsNoTracking();
@@ -52,6 +59,7 @@ namespace Labixa.Areas.Portal.Controllers
         #endregion
 
         #region Details
+
         /// <summary>
         /// Details
         /// </summary>
@@ -63,39 +71,31 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var cost = _costService.FindById((int)id);
+            var cost = _costService.FindById((int) id);
             if (cost == null)
             {
                 return HttpNotFound();
             }
             return View(cost);
         }
+
         #endregion
 
         #region Create
+
         /// <summary>
         /// Create - GET
         /// </summary>
         /// <returns></returns>
         public ActionResult Create(int? hotelId, int? costCategoryId)
         {
-            if (hotelId != null)
-            {
-                ViewBag.HotelId = new SelectList(_hotelService.FindSelectList((int)hotelId), "Id", "Name", hotelId);
-            }
-            else
-            {
-                ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(null), "Id", "Name");
-            }
+            ViewBag.HotelId = hotelId != null
+                ? new SelectList(_hotelService.FindSelectList((int) hotelId), "Id", "Name", hotelId)
+                : new SelectList(_hotelService.FindSelectList(), "Id", "Name");
 
-            if (costCategoryId != null)
-            {
-                ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(costCategoryId), "Id", "Name", costCategoryId);
-            }
-            else
-            {
-                ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(), "Id", "Name");
-            }
+            ViewBag.CostCategoryId = costCategoryId != null
+                ? new SelectList(_costCategoryService.FindSelectList(costCategoryId), "Id", "Name", costCategoryId)
+                : new SelectList(_costCategoryService.FindSelectList(), "Id", "Name");
             return View();
         }
 
@@ -112,15 +112,18 @@ namespace Labixa.Areas.Portal.Controllers
             if (ModelState.IsValid)
             {
                 _costService.Create(cost);
-                return RedirectToAction("Index", new { costCategoryId = cost.CostCategoryId, hotelId = cost.HotelId });
+                return RedirectToAction("Index", new {costCategoryId = cost.CostCategoryId, hotelId = cost.HotelId});
             }
 
-            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id", "Name", cost.CostCategoryId);
+            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id",
+                "Name", cost.CostCategoryId);
             return View(cost);
         }
+
         #endregion
 
         #region Edit
+
         /// <summary>
         /// Edit - GET
         /// </summary>
@@ -132,12 +135,13 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cost cost = _costService.FindById((int)id);
+            Cost cost = _costService.FindById((int) id);
             if (cost == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id", "Name", cost.CostCategoryId);
+            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id",
+                "Name", cost.CostCategoryId);
             ViewBag.HotelId = new SelectList(_hotelService.FindSelectList(cost.HotelId), "Id", "Name", cost.HotelId);
             return View(cost);
         }
@@ -155,14 +159,17 @@ namespace Labixa.Areas.Portal.Controllers
             if (ModelState.IsValid)
             {
                 _costService.Edit(cost);
-                return RedirectToAction("Index", new { costCategoryId = cost.CostCategoryId, hotelId = cost.HotelId });
+                return RedirectToAction("Index", new {costCategoryId = cost.CostCategoryId, hotelId = cost.HotelId});
             }
-            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id", "Name", cost.CostCategoryId);
+            ViewBag.CostCategoryId = new SelectList(_costCategoryService.FindSelectList(cost.CostCategoryId), "Id",
+                "Name", cost.CostCategoryId);
             return View(cost);
         }
+
         #endregion
 
         #region Delete
+
         /// <summary>
         /// Delete - GET
         /// </summary>
@@ -174,7 +181,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var costCategory = _costService.FindById((int)id);
+            var costCategory = _costService.FindById((int) id);
             if (costCategory == null)
             {
                 return HttpNotFound();
@@ -199,7 +206,7 @@ namespace Labixa.Areas.Portal.Controllers
             _costService.Delete(cost);
             return RedirectToAction("Index");
         }
-        #endregion
 
+        #endregion
     }
 }
