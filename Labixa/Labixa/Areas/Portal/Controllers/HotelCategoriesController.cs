@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Labixa.Areas.Portal.ViewModels.HotelCategory;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
 using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers

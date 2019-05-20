@@ -9,7 +9,6 @@ using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
 using System.Web;
 using Outsourcing.Service;
-using Outsourcing.Service.Portal;
 
 namespace Labixa.Controllers
 {

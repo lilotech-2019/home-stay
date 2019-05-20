@@ -1,7 +1,7 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 
-namespace Outsourcing.Service.Portal
+namespace Outsourcing.Service
 {
     public interface IMessageService : IServiceBase<Message>
     {

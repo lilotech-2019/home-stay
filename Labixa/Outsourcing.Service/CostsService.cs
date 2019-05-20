@@ -1,7 +1,7 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models.HMS;
 
-namespace Outsourcing.Service.Portal
+namespace Outsourcing.Service
 {
     public interface ICostsService : IServiceBase<Cost>
     {

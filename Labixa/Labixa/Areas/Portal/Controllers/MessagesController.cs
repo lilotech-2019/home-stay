@@ -1,6 +1,5 @@
 ﻿using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;

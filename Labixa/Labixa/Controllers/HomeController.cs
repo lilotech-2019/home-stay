@@ -6,7 +6,6 @@ using Outsourcing.Service;
 using Outsourcing.Core.Email;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Outsourcing.Service.Portal;
 using static Labixa.ViewModels.IndexViewModel;
 using IBlogService = Outsourcing.Service.IBlogService;
 

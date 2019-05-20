@@ -2,7 +2,6 @@
 using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
 using Outsourcing.Data.Models.HMS;
-using Outsourcing.Service.Portal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,8 +10,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Service;
-using IHotelService = Outsourcing.Service.Portal.IHotelService;
-using IRoomOrderService = Outsourcing.Service.Portal.IRoomOrderService;
+using IHotelService = Outsourcing.Service.IHotelService;
+using IRoomOrderService = Outsourcing.Service.IRoomOrderService;
 
 namespace Labixa.Areas.Portal.Controllers
 {
