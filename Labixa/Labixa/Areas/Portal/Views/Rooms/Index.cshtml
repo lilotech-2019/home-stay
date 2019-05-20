@@ -20,11 +20,6 @@
 </div><!-- /.page-header -->
 
 @Html.Action("HotelSubMenu", "Hotels")
-
-<p>
-    @Html.ActionLink("Tạo mới", "Create", new { hotelId = Request.Params["hotelId"], type = Request.Params["type"] }, new { @class = "btn btn-primary" })
-</p>
-
 <div class="row">
     <div class="col-xs-12">
         <div class="table-header">Danh sách phòng</div>

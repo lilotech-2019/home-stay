@@ -9,6 +9,8 @@ using Outsourcing.Data.Models.HMS;
 using System;
 using System.Data.Entity;
 using Outsourcing.Service;
+using Labixa.Areas.Portal.ViewModels.Rooms;
+using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -69,7 +71,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
             if (id == null)
             {
@@ -80,7 +82,30 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            return View(room);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            RoomDetailsSubMenuViewModel roomDetailsSubMenuViewModel = new RoomDetailsSubMenuViewModel {
+                Room = room,
+                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+            };
+
+            return View(roomDetailsSubMenuViewModel);
+        }
+
+        #endregion
+
+        #region RoomDetailsSubMenu
+
+        /// <summary>
+        /// RoomDetailsSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoomDetailsSubMenu(int id)
+        {
+            var room = _roomService.FindById(id);
+            return PartialView("_RoomDetailsSubMenu", room);
         }
 
         #endregion
