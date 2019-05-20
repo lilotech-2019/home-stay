@@ -64,7 +64,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(null), "Id",
+            ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(), "Id",
                 "Name");
             return View();
         }
@@ -105,10 +105,6 @@ namespace Labixa.Areas.Portal.Controllers
             }
             CostCategory costCategory = _costCategoriesService.FindById((int)id);
             ViewBag.CategoryParentId = new SelectList(_costCategoriesService.FindSelectList(costCategory.CategoryParentId), "Id","Name", costCategory.CategoryParentId);
-            if (costCategory == null)
-            {
-                return HttpNotFound();
-            }
             return View(costCategory);
         }
 
@@ -161,7 +157,7 @@ namespace Labixa.Areas.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var costCategory = _costCategoriesService.FindById((int)id);
+            var costCategory = _costCategoriesService.FindById(id);
             if (costCategory == null)
             {
                 return HttpNotFound();

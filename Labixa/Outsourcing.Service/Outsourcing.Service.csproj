@@ -70,16 +70,11 @@
     <Compile Include="DepositServices.cs" />
     <Compile Include="HMS\CategoryHotelServices.cs" />
     <Compile Include="HMS\CategoryProductServices.cs" />
-    <Compile Include="HMS\CostCategoryServices.cs" />
-    <Compile Include="HMS\CostOrderItemServices.cs" />
     <Compile Include="HMS\CostOrderServices.cs" />
-    <Compile Include="HMS\CostServices.cs" />
     <Compile Include="CustomerService.cs" />
-    <Compile Include="HMS\HMSProductServices.cs" />
-    <Compile Include="HMS\HotelServices.cs" />
+    <Compile Include="Portal\HotelServices.cs" />
     <Compile Include="HMS\RoomImageMappingServices.cs" />
     <Compile Include="HMS\RoomImageServices.cs" />
-    <Compile Include="HMS\RoomOrderItemServices.cs" />
     <Compile Include="HMS\RoomOrderServices.cs" />
     <Compile Include="HMS\RoomServices.cs" />
     <Compile Include="InventoryLogServices.cs" />

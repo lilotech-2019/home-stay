@@ -8,7 +8,7 @@ using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class BlogCategoriesController : Controller
     {
         #region Fields

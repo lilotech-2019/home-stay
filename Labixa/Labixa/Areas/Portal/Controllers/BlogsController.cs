@@ -8,7 +8,7 @@ using Outsourcing.Service.Portal;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class BlogsController : Controller
     {
         #region Fields
@@ -17,7 +17,6 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IBlogCategoryService _blogCategoryService;
 
         #endregion
-
 
         #region Ctor
 
@@ -76,7 +75,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name");
-            return View(new Blog { PictureId = 0});
+            return View(new Blog { PictureId = 0 });
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name",blog.BlogCategoryId);
+            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name", blog.BlogCategoryId);
 
             return View(blog);
         }
