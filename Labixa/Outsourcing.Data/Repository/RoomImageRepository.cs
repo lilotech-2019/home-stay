@@ -1,7 +1,7 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models.HMS;
 
-namespace Outsourcing.Data.Repository.HMS
+namespace Outsourcing.Data.Repository
 {
    
     public class RoomImageRepository : RepositoryBase<RoomImages>, IRoomImageRepository

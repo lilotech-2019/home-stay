@@ -1,7 +1,7 @@
 ﻿using Outsourcing.Data.Infrastructure;
 using Outsourcing.Data.Models;
 
-namespace Outsourcing.Data.Repository.HMS
+namespace Outsourcing.Data.Repository
 {
   
     public class CategoryHotelRepository : RepositoryBase<HotelCategory>, ICategoryHotelRepository
