@@ -20,14 +20,14 @@ namespace Outsourcing.Service
     public class DepositService : IDepositService
     {
         #region Field
-        private readonly IColorRepository _colorRepository;
+        private readonly IDepositRepository _depositRepository;
         private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public DepositService(IColorRepository colorRepository, IUnitOfWork unitOfWork)
+        public DepositService(IDepositRepository depositRepository, IUnitOfWork unitOfWork)
         {
-            _colorRepository = colorRepository;
+            _depositRepository = depositRepository;
             _unitOfWork = unitOfWork;
         }
         #endregion
@@ -35,25 +35,25 @@ namespace Outsourcing.Service
         #region BaseMethod
         public IQueryable<Deposit> FindAll()
         {
-            var listEntities = _colorRepository.FindBy(w => w.Deleted == false);
+            var listEntities = _depositRepository.FindBy(w => w.Deleted == false);
             return listEntities;
         }
 
         public Deposit FindById(int id)
         {
-            var entity = _colorRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
+            var entity = _depositRepository.FindBy(w => w.Deleted == false & w.Id == id).SingleOrDefault();
             return entity;
         }
 
         public void Create(Deposit entity)
         {
-            _colorRepository.Add(entity);
+            _depositRepository.Add(entity);
             Commit();
         }
 
         public void Edit(Deposit entity)
         {
-            _colorRepository.Update(entity);
+            _depositRepository.Update(entity);
             Commit();
         }
 
@@ -65,7 +65,7 @@ namespace Outsourcing.Service
 
         public IQueryable<Deposit> FindSelectList(int? id)
         {
-            var list = _colorRepository.FindBy(r => r.Deleted == false);
+            var list = _depositRepository.FindBy(r => r.Deleted == false);
             if (id != null)
             {
                 list = list.Where(w => w.Id == id);

@@ -22,9 +22,11 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 4;
-            BlogViewModel viewModel = new BlogViewModel();
-            viewModel.RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w => w.Id);
-            var model = _blogService.FindAll().AsEnumerable().OrderBy(q => q.Status == true);
+            BlogViewModel viewModel = new BlogViewModel
+            {
+                RelatedBlogs = _blogService.FindAll().Take(5).OrderByDescending(w => w.Id)
+            };
+            var model = _blogService.FindAll().AsEnumerable().OrderBy(q => q.Status);
             viewModel.ListBlogs = model.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
         }
@@ -39,15 +41,7 @@ namespace Labixa.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Event()
-        {
-            return View();
-        }
 
-        public ActionResult ActitityNews()
-        {
-            return View();
-        }
 
         #region[Multi Language]
 
@@ -59,9 +53,11 @@ namespace Labixa.Controllers
                 cookie.Value = slug;
             else
             {
-                cookie = new HttpCookie("_culture");
-                cookie.Value = slug;
-                cookie.Expires = DateTime.Now.AddYears(1);
+                cookie = new HttpCookie("_culture")
+                {
+                    Value = slug,
+                    Expires = DateTime.Now.AddYears(1)
+                };
             }
             Response.Cookies.Add(cookie);
             return RedirectToAction("Index", "Home");

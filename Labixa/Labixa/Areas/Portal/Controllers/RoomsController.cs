@@ -1,14 +1,15 @@
 ﻿using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Data.Models.HMS;
 using System;
+using System.Data.Entity;
+using Outsourcing.Service;
+using Labixa.Areas.Portal.ViewModels.Rooms;
+using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -18,15 +19,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly IRoomService _roomService;
-        private readonly Outsourcing.Service.HMS.IRoomImageService _roomImageService;
-        private readonly Outsourcing.Service.HMS.IRoomImageMappingService _roomImageMappingService;
+        private readonly IRoomImageService _roomImageService;
+        private readonly IRoomImageMappingService _roomImageMappingService;
         private readonly IHotelService _hotelService;
 
         #endregion
 
         #region Ctor
 
-        public RoomsController(IRoomService roomService, IHotelService hotelService, Outsourcing.Service.HMS.IRoomImageMappingService roomImageMappingService, Outsourcing.Service.HMS.IRoomImageService roomImageService)
+        public RoomsController(IRoomService roomService, IHotelService hotelService,
+            IRoomImageMappingService roomImageMappingService, IRoomImageService roomImageService)
         {
             _roomImageService = roomImageService;
             _roomImageMappingService = roomImageMappingService;
@@ -46,15 +48,19 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Index(int? hotelId, RoomType? type)
         {
-            var rooms = _roomService.FindAll();
+            IQueryable<Room> rooms = _roomService.FindAll();
+
             if (hotelId != null)
             {
-                rooms = rooms.Where(w => w.HotelId == hotelId);
+                rooms = _roomService.FindAll().Where(w => w.HotelId == hotelId);
             }
-            if (type != null) {
+            if (type != null)
+            {
                 rooms = rooms.Where(w => w.Type == type);
             }
+            if (User.IsInRole(Role.Admin)) return View(await rooms.AsNoTracking().ToListAsync());
 
+            rooms = rooms.Where(w => w.Hotel.HostEmail == User.Identity.Name);
             return View(await rooms.AsNoTracking().ToListAsync());
         }
 
@@ -66,19 +72,44 @@ namespace Labixa.Areas.Portal.Controllers
         /// Details
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomService.FindById((int) id);
-            if (room == null)
+            Room room = _roomService.FindById((int)id);
+            if (room == null || room.Hotel.HostEmail != User.Identity.Name)
             {
                 return HttpNotFound();
             }
-            return View(room);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            RoomDetailsSubMenuViewModel roomDetailsSubMenuViewModel = new RoomDetailsSubMenuViewModel
+            {
+                Room = room,
+                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+            };
+
+            return View(roomDetailsSubMenuViewModel);
+        }
+
+        #endregion
+
+        #region RoomDetailsSubMenu
+
+        /// <summary>
+        /// RoomDetailsSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoomDetailsSubMenu(int id)
+        {
+            var room = _roomService.FindById(id);
+            return PartialView("_RoomDetailsSubMenu", room);
         }
 
         #endregion
@@ -117,21 +148,27 @@ namespace Labixa.Areas.Portal.Controllers
                 RoomImageMappings = roomImage
             };
             var hotels = _hotelService.FindSelectList();
-            if (hotelId != null)
+            if (User.IsInRole(Role.Admin))
             {
-                ViewBag.HotelId = new SelectList(hotels.Where(w => w.Id == hotelId), "Id", "Name", hotelId);
-                ViewBag.HotelCategoryId = _hotelService.FindById((int) hotelId).HotelCategoryId;
-                room.HotelId = (int) hotelId;
+                ViewBag.HotelId = new SelectList(hotels, "Id", "Name", hotelId);
                 return View(room);
             }
-            ViewBag.HotelId = new SelectList(hotels, "Id", "Name");
+            if (hotelId == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.HotelId = new SelectList(hotels.Where(w => w.Id == hotelId), "Id", "Name", hotelId);
+            ViewBag.HotelCategoryId = _hotelService.FindById((int)hotelId).HotelCategoryId;
+            room.HotelId = (int)hotelId;
             return View(room);
         }
 
         /// <summary>
         /// Create - POST
         /// </summary>
+        /// <param name="type"></param>
         /// <param name="room"></param>
+        /// <param name="hotelId"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -141,7 +178,7 @@ namespace Labixa.Areas.Portal.Controllers
             room.Slug = StringConvert.ConvertShortName(room.Name);
             room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
             _roomService.Create(room);
-            return RedirectToAction("Index", new { hotelId = room.HotelId, type = type });
+            return RedirectToAction("Index", new { hotelId = room.HotelId, type });
         }
 
         #endregion
@@ -152,27 +189,30 @@ namespace Labixa.Areas.Portal.Controllers
         /// Edit - GET
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="hotelId"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
-        public ActionResult Edit(int? id,int? hotelId, RoomType? type)
+        public ActionResult Edit(int? id, int? hotelId, RoomType? type)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = _roomService.FindById((int) id);
+            Room room = _roomService.FindById((int)id);
             if (room == null)
             {
                 return HttpNotFound();
             }
             var hotels = _hotelService.FindSelectList();
-            if (hotelId != null) {
+            if (hotelId != null)
+            {
                 hotels = hotels.Where(w => w.Id == hotelId);
             }
 
             var roomTypes = Enum.GetValues(typeof(RoomType)).Cast<RoomType>();
             if (type != null)
             {
-                roomTypes = new List<RoomType> { (RoomType)type }; 
+                roomTypes = new List<RoomType> { (RoomType)type };
             }
 
             ViewBag.RoomType = new SelectList(roomTypes, room.Type);
@@ -184,6 +224,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// Edit - POST
         /// </summary>
         /// <param name="room"></param>
+        /// <param name="hotelId"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -219,7 +261,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var rooms = _roomService.FindById((int) id);
+            var rooms = _roomService.FindById((int)id);
             if (rooms == null)
             {
                 return HttpNotFound();

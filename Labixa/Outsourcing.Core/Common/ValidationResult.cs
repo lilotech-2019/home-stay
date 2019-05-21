@@ -1,18 +1,10 @@
-﻿
-namespace Outsourcing.Core.Common
+﻿namespace Outsourcing.Core.Common
 {
     /// <summary>
     /// Describes the result of a validation of a potential change through a business service.
     /// </summary>
     public class ValidationResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ValidationResult"/> class.
-        /// </summary>
-        public ValidationResult()
-        {
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationResult"/> class.
         /// </summary>

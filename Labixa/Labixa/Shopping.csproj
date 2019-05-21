@@ -23,12 +23,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <IISExpressSSLPort>44379</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -89,8 +86,10 @@
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Areas\Portal\ViewModels\CostCategory\CostCategorySubMenuViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\HotelCategory\HotelCategorySubMenuViewModel.cs" />
+    <Compile Include="Areas\Portal\ViewModels\Hotels\HotelDetailsSubMenuViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\RoomOrders\CreateViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\CreateRoomViewModel.cs" />
+    <Compile Include="Areas\Portal\ViewModels\Rooms\RoomDetailsSubMenuViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\Rooms\PartialSubMenuCategoryViewModel.cs" />
     <Compile Include="Areas\Portal\ViewModels\User\UserViewModels.cs" />
     <Compile Include="Areas\Portal\ViewModels\WebsiteAtribute\WebsiteAttributeFormModel.cs" />
@@ -99,7 +98,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseHomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\CayCanhController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomVer3Controller.cs" />
     <Compile Include="Global.asax.cs">
@@ -118,7 +116,6 @@
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RoomVer3ViewModel.cs" />
-    <Compile Include="ViewModels\TourModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\ace-rtl.min.css" />
@@ -5038,6 +5035,8 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\glyphicons-halflings-regulard41d.eot" />
     <Content Include="Areas\Portal\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Hotels\_HotelDetailsSubMenu.cshtml" />
+    <Content Include="Areas\Portal\Views\Rooms\_RoomDetailsSubMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

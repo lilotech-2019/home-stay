@@ -1,15 +1,13 @@
 using System.Linq;
 using System.Web.Mvc;
-using Outsourcing.Service;
-using Outsourcing.Service.HMS;
 using PagedList;
 using Labixa.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 using System.Web;
+using Outsourcing.Service;
 
 namespace Labixa.Controllers
 {
@@ -20,8 +18,8 @@ namespace Labixa.Controllers
 
         private readonly IRoomOrderService _roomOrderService;
 
-        public RoomVer3Controller(IRoomService roomService, IVendorService vendorService,
-            IRoomOrderService roomOrderService, IRoomOrderItemService roomOrderItem, ICustomerService customerService)
+        public RoomVer3Controller(IRoomService roomService, 
+            IRoomOrderService roomOrderService, ICustomerService customerService)
         {
             _roomService = roomService;
             _roomOrderService = roomOrderService;
@@ -37,7 +35,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(q => q.Status == true);
+            var listShortRoom = _roomService.FindByType(RoomType.ShortTemp).OrderBy(q => q.Status);
             return View(listShortRoom.ToPagedList(pageNumber, pageSize));
         }
 
@@ -45,7 +43,7 @@ namespace Labixa.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(q => q.Status == true);
+            var listLongRoom = _roomService.FindByType(RoomType.LongTemp).OrderBy(q => q.Status);
             return View(listLongRoom.ToPagedList(pageNumber, pageSize));
         }
 
@@ -71,7 +69,6 @@ namespace Labixa.Controllers
         {
 
             HttpCookie cookie = Request.Cookies["_culture"];
-            var n = cookie;
             string subject = "Đặt phòng thành công";
             string content = "<html><head><style type='text/css'>" +
                ".mail{width: 100%; height: 100% ; background-color: #f5f5f5f5; float: left; background-image: url('https://i.ibb.co/7CL0frY/1.jpg')}" +
@@ -127,7 +124,7 @@ namespace Labixa.Controllers
                 _customerservice.Create(customer);
             }
 
-            if (cookie.Value == "vi")
+            if (cookie?.Value == "vi")
             {
                 modelBooking.CheckIn = DateTime.Parse(checkIn);
                 modelBooking.CheckOut = DateTime.Parse(checkOut);
@@ -149,7 +146,7 @@ namespace Labixa.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> BookingLongRoom(RoomOrder modelBookingLongRoom, string Name, string Email,
+        public async Task<ActionResult> BookingLongRoom(RoomOrder modelBookingLongRoom, string name, string email,
             string phone)
         {
             //Room room = new Room();
@@ -169,7 +166,7 @@ namespace Labixa.Controllers
                 "<table>" +
                 "<tr>" +
                 "<th>Họ và Tên Khách Hàng: </th>" +
-                "<td>" + Name + "</td>" +
+                "<td>" + name + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Ngày CheckIn: </th>" +
@@ -181,7 +178,7 @@ namespace Labixa.Controllers
                 "</tr>" +
                 "<tr>" +
                 "<th>Email Khách Hàng: </th>" +
-                "<td>" + Email + "</td>" +
+                "<td>" + email + "</td>" +
                 "</tr>" +
                 "<tr>" +
                 "<th>Số Điện Thoại: </th>" +
@@ -221,8 +218,8 @@ namespace Labixa.Controllers
             {
                 customer = new Customer
                 {
-                    Name = Name,
-                    Email = Email,
+                    Name = name,
+                    Email = email,
                     Phone = phone
                 };
                 _customerservice.Create(customer);
@@ -234,7 +231,7 @@ namespace Labixa.Controllers
             modelBookingLongRoom.Deleted = false;
             _roomOrderService.Create(modelBookingLongRoom);
 
-            await EmailHelper.SendEmailAsync(Email, content, subject);
+            await EmailHelper.SendEmailAsync(email, content, subject);
             return RedirectToAction("LongRoom", "RoomVer3");
         }
 

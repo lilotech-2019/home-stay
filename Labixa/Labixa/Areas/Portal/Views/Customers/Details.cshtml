@@ -4,48 +4,410 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@{
+    var image = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22244%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20244%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16acba8cc09%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A12pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16acba8cc09%22%3E%3Crect%20width%3D%22244%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2290.859375%22%20y%3D%22105.3296875%22%3E244x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E";
 
-<div>
-    <h4>Customers</h4>
-    <hr />
-    <dl class="dl-horizontal">
+}
+@section head{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/config.js"></script>
+}
+@section breadcrumb
+{
+    <li><a href="@Url.Action("Index")">Customers</a></li>
+    <li class="active">Details</li>
+}
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="page-header">
+    <h1>
+        Quản Lý Khách Hàng
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.Name
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+<div class="main-container ace-save-state" id="main-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <div>
+                <div id="user-profile-1" class="user-profile row">
+                    <div class="col-xs-12 col-sm-3 center">
+                        <div>
+                            <span class="profile-picture">
+                                <img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="@image" />
+                            </span>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                            <div class="space-4"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                            <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                <div class="inline position-relative">
+                                    <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+                                        <i class="ace-icon fa fa-circle light-green"></i>
+                                        &nbsp;
+                                        <span class="white">@Model.Name</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
+                        <div class="space-6"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                    <div class="col-xs-12 col-sm-9">
 
-    </dl>
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title blue smaller">
+                                    <i class="ace-icon fa fa-rss orange"></i>
+                                    Thông tin cá nhân
+                                </h4>
+                            </div>
+
+                            <div class="profile-user-info profile-user-info-striped">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Tên </div>
+
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="username">@Model.Name</span>
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Địa chỉ </div>
+
+                                    <div class="profile-info-value">
+                                        <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                        <span class="editable" id="city">@Model.Address</span>
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Phone </div>
+
+                                    <div class="profile-info-value">
+                                        <span class="editable" >@Model.Phone</span>
+                                    </div>
+                                </div>
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Email </div>
+
+                                    <div class="profile-info-value">
+                                        <span class="editable" id="signup">@Model.Email</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12">
+
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title blue smaller">
+                                    <i class="ace-icon fa fa-rss orange"></i>
+                                    Recent Active
+                                </h4>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <table id="simple-table" class="table  table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </th>
+                                                            <th class="detail-col">Details</th>
+                                                            <th>Invoice</th>
+                                                            <th>CheckIn</th>
+                                                            <th>CheckOut</th>
+
+                                                            <th>
+                                                                Price
+                                                            </th>
+                                                            <th class="hidden-480">Status</th>
+
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        @foreach (var item in Model.RoomOrder)
+                                                        {
+
+                                                            <tr>
+                                                                <td class="center"></td>
+
+                                                                <td class="center">
+                                                                    <div class="action-buttons">
+                                                                        <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                                                                            <i class="ace-icon fa fa-angle-double-down"></i>
+                                                                            <span class="sr-only">Details</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">#@Html.DisplayFor(modelItem => item.Id)</a>
+                                                                </td>
+                                                                <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
+                                                                <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
+                                                                <td>@item.Price</td>
+
+                                                                <td class="hidden-480">
+                                                                    @switch (item.OrderStatus)
+                                                                    {
+                                                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.New:
+                                                                            <span class="label label-sm label-danger">New</span>
+                                                                            break;
+                                                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckIn:
+                                                                            <span class="label label-sm label-warning">CheckIn</span>
+                                                                            break;
+                                                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.CheckOut:
+                                                                            <span class="label label-sm label-success">CheckOut</span>
+                                                                            break;
+                                                                        case Outsourcing.Data.Models.HMS.RoomOrderStatus.Processed:
+                                                                            <span class="label label-sm label-success">Processed</span>
+                                                                            break;
+                                                                    }
+
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="hidden-sm hidden-xs btn-group">
+                                                                        <button class="btn btn-xs btn-success">
+                                                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                                                        </button>
+
+                                                                        <button class="btn btn-xs btn-info">
+                                                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                                        </button>
+
+                                                                        <button class="btn btn-xs btn-danger">
+                                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                        </button>
+
+                                                                        <button class="btn btn-xs btn-warning">
+                                                                            <i class="ace-icon fa fa-flag bigger-120"></i>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="hidden-md hidden-lg">
+                                                                        <div class="inline pos-rel">
+                                                                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                                                            </button>
+
+                                                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                                                        <span class="blue">
+                                                                                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                                        <span class="green">
+                                                                                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <li>
+                                                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                                        <span class="red">
+                                                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="detail-row">
+                                                                <td colspan="8">
+                                                                    <div class="table-detail">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-12 col-sm-3">
+                                                                                <div class="text-center">
+                                                                                    <img height="100" width="150" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="@image">
+                                                                                    <br>
+                                                                                    <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                                                                        <div class="inline position-relative">
+                                                                                            <a class="user-title-label" href="#">
+                                                                                                <i class="ace-icon fa fa-circle light-green"></i>
+                                                                                                &nbsp;
+                                                                                                <span class="white">@item.Room.Name</span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-xs-12 col-sm-9">
+                                                                                <div class="space visible-xs"></div>
+
+                                                                                <div class="profile-user-info profile-user-info-striped">
+                                                                                    <div class="profile-info-row">
+                                                                                        <div class="profile-info-name">Price</div>
+
+                                                                                        <div class="profile-info-value">
+                                                                                            <span>@item.Room.Price</span>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="profile-info-row">
+                                                                                        <div class="profile-info-name">Room Type </div>
+
+                                                                                        <div class="profile-info-value">
+                                                                                            <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                                                                            <span>@item.Room.Type</span>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="profile-info-row">
+                                                                                        <div class="profile-info-name">Share Percent </div>
+
+                                                                                        <div class="profile-info-value">
+                                                                                            <span>@item.Room.SharePercent</span>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="profile-info-row">
+                                                                                        <div class="profile-info-name">Noted </div>
+
+                                                                                        <div class="profile-info-value">
+                                                                                            <span>@item.Room.Noted</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        }
+
+                                                    </tbody>
+                                                </table>
+                                            </div><!-- /.span -->
+                                        </div><!-- /.row -->
+
+                                        <div class="hr hr-18 dotted hr-double"></div>
+
+
+                                        <!-- PAGE CONTENT ENDS -->
+                                    </div><!-- /.col -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@section scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            //initiate dataTables plugin
+
+
+            //And for the first simple table, which doesn't have TableTools or dataTables
+            //select/deselect all rows according to table header checkbox
+            var active_class = 'active';
+            $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function () {
+                var th_checked = this.checked;//checkbox inside "TH" table header
+
+                $(this).closest('table').find('tbody > tr').each(function () {
+                    var row = this;
+                    if (th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                    else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+                });
+            });
+
+            //select/deselect a row when the checkbox is checked/unchecked
+            $('#simple-table').on('click', 'td input[type=checkbox]', function () {
+                var $row = $(this).closest('tr');
+                if ($row.is('.detail-row ')) return;
+                if (this.checked) $row.addClass(active_class);
+                else $row.removeClass(active_class);
+            });
+
+
+
+            /********************************/
+            //add tooltip for small view action buttons in dropdown menu
+            $('[data-rel="tooltip"]').tooltip({ placement: tooltip_placement });
+
+            //tooltip placement on right or left
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table');
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                //var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+
+
+
+
+            /***************/
+            $('.show-details-btn').on('click', function (e) {
+                e.preventDefault();
+                $(this).closest('tr').next().toggleClass('open');
+                $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+            });
+            /***************/
+
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu',
+                function (e, event_name, event_val) {
+                    if (event_name == 'sidebar_fixed') {
+                        if ($('#sidebar').hasClass('sidebar-fixed')) {
+                            $('#sidebar2').addClass('sidebar-fixed');
+                            $('#navbar').addClass('h-navbar');
+                        } else {
+                            $('#sidebar2').removeClass('sidebar-fixed');
+                            $('#navbar').removeClass('h-navbar');
+                        }
+                    }
+                }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        });
+    </script>
+}

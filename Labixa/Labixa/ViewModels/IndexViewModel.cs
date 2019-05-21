@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using Outsourcing.Data.Models;
-using Outsourcing.Data.Models.HMS;
 
 namespace Labixa.ViewModels
 {
     public class IndexViewModel
     {
-        public List<WebsiteAtribute> websiteAttribute { get; set; }
-        public List<Blog> blog { get; set; }
-        public List<Product> product { get; set; }
-        public IEnumerable<Room> roomHome { get; set; }
+        public List<WebsiteAtribute> WebsiteAttribute { get; set; }
+        public List<Blog> Blog { get; set; }
 
-        public IEnumerable<Blog> blogHome { get; set; }      
+        public IEnumerable<Room> RoomHome { get; set; }
 
-        public IEnumerable<WebsiteAtribute> imageHome1 { get; set; }
-        public IEnumerable<WebsiteAtribute> imageHome2 { get; set; }
-        public IEnumerable<WebsiteAtribute> imageHome3 { get; set; }
+        public IEnumerable<Blog> BlogHome { get; set; }
+
+        public IEnumerable<WebsiteAtribute> ImageHome1 { get; set; }
+        public IEnumerable<WebsiteAtribute> ImageHome2 { get; set; }
+        public IEnumerable<WebsiteAtribute> ImageHome3 { get; set; }
         public List<SlideViewModel> Slider { get; set; }
 
         public class SlideViewModel
         {
-            public string ImageURL { get; set; }
+            public string ImageUrl { get; set; }
             public string Style { get; set; }
             public string Title { get; set; }
             public string TitleEnglish { get; set; }
             public string Caption { get; set; }
             public string CaptionEnglish { get; set; }
         }
-
-
     }
 }

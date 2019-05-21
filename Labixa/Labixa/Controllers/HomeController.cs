@@ -3,14 +3,11 @@ using System.Web.Mvc;
 using Outsourcing.Data.Models;
 using Labixa.ViewModels;
 using Outsourcing.Service;
-using Outsourcing.Service.HMS;
 using Outsourcing.Core.Email;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Outsourcing.Service.Portal;
 using static Labixa.ViewModels.IndexViewModel;
 using IBlogService = Outsourcing.Service.IBlogService;
-using IRoomService = Outsourcing.Service.HMS.IRoomService;
 
 namespace Labixa.Controllers
 {
@@ -22,7 +19,7 @@ namespace Labixa.Controllers
         private readonly IDepositService _depositService;
         private readonly IMessageService _messageService;
 
-        public HomeController(IVendorService vendorService, IProductService productService, IBlogService blogService,
+        public HomeController(IBlogService blogService,
             IWebsiteAttributeService websiteAttributeService, IRoomService roomService, IDepositService depositService,
             IMessageService messageService)
         {
@@ -46,7 +43,7 @@ namespace Labixa.Controllers
                 slideViewModel.Add(new SlideViewModel()
                 {
                     Style = count % 2 == 0 ? "nhs-caption2" : "nhs-caption3",
-                    ImageURL = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
+                    ImageUrl = string.IsNullOrEmpty(item.Value) ? "../../Content/HMS/images/slider/1.jpg" : item.Value,
                     Title = item.Title,
                     TitleEnglish = item.TitleEnglish,
                     Caption = item.Caption,
@@ -55,8 +52,8 @@ namespace Labixa.Controllers
             }
             var model = new IndexViewModel
             {
-                roomHome = _roomService.FindAll(),
-                blogHome = _blogService.FindAll().Take(3),
+                RoomHome = _roomService.FindAll(),
+                BlogHome = _blogService.FindAll().Take(3),
                 Slider = slideViewModel
             };
             return View(model);

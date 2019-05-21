@@ -1,6 +1,7 @@
-﻿@model Labixa.Areas.Portal.ViewModels.CostCategory.CostCategorySubMenuViewModel
+﻿@using Outsourcing.Data.Models
+@model Labixa.Areas.Portal.ViewModels.CostCategory.CostCategorySubMenuViewModel
 @{ 
-    var count = Enum.GetValues(typeof(Outsourcing.Data.Models.HMS.CostType)).Length + 1;
+    var count = Enum.GetValues(typeof(CostType)).Length + 1;
     string nameType = string.Empty;
 }
 
@@ -22,17 +23,17 @@
                 <b class="arrow"></b>
             </li>
 
-            @foreach (Outsourcing.Data.Models.HMS.CostType item in Enum.GetValues(typeof(Outsourcing.Data.Models.HMS.CostType)))
+            @foreach (CostType item in Enum.GetValues(typeof(CostType)))
             {
                 switch (item)
                 {
-                    case Outsourcing.Data.Models.HMS.CostType.Others:
+                    case CostType.Others:
                         nameType = "Others";
                         break;
-                    case Outsourcing.Data.Models.HMS.CostType.Income:
+                    case CostType.Income:
                         nameType = "Thu";
                         break;
-                    case Outsourcing.Data.Models.HMS.CostType.Outcome:
+                    case CostType.Outcome:
                         nameType = "Chi";
                         break;
                 }

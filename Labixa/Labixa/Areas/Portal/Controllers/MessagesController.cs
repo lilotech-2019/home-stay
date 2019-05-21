@@ -1,11 +1,11 @@
 ﻿using Outsourcing.Core.Email;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {

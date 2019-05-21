@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class BlogCategoriesController : Controller
     {
         #region Fields
@@ -69,7 +69,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name");
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(), "Id", "Name");
             return View();
         }
 
@@ -90,7 +90,7 @@ namespace Labixa.Areas.Portal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name");
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(), "Id", "Name");
             return View(blogCategories);
         }
 
@@ -114,7 +114,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name", blogCategories.CategoryParentId);
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(), "Id", "Name", blogCategories.CategoryParentId);
             return View(blogCategories);
         }
 
@@ -134,7 +134,7 @@ namespace Labixa.Areas.Portal.Controllers
                 _blogCategoriesService.Edit(blogCategories);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(null), "Id", "Name", blogCategories.CategoryParentId);
+            ViewBag.CategoryParentId = new SelectList(_blogCategoriesService.FindSelectList(), "Id", "Name", blogCategories.CategoryParentId);
             return View(blogCategories);
         }
 

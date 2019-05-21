@@ -1,5 +1,5 @@
-﻿@using Outsourcing.Data.Models.HMS
-@model IEnumerable<RoomOrder>
+﻿@using Outsourcing.Data.Models
+@model IEnumerable<Outsourcing.Data.Models.RoomOrder>
 @{
     ViewBag.Title = "Quản lý Booking";
 }
@@ -89,7 +89,9 @@
 
                                 <td class=" ">
                                     <div class="visible-md visible-lg  btn-group">
-
+                                        <a href="@Url.Action("Details", new {id = item.Id})" class="btn btn-xs btn-secondary">
+                                            <i class="fa fa-bookmark"></i>
+                                        </a>
                                         <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-xs btn-info">
                                             <i class="fa fa-edit"></i>
                                         </a>

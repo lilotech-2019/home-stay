@@ -1,9 +1,10 @@
 ﻿using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -32,7 +33,8 @@ namespace Labixa.Areas.Portal.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Index()
         {
-            var customers = await _customerService.FindAll().AsNoTracking()
+            var customers = await _customerService.FindAll()
+                .AsNoTracking()
                             .ToListAsync();
             return View(customers);
         }

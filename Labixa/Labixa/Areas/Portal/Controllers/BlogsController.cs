@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     public class BlogsController : Controller
     {
         #region Fields
@@ -17,7 +17,6 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IBlogCategoryService _blogCategoryService;
 
         #endregion
-
 
         #region Ctor
 
@@ -43,7 +42,6 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
-
         #region Details
 
         /// <summary>
@@ -57,7 +55,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Blog blog = _blogsService.FindById((int)id);
+            Blog blog = _blogsService.FindById((int) id);
             if (blog == null)
             {
                 return HttpNotFound();
@@ -76,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name");
-            return View(new Blog { PictureId = 0});
+            return View(new Blog {PictureId = 0});
         }
 
         /// <summary>
@@ -114,12 +112,13 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var blog = _blogsService.FindById((int)id);
+            var blog = _blogsService.FindById((int) id);
             if (blog == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name",blog.BlogCategoryId);
+            ViewBag.BlogCategoryId =
+                new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name", blog.BlogCategoryId);
 
             return View(blog);
         }
@@ -140,7 +139,8 @@ namespace Labixa.Areas.Portal.Controllers
                 _blogsService.Edit(blog);
                 return RedirectToAction("Index");
             }
-            ViewBag.BlogCategoryId = new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name", blog.BlogCategoryId);
+            ViewBag.BlogCategoryId =
+                new SelectList(_blogCategoryService.FindSelectList(), "Id", "Name", blog.BlogCategoryId);
 
             return View(blog);
         }
@@ -160,7 +160,7 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var blogs = _blogsService.FindById((int)id);
+            var blogs = _blogsService.FindById((int) id);
             if (blogs == null)
             {
                 return HttpNotFound();

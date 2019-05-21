@@ -1,7 +1,12 @@
 ﻿using ClosedXML.Excel;
+using Labixa.Areas.Portal.ViewModels.Hotels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
+using PagedList;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -9,10 +14,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using PagedList.Mvc;
-using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -26,7 +27,7 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly IHotelService _hotelService;
         private readonly ICostsService _costsService;
         private readonly IHotelCategoryService _categoryHotelService;
-      
+
 
         #endregion
 
@@ -40,7 +41,7 @@ namespace Labixa.Areas.Portal.Controllers
             _categoryHotelService = categoryHotelService;
         }
 
-        private ApplicationUserManager UserManager =>  HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
         #endregion
 
@@ -51,7 +52,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="categoryId">Hotel Category Id</param>
         /// <returns></returns>
-        public ActionResult Index(int? categoryId, int? page, string searchString)
+        public ActionResult Index(int? categoryId, bool? status, int? page, string searchString)
         {
             var hotels = _hotelService.FindAll().Where(w => w.HostEmail == User.Identity.Name);
             if (User.IsInRole(Role.Admin))
@@ -64,10 +65,20 @@ namespace Labixa.Areas.Portal.Controllers
                 hotels = hotels.Where(w => w.HotelCategoryId == categoryId);
                 ViewBag.hotelCategoryId = categoryId;
             }
-            //hotels = hotels.AsNoTracking();
+
+            if (status != null)
+            {
+                hotels = hotels.Where(w => w.Status == status);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hotels = hotels.Where(s => s.Name.Contains(searchString));
+            }
+
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            return View(hotels.OrderBy(w=>w.Id).ToPagedList(pageNumber, pageSize));
+            return View(hotels.OrderBy(w => w.Id).ToPagedList(pageNumber, pageSize));
         }
 
         #endregion
@@ -90,10 +101,17 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             ViewBag.HotelName = hotel.Name;
-            return View(hotel.Rooms.Where(w=>w.Deleted!=true).ToPagedList(pageNumber, pageSize));
+
+            HotelDetailsSubMenuViewModel hotelDetailsSubMenuViewModel = new HotelDetailsSubMenuViewModel
+            {
+                HotelId = (int)id,
+                Rooms = hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+            };
+            return View(hotelDetailsSubMenuViewModel);
         }
 
         #endregion
@@ -275,6 +293,20 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
+        #region HotelDetailsSubMenu
+
+        /// <summary>
+        /// HotelDetailsSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult HotelDetailsSubMenu(int id)
+        {
+            var hotel = _hotelService.FindById(id);
+            return PartialView("_HotelDetailsSubMenu", hotel);
+        }
+
+        #endregion
+
         public ActionResult Preview(int hotelId)
         {
             var hotel = _hotelService.FindById(hotelId);
@@ -285,9 +317,9 @@ namespace Labixa.Areas.Portal.Controllers
         public FileResult ExportData(int id)
         {
             var costs = _costsService.FindAll().Where(w => w.HotelId == id);
-            var costsIncome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Income);
-            var costsOutcome = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Outcome);
-            var costsOthers = costs.Where(w => w.Type == Outsourcing.Data.Models.HMS.CostType.Others);
+            var costsIncome = costs.Where(w => w.Type == CostType.Income);
+            var costsOutcome = costs.Where(w => w.Type == CostType.Outcome);
+            var costsOthers = costs.Where(w => w.Type == CostType.Others);
 
             //All
             DataTable dtAll = new DataTable("Report");

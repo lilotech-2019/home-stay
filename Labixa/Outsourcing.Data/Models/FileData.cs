@@ -9,16 +9,6 @@ namespace Outsourcing.Data.Models
         {
             CreateDate = DateTime.Now;
         }
-
-        //public FileData(string path, byte[] data)
-        //{
-        //    Data = data;
-        //    FileName = Path.GetFileName(path);
-        //    Url = path;
-        //    //FileNameWithoutUnicode = StringConvert.RemoveVietnameseString(Path.GetFileNameWithoutExtension(path));
-        //    MimeType = Path.GetExtension(path);
-        //    CreateDate = DateTime.Now;
-        //}
         public FileData(string path)
         {
             FileName = Path.GetFileName(path);
@@ -45,6 +35,5 @@ namespace Outsourcing.Data.Models
 
         public int? ProductId { get; set; }
 
-        public virtual Product Product { get; set; }
     }
 }

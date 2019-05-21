@@ -6,13 +6,11 @@ using System.Web.Mvc;
 using Labixa.Areas.Portal.ViewModels.HotelCategory;
 using Outsourcing.Core.Common;
 using Outsourcing.Data.Models;
-using Outsourcing.Service.Portal;
+using Outsourcing.Service;
 using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [RouteArea("Portal")]
-    [RoutePrefix("HotelCategories")]
     [Authorize]
     public class HotelCategoriesController : Controller
     {
@@ -52,6 +50,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// Details
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
         public ActionResult Details(int? id, int? page)
         {
