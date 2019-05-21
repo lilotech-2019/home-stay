@@ -686,7 +686,6 @@
                             <li>
                                 <a href="#" data-rel="colorbox">
                                     <img style="height:150px" alt="150x150" src="@item.RoomImage.Url" />
-                                    
                                 </a>
                             </li>
                         }
@@ -695,7 +694,12 @@
             </div>
         </div>
 
-
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <a href="@Url.Action("Edit","Rooms",new { hotelId = Request.Params["hotelId"], type = Request.Params["type"]})" class="btn btn-primary ">Edit</a>
+                <a href="@Url.Action("Index","Rooms",new { hotelId = Request.Params["hotelId"], type = Request.Params["type"]})" class="btn btn-warning">Back</a>
+            </div>
+        </div>
     }
 </div>
 <script>
