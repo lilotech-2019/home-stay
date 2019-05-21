@@ -1,10 +1,10 @@
 ﻿using Outsourcing.Data.Models;
-using System.Data.Entity;
+using Outsourcing.Service;
+using PagedList;
+using System;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using Outsourcing.Service;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -14,14 +14,16 @@ namespace Labixa.Areas.Portal.Controllers
         #region Fields
 
         private readonly ICustomerService _customerService;
+        private readonly IRoomOrderService _roomOrderService;
 
         #endregion
 
         #region Ctor
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(ICustomerService customerService, IRoomOrderService roomOrderService)
         {
             _customerService = customerService;
+            _roomOrderService = roomOrderService;
         }
 
         #endregion
@@ -31,12 +33,24 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index(bool? status, int? page, string searchString)
         {
-            var customers = await _customerService.FindAll()
-                .AsNoTracking()
-                            .ToListAsync();
-            return View(customers);
+
+            var customers = _customerService.FindAll();
+
+            if (status != null)
+            {
+                customers = customers.Where(w => w.Status == status);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(s => s.Name.Contains(searchString));
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(customers.OrderBy(w => w.Id).ToPagedList(pageNumber, pageSize));
         }
         #endregion
 

@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Create Hotel";
-
 }
 @section head{
     <script src="~/Content/ckeditor/ckeditor.js"></script>
@@ -10,7 +9,9 @@
 }
 @section breadcrumb
 {
-    <li><a href="@Url.Action("Index")">Hotel</a></li>
+    <li>
+        <a href="@Url.Action("Index")">Hotel</a>
+    </li>
     <li class="active">Create</li>
 }
 <div class="page-content">
@@ -52,7 +53,7 @@
                                 Hình Ảnh
                             </a>
                         </li>
-                      
+
                     </ul>
 
                     <div class="tab-content">
@@ -70,6 +71,13 @@
                                 <div class="col-sm-9">
                                     @Html.EditorFor(model => model.Name, null, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Hotline, new { @class = "col-sm-3 control-label no-padding-right" })
+                                <div class="col-sm-9">
+                                    @Html.EditorFor(model => model.Hotline, null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Hotline)
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,7 +101,7 @@
                                     @Html.ValidationMessageFor(model => model.District)
                                 </div>
                             </div>
-                        
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Status, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
@@ -108,7 +116,7 @@
                                 <div class="col-sm-9">
                                     @*@Html.EditorFor(model => model.Description, "CkEditor")*@
                                     @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                            
+
                                     @Html.ValidationMessageFor(model => model.Description)
                                 </div>
                             </div>
@@ -132,7 +140,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.MetaDescription, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
-                                    @Html.TextAreaFor(model => model.MetaDescription,new { @class = "form-control" })
+                                    @Html.TextAreaFor(model => model.MetaDescription, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.MetaDescription)
                                 </div>
                             </div>
@@ -140,7 +148,7 @@
                                 @Html.LabelFor(model => model.Content, new { @class = "col-sm-3 control-label no-padding-right" })
                                 <div class="col-sm-9">
                                     @*@Html.EditorFor(model => model.Description, "CkEditor")*@
-                                    @Html.EditorFor(model => model.Content,  new { @class = "form-control" })
+                                    @Html.EditorFor(model => model.Content, new { @class = "form-control" })
 
                                     @Html.ValidationMessageFor(model => model.Content)
                                 </div>
@@ -243,7 +251,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                        <a href="@Url.Action("Index","Hotels",new { categoryId = Request.Params["categoryId"]})" class="btn btn-warning">Back</a>
+                        <a href="@Url.Action("Index", "Hotels", new {categoryId = Request.Params["categoryId"]})" class="btn btn-warning">Back</a>
                     </div>
                 </div>
             }
