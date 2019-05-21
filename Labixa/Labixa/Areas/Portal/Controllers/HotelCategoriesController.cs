@@ -11,7 +11,7 @@ using PagedList;
 
 namespace Labixa.Areas.Portal.Controllers
 {
-    [Authorize(Roles = Role.Admin)]
+    [Authorize]
     public class HotelCategoriesController : Controller
     {
         #region Fields
