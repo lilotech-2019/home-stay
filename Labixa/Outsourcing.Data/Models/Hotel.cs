@@ -39,9 +39,11 @@ namespace Outsourcing.Data.Models
 
         public string ManagerName { get; set; }
         public string ManagerPhone { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string ManagerEmail { get; set; }
         public string HostName { get; set; }
         public string HostPhone { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string HostEmail { get; set; }
         public string HostAddress { get; set; }
         public string Hotline { get; set; }
