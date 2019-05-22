@@ -4025,6 +4025,12 @@
     <Content Include="Content\js\prototype.js" />
     <Content Include="Content\js\slick.min.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Slick\ajax-loader.gif" />
+    <Content Include="Content\Slick\fonts\slick.svg" />
+    <Content Include="Content\Slick\slick-theme.css" />
+    <Content Include="Content\Slick\slick.css" />
+    <Content Include="Content\Slick\slick.js" />
+    <Content Include="Content\Slick\slick.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -5037,6 +5043,14 @@
     <Content Include="Areas\Portal\Views\Manage\Index.cshtml" />
     <Content Include="Areas\Portal\Views\Hotels\_HotelDetailsSubMenu.cshtml" />
     <Content Include="Areas\Portal\Views\Rooms\_RoomDetailsSubMenu.cshtml" />
+    <Content Include="Content\Slick\config.rb" />
+    <Content Include="Content\Slick\slick-theme.less" />
+    <Content Include="Content\Slick\slick-theme.scss" />
+    <Content Include="Content\Slick\slick.less" />
+    <Content Include="Content\Slick\slick.scss" />
+    <Content Include="Content\Slick\fonts\slick.eot" />
+    <Content Include="Content\Slick\fonts\slick.ttf" />
+    <Content Include="Content\Slick\fonts\slick.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

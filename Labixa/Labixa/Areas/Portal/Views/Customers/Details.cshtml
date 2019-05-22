@@ -265,7 +265,7 @@
                                                             </tr>
 
                                                             <tr class="detail-row">
-                                                                <td colspan="8">
+                                                                <td colspan="12">
                                                                     <div class="table-detail">
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-3">
@@ -301,15 +301,7 @@
 
                                                                                         <div class="profile-info-value">
                                                                                             <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                                                            <span>@item.Room.Hotel.Address</span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="profile-info-row">
-                                                                                        <div class="profile-info-name">Noted </div>
-
-                                                                                        <div class="profile-info-value">
-                                                                                            <span>@item.Room.Hotel.Noted</span>
+                                                                                            <span>@String.Format("{0}, {1}, {2}", item.Room.Hotel.Address, item.Room.Hotel.Ward, item.Room.Hotel.District)</span>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="profile-info-row">
@@ -317,6 +309,13 @@
 
                                                                                         <div class="profile-info-value">
                                                                                             <span>@item.Room.Hotel.ContractNumber</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="profile-info-row">
+                                                                                        <div class="profile-info-name">HostEmail </div>
+
+                                                                                        <div class="profile-info-value">
+                                                                                            <span>@item.Room.Hotel.HostEmail</span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

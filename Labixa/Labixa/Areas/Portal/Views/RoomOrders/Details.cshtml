@@ -67,37 +67,37 @@
                                                         Name
                                                     </span>
                                                     <div class="profile-info-value">
-                                                        @Html.DisplayFor(model => model.Room.Name)
+                                                        @Html.DisplayFor(model => model.Room.Hotel.Name)
                                                     </div>
                                                 </li>
 
                                                 <li>
                                                     <span class="blue profile-info-name">
                                                         <i fa fa-caret-right blue></i>
-                                                        Price
+                                                        Address
                                                     </span>
                                                     <div class="profile-info-value">
-                                                        @Html.DisplayFor(model => model.Room.Price)
+                                                       @String.Format("{0}, {1}, {2}", Model.Room.Hotel.Address, Model.Room.Hotel.Ward, Model.Room.Hotel.District)
                                                     </div>
                                                 </li>
 
                                                 <li>
                                                     <span class="blue profile-info-name">
                                                         <i fa fa-caret-right blue></i>
-                                                        Type
+                                                        ContractNumber
                                                     </span>
                                                     <div class="profile-info-value">
-                                                        @Html.DisplayFor(model => model.Room.Type)
+                                                        @Html.DisplayFor(model => model.Room.Hotel.ContractNumber)
                                                     </div>
                                                 </li>
 
                                                 <li>
                                                     <span class="blue profile-info-name">
                                                         <i fa fa-caret-right blue></i>
-                                                        SharePercent
+                                                        HostEmail
                                                     </span>
                                                     <div class="profile-info-value">
-                                                        @Html.DisplayFor(model => model.Room.SharePercent)
+                                                        @Html.DisplayFor(model => model.Room.Hotel.HostEmail)
                                                     </div>
                                                 </li>
 
@@ -127,20 +127,20 @@
                                                 <li>
                                                     <span class="green profile-info-name">
                                                         <i fa fa-caret-right green></i>
-                                                        Phone
+                                                        Address
                                                     </span>
                                                     <div class="profile-info-value">
-                                                        @Html.DisplayFor(model => model.Customer.Phone)
+                                                        @Html.DisplayFor(model => model.Customer.Address)
                                                     </div>
                                                 </li>
 
                                                 <li>
                                                     <span class="green profile-info-name">
                                                         <i fa fa-caret-right green></i>
-                                                        Address
+                                                        Phone
                                                     </span>
-                                                    <div profile-info-value>
-                                                        @Html.DisplayFor(model => model.Customer.Address)
+                                                    <div class="profile-info-value">
+                                                        @Html.DisplayFor(model => model.Customer.Phone)
                                                     </div>
                                                 </li>
 
