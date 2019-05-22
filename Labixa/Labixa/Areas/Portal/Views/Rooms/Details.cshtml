@@ -33,7 +33,9 @@
                             <th class="center">
                                 @Resources.Resources.Action
                             </th>
-
+                            <th>
+                                Details
+                            </th>
                             <th>
                                 Invoice
                             </th>
@@ -58,12 +60,12 @@
                                     switch (status)
                                     {
                                         case Outsourcing.Data.Models.RoomOrderStatus.New:
-                                            <button class="btn btn-xs btn-default" id="updateStatus" data-url="@Url.Action("UpdateStatus","RoomOrders", new {id = item.Id, status = Outsourcing.Data.Models.RoomOrderStatus.CheckIn})">Checkin</button>
+                                            <button class="btn btn-xs btn-success" id="updateStatus" data-url="@Url.Action("UpdateStatus","RoomOrders", new {id = item.Id, status = Outsourcing.Data.Models.RoomOrderStatus.CheckIn})">Checkin</button>
                                             break;
                                         case Outsourcing.Data.Models.RoomOrderStatus.Processed:
                                             break;
                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
-                                            <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                            <a href="@Url.Action("Checkout","RoomOrders", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
                                             break;
                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
                                             break;
@@ -73,17 +75,21 @@
                                 }
                             </td>
 
-
-                            <td>
-                                <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
-                                <a type="button" class="btn btn-xs btn-info pull-right" href="@Url.Action("Details","RoomOrders", new {id = item.Id})">Details</a>
-
+                            <td class="center">
+                                <div class="action-buttons">
+                                    <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                                        <i class="ace-icon fa fa-angle-double-down"></i>
+                                        <span class="sr-only">Details</span>
+                                    </a>
+                                </div>
                             </td>
                             <td>
+                                <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","RoomOrders", new {id = item.Id})"><i class="fa fa-info-circle"></i></a>
+                                <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
+                            </td>
+                            <td>
+                                <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","Customers", new {id = item.CustomerId})"><i class="fa fa-info-circle"></i></a>
                                 <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
-
-                                <a type="button" class="btn btn-xs btn-info pull-right" href="@Url.Action("Details","Customers", new {id = item.CustomerId})">Details</a>
-
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
                             <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>

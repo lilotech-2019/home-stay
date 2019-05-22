@@ -24,17 +24,23 @@ namespace Labixa.Areas.Portal.Controllers
         private readonly ICustomerService _customerService;
         private readonly IHotelService _hotelService;
 
+        private readonly ICostCategoryService _costCategoriesService;
+        private readonly ICostsService _costService;
+
         #endregion
 
         #region Ctor
 
         public RoomOrdersController(IRoomOrderService roomOrderService, IRoomService roomService,
-            ICustomerService customerService, IHotelService hotelService)
+            ICustomerService customerService, IHotelService hotelService, ICostsService costService,
+            ICostCategoryService costCategoriesService)
         {
             _roomOrderService = roomOrderService;
             _roomService = roomService;
             _customerService = customerService;
             _hotelService = hotelService;
+            _costService = costService;
+            _costCategoriesService = costCategoriesService;
         }
 
         #endregion
@@ -352,8 +358,28 @@ namespace Labixa.Areas.Portal.Controllers
             var entity = _roomOrderService.FindById(id);
             entity.OrderStatus = RoomOrderStatus.CheckOut;
 
+            var costCategory = _costCategoriesService.FindAll();
+            if (costCategory == null)
+            {
+                var costCategoryEntity = new CostCategory
+                {
+                    Name = "Default",
+                };
+                _costCategoriesService.Create(costCategoryEntity);
+                costCategory = new List<CostCategory> { costCategoryEntity }.AsQueryable();
+            }
+            _costService.Create(new Cost
+            {
+                CostCategoryId = costCategory.FirstOrDefault().Id,
+                Amount = entity.Total,
+                Type = CostType.Income,
+                DateLogged = DateTime.Now,
+                HotelId = entity.Room.HotelId,
+                Name = "Tiền thanh toán phòng " + entity.Room.Name + " ngày " + entity.CheckOut.ToShortDateString(),
+            });
+
             _roomOrderService.Edit(entity);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Costs",new { hotelId = entity.Room.HotelId});
         }
 
         #endregion
