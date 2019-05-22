@@ -90,7 +90,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id, int? page)
+        public ActionResult Details(int? id, bool? status, int? page, string searchString)
         {
             if (id == null)
             {
@@ -106,11 +106,22 @@ namespace Labixa.Areas.Portal.Controllers
             int pageNumber = (page ?? 1);
             ViewBag.HotelName = hotel.Name;
 
+            var rooms = hotel.Rooms.Where(w => w.Deleted == false);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                rooms = rooms.Where(s => s.Name.Contains(searchString));
+            }
+            if (status != null)
+            {
+                rooms = rooms.Where(w => w.Status == status);
+            }
             HotelDetailsSubMenuViewModel hotelDetailsSubMenuViewModel = new HotelDetailsSubMenuViewModel
             {
                 HotelId = (int)id,
-                Rooms = hotel.Rooms.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+                Rooms = rooms.OrderBy(w => w.Id).ToPagedList(pageNumber, pageSize)
             };
+
             return View(hotelDetailsSubMenuViewModel);
         }
 

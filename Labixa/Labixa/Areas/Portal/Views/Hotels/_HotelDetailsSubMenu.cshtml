@@ -21,15 +21,40 @@
 
                 <b class="arrow"></b>
             </li>
-
-            @*<li class="hover">
-                <a href="@Url.Action("Index","Customers",new {hotelId = Model.Id} )">
+            <li class="hover">
+                <a href="@Url.Action("Details","Hotels", new {id = Model.Id, status = true})">
                     <i class="menu-icon fa fa-list-alt"></i>
-                    <span class="menu-text">Quản Lý Khách Hàng</span>
+                    <span class="menu-text">Phòng Cho Thuê</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+
+            <li class="hover">
+                <a href="@Url.Action("Details","Hotels", new {id = Model.Id, status = false})">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Phòng Đang Ẩn</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+
+
+            <li class="hover">
+                <a href="@Url.Action("Create","Rooms",new { hotelId = Model.Id } )">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Thêm Phòng</span>
                 </a>
 
                 <b class="arrow"></b>
-            </li>*@
+            </li>
+
+            @*<li class="hover">
+            <a href="@Url.Action("Index","Customers",new {hotelId = Model.Id} )">
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text">Quản Lý Khách Hàng</span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>*@
             <li class="hover pull-right">
                 <a href="@Url.Action("Delete","Hotels", new {id = Model.Id})">
                     <i class="menu-icon fa fa-list-alt"></i>

@@ -178,6 +178,9 @@ namespace Labixa.Areas.Portal.Controllers
             room.Slug = StringConvert.ConvertShortName(room.Name);
             room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
             _roomService.Create(room);
+            if (hotelId != null) {
+                return RedirectToAction("Details","Hotels", new { hotelId = room.HotelId });
+            }
             return RedirectToAction("Index", new { hotelId = room.HotelId, type });
         }
 
