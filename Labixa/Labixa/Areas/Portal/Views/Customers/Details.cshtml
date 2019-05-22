@@ -90,7 +90,7 @@
                                     <div class="profile-info-name"> Phone </div>
 
                                     <div class="profile-info-value">
-                                        <span class="editable" >@Model.Phone</span>
+                                        <span class="editable">@Model.Phone</span>
                                     </div>
                                 </div>
 
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            
+
                         </div>
 
                     </div>
@@ -128,18 +128,17 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="center">
-                                                                <label class="pos-rel">
-                                                                    <input type="checkbox" class="ace">
-                                                                    <span class="lbl"></span>
-                                                                </label>
+                                                                @Resources.Resources.Action
                                                             </th>
                                                             <th class="detail-col">Details</th>
                                                             <th>Invoice</th>
+                                                            <th>RoomName</th>
+                                                            <th>RoomPrice</th>
                                                             <th>CheckIn</th>
                                                             <th>CheckOut</th>
 
                                                             <th>
-                                                                Price
+                                                                TotalAmount
                                                             </th>
                                                             <th class="hidden-480">Status</th>
 
@@ -152,7 +151,26 @@
                                                         {
 
                                                             <tr>
-                                                                <td class="center"></td>
+                                                                <td class="hidden-480 ">
+                                                                    @{
+                                                                        var status = item.OrderStatus;
+                                                                        switch (status)
+                                                                        {
+                                                                            case Outsourcing.Data.Models.RoomOrderStatus.New:
+                                                                                <button class="btn btn-xs btn-default" id="updateStatus" data-url="@Url.Action("UpdateStatus","RoomOrders", new {id = item.Id, status = Outsourcing.Data.Models.RoomOrderStatus.CheckIn})">Checkin</button>
+                                                                                break;
+                                                                            case Outsourcing.Data.Models.RoomOrderStatus.Processed:
+                                                                                break;
+                                                                            case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
+                                                                                <a href="@Url.Action("Checkout", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                                                                break;
+                                                                            case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
+                                                                                break;
+                                                                            default:
+                                                                                throw new ArgumentOutOfRangeException();
+                                                                        }
+                                                                    }
+                                                                </td>
 
                                                                 <td class="center">
                                                                     <div class="action-buttons">
@@ -166,6 +184,8 @@
                                                                 <td>
                                                                     <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">#@Html.DisplayFor(modelItem => item.Id)</a>
                                                                 </td>
+                                                                <td>@Html.DisplayFor(modelItem => item.Room.Name)</td>
+                                                                <td>@Html.DisplayFor(modelItem => item.Room.Price)</td>
                                                                 <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
                                                                 <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
                                                                 <td>@item.Price</td>
@@ -174,10 +194,10 @@
                                                                     @switch (item.OrderStatus)
                                                                     {
                                                                         case Outsourcing.Data.Models.RoomOrderStatus.New:
-                                                                            <span class="label label-sm label-danger">New</span>
+                                                                            <span class="label label-sm label-danger">Đợi CheckIn</span>
                                                                             break;
                                                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
-                                                                            <span class="label label-sm label-warning">CheckIn</span>
+                                                                            <span class="label label-sm label-warning">Đợi CheckOut</span>
                                                                             break;
                                                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
                                                                             <span class="label label-sm label-success">CheckOut</span>
@@ -245,7 +265,7 @@
                                                             </tr>
 
                                                             <tr class="detail-row">
-                                                                <td colspan="8">
+                                                                <td colspan="12">
                                                                     <div class="table-detail">
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-3">
@@ -257,7 +277,7 @@
                                                                                             <a class="user-title-label" href="#">
                                                                                                 <i class="ace-icon fa fa-circle light-green"></i>
                                                                                                 &nbsp;
-                                                                                                <span class="white">@item.Room.Name</span>
+                                                                                                <span class="white">@item.Room.Hotel.Name</span>
                                                                                             </a>
                                                                                         </div>
                                                                                     </div>
@@ -269,35 +289,33 @@
 
                                                                                 <div class="profile-user-info profile-user-info-striped">
                                                                                     <div class="profile-info-row">
-                                                                                        <div class="profile-info-name">Price</div>
+                                                                                        <div class="profile-info-name">Hotline</div>
 
                                                                                         <div class="profile-info-value">
-                                                                                            <span>@item.Room.Price</span>
+                                                                                            <span>@item.Room.Hotel.Hotline</span>
                                                                                         </div>
                                                                                     </div>
 
                                                                                     <div class="profile-info-row">
-                                                                                        <div class="profile-info-name">Room Type </div>
+                                                                                        <div class="profile-info-name">Address </div>
 
                                                                                         <div class="profile-info-value">
                                                                                             <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                                                            <span>@item.Room.Type</span>
+                                                                                            <span>@String.Format("{0}, {1}, {2}", item.Room.Hotel.Address, item.Room.Hotel.Ward, item.Room.Hotel.District)</span>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="profile-info-row">
-                                                                                        <div class="profile-info-name">Share Percent </div>
+                                                                                        <div class="profile-info-name">ContractNumber </div>
 
                                                                                         <div class="profile-info-value">
-                                                                                            <span>@item.Room.SharePercent</span>
+                                                                                            <span>@item.Room.Hotel.ContractNumber</span>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="profile-info-row">
-                                                                                        <div class="profile-info-name">Noted </div>
+                                                                                        <div class="profile-info-name">HostEmail </div>
 
                                                                                         <div class="profile-info-value">
-                                                                                            <span>@item.Room.Noted</span>
+                                                                                            <span>@item.Room.Hotel.HostEmail</span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
