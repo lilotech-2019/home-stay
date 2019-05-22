@@ -76,13 +76,13 @@
 
                             <td>
                                 <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
-                                <a type="button" class="btn btn-sm btn-info pull-right" href="@Url.Action("Details","RoomOrders", new {id = item.Id})">Details</a>
+                                <a type="button" class="btn btn-xs btn-info pull-right" href="@Url.Action("Details","RoomOrders", new {id = item.Id})">Details</a>
 
                             </td>
                             <td>
                                 <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
 
-                                <a type="button" class="btn btn-sm btn-info pull-right" href="@Url.Action("Details","Customers", new {id = item.CustomerId})">Details</a>
+                                <a type="button" class="btn btn-xs btn-info pull-right" href="@Url.Action("Details","Customers", new {id = item.CustomerId})">Details</a>
 
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
