@@ -61,13 +61,15 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index - GET
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index(int? hotelId)
+        public async Task<ActionResult> Index(int? customerId, int? hotelId)
         {
             var roomOrders = _roomOrderService.FindAll().AsNoTracking();
             if (hotelId != null)
             {
-                var hotel = _hotelService.FindById((int) hotelId);
-                roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotel.Id);
+                roomOrders = roomOrders.Where(w => w.Room.Hotel.Id == hotelId);
+            }
+            if (customerId != null) {
+                roomOrders = roomOrders.Where(w => w.Customer.Id == customerId);
             }
             return View(await roomOrders.ToListAsync());
         }

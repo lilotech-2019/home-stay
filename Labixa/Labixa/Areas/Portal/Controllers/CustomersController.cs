@@ -60,7 +60,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
             if (id == null)
             {
@@ -185,6 +185,20 @@ namespace Labixa.Areas.Portal.Controllers
             }
             _customerService.Delete(customer);
             return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region CustomerDetailsSubMenu
+
+        /// <summary>
+        /// CustomerDetailsSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CustomerDetailsSubMenu(int id)
+        {
+            var customer = _customerService.FindById(id);
+            return PartialView("_CustomerDetailsSubMenu", customer);
         }
 
         #endregion

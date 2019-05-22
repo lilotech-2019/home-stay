@@ -5051,6 +5051,7 @@
     <Content Include="Content\Slick\fonts\slick.eot" />
     <Content Include="Content\Slick\fonts\slick.ttf" />
     <Content Include="Content\Slick\fonts\slick.woff" />
+    <Content Include="Areas\Portal\Views\Customers\_CustomerDetailsSubMenu.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

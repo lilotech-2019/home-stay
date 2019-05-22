@@ -17,6 +17,7 @@
     <li><a href="@Url.Action("Index")">Customers</a></li>
     <li class="active">Details</li>
 }
+@Html.Action("CustomerDetailsSubMenu", "Customers",new { id = Model.Id})
 
 <div class="page-header">
     <h1>
