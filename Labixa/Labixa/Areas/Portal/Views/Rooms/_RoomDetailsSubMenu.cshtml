@@ -14,6 +14,15 @@
 
     <div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse ace-save-state">
         <ul class="nav nav-list">
+            <li class="hover">
+                <a href="@Url.Action("Create","RoomOrders", new {roomId = Model.Id})">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Đặt Phòng</span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
             <li class="hover pull-right">
                 <a href="@Url.Action("Delete","Rooms", new {id = Model.Id})">
                     <i class="menu-icon fa fa-list-alt"></i>
