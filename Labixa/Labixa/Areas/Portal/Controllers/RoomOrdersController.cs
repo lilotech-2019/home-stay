@@ -232,7 +232,7 @@ namespace Labixa.Areas.Portal.Controllers
 
                 //====================</Mail>==============================
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Rooms",new { id = roomOrder.RoomId});
             }
 
             ViewBag.RoomId = new SelectList(_roomService.FindSelectList(), "Id", "Name");

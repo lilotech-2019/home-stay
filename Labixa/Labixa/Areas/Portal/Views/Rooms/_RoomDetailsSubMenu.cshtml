@@ -15,7 +15,7 @@
     <div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse ace-save-state">
         <ul class="nav nav-list">
             <li class="hover">
-                <a href="@Url.Action("Create","RoomOrders", new {roomId = Model.Id})">
+                <a data-toggle="modal" data-target="#phoneModal" onclick="setRoomId(@Model.Id)">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Đặt Phòng</span>
                 </a>
@@ -44,3 +44,33 @@
         </ul><!-- /.nav-list -->
     </div><!-- .sidebar -->
 </div>
+
+@using (Html.BeginForm("Create", "RoomOrders", null, FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div id="phoneModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xin vui lòng nhập số điện thoại</h4>
+                </div>
+                <div class="modal-body">
+                    <input hidden name="roomId" id="txtRoomId" type="text" />
+                    @Html.TextBox("phone")
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function setRoomId(id) {
+        document.getElementById("txtRoomId").value = id;
+        console.log(id);
+    }
+</script>

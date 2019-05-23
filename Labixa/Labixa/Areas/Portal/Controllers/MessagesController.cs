@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Outsourcing.Service;
+using System.Linq;
 
 namespace Labixa.Areas.Portal.Controllers
 {
@@ -30,9 +31,12 @@ namespace Labixa.Areas.Portal.Controllers
         /// Index
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? customerId)
         {
-            var messages = await _messageService.FindAll().AsNoTracking().ToListAsync();
+            var messages = _messageService.FindAll();
+            if (customerId != null) {
+                messages = messages.Where(w => w.CustomerId == customerId);
+            }
             return View(messages);
         }
         #endregion

@@ -1,5 +1,7 @@
-﻿@model Outsourcing.Data.Models.Customer
-
+﻿@model Labixa.Areas.Portal.ViewModels.Customers.CustomerDetailsSubMenuViewModel
+@using Outsourcing.Data.Models
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Details";
 }
@@ -17,14 +19,14 @@
     <li><a href="@Url.Action("Index")">Customers</a></li>
     <li class="active">Details</li>
 }
-@Html.Action("CustomerDetailsSubMenu", "Customers",new { id = Model.Id})
+@Html.Action("CustomerDetailsSubMenu", "Customers", new { id = Model.Customer.Id })
 
 <div class="page-header">
     <h1>
         Quản Lý Khách Hàng
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            @Model.Name
+            @Model.Customer.Name
         </small>
     </h1>
 </div><!-- /.page-header -->
@@ -48,7 +50,7 @@
                                     <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
                                         <i class="ace-icon fa fa-circle light-green"></i>
                                         &nbsp;
-                                        <span class="white">@Model.Name</span>
+                                        <span class="white">@Model.Customer.Name</span>
                                     </a>
                                 </div>
                             </div>
@@ -74,7 +76,7 @@
                                     <div class="profile-info-name"> Tên </div>
 
                                     <div class="profile-info-value">
-                                        <span class="editable" id="username">@Model.Name</span>
+                                        <span class="editable" id="username">@Model.Customer.Name</span>
                                     </div>
                                 </div>
 
@@ -83,7 +85,7 @@
 
                                     <div class="profile-info-value">
                                         <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                        <span class="editable" id="city">@Model.Address</span>
+                                        <span class="editable" id="city">@Model.Customer.Address</span>
                                     </div>
                                 </div>
 
@@ -91,7 +93,7 @@
                                     <div class="profile-info-name"> Phone </div>
 
                                     <div class="profile-info-value">
-                                        <span class="editable">@Model.Phone</span>
+                                        <span class="editable">@Model.Customer.Phone</span>
                                     </div>
                                 </div>
 
@@ -99,7 +101,7 @@
                                     <div class="profile-info-name"> Email </div>
 
                                     <div class="profile-info-value">
-                                        <span class="editable" id="signup">@Model.Email</span>
+                                        <span class="editable" id="signup">@Model.Customer.Email</span>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +150,7 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach (var item in Model.RoomOrder)
+                                                        @foreach (var item in Model.RoomOrders)
                                                         {
 
                                                             <tr>
@@ -329,6 +331,10 @@
 
                                                     </tbody>
                                                 </table>
+                                                Page @(Model.RoomOrders.PageCount < Model.RoomOrders.PageNumber ? 0 : Model.RoomOrders.PageNumber) of @Model.RoomOrders.PageCount
+
+                                                @Html.PagedListPager(Model.RoomOrders, page => Url.Action("Details",
+                                                    new { page }))
                                             </div><!-- /.span -->
                                         </div><!-- /.row -->
 
@@ -354,6 +360,27 @@
 
 @section scripts{
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#updateStatus").on("click",
+                function () {
+                    var url = $(this).attr("data-url");
+                    $.ajax({
+                        url: url,
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                });
+            $("#processed").on("click",
+                function () {
+                    var url = $(this).attr("data-href");
+                    window.location.href = url;
+                });
+        });
+
         jQuery(function ($) {
             //initiate dataTables plugin
 

@@ -1,4 +1,5 @@
-﻿using Outsourcing.Data.Models;
+﻿using Labixa.Areas.Portal.ViewModels.Customers;
+using Outsourcing.Data.Models;
 using Outsourcing.Service;
 using PagedList;
 using System;
@@ -71,7 +72,16 @@ namespace Labixa.Areas.Portal.Controllers
             {
                 return HttpNotFound();
             }
-            return View(customers);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            CustomerDetailsSubMenuViewModel detailsSubMenuViewModel = new CustomerDetailsSubMenuViewModel {
+                Customer = customers,
+                RoomOrders = customers.RoomOrder.ToPagedList(pageNumber, pageSize)
+            };
+
+            return View(detailsSubMenuViewModel);
         }
 
         #endregion
@@ -141,7 +151,7 @@ namespace Labixa.Areas.Portal.Controllers
             if (ModelState.IsValid)
             {
                 _customerService.Edit(customer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new { id = customer.Id});
             }
             return View(customer);
         }
@@ -185,6 +195,19 @@ namespace Labixa.Areas.Portal.Controllers
             }
             _customerService.Delete(customer);
             return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region CustomersSubMenu
+
+        /// <summary>
+        /// CustomersSubMenu
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CustomersSubMenu()
+        {
+            return PartialView("_CustomersSubMenu");
         }
 
         #endregion
