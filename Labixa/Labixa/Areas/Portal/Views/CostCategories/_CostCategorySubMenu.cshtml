@@ -15,7 +15,7 @@
     <div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse ace-save-state">
         <ul class="nav nav-list">
             <li class="hover">
-                <a href="@Url.Action("Index","Costs")">
+                <a href="@Url.Action("Index","Costs", new { hotelId = Request.Params["hotelId"] })">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Tất Cả</span>
                 </a>
@@ -38,7 +38,7 @@
                         break;
                 }
                 <li class="hover">
-                    <a href="@Url.Action("Index","Costs", new { costType = item })">
+                    <a href="@Url.Action("Index","Costs", new { costType = item, hotelId = Request.Params["hotelId"]  })">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text">@nameType</span>
                     </a>
@@ -48,7 +48,7 @@
             }
 
             <li class="hover">
-                <a href="@Url.Action("Create","Costs", new {categoryId = Request.Params["costType"]})">
+                <a href="@Url.Action("Create","Costs", new {costType = Request.Params["costType"], hotelId = Request.Params["hotelId"]})">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Thêm Chi Phí</span>
                 </a>

@@ -24,7 +24,7 @@
             </li>
 
             <li class="hover pull-right">
-                <a href="@Url.Action("Delete","Rooms", new {id = Model.Id})">
+                <a href="@Url.Action("Delete","Rooms", new {id = Model.Id, hotelId = Model.HotelId})">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Xóa Phòng</span>
                 </a>

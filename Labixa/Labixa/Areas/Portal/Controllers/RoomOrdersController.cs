@@ -114,7 +114,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Create(int? hotelId, int? roomId, string phone)
+        public ActionResult Create(int? roomId, string phone)
         {
             Room room;
             if (roomId != null)
@@ -368,6 +368,9 @@ namespace Labixa.Areas.Portal.Controllers
                 _costCategoriesService.Create(costCategoryEntity);
                 costCategory = new List<CostCategory> { costCategoryEntity }.AsQueryable();
             }
+
+            _roomOrderService.Edit(entity);
+
             _costService.Create(new Cost
             {
                 CostCategoryId = costCategory.FirstOrDefault().Id,
@@ -377,8 +380,6 @@ namespace Labixa.Areas.Portal.Controllers
                 HotelId = entity.Room.HotelId,
                 Name = "Tiền thanh toán phòng " + entity.Room.Name + " ngày " + entity.CheckOut.ToShortDateString(),
             });
-
-            _roomOrderService.Edit(entity);
             return RedirectToAction("Index","Costs",new { hotelId = entity.Room.HotelId});
         }
 

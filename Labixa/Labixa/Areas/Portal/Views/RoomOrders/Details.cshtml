@@ -68,6 +68,9 @@
                                                     </span>
                                                     <div class="profile-info-value">
                                                         @Html.DisplayFor(model => model.Room.Hotel.Name)
+                                                        <a href="@Url.Action("Details","Hotels",new { id = Model.Room.HotelId})">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </a>
                                                     </div>
                                                 </li>
 
@@ -121,6 +124,9 @@
                                                     </span>
                                                     <div class="profile-info-value">
                                                         @Html.DisplayFor(model => model.Customer.Name)
+                                                        <a href="@Url.Action("Details","Customers",new { id = Model.CustomerId})">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </a>
                                                     </div>
                                                 </li>
 
@@ -174,6 +180,9 @@
                                         <tbody>
                                             <tr>
                                                 <td>
+                                                    <a href="@Url.Action("Details","Rooms",new { id = Model.RoomId})">
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </a>
                                                     <a href="#">@Model.Room.Name</a>
                                                 </td>
                                                 <td class="hidden-xs">

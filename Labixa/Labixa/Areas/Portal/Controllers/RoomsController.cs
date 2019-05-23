@@ -74,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <param name="id"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id, int? page)
+        public ActionResult Details(int? id, int? hotelId , int? page)
         {
             if (id == null)
             {
@@ -92,7 +92,7 @@ namespace Labixa.Areas.Portal.Controllers
             RoomDetailsSubMenuViewModel roomDetailsSubMenuViewModel = new RoomDetailsSubMenuViewModel
             {
                 Room = room,
-                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
+                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true && w.Room.HotelId != hotelId).ToPagedList(pageNumber, pageSize)
             };
 
             return View(roomDetailsSubMenuViewModel);
@@ -179,7 +179,7 @@ namespace Labixa.Areas.Portal.Controllers
             room.SlugEnglish = StringConvert.ConvertShortName(room.NameEnglish);
             _roomService.Create(room);
             if (hotelId != null) {
-                return RedirectToAction("Details","Hotels", new { hotelId = room.HotelId });
+                return RedirectToAction("Details","Hotels", new { id = hotelId });
             }
             return RedirectToAction("Index", new { hotelId = room.HotelId, type });
         }
@@ -247,6 +247,9 @@ namespace Labixa.Areas.Portal.Controllers
 
                 _roomService.Edit(room);
 
+                if (hotelId != null) {
+                    return RedirectToAction("Details", "Hotels", new { id = hotelId });
+                }
 
                 return RedirectToAction("Index", new { hotelId, type });
             }

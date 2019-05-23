@@ -22,6 +22,15 @@
 }
 
 @Html.Action("RoomDetailsSubMenu", "Rooms", new { id = Model.Room.Id })
+<div class="page-header pull-left">
+    <h1>
+        Quản Lý Phòng
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            @Model.Room.Name
+        </small>
+    </h1>
+</div>
 <div class="row">
     <div class="col-xs-12">
         <!-- PAGE CONTENT BEGINS -->
@@ -53,120 +62,120 @@
                         @foreach (var item in Model.RoomOrders)
                         {
 
-                        <tr>
-                            <td class="hidden-480 ">
-                                @{
-                                    var status = item.OrderStatus;
-                                    switch (status)
+                            <tr>
+                                <td class="hidden-480 ">
+                                    @{
+                                        var status = item.OrderStatus;
+                                        switch (status)
+                                        {
+                                            case Outsourcing.Data.Models.RoomOrderStatus.New:
+                                                <button class="btn btn-xs btn-success" id="updateStatus" data-url="@Url.Action("UpdateStatus","RoomOrders", new {id = item.Id, status = Outsourcing.Data.Models.RoomOrderStatus.CheckIn})">Checkin</button>
+                                                break;
+                                            case Outsourcing.Data.Models.RoomOrderStatus.Processed:
+                                                break;
+                                            case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
+                                                <a href="@Url.Action("Checkout","RoomOrders", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                                break;
+                                            case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
+                                                break;
+                                            default:
+                                                throw new ArgumentOutOfRangeException();
+                                        }
+                                    }
+                                </td>
+
+                                <td class="center">
+                                    <div class="action-buttons">
+                                        <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                                            <i class="ace-icon fa fa-angle-double-down"></i>
+                                            <span class="sr-only">Details</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","RoomOrders", new {id = item.Id})"><i class="fa fa-info-circle"></i></a>
+                                    <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","Customers", new {id = item.CustomerId})"><i class="fa fa-info-circle"></i></a>
+                                    <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                <td class="hidden-480">
+                                    @switch (item.OrderStatus)
                                     {
-                                        case Outsourcing.Data.Models.RoomOrderStatus.New:
-                                            <button class="btn btn-xs btn-success" id="updateStatus" data-url="@Url.Action("UpdateStatus","RoomOrders", new {id = item.Id, status = Outsourcing.Data.Models.RoomOrderStatus.CheckIn})">Checkin</button>
-                                            break;
-                                        case Outsourcing.Data.Models.RoomOrderStatus.Processed:
-                                            break;
                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
-                                            <a href="@Url.Action("Checkout","RoomOrders", new {id = item.Id})" class="btn btn-xs btn-default">Checkout</a>
+                                            <span class="label label-sm label-warning">Đã CheckIn</span>
+                                            break;
+                                        case Outsourcing.Data.Models.RoomOrderStatus.New:
+                                            <span class="label label-sm label-danger">Đợi xác nhận</span>
                                             break;
                                         case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
+                                            <span class="label label-sm label-success">Đã CheckOut</span>
                                             break;
-                                        default:
-                                            throw new ArgumentOutOfRangeException();
+                                        case Outsourcing.Data.Models.RoomOrderStatus.Processed:
+                                            <span class="label label-sm label-success">Processed</span>
+                                            break;
                                     }
-                                }
-                            </td>
 
-                            <td class="center">
-                                <div class="action-buttons">
-                                    <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
-                                        <i class="ace-icon fa fa-angle-double-down"></i>
-                                        <span class="sr-only">Details</span>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","RoomOrders", new {id = item.Id})"><i class="fa fa-info-circle"></i></a>
-                                <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
-                            </td>
-                            <td>
-                                <a type="button" class="btn btn-xs btn-info" href="@Url.Action("Details","Customers", new {id = item.CustomerId})"><i class="fa fa-info-circle"></i></a>
-                                <a href="@Url.Action("Details","Customers",new { id = item.CustomerId})">@Html.DisplayFor(modelItem => item.Customer.Name)</a>
-                            </td>
-                            <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
-                            <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                            <td class="hidden-480">
-                                @switch (item.OrderStatus)
-                                {
-                                    case Outsourcing.Data.Models.RoomOrderStatus.CheckIn:
-                                        <span class="label label-sm label-warning">Đã CheckIn</span>
-                                        break;
-                                    case Outsourcing.Data.Models.RoomOrderStatus.New:
-                                        <span class="label label-sm label-danger">Đợi xác nhận</span>
-                                        break;
-                                    case Outsourcing.Data.Models.RoomOrderStatus.CheckOut:
-                                        <span class="label label-sm label-success">Đã CheckOut</span>
-                                        break;
-                                    case Outsourcing.Data.Models.RoomOrderStatus.Processed:
-                                        <span class="label label-sm label-success">Processed</span>
-                                        break;
-                                }
+                                </td>
 
-                            </td>
-
-                            <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-success">
-                                        <i class="ace-icon fa fa-check bigger-120"></i>
-                                    </button>
-
-                                    <button class="btn btn-xs btn-info">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    </button>
-
-                                    <button class="btn btn-xs btn-danger">
-                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    </button>
-
-                                    <button class="btn btn-xs btn-warning">
-                                        <i class="ace-icon fa fa-flag bigger-120"></i>
-                                    </button>
-                                </div>
-
-                                <div class="hidden-md hidden-lg">
-                                    <div class="inline pos-rel">
-                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                <td>
+                                    <div class="hidden-sm hidden-xs btn-group">
+                                        <button class="btn btn-xs btn-success">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
                                         </button>
 
-                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                            <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
-                                                    <span class="blue">
-                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
+                                        <button class="btn btn-xs btn-info">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button>
 
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
-                                                    <span class="green">
-                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
+                                        <button class="btn btn-xs btn-danger">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </button>
 
-                                            <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
-                                                    <span class="red">
-                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <button class="btn btn-xs btn-warning">
+                                            <i class="ace-icon fa fa-flag bigger-120"></i>
+                                        </button>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+
+                                    <div class="hidden-md hidden-lg">
+                                        <div class="inline pos-rel">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                <li>
+                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                        <span class="blue">
+                                                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                        <span class="green">
+                                                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                        <span class="red">
+                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
 
                             <tr class="detail-row">
                                 <td colspan="8">
@@ -278,10 +287,13 @@
 
                         <div class="profile-user-info">
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> ID Khách sạn </div>
+                                <div class="profile-info-name">Khách sạn </div>
 
                                 <div class="profile-info-value">
-                                    @Html.DisplayFor(model => model.Room.HotelId)
+                                    <a href="@Url.Action("Details","Hotels",new { id = Model.Room.HotelId})">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                    @Html.DisplayFor(model => model.Room.Hotel.Name)
 
                                 </div>
                             </div>
