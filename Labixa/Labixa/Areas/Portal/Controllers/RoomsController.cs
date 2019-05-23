@@ -74,7 +74,7 @@ namespace Labixa.Areas.Portal.Controllers
         /// <param name="id"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Details(int? id, int? hotelId , int? page)
+        public ActionResult Details(int? id , int? page)
         {
             if (id == null)
             {
@@ -92,7 +92,7 @@ namespace Labixa.Areas.Portal.Controllers
             RoomDetailsSubMenuViewModel roomDetailsSubMenuViewModel = new RoomDetailsSubMenuViewModel
             {
                 Room = room,
-                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true && w.Room.HotelId != hotelId).ToPagedList(pageNumber, pageSize)
+                RoomOrders = room.RoomOrders.Where(w => w.Deleted != true).ToPagedList(pageNumber, pageSize)
             };
 
             return View(roomDetailsSubMenuViewModel);

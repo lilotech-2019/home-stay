@@ -185,9 +185,17 @@
                                                                 </td>
 
                                                                 <td>
+                                                                    <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">
+                                                                        <i class="fa fa-info-circle"></i>
+                                                                    </a>
                                                                     <a href="@Url.Action("Details","RoomOrders",new { id = item.Id})">#@Html.DisplayFor(modelItem => item.Id)</a>
                                                                 </td>
-                                                                <td>@Html.DisplayFor(modelItem => item.Room.Name)</td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Details","Rooms",new { id = item.RoomId})">
+                                                                        <i class="fa fa-info-circle"></i>
+                                                                    </a>
+                                                                    <a href="@Url.Action("Details","Rooms",new { id = item.RoomId})">@Html.DisplayFor(modelItem => item.Room.Name)</a>
+                                                                </td>
                                                                 <td>@Html.DisplayFor(modelItem => item.Room.Price)</td>
                                                                 <td>@Html.DisplayFor(modelItem => item.CheckIn)</td>
                                                                 <td>@Html.DisplayFor(modelItem => item.CheckOut)</td>
