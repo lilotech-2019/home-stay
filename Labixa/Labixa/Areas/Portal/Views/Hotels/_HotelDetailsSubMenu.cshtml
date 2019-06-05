@@ -22,6 +22,14 @@
                 <b class="arrow"></b>
             </li>
             <li class="hover">
+                <a href="@Url.Action("Preview","Hotels",new { id = Model.Id } )">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text">Xuất Chi Phí</span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="hover">
                 <a href="@Url.Action("Details","Hotels", new {id = Model.Id, status = true})">
                     <i class="menu-icon fa fa-list-alt"></i>
                     <span class="menu-text">Phòng Cho Thuê</span>

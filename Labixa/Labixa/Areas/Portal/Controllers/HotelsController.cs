@@ -318,9 +318,9 @@ namespace Labixa.Areas.Portal.Controllers
 
         #endregion
 
-        public ActionResult Preview(int hotelId)
+        public ActionResult Preview(int id)
         {
-            var hotel = _hotelService.FindById(hotelId);
+            var hotel = _hotelService.FindById(id);
             return View(hotel);
         }
 
