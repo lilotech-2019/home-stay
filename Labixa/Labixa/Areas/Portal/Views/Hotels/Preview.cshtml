@@ -16,41 +16,74 @@
 }
 
 <div>
-    <h4>Hotels</h4>
-    <hr />
-    <div>
-        <div>
-            <strong>@Html.DisplayNameFor(model => model.Name)</strong>: @Html.DisplayFor(model => model.Name)
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-block alert-info">
+                    Preview Khách Sạn
+                </div>
+
+                <tbody>
+                    @foreach (var item in Model.Costs)
+                    {
+
+                        <tr class="detail-row">
+                            <td colspan="8">
+                                <div class="table-detail">
+                                    <div class="row">
+                                        
+
+                                        <div class="col-xs-6 col-sm-6">
+                                            <div class="space visible-xs"></div>
+
+                                            <div class="profile-user-info profile-user-info-striped">
+                                                <div class="profile-info-row">
+                                                    <div class="profile-info-name">ID</div>
+
+                                                    <div class="profile-info-value">
+                                                        <span>@item.Id</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="profile-info-row">
+                                                    <div class="profile-info-name">Name</div>
+
+                                                    <div class="profile-info-value">
+                                                        <span>@item.Name</span>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="profile-info-row">
+                                                    <div class="profile-info-name"> Amount </div>
+
+                                                    <div class="profile-info-value">
+                                                        <span>@item.Amount</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="profile-info-row">
+                                                    <div class="profile-info-name">Type </div>
+
+                                                    <div class="profile-info-value">
+                                                        <span>@item.Type</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </div>
         </div>
-        <div>
-            <strong>@Html.DisplayNameFor(model => model.HotelCategory.Name)</strong>: @Html.DisplayFor(model => model.HotelCategory.Name)
-        </div>
-    </div>
-    <br />
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Costs)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.Amount</td>
-                    <td>@item.Type</td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
-
+    </div> 
 </div>
 <p>
     @using (Html.BeginForm("ExportData", "Hotels", FormMethod.Post))
