@@ -22,69 +22,39 @@
                 <div class="alert alert-block alert-info">
                     Preview Khách Sạn
                 </div>
-
-                <tbody>
-                    @foreach (var item in Model.Costs)
-                    {
-
-                        <tr class="detail-row">
-                            <td colspan="8">
-                                <div class="table-detail">
-                                    <div class="row">
-                                        
-
-                                        <div class="col-xs-6 col-sm-6">
-                                            <div class="space visible-xs"></div>
-
-                                            <div class="profile-user-info profile-user-info-striped">
-                                                <div class="profile-info-row">
-                                                    <div class="profile-info-name">ID</div>
-
-                                                    <div class="profile-info-value">
-                                                        <span>@item.Id</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="profile-info-row">
-                                                    <div class="profile-info-name">Name</div>
-
-                                                    <div class="profile-info-value">
-                                                        <span>@item.Name</span>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="profile-info-row">
-                                                    <div class="profile-info-name"> Amount </div>
-
-                                                    <div class="profile-info-value">
-                                                        <span>@item.Amount</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="profile-info-row">
-                                                    <div class="profile-info-name">Type </div>
-
-                                                    <div class="profile-info-value">
-                                                        <span>@item.Type</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
+                <div class="col-xs-12 col-sm-9">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table id="simple-table" class="table  table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Costs)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(model => item.Id)</td>
+                                            <td>@Html.DisplayFor(model => item.Name)</td>
+                                            <td>@Html.DisplayFor(model => item.Amount)</td>
+                                            <td>@Html.DisplayFor(model => item.Type)</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
+
 <p>
     @using (Html.BeginForm("ExportData", "Hotels", FormMethod.Post))
     {
@@ -93,3 +63,4 @@
         <a href="@Url.Action("Index")" class="btn btn-secondary">Back</a>
     }
 </p>
+
